@@ -43,7 +43,7 @@ export default function PackagesPage() {
             Interested in employer packages or bulk exam seats? Reach out to discuss options.
           </p>
           {/* Placeholder contact form */}
-          <form className="max-w-sm mx-auto space-y-3" onSubmit={(e) => e.preventDefault()}>
+          <form className="max-w-sm mx-auto space-y-3">
             <input
               type="text"
               placeholder="Your name"

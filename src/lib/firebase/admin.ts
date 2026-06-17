@@ -5,7 +5,7 @@ import * as admin from 'firebase-admin';
  * Never import this in client components.
  */
 
-function initAdmin(): admin.app.App {
+function getAdminApp(): admin.app.App {
   if (admin.apps.length > 0) {
     return admin.apps[0] as admin.app.App;
   }
@@ -30,10 +30,24 @@ function initAdmin(): admin.app.App {
   });
 }
 
-const adminApp = initAdmin();
+// Lazy proxies — initialization is deferred until first property access at runtime,
+// so importing this module during Next.js build does not throw when env vars are absent.
+export const adminDb = new Proxy({} as ReturnType<typeof admin.firestore>, {
+  get(_, prop: string | symbol) {
+    return (admin.firestore(getAdminApp()) as any)[prop as string];
+  },
+});
 
-export const adminDb = admin.firestore(adminApp);
-export const adminAuth = admin.auth(adminApp);
-export const adminStorage = admin.storage(adminApp);
+export const adminAuth = new Proxy({} as ReturnType<typeof admin.auth>, {
+  get(_, prop: string | symbol) {
+    return (admin.auth(getAdminApp()) as any)[prop as string];
+  },
+});
 
-export default adminApp;
+export const adminStorage = new Proxy({} as ReturnType<typeof admin.storage>, {
+  get(_, prop: string | symbol) {
+    return (admin.storage(getAdminApp()) as any)[prop as string];
+  },
+});
+
+export default { adminDb, adminAuth, adminStorage };

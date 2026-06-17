@@ -1,7 +1,7 @@
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, type Auth } from 'firebase/auth';
+import { getFirestore, type Firestore } from 'firebase/firestore';
+import { getStorage, type FirebaseStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,12 +12,31 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase only once (Next.js hot reload guard)
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+// Defer initialization to avoid Firebase API key validation during Next.js SSR prerendering.
+function getClientApp(): FirebaseApp {
+  return getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+}
 
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+// Lazy proxies — Firebase is only initialized when properties are first accessed
+// in the browser, not during server-side rendering.
+export const auth = new Proxy({} as Auth, {
+  get(_, prop: string | symbol) {
+    return (getAuth(getClientApp()) as any)[prop as string];
+  },
+});
+
+export const db = new Proxy({} as Firestore, {
+  get(_, prop: string | symbol) {
+    return (getFirestore(getClientApp()) as any)[prop as string];
+  },
+});
+
+export const storage = new Proxy({} as FirebaseStorage, {
+  get(_, prop: string | symbol) {
+    return (getStorage(getClientApp()) as any)[prop as string];
+  },
+});
+
 export const googleProvider = new GoogleAuthProvider();
 
-export default app;
+export default { auth, db, storage };
