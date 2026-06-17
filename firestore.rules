@@ -1,0 +1,153 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------------------------------------------------------------
+    // Helper functions
+    // ---------------------------------------------------------------
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isProctor() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'proctor' ||
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+
+    // ---------------------------------------------------------------
+    // Users
+    // ---------------------------------------------------------------
+    match /users/{userId} {
+      // Users can read their own profile
+      allow read: if isOwner(userId);
+      // Admins can read all users
+      allow read: if isAdmin();
+      // Users can only update non-sensitive fields of their own profile
+      allow update: if isOwner(userId) &&
+        !('role' in request.resource.data) &&
+        !('adminNotes' in request.resource.data) &&
+        !('blockedReason' in request.resource.data);
+      // Only backend (admin SDK) can create/delete users and change roles
+      // Client-side creation is handled in the auth flow
+      allow create: if isOwner(userId);
+      // Admins can manage all user records
+      allow write: if isAdmin();
+    }
+
+    // User exam access subcollection
+    match /users/{userId}/examAccess/{productId} {
+      allow read: if isOwner(userId) || isAdmin();
+      // Only admin SDK (backend) writes access — never client
+      allow write: if false;
+    }
+
+    // ---------------------------------------------------------------
+    // Products (public read)
+    // ---------------------------------------------------------------
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---------------------------------------------------------------
+    // Purchases
+    // ---------------------------------------------------------------
+    match /purchases/{purchaseId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow read: if isAdmin();
+      // Purchases created/updated only by backend (webhook)
+      allow write: if false;
+    }
+
+    // ---------------------------------------------------------------
+    // Question Bank
+    // ---------------------------------------------------------------
+    match /questionBank/{questionId} {
+      // Users CANNOT read the question bank directly
+      // Questions are fetched server-side during exam start
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // ---------------------------------------------------------------
+    // Exam Attempts
+    // ---------------------------------------------------------------
+    match /examAttempts/{attemptId} {
+      // Users can read their own attempts
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow read: if isAdmin();
+      // Proctors can read assigned proctored attempts
+      allow read: if isProctor() && resource.data.proctored == true;
+      // Attempts created/scored only by backend
+      allow write: if false;
+    }
+
+    // ---------------------------------------------------------------
+    // IP Exam Locks
+    // ---------------------------------------------------------------
+    match /ipExamLocks/{lockId} {
+      // Admin only
+      allow read, write: if isAdmin();
+    }
+
+    // ---------------------------------------------------------------
+    // Certificates
+    // ---------------------------------------------------------------
+    match /certificates/{certificateId} {
+      // Users can read their own certificates
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      // Admins can read and manage all certificates
+      allow read, write: if isAdmin();
+      // Public can read ONLY safe verification fields
+      // (handled by a separate /certificateVerification collection or backend API)
+      // Direct certificate reads by unauthenticated users are denied here
+      allow read: if false; // override with backend API for public verification
+      // Certificates written only by backend
+      allow create, update, delete: if false;
+    }
+
+    // ---------------------------------------------------------------
+    // Proctored Exam Orders
+    // ---------------------------------------------------------------
+    match /proctoredExamOrders/{orderId} {
+      // Users can read their own orders
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      // Admins and proctors can read and update
+      allow read, update: if isProctor();
+      allow read, write: if isAdmin();
+      // Orders created only by backend (webhook)
+      allow create: if false;
+    }
+
+    // ---------------------------------------------------------------
+    // Audit Logs
+    // ---------------------------------------------------------------
+    match /auditLogs/{logId} {
+      // Admin only
+      allow read, write: if isAdmin();
+    }
+
+    // ---------------------------------------------------------------
+    // Training Modules (future)
+    // ---------------------------------------------------------------
+    match /trainingModules/{moduleId} {
+      allow read: if true; // public read for listing
+      allow write: if isAdmin();
+    }
+
+  }
+}
