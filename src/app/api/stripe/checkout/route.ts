@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStripe, STRIPE_PRODUCTS } from '@/lib/stripe/client';
+
+export const dynamic = 'force-dynamic';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { hashIp, getRealIp } from '@/lib/utils/ipHash';
 import type { ProductId } from '@/types';
-import { serverTimestamp } from 'firebase-admin/firestore';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
   try {
@@ -73,7 +75,7 @@ export async function POST(req: NextRequest) {
       amount: product.priceInCents,
       currency: 'usd',
       status: 'pending',
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       purchaseIpHash: ipHash,
     });
 

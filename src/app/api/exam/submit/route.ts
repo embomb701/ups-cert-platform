@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+
+export const dynamic = 'force-dynamic';
 import { scoreAttempt, generateCertNumber } from '@/lib/exam/engine';
 import {
   calculateRiskScore,
@@ -7,7 +9,7 @@ import {
   shouldFlagForReview,
 } from '@/lib/exam/antiCheat';
 import { hashIp, getRealIp } from '@/lib/utils/ipHash';
-import { serverTimestamp } from 'firebase-admin/firestore';
+import { FieldValue } from 'firebase-admin/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import type { ExamAnswer, SuspiciousEvent } from '@/types';
 
@@ -66,7 +68,7 @@ export async function POST(req: NextRequest) {
     // Update attempt
     await adminDb.collection('examAttempts').doc(attemptId).update({
       status: 'completed',
-      completedAt: serverTimestamp(),
+      completedAt: FieldValue.serverTimestamp(),
       completionIpHash: ipHash,
       answers,
       score,
@@ -115,7 +117,7 @@ export async function POST(req: NextRequest) {
         productId: attempt.productId,
         examLevel: attempt.examLevel,
         certificationTitle: certTitle,
-        issuedAt: serverTimestamp(),
+        issuedAt: FieldValue.serverTimestamp(),
         score,
         status: 'valid',
         publicVerificationSlug: certificateNumber,
@@ -132,7 +134,7 @@ export async function POST(req: NextRequest) {
         attemptId,
         eventType: 'certificate_generated',
         eventDetails: { certificateNumber, examLevel: attempt.examLevel, score },
-        createdAt: serverTimestamp(),
+        createdAt: FieldValue.serverTimestamp(),
         severity: 'info',
       });
     }

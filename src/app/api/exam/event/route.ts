@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+
+export const dynamic = 'force-dynamic';
 import { hashIp, getRealIp } from '@/lib/utils/ipHash';
-import { serverTimestamp } from 'firebase-admin/firestore';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,7 +42,7 @@ export async function POST(req: NextRequest) {
         attemptId,
         eventType: 'suspicious_event',
         eventDetails: evt,
-        createdAt: serverTimestamp(),
+        createdAt: FieldValue.serverTimestamp(),
         ipHash,
         severity: evt.type === 'devtools_detected' ? 'critical' : 'warning',
       });

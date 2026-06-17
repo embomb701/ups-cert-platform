@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { serverTimestamp } from 'firebase-admin/firestore';
+
+export const dynamic = 'force-dynamic';
+import { FieldValue } from 'firebase-admin/firestore';
 
 function isAdmin(email: string): boolean {
   const admins = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase());
@@ -24,7 +26,7 @@ export async function POST(req: NextRequest) {
     await adminDb.collection('ipExamLocks').doc(lockId).update({
       clearedByAdmin: true,
       adminNotes: notes ?? '',
-      clearedAt: serverTimestamp(),
+      clearedAt: FieldValue.serverTimestamp(),
       clearedByAdminUid: decoded.uid,
     });
 
@@ -32,7 +34,7 @@ export async function POST(req: NextRequest) {
       userId: decoded.uid,
       eventType: 'ip_lock_cleared',
       eventDetails: { lockId, notes },
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       severity: 'info',
     });
 

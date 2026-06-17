@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { serverTimestamp } from 'firebase-admin/firestore';
+
+export const dynamic = 'force-dynamic';
+import { FieldValue } from 'firebase-admin/firestore';
 
 function isAdmin(email: string): boolean {
   const admins = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase());
@@ -27,14 +29,14 @@ export async function POST(req: NextRequest) {
       proctorName: proctorName ?? 'Approved organization representative',
       meetingLink: meetingLink ?? null,
       adminNotes: notes ?? '',
-      updatedAt: serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
     });
 
     await adminDb.collection('auditLogs').add({
       userId: decoded.uid,
       eventType: 'proctor_unlock',
       eventDetails: { orderId, proctorName },
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       severity: 'info',
     });
 

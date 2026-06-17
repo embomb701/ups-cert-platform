@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+
+export const dynamic = 'force-dynamic';
 import {
   selectExamQuestions,
   sanitizeQuestionsForClient,
@@ -7,7 +9,7 @@ import {
   shuffleArray,
 } from '@/lib/exam/engine';
 import { hashIp, getRealIp } from '@/lib/utils/ipHash';
-import { serverTimestamp } from 'firebase-admin/firestore';
+import { FieldValue } from 'firebase-admin/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import type { ExamLevel } from '@/types';
 import { addDays } from 'date-fns';
@@ -122,7 +124,7 @@ export async function POST(req: NextRequest) {
       productId: examLevel === 'jr_fsc' ? 'jr_fsc_exam' : 'fsc_proctored_exam',
       examLevel,
       status: 'in_progress',
-      startedAt: serverTimestamp(),
+      startedAt: FieldValue.serverTimestamp(),
       startIpHash: ipHash,
       selectedQuestionIds: questions.map((q) => q.id),
       randomizedQuestionOrder: questionOrder,
@@ -148,7 +150,7 @@ export async function POST(req: NextRequest) {
         userId: uid,
         email,
         attemptId,
-        createdAt: serverTimestamp(),
+        createdAt: FieldValue.serverTimestamp(),
         cooldownUntil,
         clearedByAdmin: false,
       });

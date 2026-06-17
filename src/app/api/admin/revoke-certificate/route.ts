@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { serverTimestamp } from 'firebase-admin/firestore';
+
+export const dynamic = 'force-dynamic';
+import { FieldValue } from 'firebase-admin/firestore';
 
 function isAdmin(email: string): boolean {
   const admins = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase());
@@ -23,7 +25,7 @@ export async function POST(req: NextRequest) {
 
     await adminDb.collection('certificates').doc(certificateId).update({
       status: 'revoked',
-      revokedAt: serverTimestamp(),
+      revokedAt: FieldValue.serverTimestamp(),
       revokedBy: decoded.uid,
       revocationReason: reason ?? '',
     });
@@ -32,7 +34,7 @@ export async function POST(req: NextRequest) {
       userId: decoded.uid,
       eventType: 'certificate_revoked',
       eventDetails: { certificateId, reason },
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       severity: 'critical',
     });
 

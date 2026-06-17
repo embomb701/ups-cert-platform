@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+
+export const dynamic = 'force-dynamic';
 import { getStripe } from '@/lib/stripe/client';
 import { adminDb } from '@/lib/firebase/admin';
-import { serverTimestamp, FieldValue } from 'firebase-admin/firestore';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
   const stripe = getStripe();
@@ -47,7 +49,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   await adminDb.collection('purchases').doc(session.id).update({
     status: 'complete',
     stripePaymentIntentId: session.payment_intent ?? '',
-    completedAt: serverTimestamp(),
+    completedAt: FieldValue.serverTimestamp(),
   });
 
   if (productId === 'jr_fsc_exam') {
@@ -62,7 +64,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
           productId: 'jr_fsc_exam',
           purchaseId: session.id,
           granted: true,
-          grantedAt: serverTimestamp(),
+          grantedAt: FieldValue.serverTimestamp(),
         },
         { merge: true }
       );
@@ -77,8 +79,8 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       productId: 'fsc_proctored_exam',
       status: 'scheduling_pending',
       schedulingStatus: 'awaiting_contact',
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
       proctorId: null,
       proctorName: null,
       meetingLink: null,
@@ -91,7 +93,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     userId,
     eventType: 'purchase_completed',
     eventDetails: { productId, sessionId: session.id },
-    createdAt: serverTimestamp(),
+    createdAt: FieldValue.serverTimestamp(),
     severity: 'info',
   });
 }
