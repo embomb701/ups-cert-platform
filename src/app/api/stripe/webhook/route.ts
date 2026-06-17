@@ -4,8 +4,6 @@ import { getStripe } from '@/lib/stripe/client';
 import { adminDb } from '@/lib/firebase/admin';
 import { serverTimestamp, FieldValue } from 'firebase-admin/firestore';
 
-export const config = { api: { bodyParser: false } };
-
 export async function POST(req: NextRequest) {
   const stripe = getStripe();
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
