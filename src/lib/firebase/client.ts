@@ -1,7 +1,7 @@
-import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, type Auth } from 'firebase/auth';
-import { getFirestore, type Firestore } from 'firebase/firestore';
-import { getStorage, type FirebaseStorage } from 'firebase/storage';
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,31 +12,18 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Defer initialization to avoid Firebase API key validation during Next.js SSR prerendering.
-function getClientApp(): FirebaseApp {
-  return getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-}
+// Only initialize Firebase in the browser — avoids auth/invalid-api-key errors
+// during Next.js SSR prerendering when NEXT_PUBLIC_ env vars may not be present.
+const app =
+  typeof window !== 'undefined'
+    ? getApps().length > 0
+      ? getApp()
+      : initializeApp(firebaseConfig)
+    : null;
 
-// Lazy proxies — Firebase is only initialized when properties are first accessed
-// in the browser, not during server-side rendering.
-export const auth = new Proxy({} as Auth, {
-  get(_, prop: string | symbol) {
-    return (getAuth(getClientApp()) as any)[prop as string];
-  },
-});
-
-export const db = new Proxy({} as Firestore, {
-  get(_, prop: string | symbol) {
-    return (getFirestore(getClientApp()) as any)[prop as string];
-  },
-});
-
-export const storage = new Proxy({} as FirebaseStorage, {
-  get(_, prop: string | symbol) {
-    return (getStorage(getClientApp()) as any)[prop as string];
-  },
-});
-
+export const auth = app ? getAuth(app) : (null as any);
+export const db = app ? getFirestore(app) : (null as any);
+export const storage = app ? getStorage(app) : (null as any);
 export const googleProvider = new GoogleAuthProvider();
 
-export default { auth, db, storage };
+export default app;
