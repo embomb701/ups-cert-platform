@@ -6,11 +6,11 @@ export const metadata: Metadata = {
 };
 
 const packages = [
-  { label: '5 Jr. FSC Exam Seats', desc: 'Best for small hiring cohorts or pilot programs.' },
-  { label: '10 Jr. FSC Exam Seats', desc: 'For teams onboarding a class of junior field technicians.' },
-  { label: '25 Jr. FSC Exam Seats', desc: 'Larger programs or organizations with ongoing hiring.' },
+  { label: '5 Jr. FSE Exam Seats', desc: 'Best for small hiring cohorts or pilot programs.' },
+  { label: '10 Jr. FSE Exam Seats', desc: 'For teams onboarding a class of junior field technicians.' },
+  { label: '25 Jr. FSE Exam Seats', desc: 'Larger programs or organizations with ongoing hiring.' },
   { label: 'Custom Employer Training Package', desc: 'Combined book + exam + training access. Contact us for pricing.' },
-  { label: 'Proctored FSC Exam Scheduling', desc: 'For employers sending selected candidates through the FSC exam process.' },
+  { label: 'Proctored FSE Exam Scheduling', desc: 'For employers sending selected candidates through the FSE exam process.' },
 ];
 
 export default function PackagesPage() {

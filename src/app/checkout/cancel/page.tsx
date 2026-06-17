@@ -15,10 +15,10 @@ export default function CheckoutCancelPage() {
           </p>
           <div className="flex gap-4 justify-center">
             <Link href="/certifications/junior" className="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors">
-              Jr. FSC Exam
+              Jr. FSE Exam
             </Link>
             <Link href="/certifications/proctored" className="px-5 py-2.5 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-medium text-sm transition-colors">
-              FSC Exam
+              FSE Exam
             </Link>
           </div>
         </div>

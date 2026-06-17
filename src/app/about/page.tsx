@@ -14,7 +14,7 @@ export default function AboutPage() {
             About the Platform
           </h1>
           <p className="text-gray-400 leading-relaxed">
-            [PLATFORM NAME] is an independent educational platform built to give motivated people a
+            Mastering FSE is an independent educational platform built to give motivated people a
             serious path to UPS field service knowledge. It is not affiliated with, endorsed by, or
             sponsored by any employer, manufacturer, customer, or service company unless explicitly stated.
           </p>
@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="card-dark p-6 mb-8">
             <h3 className="text-base font-semibold text-white mb-3">About This Platform</h3>
             <p className="text-sm text-gray-400 leading-relaxed mb-3">
-              [PLATFORM NAME] is designed to be more than a personal project. The goal is a serious,
+              Mastering FSE is designed to be more than a personal project. The goal is a serious,
               organization-backed training and certification platform that can grow to include broader
               content, additional certification levels, employer partnerships, and eventually a recognized
               credential in the UPS and critical power field service industry.
@@ -82,7 +82,7 @@ export default function AboutPage() {
 
           <div className="mt-10 text-center">
             <Link href="/certifications/junior" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors">
-              View the Jr. FSC Exam &rarr;
+              View the Jr. FSE Exam &rarr;
             </Link>
           </div>
         </div>

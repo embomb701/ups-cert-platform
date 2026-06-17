@@ -1,7 +1,7 @@
 [
   {
-    "id": "fsc_scr_001",
-    "examLevel": "fsc",
+    "id": "fse_scr_001",
+    "examLevel": "fse",
     "category": "Power Electronics",
     "subcategory": "SCR Operation",
     "difficulty": "hard",
@@ -22,8 +22,8 @@
     "tags": ["SCR", "commutation", "holding-current", "power-electronics"]
   },
   {
-    "id": "fsc_igbt_001",
-    "examLevel": "fsc",
+    "id": "fse_igbt_001",
+    "examLevel": "fse",
     "category": "Power Electronics",
     "subcategory": "IGBT Operation",
     "difficulty": "hard",
@@ -44,8 +44,8 @@
     "tags": ["IGBT", "SCR", "gate-drive", "power-electronics", "inverter"]
   },
   {
-    "id": "fsc_transfer_001",
-    "examLevel": "fsc",
+    "id": "fse_transfer_001",
+    "examLevel": "fse",
     "category": "Transfer Operations",
     "subcategory": "Closed Transition Transfer",
     "difficulty": "hard",
@@ -66,8 +66,8 @@
     "tags": ["closed-transition", "synchronization", "transfer", "bypass"]
   },
   {
-    "id": "fsc_dc_bus_001",
-    "examLevel": "fsc",
+    "id": "fse_dc_bus_001",
+    "examLevel": "fse",
     "category": "Hazards and Safety",
     "subcategory": "Stored Energy",
     "difficulty": "hard",
@@ -88,8 +88,8 @@
     "tags": ["DC-bus", "stored-energy", "battery", "capacitor", "LOTO", "safety"]
   },
   {
-    "id": "fsc_voltage_measurement_001",
-    "examLevel": "fsc",
+    "id": "fse_voltage_measurement_001",
+    "examLevel": "fse",
     "category": "Measurement and Interpretation",
     "subcategory": "Voltage Measurement Interpretation",
     "difficulty": "hard",
@@ -110,8 +110,8 @@
     "tags": ["voltage-measurement", "interpretation", "contacts", "troubleshooting"]
   },
   {
-    "id": "fsc_static_switch_001",
-    "examLevel": "fsc",
+    "id": "fse_static_switch_001",
+    "examLevel": "fse",
     "category": "STS Systems",
     "subcategory": "Static Switch Operation",
     "difficulty": "hard",
@@ -132,8 +132,8 @@
     "tags": ["STS", "static-transfer-switch", "synchronization", "transfer-logic"]
   },
   {
-    "id": "fsc_ohm_energized_001",
-    "examLevel": "fsc",
+    "id": "fse_ohm_energized_001",
+    "examLevel": "fse",
     "category": "Measurement and Interpretation",
     "subcategory": "Measurement Hazards",
     "difficulty": "hard",
@@ -154,8 +154,8 @@
     "tags": ["ohms", "energized", "meter-safety", "measurement-hazard"]
   },
   {
-    "id": "fsc_bypass_transfer_scenario_001",
-    "examLevel": "fsc",
+    "id": "fse_bypass_transfer_scenario_001",
+    "examLevel": "fse",
     "category": "Troubleshooting Scenarios",
     "subcategory": "Bypass Transfer Scenario",
     "difficulty": "expert",
@@ -176,8 +176,8 @@
     "tags": ["bypass", "troubleshooting", "inverter", "transfer", "field-judgment"]
   },
   {
-    "id": "fsc_pwm_001",
-    "examLevel": "fsc",
+    "id": "fse_pwm_001",
+    "examLevel": "fse",
     "category": "Power Electronics",
     "subcategory": "PWM Inverter Operation",
     "difficulty": "hard",
@@ -198,8 +198,8 @@
     "tags": ["PWM", "inverter", "duty-cycle", "DC-bus", "voltage-control"]
   },
   {
-    "id": "fsc_backfeed_001",
-    "examLevel": "fsc",
+    "id": "fse_backfeed_001",
+    "examLevel": "fse",
     "category": "Hazards and Safety",
     "subcategory": "Backfeed Hazards",
     "difficulty": "expert",
@@ -220,8 +220,8 @@
     "tags": ["backfeed", "generator", "transfer-switch", "safety", "isolation"]
   },
   {
-    "id": "fsc_alarm_analysis_001",
-    "examLevel": "fsc",
+    "id": "fse_alarm_analysis_001",
+    "examLevel": "fse",
     "category": "Alarm Analysis",
     "subcategory": "Alarm Interpretation",
     "difficulty": "hard",
@@ -242,8 +242,8 @@
     "tags": ["alarm-analysis", "alarm-sequence", "battery-discharge", "rectifier", "troubleshooting"]
   },
   {
-    "id": "fsc_load_bank_001",
-    "examLevel": "fsc",
+    "id": "fse_load_bank_001",
+    "examLevel": "fse",
     "category": "Commissioning and Testing",
     "subcategory": "Load Bank Testing",
     "difficulty": "hard",
@@ -264,8 +264,8 @@
     "tags": ["load-bank", "commissioning", "battery-autonomy", "testing"]
   },
   {
-    "id": "fsc_phase_rotation_001",
-    "examLevel": "fsc",
+    "id": "fse_phase_rotation_001",
+    "examLevel": "fse",
     "category": "Electrical Systems",
     "subcategory": "Phase Rotation",
     "difficulty": "hard",
@@ -286,8 +286,8 @@
     "tags": ["phase-rotation", "three-phase", "bypass", "motor-loads", "commissioning"]
   },
   {
-    "id": "fsc_ground_fault_001",
-    "examLevel": "fsc",
+    "id": "fse_ground_fault_001",
+    "examLevel": "fse",
     "category": "Electrical Systems",
     "subcategory": "Ground Fault Awareness",
     "difficulty": "hard",
@@ -308,8 +308,8 @@
     "tags": ["ground-fault", "safety", "shock-hazard", "three-phase"]
   },
   {
-    "id": "fsc_capacitor_001",
-    "examLevel": "fsc",
+    "id": "fse_capacitor_001",
+    "examLevel": "fse",
     "category": "Power Electronics",
     "subcategory": "Capacitors and Stored Energy",
     "difficulty": "hard",

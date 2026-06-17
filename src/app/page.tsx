@@ -39,10 +39,10 @@ export default function HomePage() {
               Buy the Book
             </Link>
             <Link href="/certifications/junior" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold border border-gray-700 transition-colors">
-              Take the Jr. FSC Exam
+              Take the Jr. FSE Exam
             </Link>
             <Link href="/certifications/proctored" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold border border-gray-700 transition-colors">
-              View the Proctored FSC Exam
+              View the Proctored FSE Exam
             </Link>
             <Link href="/verify" className="px-6 py-3 rounded-lg bg-transparent border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold transition-colors">
               Verify a Certificate
@@ -115,10 +115,10 @@ export default function HomePage() {
             Certification is a more advanced, proctored credential for deeper technical understanding.
           </p>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {/* Jr FSC */}
+            {/* Jr FSE */}
             <div className="card-dark p-8">
               <span className="badge-jr mb-4 block w-fit">Entry Level</span>
-              <h3 className="text-xl font-bold text-white mb-2">Jr. FSC Exam</h3>
+              <h3 className="text-xl font-bold text-white mb-2">Jr. FSE Exam</h3>
               <p className="text-3xl font-bold text-indigo-400 mb-4">$200</p>
               <ul className="space-y-2 text-sm text-gray-400 mb-8">
                 <li>&#x2022; Browser-based online exam</li>
@@ -130,14 +130,14 @@ export default function HomePage() {
                 <li>&#x2022; Public verification link</li>
               </ul>
               <Link href="/certifications/junior" className="block w-full text-center px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors">
-                View Jr. FSC Exam Details
+                View Jr. FSE Exam Details
               </Link>
             </div>
 
-            {/* FSC */}
+            {/* FSE */}
             <div className="card-dark p-8 border-amber-900/50">
-              <span className="badge-fsc mb-4 block w-fit">Advanced / Proctored</span>
-              <h3 className="text-xl font-bold text-white mb-2">FSC Exam</h3>
+              <span className="badge-fse mb-4 block w-fit">Advanced / Proctored</span>
+              <h3 className="text-xl font-bold text-white mb-2">FSE Exam</h3>
               <p className="text-3xl font-bold text-amber-400 mb-4">$500</p>
               <ul className="space-y-2 text-sm text-gray-400 mb-8">
                 <li>&#x2022; Proctored live by approved organization representative</li>
@@ -149,7 +149,7 @@ export default function HomePage() {
                 <li>&#x2022; Public verification link</li>
               </ul>
               <Link href="/certifications/proctored" className="block w-full text-center px-5 py-2.5 rounded-lg bg-amber-700 hover:bg-amber-600 text-white font-medium text-sm transition-colors">
-                View FSC Exam Details
+                View FSE Exam Details
               </Link>
             </div>
           </div>
@@ -229,7 +229,7 @@ export default function HomePage() {
               Buy the Book
             </Link>
             <Link href="/certifications/junior" className="px-6 py-3 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold transition-colors">
-              Jr. FSC Exam — $200
+              Jr. FSE Exam — $200
             </Link>
           </div>
         </div>

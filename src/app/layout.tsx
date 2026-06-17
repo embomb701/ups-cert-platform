@@ -6,15 +6,15 @@ import { AuthProvider } from '@/components/auth/AuthProvider';
 
 export const metadata: Metadata = {
   title: {
-    default: '[PLATFORM NAME] — UPS Field Service Certification',
-    template: '%s | [PLATFORM NAME]',
+    default: 'Mastering FSE — UPS Field Service Certification',
+    template: '%s | Mastering FSE',
   },
   description:
-    'Professional UPS field service certification and training. Junior FSC Exam ($200) and Proctored FSC Exam ($500) based on Mastering Uninterruptible Power Supplies, Field Service Engineering.',
+    'Professional UPS field service certification and training. Junior FSE Exam ($200) and Proctored FSE Exam ($500) based on Mastering Uninterruptible Power Supplies, Field Service Engineering.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: '[PLATFORM NAME]',
+    siteName: 'Mastering FSE',
   },
 };
 

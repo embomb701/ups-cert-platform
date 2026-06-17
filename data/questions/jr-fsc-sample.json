@@ -1,7 +1,7 @@
 [
   {
-    "id": "jr_fsc_ups_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_ups_001",
+    "examLevel": "jr_fse",
     "category": "UPS Purpose",
     "subcategory": "Critical Load Protection",
     "difficulty": "easy",
@@ -22,8 +22,8 @@
     "tags": ["ups-purpose", "critical-load", "fundamentals"]
   },
   {
-    "id": "jr_fsc_meter_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_meter_001",
+    "examLevel": "jr_fse",
     "category": "Meter Usage",
     "subcategory": "Voltage Measurement",
     "difficulty": "medium",
@@ -44,8 +44,8 @@
     "tags": ["meter", "voltage", "contacts", "field-service"]
   },
   {
-    "id": "jr_fsc_meter_002",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_meter_002",
+    "examLevel": "jr_fse",
     "category": "Meter Usage",
     "subcategory": "Ohms Measurement",
     "difficulty": "medium",
@@ -66,8 +66,8 @@
     "tags": ["meter", "ohms", "safety", "de-energized", "LOTO"]
   },
   {
-    "id": "jr_fsc_battery_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_battery_001",
+    "examLevel": "jr_fse",
     "category": "Battery Systems",
     "subcategory": "Battery String Basics",
     "difficulty": "easy",
@@ -88,8 +88,8 @@
     "tags": ["battery", "series", "DC-bus", "voltage"]
   },
   {
-    "id": "jr_fsc_battery_002",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_battery_002",
+    "examLevel": "jr_fse",
     "category": "Battery Systems",
     "subcategory": "Battery Safety",
     "difficulty": "medium",
@@ -110,8 +110,8 @@
     "tags": ["battery", "hydrogen", "safety", "ventilation"]
   },
   {
-    "id": "jr_fsc_electrical_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_electrical_001",
+    "examLevel": "jr_fse",
     "category": "Electrical Fundamentals",
     "subcategory": "Voltage, Current, Resistance",
     "difficulty": "easy",
@@ -132,8 +132,8 @@
     "tags": ["ohms-law", "voltage", "current", "resistance", "fundamentals"]
   },
   {
-    "id": "jr_fsc_ac_dc_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_ac_dc_001",
+    "examLevel": "jr_fse",
     "category": "Electrical Fundamentals",
     "subcategory": "AC vs DC",
     "difficulty": "easy",
@@ -154,8 +154,8 @@
     "tags": ["AC", "DC", "fundamentals", "polarity"]
   },
   {
-    "id": "jr_fsc_rectifier_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_rectifier_001",
+    "examLevel": "jr_fse",
     "category": "UPS Components",
     "subcategory": "Rectifier Basics",
     "difficulty": "medium",
@@ -176,8 +176,8 @@
     "tags": ["rectifier", "double-conversion", "UPS", "AC-DC"]
   },
   {
-    "id": "jr_fsc_inverter_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_inverter_001",
+    "examLevel": "jr_fse",
     "category": "UPS Components",
     "subcategory": "Inverter Basics",
     "difficulty": "medium",
@@ -198,8 +198,8 @@
     "tags": ["inverter", "double-conversion", "UPS", "output"]
   },
   {
-    "id": "jr_fsc_bypass_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_bypass_001",
+    "examLevel": "jr_fse",
     "category": "UPS Components",
     "subcategory": "Static Bypass",
     "difficulty": "medium",
@@ -220,8 +220,8 @@
     "tags": ["bypass", "static-bypass", "transfer", "critical-load"]
   },
   {
-    "id": "jr_fsc_maint_bypass_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_maint_bypass_001",
+    "examLevel": "jr_fse",
     "category": "UPS Components",
     "subcategory": "Maintenance Bypass",
     "difficulty": "medium",
@@ -242,8 +242,8 @@
     "tags": ["maintenance-bypass", "isolation", "transfer", "critical-load"]
   },
   {
-    "id": "jr_fsc_loto_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_loto_001",
+    "examLevel": "jr_fse",
     "category": "Safety",
     "subcategory": "LOTO Awareness",
     "difficulty": "medium",
@@ -264,8 +264,8 @@
     "tags": ["LOTO", "safety", "stored-energy", "OSHA"]
   },
   {
-    "id": "jr_fsc_escalation_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_escalation_001",
+    "examLevel": "jr_fse",
     "category": "Field Judgment",
     "subcategory": "Escalation",
     "difficulty": "medium",
@@ -286,8 +286,8 @@
     "tags": ["escalation", "field-judgment", "critical-load", "safety"]
   },
   {
-    "id": "jr_fsc_alarm_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_alarm_001",
+    "examLevel": "jr_fse",
     "category": "Alarm Recognition",
     "subcategory": "Basic UPS Alarms",
     "difficulty": "medium",
@@ -308,8 +308,8 @@
     "tags": ["alarm", "battery", "low-battery", "UPS"]
   },
   {
-    "id": "jr_fsc_sts_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_sts_001",
+    "examLevel": "jr_fse",
     "category": "STS Systems",
     "subcategory": "STS Basics",
     "difficulty": "medium",
@@ -330,8 +330,8 @@
     "tags": ["STS", "static-transfer-switch", "redundancy", "transfer"]
   },
   {
-    "id": "jr_fsc_docs_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_docs_001",
+    "examLevel": "jr_fse",
     "category": "Field Documentation",
     "subcategory": "Service Reporting",
     "difficulty": "easy",
@@ -352,8 +352,8 @@
     "tags": ["documentation", "service-report", "field-service"]
   },
   {
-    "id": "jr_fsc_amp_clamp_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_amp_clamp_001",
+    "examLevel": "jr_fse",
     "category": "Meter Usage",
     "subcategory": "Amp Clamp Basics",
     "difficulty": "medium",
@@ -374,8 +374,8 @@
     "tags": ["amp-clamp", "current", "measurement", "meter"]
   },
   {
-    "id": "jr_fsc_pdu_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_pdu_001",
+    "examLevel": "jr_fse",
     "category": "Power Distribution",
     "subcategory": "PDU and RPP Basics",
     "difficulty": "easy",
@@ -396,8 +396,8 @@
     "tags": ["PDU", "RPP", "distribution", "data-center"]
   },
   {
-    "id": "jr_fsc_ppe_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_ppe_001",
+    "examLevel": "jr_fse",
     "category": "Safety",
     "subcategory": "PPE Awareness",
     "difficulty": "medium",
@@ -418,8 +418,8 @@
     "tags": ["PPE", "meter", "CAT-rating", "safety"]
   },
   {
-    "id": "jr_fsc_troubleshoot_001",
-    "examLevel": "jr_fsc",
+    "id": "jr_fse_troubleshoot_001",
+    "examLevel": "jr_fse",
     "category": "Troubleshooting",
     "subcategory": "Basic Troubleshooting Sequence",
     "difficulty": "medium",

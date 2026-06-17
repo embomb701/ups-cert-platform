@@ -35,11 +35,11 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {/* Jr FSC Card */}
+          {/* Jr FSE Card */}
           <div className="card-dark p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <span className="badge-jr text-xs mb-1 block w-fit">Jr. FSC Exam</span>
+                <span className="badge-jr text-xs mb-1 block w-fit">Jr. FSE Exam</span>
                 <h2 className="text-base font-semibold text-white">Junior UPS Field Service Certification</h2>
               </div>
             </div>
@@ -70,15 +70,15 @@ export default function DashboardPage() {
               href="/certifications/junior"
               className="block w-full text-center px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors"
             >
-              Purchase Jr. FSC Exam — $200
+              Purchase Jr. FSE Exam — $200
             </Link>
           </div>
 
-          {/* FSC Card */}
+          {/* FSE Card */}
           <div className="card-dark p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <span className="badge-fsc text-xs mb-1 block w-fit">FSC Exam — Proctored</span>
+                <span className="badge-fse text-xs mb-1 block w-fit">FSE Exam — Proctored</span>
                 <h2 className="text-base font-semibold text-white">UPS Field Service Certification</h2>
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function DashboardPage() {
               href="/certifications/proctored"
               className="block w-full text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors"
             >
-              Purchase FSC Exam — $500
+              Purchase FSE Exam — $500
             </Link>
           </div>
         </div>

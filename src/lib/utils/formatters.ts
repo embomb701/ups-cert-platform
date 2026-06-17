@@ -17,7 +17,7 @@ export function formatScore(score: number): string {
 }
 
 export function generateCertificateNumber(examLevel: string): string {
-  const prefix = examLevel === 'jr_fsc' ? 'JR' : 'FSC';
+  const prefix = examLevel === 'jr_fse' ? 'JR' : 'FSE';
   const year = new Date().getFullYear();
   const random = Math.random().toString(36).substring(2, 8).toUpperCase();
   return `${prefix}-${year}-${random}`;

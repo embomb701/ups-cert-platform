@@ -14,12 +14,12 @@ export default function AdminQuestionsPage() {
 
         <div className="grid md:grid-cols-2 gap-4 mb-8">
           <div className="card-dark p-5">
-            <h3 className="text-sm font-semibold text-white mb-1">Jr. FSC Bank</h3>
+            <h3 className="text-sm font-semibold text-white mb-1">Jr. FSE Bank</h3>
             <p className="text-xs text-gray-500">Target: 1,000 questions</p>
             <p className="text-xs text-gray-500">Active questions: [load from Firestore]</p>
           </div>
           <div className="card-dark p-5">
-            <h3 className="text-sm font-semibold text-white mb-1">FSC Bank</h3>
+            <h3 className="text-sm font-semibold text-white mb-1">FSE Bank</h3>
             <p className="text-xs text-gray-500">Target: 1,000 questions</p>
             <p className="text-xs text-gray-500">Active questions: [load from Firestore]</p>
           </div>
@@ -34,11 +34,11 @@ export default function AdminQuestionsPage() {
 {`# Validate before import
 npm run validate-questions
 
-# Import Jr. FSC sample
-npm run import-questions -- --file data/questions/jr-fsc-sample.json
+# Import Jr. FSE sample
+npm run import-questions -- --file data/questions/jr-fse-sample.json
 
-# Import FSC sample
-npm run import-questions -- --file data/questions/fsc-sample.json`}
+# Import FSE sample
+npm run import-questions -- --file data/questions/fse-sample.json`}
           </pre>
           <p className="text-xs text-gray-500 mt-3">
             See CLAUDE.md and /scripts/import-questions.ts for full documentation.
@@ -50,7 +50,7 @@ npm run import-questions -- --file data/questions/fsc-sample.json`}
           <ul className="space-y-1.5 text-xs text-gray-400">
             <li>&#x2022; Setting <code className="font-mono">active: false</code> removes a question from future exam selection without deleting it.</li>
             <li>&#x2022; Questions with <code className="font-mono">reviewRequired: true</code> need admin review before activation.</li>
-            <li>&#x2022; Both question banks are completely separate — Jr. FSC questions are never shown on FSC exams.</li>
+            <li>&#x2022; Both question banks are completely separate — Jr. FSE questions are never shown on FSE exams.</li>
             <li>&#x2022; Maintain a minimum of 100 active questions per bank for meaningful randomization. Target 1,000.</li>
           </ul>
         </div>

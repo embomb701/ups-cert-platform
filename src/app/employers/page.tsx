@@ -41,10 +41,10 @@ export default function EmployersPage() {
             </p>
           </div>
 
-          {/* Jr FSC Employer Value */}
+          {/* Jr FSE Employer Value */}
           <div className="card-dark p-8 mb-6">
             <div className="flex items-start gap-4 mb-4">
-              <span className="badge-jr shrink-0">Jr. FSC</span>
+              <span className="badge-jr shrink-0">Jr. FSE</span>
               <div>
                 <h3 className="text-lg font-bold text-white">Junior UPS Field Service Certification — $200</h3>
                 <p className="text-sm text-gray-400">Entry/junior-level knowledge credential</p>
@@ -53,7 +53,7 @@ export default function EmployersPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <ul className="space-y-2 text-sm text-gray-400">
                 <li>&#x2022; Browser-based exam, 50 randomized questions</li>
-                <li>&#x2022; 1,000-question Jr. FSC bank</li>
+                <li>&#x2022; 1,000-question Jr. FSE bank</li>
                 <li>&#x2022; Timed — 90 seconds per question</li>
                 <li>&#x2022; Anti-cheat deterrents and audit logging</li>
                 <li>&#x2022; Account and IP/network tracking</li>
@@ -68,10 +68,10 @@ export default function EmployersPage() {
             </div>
           </div>
 
-          {/* FSC Employer Value */}
+          {/* FSE Employer Value */}
           <div className="card-dark p-8 mb-12">
             <div className="flex items-start gap-4 mb-4">
-              <span className="badge-fsc shrink-0">FSC</span>
+              <span className="badge-fse shrink-0">FSE</span>
               <div>
                 <h3 className="text-lg font-bold text-white">UPS Field Service Certification — $500</h3>
                 <p className="text-sm text-gray-400">Advanced, proctored knowledge credential</p>
@@ -80,7 +80,7 @@ export default function EmployersPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <ul className="space-y-2 text-sm text-gray-400">
                 <li>&#x2022; Proctored live by approved organization representative</li>
-                <li>&#x2022; 1,000-question FSC bank — separate from Jr. FSC</li>
+                <li>&#x2022; 1,000-question FSE bank — separate from Jr. FSE</li>
                 <li>&#x2022; More technical, scenario-based, troubleshooting-focused</li>
                 <li>&#x2022; Identity confirmed before session</li>
                 <li>&#x2022; Proctor must unlock the exam</li>
@@ -116,10 +116,10 @@ export default function EmployersPage() {
           <div className="card-dark p-6 mb-8">
             <h3 className="text-sm font-semibold text-white mb-2">A Note on Exam Integrity</h3>
             <p className="text-xs text-gray-400 leading-relaxed">
-              No browser-based exam can guarantee cheating is impossible. The Jr. FSC Exam uses layered
+              No browser-based exam can guarantee cheating is impossible. The Jr. FSE Exam uses layered
               deterrents, randomized delivery, timed questions, account controls, IP/network tracking,
               payment records, and audit logging to make cheating harder, less useful, and easier to
-              identify. The FSC Exam adds live proctoring, which provides a stronger level of exam
+              identify. The FSE Exam adds live proctoring, which provides a stronger level of exam
               integrity.
             </p>
           </div>

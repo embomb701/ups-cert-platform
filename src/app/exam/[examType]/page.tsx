@@ -12,7 +12,7 @@ export default function ExamPage() {
   const params = useParams();
   const router = useRouter();
   const { user, loading } = useAuth();
-  const examType = (params?.examType as ExamLevel) ?? 'jr_fsc';
+  const examType = (params?.examType as ExamLevel) ?? 'jr_fse';
 
   const [session, setSession] = useState<ExamSessionState | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -154,8 +154,8 @@ export default function ExamPage() {
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div>
-              <span className={session.examLevel === 'jr_fsc' ? 'badge-jr' : 'badge-fsc'}>
-                {session.examLevel === 'jr_fsc' ? 'Jr. FSC' : 'FSC'} Exam
+              <span className={session.examLevel === 'jr_fse' ? 'badge-jr' : 'badge-fse'}>
+                {session.examLevel === 'jr_fse' ? 'Jr. FSE' : 'FSE'} Exam
               </span>
             </div>
             <ExamTimer

@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
       certificateId = uuidv4();
       certificateNumber = generateCertNumber(attempt.examLevel);
       const certTitle =
-        attempt.examLevel === 'jr_fsc'
+        attempt.examLevel === 'jr_fse'
           ? 'Junior UPS Field Service Certification'
           : 'UPS Field Service Certification';
 

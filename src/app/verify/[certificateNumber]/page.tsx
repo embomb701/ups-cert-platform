@@ -71,7 +71,7 @@ export default async function CertificateVerifyPage({ params }: Props) {
         <div className="card-dark p-10">
           {/* Header */}
           <div className="text-center mb-8">
-            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">[PLATFORM NAME]</p>
+            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Mastering FSE</p>
             <h1 className="text-2xl font-bold text-white mb-1">Certificate Verification</h1>
           </div>
 
@@ -97,7 +97,7 @@ export default async function CertificateVerifyPage({ params }: Props) {
             <div className="flex justify-between border-b border-gray-800 pb-3">
               <span className="text-sm text-gray-500">Level</span>
               <span className="text-sm text-white">
-                {cert.examLevel === 'jr_fsc' ? 'Junior FSC' : 'FSC (Proctored)'}
+                {cert.examLevel === 'jr_fse' ? 'Junior FSE' : 'FSE (Proctored)'}
               </span>
             </div>
             <div className="flex justify-between border-b border-gray-800 pb-3">

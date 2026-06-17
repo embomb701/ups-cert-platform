@@ -28,7 +28,7 @@ export default function PrivacyPage() {
             <ul className="space-y-1 list-disc list-inside">
               <li>To authenticate your account and verify purchases</li>
               <li>To deliver exam sessions and track attempts</li>
-              <li>To enforce 90-day retake cooldowns for the Jr. FSC Exam</li>
+              <li>To enforce 90-day retake cooldowns for the Jr. FSE Exam</li>
               <li>To generate and maintain certificates</li>
               <li>To maintain public certificate verification records</li>
               <li>To review flagged exam attempts for potential integrity violations</li>
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
           <div>
             <h2 className="text-base font-semibold text-white mb-2">3. IP Address and Network Data</h2>
             <p>
-              For the Junior FSC Exam, we store a hashed (one-way encrypted) version of your IP address
+              For the Junior FSE Exam, we store a hashed (one-way encrypted) version of your IP address
               at account creation, purchase, and exam attempt. This hash is used only for cooldown
               enforcement and duplicate detection. Raw IP addresses are not stored in our primary database.
             </p>

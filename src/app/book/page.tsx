@@ -65,7 +65,7 @@ export default function BookPage() {
                   <li>&#x2022; Electricians and technicians moving into UPS work</li>
                   <li>&#x2022; Data center operations staff who want deeper UPS knowledge</li>
                   <li>&#x2022; Junior field technicians preparing for real field work</li>
-                  <li>&#x2022; Anyone studying for the Jr. FSC or FSC certification exams</li>
+                  <li>&#x2022; Anyone studying for the Jr. FSE or FSE certification exams</li>
                 </ul>
               </div>
 
@@ -82,7 +82,7 @@ export default function BookPage() {
               <div className="card-dark p-6">
                 <h3 className="text-lg font-semibold text-white mb-3">How the Book Supports the Exams</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  The Jr. FSC and FSC certification exams are based directly on the material in this book.
+                  The Jr. FSE and FSE certification exams are based directly on the material in this book.
                   Reading and understanding the book is the primary way to prepare for both exams. The exams
                   are designed to reward people who actually studied the content.
                 </p>
@@ -110,10 +110,10 @@ export default function BookPage() {
         <div className="container-site max-w-2xl mx-auto text-center">
           <h2 className="text-xl font-bold text-white mb-3">Ready to Test Your Knowledge?</h2>
           <p className="text-gray-400 mb-6 text-sm">
-            After reading the book, take the Jr. FSC Exam to earn a formal knowledge credential.
+            After reading the book, take the Jr. FSE Exam to earn a formal knowledge credential.
           </p>
           <Link href="/certifications/junior" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors">
-            View the Jr. FSC Exam &rarr;
+            View the Jr. FSE Exam &rarr;
           </Link>
         </div>
       </section>

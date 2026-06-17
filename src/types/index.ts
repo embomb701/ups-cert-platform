@@ -2,7 +2,7 @@
 // Core shared types for UPS Certification Platform
 // ============================================================
 
-export type ExamLevel = 'jr_fsc' | 'fsc';
+export type ExamLevel = 'jr_fse' | 'fse';
 export type UserRole = 'user' | 'admin' | 'proctor';
 export type CertificateStatus = 'valid' | 'expired' | 'revoked' | 'under_review';
 export type PurchaseStatus = 'pending' | 'complete' | 'refunded' | 'failed';
@@ -62,8 +62,8 @@ export interface Product {
 }
 
 export const PRODUCTS = {
-  JR_FSC_EXAM: 'jr_fsc_exam',
-  FSC_PROCTORED_EXAM: 'fsc_proctored_exam',
+  JR_FSE_EXAM: 'jr_fse_exam',
+  FSE_PROCTORED_EXAM: 'fse_proctored_exam',
 } as const;
 
 export type ProductId = (typeof PRODUCTS)[keyof typeof PRODUCTS];
@@ -252,7 +252,7 @@ export interface AuditLog {
 }
 
 // ---------------------------------------------------------------
-// Proctored Exam Orders (FSC only)
+// Proctored Exam Orders (FSE only)
 // ---------------------------------------------------------------
 export interface ProctoredExamOrder {
   id: string;

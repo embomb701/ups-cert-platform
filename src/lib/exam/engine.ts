@@ -114,7 +114,7 @@ export async function scoreAttempt(
 // Generate a unique certificate number
 // ---------------------------------------------------------------
 export function generateCertNumber(examLevel: ExamLevel): string {
-  const prefix = examLevel === 'jr_fsc' ? 'JR' : 'FSC';
+  const prefix = examLevel === 'jr_fse' ? 'JR' : 'FSE';
   const year = new Date().getFullYear();
   const rand = uuidv4().split('-')[0].toUpperCase();
   return `${prefix}-${year}-${rand}`;

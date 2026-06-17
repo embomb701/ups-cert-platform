@@ -52,16 +52,16 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     completedAt: FieldValue.serverTimestamp(),
   });
 
-  if (productId === 'jr_fsc_exam') {
-    // Jr. FSC: create access record directly
+  if (productId === 'jr_fse_exam') {
+    // Jr. FSE: create access record directly
     await adminDb
       .collection('users')
       .doc(userId)
       .collection('examAccess')
-      .doc('jr_fsc')
+      .doc('jr_fse')
       .set(
         {
-          productId: 'jr_fsc_exam',
+          productId: 'jr_fse_exam',
           purchaseId: session.id,
           granted: true,
           grantedAt: FieldValue.serverTimestamp(),
@@ -70,13 +70,13 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       );
   }
 
-  if (productId === 'fsc_proctored_exam') {
-    // FSC: create proctored order — does NOT unlock exam
+  if (productId === 'fse_proctored_exam') {
+    // FSE: create proctored order — does NOT unlock exam
     await adminDb.collection('proctoredExamOrders').add({
       userId,
       email,
       purchaseId: session.id,
-      productId: 'fsc_proctored_exam',
+      productId: 'fse_proctored_exam',
       status: 'scheduling_pending',
       schedulingStatus: 'awaiting_contact',
       createdAt: FieldValue.serverTimestamp(),

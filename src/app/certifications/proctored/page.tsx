@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'UPS Field Service Certification Exam (Proctored) — $500',
   description:
-    'The FSC Exam is a proctored, advanced UPS field service knowledge credential. $500, scheduling required.',
+    'The FSE Exam is a proctored, advanced UPS field service knowledge credential. $500, scheduling required.',
 };
 
 export default function ProctoredCertPage() {
@@ -12,7 +12,7 @@ export default function ProctoredCertPage() {
     <>
       <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950">
         <div className="container-site max-w-4xl mx-auto">
-          <span className="badge-fsc mb-4 inline-block">Advanced — Proctored</span>
+          <span className="badge-fse mb-4 inline-block">Advanced — Proctored</span>
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             UPS Field Service Certification
           </h1>
@@ -33,7 +33,7 @@ export default function ProctoredCertPage() {
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>Proctored live — approved organization representative</li>
                 <li>50 questions per session</li>
-                <li>Selected from 1,000-question FSC bank</li>
+                <li>Selected from 1,000-question FSE bank</li>
                 <li>Randomized question and answer order</li>
                 <li>90 seconds per question (configurable)</li>
                 <li>No backtracking</li>
@@ -56,7 +56,7 @@ export default function ProctoredCertPage() {
               <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">On Pass</h3>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>Passing score: 80% or higher</li>
-                <li>FSC Certificate PDF issued</li>
+                <li>FSE Certificate PDF issued</li>
                 <li>Proctored exam noted on certificate</li>
                 <li>Public verification link created</li>
                 <li>Certificate status: valid</li>
@@ -66,9 +66,9 @@ export default function ProctoredCertPage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h2 className="text-xl font-bold text-white mb-4">What the FSC Exam Tests</h2>
+              <h2 className="text-xl font-bold text-white mb-4">What the FSE Exam Tests</h2>
               <p className="text-sm text-gray-400 leading-relaxed mb-4">
-                The FSC Exam includes everything from the Jr. FSC level, but at greater technical depth,
+                The FSE Exam includes everything from the Jr. FSE level, but at greater technical depth,
                 plus advanced topics including component theory, transfer types, troubleshooting decision
                 trees, measurement interpretation, and scenario-based field reasoning.
               </p>
@@ -98,7 +98,7 @@ export default function ProctoredCertPage() {
               <div className="card-dark p-6">
                 <h3 className="text-base font-semibold text-white mb-2">Why Proctored?</h3>
                 <p className="text-xs text-gray-400 leading-relaxed">
-                  The FSC Exam requires live proctoring by an approved organization representative. This
+                  The FSE Exam requires live proctoring by an approved organization representative. This
                   provides identity verification, observation, and a stronger level of exam integrity
                   compared to browser-based only controls. The higher price reflects the scheduling,
                   coordination, and proctoring involved.
@@ -108,7 +108,7 @@ export default function ProctoredCertPage() {
               <div className="card-dark p-6">
                 <h3 className="text-base font-semibold text-white mb-3">How It Works</h3>
                 <ol className="space-y-2 text-xs text-gray-400">
-                  <li>1. Purchase the FSC Exam for $500</li>
+                  <li>1. Purchase the FSE Exam for $500</li>
                   <li>2. Your dashboard will show scheduling instructions</li>
                   <li>3. An approved proctor will be assigned</li>
                   <li>4. Your exam session is scheduled and identity confirmed</li>
@@ -130,7 +130,7 @@ export default function ProctoredCertPage() {
 
               <div className="text-center pt-2">
                 <Link href="/login" className="block w-full px-6 py-3 rounded-lg bg-amber-700 hover:bg-amber-600 text-white font-semibold text-sm transition-colors text-center">
-                  Sign In to Purchase FSC Exam — $500
+                  Sign In to Purchase FSE Exam — $500
                 </Link>
                 <p className="text-xs text-gray-500 mt-2">
                   Exam requires scheduling after purchase. Proctor unlock required before start.

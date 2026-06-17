@@ -6,9 +6,9 @@ export const metadata: Metadata = { title: 'Admin Dashboard' };
 const adminSections = [
   { label: 'Users', href: '/admin/users', desc: 'View accounts, roles, blocks' },
   { label: 'Purchases', href: '/admin/purchases', desc: 'View all Stripe purchases' },
-  { label: 'Jr. FSC Attempts', href: '/admin/attempts?level=jr_fsc', desc: 'Review attempts, flags, cooldowns' },
-  { label: 'FSC Attempts', href: '/admin/attempts?level=fsc', desc: 'Proctored attempt records' },
-  { label: 'Proctored Orders', href: '/admin/proctored', desc: 'Manage FSC scheduling and proctor unlock' },
+  { label: 'Jr. FSE Attempts', href: '/admin/attempts?level=jr_fse', desc: 'Review attempts, flags, cooldowns' },
+  { label: 'FSE Attempts', href: '/admin/attempts?level=fse', desc: 'Proctored attempt records' },
+  { label: 'Proctored Orders', href: '/admin/proctored', desc: 'Manage FSE scheduling and proctor unlock' },
   { label: 'Certificates', href: '/admin/certificates', desc: 'View, revoke, manage certificates' },
   { label: 'Question Bank', href: '/admin/questions', desc: 'Import, review, activate/deactivate questions' },
   { label: 'Audit Logs', href: '/admin/audit', desc: 'Suspicious events, admin actions' },
@@ -45,9 +45,9 @@ export default function AdminPage() {
           <p className="text-xs text-amber-300 font-semibold mb-1">Admin Notes</p>
           <ul className="space-y-1 text-xs text-gray-400">
             <li>&#x2022; Never approve a flagged certificate without reviewing the attempt.</li>
-            <li>&#x2022; FSC exam sessions must be explicitly unlocked before the candidate can start.</li>
+            <li>&#x2022; FSE exam sessions must be explicitly unlocked before the candidate can start.</li>
             <li>&#x2022; IP lock clearing should be documented in admin notes.</li>
-            <li>&#x2022; Proctor identity should be recorded on all FSC attempt records.</li>
+            <li>&#x2022; Proctor identity should be recorded on all FSE attempt records.</li>
           </ul>
         </div>
       </div>

@@ -7,8 +7,8 @@ import { signOut } from '@/lib/firebase/auth';
 
 const navLinks = [
   { label: 'Book', href: '/book' },
-  { label: 'Jr. FSC Exam', href: '/certifications/junior' },
-  { label: 'FSC Exam', href: '/certifications/proctored' },
+  { label: 'Jr. FSE Exam', href: '/certifications/junior' },
+  { label: 'FSE Exam', href: '/certifications/proctored' },
   { label: 'Employers', href: '/employers' },
   { label: 'Training', href: '/training' },
   { label: 'About', href: '/about' },
@@ -25,7 +25,7 @@ export function Header() {
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center gap-2 group">
             <span className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
-              [PLATFORM NAME]
+              Mastering FSE
             </span>
           </Link>
 

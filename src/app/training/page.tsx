@@ -20,8 +20,8 @@ const modules = [
   'Critical Load Protection',
   'Field Documentation',
   'Customer Communication',
-  'Jr. FSC Exam Preparation',
-  'FSC Exam Preparation',
+  'Jr. FSE Exam Preparation',
+  'FSE Exam Preparation',
 ];
 
 export default function TrainingPage() {
@@ -35,7 +35,7 @@ export default function TrainingPage() {
         <p className="text-gray-400 leading-relaxed max-w-2xl mx-auto mb-12">
           Structured video and text training modules covering UPS field service fundamentals are in
           development. Modules will be available as individual paid products and will directly support
-          preparation for both the Jr. FSC and FSC certification exams.
+          preparation for both the Jr. FSE and FSE certification exams.
         </p>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 text-left mb-12">

@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
             unit_amount: product.priceInCents,
             product_data: {
               name: product.name,
-              description: `[PLATFORM NAME] — ${product.shortName}`,
+              description: `Mastering FSE — ${product.shortName}`,
             },
           },
           quantity: 1,

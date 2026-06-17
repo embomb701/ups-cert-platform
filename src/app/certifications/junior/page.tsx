@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Junior UPS Field Service Certification Exam — $200',
   description:
-    'The Jr. FSC Exam validates foundational UPS field service knowledge. Browser-based, 50 questions, timed, $200.',
+    'The Jr. FSE Exam validates foundational UPS field service knowledge. Browser-based, 50 questions, timed, $200.',
 };
 
 export default function JuniorCertPage() {
@@ -33,7 +33,7 @@ export default function JuniorCertPage() {
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>Browser-based online delivery</li>
                 <li>50 questions per attempt</li>
-                <li>Selected from 1,000-question Jr. FSC bank</li>
+                <li>Selected from 1,000-question Jr. FSE bank</li>
                 <li>Randomized question order</li>
                 <li>Randomized answer order</li>
                 <li>90 seconds per question</li>
@@ -56,7 +56,7 @@ export default function JuniorCertPage() {
               <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">On Pass</h3>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>Passing score: 80% or higher</li>
-                <li>Jr. FSC Certificate PDF issued</li>
+                <li>Jr. FSE Certificate PDF issued</li>
                 <li>Public verification link created</li>
                 <li>Score and category breakdown shown</li>
                 <li>Missed question review available</li>
@@ -69,7 +69,7 @@ export default function JuniorCertPage() {
             <div>
               <h2 className="text-xl font-bold text-white mb-4">What the Exam Tests</h2>
               <p className="text-sm text-gray-400 leading-relaxed mb-4">
-                The Jr. FSC Exam covers foundational UPS field service concepts at a junior/entry level.
+                The Jr. FSE Exam covers foundational UPS field service concepts at a junior/entry level.
                 It requires genuine study of the book. It is not easy and is designed to separate candidates
                 who have studied the material from those who have not.
               </p>
@@ -129,7 +129,7 @@ export default function JuniorCertPage() {
 
               <div className="text-center pt-2">
                 <Link href="/login" className="block w-full px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors text-center">
-                  Sign In to Purchase Jr. FSC Exam — $200
+                  Sign In to Purchase Jr. FSE Exam — $200
                 </Link>
                 <p className="text-xs text-gray-500 mt-2">Google account required. Payment via Stripe.</p>
               </div>
@@ -142,7 +142,7 @@ export default function JuniorCertPage() {
         <div className="container-site max-w-2xl mx-auto text-center">
           <p className="text-sm text-gray-400 mb-4">Want to compare both certification levels?</p>
           <Link href="/certifications/compare" className="text-sm text-indigo-400 hover:text-indigo-300">
-            Compare Jr. FSC vs. FSC side-by-side &rarr;
+            Compare Jr. FSE vs. FSE side-by-side &rarr;
           </Link>
         </div>
       </section>

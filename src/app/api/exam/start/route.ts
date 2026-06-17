@@ -36,30 +36,30 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const examLevel = body.examLevel as ExamLevel;
 
-    if (!['jr_fsc', 'fsc'].includes(examLevel)) {
+    if (!['jr_fse', 'fse'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
     const ipHash = hashIp(getRealIp(req));
 
-    if (examLevel === 'jr_fsc') {
+    if (examLevel === 'jr_fse') {
       // Verify purchase
       const accessSnap = await adminDb
         .collection('users')
         .doc(uid)
         .collection('examAccess')
-        .doc('jr_fsc')
+        .doc('jr_fse')
         .get();
 
       if (!accessSnap.exists || !accessSnap.data()?.granted) {
-        return NextResponse.json({ error: 'No valid Jr. FSC exam purchase found.' }, { status: 403 });
+        return NextResponse.json({ error: 'No valid Jr. FSE exam purchase found.' }, { status: 403 });
       }
 
       // Check account-based cooldown
       const recentAttempts = await adminDb
         .collection('examAttempts')
         .where('userId', '==', uid)
-        .where('examLevel', '==', 'jr_fsc')
+        .where('examLevel', '==', 'jr_fse')
         .where('cooldownUntil', '>', new Date())
         .limit(1)
         .get();
@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
         const attempt = recentAttempts.docs[0].data();
         return NextResponse.json({
           error:
-            'A recent Junior FSC Exam attempt has already been associated with this account or network. Junior FSC Exam attempts are limited to once every 90 days. Contact support if you believe this is an error.',
+            'A recent Junior FSE Exam attempt has already been associated with this account or network. Junior FSE Exam attempts are limited to once every 90 days. Contact support if you believe this is an error.',
           cooldownUntil: attempt.cooldownUntil?.toDate(),
         }, { status: 429 });
       }
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
       const ipLock = await adminDb
         .collection('ipExamLocks')
         .where('ipHash', '==', ipHash)
-        .where('examLevel', '==', 'jr_fsc')
+        .where('examLevel', '==', 'jr_fse')
         .where('cooldownUntil', '>', new Date())
         .where('clearedByAdmin', '==', false)
         .limit(1)
@@ -86,17 +86,17 @@ export async function POST(req: NextRequest) {
       if (!ipLock.empty) {
         return NextResponse.json({
           error:
-            'A recent Junior FSC Exam attempt has already been associated with this account or network. Junior FSC Exam attempts are limited to once every 90 days. Contact support if you believe this is an error.',
+            'A recent Junior FSE Exam attempt has already been associated with this account or network. Junior FSE Exam attempts are limited to once every 90 days. Contact support if you believe this is an error.',
         }, { status: 429 });
       }
     }
 
-    if (examLevel === 'fsc') {
-      // FSC: verify proctor has unlocked this session
+    if (examLevel === 'fse') {
+      // FSE: verify proctor has unlocked this session
       const readyOrder = await adminDb
         .collection('proctoredExamOrders')
         .where('userId', '==', uid)
-        .where('productId', '==', 'fsc_proctored_exam')
+        .where('productId', '==', 'fse_proctored_exam')
         .where('status', '==', 'ready')
         .limit(1)
         .get();
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
       if (readyOrder.empty) {
         return NextResponse.json({
           error:
-            'Your FSC Exam session has not been unlocked yet. Your proctor must mark your session as ready before you can begin.',
+            'Your FSE Exam session has not been unlocked yet. Your proctor must mark your session as ready before you can begin.',
         }, { status: 403 });
       }
     }
@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
       id: attemptId,
       userId: uid,
       email,
-      productId: examLevel === 'jr_fsc' ? 'jr_fsc_exam' : 'fsc_proctored_exam',
+      productId: examLevel === 'jr_fse' ? 'jr_fse_exam' : 'fse_proctored_exam',
       examLevel,
       status: 'in_progress',
       startedAt: FieldValue.serverTimestamp(),
@@ -137,16 +137,16 @@ export async function POST(req: NextRequest) {
       suspiciousEventsCount: 0,
       suspiciousRiskLevel: 'low',
       flaggedForReview: false,
-      cooldownUntil: examLevel === 'jr_fsc' ? cooldownUntil : null,
-      proctored: examLevel === 'fsc',
+      cooldownUntil: examLevel === 'jr_fse' ? cooldownUntil : null,
+      proctored: examLevel === 'fse',
     });
 
-    // Set IP lock for Jr. FSC
-    if (examLevel === 'jr_fsc') {
+    // Set IP lock for Jr. FSE
+    if (examLevel === 'jr_fse') {
       await adminDb.collection('ipExamLocks').add({
         ipHash,
-        examLevel: 'jr_fsc',
-        productId: 'jr_fsc_exam',
+        examLevel: 'jr_fse',
+        productId: 'jr_fse_exam',
         userId: uid,
         email,
         attemptId,
@@ -174,7 +174,7 @@ export async function POST(req: NextRequest) {
       ),
       choiceOrder,
       timePerQuestion: TIME_PER_QUESTION,
-      proctored: examLevel === 'fsc',
+      proctored: examLevel === 'fse',
     });
   } catch (err) {
     console.error('Exam start error:', err);

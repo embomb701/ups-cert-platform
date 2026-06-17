@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = { title: 'Admin — Proctored FSC Orders' };
+export const metadata: Metadata = { title: 'Admin — Proctored FSE Orders' };
 
 const STATUS_LABELS: Record<string, string> = {
   scheduling_pending: 'Scheduling Pending',
@@ -21,11 +21,11 @@ export default function AdminProctoredPage() {
       <div className="container-site max-w-5xl mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link href="/admin" className="text-sm text-gray-500 hover:text-white">&larr; Admin</Link>
-          <h1 className="text-xl font-bold text-white">Proctored FSC Orders</h1>
+          <h1 className="text-xl font-bold text-white">Proctored FSE Orders</h1>
         </div>
 
         <div className="card-dark p-6 mb-6">
-          <h2 className="text-sm font-semibold text-white mb-4">FSC Exam Workflow</h2>
+          <h2 className="text-sm font-semibold text-white mb-4">FSE Exam Workflow</h2>
           <ol className="space-y-3">
             {[
               ['purchased / scheduling_pending', 'Candidate has paid. Contact candidate to schedule.'],

@@ -12,7 +12,7 @@ const RULES_JR = [
   'Do not copy, record, photograph, or distribute exam questions in any form.',
   'Do not create multiple accounts to bypass retake rules.',
   'Suspicious activity will be logged and may be reviewed by an administrator.',
-  'The Jr. FSC Exam can only be attempted once every 90 days.',
+  'The Jr. FSE Exam can only be attempted once every 90 days.',
   'Failed, abandoned, expired, or incomplete attempts still trigger the 90-day cooldown.',
   'Certificates may be revoked if fraud, cheating, or misuse is discovered after the fact.',
   'You will be prompted to enter fullscreen mode. Exiting fullscreen will be logged.',
@@ -20,7 +20,7 @@ const RULES_JR = [
   'Tab switching and browser blur events are logged.',
 ];
 
-const RULES_FSC = [
+const RULES_FSE = [
   'This exam is timed. Each question has a 90-second timer (may be adjusted by your proctor).',
   'You cannot go back to a previous question.',
   'This exam is conducted under live supervision by an approved organization proctor.',
@@ -38,11 +38,11 @@ const RULES_FSC = [
 export default function ExamRulesPage() {
   const params = useParams();
   const router = useRouter();
-  const examType = (params?.examType as ExamLevel) ?? 'jr_fsc';
+  const examType = (params?.examType as ExamLevel) ?? 'jr_fse';
   const [accepted, setAccepted] = useState(false);
 
-  const isJr = examType === 'jr_fsc';
-  const rules = isJr ? RULES_JR : RULES_FSC;
+  const isJr = examType === 'jr_fse';
+  const rules = isJr ? RULES_JR : RULES_FSE;
   const examLabel = isJr ? 'Junior UPS Field Service Certification' : 'UPS Field Service Certification';
 
   const handleStart = () => {
