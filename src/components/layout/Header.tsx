@@ -25,7 +25,7 @@ export function Header() {
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center gap-2 group">
             <span className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
-              Mastering FSE
+              Mastering Field Service Engineering
             </span>
           </Link>
 
