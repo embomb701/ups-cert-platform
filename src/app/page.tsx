@@ -39,10 +39,13 @@ export default function HomePage() {
               Buy the Book
             </Link>
             <Link href="/certifications/junior" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold border border-gray-700 transition-colors">
-              Take the Jr. FSE Exam
+              Jr. FSE Exam — $200
+            </Link>
+            <Link href="/certifications/ai-proctored" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold border border-purple-800 transition-colors">
+              FSE AI Exam — $349
             </Link>
             <Link href="/certifications/proctored" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold border border-gray-700 transition-colors">
-              View the Proctored FSE Exam
+              FSE Exam — $500
             </Link>
             <Link href="/verify" className="px-6 py-3 rounded-lg bg-transparent border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold transition-colors">
               Verify a Certificate
@@ -108,13 +111,12 @@ export default function HomePage() {
       <section className="section-pad">
         <div className="container-site">
           <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-4">
-            Two Certification Levels
+            Three Certification Levels
           </h2>
           <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
-            The Junior UPS Field Service Certification validates foundational knowledge. The UPS Field Service
-            Certification is a more advanced, proctored credential for deeper technical understanding.
+            Choose the certification that fits your level and preferred exam format — from entry-level to advanced with AI or human proctoring.
           </p>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* Jr FSE */}
             <div className="card-dark p-8">
               <span className="badge-jr mb-4 block w-fit">Entry Level</span>
@@ -134,17 +136,36 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* FSE */}
+            {/* FSE AI */}
+            <div className="card-dark p-8 border-purple-900/50">
+              <span className="inline-block text-xs font-semibold text-purple-400 bg-purple-950/50 border border-purple-800/50 px-2 py-0.5 rounded mb-4">AI Proctored</span>
+              <h3 className="text-xl font-bold text-white mb-2">FSE AI Exam</h3>
+              <p className="text-3xl font-bold text-purple-400 mb-4">$349</p>
+              <ul className="space-y-2 text-sm text-gray-400 mb-8">
+                <li>&#x2022; AI webcam face &amp; eye tracking</li>
+                <li>&#x2022; 50 randomized questions</li>
+                <li>&#x2022; Timed — 90 seconds per question</li>
+                <li>&#x2022; No scheduling — start anytime</li>
+                <li>&#x2022; Browser lockdown + AI monitoring</li>
+                <li>&#x2022; PDF certificate if passed</li>
+                <li>&#x2022; Public verification link</li>
+              </ul>
+              <Link href="/certifications/ai-proctored" className="block w-full text-center px-5 py-2.5 rounded-lg bg-purple-700 hover:bg-purple-600 text-white font-medium text-sm transition-colors">
+                View FSE AI Exam Details
+              </Link>
+            </div>
+
+            {/* FSE Human */}
             <div className="card-dark p-8 border-amber-900/50">
-              <span className="badge-fse mb-4 block w-fit">Advanced / Proctored</span>
+              <span className="badge-fse mb-4 block w-fit">Human Proctored</span>
               <h3 className="text-xl font-bold text-white mb-2">FSE Exam</h3>
               <p className="text-3xl font-bold text-amber-400 mb-4">$500</p>
               <ul className="space-y-2 text-sm text-gray-400 mb-8">
-                <li>&#x2022; Proctored live by approved organization representative</li>
+                <li>&#x2022; Proctored live by organization representative</li>
                 <li>&#x2022; 50 randomized questions</li>
                 <li>&#x2022; More difficult — scenario-based</li>
                 <li>&#x2022; Scheduling required</li>
-                <li>&#x2022; Stronger exam integrity</li>
+                <li>&#x2022; Strongest exam integrity</li>
                 <li>&#x2022; PDF certificate if passed</li>
                 <li>&#x2022; Public verification link</li>
               </ul>
@@ -155,7 +176,7 @@ export default function HomePage() {
           </div>
           <div className="text-center mt-6">
             <Link href="/certifications/compare" className="text-sm text-indigo-400 hover:text-indigo-300">
-              Compare both certifications side-by-side &rarr;
+              Compare all three certifications side-by-side &rarr;
             </Link>
           </div>
         </div>

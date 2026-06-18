@@ -8,6 +8,7 @@ import { signOut } from '@/lib/firebase/auth';
 const navLinks = [
   { label: 'Book', href: '/book' },
   { label: 'Jr. FSE Exam', href: '/certifications/junior' },
+  { label: 'FSE AI Exam', href: '/certifications/ai-proctored' },
   { label: 'FSE Exam', href: '/certifications/proctored' },
   { label: 'Employers', href: '/employers' },
   { label: 'Training', href: '/training' },
