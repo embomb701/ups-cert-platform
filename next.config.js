@@ -12,9 +12,12 @@ const nextConfig = {
       },
     ],
   },
-  webpack: (config) => {
-    // face-api.js uses canvas which is not available server-side
+  webpack: (config, { isServer }) => {
+    // face-api.js uses canvas (server-side) and fs — exclude both from browser bundle
     config.externals = [...(config.externals || []), { canvas: 'canvas' }];
+    if (!isServer) {
+      config.resolve.fallback = { ...config.resolve.fallback, fs: false };
+    }
     return config;
   },
 };

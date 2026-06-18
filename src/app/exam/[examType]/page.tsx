@@ -202,7 +202,6 @@ export default function ExamPage() {
           </p>
         </div>
       </div>
-    </div>
   );
 
   return (
