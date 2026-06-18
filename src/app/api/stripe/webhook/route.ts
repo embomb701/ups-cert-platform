@@ -70,6 +70,24 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       );
   }
 
+  if (productId === 'fse_ai_exam') {
+    // FSE AI: create access record directly (no scheduling needed)
+    await adminDb
+      .collection('users')
+      .doc(userId)
+      .collection('examAccess')
+      .doc('fse_ai')
+      .set(
+        {
+          productId: 'fse_ai_exam',
+          purchaseId: session.id,
+          granted: true,
+          grantedAt: FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+  }
+
   if (productId === 'fse_proctored_exam') {
     // FSE: create proctored order — does NOT unlock exam
     await adminDb.collection('proctoredExamOrders').add({

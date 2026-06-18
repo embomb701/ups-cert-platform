@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const examLevel = body.examLevel as ExamLevel;
 
-    if (!['jr_fse', 'fse'].includes(examLevel)) {
+    if (!['jr_fse', 'fse_ai', 'fse'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -91,6 +91,20 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    if (examLevel === 'fse_ai') {
+      // FSE AI: verify purchase (access granted by webhook, no scheduling needed)
+      const accessSnap = await adminDb
+        .collection('users')
+        .doc(uid)
+        .collection('examAccess')
+        .doc('fse_ai')
+        .get();
+
+      if (!accessSnap.exists || !accessSnap.data()?.granted) {
+        return NextResponse.json({ error: 'No valid FSE AI Proctored exam purchase found.' }, { status: 403 });
+      }
+    }
+
     if (examLevel === 'fse') {
       // FSE: verify proctor has unlocked this session
       const readyOrder = await adminDb
@@ -121,7 +135,7 @@ export async function POST(req: NextRequest) {
       id: attemptId,
       userId: uid,
       email,
-      productId: examLevel === 'jr_fse' ? 'jr_fse_exam' : 'fse_proctored_exam',
+      productId: examLevel === 'jr_fse' ? 'jr_fse_exam' : examLevel === 'fse_ai' ? 'fse_ai_exam' : 'fse_proctored_exam',
       examLevel,
       status: 'in_progress',
       startedAt: FieldValue.serverTimestamp(),
@@ -138,7 +152,8 @@ export async function POST(req: NextRequest) {
       suspiciousRiskLevel: 'low',
       flaggedForReview: false,
       cooldownUntil: examLevel === 'jr_fse' ? cooldownUntil : null,
-      proctored: examLevel === 'fse',
+      proctored: examLevel === 'fse' || examLevel === 'fse_ai',
+      proctoringType: examLevel === 'fse_ai' ? 'ai' : examLevel === 'fse' ? 'human' : null,
     });
 
     // Set IP lock for Jr. FSE

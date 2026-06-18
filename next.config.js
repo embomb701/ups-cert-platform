@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Allow server-side only modules
   experimental: {
     serverComponentsExternalPackages: ['firebase-admin'],
   },
@@ -12,6 +11,11 @@ const nextConfig = {
         hostname: 'firebasestorage.googleapis.com',
       },
     ],
+  },
+  webpack: (config) => {
+    // face-api.js uses canvas which is not available server-side
+    config.externals = [...(config.externals || []), { canvas: 'canvas' }];
+    return config;
   },
 };
 

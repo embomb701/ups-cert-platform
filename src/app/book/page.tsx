@@ -92,13 +92,13 @@ export default function BookPage() {
                 <p className="text-white font-semibold mb-2">Get the Book</p>
                 <p className="text-sm text-gray-400 mb-6">Available on Amazon / Kindle Direct Publishing</p>
                 <a
-                  href="#"
+                  href="https://a.co/d/046t1AvW"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-block px-6 py-3 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold text-sm transition-colors"
-                  aria-label="Purchase book on Amazon (link coming soon)"
                 >
                   Buy on Amazon &rarr;
                 </a>
-                <p className="text-xs text-gray-600 mt-3">[Amazon/KDP link coming soon]</p>
               </div>
             </div>
           </div>

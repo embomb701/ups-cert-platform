@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { AntiCheatWrapper } from '@/components/exam/AntiCheatWrapper';
+import { AIProctorWrapper } from '@/components/exam/AIProctorWrapper';
 import { ExamQuestion } from '@/components/exam/ExamQuestion';
 import { ExamTimer } from '@/components/exam/ExamTimer';
 import type { ExamLevel, QuestionForExam, ExamSessionState } from '@/types';
@@ -147,17 +148,16 @@ export default function ExamPage() {
   const current = session.questions[session.currentIndex];
   const choiceOrder = current.choices.map((c) => c.id); // will be passed from server in real impl
 
-  return (
-    <AntiCheatWrapper attemptId={session.attemptId}>
-      <div className="min-h-screen bg-gray-950 py-8">
-        <div className="container-site max-w-3xl mx-auto">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <span className={session.examLevel === 'jr_fse' ? 'badge-jr' : 'badge-fse'}>
-                {session.examLevel === 'jr_fse' ? 'Jr. FSE' : 'FSE'} Exam
-              </span>
-            </div>
+  const examContent = (
+    <div className="min-h-screen bg-gray-950 py-8">
+      <div className="container-site max-w-3xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <span className={session.examLevel === 'jr_fse' ? 'badge-jr' : 'badge-fse'}>
+              {session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'fse_ai' ? 'FSE (AI Proctored)' : 'FSE'} Exam
+            </span>
+          </div>
             <ExamTimer
               key={session.currentIndex}
               secondsTotal={session.timePerQuestion}
@@ -202,6 +202,18 @@ export default function ExamPage() {
           </p>
         </div>
       </div>
+    </div>
+  );
+
+  return (
+    <AntiCheatWrapper attemptId={session.attemptId}>
+      {session.examLevel === 'fse_ai' ? (
+        <AIProctorWrapper attemptId={session.attemptId}>
+          {examContent}
+        </AIProctorWrapper>
+      ) : (
+        examContent
+      )}
     </AntiCheatWrapper>
   );
 }

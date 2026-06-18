@@ -22,9 +22,15 @@ export const STRIPE_PRODUCTS = {
     priceInCents: 20000, // $200.00
     stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE ?? '',
   },
+  fse_ai_exam: {
+    name: 'UPS FSE Certification Exam — AI Proctored',
+    shortName: 'FSE AI Proctored Exam',
+    priceInCents: 34900, // $349.00
+    stripePriceId: process.env.STRIPE_PRICE_ID_FSE_AI ?? '',
+  },
   fse_proctored_exam: {
-    name: 'UPS Field Service Certification Exam (Proctored)',
-    shortName: 'FSE Exam',
+    name: 'UPS FSE Certification Exam — Human Proctored',
+    shortName: 'FSE Human Proctored Exam',
     priceInCents: 50000, // $500.00
     stripePriceId: process.env.STRIPE_PRICE_ID_FSE ?? '',
   },

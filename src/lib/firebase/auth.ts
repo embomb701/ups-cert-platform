@@ -4,6 +4,7 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
   onAuthStateChanged,
+  getIdToken as firebaseGetIdToken,
   User,
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
@@ -33,6 +34,11 @@ export async function signInWithGoogle(): Promise<User> {
 
 export async function signOut(): Promise<void> {
   await firebaseSignOut(auth);
+}
+
+export async function getIdToken(): Promise<string | null> {
+  if (!auth.currentUser) return null;
+  return firebaseGetIdToken(auth.currentUser);
 }
 
 export { onAuthStateChanged, auth };

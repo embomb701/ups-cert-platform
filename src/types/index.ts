@@ -2,7 +2,7 @@
 // Core shared types for UPS Certification Platform
 // ============================================================
 
-export type ExamLevel = 'jr_fse' | 'fse';
+export type ExamLevel = 'jr_fse' | 'fse_ai' | 'fse';
 export type UserRole = 'user' | 'admin' | 'proctor';
 export type CertificateStatus = 'valid' | 'expired' | 'revoked' | 'under_review';
 export type PurchaseStatus = 'pending' | 'complete' | 'refunded' | 'failed';
@@ -63,6 +63,7 @@ export interface Product {
 
 export const PRODUCTS = {
   JR_FSE_EXAM: 'jr_fse_exam',
+  FSE_AI_EXAM: 'fse_ai_exam',
   FSE_PROCTORED_EXAM: 'fse_proctored_exam',
 } as const;
 
