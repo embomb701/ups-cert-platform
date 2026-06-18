@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'The Book — Mastering Uninterruptible Power Supplies',
@@ -44,6 +45,16 @@ export default function BookPage() {
 
       <section className="section-pad">
         <div className="container-site max-w-4xl mx-auto">
+          <div className="flex justify-center mb-10">
+            <Image
+              src="/book-cover.jpg"
+              alt="Mastering Uninterruptible Power Supplies — Field Service Engineering book cover"
+              width={340}
+              height={440}
+              className="rounded-lg shadow-2xl shadow-blue-950/50"
+              priority
+            />
+          </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <h2 className="text-xl font-bold text-white mb-6">What the Book Covers</h2>
