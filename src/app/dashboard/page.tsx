@@ -3,19 +3,17 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { collection, doc, getDoc, getDocs, query, orderBy, limit } from 'firebase/firestore';
-import { db } from '@/lib/firebase/client';
 import { useAuth } from '@/components/auth/AuthProvider';
+import { getIdToken } from '@/lib/firebase/auth';
 
-interface ExamAccess { granted: boolean; grantedAt?: any; }
 interface Attempt { id: string; examLevel: string; score?: number; passed?: boolean; completedAt?: any; }
 
 export default function DashboardPage() {
   const { user, profile, loading } = useAuth();
   const router = useRouter();
 
-  const [jrAccess, setJrAccess] = useState<ExamAccess | null>(null);
-  const [aiAccess, setAiAccess] = useState<ExamAccess | null>(null);
+  const [jrAccess, setJrAccess] = useState(false);
+  const [aiAccess, setAiAccess] = useState(false);
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [dataLoading, setDataLoading] = useState(true);
 
@@ -27,16 +25,15 @@ export default function DashboardPage() {
     if (!user) return;
     async function load() {
       try {
-        const [jrSnap, aiSnap, attemptsSnap] = await Promise.all([
-          getDoc(doc(db, 'users', user!.uid, 'examAccess', 'jr_fse')),
-          getDoc(doc(db, 'users', user!.uid, 'examAccess', 'fse_ai')),
-          getDocs(query(collection(db, 'users', user!.uid, 'attempts'), orderBy('startedAt', 'desc'), limit(10))),
-        ]);
-        if (jrSnap.exists()) setJrAccess(jrSnap.data() as ExamAccess);
-        if (aiSnap.exists()) setAiAccess(aiSnap.data() as ExamAccess);
-        setAttempts(attemptsSnap.docs.map(d => ({ id: d.id, ...d.data() } as Attempt)));
+        const token = await getIdToken();
+        const res = await fetch('/api/user/access', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+        setJrAccess(data.jr_fse === true);
+        setAiAccess(data.fse_ai === true);
       } catch {
-        // Firestore error — show placeholders
+        // silently fail — show not purchased
       } finally {
         setDataLoading(false);
       }
@@ -70,18 +67,18 @@ export default function DashboardPage() {
             <div className="space-y-2 text-sm mb-6">
               <div className="flex justify-between text-gray-400">
                 <span>Purchase status</span>
-                <span className={jrAccess?.granted ? 'text-green-400' : 'text-gray-300'}>
-                  {dataLoading ? '…' : jrAccess?.granted ? 'Purchased' : 'Not purchased'}
+                <span className={jrAccess ? 'text-green-400' : 'text-gray-300'}>
+                  {dataLoading ? '…' : jrAccess ? 'Purchased' : 'Not purchased'}
                 </span>
               </div>
               <div className="flex justify-between text-gray-400">
                 <span>Exam access</span>
-                <span className={jrAccess?.granted ? 'text-green-400' : 'text-gray-300'}>
-                  {dataLoading ? '…' : jrAccess?.granted ? 'Unlocked' : '—'}
+                <span className={jrAccess ? 'text-green-400' : 'text-gray-300'}>
+                  {dataLoading ? '…' : jrAccess ? 'Unlocked' : '—'}
                 </span>
               </div>
             </div>
-            {jrAccess?.granted ? (
+            {jrAccess ? (
               <Link href="/exam/rules/jr_fse" className="block w-full text-center px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors">
                 Start Jr. FSE Exam
               </Link>
@@ -99,18 +96,18 @@ export default function DashboardPage() {
             <div className="space-y-2 text-sm mb-6">
               <div className="flex justify-between text-gray-400">
                 <span>Purchase status</span>
-                <span className={aiAccess?.granted ? 'text-green-400' : 'text-gray-300'}>
-                  {dataLoading ? '…' : aiAccess?.granted ? 'Purchased' : 'Not purchased'}
+                <span className={aiAccess ? 'text-green-400' : 'text-gray-300'}>
+                  {dataLoading ? '…' : aiAccess ? 'Purchased' : 'Not purchased'}
                 </span>
               </div>
               <div className="flex justify-between text-gray-400">
                 <span>Exam access</span>
-                <span className={aiAccess?.granted ? 'text-green-400' : 'text-gray-300'}>
-                  {dataLoading ? '…' : aiAccess?.granted ? 'Unlocked' : '—'}
+                <span className={aiAccess ? 'text-green-400' : 'text-gray-300'}>
+                  {dataLoading ? '…' : aiAccess ? 'Unlocked' : '—'}
                 </span>
               </div>
             </div>
-            {aiAccess?.granted ? (
+            {aiAccess ? (
               <Link href="/exam/rules/fse_ai" className="block w-full text-center px-4 py-2 rounded-lg bg-purple-700 hover:bg-purple-600 text-white text-sm font-medium transition-colors">
                 Start FSE AI Exam
               </Link>
