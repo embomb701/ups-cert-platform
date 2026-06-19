@@ -80,8 +80,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (err) {
-    console.error('Checkout error:', err);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  } catch (err: any) {
+    console.error('Checkout error:', err?.message ?? err);
+    const msg = err?.message ?? 'Internal server error';
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
