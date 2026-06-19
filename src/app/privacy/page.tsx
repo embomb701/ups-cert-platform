@@ -6,11 +6,13 @@ export default function PrivacyPage() {
   return (
     <section className="section-pad">
       <div className="container-site max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold text-white mb-2">Privacy Policy</h1>
-        <p className="text-gray-500 text-xs mb-8">Last updated: [DATE]</p>
+        <p className="kicker mb-3">Legal</p>
+        <h1 className="font-display text-3xl font-bold uppercase tracking-tight text-white mb-2">Privacy Policy</h1>
+        <p className="font-mono text-gray-500 text-xs mb-8">Last updated: [DATE]</p>
+        <div className="rule-voltage mb-10" />
 
         <div className="space-y-8 text-gray-400 text-sm leading-relaxed">
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">1. Information We Collect</h2>
             <p>We collect the following information when you use this platform:</p>
             <ul className="mt-2 space-y-1 list-disc list-inside">
@@ -23,7 +25,7 @@ export default function PrivacyPage() {
             </ul>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">2. How We Use Your Information</h2>
             <ul className="space-y-1 list-disc list-inside">
               <li>To authenticate your account and verify purchases</li>
@@ -36,20 +38,20 @@ export default function PrivacyPage() {
             </ul>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">3. IP Address and Network Data</h2>
             <p>
               For the Junior FSE Exam, we store a hashed (one-way encrypted) version of your IP address
               at account creation, purchase, and exam attempt. This hash is used only for cooldown
               enforcement and duplicate detection. Raw IP addresses are not stored in our primary database.
             </p>
-            <p className="mt-2">
+            <div className="hazard-stripe mt-3 text-gray-300">
               Shared networks (workplaces, schools, VPNs, shared households) may trigger a false cooldown
               flag. Contact support for admin review if this occurs.
-            </p>
+            </div>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">4. Exam Behavior Logging</h2>
             <p>
               During exam sessions, the platform logs tab switches, browser blur events, fullscreen exits,
@@ -58,7 +60,7 @@ export default function PrivacyPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">5. Public Certificate Verification</h2>
             <p>
               Public verification pages at /verify/[certificateNumber] display the candidate name,
@@ -67,7 +69,7 @@ export default function PrivacyPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">6. Third-Party Services</h2>
             <ul className="space-y-1 list-disc list-inside">
               <li><strong className="text-gray-300">Google Firebase / Firestore</strong> — authentication, database, storage.</li>
@@ -75,7 +77,7 @@ export default function PrivacyPage() {
             </ul>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">7. Contact</h2>
             <p>For privacy questions or data requests, contact us at [SUPPORT EMAIL PLACEHOLDER].</p>
           </div>

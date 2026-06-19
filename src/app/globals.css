@@ -2,26 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-inter: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-}
-
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-gray-950 text-gray-100 antialiased;
+    @apply bg-carbon-950 text-gray-200 antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-display font-semibold tracking-tight text-white;
   }
 
   a {
     @apply transition-colors duration-150;
+  }
+
+  ::selection {
+    @apply bg-voltage-500/30 text-white;
   }
 }
 
@@ -34,16 +33,96 @@
     @apply py-16 sm:py-24;
   }
 
+  /* Industrial section "kicker" label — like a spec-sheet field name. */
+  .kicker {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-voltage-400;
+  }
+
+  /* Surface panel — brushed carbon with a faint top highlight. */
   .card-dark {
-    @apply bg-gray-900 border border-gray-800 rounded-xl;
+    @apply relative rounded-2xl border border-white/10 bg-carbon-850/80
+           shadow-panel backdrop-blur-sm;
+  }
+
+  .panel {
+    @apply card-dark;
+  }
+
+  /* Interactive panel that lights up on hover. */
+  .card-interactive {
+    @apply card-dark transition-all duration-200
+           hover:border-voltage-500/40 hover:shadow-voltage hover:-translate-y-0.5;
+  }
+
+  /* Buttons --------------------------------------------------------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5
+           text-sm font-semibold tracking-wide transition-all duration-150
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           focus-visible:ring-offset-carbon-950 disabled:opacity-50
+           disabled:pointer-events-none;
+  }
+
+  .btn-lg {
+    @apply px-7 py-3.5 text-base;
+  }
+
+  .btn-voltage {
+    @apply btn bg-voltage-gradient text-carbon-950 shadow-voltage
+           hover:brightness-110 focus-visible:ring-voltage-400;
+  }
+
+  .btn-arc {
+    @apply btn bg-arc-500 text-white hover:bg-arc-400 shadow-arc
+           focus-visible:ring-arc-400;
+  }
+
+  .btn-outline {
+    @apply btn border border-white/15 bg-white/[0.02] text-gray-200
+           hover:border-voltage-500/50 hover:text-white hover:bg-white/[0.04]
+           focus-visible:ring-voltage-400;
+  }
+
+  .btn-ghost {
+    @apply btn text-gray-300 hover:text-white hover:bg-white/5;
+  }
+
+  /* Badges ---------------------------------------------------------- */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5
+           text-xs font-semibold uppercase tracking-wide border;
   }
 
   .badge-jr {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-900 text-indigo-200 border border-indigo-700;
+    @apply badge bg-arc-500/10 text-arc-300 border-arc-500/30;
+  }
+
+  .badge-ai {
+    @apply badge bg-fuchsia-500/10 text-fuchsia-300 border-fuchsia-500/30;
   }
 
   .badge-fse {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-900 text-amber-200 border border-amber-700;
+    @apply badge bg-voltage-500/10 text-voltage-300 border-voltage-500/30;
+  }
+
+  /* Hazard stripe — for legal/safety callouts, evokes electrical PPE. */
+  .hazard-stripe {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(245, 158, 11, 0.14) 0,
+      rgba(245, 158, 11, 0.14) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  }
+
+  /* Thin energized divider line. */
+  .rule-voltage {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-voltage-500/50 to-transparent;
+  }
+
+  .text-voltage-gradient {
+    @apply bg-voltage-gradient bg-clip-text text-transparent;
   }
 }
 

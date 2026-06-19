@@ -5,27 +5,46 @@ export const metadata: Metadata = {
   title: 'About — Program Creator and Platform',
 };
 
+const careerLadder = [
+  'Field Service Associate',
+  'Field Service Engineering',
+  'Supervision & Scheduling',
+  'Management',
+  'Director-Level Field Service Leadership',
+  'Vice President-Level Field Service Leadership',
+];
+
 export default function AboutPage() {
   return (
     <>
-      <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950">
-        <div className="container-site max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            About the Platform
-          </h1>
-          <p className="text-gray-400 leading-relaxed">
-            Mastering FSE is an independent educational platform built to give motivated people a
-            serious path to UPS field service knowledge. It is not affiliated with, endorsed by, or
-            sponsored by any employer, manufacturer, customer, or service company unless explicitly stated.
-          </p>
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-white/10">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-voltage-500/60 to-transparent" />
+        <div className="container-site section-pad">
+          <div className="mx-auto max-w-3xl">
+            <p className="kicker mb-5">
+              <span className="inline-block h-1.5 w-1.5 animate-pulse-soft rounded-full bg-voltage-400" />
+              The Program
+            </p>
+            <h1 className="font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-white sm:text-5xl">
+              About the <span className="text-voltage-gradient">Platform</span>
+            </h1>
+            <p className="mt-6 max-w-2xl leading-relaxed text-gray-400">
+              Mastering FSE is an independent educational platform built to give motivated people a
+              serious path to UPS field service knowledge. It is not affiliated with, endorsed by, or
+              sponsored by any employer, manufacturer, customer, or service company unless explicitly stated.
+            </p>
+          </div>
         </div>
       </section>
 
+      {/* Program creator */}
       <section className="section-pad">
         <div className="container-site max-w-3xl mx-auto">
-          <h2 className="text-xl font-bold text-white mb-6">About the Program Creator</h2>
+          <p className="kicker mb-3">Two Decades in the Field</p>
+          <h2 className="mb-8 text-2xl font-bold text-white">About the Program Creator</h2>
 
-          <div className="space-y-5 text-gray-400 leading-relaxed text-sm mb-10">
+          <div className="space-y-5 text-gray-400 leading-relaxed text-sm">
             <p>
               The program creator has worked in the UPS and critical power field service industry since
               2005. That is more than two decades of hands-on work with UPS systems, batteries, STS
@@ -51,7 +70,32 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="card-dark p-6 mb-8">
+          {/* Career ladder */}
+          <div className="mt-10 card-dark p-7">
+            <p className="kicker mb-5">Every Rung of the Ladder</p>
+            <ol className="space-y-3">
+              {careerLadder.map((role, i) => (
+                <li key={role} className="flex items-center gap-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-voltage-500/30 bg-voltage-500/10 font-display text-sm font-bold text-voltage-400">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-sm font-medium text-gray-200">{role}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* About platform + disclaimer */}
+      <section className="border-y border-white/10 bg-carbon-900/40 section-pad">
+        <div className="container-site max-w-3xl mx-auto">
+          <div className="card-dark p-7 mb-6">
+            <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-arc-500/30 bg-arc-500/10">
+              <svg viewBox="0 0 24 24" className="h-5 w-5 text-arc-300" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 21V10l9-7 9 7v11h-6v-7H9v7H3z" />
+              </svg>
+            </div>
             <h3 className="text-base font-semibold text-white mb-3">About This Platform</h3>
             <p className="text-sm text-gray-400 leading-relaxed mb-3">
               Mastering FSE is designed to be more than a personal project. The goal is a serious,
@@ -61,15 +105,20 @@ export default function AboutPage() {
             </p>
             <p className="text-sm text-gray-400 leading-relaxed">
               The certifications are based directly on the book{' '}
-              <em>Mastering Uninterruptible Power Supplies, Field Service Engineering</em>. Passing an
+              <em className="text-gray-300">Mastering Uninterruptible Power Supplies, Field Service Engineering</em>. Passing an
               exam on this platform demonstrates that a candidate has studied the material seriously
               and retained the foundational knowledge needed to be trainable, safety-minded, and useful
               in a UPS field service environment.
             </p>
           </div>
 
-          <div className="card-dark p-6 bg-amber-950/20 border-amber-900/40">
-            <h3 className="text-sm font-semibold text-amber-200 mb-2">Independence Statement</h3>
+          <div className="panel hazard-stripe overflow-hidden p-7">
+            <h3 className="flex items-center gap-2 text-sm font-semibold text-voltage-300 mb-2">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01" />
+              </svg>
+              Independence Statement
+            </h3>
             <p className="text-xs text-gray-400 leading-relaxed">
               This is an independent educational platform and is not affiliated with, endorsed by, or
               sponsored by any employer, manufacturer, customer, or service company unless explicitly
@@ -81,7 +130,7 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-10 text-center">
-            <Link href="/certifications/junior" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors">
+            <Link href="/certifications/junior" className="btn-voltage btn-lg">
               View the Jr. FSE Exam &rarr;
             </Link>
           </div>

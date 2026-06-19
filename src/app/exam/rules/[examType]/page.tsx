@@ -53,7 +53,8 @@ export default function ExamRulesPage() {
   return (
     <section className="section-pad">
       <div className="container-site max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold text-white mb-2">Exam Rules</h1>
+        <p className="kicker mb-2">Before You Begin</p>
+        <h1 className="text-3xl font-bold text-white mb-2">Exam Rules</h1>
         <p className="text-gray-400 text-sm mb-8">{examLabel}</p>
 
         <div className="card-dark p-8 mb-6">
@@ -70,9 +71,9 @@ export default function ExamRulesPage() {
           </ol>
         </div>
 
-        <div className="card-dark p-6 bg-amber-950/20 border-amber-900/40 mb-6">
-          <p className="text-xs text-gray-400 leading-relaxed">
-            <strong className="text-amber-200">Reminder:</strong> This certification is an educational
+        <div className="card-dark hazard-stripe p-6 mb-6">
+          <p className="text-xs text-gray-300 leading-relaxed">
+            <strong className="text-voltage-200">Reminder:</strong> This certification is an educational
             knowledge credential. It does not authorize energized electrical work, replace employer
             training, replace OEM qualification, replace electrical licensing, replace NFPA 70E or OSHA
             requirements, or replace site-specific procedures.
@@ -85,7 +86,7 @@ export default function ExamRulesPage() {
             id="accept-rules"
             checked={accepted}
             onChange={(e) => setAccepted(e.target.checked)}
-            className="mt-1 w-4 h-4 accent-indigo-600 cursor-pointer"
+            className="mt-1 w-4 h-4 accent-voltage-500 cursor-pointer"
           />
           <label htmlFor="accept-rules" className="text-sm text-gray-300 cursor-pointer">
             I have read and understand all of the rules above. I agree to take this exam under
@@ -96,9 +97,9 @@ export default function ExamRulesPage() {
         <button
           onClick={handleStart}
           disabled={!accepted}
-          className="px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:pointer-events-none text-white font-semibold text-sm transition-colors"
+          className="btn-voltage btn-lg disabled:opacity-40"
         >
-          Begin Exam
+          Begin Exam &rarr;
         </button>
       </div>
     </section>

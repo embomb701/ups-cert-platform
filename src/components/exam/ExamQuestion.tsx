@@ -33,11 +33,11 @@ export function ExamQuestion({
 
       {/* Category badge */}
       <div className="flex items-center gap-2 mb-4">
-        <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded">
+        <span className="text-xs font-mono uppercase tracking-wide text-gray-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
           {question.category}
         </span>
         {question.safetyCritical && (
-          <span className="text-xs text-amber-400 bg-amber-950/50 border border-amber-900/50 px-2 py-0.5 rounded">
+          <span className="text-xs font-semibold text-voltage-300 bg-voltage-500/10 border border-voltage-500/30 px-2 py-0.5 rounded">
             Safety-Related
           </span>
         )}
@@ -61,13 +61,13 @@ export function ExamQuestion({
               key={choiceId}
               onClick={() => !disabled && onSelect(choiceId)}
               disabled={disabled}
-              className={`w-full text-left px-5 py-4 rounded-xl border transition-all duration-150 ${
+              className={`group w-full text-left px-5 py-4 rounded-xl border transition-all duration-150 ${
                 isSelected
-                  ? 'bg-indigo-900/60 border-indigo-500 text-white'
-                  : 'bg-gray-800/60 border-gray-700 text-gray-300 hover:border-gray-500 hover:text-white'
+                  ? 'bg-voltage-500/10 border-voltage-500/60 text-white shadow-voltage'
+                  : 'bg-white/[0.02] border-white/10 text-gray-300 hover:border-white/25 hover:bg-white/[0.04] hover:text-white'
               } ${disabled ? 'opacity-60 pointer-events-none' : ''}`}
             >
-              <span className="font-semibold text-sm mr-3 text-gray-500">{choice.id}.</span>
+              <span className={`font-mono font-bold text-sm mr-3 ${isSelected ? 'text-voltage-400' : 'text-gray-500'}`}>{choice.id}.</span>
               <span className="text-sm">{choice.text}</span>
             </button>
           );

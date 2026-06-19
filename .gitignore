@@ -46,3 +46,9 @@ Thumbs.db
 .netlify
 
 .vercel
+
+# audit working files (not for commit)
+.audit-findings.json
+
+# TS incremental build info
+tsconfig.tsbuildinfo

@@ -104,7 +104,11 @@ export async function scoreAttempt(
     if (answer.selectedChoiceId === q.correctAnswerId) correct++;
   }
 
-  const score = questions.length > 0 ? (correct / questions.length) * 100 : 0;
+  // Score against the number of questions the attempt was issued (frozen at
+  // start), NOT the number still present in the bank — otherwise deleting a
+  // question after the fact would silently change the denominator and score.
+  const denom = questionIds.length;
+  const score = denom > 0 ? (correct / denom) * 100 : 0;
   const passed = score >= (attempt.passingScore ?? DEFAULT_PASSING_SCORE);
 
   return { score, passed, correctCount: correct };

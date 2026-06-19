@@ -27,23 +27,33 @@ export default function LoginPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-voltage-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
     <section className="section-pad">
-      <div className="container-site max-w-sm mx-auto">
-        <div className="card-dark p-8 text-center">
-          <h1 className="text-2xl font-bold text-white mb-2">Sign In</h1>
+      <div className="container-site max-w-md mx-auto">
+        <div className="card-dark relative overflow-hidden p-8 text-center sm:p-10">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-voltage-500/60 to-transparent" />
+          <div className="absolute inset-0 -z-10 bg-carbon-radial" />
+
+          <div className="mx-auto mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-voltage-500/30 bg-voltage-500/10">
+            <svg viewBox="0 0 24 24" className="h-6 w-6 text-voltage-400" fill="currentColor">
+              <path d="M13 2 4.5 13.5H11l-1 8.5 9.5-12H13l1-8z" />
+            </svg>
+          </div>
+
+          <p className="kicker mx-auto mb-4 justify-center">Secure Access</p>
+          <h1 className="font-display text-2xl font-bold uppercase tracking-tight text-white mb-2">Sign In</h1>
           <p className="text-sm text-gray-400 mb-8">
             A Google account is required to purchase exams, take exams, and download certificates.
           </p>
 
           <button
             onClick={handleGoogleSignIn}
-            className="w-full flex items-center justify-center gap-3 px-5 py-3 rounded-lg bg-white hover:bg-gray-100 text-gray-900 font-medium text-sm transition-colors"
+            className="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-xl bg-white hover:bg-gray-100 text-gray-900 font-semibold text-sm transition-colors shadow-panel"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -56,9 +66,9 @@ export default function LoginPage() {
 
           <p className="text-xs text-gray-500 mt-6 leading-relaxed">
             By signing in you agree to our{' '}
-            <a href="/terms" className="text-indigo-400 hover:text-indigo-300">Terms &amp; Disclaimer</a>{' '}
+            <a href="/terms" className="text-voltage-400 hover:text-voltage-300">Terms &amp; Disclaimer</a>{' '}
             and{' '}
-            <a href="/privacy" className="text-indigo-400 hover:text-indigo-300">Privacy Policy</a>.
+            <a href="/privacy" className="text-voltage-400 hover:text-voltage-300">Privacy Policy</a>.
           </p>
         </div>
       </div>

@@ -11,19 +11,16 @@ export default function VerifyForm() {
         if (val) window.location.href = `/verify/${encodeURIComponent(val)}`;
       }}
     >
-      <label htmlFor="cert-number" className="block text-sm text-gray-400 mb-2">
+      <label htmlFor="cert-number" className="block text-xs uppercase tracking-wider text-gray-400 mb-2">
         Certificate Number
       </label>
       <input
         id="cert-number"
         type="text"
         placeholder="e.g. JR-2025-A1B2C3"
-        className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 mb-4 font-mono"
+        className="w-full px-4 py-3 rounded-xl bg-carbon-950/60 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-voltage-500 focus:ring-1 focus:ring-voltage-500/40 mb-5 font-mono tracking-wider transition-colors"
       />
-      <button
-        type="submit"
-        className="w-full px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors"
-      >
+      <button type="submit" className="btn-voltage w-full">
         Verify Certificate
       </button>
     </form>

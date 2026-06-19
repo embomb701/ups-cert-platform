@@ -9,10 +9,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
-  primary: 'bg-indigo-600 hover:bg-indigo-500 text-white border-transparent',
-  secondary: 'bg-amber-600 hover:bg-amber-500 text-white border-transparent',
-  outline: 'bg-transparent hover:bg-gray-800 text-gray-200 border-gray-700',
-  ghost: 'bg-transparent hover:bg-gray-800 text-gray-400 hover:text-white border-transparent',
+  primary: 'bg-voltage-gradient hover:brightness-110 text-carbon-950 border-transparent shadow-voltage',
+  secondary: 'bg-arc-500 hover:bg-arc-400 text-white border-transparent shadow-arc',
+  outline: 'bg-white/[0.02] hover:bg-white/[0.05] text-gray-200 border-white/15 hover:border-voltage-500/50',
+  ghost: 'bg-transparent hover:bg-white/5 text-gray-400 hover:text-white border-transparent',
   danger: 'bg-red-700 hover:bg-red-600 text-white border-transparent',
 };
 
@@ -33,7 +33,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center gap-2 font-medium rounded-lg border transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-950 disabled:opacity-50 disabled:pointer-events-none';
+    'inline-flex items-center justify-center gap-2 font-semibold tracking-wide rounded-xl border transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-voltage-400 focus-visible:ring-offset-2 focus-visible:ring-offset-carbon-950 disabled:opacity-50 disabled:pointer-events-none';
 
   const classes = cn(base, variants[variant], sizes[size], className);
 

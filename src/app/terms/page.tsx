@@ -6,11 +6,13 @@ export default function TermsPage() {
   return (
     <section className="section-pad">
       <div className="container-site max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold text-white mb-2">Terms of Use &amp; Disclaimer</h1>
-        <p className="text-gray-500 text-xs mb-8">Last updated: [DATE]</p>
+        <p className="kicker mb-3">Legal</p>
+        <h1 className="font-display text-3xl font-bold uppercase tracking-tight text-white mb-2">Terms of Use &amp; Disclaimer</h1>
+        <p className="font-mono text-gray-500 text-xs mb-8">Last updated: [DATE]</p>
+        <div className="rule-voltage mb-10" />
 
         <div className="space-y-8 text-gray-400 text-sm leading-relaxed">
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">1. Educational Purpose</h2>
             <p>
               Mastering FSE provides educational content, certification exams, and training materials
@@ -19,12 +21,12 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">2. Certification Disclaimer — IMPORTANT</h2>
-            <p className="text-white font-medium mb-2">
+            <div className="hazard-stripe mb-4 font-medium text-white">
               These certifications are educational knowledge credentials. They are not authorizations to
               perform energized electrical work.
-            </p>
+            </div>
             <p className="mb-2">Specifically, these certifications do not:</p>
             <ul className="space-y-1 list-disc list-inside">
               <li>Authorize energized electrical work of any kind</li>
@@ -44,7 +46,7 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">3. Independence Statement</h2>
             <p>
               This is an independent educational platform and is not affiliated with, endorsed by, or
@@ -53,7 +55,7 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">4. Exam Rules and Integrity</h2>
             <p>
               By purchasing and taking an exam, you agree to the Exam Rules presented before each
@@ -63,7 +65,7 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">5. Refund Policy</h2>
             <p>
               Exam purchases are generally non-refundable once an exam session has been started or
@@ -72,7 +74,7 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">6. Certificate Revocation</h2>
             <p>
               Certificates may be revoked if fraud, cheating, misrepresentation, or violation of these
@@ -81,7 +83,7 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">7. Limitation of Liability</h2>
             <p>
               This platform is not liable for any outcomes resulting from use of the information,
@@ -91,7 +93,7 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div>
+          <div className="border-l-2 border-voltage-500/40 pl-4">
             <h2 className="text-base font-semibold text-white mb-2">8. Contact</h2>
             <p>Questions about these terms? Contact us at [SUPPORT EMAIL PLACEHOLDER].</p>
           </div>

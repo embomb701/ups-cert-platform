@@ -308,4 +308,6 @@ export interface ExamSessionState {
   timePerQuestion: number; // seconds
   totalQuestions: number;
   proctored: boolean;
+  choiceOrder: Record<string, string[]>; // questionId -> ordered choiceIds
+  elapsedByQuestion: Record<string, number>; // questionId -> actual seconds spent
 }

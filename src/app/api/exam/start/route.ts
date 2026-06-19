@@ -8,7 +8,7 @@ import {
   buildRandomizedChoiceOrder,
   shuffleArray,
 } from '@/lib/exam/engine';
-import { hashIp, getRealIp } from '@/lib/utils/ipHash';
+import { hashIpOrNull, getRealIp } from '@/lib/utils/ipHash';
 import { FieldValue } from 'firebase-admin/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import type { ExamLevel } from '@/types';
@@ -16,6 +16,13 @@ import { addDays } from 'date-fns';
 
 const COOLDOWN_DAYS = 90;
 const TIME_PER_QUESTION = 90;
+
+/** Internal control-flow error carrying an HTTP status. */
+class HttpError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,7 +47,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
-    const ipHash = hashIp(getRealIp(req));
+    // null when no trusted client IP is resolvable — never a shared sentinel.
+    const ipHash = hashIpOrNull(getRealIp(req));
+
+    // Generated up front so a proctored order can be atomically bound to it.
+    const attemptId = uuidv4();
 
     if (examLevel === 'jr_fse') {
       // Verify purchase
@@ -73,21 +84,23 @@ export async function POST(req: NextRequest) {
         }, { status: 429 });
       }
 
-      // Check IP-based cooldown
-      const ipLock = await adminDb
-        .collection('ipExamLocks')
-        .where('ipHash', '==', ipHash)
-        .where('examLevel', '==', 'jr_fse')
-        .where('cooldownUntil', '>', new Date())
-        .where('clearedByAdmin', '==', false)
-        .limit(1)
-        .get();
+      // Check IP-based cooldown — only when we have a trusted client IP.
+      if (ipHash) {
+        const ipLock = await adminDb
+          .collection('ipExamLocks')
+          .where('ipHash', '==', ipHash)
+          .where('examLevel', '==', 'jr_fse')
+          .where('cooldownUntil', '>', new Date())
+          .where('clearedByAdmin', '==', false)
+          .limit(1)
+          .get();
 
-      if (!ipLock.empty) {
-        return NextResponse.json({
-          error:
-            'A recent Junior FSE Exam attempt has already been associated with this account or network. Junior FSE Exam attempts are limited to once every 90 days. Contact support if you believe this is an error.',
-        }, { status: 429 });
+        if (!ipLock.empty) {
+          return NextResponse.json({
+            error:
+              'A recent Junior FSE Exam attempt has already been associated with this account or network. Junior FSE Exam attempts are limited to once every 90 days. Contact support if you believe this is an error.',
+          }, { status: 429 });
+        }
       }
     }
 
@@ -106,7 +119,9 @@ export async function POST(req: NextRequest) {
     }
 
     if (examLevel === 'fse') {
-      // FSE: verify proctor has unlocked this session
+      // FSE: a proctor must have unlocked the session. Atomically CONSUME the
+      // 'ready' order (ready -> in_progress, bound to this attempt) so a single
+      // unlock cannot be replayed into unlimited restarts.
       const readyOrder = await adminDb
         .collection('proctoredExamOrders')
         .where('userId', '==', uid)
@@ -121,6 +136,27 @@ export async function POST(req: NextRequest) {
             'Your FSE Exam session has not been unlocked yet. Your proctor must mark your session as ready before you can begin.',
         }, { status: 403 });
       }
+
+      const orderRef = readyOrder.docs[0].ref;
+      try {
+        await adminDb.runTransaction(async (tx) => {
+          const snap = await tx.get(orderRef);
+          if (!snap.exists || snap.data()!.status !== 'ready') {
+            throw new HttpError(403, 'Your FSE Exam session is no longer available to start.');
+          }
+          tx.update(orderRef, {
+            status: 'in_progress',
+            boundAttemptId: attemptId,
+            startedAt: FieldValue.serverTimestamp(),
+            updatedAt: FieldValue.serverTimestamp(),
+          });
+        });
+      } catch (e) {
+        if (e instanceof HttpError) {
+          return NextResponse.json({ error: e.message }, { status: e.status });
+        }
+        throw e;
+      }
     }
 
     // Select and randomize questions
@@ -130,7 +166,6 @@ export async function POST(req: NextRequest) {
     const cooldownUntil = addDays(new Date(), COOLDOWN_DAYS);
 
     // Create attempt record
-    const attemptId = uuidv4();
     await adminDb.collection('examAttempts').doc(attemptId).set({
       id: attemptId,
       userId: uid,
@@ -156,8 +191,8 @@ export async function POST(req: NextRequest) {
       proctoringType: examLevel === 'fse_ai' ? 'ai' : examLevel === 'fse' ? 'human' : null,
     });
 
-    // Set IP lock for Jr. FSE
-    if (examLevel === 'jr_fse') {
+    // Set IP lock for Jr. FSE — only when we have a trusted client IP.
+    if (examLevel === 'jr_fse' && ipHash) {
       await adminDb.collection('ipExamLocks').add({
         ipHash,
         examLevel: 'jr_fse',
@@ -171,15 +206,8 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Send sanitized questions to client (no correct answers)
-    const clientQuestions = sanitizeQuestionsForClient(questions).map((q) => ({
-      ...q,
-      choices: q.choices.map((c) => ({
-        ...c,
-        // reorder choices per randomized order
-      })),
-    }));
-
+    // Send sanitized questions to the client (correct answers stripped), in the
+    // randomized question order, plus the per-question choice order to apply.
     return NextResponse.json({
       attemptId,
       questions: sanitizeQuestionsForClient(
@@ -189,7 +217,7 @@ export async function POST(req: NextRequest) {
       ),
       choiceOrder,
       timePerQuestion: TIME_PER_QUESTION,
-      proctored: examLevel === 'fse',
+      proctored: examLevel === 'fse' || examLevel === 'fse_ai',
     });
   } catch (err) {
     console.error('Exam start error:', err);
