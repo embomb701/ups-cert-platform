@@ -9,7 +9,7 @@ export function Footer() {
       <div className="container-site py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <p className="text-sm font-semibold text-white mb-3">Mastering FSE</p>
+            <p className="text-sm font-semibold text-white mb-3">Mastering Field Service Engineering</p>
             <p className="text-xs text-gray-500 leading-relaxed">
               Professional UPS field service training and certification.
             </p>
@@ -45,7 +45,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
-          &copy; {year} Mastering FSE. All rights reserved.
+          &copy; {year} Mastering Field Service Engineering. All rights reserved.
         </div>
       </div>
 
