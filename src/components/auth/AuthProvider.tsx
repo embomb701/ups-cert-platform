@@ -28,19 +28,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Safety timeout — if Firebase never fires, stop blocking the UI
+    const timeout = setTimeout(() => setLoading(false), 4000);
+
+    if (!auth) {
+      clearTimeout(timeout);
+      setLoading(false);
+      return;
+    }
+
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
+      clearTimeout(timeout);
       setUser(firebaseUser);
       if (firebaseUser) {
-        const snap = await getDoc(doc(db, 'users', firebaseUser.uid));
-        if (snap.exists()) {
-          setProfile(snap.data() as UserProfile);
+        try {
+          const snap = await getDoc(doc(db, 'users', firebaseUser.uid));
+          if (snap.exists()) {
+            setProfile(snap.data() as UserProfile);
+          }
+        } catch {
+          // Firestore error — still resolve loading
         }
       } else {
         setProfile(null);
       }
       setLoading(false);
     });
-    return unsub;
+    return () => { unsub(); clearTimeout(timeout); };
   }, []);
 
   const isAdmin = profile?.role === 'admin';
