@@ -26,31 +26,58 @@ const modules = [
 
 export default function TrainingPage() {
   return (
-    <section className="section-pad">
-      <div className="container-site max-w-4xl mx-auto text-center">
-        <span className="badge-jr mb-4 inline-block">Coming Soon</span>
-        <h1 className="text-3xl font-bold text-white mb-4">
-          Online UPS Field Service Training
-        </h1>
-        <p className="text-gray-400 leading-relaxed max-w-2xl mx-auto mb-12">
-          Structured video and text training modules covering UPS field service fundamentals are in
-          development. Modules will be available as individual paid products and will directly support
-          preparation for both the Jr. FSE and FSE certification exams.
-        </p>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 text-left mb-12">
-          {modules.map((mod) => (
-            <div key={mod} className="card-dark px-4 py-3 flex items-center justify-between opacity-60">
-              <span className="text-sm text-gray-300">{mod}</span>
-              <span className="text-xs text-gray-600 bg-gray-800 px-2 py-0.5 rounded shrink-0 ml-2">Soon</span>
-            </div>
-          ))}
+    <>
+      <section className="relative overflow-hidden border-b border-white/10">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-voltage-500/60 to-transparent" />
+        <div className="container-site section-pad">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="kicker mx-auto mb-6 justify-center">
+              <span className="inline-block h-1.5 w-1.5 animate-pulse-soft rounded-full bg-voltage-400" />
+              Coming Soon
+            </p>
+            <h1 className="font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-white sm:text-5xl">
+              Online UPS Field Service{' '}
+              <span className="text-voltage-gradient">Training</span>
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-400">
+              Structured video and text training modules covering UPS field service fundamentals are in
+              development. Modules will be available as individual paid products and will directly support
+              preparation for both the Jr. FSE and FSE certification exams.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <p className="text-xs text-gray-500">
-          Want to be notified when training launches? Check back here or sign in to your dashboard to track updates.
-        </p>
-      </div>
-    </section>
+      <section className="section-pad">
+        <div className="container-site mx-auto max-w-5xl">
+          <div className="mb-10 text-center">
+            <p className="kicker mb-3 justify-center">The Curriculum</p>
+            <h2 className="text-3xl font-bold text-white">Modules In Development</h2>
+          </div>
+          <div className="grid gap-3 text-left sm:grid-cols-2 md:grid-cols-3">
+            {modules.map((mod) => (
+              <div
+                key={mod}
+                className="card-dark flex items-center justify-between gap-2 px-4 py-3.5"
+              >
+                <span className="flex items-center gap-2.5 text-sm text-gray-300">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-voltage-500/70" />
+                  {mod}
+                </span>
+                <span className="shrink-0 rounded border border-white/10 bg-carbon-800 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-voltage-400/80">
+                  Soon
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mx-auto mt-12 max-w-2xl text-center">
+            <p className="text-sm text-gray-500">
+              Want to be notified when training launches? Check back here or sign in to your dashboard to track updates.
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
