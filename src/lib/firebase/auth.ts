@@ -9,7 +9,6 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db, googleProvider } from './client';
-import { hashIp } from '@/lib/utils/ipHash';
 
 export async function signInWithGoogle(): Promise<User> {
   const result = await signInWithPopup(auth, googleProvider);

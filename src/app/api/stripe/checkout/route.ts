@@ -3,7 +3,7 @@ import { getStripe, STRIPE_PRODUCTS } from '@/lib/stripe/client';
 
 export const dynamic = 'force-dynamic';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { hashIp, getRealIp } from '@/lib/utils/ipHash';
+import { hashIpOrNull, getRealIp } from '@/lib/utils/ipHash';
 import type { ProductId } from '@/types';
 import { FieldValue } from 'firebase-admin/firestore';
 
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Record the pending purchase in Firestore
-    const ipHash = hashIp(getRealIp(req));
+    const ipHash = hashIpOrNull(getRealIp(req));
     await adminDb.collection('purchases').doc(session.id).set({
       id: session.id,
       userId: uid,

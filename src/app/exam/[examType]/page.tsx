@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
+import { getIdToken } from '@/lib/firebase/auth';
 import { AntiCheatWrapper } from '@/components/exam/AntiCheatWrapper';
 import { AIProctorWrapper } from '@/components/exam/AIProctorWrapper';
 import { ExamQuestion } from '@/components/exam/ExamQuestion';
@@ -19,6 +20,10 @@ export default function ExamPage() {
   const [error, setError] = useState<string | null>(null);
   const [starting, setStarting] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  // Guards the final submission against re-entry (the timer's onExpire and the
+  // Submit button can both fire). A ref is used because `submitting` state is
+  // stale inside the submitAnswer closure.
+  const submittingRef = useRef(false);
 
   // Redirect if not logged in
   useEffect(() => {
@@ -30,15 +35,24 @@ export default function ExamPage() {
     if (!user || session || starting) return;
     setStarting(true);
 
-    fetch('/api/exam/start', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ examLevel: examType }),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.error) {
-          setError(data.error);
+    (async () => {
+      try {
+        const token = await getIdToken();
+        if (!token) {
+          setError('You must be signed in to start the exam.');
+          return;
+        }
+        const res = await fetch('/api/exam/start', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ examLevel: examType }),
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          setError(data.error ?? 'Failed to start exam. Please try again.');
           return;
         }
         setSession({
@@ -52,49 +66,79 @@ export default function ExamPage() {
           timePerQuestion: data.timePerQuestion ?? 90,
           totalQuestions: data.questions.length,
           proctored: data.proctored ?? false,
+          choiceOrder: data.choiceOrder ?? {},
+          elapsedByQuestion: {},
         });
-      })
-      .catch(() => setError('Failed to start exam. Please try again.'))
-      .finally(() => setStarting(false));
+      } catch {
+        setError('Failed to start exam. Please try again.');
+      } finally {
+        setStarting(false);
+      }
+    })();
   }, [user, examType]);
 
   const submitAnswer = useCallback(
     async (session: ExamSessionState, forceSubmit = false) => {
       const current = session.questions[session.currentIndex];
-      const selected = session.answers[current.id] ?? null;
       const isLast = session.currentIndex >= session.totalQuestions - 1;
 
+      // Real time spent on the current question, capped at the per-question budget.
+      const elapsed = Math.min(
+        Math.max(0, Math.round((Date.now() - session.questionStartedAt.getTime()) / 1000)),
+        session.timePerQuestion
+      );
+      const elapsedByQuestion = { ...session.elapsedByQuestion, [current.id]: elapsed };
+
       if (isLast || forceSubmit) {
-        // Final submission
+        // Guard against double submission — the timer's onExpire and the Submit
+        // button can both reach here for the same attempt.
+        if (submittingRef.current) return;
+        submittingRef.current = true;
         setSubmitting(true);
+
         const answers = session.questions.map((q) => ({
           questionId: q.id,
           selectedChoiceId: session.answers[q.id] ?? null,
           answeredAt: new Date().toISOString(),
-          timeSpentSeconds: session.timePerQuestion,
+          timeSpentSeconds: elapsedByQuestion[q.id] ?? 0,
         }));
 
         try {
+          const token = await getIdToken();
           const res = await fetch('/api/exam/submit', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
             body: JSON.stringify({ attemptId: session.attemptId, answers }),
           });
-          const data = await res.json();
+          // 409 = already submitted (e.g. the timer beat the button); that is a
+          // success path — proceed to results. Any other non-OK is a real error.
+          if (!res.ok && res.status !== 409) {
+            const data = await res.json().catch(() => ({}));
+            submittingRef.current = false;
+            setSubmitting(false);
+            setError(data.error ?? 'Submission failed. Please contact support.');
+            return;
+          }
           router.push(`/exam/results/${session.attemptId}`);
         } catch {
-          setError('Submission failed. Your answers have been recorded. Contact support.');
+          submittingRef.current = false;
+          setSubmitting(false);
+          setError('Submission failed. Your answers may not have been recorded. Contact support.');
         }
         return;
       }
 
-      // Advance to next question
+      // Advance to next question, persisting the elapsed time.
       setSession((s) =>
         s
           ? {
               ...s,
               currentIndex: s.currentIndex + 1,
               questionStartedAt: new Date(),
+              elapsedByQuestion,
             }
           : s
       );
@@ -122,8 +166,8 @@ export default function ExamPage() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm text-gray-500">Loading exam...</p>
+          <div className="w-8 h-8 border-2 border-voltage-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-sm text-gray-500 font-mono uppercase tracking-widest">Loading exam…</p>
         </div>
       </div>
     );
@@ -135,7 +179,7 @@ export default function ExamPage() {
         <div className="card-dark p-8 max-w-sm text-center">
           <p className="text-red-400 font-semibold mb-3">Exam Error</p>
           <p className="text-sm text-gray-400 mb-6">{error}</p>
-          <button onClick={() => router.push('/dashboard')} className="text-sm text-indigo-400 hover:text-indigo-300">
+          <button onClick={() => router.push('/dashboard')} className="text-sm text-voltage-400 hover:text-voltage-300">
             Return to dashboard
           </button>
         </div>
@@ -146,10 +190,12 @@ export default function ExamPage() {
   if (!session) return null;
 
   const current = session.questions[session.currentIndex];
-  const choiceOrder = current.choices.map((c) => c.id); // will be passed from server in real impl
+  // Apply the server-supplied randomized choice order; fall back to the
+  // question's own order if (for any reason) it is missing.
+  const choiceOrder = session.choiceOrder[current.id] ?? current.choices.map((c) => c.id);
 
   const examContent = (
-    <div className="min-h-screen bg-gray-950 py-8">
+    <div className="min-h-screen bg-carbon-950 py-8">
       <div className="container-site max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -167,9 +213,9 @@ export default function ExamPage() {
           </div>
 
           {/* Progress bar */}
-          <div className="h-1 bg-gray-800 rounded-full mb-8">
+          <div className="h-1.5 bg-white/10 rounded-full mb-8 overflow-hidden">
             <div
-              className="h-full bg-indigo-600 rounded-full transition-all"
+              className="h-full bg-voltage-gradient rounded-full transition-all duration-300"
               style={{ width: `${((session.currentIndex) / session.totalQuestions) * 100}%` }}
             />
           </div>
@@ -190,14 +236,14 @@ export default function ExamPage() {
             <button
               onClick={handleNext}
               disabled={submitting}
-              className="px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors"
+              className="btn-voltage btn-lg disabled:opacity-50"
             >
               {session.currentIndex >= session.totalQuestions - 1 ? 'Submit Exam' : 'Next Question'}
             </button>
           </div>
 
           {/* Safety reminder */}
-          <p className="text-xs text-gray-700 text-center mt-8">
+          <p className="text-xs text-gray-500 text-center mt-8">
             Do not copy, share, or distribute exam questions. Tab switching and browser activity are monitored.
           </p>
         </div>

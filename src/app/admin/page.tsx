@@ -4,15 +4,17 @@ import Link from 'next/link';
 export const metadata: Metadata = { title: 'Admin Dashboard' };
 
 const adminSections = [
-  { label: 'Users', href: '/admin/users', desc: 'View accounts, roles, blocks' },
-  { label: 'Purchases', href: '/admin/purchases', desc: 'View all Stripe purchases' },
-  { label: 'Jr. FSE Attempts', href: '/admin/attempts?level=jr_fse', desc: 'Review attempts, flags, cooldowns' },
-  { label: 'FSE Attempts', href: '/admin/attempts?level=fse', desc: 'Proctored attempt records' },
-  { label: 'Proctored Orders', href: '/admin/proctored', desc: 'Manage FSE scheduling and proctor unlock' },
-  { label: 'Certificates', href: '/admin/certificates', desc: 'View, revoke, manage certificates' },
-  { label: 'Question Bank', href: '/admin/questions', desc: 'Import, review, activate/deactivate questions' },
-  { label: 'Audit Logs', href: '/admin/audit', desc: 'Suspicious events, admin actions' },
-  { label: 'IP Locks', href: '/admin/ip-locks', desc: 'Review and clear network cooldown locks' },
+  // `ready: true` only for pages that actually exist on disk. The rest are
+  // shown as disabled "coming soon" cards instead of links to 404s.
+  { label: 'Users', href: '/admin/users', desc: 'View accounts, roles, blocks', ready: false },
+  { label: 'Purchases', href: '/admin/purchases', desc: 'View all Stripe purchases', ready: false },
+  { label: 'Jr. FSE Attempts', href: '/admin/attempts?level=jr_fse', desc: 'Review attempts, flags, cooldowns', ready: false },
+  { label: 'FSE Attempts', href: '/admin/attempts?level=fse', desc: 'Proctored attempt records', ready: false },
+  { label: 'Proctored Orders', href: '/admin/proctored', desc: 'Manage FSE scheduling and proctor unlock', ready: true },
+  { label: 'Certificates', href: '/admin/certificates', desc: 'View, revoke, manage certificates', ready: false },
+  { label: 'Question Bank', href: '/admin/questions', desc: 'Import, review, activate/deactivate questions', ready: true },
+  { label: 'Audit Logs', href: '/admin/audit', desc: 'Suspicious events, admin actions', ready: false },
+  { label: 'IP Locks', href: '/admin/ip-locks', desc: 'Review and clear network cooldown locks', ready: false },
 ];
 
 export default function AdminPage() {
@@ -29,16 +31,32 @@ export default function AdminPage() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {adminSections.map((s) => (
-            <Link
-              key={s.href}
-              href={s.href}
-              className="card-dark p-5 hover:border-indigo-700 transition-colors block"
-            >
-              <p className="text-base font-semibold text-white mb-1">{s.label}</p>
-              <p className="text-xs text-gray-500">{s.desc}</p>
-            </Link>
-          ))}
+          {adminSections.map((s) =>
+            s.ready ? (
+              <Link
+                key={s.href}
+                href={s.href}
+                className="card-dark p-5 hover:border-indigo-700 transition-colors block"
+              >
+                <p className="text-base font-semibold text-white mb-1">{s.label}</p>
+                <p className="text-xs text-gray-500">{s.desc}</p>
+              </Link>
+            ) : (
+              <div
+                key={s.href}
+                className="card-dark p-5 opacity-50 cursor-not-allowed select-none"
+                aria-disabled="true"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-base font-semibold text-white">{s.label}</p>
+                  <span className="text-[10px] uppercase tracking-wide text-gray-500 border border-gray-700 rounded px-1.5 py-0.5">
+                    Soon
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500">{s.desc}</p>
+              </div>
+            )
+          )}
         </div>
 
         <div className="mt-10 card-dark p-5 bg-amber-950/20 border-amber-900/40">

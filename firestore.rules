@@ -41,11 +41,17 @@ service cloud.firestore {
         !('role' in request.resource.data) &&
         !('adminNotes' in request.resource.data) &&
         !('blockedReason' in request.resource.data);
-      // Only backend (admin SDK) can create/delete users and change roles
-      // Client-side creation is handled in the auth flow
-      allow create: if isOwner(userId);
-      // Admins can manage all user records
-      allow write: if isAdmin();
+      // Client-side creation is handled in the auth flow, but a client must
+      // NEVER be able to assert a privileged role or admin-only fields on
+      // first write (otherwise isAdmin() — which trusts this very document —
+      // can be self-granted). Pin role to 'user' and forbid admin fields.
+      allow create: if isOwner(userId) &&
+        request.resource.data.role == 'user' &&
+        !('adminNotes' in request.resource.data) &&
+        !('blockedReason' in request.resource.data);
+      // Admins can manage all user records (server uses the Admin SDK, which
+      // bypasses rules; this grant is for admin tooling via the client SDK).
+      allow update, delete: if isAdmin();
     }
 
     // User exam access subcollection
@@ -90,8 +96,9 @@ service cloud.firestore {
       // Users can read their own attempts
       allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
       allow read: if isAdmin();
-      // Proctors can read assigned proctored attempts
-      allow read: if isProctor() && resource.data.proctored == true;
+      // Proctors can read ONLY attempts explicitly assigned to them — not every
+      // proctored attempt (these docs hold answers, choice order and IP hashes).
+      allow read: if isProctor() && resource.data.proctorId == request.auth.uid;
       // Attempts created/scored only by backend
       allow write: if false;
     }
@@ -110,13 +117,14 @@ service cloud.firestore {
     match /certificates/{certificateId} {
       // Users can read their own certificates
       allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
-      // Admins can read and manage all certificates
-      allow read, write: if isAdmin();
-      // Public can read ONLY safe verification fields
-      // (handled by a separate /certificateVerification collection or backend API)
-      // Direct certificate reads by unauthenticated users are denied here
-      allow read: if false; // override with backend API for public verification
-      // Certificates written only by backend
+      // Admins can read all certificates. NOTE: writes are intentionally
+      // backend-only — issuance and revocation go through the Admin SDK /
+      // server routes, never the client SDK (Firestore OR-combines allow
+      // statements, so a client `write: if isAdmin()` here could not be
+      // re-denied below; we simply never grant it).
+      allow read: if isAdmin();
+      // Public verification reads are served by the backend API (admin SDK),
+      // so unauthenticated direct reads stay denied by default.
       allow create, update, delete: if false;
     }
 
@@ -126,11 +134,14 @@ service cloud.firestore {
     match /proctoredExamOrders/{orderId} {
       // Users can read their own orders
       allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
-      // Admins and proctors can read and update
-      allow read, update: if isProctor();
-      allow read, write: if isAdmin();
-      // Orders created only by backend (webhook)
-      allow create: if false;
+      // Proctors may read ONLY orders assigned to them (PII + session unlock
+      // state). They never write from the client — unlock goes through the
+      // admin-gated /api/admin/proctor-unlock route on the Admin SDK.
+      allow read: if isProctor() && resource.data.proctorId == request.auth.uid;
+      // Admins can read/update via client tooling; create stays backend-only.
+      allow read, update: if isAdmin();
+      // Orders created (webhook) and unlocked (admin route) only by backend.
+      allow create, delete: if false;
     }
 
     // ---------------------------------------------------------------

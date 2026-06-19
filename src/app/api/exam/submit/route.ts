@@ -8,10 +8,17 @@ import {
   classifyRiskLevel,
   shouldFlagForReview,
 } from '@/lib/exam/antiCheat';
-import { hashIp, getRealIp } from '@/lib/utils/ipHash';
+import { hashIpOrNull, getRealIp } from '@/lib/utils/ipHash';
 import { FieldValue } from 'firebase-admin/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import type { ExamAnswer, SuspiciousEvent } from '@/types';
+
+/** Internal control-flow error carrying an HTTP status. */
+class HttpError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,24 +35,45 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { attemptId, answers } = body as { attemptId: string; answers: ExamAnswer[] };
+    const attemptId = body?.attemptId;
+    const answers = (body?.answers ?? []) as ExamAnswer[];
 
-    // Verify attempt belongs to this user
-    const attemptSnap = await adminDb.collection('examAttempts').doc(attemptId).get();
-    if (!attemptSnap.exists) {
-      return NextResponse.json({ error: 'Attempt not found' }, { status: 404 });
+    if (typeof attemptId !== 'string' || attemptId.length === 0 || attemptId.includes('/')) {
+      return NextResponse.json({ error: 'Invalid attemptId' }, { status: 400 });
+    }
+    if (!Array.isArray(answers)) {
+      return NextResponse.json({ error: 'Invalid answers' }, { status: 400 });
     }
 
-    const attempt = attemptSnap.data()!;
-    if (attempt.userId !== uid) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+    // Atomically CLAIM the attempt so two concurrent submits (e.g. the timer
+    // expiring while the user clicks "Submit") cannot both score it and issue
+    // two certificates. Only the request that flips in_progress -> completed
+    // proceeds; the loser gets 409.
+    const attemptRef = adminDb.collection('examAttempts').doc(attemptId);
+    let attempt: FirebaseFirestore.DocumentData;
+    try {
+      attempt = await adminDb.runTransaction(async (tx) => {
+        const snap = await tx.get(attemptRef);
+        if (!snap.exists) throw new HttpError(404, 'Attempt not found');
+        const data = snap.data()!;
+        if (data.userId !== uid) throw new HttpError(403, 'Unauthorized');
+        if (data.status !== 'in_progress') {
+          throw new HttpError(409, 'Attempt already submitted or not in progress');
+        }
+        tx.update(attemptRef, {
+          status: 'completed',
+          completedAt: FieldValue.serverTimestamp(),
+        });
+        return data;
+      });
+    } catch (e) {
+      if (e instanceof HttpError) {
+        return NextResponse.json({ error: e.message }, { status: e.status });
+      }
+      throw e;
     }
 
-    if (attempt.status === 'completed') {
-      return NextResponse.json({ error: 'Attempt already submitted' }, { status: 409 });
-    }
-
-    // SERVER-SIDE SCORING ONLY
+    // SERVER-SIDE SCORING ONLY (the attempt is now exclusively claimed)
     const { score, passed, correctCount } = await scoreAttempt(attemptId, answers);
 
     // Retrieve accumulated suspicious events (from the event log route)
@@ -63,12 +91,11 @@ export async function POST(req: NextRequest) {
     const riskLevel = classifyRiskLevel(riskScore);
     const flagged = shouldFlagForReview(riskLevel);
 
-    const ipHash = hashIp(getRealIp(req));
+    const ipHash = hashIpOrNull(getRealIp(req));
 
-    // Update attempt
-    await adminDb.collection('examAttempts').doc(attemptId).update({
-      status: 'completed',
-      completedAt: FieldValue.serverTimestamp(),
+    // Record scoring results (status/completedAt were already set atomically
+    // in the claim transaction above).
+    await attemptRef.update({
       completionIpHash: ipHash,
       answers,
       score,
@@ -97,6 +124,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Persist the breakdown so the results page can re-read it later.
+    await attemptRef.update({ categoryBreakdown });
+
     let certificateNumber: string | undefined;
     let certificateId: string | undefined;
 
@@ -124,8 +154,9 @@ export async function POST(req: NextRequest) {
         publicScoreEnabled: false,
       });
 
-      await adminDb.collection('examAttempts').doc(attemptId).update({
+      await attemptRef.update({
         certificateId,
+        certificateNumber,
       });
 
       // Audit log

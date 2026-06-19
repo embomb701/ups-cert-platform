@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
+import { getIdToken } from '@/lib/firebase/auth';
 
 interface ResultData {
   score: number;
@@ -30,17 +31,27 @@ export default function ExamResultsPage() {
 
   useEffect(() => {
     if (!attemptId || !user) return;
-    fetch(`/api/exam/result/${attemptId}`)
-      .then((r) => r.json())
-      .then((data) => setResult(data))
-      .catch(() => {})
-      .finally(() => setFetching(false));
+    (async () => {
+      try {
+        const token = await getIdToken();
+        const res = await fetch(`/api/exam/result/${attemptId}`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
+        if (res.ok) {
+          setResult(await res.json());
+        }
+      } catch {
+        // leave result null — the UI shows a "not found" state
+      } finally {
+        setFetching(false);
+      }
+    })();
   }, [attemptId, user]);
 
   if (loading || fetching) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-voltage-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -61,8 +72,8 @@ export default function ExamResultsPage() {
           <div
             className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 ${
               result.passed
-                ? 'bg-green-900 border border-green-700'
-                : 'bg-red-900 border border-red-800'
+                ? 'bg-emerald-500/15 border border-emerald-500/40'
+                : 'bg-red-500/15 border border-red-500/40'
             }`}
           >
             {result.passed ? (
@@ -90,11 +101,11 @@ export default function ExamResultsPage() {
           </p>
 
           {result.passed && result.certificateNumber && (
-            <div className="card-dark bg-green-950/20 border-green-900/40 p-4 mb-6">
-              <p className="text-sm text-green-300 font-medium mb-1">Certificate issued</p>
-              <p className="text-xs text-gray-400 font-mono">{result.certificateNumber}</p>
-              <div className="flex gap-3 justify-center mt-3">
-                <Link href="/dashboard" className="text-sm text-indigo-400 hover:text-indigo-300">
+            <div className="card-dark border-emerald-500/30 bg-emerald-500/[0.06] p-4 mb-6">
+              <p className="kicker mb-2 justify-center !text-emerald-300">Certificate Issued</p>
+              <p className="text-sm text-voltage-300 font-mono tracking-widest">{result.certificateNumber}</p>
+              <div className="flex gap-4 justify-center mt-3">
+                <Link href="/dashboard" className="text-sm text-voltage-400 hover:text-voltage-300">
                   View in dashboard
                 </Link>
                 <Link
@@ -125,7 +136,7 @@ export default function ExamResultsPage() {
                 {Object.entries(result.categoryBreakdown).map(([cat, data]) => (
                   <div key={cat} className="flex justify-between text-xs text-gray-400">
                     <span>{cat}</span>
-                    <span className={data.correct / data.total >= 0.8 ? 'text-green-400' : 'text-amber-400'}>
+                    <span className={`font-mono ${data.correct / data.total >= 0.8 ? 'text-emerald-400' : 'text-voltage-400'}`}>
                       {data.correct}/{data.total}
                     </span>
                   </div>
@@ -135,13 +146,13 @@ export default function ExamResultsPage() {
           )}
 
           <div className="mt-8">
-            <Link href="/dashboard" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors">
+            <Link href="/dashboard" className="btn-voltage btn-lg">
               Return to Dashboard
             </Link>
           </div>
         </div>
 
-        <div className="mt-6 p-4 card-dark bg-amber-950/20 border-amber-900/40">
+        <div className="mt-6 p-4 card-dark hazard-stripe">
           <p className="text-xs text-gray-500 leading-relaxed">
             This certification is an educational knowledge credential. It does not authorize energized
             electrical work or replace employer training, OEM qualification, electrical licensing, NFPA
