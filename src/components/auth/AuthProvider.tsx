@@ -40,6 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
       clearTimeout(timeout);
       setUser(firebaseUser);
+      setLoading(false); // unblock UI immediately — don't wait for Firestore
       if (firebaseUser) {
         try {
           const snap = await getDoc(doc(db, 'users', firebaseUser.uid));
@@ -47,12 +48,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setProfile(snap.data() as UserProfile);
           }
         } catch {
-          // Firestore error — still resolve loading
+          // Firestore not available yet — profile stays null
         }
       } else {
         setProfile(null);
       }
-      setLoading(false);
     });
     return () => { unsub(); clearTimeout(timeout); };
   }, []);
