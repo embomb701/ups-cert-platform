@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
   title: 'UPS Field Service Certification Exam (Proctored) — $500',
@@ -129,9 +130,11 @@ export default function ProctoredCertPage() {
               </div>
 
               <div className="text-center pt-2">
-                <Link href="/login" className="block w-full px-6 py-3 rounded-lg bg-amber-700 hover:bg-amber-600 text-white font-semibold text-sm transition-colors text-center">
-                  Sign In to Purchase FSE Exam — $500
-                </Link>
+                <PurchaseButton
+                  productId="fse_proctored_exam"
+                  label="Purchase FSE Exam — $500"
+                  className="block w-full px-6 py-3 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
+                />
                 <p className="text-xs text-gray-500 mt-2">
                   Exam requires scheduling after purchase. Proctor unlock required before start.
                 </p>

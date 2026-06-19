@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
   title: 'Junior UPS Field Service Certification Exam — $200',
@@ -128,9 +129,11 @@ export default function JuniorCertPage() {
               </div>
 
               <div className="text-center pt-2">
-                <Link href="/login" className="block w-full px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors text-center">
-                  Sign In to Purchase Jr. FSE Exam — $200
-                </Link>
+                <PurchaseButton
+                  productId="jr_fse_exam"
+                  label="Purchase Jr. FSE Exam — $200"
+                  className="block w-full px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
+                />
                 <p className="text-xs text-gray-500 mt-2">Google account required. Payment via Stripe.</p>
               </div>
             </div>

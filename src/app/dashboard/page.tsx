@@ -34,7 +34,7 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           {/* Jr FSE Card */}
           <div className="card-dark p-6">
             <div className="flex items-center justify-between mb-4">
@@ -71,6 +71,40 @@ export default function DashboardPage() {
               className="block w-full text-center px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors"
             >
               Purchase Jr. FSE Exam — $200
+            </Link>
+          </div>
+
+          {/* FSE AI Card */}
+          <div className="card-dark p-6 border-purple-900/50">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <span className="inline-block text-xs font-semibold text-purple-400 bg-purple-950/50 border border-purple-800/50 px-2 py-0.5 rounded mb-1">FSE AI Exam</span>
+                <h2 className="text-base font-semibold text-white">FSE AI Proctored Certification</h2>
+              </div>
+            </div>
+            <div className="space-y-2 text-sm mb-6">
+              <div className="flex justify-between text-gray-400">
+                <span>Purchase status</span>
+                <span className="text-gray-300">—</span>
+              </div>
+              <div className="flex justify-between text-gray-400">
+                <span>Exam status</span>
+                <span className="text-gray-300">—</span>
+              </div>
+              <div className="flex justify-between text-gray-400">
+                <span>Last attempt</span>
+                <span className="text-gray-300">—</span>
+              </div>
+              <div className="flex justify-between text-gray-400">
+                <span>Certificate</span>
+                <span className="text-gray-300">—</span>
+              </div>
+            </div>
+            <Link
+              href="/certifications/ai-proctored"
+              className="block w-full text-center px-4 py-2 rounded-lg bg-purple-700 hover:bg-purple-600 text-white text-sm font-medium transition-colors"
+            >
+              Purchase FSE AI Exam — $349
             </Link>
           </div>
 

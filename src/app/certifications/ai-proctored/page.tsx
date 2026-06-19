@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
   title: 'FSE AI Proctored Exam — Mastering FSE',
@@ -101,12 +102,11 @@ export default function AIProctorPage() {
           </div>
 
           <div className="mt-10 text-center">
-            <Link
-              href="/login"
-              className="inline-block px-8 py-3 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-colors"
-            >
-              Get Started — $349 &rarr;
-            </Link>
+            <PurchaseButton
+              productId="fse_ai_exam"
+              label="Purchase FSE AI Exam — $349 →"
+              className="inline-block px-8 py-3 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors"
+            />
             <p className="text-xs text-gray-600 mt-3">
               Sign in with Google to purchase. Exam unlocks immediately after payment.
             </p>
