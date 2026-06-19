@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -96,12 +97,14 @@ export default function HomePage() {
                 Learn More About the Book
               </Link>
             </div>
-            <div className="card-dark p-8 flex flex-col items-center text-center">
-              <div className="w-24 h-32 bg-indigo-900 rounded-lg border border-indigo-700 mb-4 flex items-center justify-center">
-                <span className="text-indigo-300 text-xs font-mono">BOOK</span>
-              </div>
-              <p className="text-sm font-semibold text-white">Mastering Uninterruptible Power Supplies</p>
-              <p className="text-xs text-gray-500 mt-1">Field Service Engineering</p>
+            <div className="flex justify-center">
+              <Image
+                src="/book-cover.jpg"
+                alt="Mastering Uninterruptible Power Supplies — Field Service Engineering"
+                width={320}
+                height={415}
+                className="rounded-lg shadow-2xl shadow-blue-950/50"
+              />
             </div>
           </div>
         </div>
