@@ -15,18 +15,21 @@ export async function signInWithGoogle(): Promise<User> {
   const result = await signInWithPopup(auth, googleProvider);
   const user = result.user;
 
-  // Ensure user document exists in Firestore
-  const userRef = doc(db, 'users', user.uid);
-  const snap = await getDoc(userRef);
-
-  if (!snap.exists()) {
-    await setDoc(userRef, {
-      uid: user.uid,
-      displayName: user.displayName ?? '',
-      email: user.email ?? '',
-      createdAt: serverTimestamp(),
-      role: 'user',
-    });
+  // Ensure user document exists in Firestore — non-blocking
+  try {
+    const userRef = doc(db, 'users', user.uid);
+    const snap = await getDoc(userRef);
+    if (!snap.exists()) {
+      await setDoc(userRef, {
+        uid: user.uid,
+        displayName: user.displayName ?? '',
+        email: user.email ?? '',
+        createdAt: serverTimestamp(),
+        role: 'user',
+      });
+    }
+  } catch {
+    // Firestore write failed — login still succeeds
   }
 
   return user;

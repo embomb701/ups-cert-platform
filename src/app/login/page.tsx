@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInWithGoogle } from '@/lib/firebase/auth';
 import { useAuth } from '@/components/auth/AuthProvider';
@@ -8,6 +8,7 @@ import { useAuth } from '@/components/auth/AuthProvider';
 export default function LoginPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading && user) {
@@ -16,11 +17,13 @@ export default function LoginPage() {
   }, [user, loading, router]);
 
   const handleGoogleSignIn = async () => {
+    setError(null);
     try {
       await signInWithGoogle();
       router.replace('/dashboard');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Sign-in error', err);
+      setError(err?.message ?? 'Sign-in failed. Please try again.');
     }
   };
 
@@ -53,6 +56,8 @@ export default function LoginPage() {
             </svg>
             Sign in with Google
           </button>
+
+          {error && <p className="text-xs text-red-400 mt-4">{error}</p>}
 
           <p className="text-xs text-gray-500 mt-6 leading-relaxed">
             By signing in you agree to our{' '}
