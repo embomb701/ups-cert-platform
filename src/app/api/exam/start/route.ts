@@ -131,6 +131,9 @@ export async function POST(req: NextRequest) {
 
     // Select and randomize questions
     const questions = await selectExamQuestions(examLevel);
+    if (questions.length === 0) {
+      return NextResponse.json({ error: 'No exam questions are available yet. Please contact support.' }, { status: 503 });
+    }
     const questionOrder = shuffleArray(questions.map((q) => q.id));
     const choiceOrder = buildRandomizedChoiceOrder(questions);
     const cooldownUntil = addDays(new Date(), COOLDOWN_DAYS);
