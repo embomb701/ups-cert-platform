@@ -191,8 +191,8 @@ export async function POST(req: NextRequest) {
       timePerQuestion: TIME_PER_QUESTION,
       proctored: examLevel === 'fse',
     });
-  } catch (err) {
+  } catch (err: any) {
     console.error('Exam start error:', err);
-    return NextResponse.json({ error: 'Failed to start exam. Please try again.' }, { status: 500 });
+    return NextResponse.json({ error: `Exam start failed: ${err?.message ?? String(err)}` }, { status: 500 });
   }
 }
