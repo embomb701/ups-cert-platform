@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { signInWithGoogle } from '@/lib/firebase/auth';
 import { useAuth } from '@/components/auth/AuthProvider';
 
@@ -61,9 +62,9 @@ export default function LoginPage() {
 
           <p className="text-xs text-gray-500 mt-6 leading-relaxed">
             By signing in you agree to our{' '}
-            <a href="/terms" className="text-indigo-400 hover:text-indigo-300">Terms &amp; Disclaimer</a>{' '}
+            <Link href="/terms" className="text-indigo-400 hover:text-indigo-300">Terms &amp; Disclaimer</Link>{' '}
             and{' '}
-            <a href="/privacy" className="text-indigo-400 hover:text-indigo-300">Privacy Policy</a>.
+            <Link href="/privacy" className="text-indigo-400 hover:text-indigo-300">Privacy Policy</Link>.
           </p>
         </div>
       </div>

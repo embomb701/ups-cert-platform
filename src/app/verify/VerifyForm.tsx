@@ -1,14 +1,16 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 export default function VerifyForm() {
+  const router = useRouter();
+
   return (
     <form
-      action=""
-      method="get"
       onSubmit={(e) => {
         e.preventDefault();
         const val = (document.getElementById('cert-number') as HTMLInputElement)?.value?.trim();
-        if (val) window.location.href = `/verify/${encodeURIComponent(val)}`;
+        if (val) router.push(`/verify/${encodeURIComponent(val)}`);
       }}
     >
       <label htmlFor="cert-number" className="block text-sm text-gray-400 mb-2">

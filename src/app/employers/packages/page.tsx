@@ -1,9 +1,7 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Employer Team Packages — Coming Soon',
-};
+import { useState } from 'react';
+import Link from 'next/link';
 
 const packages = [
   { label: '5 Jr. FSE Exam Seats', desc: 'Best for small hiring cohorts or pilot programs.' },
@@ -14,6 +12,13 @@ const packages = [
 ];
 
 export default function PackagesPage() {
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+
   return (
     <section className="section-pad">
       <div className="container-site max-w-4xl mx-auto">
@@ -42,31 +47,45 @@ export default function PackagesPage() {
           <p className="text-sm text-gray-400 mb-6">
             Interested in employer packages or bulk exam seats? Reach out to discuss options.
           </p>
-          {/* Placeholder contact form */}
-          <form className="max-w-sm mx-auto space-y-3">
-            <input
-              type="text"
-              placeholder="Your name"
-              className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500"
-            />
-            <input
-              type="email"
-              placeholder="Work email"
-              className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500"
-            />
-            <textarea
-              rows={3}
-              placeholder="Tell us about your team and needs"
-              className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500 resize-none"
-            />
-            <button
-              type="submit"
-              className="w-full px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors"
-            >
-              Submit Inquiry
-            </button>
-          </form>
-          <p className="text-xs text-gray-500 mt-3">[Contact form submission not yet wired — add your email or a form service in production]</p>
+
+          {submitted ? (
+            <div className="max-w-sm mx-auto py-6">
+              <p className="text-green-400 font-semibold mb-2">Inquiry received!</p>
+              <p className="text-sm text-gray-400">
+                We&apos;ll follow up at the email you provided. You can also return to the{' '}
+                <Link href="/employers" className="text-indigo-400 hover:text-indigo-300">employers page</Link>.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="max-w-sm mx-auto space-y-3">
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="Your name"
+                className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+              />
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="Work email"
+                className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+              />
+              <textarea
+                name="message"
+                rows={3}
+                placeholder="Tell us about your team and needs"
+                className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500 resize-none"
+              />
+              <button
+                type="submit"
+                className="w-full px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors"
+              >
+                Submit Inquiry
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>

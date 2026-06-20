@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { getIdToken } from '@/lib/firebase/auth';
 import type { ProductId } from '@/types';
@@ -22,12 +23,9 @@ export function PurchaseButton({ productId, label, className }: PurchaseButtonPr
 
   if (!user) {
     return (
-      <a
-        href="/login"
-        className={className}
-      >
+      <Link href="/login" className={className}>
         Sign In to Purchase
-      </a>
+      </Link>
     );
   }
 
