@@ -135,14 +135,30 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
+  const clearUid = req.nextUrl.searchParams.get('clearUid');
+
   try {
+    // Seed questions
     const batch = adminDb.batch();
     for (const q of QUESTIONS) {
       const ref = adminDb.collection('questionBank').doc(q.id);
       batch.set(ref, { ...q, updatedAt: FieldValue.serverTimestamp() });
     }
     await batch.commit();
-    return NextResponse.json({ success: true, count: QUESTIONS.length });
+
+    // Optionally clear cooldown for a specific user
+    let cleared = 0;
+    if (clearUid) {
+      const attSnap = await adminDb.collection('examAttempts').where('userId', '==', clearUid).get();
+      const ipSnap = await adminDb.collection('ipExamLocks').where('userId', '==', clearUid).get();
+      const b2 = adminDb.batch();
+      attSnap.docs.forEach((d) => b2.delete(d.ref));
+      ipSnap.docs.forEach((d) => b2.delete(d.ref));
+      await b2.commit();
+      cleared = attSnap.size + ipSnap.size;
+    }
+
+    return NextResponse.json({ success: true, count: QUESTIONS.length, cleared });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
