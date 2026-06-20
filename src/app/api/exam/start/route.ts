@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     // Authenticate
     const authHeader = req.headers.get('Authorization');
     const idToken = authHeader?.split('Bearer ')[1];
-    if (!idToken) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!idToken) return NextResponse.json({ error: `Unauthorized — header: ${authHeader ? 'present but invalid' : 'missing'}` }, { status: 401 });
 
     let uid: string, email: string;
     try {
