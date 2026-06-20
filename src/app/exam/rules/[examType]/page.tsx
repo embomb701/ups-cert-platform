@@ -20,6 +20,24 @@ const RULES_JR = [
   'Tab switching and browser blur events are logged.',
 ];
 
+const RULES_FSE_AI = [
+  'This exam is timed. Each question has a 90-second timer.',
+  'You cannot go back to a previous question.',
+  'This exam is monitored by an AI proctoring system using your device camera and microphone.',
+  'You must allow camera and microphone access before the exam will start.',
+  'Ensure you are in a quiet, well-lit location with no other people present.',
+  'Do not use unauthorized outside help, notes, AI tools, or other resources during the exam.',
+  'Do not copy, record, photograph, or distribute exam questions in any form.',
+  'Do not create multiple accounts to bypass retake rules.',
+  'Suspicious activity detected by the AI proctor will be logged and may be reviewed by an administrator.',
+  'The FSE AI Exam can only be attempted once every 90 days.',
+  'Failed, abandoned, expired, or incomplete attempts still trigger the 90-day cooldown.',
+  'Certificates may be revoked if fraud, cheating, or misuse is discovered after the fact.',
+  'You will be prompted to enter fullscreen mode. Exiting fullscreen will be logged.',
+  'Copy, paste, cut, and right-click are disabled during the exam.',
+  'Tab switching and browser blur events are logged.',
+];
+
 const RULES_FSE = [
   'This exam is timed. Each question has a 90-second timer (may be adjusted by your proctor).',
   'You cannot go back to a previous question.',
@@ -42,8 +60,13 @@ export default function ExamRulesPage() {
   const [accepted, setAccepted] = useState(false);
 
   const isJr = examType === 'jr_fse';
-  const rules = isJr ? RULES_JR : RULES_FSE;
-  const examLabel = isJr ? 'Junior UPS Field Service Certification' : 'UPS Field Service Certification';
+  const isAi = examType === 'fse_ai';
+  const rules = isJr ? RULES_JR : isAi ? RULES_FSE_AI : RULES_FSE;
+  const examLabel = isJr
+    ? 'Junior UPS Field Service Certification'
+    : isAi
+    ? 'UPS FSE Certification — AI Proctored'
+    : 'UPS Field Service Certification';
 
   const handleStart = () => {
     if (!accepted) return;

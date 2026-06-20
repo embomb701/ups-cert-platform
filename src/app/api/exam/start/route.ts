@@ -24,11 +24,12 @@ export async function POST(req: NextRequest) {
     const idToken = authHeader?.split('Bearer ')[1];
     if (!idToken) return NextResponse.json({ error: `Unauthorized — header: ${authHeader ? 'present but invalid' : 'missing'}` }, { status: 401 });
 
-    let uid: string, email: string;
+    let uid: string, email: string, displayName: string;
     try {
       const decoded = await adminAuth.verifyIdToken(idToken);
       uid = decoded.uid;
       email = decoded.email ?? '';
+      displayName = decoded.name ?? '';
     } catch {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
@@ -144,6 +145,7 @@ export async function POST(req: NextRequest) {
       id: attemptId,
       userId: uid,
       email,
+      displayName,
       productId: examLevel === 'jr_fse' ? 'jr_fse_exam' : examLevel === 'fse_ai' ? 'fse_ai_exam' : 'fse_proctored_exam',
       examLevel,
       status: 'in_progress',
@@ -180,15 +182,6 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Send sanitized questions to client (no correct answers)
-    const clientQuestions = sanitizeQuestionsForClient(questions).map((q) => ({
-      ...q,
-      choices: q.choices.map((c) => ({
-        ...c,
-        // reorder choices per randomized order
-      })),
-    }));
-
     return NextResponse.json({
       attemptId,
       questions: sanitizeQuestionsForClient(
@@ -198,7 +191,7 @@ export async function POST(req: NextRequest) {
       ),
       choiceOrder,
       timePerQuestion: TIME_PER_QUESTION,
-      proctored: examLevel === 'fse',
+      proctored: examLevel === 'fse' || examLevel === 'fse_ai',
     });
   } catch (err: any) {
     console.error('Exam start error:', err);

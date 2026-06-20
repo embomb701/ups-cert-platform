@@ -308,4 +308,5 @@ export interface ExamSessionState {
   timePerQuestion: number; // seconds
   totalQuestions: number;
   proctored: boolean;
+  choiceOrder: Record<string, string[]>; // questionId -> randomized choice ids
 }

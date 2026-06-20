@@ -53,6 +53,7 @@ export default function ExamPage() {
           timePerQuestion: data.timePerQuestion ?? 90,
           totalQuestions: data.questions.length,
           proctored: data.proctored ?? false,
+          choiceOrder: data.choiceOrder ?? {},
         });
       })
       .catch(() => setError('Failed to start exam. Please try again.'))
@@ -158,7 +159,7 @@ export default function ExamPage() {
   if (!session) return null;
 
   const current = session.questions[session.currentIndex];
-  const choiceOrder = current.choices.map((c) => c.id); // will be passed from server in real impl
+  const choiceOrder = session.choiceOrder[current.id] ?? current.choices.map((c) => c.id);
 
   const examContent = (
     <div className="min-h-screen bg-gray-950 py-8">

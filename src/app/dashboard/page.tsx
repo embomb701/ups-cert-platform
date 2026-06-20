@@ -26,14 +26,19 @@ export default function DashboardPage() {
     async function load() {
       try {
         const token = await getIdToken();
-        const res = await fetch('/api/user/access', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await res.json();
-        setJrAccess(data.jr_fse === true);
-        setAiAccess(data.fse_ai === true);
+        const [accessRes, attemptsRes] = await Promise.all([
+          fetch('/api/user/access', { headers: { Authorization: `Bearer ${token}` } }),
+          fetch('/api/user/attempts', { headers: { Authorization: `Bearer ${token}` } }),
+        ]);
+        const accessData = await accessRes.json();
+        setJrAccess(accessData.jr_fse === true);
+        setAiAccess(accessData.fse_ai === true);
+        if (attemptsRes.ok) {
+          const attemptsData = await attemptsRes.json();
+          setAttempts(attemptsData.attempts ?? []);
+        }
       } catch {
-        // silently fail — show not purchased
+        // silently fail — show not purchased / no attempts
       } finally {
         setDataLoading(false);
       }
@@ -151,7 +156,7 @@ export default function DashboardPage() {
                 <div key={a.id} className="flex items-center justify-between text-sm py-2 border-b border-gray-800 last:border-0">
                   <span className="text-gray-400">{a.examLevel === 'jr_fse' ? 'Jr. FSE' : a.examLevel === 'fse_ai' ? 'FSE AI' : 'FSE'}</span>
                   <span className={a.passed ? 'text-green-400' : a.passed === false ? 'text-red-400' : 'text-gray-400'}>
-                    {a.passed === true ? `Passed (${a.score}%)` : a.passed === false ? `Failed (${a.score}%)` : 'In progress'}
+                    {a.passed === true ? `Passed (${Math.round(a.score ?? 0)}%)` : a.passed === false ? `Failed (${Math.round(a.score ?? 0)}%)` : 'In progress'}
                   </span>
                 </div>
               ))}
