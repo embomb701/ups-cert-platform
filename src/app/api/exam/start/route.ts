@@ -55,35 +55,41 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'No valid Jr. FSE exam purchase found.' }, { status: 403 });
       }
 
-      // Check account-based cooldown
+      // Check account-based cooldown (filter in memory to avoid composite index)
       const recentAttempts = await adminDb
         .collection('examAttempts')
         .where('userId', '==', uid)
         .where('examLevel', '==', 'jr_fse')
-        .where('cooldownUntil', '>', new Date())
-        .limit(1)
         .get();
 
-      if (!recentAttempts.empty) {
-        const attempt = recentAttempts.docs[0].data();
+      const now = new Date();
+      const activeCooldown = recentAttempts.docs.find((d) => {
+        const cooldownUntil = d.data().cooldownUntil?.toDate?.();
+        return cooldownUntil && cooldownUntil > now;
+      });
+
+      if (activeCooldown) {
         return NextResponse.json({
           error:
             'A recent Junior FSE Exam attempt has already been associated with this account or network. Junior FSE Exam attempts are limited to once every 90 days. Contact support if you believe this is an error.',
-          cooldownUntil: attempt.cooldownUntil?.toDate(),
+          cooldownUntil: activeCooldown.data().cooldownUntil?.toDate(),
         }, { status: 429 });
       }
 
-      // Check IP-based cooldown
-      const ipLock = await adminDb
+      // Check IP-based cooldown (filter in memory to avoid composite index)
+      const ipLocks = await adminDb
         .collection('ipExamLocks')
         .where('ipHash', '==', ipHash)
         .where('examLevel', '==', 'jr_fse')
-        .where('cooldownUntil', '>', new Date())
-        .where('clearedByAdmin', '==', false)
-        .limit(1)
         .get();
 
-      if (!ipLock.empty) {
+      const activeIpLock = ipLocks.docs.find((d) => {
+        const data = d.data();
+        const cooldownUntil = data.cooldownUntil?.toDate?.();
+        return cooldownUntil && cooldownUntil > now && !data.clearedByAdmin;
+      });
+
+      if (activeIpLock) {
         return NextResponse.json({
           error:
             'A recent Junior FSE Exam attempt has already been associated with this account or network. Junior FSE Exam attempts are limited to once every 90 days. Contact support if you believe this is an error.',
