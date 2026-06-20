@@ -30,11 +30,18 @@ export default function ExamResultsPage() {
 
   useEffect(() => {
     if (!attemptId || !user) return;
-    fetch(`/api/exam/result/${attemptId}`)
-      .then((r) => r.json())
-      .then((data) => setResult(data))
-      .catch(() => {})
-      .finally(() => setFetching(false));
+    user.getIdToken().then((token) => {
+      fetch(`/api/exam/result/${attemptId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((r) => {
+          if (!r.ok) throw new Error('Failed to load result');
+          return r.json();
+        })
+        .then((data) => setResult(data))
+        .catch(() => {})
+        .finally(() => setFetching(false));
+    });
   }, [attemptId, user]);
 
   if (loading || fetching) {
