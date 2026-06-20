@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
     const level = req.nextUrl.searchParams.get('level');
     const status = req.nextUrl.searchParams.get('status');
 
-    let query: FirebaseFirestore.Query = adminDb.collection('examAttempts');
+    let query = adminDb.collection('examAttempts') as ReturnType<typeof adminDb.collection>;
     if (level) query = query.where('examLevel', '==', level);
     if (status) query = query.where('status', '==', status);
 

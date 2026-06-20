@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
@@ -38,7 +38,7 @@ const STATUS_COLORS: Record<string, string> = {
   invalidated: 'text-red-400',
 };
 
-export default function AdminAttemptsPage() {
+function AdminAttemptsContent() {
   const { user, profile, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -226,5 +226,13 @@ export default function AdminAttemptsPage() {
         </p>
       </div>
     </section>
+  );
+}
+
+export default function AdminAttemptsPage() {
+  return (
+    <Suspense>
+      <AdminAttemptsContent />
+    </Suspense>
   );
 }
