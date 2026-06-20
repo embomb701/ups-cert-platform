@@ -8,7 +8,6 @@ import { AIProctorWrapper } from '@/components/exam/AIProctorWrapper';
 import { ExamQuestion } from '@/components/exam/ExamQuestion';
 import { ExamTimer } from '@/components/exam/ExamTimer';
 import type { ExamLevel, QuestionForExam, ExamSessionState } from '@/types';
-import { getIdToken } from '@/lib/firebase/auth';
 
 export default function ExamPage() {
   const params = useParams();
@@ -31,7 +30,7 @@ export default function ExamPage() {
     if (!user || session || starting) return;
     setStarting(true);
 
-    getIdToken().then((token) =>
+    user.getIdToken().then((token) =>
     fetch('/api/exam/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
