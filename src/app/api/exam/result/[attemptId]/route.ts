@@ -18,7 +18,6 @@ export async function GET(
 
     const attempt = attemptSnap.data()!;
 
-    // Verify ownership if token provided, otherwise check status
     if (idToken) {
       try {
         const decoded = await adminAuth.verifyIdToken(idToken);
@@ -34,30 +33,60 @@ export async function GET(
       return NextResponse.json({ error: 'Attempt not completed' }, { status: 400 });
     }
 
-    // Build category breakdown from stored question IDs
     const questionIds: string[] = attempt.selectedQuestionIds ?? [];
+    const randomizedOrder: string[] = attempt.randomizedQuestionOrder ?? questionIds;
+    const answers: { questionId: string; selectedChoiceId: string | null }[] = attempt.answers ?? [];
+
     const categoryBreakdown: Record<string, { correct: number; total: number }> = {};
+    const questionReview: {
+      id: string;
+      questionText: string;
+      choices: { id: string; text: string }[];
+      correctAnswerId: string;
+      selectedChoiceId: string | null;
+      isCorrect: boolean;
+      explanation: string;
+      category: string;
+    }[] = [];
 
     if (questionIds.length > 0) {
       const questionDocs = await Promise.all(
         questionIds.map((id) => adminDb.collection('questionBank').doc(id).get())
       );
-      const answers: { questionId: string; selectedChoiceId: string | null }[] = attempt.answers ?? [];
 
+      // Build a map for quick lookup
+      const qMap: Record<string, any> = {};
       for (const qSnap of questionDocs) {
         if (!qSnap.exists) continue;
-        const q = qSnap.data()!;
+        qMap[qSnap.id] = { id: qSnap.id, ...qSnap.data() };
+      }
+
+      // Build review in the order the user saw questions
+      const orderedIds = randomizedOrder.filter((id) => qMap[id]);
+      for (const id of orderedIds) {
+        const q = qMap[id];
+        const userAnswer = answers.find((a) => a.questionId === id);
+        const selectedChoiceId = userAnswer?.selectedChoiceId ?? null;
+        const isCorrect = selectedChoiceId === q.correctAnswerId;
+
         const cat = q.category as string;
         if (!categoryBreakdown[cat]) categoryBreakdown[cat] = { correct: 0, total: 0 };
         categoryBreakdown[cat].total++;
-        const userAnswer = answers.find((a) => a.questionId === qSnap.id);
-        if (userAnswer?.selectedChoiceId === q.correctAnswerId) {
-          categoryBreakdown[cat].correct++;
-        }
+        if (isCorrect) categoryBreakdown[cat].correct++;
+
+        questionReview.push({
+          id,
+          questionText: q.questionText,
+          choices: q.choices ?? [],
+          correctAnswerId: q.correctAnswerId,
+          selectedChoiceId,
+          isCorrect,
+          explanation: q.explanation ?? '',
+          category: cat,
+        });
       }
     }
 
-    // Get certificate number if issued
     let certificateNumber: string | undefined;
     if (attempt.certificateId) {
       const certSnap = await adminDb.collection('certificates').doc(attempt.certificateId).get();
@@ -74,6 +103,7 @@ export async function GET(
       certificateId: attempt.certificateId,
       certificateNumber,
       categoryBreakdown,
+      questionReview,
       flaggedForReview: attempt.flaggedForReview ?? false,
     });
   } catch (err: any) {

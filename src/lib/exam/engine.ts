@@ -13,7 +13,9 @@ import type {
   ExamAnswer,
 } from '@/types';
 
-const QUESTIONS_PER_EXAM = 50;
+// NOTE: set to 15 because the current question bank has only 20 active questions.
+// Increase toward 50 once the bank exceeds 100 questions so randomization is meaningful.
+const QUESTIONS_PER_EXAM = 15;
 const DEFAULT_PASSING_SCORE = 80;
 
 // ---------------------------------------------------------------
