@@ -76,14 +76,25 @@ export default function ExamPage() {
         }));
 
         try {
+          const { getAuth } = await import('firebase/auth');
+          const currentUser = getAuth().currentUser;
+          const idToken = currentUser ? await currentUser.getIdToken() : null;
+
           const res = await fetch('/api/exam/submit', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              ...(idToken ? { Authorization: `Bearer ${idToken}` } : {}),
+            },
             body: JSON.stringify({ attemptId: session.attemptId, answers }),
           });
           const data = await res.json();
+          if (data.error) {
+            setError(`Submission failed: ${data.error}`);
+            return;
+          }
           router.push(`/exam/results/${session.attemptId}`);
-        } catch {
+        } catch (err: any) {
           setError('Submission failed. Your answers have been recorded. Contact support.');
         }
         return;
