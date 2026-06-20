@@ -18,7 +18,6 @@ const EVENT_WEIGHTS: Record<string, number> = {
   right_click: 2,
   text_selection: 1,
   devtools_detected: 10,
-  rapid_answers: 5,
 };
 
 export function calculateRiskScore(events: SuspiciousEvent[]): number {

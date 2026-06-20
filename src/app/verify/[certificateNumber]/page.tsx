@@ -97,7 +97,7 @@ export default async function CertificateVerifyPage({ params }: Props) {
             <div className="flex justify-between border-b border-gray-800 pb-3">
               <span className="text-sm text-gray-500">Level</span>
               <span className="text-sm text-white">
-                {cert.examLevel === 'jr_fse' ? 'Junior FSE' : 'FSE (Proctored)'}
+                {cert.examLevel === 'jr_fse' ? 'Junior FSE' : cert.examLevel === 'fse_ai' ? 'FSE (AI Proctored)' : 'FSE (Human Proctored)'}
               </span>
             </div>
             <div className="flex justify-between border-b border-gray-800 pb-3">

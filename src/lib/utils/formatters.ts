@@ -16,13 +16,6 @@ export function formatScore(score: number): string {
   return `${Math.round(score)}%`;
 }
 
-export function generateCertificateNumber(examLevel: string): string {
-  const prefix = examLevel === 'jr_fse' ? 'JR' : 'FSE';
-  const year = new Date().getFullYear();
-  const random = Math.random().toString(36).substring(2, 8).toUpperCase();
-  return `${prefix}-${year}-${random}`;
-}
-
 export function cooldownDaysRemaining(cooldownUntil: Date): number {
   const now = new Date();
   const diff = cooldownUntil.getTime() - now.getTime();

@@ -130,6 +130,22 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Block duplicate in_progress attempts
+    const existingSnap = await adminDb
+      .collection('examAttempts')
+      .where('userId', '==', uid)
+      .where('examLevel', '==', examLevel)
+      .where('status', '==', 'in_progress')
+      .limit(1)
+      .get();
+
+    if (!existingSnap.empty) {
+      return NextResponse.json(
+        { error: 'You already have an exam in progress. Please complete or wait for it to expire before starting a new attempt.' },
+        { status: 409 }
+      );
+    }
+
     // Select and randomize questions
     const questions = await selectExamQuestions(examLevel);
     if (questions.length === 0) {

@@ -4,7 +4,7 @@ import { FieldValue } from 'firebase-admin/firestore';
 
 export const dynamic = 'force-dynamic';
 
-const SEED_SECRET = 'seed-ups-cert-2024';
+const SEED_SECRET = process.env.SEED_SECRET ?? '';
 
 const QUESTIONS = [
   {
@@ -131,7 +131,7 @@ const QUESTIONS = [
 
 export async function GET(req: NextRequest) {
   const secret = req.nextUrl.searchParams.get('secret');
-  if (secret !== SEED_SECRET) {
+  if (!SEED_SECRET || secret !== SEED_SECRET) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from 'react';
 import { setupAntiCheatListeners } from '@/lib/exam/antiCheat';
+import { getIdToken } from '@/lib/firebase/auth';
 import type { SuspiciousEvent } from '@/types';
 
 interface AntiCheatWrapperProps {
@@ -24,9 +25,13 @@ export function AntiCheatWrapper({
     if (batch.length === 0) return;
 
     try {
+      const token = await getIdToken();
       await fetch('/api/exam/event', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify({ attemptId, events: batch }),
       });
     } catch {

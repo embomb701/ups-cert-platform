@@ -139,8 +139,7 @@ export interface SuspiciousEvent {
     | 'cut_attempt'
     | 'right_click'
     | 'text_selection'
-    | 'devtools_detected'
-    | 'rapid_answers';
+    | 'devtools_detected';
   count: number;
   lastOccurredAt: Date;
 }
