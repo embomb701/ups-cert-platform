@@ -70,8 +70,8 @@ function AdminAttemptsContent() {
   }, [level]);
 
   useEffect(() => {
-    if (user && profile?.role === 'admin') loadAttempts();
-  }, [user, profile, loadAttempts]);
+    if (user) loadAttempts();
+  }, [user, loadAttempts]);
 
   async function clearCooldown(userId: string, examLevel: string, attemptId: string) {
     if (!confirm(`Clear ALL ${examLevel} attempts and IP locks for this user? This lets them retake the exam immediately.`)) return;
