@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, useCallback, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
@@ -53,7 +53,7 @@ function AdminAttemptsContent() {
     if (!loading && (!user || profile?.role !== 'admin')) router.replace('/dashboard');
   }, [user, profile, loading, router]);
 
-  async function loadAttempts() {
+  const loadAttempts = useCallback(async () => {
     setFetching(true);
     try {
       const token = await getIdToken();
@@ -67,11 +67,11 @@ function AdminAttemptsContent() {
     } finally {
       setFetching(false);
     }
-  }
+  }, [level]);
 
   useEffect(() => {
     if (user && profile?.role === 'admin') loadAttempts();
-  }, [user, profile, level]);
+  }, [user, profile, loadAttempts]);
 
   async function clearCooldown(userId: string, examLevel: string, attemptId: string) {
     if (!confirm(`Clear ALL ${examLevel} attempts and IP locks for this user? This lets them retake the exam immediately.`)) return;

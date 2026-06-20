@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,13 +12,8 @@ export async function POST(req: NextRequest) {
     const token = authHeader?.split('Bearer ')[1];
     if (!token) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    let decoded: Awaited<ReturnType<typeof adminAuth.verifyIdToken>>;
-    try {
-      decoded = await adminAuth.verifyIdToken(token);
-    } catch {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
+    const decoded = await adminAuth.verifyIdToken(token).catch(() => null);
+    if (!decoded) return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     if (!ADMIN_EMAILS.includes(decoded.email?.toLowerCase() ?? '')) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
@@ -27,7 +23,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'uid and examLevel required' }, { status: 400 });
     }
 
-    // Delete all attempts for this user+examLevel (clears cooldown)
     const snap = await adminDb
       .collection('examAttempts')
       .where('userId', '==', uid)
@@ -37,7 +32,6 @@ export async function POST(req: NextRequest) {
     const batch = adminDb.batch();
     snap.docs.forEach((d) => batch.delete(d.ref));
 
-    // Also clear IP locks
     const ipSnap = await adminDb
       .collection('ipExamLocks')
       .where('userId', '==', uid)
@@ -47,8 +41,6 @@ export async function POST(req: NextRequest) {
 
     await batch.commit();
 
-    // Audit log
-    const { FieldValue } = await import('firebase-admin/firestore');
     await adminDb.collection('auditLogs').add({
       userId: decoded.uid,
       eventType: 'admin_action',
