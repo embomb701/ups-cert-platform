@@ -39,7 +39,7 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 function AdminAttemptsContent() {
-  const { user, profile, loading } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const level = searchParams.get('level') ?? 'jr_fse';
@@ -50,8 +50,8 @@ function AdminAttemptsContent() {
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!loading && (!user || profile?.role !== 'admin')) router.replace('/dashboard');
-  }, [user, profile, loading, router]);
+    if (!loading && !user) router.replace('/dashboard');
+  }, [user, loading, router]);
 
   const loadAttempts = useCallback(async () => {
     setFetching(true);

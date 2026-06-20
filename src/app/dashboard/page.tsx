@@ -14,6 +14,7 @@ export default function DashboardPage() {
 
   const [jrAccess, setJrAccess] = useState(false);
   const [aiAccess, setAiAccess] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [dataLoading, setDataLoading] = useState(true);
 
@@ -26,9 +27,10 @@ export default function DashboardPage() {
     async function load() {
       try {
         const token = await getIdToken();
-        const [accessRes, attemptsRes] = await Promise.all([
+        const [accessRes, attemptsRes, adminRes] = await Promise.all([
           fetch('/api/user/access', { headers: { Authorization: `Bearer ${token}` } }),
           fetch('/api/user/attempts', { headers: { Authorization: `Bearer ${token}` } }),
+          fetch('/api/user/is-admin', { headers: { Authorization: `Bearer ${token}` } }),
         ]);
         const accessData = await accessRes.json();
         setJrAccess(accessData.jr_fse === true);
@@ -37,6 +39,8 @@ export default function DashboardPage() {
           const attemptsData = await attemptsRes.json();
           setAttempts(attemptsData.attempts ?? []);
         }
+        const adminData = await adminRes.json();
+        setIsAdmin(adminData.isAdmin === true);
       } catch {
         // silently fail — show not purchased / no attempts
       } finally {
@@ -164,7 +168,7 @@ export default function DashboardPage() {
           )}
         </div>
 
-        {profile?.role === 'admin' && (
+        {isAdmin && (
           <div className="mt-6 text-center">
             <Link href="/admin" className="text-sm text-indigo-400 hover:text-indigo-300">
               Admin Dashboard &rarr;
