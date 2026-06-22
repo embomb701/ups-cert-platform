@@ -8,6 +8,7 @@ import type { SuspiciousEvent, SuspiciousRiskLevel } from '@/types';
 
 // Event weights for risk scoring
 const EVENT_WEIGHTS: Record<string, number> = {
+  // Browser-based events
   tab_switch: 3,
   blur: 1,
   visibility_change: 2,
@@ -18,6 +19,10 @@ const EVENT_WEIGHTS: Record<string, number> = {
   right_click: 2,
   text_selection: 1,
   devtools_detected: 10,
+  // AI camera events — weighted higher since camera confirms physical behavior
+  ai_looking_away: 5,   // face turned away from screen
+  ai_no_face: 8,        // candidate left the camera view entirely
+  ai_multiple_faces: 10, // another person visible — highest camera risk
 };
 
 export function calculateRiskScore(events: SuspiciousEvent[]): number {

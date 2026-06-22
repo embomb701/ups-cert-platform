@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
         eventDetails: evt,
         createdAt: FieldValue.serverTimestamp(),
         ipHash,
-        severity: evt.type === 'devtools_detected' ? 'critical' : 'warning',
+        severity: ['devtools_detected', 'ai_multiple_faces'].includes(evt.type) ? 'critical' : 'warning',
       });
     }
     await batch.commit();
