@@ -1,21 +1,100 @@
-import type { Metadata } from 'next';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { getIdToken } from '@/lib/firebase/auth';
 
-export const metadata: Metadata = { title: 'Admin — Proctored FSE Orders' };
+interface ProctoredOrder {
+  id: string;
+  userId: string;
+  email: string;
+  status: string;
+  adminNotes?: string;
+  proctorName?: string;
+  meetingLink?: string;
+  createdAt?: string;
+  manuallyCreated?: boolean;
+}
 
-const STATUS_LABELS: Record<string, string> = {
-  scheduling_pending: 'Scheduling Pending',
-  scheduled: 'Scheduled',
-  proctor_assigned: 'Proctor Assigned',
-  ready: 'Ready to Start',
-  in_progress: 'In Progress',
-  completed: 'Completed',
-  passed: 'Passed',
-  failed: 'Failed',
-  certificate_issued: 'Certificate Issued',
+const STATUS_COLORS: Record<string, string> = {
+  scheduling_pending: 'text-amber-400',
+  awaiting_contact: 'text-amber-400',
+  scheduled: 'text-blue-400',
+  proctor_assigned: 'text-blue-400',
+  ready: 'text-green-400',
+  in_progress: 'text-green-400',
+  completed: 'text-gray-400',
+  passed: 'text-green-400',
+  failed: 'text-red-400',
+  certificate_issued: 'text-indigo-400',
 };
 
 export default function AdminProctoredPage() {
+  const [orders, setOrders] = useState<ProctoredOrder[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [creating, setCreating] = useState(false);
+  const [newEmail, setNewEmail] = useState('');
+  const [newUid, setNewUid] = useState('');
+  const [createMsg, setCreateMsg] = useState('');
+  const [unlocking, setUnlocking] = useState<string | null>(null);
+
+  async function loadOrders() {
+    setLoading(true);
+    try {
+      const token = await getIdToken();
+      const res = await fetch('/api/admin/proctored-orders', { headers: { Authorization: `Bearer ${token}` } });
+      const data = await res.json();
+      if (data.orders) setOrders(data.orders);
+    } catch {}
+    setLoading(false);
+  }
+
+  useEffect(() => { loadOrders(); }, []);
+
+  async function handleCreate() {
+    if (!newEmail || !newUid) { setCreateMsg('Both UID and email are required'); return; }
+    setCreating(true);
+    setCreateMsg('');
+    try {
+      const token = await getIdToken();
+      const res = await fetch('/api/admin/proctored-orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ userId: newUid, email: newEmail }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setCreateMsg(`Order created: ${data.orderId}`);
+        setNewEmail('');
+        setNewUid('');
+        await loadOrders();
+      } else {
+        setCreateMsg(`Error: ${data.error}`);
+      }
+    } catch (e: any) {
+      setCreateMsg(`Error: ${e.message}`);
+    }
+    setCreating(false);
+  }
+
+  async function handleUnlock(orderId: string) {
+    setUnlocking(orderId);
+    try {
+      const token = await getIdToken();
+      const res = await fetch('/api/admin/proctor-unlock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ orderId, proctorName: 'Approved organization representative' }),
+      });
+      const data = await res.json();
+      if (data.ok) await loadOrders();
+      else alert(`Unlock failed: ${data.error}`);
+    } catch (e: any) {
+      alert(`Unlock failed: ${e}`);
+    }
+    setUnlocking(null);
+  }
+
   return (
     <section className="section-pad">
       <div className="container-site max-w-5xl mx-auto">
@@ -24,46 +103,93 @@ export default function AdminProctoredPage() {
           <h1 className="text-xl font-bold text-white">Proctored FSE Orders</h1>
         </div>
 
+        {/* Manual order creation */}
         <div className="card-dark p-6 mb-6">
-          <h2 className="text-sm font-semibold text-white mb-4">FSE Exam Workflow</h2>
-          <ol className="space-y-3">
-            {[
-              ['purchased / scheduling_pending', 'Candidate has paid. Contact candidate to schedule.'],
-              ['scheduled', 'Date and time confirmed with candidate.'],
-              ['proctor_assigned', 'Specific proctor name assigned to this session.'],
-              ['ready', 'Proctor has unlocked the exam. Candidate may now start.'],
-              ['in_progress', 'Exam session is live under proctor supervision.'],
-              ['completed → passed / failed', 'Proctor marks session complete. Score recorded.'],
-              ['certificate_issued', 'Certificate generated and delivered to candidate.'],
-            ].map(([status, desc], i) => (
-              <li key={i} className="flex gap-3 text-xs">
-                <span className="text-indigo-400 font-mono shrink-0 mt-0.5">{String(i + 1).padStart(2, '0')}.</span>
-                <div>
-                  <span className="font-semibold text-gray-300">{status}</span>
-                  <span className="text-gray-500 ml-2">— {desc}</span>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <div className="card-dark p-6 mb-6">
-          <h2 className="text-sm font-semibold text-white mb-2">Proctor Notes</h2>
-          <ul className="space-y-1.5 text-xs text-gray-400">
-            <li>&#x2022; The exam does NOT unlock until an admin changes status to <code className="font-mono">ready</code>.</li>
-            <li>&#x2022; Record the proctor name on the order — do not use the program creator&apos;s personal name. Use &quot;approved representative from the organization.&quot;</li>
-            <li>&#x2022; Confirm identity before unlocking the exam session.</li>
-            <li>&#x2022; Proctor may add notes to the attempt record at any time.</li>
-            <li>&#x2022; An invalidated attempt should be clearly documented with reason.</li>
-          </ul>
-        </div>
-
-        <div className="card-dark p-5 bg-gray-900/60">
-          <p className="text-xs text-gray-500">
-            The proctored order list is loaded dynamically from Firestore.
-            Wire up <code className="font-mono">adminDb.collection(&apos;proctoredExamOrders&apos;)</code> in a
-            Server Component or API route to render live data here.
+          <h2 className="text-sm font-semibold text-white mb-1">Manual Order Creation</h2>
+          <p className="text-xs text-gray-500 mb-4">
+            Use this if a candidate purchased but the Stripe webhook did not create an order record.
+            Get the user UID from Firebase Console → Authentication.
           </p>
+          <div className="grid sm:grid-cols-2 gap-3 mb-3">
+            <input
+              type="text"
+              placeholder="User UID (from Firebase Auth)"
+              value={newUid}
+              onChange={(e) => setNewUid(e.target.value)}
+              className="px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-indigo-500"
+            />
+            <input
+              type="email"
+              placeholder="User email address"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              className="px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+          <button
+            onClick={handleCreate}
+            disabled={creating}
+            className="px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white text-sm font-medium transition-colors"
+          >
+            {creating ? 'Creating…' : 'Create Order'}
+          </button>
+          {createMsg && <p className="text-xs mt-2 text-indigo-400">{createMsg}</p>}
+        </div>
+
+        {/* Orders list */}
+        <div className="card-dark p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold text-white">All Proctored Orders ({orders.length})</h2>
+            <button onClick={loadOrders} className="text-xs text-gray-500 hover:text-white">Refresh</button>
+          </div>
+
+          {loading ? (
+            <p className="text-sm text-gray-500">Loading…</p>
+          ) : orders.length === 0 ? (
+            <p className="text-sm text-gray-500">No proctored orders found.</p>
+          ) : (
+            <div className="space-y-3">
+              {orders.map((o) => (
+                <div key={o.id} className="border border-gray-800 rounded-lg p-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      <p className="text-sm text-white font-medium truncate">{o.email}</p>
+                      <p className="text-xs text-gray-500 font-mono">{o.userId}</p>
+                      <p className="text-xs text-gray-600 mt-0.5">Order: {o.id}</p>
+                      {o.createdAt && <p className="text-xs text-gray-600">{new Date(o.createdAt).toLocaleString()}</p>}
+                      {o.manuallyCreated && <span className="text-xs text-amber-500">Manually created</span>}
+                    </div>
+                    <div className="flex items-center gap-3 shrink-0">
+                      <span className={`text-xs font-semibold ${STATUS_COLORS[o.status] ?? 'text-gray-400'}`}>
+                        {o.status.replace(/_/g, ' ')}
+                      </span>
+                      {o.status !== 'ready' && o.status !== 'completed' && o.status !== 'passed' && o.status !== 'failed' && o.status !== 'certificate_issued' && (
+                        <button
+                          onClick={() => handleUnlock(o.id)}
+                          disabled={unlocking === o.id}
+                          className="px-3 py-1 rounded bg-green-800 hover:bg-green-700 disabled:opacity-50 text-white text-xs font-medium transition-colors"
+                        >
+                          {unlocking === o.id ? 'Unlocking…' : 'Unlock Exam'}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  {o.adminNotes && <p className="text-xs text-gray-500 mt-2 italic">{o.adminNotes}</p>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Workflow */}
+        <div className="card-dark p-5 mt-6 bg-amber-950/20 border-amber-900/40">
+          <p className="text-xs text-amber-300 font-semibold mb-2">FSE Exam Workflow</p>
+          <ol className="space-y-1 text-xs text-gray-400">
+            <li>1. <strong className="text-gray-300">scheduling_pending</strong> — Candidate paid. Contact them to schedule.</li>
+            <li>2. <strong className="text-gray-300">ready</strong> — Click "Unlock Exam" above once proctor is confirmed.</li>
+            <li>3. Candidate starts exam from their dashboard.</li>
+            <li>4. Exam scored server-side. Certificate issued if passed and not flagged.</li>
+          </ol>
         </div>
       </div>
     </section>
