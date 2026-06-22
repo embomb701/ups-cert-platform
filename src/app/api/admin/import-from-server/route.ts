@@ -1,18 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
-import fs from 'fs';
-import path from 'path';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
+
+// Static imports — webpack bundles these into the Vercel function at build time.
+// fs.readFileSync CANNOT be used here: data/ is not included in the serverless bundle.
+import jrFscSample from '../../../../../data/questions/jr-fsc-sample.json';
+import jrFseAll from '../../../../../data/questions/jr-fse-all-questions.json';
+import bookJrFse from '../../../../../data/questions/book-jr-fse-questions.json';
+import fscSample from '../../../../../data/questions/fsc-sample.json';
+import bookFse from '../../../../../data/questions/book-fse-questions.json';
 
 function isAdmin(email: string): boolean {
   const admins = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase());
   return admins.includes(email.toLowerCase());
 }
 
-const QUESTION_FILES = [
+type QuestionRecord = Record<string, unknown>;
+
+const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
+  'jr-fsc-sample.json':        jrFscSample as QuestionRecord[],
+  'jr-fse-all-questions.json': jrFseAll as QuestionRecord[],
+  'book-jr-fse-questions.json': bookJrFse as QuestionRecord[],
+  'fsc-sample.json':           fscSample as QuestionRecord[],
+  'book-fse-questions.json':   bookFse as QuestionRecord[],
+};
+
+const FILE_ORDER = [
   'jr-fsc-sample.json',
   'jr-fse-all-questions.json',
   'book-jr-fse-questions.json',
@@ -33,29 +49,19 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json().catch(() => ({}));
     const fileName = body.file as string | undefined;
+    const filesToImport = fileName ? [fileName] : FILE_ORDER;
 
-    // If a specific file is requested, import just that one
-    const filesToImport = fileName ? [fileName] : QUESTION_FILES;
-
-    const dataDir = path.join(process.cwd(), 'data', 'questions');
     const collection = adminDb.collection('questionBank');
-
     let totalCreated = 0;
-    let totalUpdated = 0;
-    let totalSkipped = 0;
-    let filesProcessed: string[] = [];
-    let filesNotFound: string[] = [];
+    const filesProcessed: string[] = [];
+    const filesNotFound: string[] = [];
 
     for (const file of filesToImport) {
-      const filePath = path.join(dataDir, file);
-      if (!fs.existsSync(filePath)) {
+      const questions = BUNDLED_FILES[file];
+      if (!questions || questions.length === 0) {
         filesNotFound.push(file);
         continue;
       }
-
-      const questions: Record<string, unknown>[] = JSON.parse(
-        fs.readFileSync(filePath, 'utf8')
-      );
 
       const BATCH_SIZE = 400;
       for (let i = 0; i < questions.length; i += BATCH_SIZE) {
@@ -65,19 +71,12 @@ export async function POST(req: NextRequest) {
         for (const q of chunk) {
           const id = q.id as string;
           if (!id) continue;
-          const docRef = collection.doc(id);
-          const snap = await docRef.get();
           batch.set(
-            docRef,
-            {
-              ...q,
-              createdAt: snap.exists ? snap.data()?.createdAt : FieldValue.serverTimestamp(),
-              updatedAt: FieldValue.serverTimestamp(),
-            },
+            collection.doc(id),
+            { ...q, updatedAt: FieldValue.serverTimestamp() },
             { merge: true }
           );
-          if (snap.exists) totalUpdated++;
-          else totalCreated++;
+          totalCreated++;
         }
 
         await batch.commit();
@@ -89,19 +88,12 @@ export async function POST(req: NextRequest) {
     await adminDb.collection('auditLogs').add({
       userId: decoded.uid,
       eventType: 'bulk_questions_imported_from_server',
-      eventDetails: { filesProcessed, filesNotFound, totalCreated, totalUpdated },
+      eventDetails: { filesProcessed, filesNotFound, totalCreated },
       createdAt: FieldValue.serverTimestamp(),
       severity: 'info',
     });
 
-    return NextResponse.json({
-      ok: true,
-      filesProcessed,
-      filesNotFound,
-      totalCreated,
-      totalUpdated,
-      totalSkipped,
-    });
+    return NextResponse.json({ ok: true, filesProcessed, filesNotFound, totalCreated, totalUpdated: 0 });
   } catch (err: any) {
     console.error('Import from server error:', err);
     return NextResponse.json({ error: err.message ?? 'Import failed' }, { status: 500 });
