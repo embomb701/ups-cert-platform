@@ -14,6 +14,7 @@ export default function DashboardPage() {
 
   const [jrAccess, setJrAccess] = useState(false);
   const [aiAccess, setAiAccess] = useState(false);
+  const [fseOrderStatus, setFseOrderStatus] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [dataLoading, setDataLoading] = useState(true);
@@ -35,6 +36,7 @@ export default function DashboardPage() {
         const accessData = await accessRes.json();
         setJrAccess(accessData.jr_fse === true);
         setAiAccess(accessData.fse_ai === true);
+        setFseOrderStatus(accessData.fse_proctored ?? null);
         if (attemptsRes.ok) {
           const attemptsData = await attemptsRes.json();
           setAttempts(attemptsData.attempts ?? []);
@@ -134,16 +136,38 @@ export default function DashboardPage() {
             <div className="space-y-2 text-sm mb-6">
               <div className="flex justify-between text-gray-400">
                 <span>Purchase status</span>
-                <span className="text-gray-300">—</span>
+                <span className={fseOrderStatus ? 'text-green-400' : 'text-gray-300'}>
+                  {dataLoading ? '…' : fseOrderStatus ? 'Purchased' : 'Not purchased'}
+                </span>
               </div>
               <div className="flex justify-between text-gray-400">
                 <span>Scheduling status</span>
-                <span className="text-gray-300">—</span>
+                <span className={
+                  fseOrderStatus === 'ready' ? 'text-green-400'
+                  : fseOrderStatus ? 'text-amber-400'
+                  : 'text-gray-300'
+                }>
+                  {dataLoading ? '…'
+                    : fseOrderStatus === 'ready' ? 'Ready — start when proctor confirms'
+                    : fseOrderStatus === 'scheduling_pending' || fseOrderStatus === 'awaiting_contact' ? 'We will contact you to schedule'
+                    : fseOrderStatus ? fseOrderStatus.replace(/_/g, ' ')
+                    : '—'}
+                </span>
               </div>
             </div>
-            <Link href="/certifications/proctored" className="block w-full text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors">
-              Purchase FSE Exam — $500
-            </Link>
+            {fseOrderStatus === 'ready' ? (
+              <Link href="/exam/rules/fse" className="block w-full text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors">
+                Start FSE Exam
+              </Link>
+            ) : fseOrderStatus ? (
+              <div className="w-full text-center px-4 py-2 rounded-lg bg-gray-800 text-gray-400 text-sm cursor-default">
+                Awaiting proctor scheduling
+              </div>
+            ) : (
+              <Link href="/certifications/proctored" className="block w-full text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors">
+                Purchase FSE Exam — $500
+              </Link>
+            )}
           </div>
         </div>
 
