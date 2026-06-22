@@ -6,15 +6,60 @@ import { getIdToken } from '@/lib/firebase/auth';
 
 interface BankStats { total: number; active: number; }
 interface ImportResult { ok: boolean; created: number; updated: number; skipped: number; errors: number; error?: string; }
+interface ServerImportResult { ok: boolean; filesProcessed: string[]; filesNotFound: string[]; totalCreated: number; totalUpdated: number; error?: string; }
+
+const SERVER_FILES = [
+  'jr-fsc-sample.json',
+  'jr-fse-all-questions.json',
+  'book-jr-fse-questions.json',
+  'fsc-sample.json',
+  'book-fse-questions.json',
+];
 
 export default function AdminQuestionsPage() {
   const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
+  const [serverImporting, setServerImporting] = useState(false);
+  const [serverProgress, setServerProgress] = useState('');
+  const [serverResult, setServerResult] = useState<ServerImportResult | null>(null);
   const [overwrite, setOverwrite] = useState(false);
   const [result, setResult] = useState<ImportResult | null>(null);
   const [progress, setProgress] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
+
+  async function handleServerImport() {
+    setServerImporting(true);
+    setServerResult(null);
+    let totalCreated = 0, totalUpdated = 0;
+    const filesProcessed: string[] = [];
+    const filesNotFound: string[] = [];
+
+    try {
+      const token = await getIdToken();
+      for (const file of SERVER_FILES) {
+        setServerProgress(`Importing ${file}…`);
+        const res = await fetch('/api/admin/import-from-server', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+          body: JSON.stringify({ file }),
+        });
+        const data: ServerImportResult = await res.json();
+        if (data.error) { filesNotFound.push(file); continue; }
+        totalCreated += data.totalCreated;
+        totalUpdated += data.totalUpdated;
+        filesProcessed.push(...data.filesProcessed);
+        filesNotFound.push(...data.filesNotFound);
+      }
+      setServerResult({ ok: true, filesProcessed, filesNotFound, totalCreated, totalUpdated });
+      setServerProgress('');
+      await loadStats();
+    } catch (e: any) {
+      setServerResult({ ok: false, filesProcessed: [], filesNotFound: [], totalCreated: 0, totalUpdated: 0, error: e.message });
+      setServerProgress('');
+    }
+    setServerImporting(false);
+  }
 
   async function loadStats() {
     setStatsLoading(true);
@@ -118,9 +163,39 @@ export default function AdminQuestionsPage() {
           </div>
         </div>
 
-        {/* Import tool */}
+        {/* One-click server import */}
+        <div className="card-dark p-6 mb-6 border-indigo-900/50">
+          <h2 className="text-sm font-semibold text-white mb-1">Import All Questions from Server</h2>
+          <p className="text-xs text-gray-500 mb-4">
+            Imports all 5 question bank files directly from the server — no upload needed.
+            Adds ~595 Jr. FSE and ~435 FSE questions. Safe to run multiple times (skips existing).
+          </p>
+          <button
+            onClick={handleServerImport}
+            disabled={serverImporting}
+            className="px-5 py-2 rounded-lg bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white text-sm font-semibold transition-colors"
+          >
+            {serverImporting ? 'Importing…' : 'Import All Questions Now'}
+          </button>
+          {serverProgress && <p className="text-xs text-indigo-400 mt-2">{serverProgress}</p>}
+          {serverResult && (
+            <div className={`rounded-lg p-3 mt-3 text-xs ${serverResult.ok ? 'bg-green-950/40 border border-green-800/40' : 'bg-red-950/40 border border-red-800/40'}`}>
+              {serverResult.error ? (
+                <p className="text-red-400">Error: {serverResult.error}</p>
+              ) : (
+                <>
+                  <p className="text-green-400 font-semibold mb-1">Import complete — Created: {serverResult.totalCreated} · Updated: {serverResult.totalUpdated}</p>
+                  {serverResult.filesProcessed.length > 0 && <p className="text-gray-400">Processed: {serverResult.filesProcessed.join(', ')}</p>}
+                  {serverResult.filesNotFound.length > 0 && <p className="text-amber-400">Not found: {serverResult.filesNotFound.join(', ')}</p>}
+                </>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Manual file upload */}
         <div className="card-dark p-6 mb-6">
-          <h2 className="text-sm font-semibold text-white mb-1">Import Questions</h2>
+          <h2 className="text-sm font-semibold text-white mb-1">Import Questions from File Upload</h2>
           <p className="text-xs text-gray-500 mb-4">
             Upload a JSON file containing an array of question objects. All questions must have the correct schema.
             Use the batch files in <code className="font-mono">data/questions/</code>.
