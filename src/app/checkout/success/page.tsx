@@ -3,23 +3,11 @@
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@/components/auth/AuthProvider';
-
-const CALENDLY_BASE = 'https://calendly.com/careers-aiellorecruiter/30min';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const product = searchParams.get('product');
   const isFseProctored = product === 'fse_proctored_exam';
-  const { user } = useAuth();
-
-  const calendlyUrl = (() => {
-    const params = new URLSearchParams();
-    if (user?.email) params.set('email', user.email);
-    if (user?.displayName) params.set('name', user.displayName);
-    const qs = params.toString();
-    return qs ? `${CALENDLY_BASE}?${qs}` : CALENDLY_BASE;
-  })();
 
   return (
     <div className="card-dark p-10">
@@ -36,22 +24,9 @@ function SuccessContent() {
 
       {isFseProctored && (
         <div className="rounded-xl border border-amber-800/40 bg-amber-950/30 p-6 mb-6 text-left">
-          <h2 className="text-base font-semibold text-amber-300 mb-1">Schedule Your Exam Session</h2>
-          <p className="text-sm text-gray-400 mb-4 leading-relaxed">
-            Your FSE Human Proctored exam requires a live proctored session. Use the button below
-            to pick a date and time that works for you. A proctor will confirm your slot and you
-            will receive access to begin your exam at the scheduled time.
-          </p>
-          <a
-            href={calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-6 py-3 rounded-lg bg-amber-700 hover:bg-amber-600 text-white font-semibold text-sm transition-colors"
-          >
-            Schedule My Exam Session
-          </a>
-          <p className="text-xs text-gray-600 mt-3">
-            You can also schedule later from your dashboard.
+          <h2 className="text-base font-semibold text-amber-300 mb-1">Next Step: Schedule Your Session</h2>
+          <p className="text-sm text-gray-400 leading-relaxed">
+            Head to your dashboard to submit your contact info. We'll reach out directly to schedule your proctored exam session.
           </p>
         </div>
       )}

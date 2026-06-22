@@ -19,6 +19,14 @@ export default function DashboardPage() {
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [dataLoading, setDataLoading] = useState(true);
 
+  // FSE scheduling request form
+  const [schedName, setSchedName] = useState('');
+  const [schedPhone, setSchedPhone] = useState('');
+  const [schedEmail, setSchedEmail] = useState('');
+  const [schedSubmitting, setSchedSubmitting] = useState(false);
+  const [schedDone, setSchedDone] = useState(false);
+  const [schedError, setSchedError] = useState('');
+
   useEffect(() => {
     if (!loading && !user) router.replace('/login');
   }, [user, loading, router]);
@@ -37,6 +45,9 @@ export default function DashboardPage() {
         setJrAccess(accessData.jr_fse === true);
         setAiAccess(accessData.fse_ai === true);
         setFseOrderStatus(accessData.fse_proctored ?? null);
+        // Pre-fill scheduling form with known info
+        setSchedName(user.displayName ?? '');
+        setSchedEmail(user.email ?? '');
         if (attemptsRes.ok) {
           const attemptsData = await attemptsRes.json();
           setAttempts(attemptsData.attempts ?? []);
@@ -51,6 +62,29 @@ export default function DashboardPage() {
     }
     load();
   }, [user]);
+
+  async function handleScheduleRequest(e: React.FormEvent) {
+    e.preventDefault();
+    setSchedSubmitting(true);
+    setSchedError('');
+    try {
+      const token = await getIdToken();
+      const res = await fetch('/api/notify/schedule-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ name: schedName, phone: schedPhone, email: schedEmail }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setSchedDone(true);
+      } else {
+        setSchedError(data.error ?? 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setSchedError('Request failed. Please try again.');
+    }
+    setSchedSubmitting(false);
+  }
 
   if (loading || !user) {
     return (
@@ -160,14 +194,45 @@ export default function DashboardPage() {
                 Start FSE Exam
               </Link>
             ) : fseOrderStatus ? (
-              <a
-                href={`https://calendly.com/careers-aiellorecruiter/30min${user.email ? `?email=${encodeURIComponent(user.email)}${user.displayName ? `&name=${encodeURIComponent(user.displayName)}` : ''}` : ''}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors"
-              >
-                Schedule My Exam Session
-              </a>
+              schedDone ? (
+                <div className="rounded-lg bg-green-950/40 border border-green-800/40 px-4 py-3 text-xs text-green-400">
+                  Request received! We'll contact you at <span className="font-semibold">{schedPhone}</span> to schedule your exam session.
+                </div>
+              ) : (
+                <form onSubmit={handleScheduleRequest} className="space-y-2">
+                  <p className="text-xs text-gray-500 mb-3">Submit your contact info and we'll reach out to schedule your proctored session.</p>
+                  <input
+                    type="text"
+                    placeholder="Full name"
+                    value={schedName}
+                    onChange={(e) => setSchedName(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-xs placeholder-gray-600 focus:outline-none focus:border-amber-600"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone number *"
+                    value={schedPhone}
+                    onChange={(e) => setSchedPhone(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-xs placeholder-gray-600 focus:outline-none focus:border-amber-600"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={schedEmail}
+                    onChange={(e) => setSchedEmail(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-xs placeholder-gray-600 focus:outline-none focus:border-amber-600"
+                  />
+                  {schedError && <p className="text-xs text-red-400">{schedError}</p>}
+                  <button
+                    type="submit"
+                    disabled={schedSubmitting}
+                    className="w-full px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white text-sm font-medium transition-colors"
+                  >
+                    {schedSubmitting ? 'Sending…' : 'Request Scheduling Contact'}
+                  </button>
+                </form>
+              )
             ) : (
               <Link href="/certifications/proctored" className="block w-full text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors">
                 Purchase FSE Exam — $500
