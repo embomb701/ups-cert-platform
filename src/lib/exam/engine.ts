@@ -13,9 +13,8 @@ import type {
   ExamAnswer,
 } from '@/types';
 
-// NOTE: set to 15 because the current question bank has only 20 active questions.
-// Increase toward 50 once the bank exceeds 100 questions so randomization is meaningful.
-const QUESTIONS_PER_EXAM = 15;
+// 10 questions during pre-launch. Change to 50 when going live.
+const QUESTIONS_PER_EXAM = 10;
 const DEFAULT_PASSING_SCORE = 80;
 
 // ---------------------------------------------------------------

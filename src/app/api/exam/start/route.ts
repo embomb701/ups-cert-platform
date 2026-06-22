@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const examLevel = body.examLevel as ExamLevel;
+    const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
     if (!['jr_fse', 'fse_ai', 'fse'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
@@ -162,6 +163,7 @@ export async function POST(req: NextRequest) {
       userId: uid,
       email,
       displayName,
+      candidateName: candidateName || displayName || email,
       productId: examLevel === 'jr_fse' ? 'jr_fse_exam' : examLevel === 'fse_ai' ? 'fse_ai_exam' : 'fse_proctored_exam',
       examLevel,
       status: 'in_progress',

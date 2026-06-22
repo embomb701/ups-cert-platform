@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
         id: certificateId,
         certificateNumber,
         userId: uid,
-        candidateName: attempt.displayName ?? '',
+        candidateName: attempt.candidateName || attempt.displayName || '',
         productId: attempt.productId,
         examLevel: attempt.examLevel,
         certificationTitle: certTitle,

@@ -58,6 +58,7 @@ export default function ExamRulesPage() {
   const router = useRouter();
   const examType = (params?.examType as ExamLevel) ?? 'jr_fse';
   const [accepted, setAccepted] = useState(false);
+  const [candidateName, setCandidateName] = useState('');
 
   const isJr = examType === 'jr_fse';
   const isAi = examType === 'fse_ai';
@@ -69,8 +70,8 @@ export default function ExamRulesPage() {
     : 'UPS Field Service Certification';
 
   const handleStart = () => {
-    if (!accepted) return;
-    router.push(`/exam/${examType}`);
+    if (!accepted || !candidateName.trim()) return;
+    router.push(`/exam/${examType}?name=${encodeURIComponent(candidateName.trim())}`);
   };
 
   return (
@@ -102,6 +103,25 @@ export default function ExamRulesPage() {
           </p>
         </div>
 
+        {/* Name for certificate */}
+        <div className="card-dark p-6 mb-6">
+          <label htmlFor="candidate-name" className="block text-sm font-semibold text-white mb-1">
+            Your full name <span className="text-red-400">*</span>
+          </label>
+          <p className="text-xs text-gray-500 mb-3">
+            This name will appear exactly as entered on your certificate. Make sure it is spelled correctly.
+          </p>
+          <input
+            id="candidate-name"
+            type="text"
+            value={candidateName}
+            onChange={(e) => setCandidateName(e.target.value)}
+            placeholder="First and Last Name"
+            maxLength={100}
+            className="w-full px-4 py-2.5 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          />
+        </div>
+
         <div className="flex items-start gap-3 mb-8">
           <input
             type="checkbox"
@@ -118,7 +138,7 @@ export default function ExamRulesPage() {
 
         <button
           onClick={handleStart}
-          disabled={!accepted}
+          disabled={!accepted || !candidateName.trim()}
           className="px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:pointer-events-none text-white font-semibold text-sm transition-colors"
         >
           Begin Exam

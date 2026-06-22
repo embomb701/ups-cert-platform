@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { AntiCheatWrapper } from '@/components/exam/AntiCheatWrapper';
 import { AIProctorWrapper } from '@/components/exam/AIProctorWrapper';
@@ -12,8 +12,10 @@ import type { ExamLevel, QuestionForExam, ExamSessionState } from '@/types';
 export default function ExamPage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { user, loading } = useAuth();
   const examType = (params?.examType as ExamLevel) ?? 'jr_fse';
+  const candidateName = searchParams?.get('name') ?? '';
 
   const [session, setSession] = useState<ExamSessionState | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -34,7 +36,7 @@ export default function ExamPage() {
     fetch('/api/exam/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ examLevel: examType }),
+      body: JSON.stringify({ examLevel: examType, candidateName }),
     }))
       .then((r) => r.json())
       .then((data) => {

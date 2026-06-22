@@ -18,7 +18,7 @@ interface AnswerChoice {
 
 interface Question {
   id: string;
-  examLevel: 'jr_fsc' | 'fsc';
+  examLevel: 'jr_fse' | 'fse_ai' | 'fse';
   category: string;
   subcategory: string;
   difficulty: 'easy' | 'medium' | 'hard' | 'expert';
@@ -34,7 +34,7 @@ interface Question {
   tags: string[];
 }
 
-const VALID_EXAM_LEVELS = ['jr_fsc', 'fsc'];
+const VALID_EXAM_LEVELS = ['jr_fse', 'fse_ai', 'fse'];
 const VALID_DIFFICULTIES = ['easy', 'medium', 'hard', 'expert'];
 const VALID_CHOICE_IDS = ['A', 'B', 'C', 'D'];
 
