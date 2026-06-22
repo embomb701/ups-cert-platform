@@ -149,7 +149,7 @@ export default function DashboardPage() {
                 }>
                   {dataLoading ? '…'
                     : fseOrderStatus === 'ready' ? 'Ready — start when proctor confirms'
-                    : fseOrderStatus === 'scheduling_pending' || fseOrderStatus === 'awaiting_contact' ? 'We will contact you to schedule'
+                    : fseOrderStatus === 'scheduling_pending' || fseOrderStatus === 'awaiting_contact' ? 'Schedule your session below'
                     : fseOrderStatus ? fseOrderStatus.replace(/_/g, ' ')
                     : '—'}
                 </span>
@@ -160,9 +160,14 @@ export default function DashboardPage() {
                 Start FSE Exam
               </Link>
             ) : fseOrderStatus ? (
-              <div className="w-full text-center px-4 py-2 rounded-lg bg-gray-800 text-gray-400 text-sm cursor-default">
-                Awaiting proctor scheduling
-              </div>
+              <a
+                href={`https://calendly.com/careers-aiellorecruiter/30min${user.email ? `?email=${encodeURIComponent(user.email)}${user.displayName ? `&name=${encodeURIComponent(user.displayName)}` : ''}` : ''}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors"
+              >
+                Schedule My Exam Session
+              </a>
             ) : (
               <Link href="/certifications/proctored" className="block w-full text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors">
                 Purchase FSE Exam — $500

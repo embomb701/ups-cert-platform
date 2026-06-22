@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
         email,
         productId,
       },
-      success_url: `${siteUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${siteUrl}/checkout/success?product=${productId}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/checkout/cancel`,
     });
 
