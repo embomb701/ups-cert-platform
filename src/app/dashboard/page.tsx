@@ -20,9 +20,7 @@ export default function DashboardPage() {
   const [dataLoading, setDataLoading] = useState(true);
 
   // FSE scheduling request form
-  const [schedName, setSchedName] = useState('');
   const [schedPhone, setSchedPhone] = useState('');
-  const [schedEmail, setSchedEmail] = useState('');
   const [schedSubmitting, setSchedSubmitting] = useState(false);
   const [schedDone, setSchedDone] = useState(false);
   const [schedError, setSchedError] = useState('');
@@ -45,9 +43,6 @@ export default function DashboardPage() {
         setJrAccess(accessData.jr_fse === true);
         setAiAccess(accessData.fse_ai === true);
         setFseOrderStatus(accessData.fse_proctored ?? null);
-        // Pre-fill scheduling form with known info
-        setSchedName(user.displayName ?? '');
-        setSchedEmail(user.email ?? '');
         if (attemptsRes.ok) {
           const attemptsData = await attemptsRes.json();
           setAttempts(attemptsData.attempts ?? []);
@@ -72,7 +67,7 @@ export default function DashboardPage() {
       const res = await fetch('/api/notify/schedule-request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ name: schedName, phone: schedPhone, email: schedEmail }),
+        body: JSON.stringify({ phone: schedPhone }),
       });
       const data = await res.json();
       if (data.ok) {
@@ -195,32 +190,18 @@ export default function DashboardPage() {
               </Link>
             ) : fseOrderStatus ? (
               schedDone ? (
-                <div className="rounded-lg bg-green-950/40 border border-green-800/40 px-4 py-3 text-xs text-green-400">
-                  Request received! We'll contact you at <span className="font-semibold">{schedPhone}</span> to schedule your exam session.
+                <div className="rounded-lg bg-green-950/40 border border-green-800/40 px-4 py-3 text-sm text-green-400 leading-relaxed">
+                  Your information has been sent to the admin team. Someone will be in touch with you within 24 hours to schedule your proctored test.
                 </div>
               ) : (
                 <form onSubmit={handleScheduleRequest} className="space-y-2">
-                  <p className="text-xs text-gray-500 mb-3">Submit your contact info and we'll reach out to schedule your proctored session.</p>
-                  <input
-                    type="text"
-                    placeholder="Full name"
-                    value={schedName}
-                    onChange={(e) => setSchedName(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-xs placeholder-gray-600 focus:outline-none focus:border-amber-600"
-                  />
+                  <p className="text-xs text-gray-500 mb-3">Provide your phone number and our team will contact you within 24 hours to schedule your session.</p>
                   <input
                     type="tel"
-                    placeholder="Phone number *"
+                    placeholder="Best phone number to reach you"
                     value={schedPhone}
                     onChange={(e) => setSchedPhone(e.target.value)}
                     required
-                    className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-xs placeholder-gray-600 focus:outline-none focus:border-amber-600"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    value={schedEmail}
-                    onChange={(e) => setSchedEmail(e.target.value)}
                     className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-xs placeholder-gray-600 focus:outline-none focus:border-amber-600"
                   />
                   {schedError && <p className="text-xs text-red-400">{schedError}</p>}
@@ -229,7 +210,7 @@ export default function DashboardPage() {
                     disabled={schedSubmitting}
                     className="w-full px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white text-sm font-medium transition-colors"
                   >
-                    {schedSubmitting ? 'Sending…' : 'Request Scheduling Contact'}
+                    {schedSubmitting ? 'Sending…' : 'Notify Scheduling Team'}
                   </button>
                 </form>
               )
