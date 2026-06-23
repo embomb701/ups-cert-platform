@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,10 +11,14 @@ const ADMIN_EMAILS = [
   'aiellochori@gmail.com',
 ];
 
-function getResend() {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) throw new Error('RESEND_API_KEY is not set');
-  return new Resend(key);
+function getTransport() {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_APP_PASSWORD;
+  if (!user || !pass) throw new Error('GMAIL_USER or GMAIL_APP_PASSWORD env var is missing');
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user, pass },
+  });
 }
 
 export async function POST(req: NextRequest) {
@@ -27,12 +31,10 @@ export async function POST(req: NextRequest) {
     const uid = decoded.uid;
 
     const { phone } = await req.json() as { phone: string };
-
     if (!phone?.trim()) {
       return NextResponse.json({ error: 'Phone number is required' }, { status: 400 });
     }
 
-    // Pull name and email from the verified token — no need to trust client input
     const name = decoded.name || decoded.email || 'Candidate';
     const email = decoded.email || '';
 
@@ -52,11 +54,11 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Email all admins
-    const resend = getResend();
-    await resend.emails.send({
-      from: 'UPS Cert Platform <onboarding@resend.dev>',
-      to: ADMIN_EMAILS,
+    // Send email via Gmail
+    const transporter = getTransport();
+    await transporter.sendMail({
+      from: `"UPS Cert Platform" <${process.env.GMAIL_USER}>`,
+      to: ADMIN_EMAILS.join(', '),
       subject: `FSE Exam Scheduling Request — ${name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">
