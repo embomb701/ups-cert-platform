@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
     // (phone was already saved to Firestore above if the error is email-only)
     return NextResponse.json({
       ok: false,
-      error: 'We saved your info but could not send the email notification. Please contact us directly at faiello@gmail.com.',
+      error: 'We saved your info but could not send the email notification. Please contact us directly at careers@aiellorecruiter.com.',
     });
   }
 }
