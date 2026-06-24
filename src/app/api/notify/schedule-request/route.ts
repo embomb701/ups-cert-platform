@@ -4,6 +4,7 @@ import { FieldValue } from 'firebase-admin/firestore';
 import nodemailer from 'nodemailer';
 
 export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
 
 const ADMIN_EMAILS = [
   'faiello@gmail.com',
