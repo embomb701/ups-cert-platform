@@ -24,6 +24,14 @@ interface Attempt {
   certificateId: string | null;
 }
 
+interface SuspiciousEventDetail {
+  type: string;
+  label: string;
+  count: number;
+  weight: number;
+  pts: number;
+}
+
 const LEVEL_LABELS: Record<string, string> = {
   jr_fse: 'Jr. FSE',
   fse_ai: 'FSE AI',
@@ -48,6 +56,8 @@ function AdminAttemptsContent() {
   const [fetching, setFetching] = useState(true);
   const [clearing, setClearing] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [eventDetails, setEventDetails] = useState<Record<string, { events: SuspiciousEventDetail[]; totalScore: number }>>({});
 
   useEffect(() => {
     if (!loading && !user) router.replace('/dashboard');
@@ -72,6 +82,22 @@ function AdminAttemptsContent() {
   useEffect(() => {
     if (user) loadAttempts();
   }, [user, loadAttempts]);
+
+  async function toggleDetail(attemptId: string) {
+    if (expandedId === attemptId) { setExpandedId(null); return; }
+    setExpandedId(attemptId);
+    if (eventDetails[attemptId]) return; // already loaded
+    try {
+      const token = await getIdToken();
+      const res = await fetch(`/api/admin/attempts/${attemptId}/events`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setEventDetails((prev) => ({ ...prev, [attemptId]: data }));
+      }
+    } catch {}
+  }
 
   async function clearCooldown(userId: string, examLevel: string, attemptId: string) {
     if (!confirm(`Clear ALL ${examLevel} attempts and IP locks for this user? This lets them retake the exam immediately.`)) return;
@@ -155,66 +181,119 @@ function AdminAttemptsContent() {
                 </tr>
               ) : (
                 attempts.map((a) => (
-                  <tr key={a.id} className="border-b border-gray-800/50 hover:bg-gray-800/20">
-                    <td className="py-3 px-4">
-                      <p className="text-white text-xs font-medium">{a.email}</p>
-                      {a.displayName && <p className="text-gray-500 text-xs">{a.displayName}</p>}
-                    </td>
-                    <td className="py-3 px-4">
-                      <span className={`text-xs font-medium ${STATUS_COLORS[a.status] ?? 'text-gray-400'}`}>
-                        {a.status.replace('_', ' ')}
-                      </span>
-                      {a.flaggedForReview && (
-                        <span className="ml-2 text-xs text-red-400 bg-red-950/50 border border-red-800 px-1.5 py-0.5 rounded">
-                          flagged
+                  <>
+                    <tr
+                      key={a.id}
+                      onClick={() => toggleDetail(a.id)}
+                      className="border-b border-gray-800/50 hover:bg-gray-800/20 cursor-pointer"
+                    >
+                      <td className="py-3 px-4">
+                        <p className="text-white text-xs font-medium">{a.email}</p>
+                        {a.displayName && <p className="text-gray-500 text-xs">{a.displayName}</p>}
+                      </td>
+                      <td className="py-3 px-4">
+                        <span className={`text-xs font-medium ${STATUS_COLORS[a.status] ?? 'text-gray-400'}`}>
+                          {a.status.replace('_', ' ')}
                         </span>
-                      )}
-                    </td>
-                    <td className="py-3 px-4">
-                      {a.score !== null ? (
-                        <span className={a.passed ? 'text-green-400' : 'text-red-400'}>
-                          {Math.round(a.score)}% {a.passed ? '✓' : '✗'}
-                        </span>
-                      ) : (
-                        <span className="text-gray-600">—</span>
-                      )}
-                    </td>
-                    <td className="py-3 px-4">
-                      <span className={`text-xs ${
-                        a.suspiciousRiskLevel === 'critical' ? 'text-red-400' :
-                        a.suspiciousRiskLevel === 'high' ? 'text-orange-400' :
-                        a.suspiciousRiskLevel === 'medium' ? 'text-yellow-400' :
-                        'text-gray-500'
-                      }`}>
-                        {a.suspiciousRiskLevel}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 text-xs text-gray-400">
-                      {a.startedAt ? new Date(a.startedAt).toLocaleDateString() : '—'}
-                    </td>
-                    <td className="py-3 px-4 text-xs text-gray-400">
-                      {a.cooldownUntil ? new Date(a.cooldownUntil).toLocaleDateString() : '—'}
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex gap-2">
-                        {a.certificateId && (
-                          <Link
-                            href={`/admin/certificates`}
-                            className="text-xs text-indigo-400 hover:text-indigo-300"
-                          >
-                            Cert
-                          </Link>
+                        {a.flaggedForReview && (
+                          <span className="ml-2 text-xs text-red-400 bg-red-950/50 border border-red-800 px-1.5 py-0.5 rounded">
+                            flagged
+                          </span>
                         )}
-                        <button
-                          onClick={() => clearCooldown(a.userId, a.examLevel, a.id)}
-                          disabled={clearing === a.id}
-                          className="text-xs text-red-400 hover:text-red-300 disabled:opacity-50"
-                        >
-                          {clearing === a.id ? 'Clearing…' : 'Clear & Reset'}
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                      <td className="py-3 px-4">
+                        {a.score !== null ? (
+                          <span className={a.passed ? 'text-green-400' : 'text-red-400'}>
+                            {Math.round(a.score)}% {a.passed ? '✓' : '✗'}
+                          </span>
+                        ) : (
+                          <span className="text-gray-600">—</span>
+                        )}
+                      </td>
+                      <td className="py-3 px-4">
+                        <span className={`text-xs ${
+                          a.suspiciousRiskLevel === 'critical' ? 'text-red-400' :
+                          a.suspiciousRiskLevel === 'high' ? 'text-orange-400' :
+                          a.suspiciousRiskLevel === 'medium' ? 'text-yellow-400' :
+                          'text-gray-500'
+                        }`}>
+                          {a.suspiciousRiskLevel}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-xs text-gray-400">
+                        {a.startedAt ? new Date(a.startedAt).toLocaleDateString() : '—'}
+                      </td>
+                      <td className="py-3 px-4 text-xs text-gray-400">
+                        {a.cooldownUntil ? new Date(a.cooldownUntil).toLocaleDateString() : '—'}
+                      </td>
+                      <td className="py-3 px-4" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex gap-2">
+                          {a.certificateId && (
+                            <Link
+                              href={`/admin/certificates`}
+                              className="text-xs text-indigo-400 hover:text-indigo-300"
+                            >
+                              Cert
+                            </Link>
+                          )}
+                          <button
+                            onClick={() => clearCooldown(a.userId, a.examLevel, a.id)}
+                            disabled={clearing === a.id}
+                            className="text-xs text-red-400 hover:text-red-300 disabled:opacity-50"
+                          >
+                            {clearing === a.id ? 'Clearing…' : 'Clear & Reset'}
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    {expandedId === a.id && (
+                      <tr key={`${a.id}-detail`} className="bg-gray-900/60">
+                        <td colSpan={7} className="px-6 py-4">
+                          {!eventDetails[a.id] ? (
+                            <p className="text-xs text-gray-500">Loading…</p>
+                          ) : eventDetails[a.id].events.length === 0 ? (
+                            <p className="text-xs text-gray-500">No suspicious events recorded for this attempt.</p>
+                          ) : (
+                            <div className="max-w-md">
+                              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Suspicious Event Breakdown</p>
+                              <table className="w-full text-xs">
+                                <thead>
+                                  <tr className="text-gray-600 uppercase text-[10px]">
+                                    <th className="text-left pb-1">Event</th>
+                                    <th className="text-right pb-1">Count</th>
+                                    <th className="text-right pb-1">Pts</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {eventDetails[a.id].events.map((e) => (
+                                    <tr key={e.type} className="border-t border-gray-800">
+                                      <td className="py-1.5 text-gray-300">{e.label}</td>
+                                      <td className="py-1.5 text-right text-gray-400">×{e.count}</td>
+                                      <td className={`py-1.5 text-right font-semibold ${e.pts >= 8 ? 'text-red-400' : e.pts >= 4 ? 'text-orange-400' : 'text-yellow-400'}`}>
+                                        +{e.pts}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                                <tfoot>
+                                  <tr className="border-t border-gray-700">
+                                    <td colSpan={2} className="pt-2 text-gray-400 font-semibold">Total risk score</td>
+                                    <td className={`pt-2 text-right font-bold ${
+                                      a.suspiciousRiskLevel === 'critical' ? 'text-red-400' :
+                                      a.suspiciousRiskLevel === 'high' ? 'text-orange-400' :
+                                      'text-yellow-400'
+                                    }`}>
+                                      {eventDetails[a.id].totalScore} — {a.suspiciousRiskLevel.toUpperCase()}
+                                    </td>
+                                  </tr>
+                                </tfoot>
+                              </table>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                  </>
                 ))
               )}
             </tbody>
