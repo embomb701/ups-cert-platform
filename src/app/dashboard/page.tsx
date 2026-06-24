@@ -60,6 +60,11 @@ export default function DashboardPage() {
 
   async function handleScheduleRequest(e: React.FormEvent) {
     e.preventDefault();
+    const digits = schedPhone.replace(/\D/g, '');
+    if (digits.length < 10) {
+      setSchedError('Please enter a valid phone number with at least 10 digits.');
+      return;
+    }
     setSchedSubmitting(true);
     setSchedError('');
     try {

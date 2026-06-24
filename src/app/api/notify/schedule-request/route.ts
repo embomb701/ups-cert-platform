@@ -17,7 +17,9 @@ function getTransport() {
   const pass = process.env.GMAIL_APP_PASSWORD;
   if (!user || !pass) throw new Error('GMAIL_USER or GMAIL_APP_PASSWORD env var is missing');
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: { user, pass },
   });
 }
@@ -32,8 +34,9 @@ export async function POST(req: NextRequest) {
     const uid = decoded.uid;
 
     const { phone } = await req.json() as { phone: string };
-    if (!phone?.trim()) {
-      return NextResponse.json({ error: 'Phone number is required' }, { status: 400 });
+    const digits = (phone ?? '').replace(/\D/g, '');
+    if (digits.length < 10) {
+      return NextResponse.json({ error: 'A valid phone number with at least 10 digits is required.' }, { status: 400 });
     }
 
     const name = decoded.name || decoded.email || 'Candidate';
@@ -101,7 +104,7 @@ export async function POST(req: NextRequest) {
     // (phone was already saved to Firestore above if the error is email-only)
     return NextResponse.json({
       ok: false,
-      error: 'We saved your info but could not send the email notification. Please contact us directly at careers@aiellorecruiter.com.',
+      error: `Email failed: ${err?.message ?? 'unknown error'}. Your info was saved — please contact careers@aiellorecruiter.com.`,
     });
   }
 }
