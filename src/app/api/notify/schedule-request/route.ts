@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     const name = decoded.name || decoded.email || 'Candidate';
     const email = decoded.email || '';
 
-    // Save phone to their proctored order
+    // Always save phone to Firestore first — admin has the info even if email fails
     const ordersSnap = await adminDb
       .collection('proctoredExamOrders')
       .where('userId', '==', uid)
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Send email via Gmail
+    // Attempt email — fail loudly so the client knows
     const transporter = getTransport();
     await transporter.sendMail({
       from: `"UPS Cert Platform" <${process.env.GMAIL_USER}>`,
@@ -96,6 +96,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (err: any) {
     console.error('Schedule request error:', err);
-    return NextResponse.json({ error: err.message ?? 'Failed to send request' }, { status: 500 });
+    // Return 200 with ok:false so the client can show a user-friendly message
+    // (phone was already saved to Firestore above if the error is email-only)
+    return NextResponse.json({
+      ok: false,
+      error: 'We saved your info but could not send the email notification. Please contact us directly at faiello@gmail.com.',
+    });
   }
 }

@@ -221,7 +221,7 @@ export default function ExamPage() {
 
   return (
     <AntiCheatWrapper attemptId={session.attemptId}>
-      {session.examLevel === 'fse_ai' ? (
+      {(session.examLevel === 'fse_ai' || session.examLevel === 'jr_fse') ? (
         <AIProctorWrapper attemptId={session.attemptId}>
           {examContent}
         </AIProctorWrapper>
