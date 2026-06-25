@@ -87,44 +87,28 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     completedAt: FieldValue.serverTimestamp(),
   });
 
-  // ── Individual exams ─────────────────────────────────────────
+  // ── Training course ($1,499 — exam unlocked after all 24 modules complete) ──
+  if (productId === 'training_course' || productId === 'training_portal') {
+    await grantTrainingAccess(userId, session.id);
+    // Jr. FSE exam access is granted automatically when training is completed (see module test route)
+    // We record the purchase so the exam grant can reference it later
+    await adminDb.collection('users').doc(userId).collection('examAccess').doc('jr_fse_pending').set(
+      { fromTraining: true, purchaseId: session.id, grantedAt: FieldValue.serverTimestamp() },
+      { merge: true }
+    );
+  }
+
+  // ── Test-out ($299 — one attempt, fail = must complete training) ──
   if (productId === 'jr_fse_exam') {
-    await grantExamAccess(userId, 'jr_fse', 'jr_fse_exam', session.id);
+    await adminDb.collection('users').doc(userId).collection('examAccess').doc('jr_fse').set(
+      { granted: true, testOut: true, testOutFailed: false, purchaseId: session.id, grantedAt: FieldValue.serverTimestamp() },
+      { merge: true }
+    );
   }
 
-  if (productId === 'fse_ai_exam') {
-    await grantExamAccess(userId, 'fse_ai', 'fse_ai_exam', session.id);
-  }
-
+  // ── FSE human proctored ───────────────────────────────────────
   if (productId === 'fse_proctored_exam') {
     await createProctoredOrder(userId, email ?? '', session.id, 'fse_proctored_exam', false);
-  }
-
-  // ── Training portal ──────────────────────────────────────────
-  if (productId === 'training_portal') {
-    await grantTrainingAccess(userId, session.id);
-  }
-
-  // ── Bundles ──────────────────────────────────────────────────
-  if (productId === 'jr_fse_bundle') {
-    await Promise.all([
-      grantTrainingAccess(userId, session.id),
-      grantExamAccess(userId, 'jr_fse', 'jr_fse_exam', session.id),
-    ]);
-  }
-
-  if (productId === 'fse_ai_bundle') {
-    await Promise.all([
-      grantTrainingAccess(userId, session.id),
-      grantExamAccess(userId, 'fse_ai', 'fse_ai_exam', session.id),
-    ]);
-  }
-
-  if (productId === 'fse_human_bundle') {
-    await Promise.all([
-      grantTrainingAccess(userId, session.id),
-      createProctoredOrder(userId, email ?? '', session.id, 'fse_proctored_exam', true),
-    ]);
   }
 
   // ── Physical products ────────────────────────────────────────

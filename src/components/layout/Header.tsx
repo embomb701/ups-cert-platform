@@ -6,14 +6,11 @@ import { useAuth } from '@/components/auth/AuthProvider';
 import { signOut } from '@/lib/firebase/auth';
 
 const navLinks = [
-  { label: 'Book', href: '/book' },
-  { label: 'Jr. FSE Exam', href: '/certifications/junior' },
-  { label: 'FSE AI Exam', href: '/certifications/ai-proctored' },
-  { label: 'FSE Exam', href: '/certifications/proctored' },
-  { label: 'Employers', href: '/employers' },
   { label: 'Training', href: '/training' },
+  { label: 'Certifications', href: '/certifications/junior' },
+  { label: 'Employers', href: '/employers' },
+  { label: 'Book', href: '/book' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 export function Header() {
@@ -24,10 +21,10 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-gray-950/95 backdrop-blur border-b border-gray-800">
       <div className="container-site">
         <div className="flex items-center justify-between h-16">
-          {/* Logo / Brand */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
-              Field Service Engineering Academy
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
+            <span className="text-base font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">
+              FSE Academy
             </span>
           </Link>
 
@@ -44,34 +41,34 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Auth / Dashboard */}
-          <div className="flex items-center gap-3">
+          {/* Auth */}
+          <div className="hidden lg:flex items-center gap-3">
             {!loading && (
-              <>
-                {user ? (
-                  <>
-                    <Link
-                      href="/dashboard"
-                      className="hidden lg:inline text-sm text-gray-300 hover:text-white transition-colors"
-                    >
-                      Dashboard
-                    </Link>
-                    <button
-                      onClick={() => signOut()}
-                      className="hidden lg:inline text-sm text-gray-400 hover:text-white transition-colors"
-                    >
-                      Sign Out
-                    </button>
-                  </>
-                ) : (
+              user ? (
+                <>
+                  <Link href="/training" className="text-sm text-gray-300 hover:text-white transition-colors">
+                    My Training
+                  </Link>
+                  <Link href="/dashboard" className="text-sm text-gray-400 hover:text-white transition-colors">
+                    Dashboard
+                  </Link>
+                  <button onClick={() => signOut()} className="text-sm text-gray-500 hover:text-white transition-colors">
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" className="text-sm text-gray-400 hover:text-white transition-colors">
+                    Sign In
+                  </Link>
                   <Link
                     href="/login"
-                    className="px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors"
+                    className="px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors"
                   >
-                    Login
+                    Get Started Free
                   </Link>
-                )}
-              </>
+                </>
+              )
             )}
           </div>
 
@@ -104,9 +101,12 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <div className="pt-3 border-t border-gray-800">
+            <div className="pt-3 border-t border-gray-800 space-y-2">
               {user ? (
                 <>
+                  <Link href="/training" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
+                    My Training
+                  </Link>
                   <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
                     Dashboard
                   </Link>
@@ -115,8 +115,8 @@ export function Header() {
                   </button>
                 </>
               ) : (
-                <Link href="/login" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm font-medium text-indigo-400 hover:text-indigo-300">
-                  Sign In
+                <Link href="/login" onClick={() => setMobileOpen(false)} className="block mx-2 py-2.5 text-center text-sm font-semibold rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors">
+                  Get Started Free
                 </Link>
               )}
             </div>

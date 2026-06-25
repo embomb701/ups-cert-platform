@@ -135,13 +135,13 @@ export default function ProctoredCertPage() {
                   label="Purchase FSE Exam — $649"
                   className="block w-full px-6 py-3 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
                 />
-                <div className="card-dark p-4 border-indigo-900/50 bg-indigo-950/20">
-                  <p className="text-xs text-indigo-300 font-semibold mb-1">Better value: FSE Human Complete Bundle — $699</p>
-                  <p className="text-xs text-gray-400 mb-2">Includes Training Portal Access + this exam + a signed copy of the book, shipped to you.</p>
+                <div className="card-dark p-4 border-amber-900/40 bg-amber-950/10">
+                  <p className="text-xs font-semibold text-amber-200 mb-1">Add Signed Copy of the Book — $69.99</p>
+                  <p className="text-xs text-gray-400 mb-2">Personally signed by Francis Aiello. Includes shipping to US addresses.</p>
                   <PurchaseButton
-                    productId="fse_human_bundle"
-                    label="Get the Bundle — $699 →"
-                    className="block w-full px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-xs transition-colors text-center"
+                    productId="signed_book"
+                    label="Buy Signed Book — $69.99 →"
+                    className="block w-full px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-xs transition-colors text-center"
                   />
                 </div>
                 <p className="text-xs text-gray-500 text-center">

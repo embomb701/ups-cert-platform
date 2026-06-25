@@ -100,6 +100,14 @@ export async function POST(req: NextRequest) {
     let certificateNumber: string | undefined;
     let certificateId: string | undefined;
 
+    // If this was a test-out attempt and the candidate failed, lock future attempts until training is complete
+    if (!passed && attempt.examLevel === 'jr_fse') {
+      const accessSnap = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').get();
+      if (accessSnap.exists && accessSnap.data()?.testOut) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').update({ testOutFailed: true });
+      }
+    }
+
     // Issue certificate if passed and not flagged
     if (passed && !flagged) {
       certificateId = uuidv4();

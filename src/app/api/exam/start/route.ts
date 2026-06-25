@@ -57,6 +57,28 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'No valid Jr. FSE exam purchase found.' }, { status: 403 });
       }
 
+      const accessData = accessSnap.data()!;
+
+      // Test-out failure check: if they failed a test-out attempt, they must complete training first
+      if (accessData.testOut && accessData.testOutFailed) {
+        const allProgressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
+        const completedModuleIds = new Set<string>();
+        allProgressSnap.forEach((doc) => {
+          const d = doc.data();
+          if (d.passed && d.completedAt) completedModuleIds.add(doc.id);
+        });
+        const { ALL_MODULES } = await import('@/data/index');
+        const trainingComplete = ALL_MODULES.every((m) => completedModuleIds.has(m.id));
+        if (!trainingComplete) {
+          return NextResponse.json({
+            error: 'You did not pass the Jr. FSE Test-Out. You must complete the 6-Month Training Course before you can attempt the exam again.',
+            requiresTraining: true,
+          }, { status: 403 });
+        }
+        // Training is complete — clear the testOutFailed flag and allow the attempt
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').update({ testOutFailed: false });
+      }
+
       // Check account-based cooldown (filter in memory to avoid composite index)
       const recentAttempts = await adminDb
         .collection('examAttempts')

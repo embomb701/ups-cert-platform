@@ -102,23 +102,16 @@ export default function AIProctorPage() {
           </div>
 
           <div className="mt-10 space-y-4">
-            <div className="text-center">
-              <PurchaseButton
-                productId="fse_ai_exam"
-                label="Purchase FSE AI Exam — $349 →"
-                className="inline-block px-8 py-3 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors"
-              />
-              <p className="text-xs text-gray-600 mt-3">
-                Sign in with Google to purchase. Exam unlocks immediately after payment.
+            <div className="card-dark p-6 bg-amber-950/20 border-amber-900/50 max-w-lg mx-auto text-center">
+              <p className="text-amber-300 font-semibold mb-2">AI Proctored Exam Discontinued</p>
+              <p className="text-sm text-gray-400 mb-4">
+                The AI proctored option is no longer offered. The FSE exam is now available
+                as a human-proctored session only ($649).
               </p>
-            </div>
-            <div className="card-dark p-4 border-indigo-900/50 bg-indigo-950/20 max-w-md mx-auto">
-              <p className="text-xs text-indigo-300 font-semibold mb-1">Better value: FSE AI Complete Bundle — $449</p>
-              <p className="text-xs text-gray-400 mb-2">Includes Training Portal Access + this exam. Save $49 vs. buying separately.</p>
               <PurchaseButton
-                productId="fse_ai_bundle"
-                label="Get the Bundle — $449 →"
-                className="block w-full px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-xs transition-colors text-center"
+                productId="fse_proctored_exam"
+                label="Purchase FSE Human Proctored Exam — $649 →"
+                className="inline-block px-6 py-2.5 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors"
               />
             </div>
           </div>
