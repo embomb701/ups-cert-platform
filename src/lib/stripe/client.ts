@@ -36,6 +36,12 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ── Bundles ───────────────────────────────────────────────────
+  jr_fse_bundle: {
+    name: 'Jr. FSE Complete Bundle — Training + Jr. FSE Exam',
+    shortName: 'Jr. FSE Complete Bundle',
+    priceInCents: 29900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE_BUNDLE ?? '',
+  },
   fse_ai_bundle: {
     name: 'FSE AI Complete Bundle — Training + AI Proctored Exam',
     shortName: 'FSE AI Complete Bundle',
@@ -54,12 +60,12 @@ export const STRIPE_PRODUCTS = {
     name: 'Employer Team Pack — 5 FSE Human Complete Bundles',
     shortName: '5-Seat Team Pack',
     priceInCents: 339900,
-    stripePriceId: process.env.STRIPE_PRICE_ID_EMPLOYER_5PACK ?? '',
+    stripePriceId: process.env.STRIPE_PRICE_ID_EMPLOYER_5PACK ?? 'price_1TmJoaB8fedYuRufbhA6kKkC',
   },
   employer_10pack: {
     name: 'Employer Team Pack — 10 FSE Human Complete Bundles',
     shortName: '10-Seat Team Pack',
     priceInCents: 525000,
-    stripePriceId: process.env.STRIPE_PRICE_ID_EMPLOYER_10PACK ?? '',
+    stripePriceId: process.env.STRIPE_PRICE_ID_EMPLOYER_10PACK ?? 'price_1TmJq1B8fedYuRuf2wQ2Osrd',
   },
 } as const;

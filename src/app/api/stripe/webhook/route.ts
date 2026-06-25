@@ -106,6 +106,13 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   // ── Bundles ──────────────────────────────────────────────────
+  if (productId === 'jr_fse_bundle') {
+    await Promise.all([
+      grantTrainingAccess(userId, session.id),
+      grantExamAccess(userId, 'jr_fse', 'jr_fse_exam', session.id),
+    ]);
+  }
+
   if (productId === 'fse_ai_bundle') {
     await Promise.all([
       grantTrainingAccess(userId, session.id),

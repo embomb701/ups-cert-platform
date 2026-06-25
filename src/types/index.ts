@@ -66,6 +66,7 @@ export const PRODUCTS = {
   FSE_AI_EXAM: 'fse_ai_exam',
   FSE_PROCTORED_EXAM: 'fse_proctored_exam',
   TRAINING_PORTAL: 'training_portal',
+  JR_FSE_BUNDLE: 'jr_fse_bundle',
   FSE_AI_BUNDLE: 'fse_ai_bundle',
   FSE_HUMAN_BUNDLE: 'fse_human_bundle',
   EMPLOYER_5PACK: 'employer_5pack',
