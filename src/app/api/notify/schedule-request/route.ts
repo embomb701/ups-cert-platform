@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 30;
@@ -12,16 +12,10 @@ const ADMIN_EMAILS = [
   'aiellochori@gmail.com',
 ];
 
-function getTransport() {
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_APP_PASSWORD;
-  if (!user || !pass) throw new Error('GMAIL_USER or GMAIL_APP_PASSWORD env var is missing');
-  return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: { user, pass },
-  });
+function getResend() {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error('RESEND_API_KEY is not set');
+  return new Resend(key);
 }
 
 export async function POST(req: NextRequest) {
@@ -42,7 +36,7 @@ export async function POST(req: NextRequest) {
     const name = decoded.name || decoded.email || 'Candidate';
     const email = decoded.email || '';
 
-    // Always save phone to Firestore first — admin has the info even if email fails
+    // Always save to Firestore first
     const ordersSnap = await adminDb
       .collection('proctoredExamOrders')
       .where('userId', '==', uid)
@@ -58,32 +52,31 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Attempt email — fail loudly so the client knows
-    const transporter = getTransport();
-    await transporter.sendMail({
-      from: `"UPS Cert Platform" <${process.env.GMAIL_USER}>`,
-      to: ADMIN_EMAILS.join(', '),
+    const resend = getResend();
+    await resend.emails.send({
+      from: 'UPS Cert Platform <noreply@aiellorecruiter.com>',
+      to: ADMIN_EMAILS,
       subject: `FSE Exam Scheduling Request — ${name}`,
       html: `
-        <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">
-          <h2 style="color: #1e1b4b; margin-bottom: 4px;">FSE Exam Scheduling Request</h2>
-          <p style="color: #6b7280; margin-top: 0;">A candidate has purchased their human-proctored FSE exam and is ready to schedule.</p>
-          <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">
+          <h2 style="color:#1e1b4b;margin-bottom:4px;">FSE Exam Scheduling Request</h2>
+          <p style="color:#6b7280;margin-top:0;">A candidate is ready to schedule their human-proctored FSE exam.</p>
+          <table style="width:100%;border-collapse:collapse;margin-top:20px;">
             <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; color: #374151; font-weight: 600; width: 100px;">Name</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; color: #111827;">${name}</td>
+              <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#374151;font-weight:600;width:100px;">Name</td>
+              <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;">${name}</td>
             </tr>
             <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; color: #374151; font-weight: 600;">Phone</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; color: #111827; font-size: 16px; font-weight: 700;">${phone.trim()}</td>
+              <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#374151;font-weight:600;">Phone</td>
+              <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;font-size:16px;font-weight:700;">${phone.trim()}</td>
             </tr>
             <tr>
-              <td style="padding: 10px 0; color: #374151; font-weight: 600;">Email</td>
-              <td style="padding: 10px 0; color: #111827;"><a href="mailto:${email}" style="color: #4f46e5;">${email}</a></td>
+              <td style="padding:10px 0;color:#374151;font-weight:600;">Email</td>
+              <td style="padding:10px 0;color:#111827;"><a href="mailto:${email}" style="color:#4f46e5;">${email}</a></td>
             </tr>
           </table>
-          <p style="margin-top: 24px; font-size: 13px; color: #9ca3af;">
-            View this candidate in the <a href="https://ups-cert-platform.vercel.app/admin/proctored" style="color: #4f46e5;">Admin → Proctored Orders</a> panel.
+          <p style="margin-top:24px;font-size:13px;color:#9ca3af;">
+            View in <a href="https://ups-cert-platform.vercel.app/admin/proctored" style="color:#4f46e5;">Admin → Proctored Orders</a>
           </p>
         </div>
       `,
@@ -100,8 +93,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (err: any) {
     console.error('Schedule request error:', err);
-    // Return 200 with ok:false so the client can show a user-friendly message
-    // (phone was already saved to Firestore above if the error is email-only)
     return NextResponse.json({
       ok: false,
       error: `Email failed: ${err?.message ?? 'unknown error'}. Your info was saved — please contact careers@aiellorecruiter.com.`,
