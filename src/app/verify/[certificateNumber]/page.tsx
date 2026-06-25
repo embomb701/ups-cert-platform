@@ -71,7 +71,7 @@ export default async function CertificateVerifyPage({ params }: Props) {
         <div className="card-dark p-10">
           {/* Header */}
           <div className="text-center mb-8">
-            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Mastering FSE</p>
+            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Field Service Engineering Academy</p>
             <h1 className="text-2xl font-bold text-white mb-1">Certificate Verification</h1>
           </div>
 

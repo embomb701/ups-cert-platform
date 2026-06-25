@@ -9,9 +9,10 @@ export function Footer() {
       <div className="container-site py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <p className="text-sm font-semibold text-white mb-3">Mastering Field Service Engineering</p>
+            <p className="text-sm font-semibold text-white mb-1">Field Service Engineering Academy</p>
+            <p className="text-xs text-gray-600 mb-3">FA Consulting and Recruiting</p>
             <p className="text-xs text-gray-500 leading-relaxed">
-              Professional UPS field service training and certification.
+              Professional UPS field service training, certification, and career development.
             </p>
           </div>
 
@@ -19,6 +20,7 @@ export function Footer() {
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Certifications</p>
             <ul className="space-y-2">
               <li><Link href="/certifications/junior" className="text-sm text-gray-500 hover:text-white">Jr. FSE Exam</Link></li>
+              <li><Link href="/certifications/ai-proctored" className="text-sm text-gray-500 hover:text-white">FSE AI Exam</Link></li>
               <li><Link href="/certifications/proctored" className="text-sm text-gray-500 hover:text-white">FSE Exam</Link></li>
               <li><Link href="/certifications/compare" className="text-sm text-gray-500 hover:text-white">Compare</Link></li>
               <li><Link href="/verify" className="text-sm text-gray-500 hover:text-white">Verify Certificate</Link></li>
@@ -32,6 +34,7 @@ export function Footer() {
               <li><Link href="/training" className="text-sm text-gray-500 hover:text-white">Training</Link></li>
               <li><Link href="/employers" className="text-sm text-gray-500 hover:text-white">Employers</Link></li>
               <li><Link href="/about" className="text-sm text-gray-500 hover:text-white">About</Link></li>
+              <li><Link href="/contact" className="text-sm text-gray-500 hover:text-white">Contact</Link></li>
             </ul>
           </div>
 
@@ -45,7 +48,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
-          &copy; {year} Mastering Field Service Engineering. All rights reserved.
+          &copy; {year} FA Consulting and Recruiting. Field Service Engineering Academy. All rights reserved.
         </div>
       </div>
 
