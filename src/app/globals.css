@@ -47,6 +47,11 @@
   }
 }
 
+/* Training — animated circuit current flow */
+@keyframes circuit-flow {
+  to { stroke-dashoffset: -22; }
+}
+
 /* Exam interface — disable user interactions */
 .exam-active {
   user-select: none;
