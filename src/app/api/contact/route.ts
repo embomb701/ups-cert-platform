@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
     }
 
-    // Always save to Firestore first — this is the source of truth
+    // Always save to Firestore first
     await adminDb.collection('contactSubmissions').add({
       name: name.trim(),
       email: email.trim(),
@@ -36,7 +36,6 @@ export async function POST(req: NextRequest) {
         await sgMail.sendMultiple({
           to: ADMIN_EMAILS,
           from: { name: 'UPS Cert Platform', email: 'careers@aiellorecruiter.com' },
-          replyTo: { name: name.trim(), email: email.trim() },
           subject: `Contact Form — ${name.trim()}`,
           html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">
@@ -48,20 +47,23 @@ export async function POST(req: NextRequest) {
                 </tr>
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#374151;font-weight:600;">Email</td>
-                  <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;"><a href="mailto:${email.trim()}" style="color:#4f46e5;">${email.trim()}</a></td>
+                  <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;">
+                    <a href="mailto:${email.trim()}" style="color:#4f46e5;">${email.trim()}</a>
+                  </td>
                 </tr>
               </table>
               <div style="margin-top:20px;padding:16px;background:#f9fafb;border-radius:8px;">
                 <p style="margin:0;color:#111827;white-space:pre-wrap;">${message.trim().replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
               </div>
+              <p style="margin-top:16px;font-size:13px;color:#9ca3af;">
+                Reply directly to <a href="mailto:${email.trim()}" style="color:#4f46e5;">${email.trim()}</a>
+              </p>
             </div>
           `,
         });
       } catch (emailErr) {
         console.error('Contact form email failed (non-fatal):', emailErr);
       }
-    } else {
-      console.warn('SENDGRID_API_KEY not set — contact submission saved to Firestore only');
     }
 
     return NextResponse.json({ ok: true });
