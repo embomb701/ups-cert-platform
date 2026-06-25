@@ -71,6 +71,7 @@ export const PRODUCTS = {
   FSE_HUMAN_BUNDLE: 'fse_human_bundle',
   EMPLOYER_5PACK: 'employer_5pack',
   EMPLOYER_10PACK: 'employer_10pack',
+  SIGNED_BOOK: 'signed_book',
 } as const;
 
 export type ProductId = (typeof PRODUCTS)[keyof typeof PRODUCTS];

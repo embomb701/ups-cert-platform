@@ -127,6 +127,25 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     ]);
   }
 
+  // ── Physical products ────────────────────────────────────────
+  if (productId === 'signed_book') {
+    const shipping = session.shipping_details;
+    await adminDb.collection('bookOrders').add({
+      userId,
+      email,
+      purchaseId: session.id,
+      productId: 'signed_book',
+      status: 'pending_shipment',
+      shippingName: shipping?.name ?? '',
+      shippingAddress: shipping?.address ?? {},
+      createdAt: FieldValue.serverTimestamp(),
+      shipped: false,
+      shippedAt: null,
+      trackingNumber: null,
+      adminNotes: 'SIGNED BOOK ORDER — sign and ship to address from Stripe.',
+    });
+  }
+
   // ── Employer packs ───────────────────────────────────────────
   if (productId === 'employer_5pack' || productId === 'employer_10pack') {
     const seats = productId === 'employer_10pack' ? 10 : 5;

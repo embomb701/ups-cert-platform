@@ -37,6 +37,8 @@ export async function POST(req: NextRequest) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
     const stripe = getStripe();
 
+    const isPhysicalProduct = productId === 'signed_book';
+
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -49,12 +51,17 @@ export async function POST(req: NextRequest) {
             unit_amount: product.priceInCents,
             product_data: {
               name: product.name,
-              description: `Mastering FSE — ${product.shortName}`,
+              description: isPhysicalProduct
+                ? 'Personally signed by Francis Aiello — includes shipping to US addresses'
+                : `FSE Academy — ${product.shortName}`,
             },
           },
           quantity: 1,
         },
       ],
+      ...(isPhysicalProduct && {
+        shipping_address_collection: { allowed_countries: ['US'] },
+      }),
       metadata: {
         userId: uid,
         email,

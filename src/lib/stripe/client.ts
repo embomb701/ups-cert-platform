@@ -55,7 +55,15 @@ export const STRIPE_PRODUCTS = {
     stripePriceId: process.env.STRIPE_PRICE_ID_FSE_BUNDLE ?? 'price_1TmJPtB8fedYuRufMs2WCa5I',
   },
 
-  // ── Employer packs (Stripe IDs added once created) ────────────
+  // ── Physical products ─────────────────────────────────────────
+  signed_book: {
+    name: 'Mastering Uninterruptible Power Supplies — Signed Copy',
+    shortName: 'Signed Book (Ships to You)',
+    priceInCents: 6999,
+    stripePriceId: process.env.STRIPE_PRICE_ID_SIGNED_BOOK ?? 'price_1TmL58B8fedYuRufJ5zfszYd',
+  },
+
+  // ── Employer packs ────────────────────────────────────────────
   employer_5pack: {
     name: 'Employer Team Pack — 5 FSE Human Complete Bundles',
     shortName: '5-Seat Team Pack',

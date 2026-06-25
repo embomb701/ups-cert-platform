@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
   title: 'The Book — Mastering Uninterruptible Power Supplies',
@@ -99,14 +100,33 @@ export default function BookPage() {
                 </p>
               </div>
 
-              <div className="card-dark p-8 text-center">
-                <p className="text-white font-semibold mb-2">Get the Book</p>
-                <p className="text-sm text-gray-400 mb-6">Available on Amazon / Kindle Direct Publishing</p>
+              <div className="card-dark p-6 space-y-4">
+                <p className="text-white font-semibold">Get the Book</p>
+
+                <div className="border border-amber-700/50 bg-amber-950/20 rounded-lg p-4">
+                  <p className="text-sm font-semibold text-amber-200 mb-1">✍️ Signed Copy — $69.99</p>
+                  <p className="text-xs text-gray-400 mb-3">
+                    Personally signed by Francis Aiello. Ships to US addresses — price includes shipping.
+                  </p>
+                  <PurchaseButton
+                    productId="signed_book"
+                    label="Buy Signed Copy — $69.99 →"
+                    className="block w-full px-5 py-2.5 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
+                  />
+                  <p className="text-xs text-gray-600 mt-2 text-center">Google account required. Ships after payment.</p>
+                </div>
+
+                <div className="relative flex items-center gap-3">
+                  <div className="flex-1 border-t border-gray-800" />
+                  <span className="text-xs text-gray-600">or buy on Amazon</span>
+                  <div className="flex-1 border-t border-gray-800" />
+                </div>
+
                 <a
                   href="https://a.co/d/046t1AvW"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-6 py-3 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold text-sm transition-colors"
+                  className="block text-center px-5 py-2.5 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-semibold text-sm transition-colors"
                 >
                   Buy on Amazon &rarr;
                 </a>

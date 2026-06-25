@@ -129,11 +129,47 @@ export default function JuniorCertPage() {
               </div>
 
               <div className="pt-2 space-y-3">
+                <div className="card-dark p-4 border-indigo-700/60 bg-indigo-950/20">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-semibold text-indigo-300">Best Value: Jr. FSE Complete Bundle</p>
+                    <span className="text-xs bg-indigo-900/60 border border-indigo-700 text-indigo-300 px-2 py-0.5 rounded-full">Save $49</span>
+                  </div>
+                  <p className="text-xs text-gray-400 mb-2">Training Portal Access + Jr. FSE Exam — everything you need.</p>
+                  <PurchaseButton
+                    productId="jr_fse_bundle"
+                    label="Get the Bundle — $299 →"
+                    className="block w-full px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
+                  />
+                </div>
+
+                <div className="relative flex items-center gap-3">
+                  <div className="flex-1 border-t border-gray-800" />
+                  <span className="text-xs text-gray-600">or exam only</span>
+                  <div className="flex-1 border-t border-gray-800" />
+                </div>
+
                 <PurchaseButton
                   productId="jr_fse_exam"
-                  label="Purchase Jr. FSE Exam — $199"
-                  className="block w-full px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
+                  label="Exam Only — $199"
+                  className="block w-full px-6 py-2.5 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
                 />
+
+                <div className="relative flex items-center gap-3">
+                  <div className="flex-1 border-t border-gray-800" />
+                  <span className="text-xs text-gray-600">or add the book</span>
+                  <div className="flex-1 border-t border-gray-800" />
+                </div>
+
+                <div className="card-dark p-4 border-amber-900/40 bg-amber-950/10">
+                  <p className="text-xs font-semibold text-amber-200 mb-1">Signed Copy of the Book — $69.99</p>
+                  <p className="text-xs text-gray-400 mb-2">Personally signed by Francis Aiello. Includes shipping to US addresses.</p>
+                  <PurchaseButton
+                    productId="signed_book"
+                    label="Buy Signed Book — $69.99 →"
+                    className="block w-full px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-xs transition-colors text-center"
+                  />
+                </div>
+
                 <p className="text-xs text-gray-500 text-center">Google account required. Payment via Stripe.</p>
               </div>
             </div>
