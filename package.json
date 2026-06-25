@@ -12,6 +12,7 @@
     "import-questions": "ts-node --project tsconfig.scripts.json scripts/import-questions.ts"
   },
   "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
     "@stripe/stripe-js": "^3.4.0",
     "@types/nodemailer": "^8.0.1",
     "clsx": "^2.1.1",

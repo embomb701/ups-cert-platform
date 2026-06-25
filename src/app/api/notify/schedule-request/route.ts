@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
-import { Resend } from 'resend';
+import sgMail from '@sendgrid/mail';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 30;
@@ -11,12 +11,6 @@ const ADMIN_EMAILS = [
   'careers@aiellorecruiter.com',
   'aiellochori@gmail.com',
 ];
-
-function getResend() {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) throw new Error('RESEND_API_KEY is not set');
-  return new Resend(key);
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -52,10 +46,13 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const resend = getResend();
-    await resend.emails.send({
-      from: 'UPS Cert Platform <noreply@aiellorecruiter.com>',
+    const apiKey = process.env.SENDGRID_API_KEY;
+    if (!apiKey) throw new Error('SENDGRID_API_KEY is not set');
+    sgMail.setApiKey(apiKey);
+
+    await sgMail.sendMultiple({
       to: ADMIN_EMAILS,
+      from: { name: 'UPS Cert Platform', email: 'careers@aiellorecruiter.com' },
       subject: `FSE Exam Scheduling Request — ${name}`,
       html: `
         <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">
@@ -95,7 +92,7 @@ export async function POST(req: NextRequest) {
     console.error('Schedule request error:', err);
     return NextResponse.json({
       ok: false,
-      error: `Email failed: ${err?.message ?? 'unknown error'}. Your info was saved — please contact careers@aiellorecruiter.com.`,
+      error: `Email failed: ${err?.message ?? 'unknown error'}`,
     });
   }
 }
