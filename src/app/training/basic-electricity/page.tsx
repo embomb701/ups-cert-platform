@@ -18,7 +18,7 @@ const lessons = [
     title: 'Power Formula',
     subtitle: 'P = V × I',
     description: 'Understand how electrical power is calculated and why it matters in UPS systems.',
-    available: false,
+    available: true,
   },
   {
     id: 'series-parallel',

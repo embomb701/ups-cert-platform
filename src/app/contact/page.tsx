@@ -35,73 +35,98 @@ export default function ContactPage() {
 
   return (
     <section className="section-pad">
-      <div className="container-site max-w-xl mx-auto">
+      <div className="container-site max-w-2xl mx-auto">
         <h1 className="text-2xl font-bold text-white mb-2">Contact Us</h1>
         <p className="text-gray-400 text-sm mb-8">
-          Have a question about the program, exams, or certifications? Send us a message and we'll get back to you.
+          Have a question about the program, exams, or certifications? Send us a message or reach us directly.
         </p>
 
-        {done ? (
-          <div className="card-dark p-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-green-900/40 border border-green-700 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
+        <div className="grid md:grid-cols-5 gap-8">
+          {/* Contact info */}
+          <div className="md:col-span-2 space-y-6">
+            <div>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Phone</p>
+              <a href="tel:5555555555" className="text-white font-medium hover:text-indigo-300 transition-colors">
+                (555) 555-5555
+              </a>
             </div>
-            <h2 className="text-lg font-semibold text-white mb-2">Message Sent</h2>
-            <p className="text-sm text-gray-400">
-              Thanks for reaching out. We'll get back to you as soon as possible.
-            </p>
+            <div>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Email</p>
+              <a href="mailto:careers@aiellorecruiter.com" className="text-white font-medium hover:text-indigo-300 transition-colors break-all">
+                careers@aiellorecruiter.com
+              </a>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Response Time</p>
+              <p className="text-sm text-gray-400">Within 24 hours on business days</p>
+            </div>
           </div>
-        ) : (
-          <div className="card-dark p-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-xs font-medium text-gray-400 mb-1">Name</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  placeholder="Your full name"
-                  className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-indigo-500"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-400 mb-1">Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="your@email.com"
-                  className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-indigo-500"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-400 mb-1">Message</label>
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                  rows={5}
-                  placeholder="How can we help?"
-                  className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-indigo-500 resize-none"
-                />
-              </div>
 
-              {error && <p className="text-sm text-red-400">{error}</p>}
+          {/* Form */}
+          <div className="md:col-span-3">
+            {done ? (
+              <div className="card-dark p-8 text-center">
+                <div className="w-12 h-12 rounded-full bg-green-900/40 border border-green-700 flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className="text-lg font-semibold text-white mb-2">Message Sent</h2>
+                <p className="text-sm text-gray-400">
+                  Thanks for reaching out. We'll get back to you as soon as possible.
+                </p>
+              </div>
+            ) : (
+              <div className="card-dark p-6">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-400 mb-1">Name</label>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      placeholder="Your full name"
+                      className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-indigo-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-400 mb-1">Email</label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      placeholder="your@email.com"
+                      className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-indigo-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-400 mb-1">Message</label>
+                    <textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                      rows={5}
+                      placeholder="How can we help?"
+                      className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-indigo-500 resize-none"
+                    />
+                  </div>
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-medium text-sm transition-colors"
-              >
-                {submitting ? 'Sending…' : 'Send Message'}
-              </button>
-            </form>
+                  {error && <p className="text-sm text-red-400">{error}</p>}
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-medium text-sm transition-colors"
+                  >
+                    {submitting ? 'Sending…' : 'Send Message'}
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
