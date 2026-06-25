@@ -12,19 +12,19 @@ export const STRIPE_PRODUCTS = {
     name: 'Jr. FSE Certification Exam',
     shortName: 'Jr. FSE Exam',
     priceInCents: 19900,
-    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE ?? '',
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE ?? 'price_1TjlXWB8fedYuRufuS9JnW1B',
   },
   fse_ai_exam: {
     name: 'FSE Certification Exam — AI Proctored',
     shortName: 'FSE AI Exam',
     priceInCents: 34900,
-    stripePriceId: process.env.STRIPE_PRICE_ID_FSE_AI ?? '',
+    stripePriceId: process.env.STRIPE_PRICE_ID_FSE_AI ?? 'price_1TjlYRB8fedYuRufsLe9T8Ql',
   },
   fse_proctored_exam: {
     name: 'FSE Certification Exam — Human Proctored',
     shortName: 'FSE Human Proctored Exam',
     priceInCents: 64900,
-    stripePriceId: process.env.STRIPE_PRICE_ID_FSE ?? '',
+    stripePriceId: process.env.STRIPE_PRICE_ID_FSE ?? 'price_1TjlZdB8fedYuRuf69YOExVF',
   },
 
   // ── Training ──────────────────────────────────────────────────
@@ -40,7 +40,7 @@ export const STRIPE_PRODUCTS = {
     name: 'Jr. FSE Complete Bundle — Training + Jr. FSE Exam',
     shortName: 'Jr. FSE Complete Bundle',
     priceInCents: 29900,
-    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE_BUNDLE ?? '',
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE_BUNDLE ?? 'price_1TmJNxB8fedYuRuf9ub9wXyL',
   },
   fse_ai_bundle: {
     name: 'FSE AI Complete Bundle — Training + AI Proctored Exam',
