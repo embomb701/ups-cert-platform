@@ -30,12 +30,48 @@ export async function POST(req: NextRequest) {
       const session = event.data.object as Stripe.Checkout.Session;
       await handleCheckoutCompleted(session);
     }
-
     return NextResponse.json({ received: true });
   } catch (err) {
     console.error('Webhook handler error:', err);
     return NextResponse.json({ error: 'Handler error' }, { status: 500 });
   }
+}
+
+async function grantTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users')
+    .doc(userId)
+    .collection('examAccess')
+    .doc('training_portal')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+}
+
+async function grantExamAccess(userId: string, examDoc: string, productId: string, purchaseId: string) {
+  await adminDb
+    .collection('users')
+    .doc(userId)
+    .collection('examAccess')
+    .doc(examDoc)
+    .set({ productId, purchaseId, granted: true, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function createProctoredOrder(userId: string, email: string, purchaseId: string, productId: string, includesBook = false) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    email,
+    purchaseId,
+    productId,
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    includesSignedBook: includesBook,
+    bookShipped: false,
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: includesBook ? 'SIGNED BOOK INCLUDED — ship to candidate before exam date.' : '',
+  });
 }
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
@@ -45,68 +81,61 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     return;
   }
 
-  // Update purchase status to complete
   await adminDb.collection('purchases').doc(session.id).update({
     status: 'complete',
     stripePaymentIntentId: session.payment_intent ?? '',
     completedAt: FieldValue.serverTimestamp(),
   });
 
+  // ── Individual exams ─────────────────────────────────────────
   if (productId === 'jr_fse_exam') {
-    // Jr. FSE: create access record directly
-    await adminDb
-      .collection('users')
-      .doc(userId)
-      .collection('examAccess')
-      .doc('jr_fse')
-      .set(
-        {
-          productId: 'jr_fse_exam',
-          purchaseId: session.id,
-          granted: true,
-          grantedAt: FieldValue.serverTimestamp(),
-        },
-        { merge: true }
-      );
+    await grantExamAccess(userId, 'jr_fse', 'jr_fse_exam', session.id);
   }
 
   if (productId === 'fse_ai_exam') {
-    // FSE AI: create access record directly (no scheduling needed)
-    await adminDb
-      .collection('users')
-      .doc(userId)
-      .collection('examAccess')
-      .doc('fse_ai')
-      .set(
-        {
-          productId: 'fse_ai_exam',
-          purchaseId: session.id,
-          granted: true,
-          grantedAt: FieldValue.serverTimestamp(),
-        },
-        { merge: true }
-      );
+    await grantExamAccess(userId, 'fse_ai', 'fse_ai_exam', session.id);
   }
 
   if (productId === 'fse_proctored_exam') {
-    // FSE: create proctored order — does NOT unlock exam
-    await adminDb.collection('proctoredExamOrders').add({
+    await createProctoredOrder(userId, email ?? '', session.id, 'fse_proctored_exam', false);
+  }
+
+  // ── Training portal ──────────────────────────────────────────
+  if (productId === 'training_portal') {
+    await grantTrainingAccess(userId, session.id);
+  }
+
+  // ── Bundles ──────────────────────────────────────────────────
+  if (productId === 'fse_ai_bundle') {
+    await Promise.all([
+      grantTrainingAccess(userId, session.id),
+      grantExamAccess(userId, 'fse_ai', 'fse_ai_exam', session.id),
+    ]);
+  }
+
+  if (productId === 'fse_human_bundle') {
+    await Promise.all([
+      grantTrainingAccess(userId, session.id),
+      createProctoredOrder(userId, email ?? '', session.id, 'fse_proctored_exam', true),
+    ]);
+  }
+
+  // ── Employer packs ───────────────────────────────────────────
+  if (productId === 'employer_5pack' || productId === 'employer_10pack') {
+    const seats = productId === 'employer_10pack' ? 10 : 5;
+    await adminDb.collection('employerOrders').add({
       userId,
       email,
       purchaseId: session.id,
-      productId: 'fse_proctored_exam',
-      status: 'scheduling_pending',
-      schedulingStatus: 'awaiting_contact',
+      productId,
+      seats,
+      seatsUsed: 0,
+      status: 'active',
       createdAt: FieldValue.serverTimestamp(),
-      updatedAt: FieldValue.serverTimestamp(),
-      proctorId: null,
-      proctorName: null,
-      meetingLink: null,
-      adminNotes: '',
+      adminNotes: `Employer purchased ${seats}-seat pack. ${seats} signed books to ship. Contact to coordinate candidate onboarding.`,
     });
   }
 
-  // Audit log
   await adminDb.collection('auditLogs').add({
     userId,
     eventType: 'purchase_completed',

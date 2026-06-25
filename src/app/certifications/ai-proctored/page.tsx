@@ -90,9 +90,9 @@ export default function AIProctorPage() {
               </ul>
             </div>
             <div className="card-dark p-6">
-              <h3 className="text-sm font-semibold text-white mb-3">vs. Human Proctored ($500)</h3>
+              <h3 className="text-sm font-semibold text-white mb-3">vs. Human Proctored ($649)</h3>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li>&#x2022; $151 less expensive</li>
+                <li>&#x2022; $300 less expensive</li>
                 <li>&#x2022; No scheduling — start anytime</li>
                 <li>&#x2022; No live proctor session</li>
                 <li>&#x2022; AI monitoring instead of human oversight</li>
@@ -101,15 +101,26 @@ export default function AIProctorPage() {
             </div>
           </div>
 
-          <div className="mt-10 text-center">
-            <PurchaseButton
-              productId="fse_ai_exam"
-              label="Purchase FSE AI Exam — $349 →"
-              className="inline-block px-8 py-3 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors"
-            />
-            <p className="text-xs text-gray-600 mt-3">
-              Sign in with Google to purchase. Exam unlocks immediately after payment.
-            </p>
+          <div className="mt-10 space-y-4">
+            <div className="text-center">
+              <PurchaseButton
+                productId="fse_ai_exam"
+                label="Purchase FSE AI Exam — $349 →"
+                className="inline-block px-8 py-3 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors"
+              />
+              <p className="text-xs text-gray-600 mt-3">
+                Sign in with Google to purchase. Exam unlocks immediately after payment.
+              </p>
+            </div>
+            <div className="card-dark p-4 border-indigo-900/50 bg-indigo-950/20 max-w-md mx-auto">
+              <p className="text-xs text-indigo-300 font-semibold mb-1">Better value: FSE AI Complete Bundle — $449</p>
+              <p className="text-xs text-gray-400 mb-2">Includes Training Portal Access + this exam. Save $49 vs. buying separately.</p>
+              <PurchaseButton
+                productId="fse_ai_bundle"
+                label="Get the Bundle — $449 →"
+                className="block w-full px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-xs transition-colors text-center"
+              />
+            </div>
           </div>
         </div>
       </section>

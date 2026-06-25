@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
-  title: 'Junior UPS Field Service Certification Exam — $200',
+  title: 'Junior UPS Field Service Certification Exam — $199',
   description:
-    'The Jr. FSE Exam validates foundational UPS field service knowledge. Browser-based, 50 questions, timed, $200.',
+    'The Jr. FSE Exam validates foundational UPS field service knowledge. Browser-based, 50 questions, timed, $199.',
 };
 
 export default function JuniorCertPage() {
@@ -17,7 +17,7 @@ export default function JuniorCertPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Junior UPS Field Service Certification
           </h1>
-          <p className="text-2xl font-bold text-indigo-400 mb-4">$200</p>
+          <p className="text-2xl font-bold text-indigo-400 mb-4">$199</p>
           <p className="text-gray-400 leading-relaxed max-w-2xl">
             This credential demonstrates junior-level UPS field service knowledge for candidates entering
             the critical power field service industry. It is based on the material from{' '}
@@ -46,7 +46,7 @@ export default function JuniorCertPage() {
               <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">Access Rules</h3>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>Google login required</li>
-                <li>Stripe payment required ($200)</li>
+                <li>Stripe payment required ($199)</li>
                 <li>One attempt every 90 days</li>
                 <li>Account and IP/network cooldown enforced</li>
                 <li>Suspicious activity logged</li>
@@ -128,13 +128,13 @@ export default function JuniorCertPage() {
                 </p>
               </div>
 
-              <div className="text-center pt-2">
+              <div className="pt-2 space-y-3">
                 <PurchaseButton
                   productId="jr_fse_exam"
-                  label="Purchase Jr. FSE Exam — $200"
+                  label="Purchase Jr. FSE Exam — $199"
                   className="block w-full px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
                 />
-                <p className="text-xs text-gray-500 mt-2">Google account required. Payment via Stripe.</p>
+                <p className="text-xs text-gray-500 text-center">Google account required. Payment via Stripe.</p>
               </div>
             </div>
           </div>

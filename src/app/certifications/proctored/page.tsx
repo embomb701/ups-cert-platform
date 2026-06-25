@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
-  title: 'UPS Field Service Certification Exam (Proctored) — $500',
+  title: 'UPS Field Service Certification Exam (Proctored) — $649',
   description:
-    'The FSE Exam is a proctored, advanced UPS field service knowledge credential. $500, scheduling required.',
+    'The FSE Exam is a proctored, advanced UPS field service knowledge credential. $649, scheduling required.',
 };
 
 export default function ProctoredCertPage() {
@@ -17,7 +17,7 @@ export default function ProctoredCertPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             UPS Field Service Certification
           </h1>
-          <p className="text-2xl font-bold text-amber-400 mb-4">$500</p>
+          <p className="text-2xl font-bold text-amber-400 mb-4">$649</p>
           <p className="text-gray-400 leading-relaxed max-w-2xl">
             The UPS Field Service Certification is a more advanced, proctored credential intended to
             validate deeper technical understanding and stronger readiness for field service work.
@@ -45,7 +45,7 @@ export default function ProctoredCertPage() {
               <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">Access &amp; Scheduling</h3>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>Google login required</li>
-                <li>Stripe payment required ($500)</li>
+                <li>Stripe payment required ($649)</li>
                 <li>Exam does not unlock immediately on purchase</li>
                 <li>Scheduling required after purchase</li>
                 <li>Identity confirmed before exam begins</li>
@@ -109,7 +109,7 @@ export default function ProctoredCertPage() {
               <div className="card-dark p-6">
                 <h3 className="text-base font-semibold text-white mb-3">How It Works</h3>
                 <ol className="space-y-2 text-xs text-gray-400">
-                  <li>1. Purchase the FSE Exam for $500</li>
+                  <li>1. Purchase the FSE Exam for $649</li>
                   <li>2. Your dashboard will show scheduling instructions</li>
                   <li>3. An approved proctor will be assigned</li>
                   <li>4. Your exam session is scheduled and identity confirmed</li>
@@ -129,13 +129,22 @@ export default function ProctoredCertPage() {
                 </p>
               </div>
 
-              <div className="text-center pt-2">
+              <div className="pt-2 space-y-3">
                 <PurchaseButton
                   productId="fse_proctored_exam"
-                  label="Purchase FSE Exam — $500"
+                  label="Purchase FSE Exam — $649"
                   className="block w-full px-6 py-3 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
                 />
-                <p className="text-xs text-gray-500 mt-2">
+                <div className="card-dark p-4 border-indigo-900/50 bg-indigo-950/20">
+                  <p className="text-xs text-indigo-300 font-semibold mb-1">Better value: FSE Human Complete Bundle — $699</p>
+                  <p className="text-xs text-gray-400 mb-2">Includes Training Portal Access + this exam + a signed copy of the book, shipped to you.</p>
+                  <PurchaseButton
+                    productId="fse_human_bundle"
+                    label="Get the Bundle — $699 →"
+                    className="block w-full px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-xs transition-colors text-center"
+                  />
+                </div>
+                <p className="text-xs text-gray-500 text-center">
                   Exam requires scheduling after purchase. Proctor unlock required before start.
                 </p>
               </div>

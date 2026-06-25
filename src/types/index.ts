@@ -65,6 +65,11 @@ export const PRODUCTS = {
   JR_FSE_EXAM: 'jr_fse_exam',
   FSE_AI_EXAM: 'fse_ai_exam',
   FSE_PROCTORED_EXAM: 'fse_proctored_exam',
+  TRAINING_PORTAL: 'training_portal',
+  FSE_AI_BUNDLE: 'fse_ai_bundle',
+  FSE_HUMAN_BUNDLE: 'fse_human_bundle',
+  EMPLOYER_5PACK: 'employer_5pack',
+  EMPLOYER_10PACK: 'employer_10pack',
 } as const;
 
 export type ProductId = (typeof PRODUCTS)[keyof typeof PRODUCTS];

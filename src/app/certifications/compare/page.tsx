@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 const rows: { label: string; jr: string; ai: string; human: string }[] = [
-  { label: 'Price', jr: '$200', ai: '$349', human: '$500' },
+  { label: 'Price', jr: '$199', ai: '$349', human: '$649' },
   { label: 'Proctoring', jr: 'None — browser controls only', ai: 'AI webcam (face + eye tracking)', human: 'Live human proctor' },
   { label: 'Scheduling required', jr: 'No', ai: 'No — start anytime after purchase', human: 'Yes — admin must schedule & unlock' },
   { label: 'Questions per attempt', jr: '50 randomized', ai: '50 randomized', human: '50 randomized' },
@@ -67,7 +67,7 @@ export default function ComparePage() {
 
         <div className="grid md:grid-cols-3 gap-4 mt-10">
           <Link href="/certifications/junior" className="card-dark p-6 text-center hover:border-indigo-700 transition-colors block">
-            <p className="text-lg font-bold text-indigo-400 mb-1">Jr. FSE Exam — $200</p>
+            <p className="text-lg font-bold text-indigo-400 mb-1">Jr. FSE Exam — $199</p>
             <p className="text-sm text-gray-400">Start here if you are entering the field</p>
           </Link>
           <Link href="/certifications/ai-proctored" className="card-dark p-6 text-center hover:border-purple-700 transition-colors block">
@@ -75,7 +75,7 @@ export default function ComparePage() {
             <p className="text-sm text-gray-400">Flexible scheduling, AI webcam monitoring</p>
           </Link>
           <Link href="/certifications/proctored" className="card-dark p-6 text-center hover:border-amber-700 transition-colors block">
-            <p className="text-lg font-bold text-amber-400 mb-1">FSE Human Proctored — $500</p>
+            <p className="text-lg font-bold text-amber-400 mb-1">FSE Human Proctored — $649</p>
             <p className="text-sm text-gray-400">Highest credential with live proctor</p>
           </Link>
         </div>

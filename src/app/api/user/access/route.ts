@@ -14,9 +14,10 @@ export async function GET(req: NextRequest) {
     const decoded = await adminAuth.verifyIdToken(token);
     const uid = decoded.uid;
 
-    const [jrSnap, aiSnap, fseOrdersSnap] = await Promise.all([
+    const [jrSnap, aiSnap, trainingSnap, fseOrdersSnap] = await Promise.all([
       adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').get(),
       adminDb.collection('users').doc(uid).collection('examAccess').doc('fse_ai').get(),
+      adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get(),
       adminDb
         .collection('proctoredExamOrders')
         .where('userId', '==', uid)
@@ -30,6 +31,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       jr_fse: jrSnap.exists ? (jrSnap.data()?.granted === true) : false,
       fse_ai: aiSnap.exists ? (aiSnap.data()?.granted === true) : false,
+      training_portal: trainingSnap.exists ? (trainingSnap.data()?.granted === true) : false,
       fse_proctored: fseOrder?.status ?? null,
     });
   } catch (err: any) {
