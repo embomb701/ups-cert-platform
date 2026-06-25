@@ -3,257 +3,396 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'UPS Field Service Certification & Training',
+  title: 'UPS Field Service Engineering Academy — Start a Career in 6 Months',
 };
 
-const whyMatters = [
+const stats = [
+  { value: '$55–100k', label: 'Starting salary range', sub: 'Jr. FSE to experienced FSE' },
+  { value: '6 months', label: 'Time to job-ready', sub: 'With focused study and certification' },
+  { value: '$0', label: 'College debt required', sub: 'No degree needed to get started' },
+  { value: '25+ years', label: 'Built from real experience', sub: 'Every role, every level' },
+];
+
+const whyItMatters = [
   {
-    title: 'Critical Infrastructure Depends on It',
-    body: 'Data centers, hospitals, financial networks, AI infrastructure, and industrial facilities run on reliable power. When a UPS fails or a transfer goes wrong, the consequences are real.',
+    icon: '🏥',
+    title: 'Hospitals',
+    body: 'UPS systems protect life-critical equipment — ventilators, surgical suites, patient monitoring. When the grid fails, the UPS cannot.',
   },
   {
-    title: 'The Industry Needs Qualified People',
-    body: 'Hyperscale computing and AI are driving unprecedented demand for critical power systems. The field needs people who understand UPS systems well enough to learn quickly, work safely, and grow into reliable technicians.',
+    icon: '🖥️',
+    title: 'Data Centers & AI Infrastructure',
+    body: 'Every major AI company, cloud provider, and financial system runs on critical power. Hyperscale expansion is creating more FSE jobs than the industry can fill.',
   },
   {
-    title: 'Field Knowledge is Hard to Find',
-    body: 'Most UPS training is OEM-specific, employer-specific, or locked behind years of on-the-job experience. There is no independent benchmark for foundational UPS field service knowledge. This platform is built to change that.',
+    icon: '🏭',
+    title: 'Industrial & Government',
+    body: 'Manufacturing facilities, military installations, and government data centers all depend on continuous power — and skilled people to maintain it.',
   },
+];
+
+const careerPath = [
+  { role: 'Jr. FSE', salary: '$55–65k', time: 'Month 1–6', desc: 'Entry-level field technician. Supervised work on UPS systems. Begin with Jr. FSE certification.' },
+  { role: 'FSE', salary: '$75–100k', time: 'Year 1–3', desc: 'Unsupervised field service. Handle commissioning, troubleshooting, and maintenance independently.' },
+  { role: 'Sr. FSE / Lead', salary: '$95–130k', time: 'Year 3–7', desc: 'Lead technician or regional specialist. Handle complex systems, mentor junior staff.' },
+  { role: 'Management', salary: '$120k+', time: 'Year 5+', desc: 'Field Service Manager, Director, or VP. Oversee teams, accounts, and regional operations.' },
 ];
 
 export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950">
-        <div className="container-site text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Master UPS Field Service Engineering from{' '}
-            <span className="text-indigo-400">Real Field Experience</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-400 leading-relaxed mb-10 max-w-3xl mx-auto">
-            A practical book, certification path, and training platform for people who want to
-            understand, service, and support Uninterruptible Power Supply systems in the real world.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/book" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition-colors">
-              Buy the Book
-            </Link>
-            <Link href="/certifications/junior" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold border border-gray-700 transition-colors">
-              Jr. FSE Exam — $200
-            </Link>
-            <Link href="/certifications/ai-proctored" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold border border-purple-800 transition-colors">
-              FSE AI Exam — $349
-            </Link>
-            <Link href="/certifications/proctored" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold border border-gray-700 transition-colors">
-              FSE Exam — $500
-            </Link>
-            <Link href="/verify" className="px-6 py-3 rounded-lg bg-transparent border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold transition-colors">
-              Verify a Certificate
-            </Link>
+      <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950 border-b border-gray-800">
+        <div className="container-site max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-4">
+                An industry in crisis. An opportunity wide open.
+              </p>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
+                Start a High-Paying Career in Critical Power —
+                <span className="text-indigo-400"> Without a Four-Year Degree.</span>
+              </h1>
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-6">
+                The UPS field service industry is <strong className="text-white">desperately short of qualified people</strong>.
+                Data centers are multiplying. AI infrastructure is exploding. Hospitals can't go dark.
+                And the companies that keep all of it running cannot find enough trained technicians to hire.
+              </p>
+              <p className="text-base text-gray-400 leading-relaxed mb-8">
+                FSE Academy gives motivated young men and women a structured, affordable path into a career
+                that pays $55,000–$100,000+ — in as little as six months — without the cost or time of a traditional degree.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/training" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors">
+                  Start Training →
+                </Link>
+                <Link href="/certifications/junior" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-semibold text-sm transition-colors">
+                  Jr. FSE Exam — $199
+                </Link>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {stats.map((s) => (
+                <div key={s.value} className="card-dark p-5">
+                  <p className="text-2xl font-mono font-bold text-indigo-400 mb-1">{s.value}</p>
+                  <p className="text-xs font-semibold text-white mb-0.5">{s.label}</p>
+                  <p className="text-xs text-gray-500">{s.sub}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why UPS Field Service Matters */}
-      <section className="section-pad">
-        <div className="container-site">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12">
-            Why UPS Field Service Knowledge Matters
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {whyMatters.map((item) => (
-              <div key={item.title} className="card-dark p-6">
-                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{item.body}</p>
+      {/* Industry crisis */}
+      <section className="section-pad bg-gray-900 border-b border-gray-800">
+        <div className="container-site max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-xs font-semibold text-red-400 uppercase tracking-widest mb-3">The Talent Crisis</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5 leading-snug">
+                The industry isn't struggling to find applicants.<br />
+                It's struggling to find people who actually know anything.
+              </h2>
+              <div className="space-y-4 text-sm text-gray-400 leading-relaxed">
+                <p>
+                  Hiring managers across the UPS field service industry share the same frustration:
+                  candidates show up with minimal electrical knowledge, no understanding of how a UPS actually
+                  works, and no way to verify they've studied the field at all.
+                </p>
+                <p>
+                  The result is that companies spend 3–6 months training each new hire from scratch —
+                  tying up their best technicians as babysitters instead of letting them do field work.
+                  The ones who wash out cost even more.
+                </p>
+                <p className="text-white font-medium">
+                  FSE Academy is the answer to both sides of that problem. Candidates arrive educated,
+                  tested, and certified. Employers get a meaningful knowledge signal before they hire.
+                </p>
+              </div>
+            </div>
+            <div className="space-y-3">
+              {whyItMatters.map((item) => (
+                <div key={item.title} className="card-dark p-5 flex gap-4">
+                  <span className="text-2xl shrink-0">{item.icon}</span>
+                  <div>
+                    <p className="text-sm font-semibold text-white mb-1">{item.title}</p>
+                    <p className="text-xs text-gray-400 leading-relaxed">{item.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* For young people — college alternative */}
+      <section className="section-pad border-b border-gray-800">
+        <div className="container-site max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-3">A Better Path</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+              Why go $100,000 into debt for a degree<br />
+              <span className="text-amber-400">when this career doesn't require one?</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-sm leading-relaxed">
+              Young men and women are told the only path to a real career is a four-year college degree.
+              Nobody tells them about UPS field service — a skilled trade that pays exceptionally well,
+              has bulletproof job security, and can be entered without a degree, student loans, or years of waiting.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="card-dark p-6 border-red-900/40 bg-red-950/10">
+              <p className="text-sm font-semibold text-red-400 mb-4">Traditional 4-Year College</p>
+              <ul className="space-y-3 text-sm text-gray-400">
+                <li className="flex gap-2"><span className="text-red-500 shrink-0">✗</span> $40,000–$100,000+ in student debt</li>
+                <li className="flex gap-2"><span className="text-red-500 shrink-0">✗</span> 4 years before you earn a dollar</li>
+                <li className="flex gap-2"><span className="text-red-500 shrink-0">✗</span> No guarantee of a job after graduation</li>
+                <li className="flex gap-2"><span className="text-red-500 shrink-0">✗</span> Debt payments following you for 10–30 years</li>
+                <li className="flex gap-2"><span className="text-red-500 shrink-0">✗</span> Degree may not match industry need</li>
+              </ul>
+            </div>
+            <div className="card-dark p-6 border-green-900/40 bg-green-950/10">
+              <p className="text-sm font-semibold text-green-400 mb-4">FSE Academy Training Path</p>
+              <ul className="space-y-3 text-sm text-gray-400">
+                <li className="flex gap-2"><span className="text-green-400 shrink-0">✓</span> Training portal access from $149</li>
+                <li className="flex gap-2"><span className="text-green-400 shrink-0">✓</span> Job-ready in 6 months with certification</li>
+                <li className="flex gap-2"><span className="text-green-400 shrink-0">✓</span> Real, verifiable credential employers recognize</li>
+                <li className="flex gap-2"><span className="text-green-400 shrink-0">✓</span> Start earning $55k+ on day one of employment</li>
+                <li className="flex gap-2"><span className="text-green-400 shrink-0">✓</span> Built from 25+ years of real field experience</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Career path */}
+      <section className="section-pad bg-gray-900 border-b border-gray-800">
+        <div className="container-site max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-3">Career Trajectory</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              Where this career can take you
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {careerPath.map((step, i) => (
+              <div key={step.role} className="card-dark p-5 relative">
+                <div className="absolute top-4 right-4 text-xs font-semibold text-gray-600">Step {i + 1}</div>
+                <p className="text-xs font-semibold text-indigo-400 uppercase tracking-wide mb-1">{step.time}</p>
+                <p className="text-base font-bold text-white mb-0.5">{step.role}</p>
+                <p className="text-lg font-mono font-bold text-green-400 mb-3">{step.salary}</p>
+                <p className="text-xs text-gray-400 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
+          <p className="text-center text-xs text-gray-600 mt-6">
+            Salary ranges are representative of the UPS field service industry. Individual results vary by employer, location, and experience.
+          </p>
         </div>
       </section>
 
-      {/* Book Overview */}
-      <section className="section-pad bg-gray-900">
-        <div className="container-site">
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+      {/* Training Portal */}
+      <section className="section-pad border-b border-gray-800">
+        <div className="container-site max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-xs font-semibold text-indigo-400 uppercase tracking-wider mb-3">The Book</p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                Mastering Uninterruptible Power Supplies, Field Service Engineering
+              <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-3">The Training</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-5">
+                24 structured modules.<br />Built from the book.
               </h2>
-              <p className="text-gray-400 leading-relaxed mb-6">
-                Written for people entering or advancing in UPS field service. Not theory-only classroom
-                material — this is a practical guide built around what you actually encounter in the field.
+              <p className="text-sm text-gray-400 leading-relaxed mb-5">
+                Every module is based directly on{' '}
+                <em>Mastering Uninterruptible Power Supplies, Field Service Engineering</em> — written
+                by Francis Aiello from 25+ years of real UPS field service experience, at every level from
+                technician to VP of Field Services.
               </p>
-              <ul className="space-y-2 mb-8">
-                {['UPS topologies and operating principles', 'Batteries, rectifiers, inverters, static switches', 'STS, PDU, RPP systems', 'Safe meter use, measurement concepts', 'Troubleshooting logic and escalation judgment', 'Field documentation and customer communication'].map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-gray-400">
-                    <span className="text-indigo-400 mt-0.5">&#10003;</span>
+              <ul className="space-y-2 mb-8 text-sm">
+                {[
+                  '24 sequential modules, from electricity basics to field professionalism',
+                  'Slide-based lessons with minimum review time enforced',
+                  '10-question section quiz before advancing each slide',
+                  'Module mastery test — 100% required to complete',
+                  'Modules unlock weekly as you progress through the program',
+                  'Builds directly toward the Jr. FSE and FSE certification exams',
+                ].map((item) => (
+                  <li key={item} className="flex gap-2 text-gray-400">
+                    <span className="text-indigo-400 shrink-0 mt-0.5">✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
-              <Link href="/book" className="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors">
-                Learn More About the Book
+              <Link href="/training" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors inline-block">
+                View All 24 Modules →
               </Link>
             </div>
-            <div className="flex justify-center">
-              <Image
-                src="/book-cover.jpg"
-                alt="Mastering Uninterruptible Power Supplies — Field Service Engineering"
-                width={320}
-                height={415}
-                className="rounded-lg shadow-2xl shadow-blue-950/50"
-              />
+            <div className="space-y-2">
+              {[
+                { num: '01', title: 'Introduction to Electricity & Electronics' },
+                { num: '02', title: 'Electric Circuits — Series & Parallel' },
+                { num: '03', title: 'Electronic Components' },
+                { num: '04', title: 'AC & DC Systems' },
+                { num: '05', title: 'Ohm\'s Law & Power Formula' },
+                { num: '06', title: 'Overview of UPS, PDU & STS Systems' },
+                { num: '07', title: 'Rectifiers & Inverters' },
+                { num: '08', title: 'Transformers & Circuit Breakers' },
+              ].map((m) => (
+                <div key={m.num} className="card-dark px-4 py-3 flex gap-3 items-center">
+                  <span className="text-xs font-mono text-gray-600 shrink-0 w-6">{m.num}</span>
+                  <span className="text-sm text-gray-300">{m.title}</span>
+                  {m.num === '01' || m.num === '02' ? (
+                    <span className="ml-auto text-xs text-green-400 bg-green-950/40 border border-green-900 px-2 py-0.5 rounded-full shrink-0">Available</span>
+                  ) : (
+                    <span className="ml-auto text-gray-700 shrink-0 text-xs">🔒</span>
+                  )}
+                </div>
+              ))}
+              <p className="text-xs text-gray-600 text-center pt-2">+ 16 more modules</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Certification Overview */}
-      <section className="section-pad">
+      {/* Book */}
+      <section className="section-pad bg-gray-900 border-b border-gray-800">
         <div className="container-site">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-4">
-            Three Certification Levels
-          </h2>
-          <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
-            Choose the certification that fits your level and preferred exam format — from entry-level to advanced with AI or human proctoring.
-          </p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Jr FSE */}
-            <div className="card-dark p-8">
-              <span className="badge-jr mb-4 block w-fit">Entry Level</span>
-              <h3 className="text-xl font-bold text-white mb-2">Jr. FSE Exam</h3>
-              <p className="text-3xl font-bold text-indigo-400 mb-4">$200</p>
-              <ul className="space-y-2 text-sm text-gray-400 mb-8">
-                <li>&#x2022; Browser-based online exam</li>
-                <li>&#x2022; 50 randomized questions</li>
-                <li>&#x2022; Timed — 90 seconds per question</li>
-                <li>&#x2022; Anti-cheat deterrents &amp; audit logging</li>
-                <li>&#x2022; One attempt per 90 days</li>
-                <li>&#x2022; PDF certificate if passed</li>
-                <li>&#x2022; Public verification link</li>
-              </ul>
-              <Link href="/certifications/junior" className="block w-full text-center px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors">
-                View Jr. FSE Exam Details
-              </Link>
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+            <div className="flex justify-center">
+              <Image
+                src="/book-cover.jpg"
+                alt="Mastering Uninterruptible Power Supplies — Field Service Engineering"
+                width={300}
+                height={390}
+                className="rounded-lg shadow-2xl shadow-blue-950/50"
+              />
             </div>
-
-            {/* FSE AI */}
-            <div className="card-dark p-8 border-purple-900/50">
-              <span className="inline-block text-xs font-semibold text-purple-400 bg-purple-950/50 border border-purple-800/50 px-2 py-0.5 rounded mb-4">AI Proctored</span>
-              <h3 className="text-xl font-bold text-white mb-2">FSE AI Exam</h3>
-              <p className="text-3xl font-bold text-purple-400 mb-4">$349</p>
-              <ul className="space-y-2 text-sm text-gray-400 mb-8">
-                <li>&#x2022; AI webcam face &amp; eye tracking</li>
-                <li>&#x2022; 50 randomized questions</li>
-                <li>&#x2022; Timed — 90 seconds per question</li>
-                <li>&#x2022; No scheduling — start anytime</li>
-                <li>&#x2022; Browser lockdown + AI monitoring</li>
-                <li>&#x2022; PDF certificate if passed</li>
-                <li>&#x2022; Public verification link</li>
-              </ul>
-              <Link href="/certifications/ai-proctored" className="block w-full text-center px-5 py-2.5 rounded-lg bg-purple-700 hover:bg-purple-600 text-white font-medium text-sm transition-colors">
-                View FSE AI Exam Details
-              </Link>
+            <div>
+              <p className="text-xs font-semibold text-indigo-400 uppercase tracking-wider mb-3">The Book</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                Mastering Uninterruptible Power Supplies,<br />Field Service Engineering
+              </h2>
+              <p className="text-gray-400 leading-relaxed mb-4 text-sm">
+                Written by Francis Aiello — who has held every position in this industry, from field service
+                associate to VP of Field Services — this book gives you the foundation that employers wish
+                every candidate walked in with.
+              </p>
+              <p className="text-gray-400 leading-relaxed mb-6 text-sm">
+                The Jr. FSE and FSE certification exams are based directly on this material.
+                The 24 training modules are built from this book chapter by chapter.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/book" className="px-5 py-2.5 rounded-lg bg-amber-700 hover:bg-amber-600 text-white font-semibold text-sm transition-colors">
+                  Buy Signed Copy — $69.99
+                </Link>
+                <a href="https://a.co/d/046t1AvW" target="_blank" rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-semibold text-sm transition-colors">
+                  Buy on Amazon
+                </a>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* FSE Human */}
-            <div className="card-dark p-8 border-amber-900/50">
-              <span className="badge-fse mb-4 block w-fit">Human Proctored</span>
-              <h3 className="text-xl font-bold text-white mb-2">FSE Exam</h3>
-              <p className="text-3xl font-bold text-amber-400 mb-4">$500</p>
-              <ul className="space-y-2 text-sm text-gray-400 mb-8">
-                <li>&#x2022; Proctored live by organization representative</li>
-                <li>&#x2022; 50 randomized questions</li>
-                <li>&#x2022; More difficult — scenario-based</li>
-                <li>&#x2022; Scheduling required</li>
-                <li>&#x2022; Strongest exam integrity</li>
-                <li>&#x2022; PDF certificate if passed</li>
-                <li>&#x2022; Public verification link</li>
-              </ul>
-              <Link href="/certifications/proctored" className="block w-full text-center px-5 py-2.5 rounded-lg bg-amber-700 hover:bg-amber-600 text-white font-medium text-sm transition-colors">
-                View FSE Exam Details
-              </Link>
+      {/* Certifications */}
+      <section className="section-pad border-b border-gray-800">
+        <div className="container-site max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-3">Certifications</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              A credential employers can verify
+            </h2>
+            <p className="text-gray-400 text-sm max-w-2xl mx-auto">
+              Every certificate is publicly verifiable. Employers can check a candidate's certificate number and confirm it's real.
+              These aren't participation trophies — they require genuine study and a controlled exam.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto">
+            <div className="card-dark p-6 flex flex-col">
+              <span className="badge-jr mb-3 w-fit">Jr. FSE</span>
+              <p className="font-bold text-white mb-1">Junior FSE Exam</p>
+              <p className="text-2xl font-mono font-bold text-indigo-400 mb-3">$199</p>
+              <p className="text-xs text-gray-400 flex-1 mb-4">50 questions, AI-proctored, browser-based. Entry-level knowledge credential.</p>
+              <Link href="/certifications/junior" className="block text-center px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors">View Details</Link>
+            </div>
+            <div className="card-dark p-6 flex flex-col border-purple-900/50">
+              <span className="inline-block text-xs font-semibold text-purple-400 bg-purple-950/50 border border-purple-800/50 px-2 py-0.5 rounded mb-3 w-fit">FSE AI</span>
+              <p className="font-bold text-white mb-1">FSE AI Proctored</p>
+              <p className="text-2xl font-mono font-bold text-purple-400 mb-3">$349</p>
+              <p className="text-xs text-gray-400 flex-1 mb-4">50 questions, AI webcam monitoring. Advanced level, no scheduling needed.</p>
+              <Link href="/certifications/ai-proctored" className="block text-center px-4 py-2 rounded-lg bg-purple-700 hover:bg-purple-600 text-white text-sm font-medium transition-colors">View Details</Link>
+            </div>
+            <div className="card-dark p-6 flex flex-col border-amber-900/50">
+              <span className="badge-fse mb-3 w-fit">FSE</span>
+              <p className="font-bold text-white mb-1">FSE Human Proctored</p>
+              <p className="text-2xl font-mono font-bold text-amber-400 mb-3">$649</p>
+              <p className="text-xs text-gray-400 flex-1 mb-4">Live proctor, identity confirmed. Strongest credential, scheduling required.</p>
+              <Link href="/certifications/proctored" className="block text-center px-4 py-2 rounded-lg bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium transition-colors">View Details</Link>
             </div>
           </div>
           <div className="text-center mt-6">
             <Link href="/certifications/compare" className="text-sm text-indigo-400 hover:text-indigo-300">
-              Compare all three certifications side-by-side &rarr;
+              Compare all certifications side-by-side →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Employer Value */}
-      <section className="section-pad bg-gray-900">
+      {/* For employers */}
+      <section className="section-pad bg-gray-900 border-b border-gray-800">
         <div className="container-site max-w-4xl mx-auto text-center">
+          <p className="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-3">For Employers</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Why Employers Value These Certifications
+            Stop training from zero. Hire people who already studied.
           </h2>
-          <p className="text-gray-400 leading-relaxed mb-6">
-            Employers hiring for UPS field service roles need a way to distinguish candidates who have
-            genuinely studied the fundamentals from those who have not. These certifications provide a
-            knowledge benchmark backed by a serious, controlled exam process.
+          <p className="text-gray-400 leading-relaxed mb-6 text-sm max-w-2xl mx-auto">
+            Employer team packages let you buy blocks of complete FSE certification bundles for your candidates —
+            Training Portal, proctored exam, and a signed copy of the book — shipped directly to each person.
+            5-seat and 10-seat packs available at significant per-seat savings.
           </p>
-          <Link href="/employers" className="inline-flex px-5 py-2.5 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-medium text-sm transition-colors">
-            Employer Resources &rarr;
-          </Link>
-        </div>
-      </section>
-
-      {/* Training Coming Soon */}
-      <section className="section-pad">
-        <div className="container-site text-center max-w-2xl mx-auto">
-          <span className="badge-jr mb-4 inline-block">Coming Soon</span>
-          <h2 className="text-2xl font-bold text-white mb-3">Online UPS Field Service Training</h2>
-          <p className="text-gray-400 mb-6">
-            Structured video and text modules covering UPS fundamentals, electrical theory, meter use,
-            batteries, troubleshooting, startup, commissioning, and exam preparation are in development.
-          </p>
-          <Link href="/training" className="text-sm text-indigo-400 hover:text-indigo-300">
-            Learn more about upcoming training &rarr;
+          <Link href="/employers" className="inline-block px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-semibold text-sm transition-colors">
+            View Employer Packages →
           </Link>
         </div>
       </section>
 
       {/* About */}
-      <section className="section-pad bg-gray-900">
-        <div className="container-site max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">About the Program</h2>
-          <p className="text-gray-400 leading-relaxed mb-4">
-            This platform is built on over two decades of hands-on UPS and critical power field service
-            experience — from field service associate work through engineering, supervision, management,
-            and director and vice president-level field service leadership.
+      <section className="section-pad border-b border-gray-800">
+        <div className="container-site max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Built by someone who lived it</h2>
+          <p className="text-gray-400 leading-relaxed mb-4 text-sm">
+            FSE Academy is built by Francis Aiello of FA Consulting and Recruiting — who spent 25+ years in the
+            UPS and critical power field service industry, holding every position from field service associate
+            through VP of Field Services. He's seen the talent gap from every angle: as the technician,
+            as the manager, and as the person doing the hiring.
           </p>
-          <p className="text-gray-400 leading-relaxed mb-6">
-            The certification exams are based directly on the book{' '}
-            <em>Mastering Uninterruptible Power Supplies, Field Service Engineering</em>, written to
-            give serious candidates the foundation they need before entering or advancing in this field.
+          <p className="text-gray-400 leading-relaxed mb-6 text-sm">
+            The goal is simple: help the industry find the qualified candidates it desperately needs,
+            while giving motivated young people a real path into a real career — without debt, without waiting.
           </p>
-          <div className="text-center">
-            <Link href="/about" className="text-sm text-indigo-400 hover:text-indigo-300">
-              Read the full about page &rarr;
-            </Link>
-          </div>
+          <Link href="/about" className="text-sm text-indigo-400 hover:text-indigo-300">
+            Read the full story →
+          </Link>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Final CTA */}
       <section className="section-pad">
         <div className="container-site text-center max-w-2xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Ready to Get Started?
+            Ready to start?
           </h2>
-          <p className="text-gray-400 mb-8">
-            Study the book. Pass the exam. Earn a credential that signals you took the time to learn the field.
+          <p className="text-gray-400 mb-8 text-sm leading-relaxed">
+            Get the Training Portal, study the modules, pass the certification exam.
+            Six months from now you could be employed in a career that pays well and lasts a lifetime.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/book" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition-colors">
-              Buy the Book
+          <div className="flex flex-wrap gap-3 justify-center">
+            <Link href="/training" className="px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition-colors">
+              Start Training — $149
             </Link>
-            <Link href="/certifications/junior" className="px-6 py-3 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold transition-colors">
-              Jr. FSE Exam — $200
+            <Link href="/certifications/junior" className="px-6 py-3 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold transition-colors text-sm">
+              Just the Exam — $199
             </Link>
           </div>
         </div>
