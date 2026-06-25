@@ -78,7 +78,7 @@ export default function DashboardPage() {
       if (data.ok) {
         setSchedDone(true);
       } else {
-        setSchedError(data.error ?? 'Something went wrong. Please try again.');
+        setSchedError(data.error ? 'Submission failed. Please try again or reach us from the Contact page.' : 'Something went wrong. Please try again.');
       }
     } catch {
       setSchedError('Request failed. Please try again.');
@@ -196,11 +196,11 @@ export default function DashboardPage() {
             ) : fseOrderStatus ? (
               schedDone ? (
                 <div className="rounded-lg bg-green-950/40 border border-green-800/40 px-4 py-3 text-sm text-green-400 leading-relaxed">
-                  Your information has been sent to the admin team. Someone will be in touch with you within 24 hours to schedule your proctored test.
+                  Submitted successfully! Someone will be in touch with you soon to schedule your proctored test.
                 </div>
               ) : (
                 <form onSubmit={handleScheduleRequest} className="space-y-2">
-                  <p className="text-xs text-gray-500 mb-3">Provide your phone number and our team will contact you within 24 hours to schedule your session.</p>
+                  <p className="text-xs text-gray-500 mb-3">Provide your phone number and our team will contact you to schedule your session.</p>
                   <input
                     type="tel"
                     placeholder="Best phone number to reach you"

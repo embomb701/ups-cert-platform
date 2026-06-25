@@ -13,6 +13,7 @@ const navLinks = [
   { label: 'Employers', href: '/employers' },
   { label: 'Training', href: '/training' },
   { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export function Header() {
@@ -44,20 +45,20 @@ export function Header() {
           </nav>
 
           {/* Auth / Dashboard */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="flex items-center gap-3">
             {!loading && (
               <>
                 {user ? (
                   <>
                     <Link
                       href="/dashboard"
-                      className="text-sm text-gray-300 hover:text-white transition-colors"
+                      className="hidden lg:inline text-sm text-gray-300 hover:text-white transition-colors"
                     >
                       Dashboard
                     </Link>
                     <button
                       onClick={() => signOut()}
-                      className="text-sm text-gray-400 hover:text-white transition-colors"
+                      className="hidden lg:inline text-sm text-gray-400 hover:text-white transition-colors"
                     >
                       Sign Out
                     </button>
@@ -67,7 +68,7 @@ export function Header() {
                     href="/login"
                     className="px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors"
                   >
-                    Sign In
+                    Login
                   </Link>
                 )}
               </>
