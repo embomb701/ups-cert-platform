@@ -22,13 +22,31 @@ const AuthContext = createContext<AuthContextValue>({
   isProctor: false,
 });
 
+function setAuthCookie(token: string) {
+  document.cookie = `firebase-token=${token}; path=/; max-age=3500; SameSite=Lax`;
+}
+
+function clearAuthCookie() {
+  document.cookie = 'firebase-token=; path=/; max-age=0; SameSite=Lax';
+}
+
+export async function refreshAuthCookie(): Promise<string | null> {
+  if (!auth.currentUser) return null;
+  try {
+    const token = await auth.currentUser.getIdToken(true);
+    setAuthCookie(token);
+    return token;
+  } catch {
+    return null;
+  }
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Safety timeout — if Firebase never fires, stop blocking the UI
     const timeout = setTimeout(() => setLoading(false), 4000);
 
     if (!auth) {
@@ -39,22 +57,49 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
       clearTimeout(timeout);
-      setUser(firebaseUser);
-      setLoading(false); // unblock UI immediately — don't wait for Firestore
+
       if (firebaseUser) {
+        // Set the cookie BEFORE updating state so that any navigation
+        // triggered by state change finds the cookie already in place.
+        try {
+          const token = await firebaseUser.getIdToken();
+          setAuthCookie(token);
+        } catch {
+          // Token fetch failed — cookie stays stale; server will redirect to login
+        }
+
+        setUser(firebaseUser);
+        setLoading(false);
+
         try {
           const snap = await getDoc(doc(db, 'users', firebaseUser.uid));
-          if (snap.exists()) {
-            setProfile(snap.data() as UserProfile);
-          }
+          if (snap.exists()) setProfile(snap.data() as UserProfile);
         } catch {
-          // Firestore not available yet — profile stays null
+          // Firestore unavailable — profile stays null
         }
       } else {
+        clearAuthCookie();
+        setUser(null);
         setProfile(null);
+        setLoading(false);
       }
     });
-    return () => { unsub(); clearTimeout(timeout); };
+
+    // Refresh the token cookie every 50 minutes (tokens expire after 60 min)
+    const refreshInterval = setInterval(async () => {
+      if (auth.currentUser) {
+        try {
+          const token = await auth.currentUser.getIdToken(true);
+          setAuthCookie(token);
+        } catch {/* ignore */}
+      }
+    }, 50 * 60 * 1000);
+
+    return () => {
+      unsub();
+      clearTimeout(timeout);
+      clearInterval(refreshInterval);
+    };
   }, []);
 
   const isAdmin = profile?.role === 'admin';

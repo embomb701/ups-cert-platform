@@ -2,7 +2,7 @@
 // Core shared types for UPS Certification Platform
 // ============================================================
 
-export type ExamLevel = 'jr_fse' | 'fse_ai' | 'fse';
+export type ExamLevel = 'jr_fse' | 'fse';
 export type UserRole = 'user' | 'admin' | 'proctor';
 export type CertificateStatus = 'valid' | 'expired' | 'revoked' | 'under_review';
 export type PurchaseStatus = 'pending' | 'complete' | 'refunded' | 'failed';
@@ -63,13 +63,18 @@ export interface Product {
 
 export const PRODUCTS = {
   TRAINING_COURSE: 'training_course',
-  JR_FSE_EXAM: 'jr_fse_exam',
+  JR_FSE_TEST_AI: 'jr_fse_test_ai',
+  JR_FSE_TEST_HUMAN: 'jr_fse_test_human',
   FSE_PROCTORED_EXAM: 'fse_proctored_exam',
+  PKG_TRAINING_JR_AI: 'pkg_training_jr_ai',
+  PKG_TRAINING_JR_HUMAN: 'pkg_training_jr_human',
+  PKG_TRAINING_FSE: 'pkg_training_fse',
   EMPLOYER_5PACK: 'employer_5pack',
   EMPLOYER_10PACK: 'employer_10pack',
   SIGNED_BOOK: 'signed_book',
 } as const;
 
+// Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts
 export type ProductId = (typeof PRODUCTS)[keyof typeof PRODUCTS];
 
 // ---------------------------------------------------------------

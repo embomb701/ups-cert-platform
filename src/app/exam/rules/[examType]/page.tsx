@@ -61,12 +61,9 @@ export default function ExamRulesPage() {
   const [candidateName, setCandidateName] = useState('');
 
   const isJr = examType === 'jr_fse';
-  const isAi = examType === 'fse_ai';
-  const rules = isJr ? RULES_JR : isAi ? RULES_FSE_AI : RULES_FSE;
+  const rules = isJr ? RULES_JR : RULES_FSE;
   const examLabel = isJr
     ? 'Junior UPS Field Service Certification'
-    : isAi
-    ? 'UPS FSE Certification — AI Proctored'
     : 'UPS Field Service Certification';
 
   const handleStart = () => {

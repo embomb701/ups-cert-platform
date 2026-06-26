@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     const examLevel = body.examLevel as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse_ai', 'fse'].includes(examLevel)) {
+    if (!['jr_fse', 'fse'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -121,20 +121,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    if (examLevel === 'fse_ai') {
-      // FSE AI: verify purchase (access granted by webhook, no scheduling needed)
-      const accessSnap = await adminDb
-        .collection('users')
-        .doc(uid)
-        .collection('examAccess')
-        .doc('fse_ai')
-        .get();
-
-      if (!accessSnap.exists || !accessSnap.data()?.granted) {
-        return NextResponse.json({ error: 'No valid FSE AI Proctored exam purchase found.' }, { status: 403 });
-      }
-    }
-
     if (examLevel === 'fse') {
       // FSE: verify proctor has unlocked this session
       const readyOrder = await adminDb
@@ -186,7 +172,7 @@ export async function POST(req: NextRequest) {
       email,
       displayName,
       candidateName: candidateName || displayName || email,
-      productId: examLevel === 'jr_fse' ? 'jr_fse_exam' : examLevel === 'fse_ai' ? 'fse_ai_exam' : 'fse_proctored_exam',
+      productId: examLevel === 'jr_fse' ? 'jr_fse_test_ai' : 'fse_proctored_exam',
       examLevel,
       status: 'in_progress',
       startedAt: FieldValue.serverTimestamp(),
@@ -203,8 +189,8 @@ export async function POST(req: NextRequest) {
       suspiciousRiskLevel: 'low',
       flaggedForReview: false,
       cooldownUntil: examLevel === 'jr_fse' ? cooldownUntil : null,
-      proctored: examLevel === 'fse' || examLevel === 'fse_ai',
-      proctoringType: examLevel === 'fse_ai' ? 'ai' : examLevel === 'fse' ? 'human' : null,
+      proctored: examLevel === 'fse',
+      proctoringType: examLevel === 'fse' ? 'human' : null,
     });
 
     // Set IP lock for Jr. FSE
@@ -212,7 +198,7 @@ export async function POST(req: NextRequest) {
       await adminDb.collection('ipExamLocks').add({
         ipHash,
         examLevel: 'jr_fse',
-        productId: 'jr_fse_exam',
+        productId: 'jr_fse_test_ai',
         userId: uid,
         email,
         attemptId,
@@ -231,7 +217,7 @@ export async function POST(req: NextRequest) {
       ),
       choiceOrder,
       timePerQuestion: TIME_PER_QUESTION,
-      proctored: examLevel === 'fse' || examLevel === 'fse_ai',
+      proctored: examLevel === 'fse',
     });
   } catch (err: any) {
     console.error('Exam start error:', err);

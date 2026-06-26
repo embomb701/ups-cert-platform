@@ -24,8 +24,7 @@ export async function selectExamQuestions(
   examLevel: ExamLevel,
   count = QUESTIONS_PER_EXAM
 ): Promise<Question[]> {
-  // fse_ai is AI-proctored but uses the same question bank as the human-proctored fse exam
-  const bankLevel = examLevel === 'fse_ai' ? 'fse' : examLevel;
+  const bankLevel = examLevel;
   const snap = await adminDb
     .collection('questionBank')
     .where('examLevel', '==', bankLevel)

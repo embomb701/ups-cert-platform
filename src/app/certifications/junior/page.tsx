@@ -164,9 +164,14 @@ export default function JuniorCertPage() {
                 </div>
 
                 <PurchaseButton
-                  productId="jr_fse_exam"
-                  label="Test-Out Exam — $299 (one attempt)"
-                  className="block w-full px-6 py-2.5 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
+                  productId="jr_fse_test_ai"
+                  label="Test-Out (AI Proctored) — $199"
+                  className="block w-full px-6 py-2.5 rounded-lg bg-purple-700 hover:bg-purple-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
+                />
+                <PurchaseButton
+                  productId="jr_fse_test_human"
+                  label="Test-Out (Human Proctored) — $299"
+                  className="block w-full px-6 py-2.5 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
                 />
 
                 <div className="relative flex items-center gap-3">

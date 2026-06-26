@@ -32,6 +32,7 @@ export async function signInWithGoogle(): Promise<User> {
     // Firestore write failed — login still succeeds
   }
 
+  // Return the full User so callers can call getIdToken() to set the server cookie
   return user;
 }
 

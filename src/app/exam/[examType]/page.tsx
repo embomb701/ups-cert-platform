@@ -170,7 +170,7 @@ export default function ExamPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <span className={session.examLevel === 'jr_fse' ? 'badge-jr' : 'badge-fse'}>
-              {session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'fse_ai' ? 'FSE (AI Proctored)' : 'FSE'} Exam
+              {session.examLevel === 'jr_fse' ? 'Jr. FSE' : 'FSE'} Exam
             </span>
           </div>
             <ExamTimer
@@ -221,7 +221,7 @@ export default function ExamPage() {
 
   return (
     <AntiCheatWrapper attemptId={session.attemptId}>
-      {(session.examLevel === 'fse_ai' || session.examLevel === 'jr_fse') ? (
+      {session.examLevel === 'jr_fse' ? (
         <AIProctorWrapper attemptId={session.attemptId}>
           {examContent}
         </AIProctorWrapper>

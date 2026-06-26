@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [signing, setSigning] = useState(false);
 
+  // Returning user: cookie already set by AuthProvider before this effect fires
   useEffect(() => {
     if (!loading && user) router.replace('/training');
   }, [user, loading, router]);
@@ -20,7 +21,10 @@ export default function LoginPage() {
     setSigning(true);
     setError(null);
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      // Get the token and set the cookie synchronously before navigating
+      const token = await result.getIdToken();
+      document.cookie = `firebase-token=${token}; path=/; max-age=3500; SameSite=Lax`;
       router.replace('/training');
     } catch (err: unknown) {
       const e = err as { message?: string };
@@ -39,37 +43,36 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gray-900 flex">
-      {/* Left panel — value prop */}
+      {/* Left panel */}
       <div className="hidden lg:flex flex-col justify-center px-16 bg-gray-950 flex-1 border-r border-gray-800">
         <div className="max-w-md">
           <div className="inline-block px-3 py-1 bg-blue-900/40 border border-blue-700 text-blue-300 text-xs font-semibold rounded-full mb-6">
             Career in 6 months · No college required
           </div>
           <h2 className="text-3xl font-bold text-white mb-4 leading-tight">
-            A $55K–$100K career that the industry is <span className="text-blue-400">desperate</span> to fill.
+            A <span className="text-blue-400">$55K–$100K</span> career the industry is desperate to fill.
           </h2>
           <p className="text-gray-400 leading-relaxed mb-8">
             Hospitals, data centers, and military installations run 24/7 on Uninterruptible Power Supplies.
-            There are not enough qualified technicians to service them. FSE Academy closes that gap —
-            with a structured 6-month program built by a working engineer, not an institution.
+            FSE Academy trains and certifies you to service them — structured 6-month program, no degree required.
           </p>
           <div className="space-y-4">
             {[
-              { icon: '✓', text: '24-module, 6-month structured training program' },
-              { icon: '✓', text: 'Jr. FSE certification exam included at completion' },
-              { icon: '✓', text: '$1,499 total — less than one month of college tuition' },
-              { icon: '✓', text: 'Credential recognized by employers in critical power' },
+              '24-module, 6-month structured training program',
+              'Jr. FSE certification exam included at completion',
+              '$1,499 total — less than one month of college tuition',
+              'Credential recognized by employers in critical power',
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
-                <span className="text-green-400 font-bold text-lg mt-0.5">{item.icon}</span>
-                <span className="text-gray-300">{item.text}</span>
+                <span className="text-green-400 font-bold text-lg mt-0.5">✓</span>
+                <span className="text-gray-300 text-sm">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Right panel — sign in */}
+      {/* Right panel */}
       <div className="flex flex-col justify-center items-center px-8 flex-1 max-w-lg mx-auto w-full">
         <div className="w-full max-w-sm">
           <Link href="/" className="inline-block mb-8 text-gray-400 hover:text-white text-sm transition-colors">
@@ -114,7 +117,8 @@ export default function LoginPage() {
 
           <div className="mt-8 p-4 rounded-lg bg-gray-800 border border-gray-700">
             <p className="text-xs text-gray-400 text-center leading-relaxed">
-              After signing in, you will be taken to your training portal where you can enroll in the 6-Month Training Course or take the Jr. FSE Test-Out Exam.
+              After signing in, you will be taken to your training portal where you can enroll in the
+              6-Month Training Course or take a Jr. FSE or FSE certification exam.
             </p>
           </div>
         </div>
