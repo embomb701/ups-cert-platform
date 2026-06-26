@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { checkIsAdmin } from '@/lib/utils/isAdmin';
 
 export const dynamic = 'force-dynamic';
-
-function isAdmin(email: string): boolean {
-  const admins = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase());
-  return admins.includes(email.toLowerCase());
-}
 
 const EVENT_WEIGHTS: Record<string, number> = {
   tab_switch: 3,
@@ -50,7 +46,7 @@ export async function GET(
     if (!idToken) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const decoded = await adminAuth.verifyIdToken(idToken).catch(() => null);
-    if (!decoded?.email || !isAdmin(decoded.email)) {
+    if (!decoded || !(await checkIsAdmin(decoded.uid, decoded.email ?? ''))) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth } from '@/lib/firebase/admin';
+import { checkIsAdmin } from '@/lib/utils/isAdmin';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,13 +11,10 @@ export async function GET(req: NextRequest) {
 
   try {
     const decoded = await adminAuth.verifyIdToken(idToken).catch(() => null);
-    if (!decoded?.email) return NextResponse.json({ isAdmin: false });
+    if (!decoded) return NextResponse.json({ isAdmin: false });
 
-    const admins = (process.env.ADMIN_EMAILS ?? '')
-      .split(',')
-      .map((e) => e.trim().toLowerCase());
-
-    return NextResponse.json({ isAdmin: admins.includes(decoded.email.toLowerCase()) });
+    const isAdmin = await checkIsAdmin(decoded.uid, decoded.email ?? '');
+    return NextResponse.json({ isAdmin });
   } catch {
     return NextResponse.json({ isAdmin: false });
   }

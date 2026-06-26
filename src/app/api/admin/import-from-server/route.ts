@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { FieldValue } from 'firebase-admin/firestore';
 
 export const dynamic = 'force-dynamic';
@@ -12,11 +13,6 @@ import jrFseAll from '../../../../../data/questions/jr-fse-all-questions.json';
 import bookJrFse from '../../../../../data/questions/book-jr-fse-questions.json';
 import fscSample from '../../../../../data/questions/fsc-sample.json';
 import bookFse from '../../../../../data/questions/book-fse-questions.json';
-
-function isAdmin(email: string): boolean {
-  const admins = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase());
-  return admins.includes(email.toLowerCase());
-}
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -43,7 +39,7 @@ export async function POST(req: NextRequest) {
     if (!idToken) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const decoded = await adminAuth.verifyIdToken(idToken);
-    if (!decoded.email || !isAdmin(decoded.email)) {
+    if (!(await checkIsAdmin(decoded.uid, decoded.email ?? ''))) {
       return NextResponse.json({ error: 'Forbidden — admin only' }, { status: 403 });
     }
 

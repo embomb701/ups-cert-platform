@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { FieldValue } from 'firebase-admin/firestore';
 
 export const dynamic = 'force-dynamic';
-
-function isAdmin(email: string): boolean {
-  const admins = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase());
-  return admins.includes(email.toLowerCase());
-}
 
 // GET — list all proctored orders
 export async function GET(req: NextRequest) {
@@ -17,7 +13,7 @@ export async function GET(req: NextRequest) {
     if (!idToken) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const decoded = await adminAuth.verifyIdToken(idToken);
-    if (!decoded.email || !isAdmin(decoded.email)) {
+    if (!(await checkIsAdmin(decoded.uid, decoded.email ?? ''))) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
@@ -48,7 +44,7 @@ export async function POST(req: NextRequest) {
     if (!idToken) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const decoded = await adminAuth.verifyIdToken(idToken);
-    if (!decoded.email || !isAdmin(decoded.email)) {
+    if (!(await checkIsAdmin(decoded.uid, decoded.email ?? ''))) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

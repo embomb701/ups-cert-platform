@@ -24,7 +24,7 @@ export default function AdminPage() {
           <div>
             <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
             <p className="text-sm text-gray-500 mt-1">
-              Access restricted to admin email addresses defined in ADMIN_EMAILS env variable.
+              Access restricted to admins (ADMIN_EMAILS env var or Firestore isAdmin flag).
             </p>
           </div>
         </div>

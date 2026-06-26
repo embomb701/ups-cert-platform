@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { checkIsAdmin } from '@/lib/utils/isAdmin';
 
 export const dynamic = 'force-dynamic';
-
-function isAdmin(email: string): boolean {
-  const admins = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim().toLowerCase());
-  return admins.includes(email.toLowerCase());
-}
 
 export async function GET(req: NextRequest) {
   try {
@@ -16,7 +12,7 @@ export async function GET(req: NextRequest) {
 
     const decoded = await adminAuth.verifyIdToken(idToken).catch(() => null);
     if (!decoded) return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    if (!decoded.email || !isAdmin(decoded.email)) {
+    if (!(await checkIsAdmin(decoded.uid, decoded.email ?? ''))) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
