@@ -26,13 +26,17 @@ export default async function ModulePage({ params }: Props) {
   const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
   if (!accessDoc.exists || !accessDoc.data()?.granted) redirect('/training');
 
+  const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
+  const userEmail = (await adminAuth.getUser(uid)).email?.toLowerCase() ?? '';
+  const isAdmin = adminEmails.includes(userEmail);
+
   const mod = getModule(moduleId);
   if (!mod) notFound();
 
-  // Check 1-week rule from previous module
+  // Check 1-week rule from previous module — bypassed for admins
   let locked = false;
   let unlockDate: Date | null = null;
-  if (mod.num > 1) {
+  if (!isAdmin && mod.num > 1) {
     const prevMod = ALL_MODULES.find((m) => m.num === mod.num - 1);
     if (prevMod) {
       const prevProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(prevMod.id).get();

@@ -14,6 +14,8 @@ export async function POST(req: NextRequest) {
 
     const decoded = await adminAuth.verifyIdToken(token);
     const uid = decoded.uid;
+    const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
+    const isAdmin = adminEmails.includes(decoded.email?.toLowerCase() ?? '');
 
     const { moduleId, slideIndex, answers } = await req.json();
     if (typeof moduleId !== 'string' || typeof slideIndex !== 'number' || !Array.isArray(answers)) {
@@ -28,18 +30,20 @@ export async function POST(req: NextRequest) {
 
     const slide = mod.slides[slideIndex];
 
-    // Verify 5-minute minimum time
+    // Verify 5-minute minimum time (bypassed for admins)
     const progressDoc = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(moduleId).get();
     const data = progressDoc.data() ?? {};
-    const slideKey = `slide_${slideIndex}_startedAt`;
-    const startedAt = data[slideKey];
-    if (!startedAt) {
-      return NextResponse.json({ error: 'Slide not started' }, { status: 400 });
-    }
-    const startedDate = startedAt.toDate ? startedAt.toDate() : new Date(startedAt);
-    const elapsedSeconds = (Date.now() - startedDate.getTime()) / 1000;
-    if (elapsedSeconds < SLIDE_MIN_SECONDS) {
-      return NextResponse.json({ error: 'Minimum 5 minutes required', secondsRemaining: Math.ceil(SLIDE_MIN_SECONDS - elapsedSeconds) }, { status: 403 });
+    if (!isAdmin) {
+      const slideKey = `slide_${slideIndex}_startedAt`;
+      const startedAt = data[slideKey];
+      if (!startedAt) {
+        return NextResponse.json({ error: 'Slide not started' }, { status: 400 });
+      }
+      const startedDate = startedAt.toDate ? startedAt.toDate() : new Date(startedAt);
+      const elapsedSeconds = (Date.now() - startedDate.getTime()) / 1000;
+      if (elapsedSeconds < SLIDE_MIN_SECONDS) {
+        return NextResponse.json({ error: 'Minimum 5 minutes required', secondsRemaining: Math.ceil(SLIDE_MIN_SECONDS - elapsedSeconds) }, { status: 403 });
+      }
     }
 
     // Score the section quiz (must be 100%)

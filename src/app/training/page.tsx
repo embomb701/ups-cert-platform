@@ -20,10 +20,14 @@ export default async function TrainingPage() {
     redirect('/login');
   }
 
+  const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
+  const userEmail = (await adminAuth.getUser(uid)).email?.toLowerCase() ?? '';
+  const isAdmin = adminEmails.includes(userEmail);
+
   const accessDoc = await adminDb
     .collection('users').doc(uid)
     .collection('examAccess').doc('training_portal').get();
-  const hasAccess = accessDoc.exists && accessDoc.data()?.granted;
+  const hasAccess = isAdmin || (accessDoc.exists && accessDoc.data()?.granted);
 
   if (!hasAccess) {
     return <TrainingPurchaseOptions />;
@@ -43,7 +47,7 @@ export default async function TrainingPage() {
     const slidesDone = completedSlides.length;
 
     let locked = false;
-    if (idx > 0) {
+    if (!isAdmin && idx > 0) {
       const prevMod = ALL_MODULES[idx - 1];
       const prevP = progress[prevMod.id] ?? {};
       if (!prevP.completedAt || !prevP.passed) {

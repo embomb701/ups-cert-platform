@@ -21,14 +21,15 @@ interface Props {
   slideIndex: number;
   slide: Slide;
   nextUrl: string;
+  skipTimer?: boolean;
 }
 
 const REQUIRED_SECONDS = 300;
 
-export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl }: Props) {
-  const [secondsLeft, setSecondsLeft] = useState(REQUIRED_SECONDS);
+export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, skipTimer = false }: Props) {
+  const [secondsLeft, setSecondsLeft] = useState(skipTimer ? 0 : REQUIRED_SECONDS);
   const [timerStarted, setTimerStarted] = useState(false);
-  const [timerDone, setTimerDone] = useState(false);
+  const [timerDone, setTimerDone] = useState(skipTimer);
   const [showQuiz, setShowQuiz] = useState(false);
   const [answers, setAnswers] = useState<(number | null)[]>(new Array(slide.quiz.length).fill(null));
   const [submitted, setSubmitted] = useState(false);
@@ -131,19 +132,27 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl }:
 
   return (
     <div className="space-y-8">
-      {/* Timer bar */}
-      <div className="rounded-lg bg-gray-800 border border-gray-700 p-4 flex items-center justify-between">
-        <span className="text-sm text-gray-400">Minimum reading time</span>
-        <span className={`text-lg font-mono font-bold ${timerDone ? 'text-green-400' : 'text-yellow-400'}`}>
-          {timerDone ? 'Ready' : formatTime(secondsLeft)}
-        </span>
-        <div className="w-40 h-2 bg-gray-700 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-yellow-400 transition-all duration-1000"
-            style={{ width: `${Math.max(0, ((REQUIRED_SECONDS - secondsLeft) / REQUIRED_SECONDS) * 100)}%`, backgroundColor: timerDone ? '#4ade80' : undefined }}
-          />
+      {/* Timer bar — hidden for admin bypass */}
+      {!skipTimer && (
+        <div className="rounded-lg bg-gray-800 border border-gray-700 p-4 flex items-center justify-between">
+          <span className="text-sm text-gray-400">Minimum reading time</span>
+          <span className={`text-lg font-mono font-bold ${timerDone ? 'text-green-400' : 'text-yellow-400'}`}>
+            {timerDone ? 'Ready' : formatTime(secondsLeft)}
+          </span>
+          <div className="w-40 h-2 bg-gray-700 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-yellow-400 transition-all duration-1000"
+              style={{ width: `${Math.max(0, ((REQUIRED_SECONDS - secondsLeft) / REQUIRED_SECONDS) * 100)}%`, backgroundColor: timerDone ? '#4ade80' : undefined }}
+            />
+          </div>
         </div>
-      </div>
+      )}
+      {skipTimer && (
+        <div className="rounded-lg bg-gray-800 border border-gray-700/50 p-3 flex items-center gap-2">
+          <span className="text-xs text-amber-400 font-semibold">ADMIN PREVIEW</span>
+          <span className="text-xs text-gray-500">— timer bypassed, progress still recorded</span>
+        </div>
+      )}
 
       {/* Slide content */}
       <div>

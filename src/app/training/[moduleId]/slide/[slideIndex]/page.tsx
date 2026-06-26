@@ -28,6 +28,10 @@ export default async function SlidePage({ params }: Props) {
   const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
   if (!accessDoc.exists || !accessDoc.data()?.granted) redirect('/training');
 
+  const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
+  const userEmail = (await adminAuth.getUser(uid)).email?.toLowerCase() ?? '';
+  const isAdmin = adminEmails.includes(userEmail);
+
   const mod = getModule(moduleId);
   if (!mod) notFound();
   if (isNaN(slideIndex) || slideIndex < 0 || slideIndex >= mod.slides.length) notFound();
@@ -58,6 +62,7 @@ export default async function SlidePage({ params }: Props) {
           slideIndex={slideIndex}
           slide={slide}
           nextUrl={nextUrl}
+          skipTimer={isAdmin}
         />
       </div>
     </div>

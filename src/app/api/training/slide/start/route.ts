@@ -12,6 +12,8 @@ export async function POST(req: NextRequest) {
 
     const decoded = await adminAuth.verifyIdToken(token);
     const uid = decoded.uid;
+    const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
+    const isAdmin = adminEmails.includes(decoded.email?.toLowerCase() ?? '');
 
     const { moduleId, slideIndex } = await req.json();
     if (typeof moduleId !== 'string' || typeof slideIndex !== 'number') {
@@ -30,8 +32,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Access denied' }, { status: 403 });
     }
 
-    // Verify module unlock (1-week rule between modules)
-    if (mod.num > 1) {
+    // Verify module unlock (1-week rule between modules) — bypassed for admins
+    if (!isAdmin && mod.num > 1) {
       const prevMod = (await import('@/data/index')).ALL_MODULES.find((m) => m.num === mod.num - 1);
       if (prevMod) {
         const prevProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(prevMod.id).get();
@@ -47,8 +49,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Verify previous slides completed
-    if (slideIndex > 0) {
+    // Verify previous slides completed — bypassed for admins
+    if (!isAdmin && slideIndex > 0) {
       const modProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(moduleId).get();
       const data = modProgress.data() ?? {};
       const completedSlides: number[] = data.completedSlides ?? [];
