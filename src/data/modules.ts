@@ -5,11 +5,58 @@ export interface QuizQ {
   exp: string;
 }
 
+export interface PracticalChoice {
+  id: string;
+  label: string;
+  sublabel?: string;
+}
+
+export interface PracticalMeter {
+  id: string;
+  label: string;
+  detail: string;
+  icon: string;
+}
+
+export interface PracticalDialMode {
+  id: string;
+  label: string;
+  symbol: string;
+}
+
+export type PracticalStepType = 'meter_select' | 'dial_select' | 'lead_placement' | 'scenario';
+
+export interface PracticalStep {
+  id: string;
+  type: PracticalStepType;
+  title: string;
+  prompt: string;
+  meters?: PracticalMeter[];
+  correctMeter?: string;
+  dialModes?: PracticalDialMode[];
+  correctDial?: string;
+  redOptions?: PracticalChoice[];
+  blackOptions?: PracticalChoice[];
+  correctRed?: string;
+  correctBlack?: string;
+  scenarioOptions?: PracticalChoice[];
+  correctScenario?: string;
+  hint?: string;
+  correctFeedback: string;
+  incorrectFeedback: string;
+}
+
+export interface PracticalExercise {
+  intro: string;
+  steps: PracticalStep[];
+}
+
 export interface Slide {
   title: string;
   body: string[];
   keyPoints: string[];
   quiz: QuizQ[];
+  practical?: PracticalExercise;
 }
 
 export interface TrainingModule {
@@ -529,6 +576,283 @@ export const MODULES: TrainingModule[] = [
           { q: "If the same resistor's resistance drops to 100Ω due to a fault, dissipated power becomes:", a: ['50W', '100W', '150W', '25W'], correct: 1, exp: "P = V²/R = 10000/100 = 100W — double its rating. It will overheat and fail." },
           { q: "During a service visit, which calculation helps you verify a UPS is not overloaded?", a: ['Battery string voltage check', 'Measuring ambient temperature', 'Total load kW vs. nameplate kVA × PF', 'Checking inverter output frequency'], correct: 2, exp: "Compare total connected load (kW) to the UPS nameplate kVA rating × power factor. If load > capacity, it is overloaded." },
         ],
+      },
+      {
+        title: 'Test Equipment Selection',
+        body: [
+          'Field service engineers use three primary test instruments: the Digital Multimeter (DMM), the Clamp Meter, and the Insulation Resistance Tester (megohmmeter). Selecting the wrong tool gives invalid readings, damages equipment, or risks injury. Know which tool to use before reaching into your bag.',
+          'The Digital Multimeter (DMM) is the most versatile: it measures AC/DC voltage, resistance, continuity, diode forward voltage, small inline current (up to 10A), frequency, and capacitance. A high-quality DMM (Fluke 87V, Klein MM700, Ideal 61-340) is your primary troubleshooting tool. For voltage and resistance, the meter is always connected IN PARALLEL with the component being measured.',
+          'The Clamp Meter measures current by clamping around a single conductor and reading the magnetic field that current creates — no circuit interruption required. Essential for live, high-current circuits (30A, 100A, 400A+). Most clamp meters also measure AC voltage and resistance. Critical note: standard clamp meters only read AC current. DC clamp meters must include a Hall-effect sensor and be specifically selected for DC work.',
+          'The Insulation Resistance Tester (megohmmeter, "Megger") applies a high DC test voltage (500V, 1000V, or 2500V) between a conductor and ground and measures the resulting leakage current to calculate insulation resistance in megaohms (MΩ). Good insulation shows hundreds or thousands of MΩ. Values below 1 MΩ indicate significant degradation. Critical for aged cables, battery interconnects, and transformer windings before re-energizing.',
+        ],
+        keyPoints: [
+          'DMM: voltage, resistance, continuity, small inline current — most versatile daily tool',
+          'Clamp meter: non-contact current measurement — no circuit interruption, safe on live cables',
+          'Megger: high-voltage insulation resistance test (MΩ) — reveals breakdown not visible at low voltage',
+          'Standard clamp meters only read AC current — verify Hall-effect sensor if DC current needed',
+          'Selecting the wrong tool wastes time, gives invalid readings, or damages equipment',
+        ],
+        quiz: [
+          { q: 'Which meter measures current without breaking the circuit?', a: ['DMM in inline ammeter mode', 'Clamp meter', 'Insulation resistance tester', 'Power quality analyzer'], correct: 1, exp: 'A clamp meter wraps around a single conductor and reads the magnetic field to calculate current — no circuit interruption.' },
+          { q: 'An insulation resistance test applies a test voltage of:', a: ['1.5V (internal battery)', '9–12V (DMM levels)', '500–1000V (high voltage)', 'The operating line voltage'], correct: 2, exp: 'Insulation testers apply 500V, 1000V, or higher test voltage to stress insulation and reveal high-voltage breakdown.' },
+          { q: 'Good cable insulation resistance should read:', a: ['Near 0 MΩ (low resistance is best)', 'Under 1 MΩ', 'Above 1 MΩ — typically hundreds of MΩ', 'Exactly 1 MΩ'], correct: 2, exp: 'Healthy insulation shows very high resistance (hundreds or thousands of MΩ). Values below 1 MΩ indicate serious degradation.' },
+          { q: 'Standard inductive clamp meters can only measure:', a: ['DC current', 'AC current', 'Both AC and DC equally', 'Resistance and voltage only'], correct: 1, exp: 'Standard clamp meters use inductive sensing and only work with AC current. DC clamp meters require a Hall-effect sensor.' },
+          { q: 'A DMM measures voltage and resistance with the meter connected in _____ with the component.', a: ['Series', 'Parallel', 'Ground bypass loop', 'Bypass mode'], correct: 1, exp: 'Voltage and resistance are measured with the meter IN PARALLEL across the component — touching both terminals simultaneously.' },
+          { q: 'A DMM ammeter is connected in _____ with the load to measure current.', a: ['Parallel', 'Series (circuit must be broken to insert it)', 'Ground reference only', 'Bypass'], correct: 1, exp: 'Current measurement requires the DMM to be in SERIES — the circuit is broken and the meter inserted so all load current flows through it.' },
+          { q: 'To check if a 15-year-old transformer winding has degraded insulation, use a:', a: ['DMM in Ω mode', 'Clamp meter', 'Insulation resistance tester (megger)', 'True-RMS power quality analyzer'], correct: 2, exp: 'Insulation degradation shows up only at high voltage — a DMM\'s 1.5V test current cannot detect breakdown that occurs at 240V+ operating voltage.' },
+          { q: 'For UPS field service, the gold-standard DMM brand is:', a: ['RadioShack', 'Fluke', 'Harbor Freight', 'Craftsman'], correct: 1, exp: 'Fluke DMMs (especially the 87V) are the industry standard for quality, safety ratings (CAT III/IV), and measurement accuracy.' },
+          { q: 'You need to verify 120V AC output from a UPS. The best tool is:', a: ['Clamp meter (voltage mode)', 'DMM in V AC mode', 'Insulation resistance tester', 'Either equally — just pick one'], correct: 1, exp: 'A DMM in V AC mode is the most precise and reliable for voltage measurements. Clamp meters can measure voltage but typically with less resolution.' },
+          { q: 'MΩ on an insulation tester readout stands for:', a: ['Milli-ohms (thousandths)', 'Mega-ohms (millions of ohms)', 'Micro-ohms (millionths)', 'Milli-amperes'], correct: 1, exp: 'MΩ = megaohms = millions of ohms. Healthy insulation shows hundreds or thousands of MΩ. Capital M = mega (10^6).' },
+        ],
+        practical: {
+          intro: 'Before taking any measurement, you must select the right instrument. The wrong choice wastes time, gives invalid readings, or can damage your meter. Work through these three field scenarios.',
+          steps: [
+            {
+              id: 'tool-1',
+              type: 'meter_select',
+              title: 'Scenario A: Live 200A Cable Current Check',
+              prompt: 'A UPS output cable carries approximately 200A. You need to verify the current matches the nameplate load. The circuit cannot be de-energized. Which tool do you use?',
+              meters: [
+                { id: 'dmm', label: 'Digital Multimeter', detail: 'Inline ammeter mode requires breaking the circuit to insert it in series — dangerous and impractical at 200A', icon: '🔢' },
+                { id: 'clamp', label: 'Clamp Meter', detail: 'Clamps around one conductor — reads magnetic field without any circuit interruption — safe for live, high-current cables', icon: '🔄' },
+                { id: 'megger', label: 'Insulation Tester (Megger)', detail: 'Applies 500V–2500V test voltage to measure insulation resistance — not designed to measure operating current', icon: '⚡' },
+              ],
+              correctMeter: 'clamp',
+              hint: 'Which tool can measure current on a live circuit without breaking or disconnecting anything?',
+              correctFeedback: 'Correct! A clamp meter clamps around a single conductor and reads the magnetic field produced by current flow. No disconnection — ideal for live, high-current cables. For accurate readings, clamp around ONE conductor only (not both in a cable bundle).',
+              incorrectFeedback: 'Incorrect. A DMM ammeter requires breaking the 200A circuit to insert in series — extremely dangerous. A Megger applies high test voltage and is exclusively for insulation resistance tests, not operating current.',
+            },
+            {
+              id: 'tool-2',
+              type: 'meter_select',
+              title: 'Scenario B: Aged Battery Cable Insulation',
+              prompt: 'A 14-year-old 240V DC battery interconnect cable shows surface cracking on its jacket. Before re-energizing after maintenance, you need to verify the insulation has not broken down. Which tool?',
+              meters: [
+                { id: 'dmm', label: 'DMM (Ω mode)', detail: 'Resistance mode applies only 1.5V–9V internally. Cannot detect insulation that breaks down under operating voltage (240V)', icon: '🔢' },
+                { id: 'clamp', label: 'Clamp Meter', detail: 'Measures AC/DC current and voltage — has no insulation testing function at high voltage', icon: '🔄' },
+                { id: 'megger', label: 'Insulation Tester (Megger)', detail: 'Applies 500V, 1000V, or 2500V test voltage — detects insulation breakdown that only appears under high-voltage stress', icon: '⚡' },
+              ],
+              correctMeter: 'megger',
+              hint: 'Insulation failure may only occur at the actual operating voltage — not at the 1.5V that a standard ohmmeter applies.',
+              correctFeedback: 'Correct! Insulation resistance testing (megger test) applies high test voltage to reveal breakdown not detectable at low voltage. A 240V cable needs testing at 500V or 1000V to verify it will hold at operating conditions.',
+              incorrectFeedback: 'A DMM in Ω mode applies only 1.5–9V — far too low to stress insulation rated for 240V. Degraded insulation may pass a low-voltage test and fail immediately when energized. Only a megger applies enough voltage to reveal the fault.',
+            },
+            {
+              id: 'tool-3',
+              type: 'meter_select',
+              title: 'Scenario C: Reading 48V DC Battery String Voltage',
+              prompt: 'You need to measure the voltage of a 48V DC UPS battery string during a routine inspection. Which tool is the best choice?',
+              meters: [
+                { id: 'dmm', label: 'Digital Multimeter (V mode)', detail: 'Measures AC and DC voltage with high precision — purpose-built for battery voltage checks', icon: '🔢' },
+                { id: 'clamp', label: 'Clamp Meter (V mode)', detail: 'Can measure voltage, but most are optimized for current — less precise for DC voltage than a dedicated DMM', icon: '🔄' },
+                { id: 'megger', label: 'Insulation Tester', detail: 'Not designed for voltage measurement — applies its own high voltage, which will damage the meter if connected to a battery', icon: '⚡' },
+              ],
+              correctMeter: 'dmm',
+              hint: 'This is a straightforward DC voltage measurement — use the tool designed for precision voltage readings.',
+              correctFeedback: 'Correct! A DMM in V DC mode is the go-to tool for battery voltage checks. Red probe to positive terminal, black to negative. The display shows true DC voltage with millivolt precision. Never use a megger for voltage measurement.',
+              incorrectFeedback: 'While a clamp meter CAN measure voltage, the DMM is the preferred tool for precision DC readings. The megger is dangerous here — it applies its own high test voltage and must never be connected to an energized source like a battery.',
+            },
+          ],
+        },
+      },
+      {
+        title: 'Voltage Measurement — Mode and Lead Placement',
+        body: [
+          'Voltage measurement is the most common task in UPS field service. You measure battery strings, DC bus voltage, AC input, and output voltage multiple times per service call. Two critical decisions before you touch anything: (1) Is this AC or DC? Set the correct mode. (2) Are the leads in the right jacks?',
+          'AC voltage mode (V~) is required for: utility input (120V, 208V, 240V, 480V), UPS output, bypass line, and any transformer secondary that feeds AC loads. DC voltage mode (V─) is required for: battery strings (12V, 24V, 48V, 240V), DC bus (240V, 400V DC), and all control circuit voltages. Using AC mode on a DC source (or vice versa) gives a reading of zero or nonsense values — not an error message.',
+          'Lead placement rule that never changes for voltage and resistance: BLACK lead → COM jack, RED lead → VΩmA jack. The COM jack is the common return for all measurements. The VΩmA jack handles voltage (all ranges), resistance, and small current. The 10A jack is exclusively for current measurement and should never have a lead plugged in during voltage measurement.',
+          'Range selection: auto-ranging DMMs (the standard today) automatically select the correct range when you connect. If using a manual-ranging meter, always start at the highest range and step down — connecting a 10V meter to 480V will destroy the meter immediately. On auto-range meters, simply select V AC or V DC, connect the probes, and read the stable value.',
+        ],
+        keyPoints: [
+          'V AC (~) for utility, UPS output, bypass, and transformer secondary voltages',
+          'V DC (─) for batteries, DC bus, and all direct current measurements',
+          'For voltage AND resistance: BLACK → COM always, RED → VΩmA always',
+          'Wrong AC/DC mode gives 0V reading — not an error, just silent wrong answer',
+          '10A jack is ONLY for current — never plug red lead there for voltage',
+        ],
+        quiz: [
+          { q: 'To measure 48V DC battery string voltage, set the meter to:', a: ['V AC (~)', 'V DC (─)', 'Ω resistance', 'A DC current'], correct: 1, exp: 'V DC mode for all direct current sources. Battery voltage is constant polarity DC — V AC mode would show 0V.' },
+          { q: 'To measure 120V AC UPS output, set the meter to:', a: ['V DC (─)', 'V AC (~)', 'Ω resistance', 'A AC current'], correct: 1, exp: 'V AC mode for all alternating current. UPS output, utility input, and bypass feeds are all AC.' },
+          { q: 'For all voltage measurements, the BLACK lead goes to:', a: ['VΩmA jack', 'COM jack', '10A jack', 'Any available jack'], correct: 1, exp: 'BLACK lead ALWAYS → COM jack for voltage and resistance. No exceptions.' },
+          { q: 'For all voltage measurements, the RED lead goes to:', a: ['COM jack', 'VΩmA jack', '10A jack', 'Whichever is open'], correct: 1, exp: 'RED lead → VΩmA jack for all voltage and resistance measurements. Only moves to 10A for current measurement.' },
+          { q: 'You set the meter to V DC and connect to a 120V AC source. The display shows:', a: ['120V (correct)', 'Double the AC voltage', 'Near 0V or unstable reading', 'Infinite resistance'], correct: 2, exp: 'V DC mode on an AC source shows near-zero or fluctuating values — it cannot detect alternating polarity. No error is generated, just a wrong reading.' },
+          { q: 'The 10A input jack on a DMM is used only for:', a: ['Voltage measurements above 100V', 'Current measurements where red lead must be moved there', 'All resistance measurements', 'Auto-ranging mode'], correct: 1, exp: 'The 10A jack is exclusively for current (ammeter) measurements. Using it accidentally for voltage shorts the fuse and may destroy the meter.' },
+          { q: 'An auto-ranging DMM in V AC mode connected to 208V three-phase should:', a: ['Require the user to manually select the 200V range', 'Display OL (over limit)', 'Automatically select the correct range and display ~208V', 'Show 120V line-to-neutral'], correct: 2, exp: 'Auto-ranging meters automatically step to the appropriate measurement range. Select mode, connect, and read.' },
+          { q: 'Measuring DC bus voltage with red on the negative terminal gives:', a: ['Correct positive reading', 'A negative reading — probes are reversed', 'Damage to the meter', 'Zero volts'], correct: 1, exp: 'A negative DC reading means probes are reversed (red on –, black on +). Swap them for the correct positive reading.' },
+          { q: 'Before measuring voltage at a live UPS terminal, which action is NOT a required safety step?', a: ['Verify meter is set to correct AC/DC mode', 'Confirm leads are in correct jacks', 'Turn off the UPS to de-energize before measuring voltage', 'Wear appropriate PPE for the voltage level'], correct: 2, exp: 'Voltage measurement is performed on live circuits — de-energizing defeats the purpose. Safe practice requires correct mode, correct leads, and appropriate PPE.' },
+          { q: 'DC bus voltage in a large double-conversion UPS is typically:', a: ['12V DC', '48V DC', '120V DC', '240V to 400V DC'], correct: 3, exp: 'Large UPS systems commonly use 240V or 400V DC internal buses. The 400V DC bus matches the peak of European 230V AC for efficient transformerless inverter design.' },
+        ],
+        practical: {
+          intro: 'Voltage measurement requires the right mode (AC vs DC) AND correct lead placement. Getting either wrong means a 0V reading with no error message. Practice these critical steps before your first service call.',
+          steps: [
+            {
+              id: 'dial-ac',
+              type: 'dial_select',
+              title: 'Step 1: Measuring AC Output — Set the Dial',
+              prompt: 'You are about to measure the output voltage of a UPS rated for 120V AC. The UPS is energized and running normally. Select the correct meter mode.',
+              dialModes: [
+                { id: 'vdc', label: 'V DC', symbol: '─' },
+                { id: 'vac', label: 'V AC', symbol: '~' },
+                { id: 'ohm', label: 'Resistance', symbol: 'Ω' },
+                { id: 'aac', label: 'A AC (current)', symbol: '~A' },
+                { id: 'adc', label: 'A DC (current)', symbol: '─A' },
+                { id: 'hz', label: 'Frequency', symbol: 'Hz' },
+              ],
+              correctDial: 'vac',
+              hint: 'UPS output is alternating current — the same type as a standard wall outlet.',
+              correctFeedback: 'Correct! V AC (~) mode for all alternating current voltage. This covers UPS output, utility input, bypass feeds, and transformer secondaries. V DC mode would show 0V on this AC source.',
+              incorrectFeedback: 'Incorrect. AC (alternating current) requires V AC (~) mode. V DC mode cannot detect alternating polarity and displays near-zero. Always match the measurement type: AC sources → V AC, DC sources → V DC.',
+            },
+            {
+              id: 'leads-v',
+              type: 'lead_placement',
+              title: 'Step 2: Voltage Measurement — Connect the Leads',
+              prompt: 'The meter is in V AC mode. Before touching any terminals, verify your lead placement. Where does each lead plug into the meter?',
+              redOptions: [
+                { id: 'com', label: 'COM', sublabel: 'Common / return for all measurements' },
+                { id: 'voma', label: 'VΩmA', sublabel: 'Voltage, resistance, small current' },
+                { id: 'ua', label: 'µA/mA', sublabel: 'Very small current only (< 200mA)' },
+                { id: 'a10', label: '10A', sublabel: 'High current — fused, amps only' },
+              ],
+              blackOptions: [
+                { id: 'com', label: 'COM', sublabel: 'Common / return for all measurements' },
+                { id: 'voma', label: 'VΩmA', sublabel: 'Voltage, resistance, small current' },
+                { id: 'ua', label: 'µA/mA', sublabel: 'Very small current only (< 200mA)' },
+                { id: 'a10', label: '10A', sublabel: 'High current — fused, amps only' },
+              ],
+              correctRed: 'voma',
+              correctBlack: 'com',
+              hint: 'Black goes to the COMMON jack. Red goes to the jack labeled for voltage, ohms, and milliamps.',
+              correctFeedback: 'Correct! BLACK → COM, RED → VΩmA for all voltage and resistance measurements. This lead placement never changes for V AC, V DC, or Ω mode. The 10A jack is only for current measurement.',
+              incorrectFeedback: 'Incorrect lead placement. For ALL voltage and resistance measurements: BLACK → COM, RED → VΩmA. This is the universal setup. Only switch the red lead to 10A when switching to current (ammeter) mode.',
+            },
+            {
+              id: 'dial-dc',
+              type: 'dial_select',
+              title: 'Step 3: Battery String Voltage — Set the Dial',
+              prompt: 'Now you are moving to the battery cabinet to measure a 48V DC battery string. What mode do you set?',
+              dialModes: [
+                { id: 'vdc', label: 'V DC', symbol: '─' },
+                { id: 'vac', label: 'V AC', symbol: '~' },
+                { id: 'ohm', label: 'Resistance', symbol: 'Ω' },
+                { id: 'aac', label: 'A AC (current)', symbol: '~A' },
+                { id: 'adc', label: 'A DC (current)', symbol: '─A' },
+                { id: 'hz', label: 'Frequency', symbol: 'Hz' },
+              ],
+              correctDial: 'vdc',
+              hint: 'Batteries produce direct current with fixed polarity. They never alternate.',
+              correctFeedback: 'Correct! V DC (─) mode for all battery and DC bus measurements. If the reading is negative, your probes are reversed — red on the negative terminal. Swap them for the correct positive reading.',
+              incorrectFeedback: 'Incorrect. Batteries produce DC voltage — it never alternates. V AC mode would display near-zero on a DC battery string. Use V DC (─) for all battery, DC bus, and control circuit DC measurements.',
+            },
+          ],
+        },
+      },
+      {
+        title: 'Resistance and Current Measurement',
+        body: [
+          'Resistance measurement (ohmmeter mode, Ω) has one absolute rule: the circuit MUST be de-energized. The ohmmeter works by passing a small test current from its own internal battery through the component and measuring the response. Any external voltage from a live circuit overrides this — the meter displays garbage values and the input circuit can be destroyed instantly.',
+          'To measure resistance safely: (1) De-energize and isolate the circuit — open all breakers, disconnect at both ends if possible. (2) Discharge any capacitors (discharge time varies — check the service manual). (3) Set meter to Ω. (4) Connect RED → VΩmA, BLACK → COM — same jacks as voltage. (5) Touch probes to both ends of the component. (6) Read the stable value. OL (over limit / overload) means open circuit. Near 0Ω means short circuit.',
+          'Current measurement with a DMM (inline ammeter mode) requires breaking the circuit to insert the meter in series. The critical detail: before switching to current mode, you MUST move the red lead from VΩmA to the 10A jack (for currents up to 10A). The VΩmA jack has a small internal fuse — typically 200mA to 500mA. Connecting a circuit with more than that current to VΩmA instantly blows the fuse. Many technicians leave the meter unusable by forgetting to switch jacks.',
+          'Clamp meters bypass the inline series problem — clamp the jaws around ONE conductor only. Clamping around both conductors (hot and neutral together) cancels the magnetic fields and gives a reading of zero. Standard inductive clamp meters only measure AC current. For DC current (battery charger output, DC distribution), verify your clamp meter specifically supports DC measurement with a Hall-effect sensor.',
+        ],
+        keyPoints: [
+          'NEVER measure resistance (Ω) on a live circuit — external voltage destroys the meter',
+          'Resistance uses same jacks as voltage: RED → VΩmA, BLACK → COM',
+          'OL in Ω mode = open circuit; near 0Ω = short circuit',
+          'Current (inline): RED must move to 10A jack — VΩmA fuse blows at 200–500mA',
+          'Clamp meter: clamp around ONE conductor only — two conductors cancel to zero',
+        ],
+        quiz: [
+          { q: 'Before measuring resistance (Ω) of a component, you MUST first:', a: ['Set the highest resistance range', 'De-energize and isolate the circuit completely', 'Move the red lead to the 10A jack', 'Set the meter to V AC mode first'], correct: 1, exp: 'CRITICAL: The circuit must be dead before Ω measurement. The ohmmeter applies its own test voltage — external voltage from a live circuit destroys the meter and gives wrong readings.' },
+          { q: 'Why can you NOT measure resistance on a live circuit?', a: ['The circuit changes resistance when energized', 'Ohmmeter applies its own test voltage — external voltage conflicts, gives false readings and damages the meter', 'Resistance is only relevant when de-energized', 'You actually can — this is a myth'], correct: 1, exp: 'The ohmmeter uses its own internal battery (1.5V–9V) to push test current. Adding external voltage to this creates an unpredictable conflict that destroys the measurement circuit.' },
+          { q: 'A resistance measurement shows "OL" (or ∞). This means:', a: ['The circuit is shorted (zero resistance)', 'Normal resistance within range', 'Open circuit — resistance is infinite (broken path)', 'The internal battery is dead'], correct: 2, exp: 'OL = over limit = infinite resistance = open circuit. The current path is broken — wire disconnected, fuse blown, contact failed open.' },
+          { q: 'For inline DC current measurement (up to 8A), the RED lead goes to:', a: ['VΩmA jack (same as voltage)', 'COM jack', '10A jack (different from voltage mode!)', 'Ground terminal'], correct: 2, exp: 'Current measurement: RED → 10A jack — NOT VΩmA. This is the most important lead placement distinction to memorize.' },
+          { q: 'You forget to move the red lead from VΩmA to 10A before measuring 5A current. What happens?', a: ['Meter reads half the correct current', 'Nothing — VΩmA works for any measurement', 'The internal fuse blows — meter shows no reading', 'Meter reads twice the actual current'], correct: 2, exp: 'The VΩmA jack has a tiny fuse (200mA–500mA). Connecting 5A through it destroys the fuse immediately. Meter shows blank or zero until fuse is replaced.' },
+          { q: 'Continuity mode (beeper) activates when resistance is:', a: ['Above 1000Ω', 'Above 100Ω', 'Below a low threshold (good connection)', 'Exactly 0Ω'], correct: 2, exp: 'Continuity beeps when resistance is below the threshold (typically 30–50Ω). Beep = good connection. No beep = open circuit.' },
+          { q: 'To check if a fuse is blown, you should use:', a: ['V AC mode on a live circuit', 'Ω or continuity mode — circuit must be de-energized', 'A DC current mode', 'Hz frequency mode'], correct: 1, exp: 'Test fuses with Ω or continuity on a de-energized circuit. Good fuse: near 0Ω, beeps. Blown fuse: OL, no beep. Never test fuses in-circuit on a live supply.' },
+          { q: 'When clamping a clamp meter around a 2-conductor cable (hot + neutral together), the reading shows:', a: ['The sum of both currents', 'The correct load current', 'Near zero — the magnetic fields cancel', 'Double the load current'], correct: 2, exp: 'Current flows out on one conductor and back on the other — the equal and opposite magnetic fields cancel inside the clamp. Always clamp ONE conductor only.' },
+          { q: 'Standard inductive clamp meters cannot measure DC current because:', a: ['DC is too slow for the clamp electronics', 'DC creates a constant (non-alternating) magnetic field that standard inductive jaws cannot sense', 'DC current is always too large for clamp meters', 'DMMs are required for all DC measurements'], correct: 1, exp: 'Inductive clamp meters detect the alternating magnetic field of AC current. DC creates a constant field — no induction occurs. DC clamp meters use a Hall-effect sensor to detect constant magnetic fields.' },
+          { q: 'The correct procedure for inline current measurement with a DMM is:', a: ['Set A mode → connect in parallel → read', 'Move red to 10A → set A mode → break circuit → insert in series → read', 'Leave red in VΩmA → set A mode → connect → read', 'Use V mode with a known shunt resistor only'], correct: 1, exp: 'Sequence: (1) Move red lead to 10A jack. (2) Set mode to A (AC or DC). (3) Break the circuit at a safe point. (4) Insert meter in series. (5) Re-energize and read.' },
+        ],
+        practical: {
+          intro: 'Resistance and current measurement have distinct safety rules and different lead placements. A wrong choice can blow an internal fuse, destroy the meter, or injure you. Practice the critical decisions here.',
+          steps: [
+            {
+              id: 'hot-dead',
+              type: 'scenario',
+              title: 'Safety Check: Hot or Dead Circuit?',
+              prompt: 'You need to measure the contact resistance of a battery disconnect switch. You have your meter set to Ω (resistance). What must be true before connecting?',
+              scenarioOptions: [
+                { id: 'live-ok', label: 'Circuit can be live — resistance mode handles it automatically' },
+                { id: 'dead', label: 'Circuit MUST be de-energized (dead) — never measure resistance on live circuits' },
+                { id: 'one-lead', label: 'Disconnect only one end of the switch — the other can stay connected to live' },
+                { id: 'low-v', label: 'Only needs to be dead if the voltage is above 100V' },
+              ],
+              correctScenario: 'dead',
+              hint: 'Remember: an ohmmeter applies its OWN test voltage to measure resistance. What happens if the circuit also has external voltage on it?',
+              correctFeedback: 'Correct! ALWAYS de-energize before measuring resistance. The ohmmeter applies its own small test voltage (internal battery). External circuit voltage on top of this gives completely false readings and can destroy the meter input stage in milliseconds.',
+              incorrectFeedback: 'DANGEROUS. The ohmmeter applies its own test voltage to measure resistance. If the circuit is live, you have two voltage sources in conflict — the reading is meaningless AND the external voltage can destroy the meter input. The circuit MUST be dead.',
+            },
+            {
+              id: 'leads-ohm',
+              type: 'lead_placement',
+              title: 'Resistance Measurement Lead Placement',
+              prompt: 'Circuit is now de-energized. Meter is set to Ω. Where do the leads plug in to measure resistance?',
+              redOptions: [
+                { id: 'com', label: 'COM', sublabel: 'Common / return' },
+                { id: 'voma', label: 'VΩmA', sublabel: 'Voltage, ohms, milliamps' },
+                { id: 'a10', label: '10A', sublabel: 'High current input only' },
+              ],
+              blackOptions: [
+                { id: 'com', label: 'COM', sublabel: 'Common / return' },
+                { id: 'voma', label: 'VΩmA', sublabel: 'Voltage, ohms, milliamps' },
+                { id: 'a10', label: '10A', sublabel: 'High current input only' },
+              ],
+              correctRed: 'voma',
+              correctBlack: 'com',
+              hint: 'Resistance uses the same lead jacks as voltage measurement.',
+              correctFeedback: 'Correct! Resistance measurement: RED → VΩmA, BLACK → COM — same as voltage. The VΩmA jack handles all non-current measurements (voltage AC, voltage DC, resistance, continuity, diode, frequency).',
+              incorrectFeedback: 'Resistance uses the same jacks as voltage: RED → VΩmA, BLACK → COM. The VΩmA jack is the universal measurement input. Only move the red lead to 10A for current (ammeter) mode.',
+            },
+            {
+              id: 'leads-amps',
+              type: 'lead_placement',
+              title: 'Current Measurement — Lead Placement (Different from Voltage!)',
+              prompt: 'The circuit is re-energized. You need to measure 7A DC battery charger output current inline. IMPORTANT: lead placement changes for current. Where do the leads plug in?',
+              redOptions: [
+                { id: 'com', label: 'COM', sublabel: 'Common / return' },
+                { id: 'voma', label: 'VΩmA', sublabel: 'Voltage, ohms — fused at ~200mA, WILL BLOW for 7A' },
+                { id: 'a10', label: '10A', sublabel: 'Current up to 10A — correct for ammeter mode' },
+              ],
+              blackOptions: [
+                { id: 'com', label: 'COM', sublabel: 'Common / return' },
+                { id: 'voma', label: 'VΩmA', sublabel: 'Voltage, ohms — not for current' },
+                { id: 'a10', label: '10A', sublabel: 'Current up to 10A' },
+              ],
+              correctRed: 'a10',
+              correctBlack: 'com',
+              hint: 'Current measurement uses a DIFFERENT red jack than voltage and resistance. Look at which jack is labeled for amps.',
+              correctFeedback: 'Correct! For current measurement: RED → 10A jack, BLACK → COM. This is the critical difference from voltage/resistance mode. The 10A jack bypasses the small fuse in VΩmA. Forgetting to switch blows the internal fuse and disables the meter.',
+              incorrectFeedback: 'IMPORTANT: For current, RED MUST go to the 10A jack — NOT VΩmA! The VΩmA input is fused at only 200mA–500mA. Plugging 7A through it blows the fuse instantly and renders the meter inoperative. RED → 10A, BLACK → COM for all ammeter (current) measurements.',
+            },
+            {
+              id: 'clamp-placement',
+              type: 'scenario',
+              title: 'Clamp Meter Technique',
+              prompt: 'You are using a clamp meter on a 2-wire power cable (hot + neutral together in a rubber jacket). You clamp the jaws around the entire cable. The meter reads 0.0A but you know there is load current. What went wrong?',
+              scenarioOptions: [
+                { id: 'dead-battery', label: 'The clamp meter battery is dead — replace it' },
+                { id: 'both-conductors', label: 'Clamping around both conductors (hot + neutral) cancels the magnetic fields — must clamp ONE conductor only' },
+                { id: 'dc-current', label: 'Standard clamp meters cannot read DC current — but this is AC so that is not the issue' },
+                { id: 'wrong-mode', label: 'The meter is in voltage mode, not current mode' },
+              ],
+              correctScenario: 'both-conductors',
+              hint: 'Current flows OUT on one conductor and returns on the other. Think about what that means for the magnetic fields inside the clamp.',
+              correctFeedback: 'Correct! Current flows out on hot (+) and returns on neutral (–). These equal and opposite currents create equal and opposite magnetic fields that cancel inside the clamp, giving 0A. ALWAYS clamp around ONE conductor only — separate the conductors if needed.',
+              incorrectFeedback: 'The issue is clamping both conductors simultaneously. The outgoing and returning currents create equal and opposite magnetic fields that cancel inside the clamp — perfect cancellation gives 0A reading. Always separate conductors and clamp around ONE wire only.',
+            },
+          ],
+        },
       },
     ],
     test: [

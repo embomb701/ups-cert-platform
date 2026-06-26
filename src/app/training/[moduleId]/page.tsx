@@ -110,7 +110,7 @@ export default async function ModulePage({ params }: Props) {
                       <p className="text-gray-500 text-sm">{slide.quiz.length} questions · 5 min minimum</p>
                     </div>
                   </div>
-                  {(done || i <= startSlide) && (
+                  {(isAdmin || done || i <= startSlide) && (
                     <Link href={`/training/${moduleId}/slide/${i}`} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${done ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' : 'bg-blue-600 hover:bg-blue-500 text-white'}`}>
                       {done ? 'Review' : 'Start'}
                     </Link>

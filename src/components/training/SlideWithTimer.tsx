@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import PracticalActivity from './PracticalActivity';
+import type { PracticalExercise } from '@/data/modules';
 
 interface QuizQ {
   q: string;
@@ -14,6 +16,7 @@ interface Slide {
   body: string[];
   keyPoints: string[];
   quiz: QuizQ[];
+  practical?: PracticalExercise;
 }
 
 interface Props {
@@ -27,6 +30,10 @@ interface Props {
 const REQUIRED_SECONDS = 300;
 
 export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, skipTimer = false }: Props) {
+  // A slide with a practical exercise gates the reading material until the exercise is done
+  const hasPractical = !!slide.practical;
+  const [practicalDone, setPracticalDone] = useState(!hasPractical);
+
   const [secondsLeft, setSecondsLeft] = useState(skipTimer ? 0 : REQUIRED_SECONDS);
   const [timerStarted, setTimerStarted] = useState(false);
   const [timerDone, setTimerDone] = useState(skipTimer);
@@ -134,17 +141,20 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
     <div className="space-y-8">
       {/* Timer bar — hidden for admin bypass */}
       {!skipTimer && (
-        <div className="rounded-lg bg-gray-800 border border-gray-700 p-4 flex items-center justify-between">
-          <span className="text-sm text-gray-400">Minimum reading time</span>
-          <span className={`text-lg font-mono font-bold ${timerDone ? 'text-green-400' : 'text-yellow-400'}`}>
-            {timerDone ? 'Ready' : formatTime(secondsLeft)}
-          </span>
-          <div className="w-40 h-2 bg-gray-700 rounded-full overflow-hidden">
+        <div className="rounded-lg bg-gray-800 border border-gray-700 p-4 flex items-center justify-between gap-4">
+          <span className="text-sm text-gray-400 shrink-0">Minimum reading time</span>
+          <div className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
             <div
-              className="h-full bg-yellow-400 transition-all duration-1000"
-              style={{ width: `${Math.max(0, ((REQUIRED_SECONDS - secondsLeft) / REQUIRED_SECONDS) * 100)}%`, backgroundColor: timerDone ? '#4ade80' : undefined }}
+              className="h-full rounded-full transition-all duration-1000"
+              style={{
+                width: `${Math.max(0, ((REQUIRED_SECONDS - secondsLeft) / REQUIRED_SECONDS) * 100)}%`,
+                backgroundColor: timerDone ? '#4ade80' : '#facc15',
+              }}
             />
           </div>
+          <span className={`text-lg font-mono font-bold shrink-0 ${timerDone ? 'text-green-400' : 'text-yellow-400'}`}>
+            {timerDone ? 'Ready' : formatTime(secondsLeft)}
+          </span>
         </div>
       )}
       {skipTimer && (
@@ -154,103 +164,151 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
         </div>
       )}
 
-      {/* Slide content */}
-      <div>
-        <h2 className="text-2xl font-bold text-white mb-4">{slide.title}</h2>
+      {/* PRACTICAL EXERCISE — shown first, gates reading material */}
+      {hasPractical && !practicalDone && (
         <div className="space-y-4">
-          {slide.body.map((para, i) => (
-            <p key={i} className="text-gray-300 leading-relaxed">{para}</p>
-          ))}
+          <PracticalActivity
+            exercise={slide.practical!}
+            onComplete={() => setPracticalDone(true)}
+          />
         </div>
-      </div>
-
-      {/* Key points */}
-      <div className="rounded-lg bg-blue-900/30 border border-blue-700 p-5">
-        <h3 className="text-blue-300 font-semibold mb-3">Key Points</h3>
-        <ul className="space-y-2">
-          {slide.keyPoints.map((point, i) => (
-            <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
-              <span className="text-blue-400 mt-1">•</span>
-              <span>{point}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Section quiz toggle */}
-      {timerDone && !showQuiz && (
-        <button
-          onClick={() => setShowQuiz(true)}
-          className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors"
-        >
-          Take Section Quiz (10 Questions)
-        </button>
       )}
 
-      {!timerDone && (
-        <p className="text-center text-gray-500 text-sm">Section quiz will unlock when the timer reaches 0.</p>
-      )}
-
-      {/* Quiz */}
-      {showQuiz && (
-        <div className="space-y-6">
-          <h3 className="text-xl font-bold text-white">Section Quiz</h3>
-          {slide.quiz.map((q, qi) => (
-            <div key={qi} className={`rounded-lg border p-5 space-y-3 ${submitted && results ? (results[qi].correct ? 'border-green-700 bg-green-900/20' : 'border-red-700 bg-red-900/20') : 'border-gray-700 bg-gray-800'}`}>
-              <p className="text-white font-medium">{qi + 1}. {q.q}</p>
-              <div className="space-y-2">
-                {q.a.map((option, ai) => {
-                  let btnClass = 'w-full text-left px-4 py-2 rounded border text-sm transition-colors ';
-                  if (submitted && results) {
-                    if (ai === results[qi].correctAnswer) btnClass += 'border-green-500 bg-green-900/40 text-green-300';
-                    else if (ai === answers[qi] && !results[qi].correct) btnClass += 'border-red-500 bg-red-900/40 text-red-300';
-                    else btnClass += 'border-gray-700 bg-gray-700/50 text-gray-400';
-                  } else {
-                    if (answers[qi] === ai) btnClass += 'border-blue-500 bg-blue-900/40 text-white';
-                    else btnClass += 'border-gray-600 bg-gray-700 text-gray-300 hover:border-gray-500';
-                  }
-                  return (
-                    <button key={ai} className={btnClass} onClick={() => handleAnswer(qi, ai)} disabled={submitted}>
-                      {['A', 'B', 'C', 'D'][ai]}. {option}
-                    </button>
-                  );
-                })}
-              </div>
-              {submitted && results && (
-                <p className="text-sm text-gray-400 italic">{results[qi].explanation}</p>
-              )}
+      {/* READING CONTENT — shown after practical is complete (or immediately if no practical) */}
+      {practicalDone && (
+        <>
+          <div>
+            <h2 className="text-2xl font-bold text-white mb-4">{slide.title}</h2>
+            <div className="space-y-4">
+              {slide.body.map((para, i) => (
+                <p key={i} className="text-gray-300 leading-relaxed">{para}</p>
+              ))}
             </div>
-          ))}
+          </div>
 
-          {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+          {/* Key points */}
+          <div className="rounded-lg bg-blue-900/30 border border-blue-700 p-5">
+            <h3 className="text-blue-300 font-semibold mb-3">Key Points</h3>
+            <ul className="space-y-2">
+              {slide.keyPoints.map((point, i) => (
+                <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
+                  <span className="text-blue-400 mt-1 shrink-0">•</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {!submitted && (
+          {/* Quiz toggle */}
+          {timerDone && !showQuiz && (
             <button
-              onClick={handleSubmit}
-              disabled={loading || answers.some((a) => a === null)}
-              className="w-full py-3 bg-green-600 hover:bg-green-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+              onClick={() => setShowQuiz(true)}
+              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors"
             >
-              {loading ? 'Submitting...' : 'Submit Answers'}
+              Take Section Quiz ({slide.quiz.length} Questions)
             </button>
           )}
 
-          {submitted && results && (
-            <div className={`rounded-lg p-5 text-center ${results.every((r) => r.correct) ? 'bg-green-900/40 border border-green-700' : 'bg-red-900/40 border border-red-700'}`}>
-              {results.every((r) => r.correct) ? (
-                <p className="text-green-300 font-bold text-lg">Perfect score! Proceeding to next section...</p>
-              ) : (
-                <div className="space-y-3">
-                  <p className="text-red-300 font-bold text-lg">
-                    {results.filter((r) => r.correct).length}/{results.length} correct — you must score 100%.
-                  </p>
-                  <button onClick={handleRetry} className="px-6 py-2 bg-yellow-600 hover:bg-yellow-500 text-white font-semibold rounded-lg transition-colors">
-                    Retry Quiz
-                  </button>
+          {!timerDone && (
+            <p className="text-center text-gray-500 text-sm">
+              Section quiz unlocks when the timer reaches 0.
+            </p>
+          )}
+
+          {/* Quiz */}
+          {showQuiz && (
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold text-white">Section Quiz</h3>
+              {slide.quiz.map((q, qi) => (
+                <div
+                  key={qi}
+                  className={`rounded-lg border p-5 space-y-3 ${
+                    submitted && results
+                      ? results[qi].correct
+                        ? 'border-green-700 bg-green-900/20'
+                        : 'border-red-700 bg-red-900/20'
+                      : 'border-gray-700 bg-gray-800'
+                  }`}
+                >
+                  <p className="text-white font-medium">{qi + 1}. {q.q}</p>
+                  <div className="space-y-2">
+                    {q.a.map((option, ai) => {
+                      let btnClass =
+                        'w-full text-left px-4 py-2 rounded border text-sm transition-colors ';
+                      if (submitted && results) {
+                        if (ai === results[qi].correctAnswer)
+                          btnClass += 'border-green-500 bg-green-900/40 text-green-300';
+                        else if (ai === answers[qi] && !results[qi].correct)
+                          btnClass += 'border-red-500 bg-red-900/40 text-red-300';
+                        else btnClass += 'border-gray-700 bg-gray-700/50 text-gray-400';
+                      } else {
+                        if (answers[qi] === ai)
+                          btnClass += 'border-blue-500 bg-blue-900/40 text-white';
+                        else
+                          btnClass +=
+                            'border-gray-600 bg-gray-700 text-gray-300 hover:border-gray-500';
+                      }
+                      return (
+                        <button
+                          key={ai}
+                          className={btnClass}
+                          onClick={() => handleAnswer(qi, ai)}
+                          disabled={submitted}
+                        >
+                          {['A', 'B', 'C', 'D'][ai]}. {option}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {submitted && results && (
+                    <p className="text-sm text-gray-400 italic">{results[qi].explanation}</p>
+                  )}
+                </div>
+              ))}
+
+              {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+
+              {!submitted && (
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading || answers.some((a) => a === null)}
+                  className="w-full py-3 bg-green-600 hover:bg-green-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                >
+                  {loading ? 'Submitting...' : 'Submit Answers'}
+                </button>
+              )}
+
+              {submitted && results && (
+                <div
+                  className={`rounded-lg p-5 text-center ${
+                    results.every((r) => r.correct)
+                      ? 'bg-green-900/40 border border-green-700'
+                      : 'bg-red-900/40 border border-red-700'
+                  }`}
+                >
+                  {results.every((r) => r.correct) ? (
+                    <p className="text-green-300 font-bold text-lg">
+                      Perfect score! Proceeding to next section...
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      <p className="text-red-300 font-bold text-lg">
+                        {results.filter((r) => r.correct).length}/{results.length} correct — you
+                        must score 100%.
+                      </p>
+                      <button
+                        onClick={handleRetry}
+                        className="px-6 py-2 bg-yellow-600 hover:bg-yellow-500 text-white font-semibold rounded-lg transition-colors"
+                      >
+                        Retry Quiz
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );
