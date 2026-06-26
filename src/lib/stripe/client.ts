@@ -28,7 +28,7 @@ export const STRIPE_PRODUCTS = {
     name: 'Jr. FSE Practice Exam',
     shortName: 'Jr. FSE Practice Test',
     priceInCents: 1499,     // $14.99
-    stripePriceId: process.env.STRIPE_PRICE_ID_PRACTICE_TEST ?? 'price_1practice_test_placeholder',
+    stripePriceId: process.env.STRIPE_PRICE_ID_PRACTICE_TEST ?? 'price_1TmflrB8fedYuRufBJZIH3CC',
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -40,7 +40,7 @@ export const STRIPE_PRODUCTS = {
     name: 'Jr. FSE Certification Exam — Human Proctored Test-Out',
     shortName: 'Jr. FSE Test-Out (Human Proctored)',
     priceInCents: 29900,    // $299
-    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE_HUMAN ?? 'price_1TjlXWB8fedYuRufuS9Jnhum',
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE_HUMAN ?? 'price_1TmfniB8fedYuRufPOIIsixS',
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -63,7 +63,7 @@ export const STRIPE_PRODUCTS = {
     name: 'Training Course + Jr. FSE Test-Out (Human Proctored)',
     shortName: 'Training + Jr. FSE Human Package',
     priceInCents: 174900,   // $1,749
-    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_JR_HUMAN ?? 'price_1pkg_training_jr_human',
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_JR_HUMAN ?? 'price_1TmflsB8fedYuRufm9Uqnfti',
   },
 
   // Training + FSE ($1,499 + $649 = $2,148 → $2,099, save $49)
@@ -71,7 +71,7 @@ export const STRIPE_PRODUCTS = {
     name: 'Training Course + FSE Exam (Human Proctored)',
     shortName: 'Training + FSE Package',
     priceInCents: 209900,   // $2,099
-    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_FSE ?? 'price_1pkg_training_fse',
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_FSE ?? 'price_1TmflsB8fedYuRufQCtOIJN5',
   },
 
   // ─────────────────────────────────────────────────────────────────────────
