@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { ALL_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { TrainingPurchaseOptions } from '@/components/training/TrainingPurchaseOptions';
@@ -22,8 +23,7 @@ export default async function TrainingPage() {
     redirect('/login');
   }
 
-  const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
-  const isAdmin = adminEmails.includes(userEmail);
+  const isAdmin = await checkIsAdmin(uid, userEmail);
 
   const accessDoc = await adminDb
     .collection('users').doc(uid)

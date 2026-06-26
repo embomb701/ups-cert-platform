@@ -1,6 +1,7 @@
 import { redirect, notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { getModule } from '@/data/index';
 import SlideWithTimer from '@/components/training/SlideWithTimer';
 import Link from 'next/link';
@@ -27,8 +28,7 @@ export default async function SlidePage({ params }: Props) {
     redirect('/login');
   }
 
-  const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
-  const isAdmin = adminEmails.includes(userEmail);
+  const isAdmin = await checkIsAdmin(uid, userEmail);
 
   const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
   if (!isAdmin && (!accessDoc.exists || !accessDoc.data()?.granted)) redirect('/training');

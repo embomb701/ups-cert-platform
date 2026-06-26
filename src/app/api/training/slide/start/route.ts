@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { getModule } from '@/data/index';
+import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
@@ -12,8 +13,7 @@ export async function POST(req: NextRequest) {
 
     const decoded = await adminAuth.verifyIdToken(token);
     const uid = decoded.uid;
-    const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
-    const isAdmin = adminEmails.includes(decoded.email?.toLowerCase() ?? '');
+    const isAdmin = await checkIsAdmin(uid, decoded.email ?? '');
 
     const { moduleId, slideIndex } = await req.json();
     if (typeof moduleId !== 'string' || typeof slideIndex !== 'number') {
