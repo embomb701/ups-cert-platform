@@ -20,16 +20,20 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // JR. FSE TEST-OUT (skip training — one attempt only, fail = must train)
+  // PRACTICE TEST — not a certification attempt; no cert issued on pass
+  // Can be made temporarily free by admin via Firestore settings/practiceTest
   // ─────────────────────────────────────────────────────────────────────────
 
-  // AI proctored: browser-based anti-cheat, no scheduling required
-  jr_fse_test_ai: {
-    name: 'Jr. FSE Certification Exam — AI Proctored Test-Out',
-    shortName: 'Jr. FSE Test-Out (AI Proctored)',
-    priceInCents: 19900,    // $199
-    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FSE_AI ?? 'price_1TjlXWB8fedYuRufuS9JnW1B',
+  practice_test: {
+    name: 'Jr. FSE Practice Exam',
+    shortName: 'Jr. FSE Practice Test',
+    priceInCents: 1499,     // $14.99
+    stripePriceId: process.env.STRIPE_PRICE_ID_PRACTICE_TEST ?? 'price_1practice_test_placeholder',
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // JR. FSE TEST-OUT (skip training — one attempt only, fail = must train)
+  // ─────────────────────────────────────────────────────────────────────────
 
   // Human proctored: live proctor session, more accountability
   jr_fse_test_human: {
@@ -53,14 +57,6 @@ export const STRIPE_PRODUCTS = {
   // ─────────────────────────────────────────────────────────────────────────
   // PACKAGES (training + exam bundle — save vs buying separately)
   // ─────────────────────────────────────────────────────────────────────────
-
-  // Training + Jr. FSE AI test-out ($1,499 + $199 = $1,698 → $1,649, save $49)
-  pkg_training_jr_ai: {
-    name: 'Training Course + Jr. FSE Test-Out (AI Proctored)',
-    shortName: 'Training + Jr. FSE AI Package',
-    priceInCents: 164900,   // $1,649
-    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_JR_AI ?? 'price_1pkg_training_jr_ai',
-  },
 
   // Training + Jr. FSE Human test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
   pkg_training_jr_human: {

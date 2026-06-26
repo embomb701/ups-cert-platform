@@ -4,6 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = { title: 'Admin Dashboard' };
 
 const adminSections = [
+  { label: 'Practice Test Settings', href: '/admin/practice-test', desc: 'Toggle practice test free/paid — make it temporarily free for promotions' },
   { label: 'Users', href: '/admin/users', desc: 'View accounts, roles, blocks' },
   { label: 'Purchases', href: '/admin/purchases', desc: 'View all Stripe purchases' },
   { label: 'Jr. FSE Attempts', href: '/admin/attempts?level=jr_fse', desc: 'Review attempts, flags, cooldowns' },

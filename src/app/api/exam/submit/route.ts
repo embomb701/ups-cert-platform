@@ -100,7 +100,21 @@ export async function POST(req: NextRequest) {
     let certificateNumber: string | undefined;
     let certificateId: string | undefined;
 
-    // If this was a test-out attempt and the candidate failed, lock future attempts until training is complete
+    // Practice attempts: return score/results immediately without cert or test-out flag
+    if (attempt.isPractice) {
+      return NextResponse.json({
+        score,
+        passed,
+        passingScore: attempt.passingScore ?? 80,
+        correctCount,
+        examLevel: attempt.examLevel,
+        isPractice: true,
+        categoryBreakdown,
+        flaggedForReview: false,
+      });
+    }
+
+    // Real exam: if test-out and failed, lock until training complete
     if (!passed && attempt.examLevel === 'jr_fse') {
       const accessSnap = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').get();
       if (accessSnap.exists && accessSnap.data()?.testOut) {

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 
 export const metadata: Metadata = {
   title: 'FSE Academy — UPS Field Service Engineering Career Training',
@@ -152,38 +153,50 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* Jr. FSE Practice Test */}
+        <div className="rounded-xl border border-green-800/60 bg-green-950/10 p-6 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1">
+              <div className="inline-block px-2 py-0.5 bg-green-700/40 border border-green-700/60 text-green-300 text-xs font-semibold rounded-full mb-2">
+                PRACTICE — NO CERT ISSUED
+              </div>
+              <h3 className="text-xl font-bold text-white mb-1">Jr. FSE Practice Test</h3>
+              <p className="text-3xl font-bold text-white mb-3">$14.99</p>
+              <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
+                Same 50-question format as the real exam. See your score and category breakdown. No certificate — practice only.
+              </p>
+            </div>
+            <div className="flex-shrink-0 min-w-[200px]">
+              <PracticeTestButton
+                className="block w-full py-2.5 px-5 bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Jr. FSE Test-Outs */}
         <div className="mb-8">
           <h3 className="text-lg font-bold text-white mb-2">Jr. FSE Test-Out — For experienced technicians</h3>
           <p className="text-gray-500 text-sm mb-5">
             Skip the training. One attempt only — fail and you must complete the training course before retrying.
           </p>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-xl border border-purple-800/60 bg-purple-950/10 p-6">
-              <span className="text-xs font-semibold text-purple-300 uppercase tracking-widest">AI Proctored</span>
-              <h4 className="text-xl font-bold text-white mt-2 mb-1">Jr. FSE Test-Out</h4>
-              <p className="text-3xl font-bold text-white mb-3">$199</p>
-              <p className="text-gray-400 text-sm mb-5 leading-relaxed">
-                Browser-based AI anti-cheat. Start immediately after purchase. No scheduling required.
-              </p>
-              <PurchaseButton
-                productId="jr_fse_test_ai"
-                label="Buy Test-Out (AI) — $199"
-                className="block w-full py-2.5 px-4 bg-purple-700 hover:bg-purple-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
-              />
-            </div>
-            <div className="rounded-xl border border-amber-800/60 bg-amber-950/10 p-6">
-              <span className="text-xs font-semibold text-amber-300 uppercase tracking-widest">Human Proctored</span>
-              <h4 className="text-xl font-bold text-white mt-2 mb-1">Jr. FSE Test-Out</h4>
-              <p className="text-3xl font-bold text-white mb-3">$299</p>
-              <p className="text-gray-400 text-sm mb-5 leading-relaxed">
-                Live proctor session. Higher accountability — stronger credential. Scheduled after purchase.
-              </p>
-              <PurchaseButton
-                productId="jr_fse_test_human"
-                label="Buy Test-Out (Human) — $299"
-                className="block w-full py-2.5 px-4 bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
-              />
+          <div className="rounded-xl border border-amber-800/60 bg-amber-950/10 p-6">
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <div className="flex-1">
+                <span className="text-xs font-semibold text-amber-300 uppercase tracking-widest">Human Proctored</span>
+                <h4 className="text-xl font-bold text-white mt-2 mb-1">Jr. FSE Test-Out</h4>
+                <p className="text-3xl font-bold text-white mb-3">$299</p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Live proctor session. One attempt — pass and earn your Jr. FSE certification; fail and the training course is required before retrying.
+                </p>
+              </div>
+              <div className="flex-shrink-0 min-w-[200px]">
+                <PurchaseButton
+                  productId="jr_fse_test_human"
+                  label="Buy Test-Out — $299"
+                  className="block w-full py-2.5 px-4 bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -214,11 +227,10 @@ export default function HomePage() {
         <div className="mb-8">
           <h3 className="text-lg font-bold text-white mb-2">Packages — Save $49</h3>
           <p className="text-gray-500 text-sm mb-5">Training course bundled with a test-out option.</p>
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 gap-5">
             {([
-              { name: 'Training + Jr. FSE AI', price: '$1,649', id: 'pkg_training_jr_ai' },
-              { name: 'Training + Jr. FSE Human', price: '$1,749', id: 'pkg_training_jr_human' },
-              { name: 'Training + FSE', price: '$2,099', id: 'pkg_training_fse' },
+              { name: 'Training + Jr. FSE Human Test-Out', price: '$1,749', id: 'pkg_training_jr_human' },
+              { name: 'Training + FSE Exam', price: '$2,099', id: 'pkg_training_fse' },
             ] as const).map((pkg, i) => (
               <div key={i} className="rounded-xl border border-blue-900/50 bg-blue-950/10 p-5">
                 <h4 className="text-white font-semibold mb-1">{pkg.name}</h4>
@@ -389,7 +401,7 @@ export default function HomePage() {
           {[
             { q: 'Do I need any experience to start?', a: 'No. The training course starts with electrical fundamentals and builds from there. No prior knowledge required.' },
             { q: 'What happens if I fail the Jr. FSE test-out?', a: 'You must complete the full 6-month training course before you can attempt the exam again. The test-out is for people already working in the field who know the material.' },
-            { q: "What's the difference between AI and human proctored test-out?", a: 'AI proctored uses comprehensive browser-based anti-cheat (tab tracking, copy detection, timing analysis). No scheduling — start anytime after purchase. Human proctored adds a live proctor session for higher accountability. Both have one attempt only and the same test content.' },
+            { q: "What is the Jr. FSE Practice Test?", a: 'The practice test ($14.99) uses the same 50-question format and question pool as the real exam so you can gauge your readiness. No certificate is issued — it\'s for practice only. The real test-out ($299) is human proctored, one attempt, and issues a certification if you pass.' },
             { q: 'Why does the training take 6 months?', a: 'The 1-week minimum between modules is enforced server-side. Real retention requires spacing. Employers know what it took because the timeline is verifiable — it cannot be bypassed.' },
             { q: 'Is the Jr. FSE exam included in the training course?', a: 'Yes. Completing all 24 modules automatically unlocks your Jr. FSE certification exam at no additional cost. The $1,499 covers everything.' },
             { q: 'What is the FSE exam?', a: "The advanced certification for experienced engineers. Human proctored, live session, $649. Separate from Jr. FSE — you don't need Jr. FSE first, though the training course prepares you well for it." },

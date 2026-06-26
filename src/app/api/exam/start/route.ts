@@ -35,7 +35,10 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const examLevel = body.examLevel as ExamLevel;
+    const rawExamLevel = body.examLevel as string;
+    // practice_jr_fse uses the jr_fse question bank but skips cooldowns and cert issuance
+    const isPractice = rawExamLevel === 'practice_jr_fse';
+    const examLevel = (isPractice ? 'jr_fse' : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
     if (!['jr_fse', 'fse'].includes(examLevel)) {
@@ -44,7 +47,20 @@ export async function POST(req: NextRequest) {
 
     const ipHash = hashIp(getRealIp(req));
 
-    if (examLevel === 'jr_fse') {
+    // Practice test: verify practice_test access, skip cooldown/IP checks
+    if (isPractice) {
+      const practiceSnap = await adminDb
+        .collection('users').doc(uid)
+        .collection('examAccess').doc('practice_test')
+        .get();
+      if (!practiceSnap.exists || !practiceSnap.data()?.granted) {
+        return NextResponse.json({
+          error: 'No practice test access found. Purchase the Jr. FSE Practice Test to continue.',
+        }, { status: 403 });
+      }
+    }
+
+    if (!isPractice && examLevel === 'jr_fse') {
       // Verify purchase
       const accessSnap = await adminDb
         .collection('users')
@@ -172,8 +188,9 @@ export async function POST(req: NextRequest) {
       email,
       displayName,
       candidateName: candidateName || displayName || email,
-      productId: examLevel === 'jr_fse' ? 'jr_fse_test_ai' : 'fse_proctored_exam',
+      productId: isPractice ? 'practice_test' : (examLevel === 'jr_fse' ? 'jr_fse_test_human' : 'fse_proctored_exam'),
       examLevel,
+      isPractice,
       status: 'in_progress',
       startedAt: FieldValue.serverTimestamp(),
       startIpHash: ipHash,
@@ -188,17 +205,18 @@ export async function POST(req: NextRequest) {
       suspiciousEventsCount: 0,
       suspiciousRiskLevel: 'low',
       flaggedForReview: false,
-      cooldownUntil: examLevel === 'jr_fse' ? cooldownUntil : null,
+      // Practice tests have no cooldown; real Jr. FSE attempts get 90-day cooldown
+      cooldownUntil: (!isPractice && examLevel === 'jr_fse') ? cooldownUntil : null,
       proctored: examLevel === 'fse',
       proctoringType: examLevel === 'fse' ? 'human' : null,
     });
 
-    // Set IP lock for Jr. FSE
-    if (examLevel === 'jr_fse') {
+    // Set IP lock only for real (non-practice) Jr. FSE attempts
+    if (!isPractice && examLevel === 'jr_fse') {
       await adminDb.collection('ipExamLocks').add({
         ipHash,
         examLevel: 'jr_fse',
-        productId: 'jr_fse_test_ai',
+        productId: 'jr_fse_test_human',
         userId: uid,
         email,
         attemptId,

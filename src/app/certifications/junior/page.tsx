@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 
 export const metadata: Metadata = {
   title: 'Jr. FSE Certification — Test-Out Exam $299 | FSE Academy',
@@ -163,10 +164,8 @@ export default function JuniorCertPage() {
                   <div className="flex-1 border-t border-gray-800" />
                 </div>
 
-                <PurchaseButton
-                  productId="jr_fse_test_ai"
-                  label="Test-Out (AI Proctored) — $199"
-                  className="block w-full px-6 py-2.5 rounded-lg bg-purple-700 hover:bg-purple-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
+                <PracticeTestButton
+                  className="block w-full px-6 py-2.5 rounded-lg bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
                 />
                 <PurchaseButton
                   productId="jr_fse_test_human"

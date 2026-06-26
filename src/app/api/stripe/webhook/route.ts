@@ -130,9 +130,16 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       await grantTrainingAccess(userId, pid);
       break;
 
+    // ── Practice test ($14.99 — no cert issued, not a test-out) ──────────
+    case 'practice_test':
+      await adminDb
+        .collection('users').doc(userId)
+        .collection('examAccess').doc('practice_test')
+        .set({ granted: true, purchaseId: pid, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+      break;
+
     // ── Standalone Jr. FSE test-outs ──────────────────────────────────────
     case 'jr_fse_exam':     // old product ID
-    case 'jr_fse_test_ai':
       await grantJrFseAccess(userId, pid, 'ai');
       break;
 
@@ -143,12 +150,6 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     // ── Standalone FSE exam ───────────────────────────────────────────────
     case 'fse_proctored_exam':
       await grantFseAccess(userId, email ?? '', pid);
-      break;
-
-    // ── Package: Training + Jr. FSE AI ────────────────────────────────────
-    case 'pkg_training_jr_ai':
-      await grantTrainingAccess(userId, pid);
-      await grantJrFseAccess(userId, pid, 'ai');
       break;
 
     // ── Package: Training + Jr. FSE Human ────────────────────────────────

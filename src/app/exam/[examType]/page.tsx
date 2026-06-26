@@ -14,7 +14,8 @@ export default function ExamPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, loading } = useAuth();
-  const examType = (params?.examType as ExamLevel) ?? 'jr_fse';
+  const examType = (params?.examType as string) ?? 'jr_fse';
+  const isPractice = examType === 'practice_jr_fse';
   const candidateName = searchParams?.get('name') ?? '';
 
   const [session, setSession] = useState<ExamSessionState | null>(null);
@@ -46,7 +47,7 @@ export default function ExamPage() {
         }
         setSession({
           attemptId: data.attemptId,
-          examLevel: examType,
+          examLevel: (isPractice ? 'jr_fse' : examType) as ExamLevel,
           questions: data.questions,
           currentIndex: 0,
           answers: {},
@@ -170,7 +171,7 @@ export default function ExamPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <span className={session.examLevel === 'jr_fse' ? 'badge-jr' : 'badge-fse'}>
-              {session.examLevel === 'jr_fse' ? 'Jr. FSE' : 'FSE'} Exam
+              {isPractice ? 'Jr. FSE Practice Test' : session.examLevel === 'jr_fse' ? 'Jr. FSE' : 'FSE'} Exam
             </span>
           </div>
             <ExamTimer

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 
 export function TrainingPurchaseOptions() {
   return (
@@ -60,6 +61,29 @@ export function TrainingPurchaseOptions() {
           </div>
         </div>
 
+        {/* ── PRACTICE TEST ───────────────────────────────────────────────── */}
+        <div className="rounded-xl border border-green-800/60 bg-green-950/10 p-6">
+          <div className="flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1">
+              <div className="inline-block px-2 py-0.5 bg-green-700/40 border border-green-700/60 text-green-300 text-xs font-semibold rounded-full mb-2">
+                PRACTICE — NO CERT ISSUED
+              </div>
+              <h2 className="text-xl font-bold text-white mb-1">Jr. FSE Practice Test</h2>
+              <p className="text-3xl font-bold text-white mb-3">$14.99</p>
+              <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
+                Take a real 50-question Jr. FSE exam to see how you score. Same question pool, same
+                format, same time limits. Results and category breakdown shown. No certificate issued —
+                this is for practice only, not a test-out attempt.
+              </p>
+            </div>
+            <div className="flex-shrink-0 min-w-[200px]">
+              <PracticeTestButton
+                className="block w-full py-2.5 px-5 bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* ── JR. FSE TEST-OUT OPTIONS ────────────────────────────────────── */}
         <div>
           <h2 className="text-xl font-bold text-white mb-2">Jr. FSE Test-Out</h2>
@@ -68,62 +92,37 @@ export function TrainingPurchaseOptions() {
             certification. <span className="text-amber-300 font-medium">One attempt only.</span>{' '}
             Fail and you must complete the training course before trying again.
           </p>
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* AI Proctored */}
-            <div className="rounded-xl border border-gray-700 bg-gray-800 p-6">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs px-2 py-0.5 rounded-full bg-purple-900/60 border border-purple-700 text-purple-300 font-semibold">
-                  AI PROCTORED
-                </span>
+          <div className="rounded-xl border border-amber-800/60 bg-amber-950/10 p-6">
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <div className="flex-1">
+                <div className="inline-block mb-3">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-amber-900/60 border border-amber-700 text-amber-300 font-semibold">
+                    HUMAN PROCTORED
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-1">Jr. FSE Test-Out</h3>
+                <p className="text-3xl font-bold text-white mb-3">$299</p>
+                <ul className="space-y-1.5 text-sm text-gray-400">
+                  <li className="flex gap-2"><span className="text-amber-400 flex-shrink-0">→</span>50-question exam with live proctor</li>
+                  <li className="flex gap-2"><span className="text-amber-400 flex-shrink-0">→</span>Session scheduled after purchase</li>
+                  <li className="flex gap-2"><span className="text-amber-400 flex-shrink-0">→</span>Pass = Jr. FSE certification issued</li>
+                  <li className="flex gap-2 text-amber-400"><span className="flex-shrink-0">→</span>One attempt — fail means training required</li>
+                </ul>
               </div>
-              <h3 className="text-lg font-bold text-white mb-1">Jr. FSE Test-Out — AI</h3>
-              <p className="text-3xl font-bold text-white mb-1">$199</p>
-              <p className="text-gray-500 text-xs mb-4">Browser-based · No scheduling needed</p>
-              <ul className="space-y-2 mb-6 text-sm text-gray-400">
-                <li className="flex gap-2"><span className="text-purple-400 flex-shrink-0">→</span>50-question exam, browser anti-cheat</li>
-                <li className="flex gap-2"><span className="text-purple-400 flex-shrink-0">→</span>Start immediately after purchase</li>
-                <li className="flex gap-2"><span className="text-purple-400 flex-shrink-0">→</span>Pass 80%+ for Jr. FSE certification</li>
-                <li className="flex gap-2 text-amber-400"><span className="flex-shrink-0">→</span>One attempt — fail means training required</li>
-              </ul>
-              <PurchaseButton
-                productId="jr_fse_test_ai"
-                label="Buy Test-Out (AI) — $199"
-                className="block w-full py-2.5 px-4 bg-purple-700 hover:bg-purple-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
-              />
-            </div>
-
-            {/* Human Proctored */}
-            <div className="rounded-xl border border-gray-700 bg-gray-800 p-6">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-900/60 border border-amber-700 text-amber-300 font-semibold">
-                  HUMAN PROCTORED
-                </span>
+              <div className="flex-shrink-0 min-w-[200px]">
+                <PurchaseButton
+                  productId="jr_fse_test_human"
+                  label="Buy Test-Out — $299"
+                  className="block w-full py-2.5 px-4 bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+                />
               </div>
-              <h3 className="text-lg font-bold text-white mb-1">Jr. FSE Test-Out — Human</h3>
-              <p className="text-3xl font-bold text-white mb-1">$299</p>
-              <p className="text-gray-500 text-xs mb-4">Live proctor · Scheduled session</p>
-              <ul className="space-y-2 mb-6 text-sm text-gray-400">
-                <li className="flex gap-2"><span className="text-amber-400 flex-shrink-0">→</span>50-question exam with live proctor</li>
-                <li className="flex gap-2"><span className="text-amber-400 flex-shrink-0">→</span>Session scheduled after purchase</li>
-                <li className="flex gap-2"><span className="text-amber-400 flex-shrink-0">→</span>Higher accountability — stronger credential</li>
-                <li className="flex gap-2 text-amber-400"><span className="flex-shrink-0">→</span>One attempt — fail means training required</li>
-              </ul>
-              <PurchaseButton
-                productId="jr_fse_test_human"
-                label="Buy Test-Out (Human) — $299"
-                className="block w-full py-2.5 px-4 bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
-              />
             </div>
           </div>
         </div>
 
         {/* ── FSE EXAM ────────────────────────────────────────────────────── */}
         <div>
-          <h2 className="text-xl font-bold text-white mb-2">FSE Certification Exam</h2>
-          <p className="text-gray-400 text-sm mb-5">
-            The advanced FSE certification for experienced field service engineers. Human proctored
-            only — live proctor session required.
-          </p>
+          <h2 className="text-xl font-bold text-white mb-5">FSE Certification — Human Proctored</h2>
           <div className="rounded-xl border border-gray-700 bg-gray-800 p-6 flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex-1">
               <h3 className="text-lg font-bold text-white mb-1">FSE Exam — Human Proctored</h3>
@@ -150,36 +149,26 @@ export function TrainingPurchaseOptions() {
         <div>
           <h2 className="text-xl font-bold text-white mb-2">Packages — Save $49</h2>
           <p className="text-gray-400 text-sm mb-5">
-            Bundle the training course with a test-out option for a discounted price.
+            Bundle the training course with a test-out or exam option.
           </p>
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 gap-5">
             {[
               {
-                name: 'Training + Jr. FSE AI',
-                price: '$1,649',
-                desc: 'Training Course + Jr. FSE Test-Out (AI Proctored)',
-                saving: 'Save $49 vs individual',
-                productId: 'pkg_training_jr_ai' as const,
-                color: 'border-blue-800',
-              },
-              {
-                name: 'Training + Jr. FSE Human',
+                name: 'Training + Jr. FSE Human Test-Out',
                 price: '$1,749',
                 desc: 'Training Course + Jr. FSE Test-Out (Human Proctored)',
                 saving: 'Save $49 vs individual',
                 productId: 'pkg_training_jr_human' as const,
-                color: 'border-blue-800',
               },
               {
-                name: 'Training + FSE',
+                name: 'Training + FSE Exam',
                 price: '$2,099',
                 desc: 'Training Course + FSE Exam (Human Proctored)',
                 saving: 'Save $49 vs individual',
                 productId: 'pkg_training_fse' as const,
-                color: 'border-blue-800',
               },
             ].map((pkg, i) => (
-              <div key={i} className={`rounded-xl border ${pkg.color} bg-blue-950/10 p-5`}>
+              <div key={i} className="rounded-xl border border-blue-800 bg-blue-950/10 p-5">
                 <h3 className="text-white font-semibold mb-1">{pkg.name}</h3>
                 <p className="text-2xl font-bold text-white mb-1">{pkg.price}</p>
                 <p className="text-green-400 text-xs mb-3 font-medium">{pkg.saving}</p>
@@ -213,10 +202,9 @@ export function TrainingPurchaseOptions() {
           </div>
         </div>
 
-        {/* Footer note */}
         <div className="text-center">
           <p className="text-gray-600 text-xs">
-            All purchases processed securely via Stripe. Google account required.{' '}
+            All purchases via Stripe. Google account required.{' '}
             <Link href="/about" className="text-gray-500 hover:text-gray-400">About the instructor →</Link>
           </p>
         </div>

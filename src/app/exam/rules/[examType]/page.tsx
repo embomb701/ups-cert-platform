@@ -56,13 +56,16 @@ const RULES_FSE = [
 export default function ExamRulesPage() {
   const params = useParams();
   const router = useRouter();
-  const examType = (params?.examType as ExamLevel) ?? 'jr_fse';
+  const examType = (params?.examType as string) ?? 'jr_fse';
   const [accepted, setAccepted] = useState(false);
   const [candidateName, setCandidateName] = useState('');
 
-  const isJr = examType === 'jr_fse';
+  const isPractice = examType === 'practice_jr_fse';
+  const isJr = examType === 'jr_fse' || isPractice;
   const rules = isJr ? RULES_JR : RULES_FSE;
-  const examLabel = isJr
+  const examLabel = isPractice
+    ? 'Jr. FSE Practice Test — Results Only, No Certificate'
+    : isJr
     ? 'Junior UPS Field Service Certification'
     : 'UPS Field Service Certification';
 

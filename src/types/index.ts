@@ -63,10 +63,9 @@ export interface Product {
 
 export const PRODUCTS = {
   TRAINING_COURSE: 'training_course',
-  JR_FSE_TEST_AI: 'jr_fse_test_ai',
+  PRACTICE_TEST: 'practice_test',
   JR_FSE_TEST_HUMAN: 'jr_fse_test_human',
   FSE_PROCTORED_EXAM: 'fse_proctored_exam',
-  PKG_TRAINING_JR_AI: 'pkg_training_jr_ai',
   PKG_TRAINING_JR_HUMAN: 'pkg_training_jr_human',
   PKG_TRAINING_FSE: 'pkg_training_fse',
   EMPLOYER_5PACK: 'employer_5pack',
