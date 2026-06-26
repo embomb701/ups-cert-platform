@@ -13,15 +13,16 @@ export default async function TrainingPage() {
   if (!token) redirect('/login');
 
   let uid: string;
+  let userEmail = '';
   try {
     const decoded = await adminAuth.verifyIdToken(token);
     uid = decoded.uid;
+    userEmail = decoded.email?.toLowerCase() ?? '';
   } catch {
     redirect('/login');
   }
 
   const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((s) => s.trim().toLowerCase());
-  const userEmail = (await adminAuth.getUser(uid)).email?.toLowerCase() ?? '';
   const isAdmin = adminEmails.includes(userEmail);
 
   const accessDoc = await adminDb
