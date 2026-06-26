@@ -125,10 +125,12 @@ export default function HomePage() {
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                 {[
                   '24 modules over 6 months',
-                  '72 slides with 5-min timer',
-                  '100% required on all quizzes',
-                  '100% required on all module tests',
+                  '72 slides with 5-min timer per slide',
+                  '100% required on every section quiz',
+                  'Fail a section → repeat it, 24-hour retry wait',
+                  '100% required on every module test (once per day)',
                   '1 week minimum between modules',
+                  'Practice test included free',
                   'Jr. FSE Exam included — no extra charge',
                 ].map((t, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-300">

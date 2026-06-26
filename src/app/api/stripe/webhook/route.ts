@@ -50,6 +50,18 @@ async function grantTrainingAccess(userId: string, purchaseId: string) {
     .collection('users').doc(userId)
     .collection('examAccess').doc('jr_fse_pending')
     .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+
+  // Training purchasers get the practice test included free
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('practice_test')
+    .set({
+      granted: true,
+      free: true,
+      freeViaTraining: true,
+      purchaseId,
+      grantedAt: FieldValue.serverTimestamp(),
+    }, { merge: true });
 }
 
 async function grantJrFseAccess(

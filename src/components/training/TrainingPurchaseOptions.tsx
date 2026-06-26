@@ -39,8 +39,10 @@ export function TrainingPurchaseOptions() {
                   '24 training modules · 72 slides',
                   '5-minute timer enforced per slide',
                   '100% required on every section quiz',
+                  'Fail a section quiz → repeat the full section, 24-hour retry wait',
                   '100% required on every module test (once per day)',
                   '1-week minimum between modules',
+                  'Practice test included free',
                   'Jr. FSE Certification Exam included',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-300">

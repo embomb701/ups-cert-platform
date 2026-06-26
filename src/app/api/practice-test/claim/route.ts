@@ -18,9 +18,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
     }
 
-    // Verify practice test is currently free
+    // Allow if global free toggle is on OR user has training access
     const settingsSnap = await adminDb.collection('settings').doc('practiceTest').get();
-    if (!settingsSnap.exists || settingsSnap.data()?.free !== true) {
+    const globalFree = settingsSnap.exists && settingsSnap.data()?.free === true;
+
+    let freeViaTraining = false;
+    if (!globalFree) {
+      const trainingSnap = await adminDb
+        .collection('users').doc(uid)
+        .collection('examAccess').doc('training_portal')
+        .get();
+      freeViaTraining = trainingSnap.exists && trainingSnap.data()?.granted === true;
+    }
+
+    if (!globalFree && !freeViaTraining) {
       return NextResponse.json({ error: 'Practice test is not currently free.' }, { status: 403 });
     }
 
@@ -31,7 +42,8 @@ export async function POST(req: NextRequest) {
       .set({
         granted: true,
         free: true,
-        purchaseId: 'free_claim',
+        freeViaTraining,
+        purchaseId: freeViaTraining ? 'free_via_training' : 'free_claim',
         grantedAt: FieldValue.serverTimestamp(),
       }, { merge: true });
 
