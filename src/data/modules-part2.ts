@@ -3,7 +3,7 @@ import type { TrainingModule } from './modules';
 export const MODULES_PART2: TrainingModule[] = [
   {
     id: 'ups-overview',
-    num: 8,
+    num: 9,
     title: 'Overview of UPS Systems',
     desc: 'What a UPS is, why it exists, the three main topologies, and how each protects critical loads.',
     slides: [
@@ -105,7 +105,7 @@ export const MODULES_PART2: TrainingModule[] = [
 
   {
     id: 'pdu-sts',
-    num: 9,
+    num: 10,
     title: 'PDU, RPP, and STS Systems',
     desc: 'Power Distribution Units, Remote Power Panels, and Static Transfer Switches — the distribution and switching infrastructure between UPS and loads.',
     slides: [
@@ -207,7 +207,7 @@ export const MODULES_PART2: TrainingModule[] = [
 
   {
     id: 'rectifiers',
-    num: 10,
+    num: 11,
     title: 'Rectifiers',
     desc: 'How rectifiers convert AC to DC, the different circuit configurations, and how they function in the UPS power conversion chain.',
     slides: [
@@ -309,7 +309,7 @@ export const MODULES_PART2: TrainingModule[] = [
 
   {
     id: 'inverters',
-    num: 11,
+    num: 12,
     title: 'Inverters',
     desc: 'How UPS inverters convert DC back to AC, PWM technology, output waveform quality, and inverter monitoring.',
     slides: [
@@ -411,7 +411,7 @@ export const MODULES_PART2: TrainingModule[] = [
 
   {
     id: 'transformers-breakers',
-    num: 12,
+    num: 13,
     title: 'Transformers and Circuit Breakers',
     desc: 'Transformer types used in UPS systems, how circuit breakers work, and protective device coordination in critical power distribution.',
     slides: [
@@ -513,7 +513,7 @@ export const MODULES_PART2: TrainingModule[] = [
 
   {
     id: 'battery-types',
-    num: 13,
+    num: 14,
     title: 'Battery Types and Chemistry',
     desc: 'Lead-acid, VRLA, NiCd, NiMH, and Li-ion batteries — chemistry, ratings, and which types appear in UPS systems.',
     slides: [

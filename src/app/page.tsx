@@ -124,8 +124,8 @@ export default function HomePage() {
               <p className="text-blue-300 text-sm mb-5">Jr. FSE Certification Exam included at completion</p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                 {[
-                  '25 modules over 6 months',
-                  '75+ slides with 5-min timer per slide',
+                  '26 modules over 6 months',
+                  '78+ slides with 5-min timer per slide',
                   '100% required on every section quiz',
                   'Fail a section → repeat it, 24-hour retry wait',
                   '100% required on every module test (once per day)',
@@ -331,9 +331,10 @@ export default function HomePage() {
               when a UPS is in bypass mode.
             </p>
             <p className="text-gray-300 leading-relaxed mb-4 font-medium">
-              At FSE Academy, Modules 1–6 build the electrical foundation first. Then Module 7
-              delivers NFPA 70E — and every concept lands with full context. Students don&apos;t memorize
-              the standard. They understand it.
+              At FSE Academy, Modules 1–6 build the electrical foundation first. Module 7 delivers
+              NFPA 70E — every arc flash concept lands with full context. Module 8 delivers LOTO —
+              and students understand exactly why each step matters on multi-source UPS equipment.
+              They don&apos;t memorize the standards. They understand them.
             </p>
             <p className="text-gray-400 leading-relaxed text-sm">
               The result is a technician who can adapt when the field situation doesn&apos;t match a
@@ -375,20 +376,20 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="text-center mb-12">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Curriculum</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">25 modules. 6 months. One career.</h2>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">26 modules. 6 months. One career.</h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             { n: '01–06', title: 'Electrical Foundations', topics: "Electricity, circuits, components, AC/DC, Ohm's law, scientific notation", badge: null },
-            { n: '07', title: 'NFPA 70E — Electrical Safety', topics: 'Arc flash hazards, PPE categories, approach boundaries, energized work permits, safe work practices on UPS equipment', badge: 'FREE CERT' },
-            { n: '08–13', title: 'UPS Core Systems', topics: 'UPS overview, PDUs, rectifiers, inverters, transformers, battery types', badge: null },
-            { n: '14', title: 'Battery Safety', topics: 'PPE, installation, testing, disposal, hazard identification', badge: null },
-            { n: '15–16', title: 'Power Electronics', topics: 'PWM, duty cycle, digital logic, truth tables, control systems', badge: null },
-            { n: '17–18', title: 'Control Systems', topics: 'Relay logic, ladder diagrams, AVR, voltage regulation, feedback loops', badge: null },
-            { n: '19', title: 'Rotating Machines', topics: 'AC/DC motors, generators, synchronization, bearing maintenance', badge: null },
-            { n: '20–21', title: 'Configurations & Procedures', topics: 'N+1 redundancy, 2N topology, PDU ratings, startup, shutdown, LOTO', badge: null },
-            { n: '22–23', title: 'Troubleshooting & Repair', topics: 'Systematic diagnosis, fault codes, PM procedures, IGBT replacement', badge: null },
-            { n: '24–25', title: 'Career & Professionalism', topics: 'Incident response, root cause analysis, customer communication, career development', badge: null },
+            { n: '07', title: 'NFPA 70E — Electrical Safety', topics: 'Arc flash hazards, PPE categories 1–4, approach boundaries, energized work permits, safe work practices on UPS equipment', badge: 'FREE CERT' },
+            { n: '08', title: 'Lockout/Tagout (LOTO)', topics: 'OSHA 29 CFR 1910.147, six-step de-energization, lockout hardware, UPS multi-source isolation, group LOTO, re-energization sequence', badge: 'FREE CERT' },
+            { n: '09–14', title: 'UPS Core Systems', topics: 'UPS overview, PDUs, rectifiers, inverters, transformers, battery types', badge: null },
+            { n: '15', title: 'Battery Safety', topics: 'PPE, installation, testing, disposal, hazard identification', badge: null },
+            { n: '16–17', title: 'Power Electronics', topics: 'PWM, duty cycle, digital logic, truth tables, control systems', badge: null },
+            { n: '18–19', title: 'Control Systems', topics: 'Relay logic, ladder diagrams, AVR, voltage regulation, feedback loops', badge: null },
+            { n: '20', title: 'Rotating Machines', topics: 'AC/DC motors, generators, synchronization, bearing maintenance', badge: null },
+            { n: '21–23', title: 'Configurations, Procedures & Troubleshooting', topics: 'N+1 redundancy, startup, shutdown, systematic diagnosis, fault codes, PM procedures', badge: null },
+            { n: '24–26', title: 'Repair & Career', topics: 'Component replacement, post-repair commissioning, incident response, career development', badge: null },
           ].map((item, i) => (
             <div key={i} className={`p-5 rounded-lg border relative ${item.badge ? 'border-amber-700/60 bg-amber-950/10' : 'border-gray-700 bg-gray-800'}`}>
               <div className="flex items-center gap-2 mb-1">
@@ -467,11 +468,12 @@ export default function HomePage() {
           {[
             { q: 'Do I need any experience to start?', a: 'No. The training course starts with electrical fundamentals and builds from there. No prior knowledge required.' },
             { q: 'What is the NFPA 70E certificate and is it included?', a: 'Yes — the NFPA 70E Electrical Safety certificate is earned by completing Module 7 and is included free with the training course. It covers arc flash hazards, PPE categories 1–4, approach boundaries, energized work permits, and safe work practices specific to UPS and critical power equipment. It is a standalone, employer-verifiable credential in addition to your Jr. FSE certification.' },
-            { q: 'Why does NFPA 70E come after the electrical fundamentals (Module 7) instead of first?', a: 'NFPA 70E safety training without electrical knowledge is just memorizing rules. Once you understand fault current, circuit impedance, and how protective devices operate, the arc flash standard makes complete sense — you can reason about hazards rather than recite categories. Students who understand the physics behind the rules can adapt when the field situation doesn\'t match a textbook scenario.' },
+            { q: 'Why do NFPA 70E and LOTO come after the electrical fundamentals instead of first?', a: 'Safety training without electrical knowledge is just memorizing rules. Once you understand fault current, circuit impedance, and how UPS bypass paths work, the arc flash and LOTO standards make complete sense — you can reason about hazards rather than recite procedures. NFPA 70E arc flash categories mean something when you know why high fault current increases incident energy. LOTO multi-source isolation makes sense when you understand that a static bypass can energize the output bus even with the main breaker open.' },
+            { q: 'What is the LOTO certificate and is it included?', a: 'Yes — the Lockout/Tagout (LOTO) certificate is earned by completing Module 8 and is included free with the training course. It covers OSHA 29 CFR 1910.147 requirements, the six-step de-energization procedure, lockout hardware, UPS-specific multi-source isolation, group lockout, and re-energization sequences. It is a standalone, employer-verifiable credential.' },
             { q: 'What happens if I fail the Jr. FSE test-out?', a: 'You must complete the full 6-month training course before you can attempt the exam again. The test-out is for people already working in the field who know the material.' },
             { q: "What is the Jr. FSE Practice Test?", a: 'The practice test ($14.99) uses the same 50-question format and question pool as the real exam so you can gauge your readiness. No certificate is issued — it\'s for practice only. The real test-out ($299) is human proctored, one attempt, and issues a certification if you pass.' },
             { q: 'Why does the training take 6 months?', a: 'The 1-week minimum between modules is enforced server-side. Real retention requires spacing. Employers know what it took because the timeline is verifiable — it cannot be bypassed.' },
-            { q: 'Is the Jr. FSE exam included in the training course?', a: 'Yes. Completing all 25 modules automatically unlocks your Jr. FSE certification exam at no additional cost. The $1,499 covers everything — including the NFPA 70E certificate along the way.' },
+            { q: 'Is the Jr. FSE exam included in the training course?', a: 'Yes. Completing all 26 modules automatically unlocks your Jr. FSE certification exam at no additional cost. The $1,499 covers everything — including the NFPA 70E and LOTO certificates earned along the way.' },
             { q: 'What is the FSE exam?', a: "The advanced certification for experienced engineers. Human proctored, live session, $649. Separate from Jr. FSE — you don't need Jr. FSE first, though the training course prepares you well for it." },
           ].map((item, i) => (
             <div key={i} className="border border-gray-700 rounded-lg p-6 bg-gray-800/40">
