@@ -1,4 +1,5 @@
 import { MODULES } from './modules';
+import { MODULES_SAFETY } from './modules-safety';
 import { MODULES_PART2 } from './modules-part2';
 import { MODULES_PART3 } from './modules-part3';
 import { MODULES_PART4 } from './modules-part4';
@@ -8,6 +9,7 @@ export type { QuizQ, Slide, TrainingModule } from './modules';
 
 export const ALL_MODULES = [
   ...MODULES,
+  ...MODULES_SAFETY,
   ...MODULES_PART2,
   ...MODULES_PART3,
   ...MODULES_PART4,

@@ -3,7 +3,7 @@ import type { TrainingModule } from './modules';
 export const MODULES_PART3: TrainingModule[] = [
   {
     id: 'battery-safety',
-    num: 13,
+    num: 14,
     title: 'Battery Safety and Handling',
     desc: 'PPE requirements, electrical and chemical hazards, proper installation procedures, and battery testing and maintenance protocols.',
     slides: [
@@ -105,7 +105,7 @@ export const MODULES_PART3: TrainingModule[] = [
 
   {
     id: 'pwm',
-    num: 14,
+    num: 15,
     title: 'Pulse Width Modulation (PWM)',
     desc: 'How PWM works, its role in UPS inverters and chargers, duty cycle, and efficiency implications.',
     slides: [
@@ -207,7 +207,7 @@ export const MODULES_PART3: TrainingModule[] = [
 
   {
     id: 'digital-logic',
-    num: 15,
+    num: 16,
     title: 'Digital Logic Gates and Truth Tables',
     desc: 'Boolean logic, basic logic gates, truth tables, and how digital logic controls UPS systems.',
     slides: [
@@ -309,7 +309,7 @@ export const MODULES_PART3: TrainingModule[] = [
 
   {
     id: 'relay-logic',
-    num: 16,
+    num: 17,
     title: 'Relay Logic',
     desc: 'How electromechanical relays work, relay logic circuits, and relay applications in UPS control and protection systems.',
     slides: [
@@ -411,7 +411,7 @@ export const MODULES_PART3: TrainingModule[] = [
 
   {
     id: 'regulator-control',
-    num: 17,
+    num: 18,
     title: 'Regulator and Control Systems',
     desc: 'Voltage regulation principles, automatic voltage regulators, and closed-loop control feedback systems in UPS applications.',
     slides: [

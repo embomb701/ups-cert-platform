@@ -3,7 +3,7 @@ import type { TrainingModule } from './modules';
 export const MODULES_PART5: TrainingModule[] = [
   {
     id: 'troubleshooting',
-    num: 21,
+    num: 22,
     title: 'Troubleshooting and Maintenance',
     desc: 'Systematic diagnostic approach, common UPS fault codes, test equipment use, and preventive maintenance procedures.',
     slides: [
@@ -105,7 +105,7 @@ export const MODULES_PART5: TrainingModule[] = [
 
   {
     id: 'repair-replacement',
-    num: 22,
+    num: 23,
     title: 'Repair and Replacement Procedures',
     desc: 'Component replacement procedures, battery replacement, IGBT and capacitor replacement, firmware updates, and post-repair testing.',
     slides: [
@@ -207,7 +207,7 @@ export const MODULES_PART5: TrainingModule[] = [
 
   {
     id: 'power-incidents',
-    num: 23,
+    num: 24,
     title: 'Power Loss Incidents and Critical Infrastructure',
     desc: 'Responding to power loss events, incident documentation, root cause analysis, and UPS role in critical infrastructure protection.',
     slides: [
@@ -309,7 +309,7 @@ export const MODULES_PART5: TrainingModule[] = [
 
   {
     id: 'career-professionalism',
-    num: 24,
+    num: 25,
     title: 'Customer Service, Professional Conduct, and Career',
     desc: 'Professional communication, customer relationship management, career development in field service engineering, and FSE certifications.',
     slides: [
