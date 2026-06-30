@@ -3,7 +3,7 @@ import type { TrainingModule } from './modules';
 export const MODULES_SAFETY: TrainingModule[] = [
   {
     id: 'nfpa-70e',
-    num: 7,
+    num: 8,
     title: 'NFPA 70E — Electrical Safety in the Workplace',
     desc: 'Full NFPA 70E certificate course covering electrical hazards, qualified person requirements, hierarchy of risk controls, arc flash analysis, PPE categories, approach boundaries, and safe work practices on UPS and critical power equipment.',
     slides: [
@@ -433,7 +433,7 @@ export const MODULES_SAFETY: TrainingModule[] = [
   // ════════════════════════════════════════════════════════════════════════
   {
     id: 'loto',
-    num: 8,
+    num: 9,
     title: 'Lockout/Tagout (LOTO) — OSHA 29 CFR 1910.147',
     desc: 'Full LOTO certificate course covering OSHA 29 CFR 1910.147 requirements, the six-step de-energization procedure, lockout hardware, UPS-specific multi-source isolation, group lockout, and safe re-energization sequences.',
     slides: [

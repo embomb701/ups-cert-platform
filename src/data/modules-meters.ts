@@ -3,7 +3,7 @@ import type { TrainingModule } from './modules';
 export const MODULES_METERS: TrainingModule[] = [
   {
     id: 'meter-fundamentals',
-    num: 9,
+    num: 10,
     title: 'Electrical Meters & Test Equipment',
     desc: 'Master all three essential meter types through hands-on interactive simulations — digital multimeter, clamp meter, and megger. Learn every setting, proper lead placement, and real UPS troubleshooting techniques.',
     slides: [
