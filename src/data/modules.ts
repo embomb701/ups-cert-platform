@@ -1160,11 +1160,60 @@ export const MODULES: TrainingModule[] = [
           "Using the VIR triangle: draw a triangle with V on top, I on the bottom-left, R on the bottom-right. Cover the quantity you want to find. If you cover V, you see I × R. If you cover I, you see V/R. If you cover R, you see V/I.",
           "Limitations of Ohm's Law: it applies to resistive loads only. Capacitors and inductors have reactive impedance that varies with frequency. Non-linear loads like switching power supplies do not obey Ohm's Law linearly. In these cases, you use impedance (Z) instead of resistance, but the underlying principle is the same.",
         ],
+        tables: [
+          {
+            caption: "Ohm's Law — all three forms",
+            headers: ['Find', 'Formula', 'UPS Example'],
+            rows: [
+              ['Voltage (V)',     'V = I × R',  '20A through 0.5Ω cable → 10V drop across cable'],
+              ['Current (I)',     'I = V / R',  '48V bus, 12Ω load → 4A flowing'],
+              ['Resistance (R)', 'R = V / I',  '24V protecting with 3A fuse → load must be ≥ 8Ω'],
+            ],
+          },
+        ],
+        widget: 'ohms-law-explorer',
         keyPoints: [
           "V = I × R (find voltage)", "I = V / R (find current)", "R = V / I (find resistance)",
           "Applies directly to resistive loads",
           "Use the VIR triangle to remember which formula to apply",
         ],
+        practical: {
+          intro: "Apply Ohm's Law to two real wiring and circuit scenarios.",
+          steps: [
+            {
+              id: 'vir-1',
+              type: 'scenario',
+              title: "Scenario A: Cable Voltage Drop",
+              prompt: "A 240V DC UPS battery bus connects to a load room 80 feet away. The two conductors (there and back) total 0.8Ω resistance. The load draws 30A. How much voltage does the load actually receive? Is this acceptable (typically ≤3% drop)?",
+              scenarioOptions: [
+                { id: 'right', label: "V_drop = 30A × 0.8Ω = 24V. Load receives 240 – 24 = 216V. Drop is 24/240 = 10% — NOT acceptable, conductor must be upsized.", sublabel: "Correct — apply V = I×R to find the drop" },
+                { id: 'low',   label: "V_drop = 30A × 0.08Ω = 2.4V. Load receives 237.6V — acceptable (1% drop)" },
+                { id: 'none',  label: "No voltage drop — DC lines don't lose voltage over distance" },
+                { id: 'over',  label: "V_drop = 30A ÷ 0.8Ω = 37.5V. Load receives only 202.5V." },
+              ],
+              correctScenario: 'right',
+              hint: "Use V = I × R to find how many volts are lost in the cable. Compare that to the supply voltage to find what's left.",
+              correctFeedback: "Correct. V = I × R = 30A × 0.8Ω = 24V drop in the cable. The load sees 240 – 24 = 216V. That is a 10% drop — far beyond the typical 3% limit. You would need to upsize the conductors significantly (roughly 3× cross-sectional area to get below 3% drop) or run conduit closer to the load.",
+              incorrectFeedback: "Incorrect. Apply Ohm's Law: V_drop = I × R = 30A × 0.8Ω = 24V. The load receives 240 – 24 = 216V. At 10% voltage drop, the load may under-perform, overheat, or trip its undervoltage protection. This cable run needs to be upsized.",
+            },
+            {
+              id: 'vir-2',
+              type: 'scenario',
+              title: "Scenario B: Fuse Sizing",
+              prompt: "A 48V DC control circuit needs a fuse to protect a relay that requires exactly 0.5A to operate. The relay coil resistance is 96Ω. You have 0.5A, 1A, and 2A fuses available. Which is the correct fuse, and what would happen with the others?",
+              scenarioOptions: [
+                { id: 'half',  label: "0.5A fuse — the relay draws exactly 0.5A (I = 48/96 = 0.5A), so a 0.5A fuse should be correct.", sublabel: "Correct — fuse must be sized to the calculated current" },
+                { id: 'one',   label: "1A fuse — always use the next size up for margin, the relay will be protected" },
+                { id: 'two',   label: "2A fuse — bigger is better for reliability, the relay won't care" },
+                { id: 'none',  label: "No fuse needed — the relay resistance limits the current automatically" },
+              ],
+              correctScenario: 'half',
+              hint: "First verify the actual current: I = V/R = 48V/96Ω. Then match the fuse to that current.",
+              correctFeedback: "Correct. I = V/R = 48/96 = 0.5A. The relay draws exactly 0.5A, so a 0.5A fuse is correctly rated. A 1A fuse would allow twice the relay's design current before blowing — providing minimal protection if the coil shorts to 48Ω (now drawing 1A, near damage threshold). A 2A fuse provides virtually no protection at all. Fuses must be sized close to the device's actual current draw.",
+              incorrectFeedback: "Incorrect. Calculate the current first: I = V/R = 48V ÷ 96Ω = 0.5A. Using a 1A or 2A fuse on a 0.5A circuit means the fuse won't blow until current is 2× or 4× higher than the relay's design limit — it would fail before the fuse does. Always size fuses to the calculated current.",
+            },
+          ],
+        },
         quiz: [
           { q: "A 12V battery drives current through a 4Ω resistor. How much current flows?", a: ['3A', '4A', '12A', '48A'], correct: 0, exp: "I = V/R = 12/4 = 3A." },
           { q: "8A flows through a 5Ω resistor. What voltage is across it?", a: ['1.6V', '13V', '40V', '0.6V'], correct: 2, exp: "V = I × R = 8 × 5 = 40V." },
@@ -1186,6 +1235,18 @@ export const MODULES: TrainingModule[] = [
           "Power dissipation in resistors is waste — heat. A 1Ω wire resistance carrying 10A dissipates P = I²R = 100 × 1 = 100W as heat. This is why wire sizing and connection quality matter — every ohm of resistance in a current-carrying path wastes power and generates heat.",
           "Energy is power consumed over time: E = P × t, measured in watt-hours (Wh) or kilowatt-hours (kWh). Battery runtime calculations use this: a battery rated at 100Ah × 48V = 4800Wh theoretical energy. At 80% efficiency supporting a 2kW load: 4800 × 0.8 / 2000 = 1.92 hours of runtime.",
         ],
+        tables: [
+          {
+            caption: 'Power formula — three forms',
+            headers: ['Find', 'Formula', 'Use When…', 'UPS Example'],
+            rows: [
+              ['Power (P)',     'P = I × V',   'You know current and voltage',      '25A at 120V → P = 3000W = 3kW'],
+              ['Power (P)',     'P = I² × R',  'You know current and resistance',   '20A through 0.5Ω cable → 200W wasted as heat'],
+              ['Power (P)',     'P = V² / R',  'You know voltage and resistance',   '100V across 200Ω bleeder → 50W dissipated'],
+              ['Energy (E)',    'E = P × t',   'Power × time → watt-hours (Wh)',   '2kW load × 4h = 8kWh consumed'],
+            ],
+          },
+        ],
         keyPoints: [
           "P = I × V (basic power formula)",
           "P = I²R (power dissipated in a resistance)",
@@ -1193,6 +1254,43 @@ export const MODULES: TrainingModule[] = [
           "Energy = Power × Time (Wh or kWh)",
           "Resistive losses in wiring = heat = wasted power",
         ],
+        practical: {
+          intro: 'Two power formula scenarios: UPS loading and battery runtime estimation.',
+          steps: [
+            {
+              id: 'pow-1',
+              type: 'scenario',
+              title: 'Scenario A: UPS Overload Check',
+              prompt: 'A 10 kVA / 0.9 PF UPS is serving three servers: Server A = 1800W, Server B = 2400W, Server C = 3000W. Is the UPS overloaded?',
+              scenarioOptions: [
+                { id: 'ok',     label: '7200W total, UPS can handle 10,000VA — plenty of room' },
+                { id: 'over',   label: 'UPS real power limit = 10,000 × 0.9 = 9,000W. Load is 1800+2400+3000 = 7,200W. 7,200 < 9,000W — NOT overloaded. Load is at 80% of capacity.', sublabel: 'Correct — compare kW to kW limit' },
+                { id: 'exact',  label: '7200W is exactly the UPS limit — running at 100%' },
+                { id: 'va',     label: 'Need to know server PF before we can tell if it\'s overloaded' },
+              ],
+              correctScenario: 'over',
+              hint: 'UPS kW limit = VA × PF = 10,000 × 0.9 = 9,000W. Add up server watts and compare.',
+              correctFeedback: 'Correct. Total load: 1800 + 2400 + 3000 = 7,200W. UPS real power capacity: 10,000VA × 0.9 PF = 9,000W. 7,200W < 9,000W — the UPS is at 80% capacity. This is a good operating point. You have 1,800W of headroom before the real power limit, and the VA loading is similar (modern servers have ~0.95–0.99 PF so VA ≈ W).',
+              incorrectFeedback: "Incorrect. You can't just compare watts to VA — they have different units. First convert the UPS to watts: 10,000VA × 0.9 PF = 9,000W capacity. Then sum the servers: 7,200W. Since 7,200 < 9,000, the UPS is not overloaded. It's at 80% — good headroom.",
+            },
+            {
+              id: 'pow-2',
+              type: 'scenario',
+              title: 'Scenario B: Battery Runtime Estimate',
+              prompt: 'A 48V battery string is rated 100Ah. The UPS load is 2,000W and the system efficiency (inverter + charger) is 90%. Estimate the runtime. (Use: E = V × Ah × efficiency; runtime = E / Load_W)',
+              scenarioOptions: [
+                { id: 'a',    label: 'Runtime = (48 × 100 × 0.9) / 2000 = 4,320 / 2000 = 2.16 hours ≈ 130 minutes', sublabel: 'Correct — account for efficiency in the calculation' },
+                { id: 'b',    label: 'Runtime = (48 × 100) / 2000 = 4800 / 2000 = 2.4 hours — ignoring efficiency' },
+                { id: 'c',    label: 'Runtime = 100Ah / 2000W = 0.05 hours — mixing units incorrectly' },
+                { id: 'd',    label: 'Runtime = 2000W / 48V = 41.7A draw → 100Ah / 41.7A = 2.4 hours — ignoring efficiency' },
+              ],
+              correctScenario: 'a',
+              hint: 'Stored energy = V × Ah = watt-hours. Multiply by efficiency (some energy is lost in conversion). Divide by load to get hours.',
+              correctFeedback: 'Correct. Theoretical stored energy = 48V × 100Ah = 4,800Wh. After 90% conversion efficiency: 4,800 × 0.9 = 4,320Wh usable. Runtime = 4,320 / 2,000W = 2.16 hours ≈ 130 minutes. Ignoring efficiency (option D) gives 2.4h — an 11% overestimate that could strand you short of actual runtime.',
+              incorrectFeedback: 'Incorrect. The correct calculation must account for efficiency: E_usable = 48V × 100Ah × 0.90 = 4,320Wh. Runtime = 4,320Wh ÷ 2,000W = 2.16 hours. Skipping efficiency overstates runtime. Mixing units (Ah ÷ W) produces nonsense — you must convert to Wh first.',
+            },
+          ],
+        },
         quiz: [
           { q: "A circuit draws 10A at 120V. Power consumed is:", a: ['12W', '120W', '1200W', '12000W'], correct: 2, exp: "P = I × V = 10 × 120 = 1200W = 1.2kW." },
           { q: "P = I²R means that if current doubles in a resistor, power:", a: ['Doubles', 'Triples', 'Quadruples', 'Stays the same'], correct: 2, exp: "P = I²R. If I doubles, I² quadruples — power increases by 4×." },
@@ -1214,6 +1312,20 @@ export const MODULES: TrainingModule[] = [
           "Heat dissipation calculations protect equipment. A power resistor rated 50W must not dissipate more than 50W. If it's across 100V, it draws P = V²/R = 10000/200 = 50W (if R=200Ω). If resistance drops to 100Ω due to a fault, P = 10000/100 = 100W — instantly overloaded.",
           "Always double-check nameplate data against actual field conditions. A UPS rated 80kVA at 0.8 PF delivers 64kW. If someone has connected 70kW of load, the UPS is overloaded by 9.4% — it may not trip immediately but will run hot and reduce component life. These calculations are part of every service visit.",
         ],
+        tables: [
+          {
+            caption: 'Field calculation cheat sheet',
+            headers: ['Task', 'Formula', 'Typical UPS Numbers'],
+            rows: [
+              ['Battery string voltage',  'V = cell_count × V_cell',         '24 cells × 2V = 48V string; 60 cells × 2V = 120V'],
+              ['Load current (single-Ø)', 'I = P / V',                       '3kW ÷ 208V = 14.4A; size breaker at 14.4 × 1.25 = 18A'],
+              ['Load current (3-Ø)',      'I = P / (V × √3)',                '90kW ÷ (480 × 1.732) = 108A per phase'],
+              ['Cable voltage drop',      'V_drop = I × R_cable',            '30A × 0.1Ω = 3V drop over 100-ft run'],
+              ['UPS real power limit',    'P_max = VA_rating × PF',          '20kVA × 0.9 = 18kW max real power output'],
+              ['Resistor heat',           'P = V²/R or P = I²R',             '100V / 200Ω = 50W; 15A × 1Ω = 225W in cable'],
+            ],
+          },
+        ],
         keyPoints: [
           "Cell count × cell voltage = expected string voltage",
           "Load current = Load watts / Supply voltage",
@@ -1221,6 +1333,43 @@ export const MODULES: TrainingModule[] = [
           "Heat dissipated = V²/R or I²R — must be within component rating",
           "Always verify UPS load against nameplate kVA × PF",
         ],
+        practical: {
+          intro: 'Two integrated field calculation scenarios that combine multiple formulas.',
+          steps: [
+            {
+              id: 'field-1',
+              type: 'scenario',
+              title: 'Scenario A: Breaker Sizing for a New Load',
+              prompt: 'A data center is adding a 5kW rack to a 208V single-phase branch. NEC requires conductors and breakers sized at 125% of continuous load current. What is the minimum breaker amperage required?',
+              scenarioOptions: [
+                { id: 'a', label: 'I = 5000/208 = 24A. 24 × 1.25 = 30A minimum breaker.', sublabel: 'Correct — calculate then apply NEC 125% factor' },
+                { id: 'b', label: 'I = 5000/208 = 24A. Use a 20A breaker with some safety margin' },
+                { id: 'c', label: 'I = 5000/120 = 41.7A because 208V circuits use 120V for current calculations' },
+                { id: 'd', label: 'I = 5000/208 = 24A. 24A breaker is the exact match' },
+              ],
+              correctScenario: 'a',
+              hint: 'Step 1: I = P/V to find load current. Step 2: Multiply by 1.25 for NEC continuous load factor.',
+              correctFeedback: 'Correct. I = P/V = 5000/208 = 24.04A. NEC 210.20 requires branch circuits for continuous loads to be sized at 125% of load current. 24A × 1.25 = 30A. You would specify a 30A breaker and conductors rated for at least 30A (typically 10 AWG).',
+              incorrectFeedback: 'Incorrect. Step 1: I = P/V = 5000W ÷ 208V = 24A. Step 2: Apply NEC 125% factor for continuous loads: 24A × 1.25 = 30A minimum. A 24A breaker would run at 100% of its rating continuously — this violates NEC code for continuous loads.',
+            },
+            {
+              id: 'field-2',
+              type: 'scenario',
+              title: 'Scenario B: Verifying UPS is Not Overloaded',
+              prompt: 'During a site PM, you find a 20kVA / 0.8 PF UPS with the following loads wired to it: three 3kW servers (measured via clamp), one 2kW network switch stack, and one 1kW KVM console. Is the UPS overloaded?',
+              scenarioOptions: [
+                { id: 'ok',   label: 'Total load = (3×3kW) + 2kW + 1kW = 12kW. UPS limit = 20kVA × 0.8 = 16kW. 12kW < 16kW — NOT overloaded (75% utilization).', sublabel: 'Correct — add loads, compare to kW limit' },
+                { id: 'over', label: 'Total VA = 12,000 ÷ 0.8 = 15kVA. UPS is 20kVA so there is 5kVA of room.' },
+                { id: 'cap',  label: '12kW is more than half of 20kVA, so the UPS is past 50% and should be replaced.' },
+                { id: 'fail', label: 'Can\'t determine without knowing each load\'s power factor individually.' },
+              ],
+              correctScenario: 'ok',
+              hint: 'UPS real power limit = VA × PF. Sum all loads in watts and compare.',
+              correctFeedback: 'Correct. Total load = 9kW + 2kW + 1kW = 12kW. UPS kW limit = 20,000VA × 0.8 = 16kW. 12kW < 16kW — the UPS is at 75% capacity, well within limits. Document this reading on the PM report and note there is 4kW of growth headroom.',
+              incorrectFeedback: 'Incorrect. First calculate the UPS real power limit: 20kVA × 0.8 PF = 16kW. Then sum the actual measured loads: 3×3kW + 2kW + 1kW = 12kW. Compare: 12kW < 16kW. Not overloaded at 75%. The UPS is healthy.',
+            },
+          ],
+        },
         quiz: [
           { q: "A 48V battery string has 24 cells. Average cell voltage should be:", a: ['1V', '2V', '4V', '48V'], correct: 1, exp: "48V / 24 cells = 2V per cell. Lead-acid battery cells have a nominal voltage of 2V per cell." },
           { q: "A 3kW load at 240V draws approximately:", a: ['3A', '12.5A', '720A', '80A'], correct: 1, exp: "I = P/V = 3000/240 = 12.5A." },
@@ -1241,6 +1390,20 @@ export const MODULES: TrainingModule[] = [
           'The Digital Multimeter (DMM) is the most versatile: it measures AC/DC voltage, resistance, continuity, diode forward voltage, small inline current (up to 10A), frequency, and capacitance. A high-quality DMM (Fluke 87V, Klein MM700, Ideal 61-340) is your primary troubleshooting tool. For voltage and resistance, the meter is always connected IN PARALLEL with the component being measured.',
           'The Clamp Meter measures current by clamping around a single conductor and reading the magnetic field that current creates — no circuit interruption required. Essential for live, high-current circuits (30A, 100A, 400A+). Most clamp meters also measure AC voltage and resistance. Critical note: standard clamp meters only read AC current. DC clamp meters must include a Hall-effect sensor and be specifically selected for DC work.',
           'The Insulation Resistance Tester (megohmmeter, "Megger") applies a high DC test voltage (500V, 1000V, or 2500V) between a conductor and ground and measures the resulting leakage current to calculate insulation resistance in megaohms (MΩ). Good insulation shows hundreds or thousands of MΩ. Values below 1 MΩ indicate significant degradation. Critical for aged cables, battery interconnects, and transformer windings before re-energizing.',
+        ],
+        tables: [
+          {
+            caption: 'Test instrument selection — which tool for which measurement',
+            headers: ['Measurement Task', 'Correct Tool', 'Wrong Tool and Why'],
+            rows: [
+              ['AC voltage (UPS output, utility)',       'DMM — V AC mode',          'Clamp meter works but less precise; Megger would be damaged'],
+              ['DC voltage (battery, DC bus)',            'DMM — V DC mode',          'Clamp meter clamp jaw = AC only; Megger applies its own voltage (dangerous)'],
+              ['High current on live cable (100A+)',      'Clamp meter',              'DMM ammeter = circuit must be broken = not safe at high current'],
+              ['DC current on live cable',               'Clamp meter with Hall-effect DC mode', 'Standard AC clamp meter reads 0A on DC current'],
+              ['Insulation resistance (aged cable, winding)', 'Megger (500–2500V)', 'DMM at 9V cannot detect breakdown that occurs at operating voltage'],
+              ['Continuity check (fuse, switch)',        'DMM — continuity (Ω) mode', 'Clamp meter or Megger — wrong tool, potential damage'],
+            ],
+          },
         ],
         keyPoints: [
           'DMM: voltage, resistance, continuity, small inline current — most versatile daily tool',
@@ -1319,6 +1482,19 @@ export const MODULES: TrainingModule[] = [
           'AC voltage mode (V~) is required for: utility input (120V, 208V, 240V, 480V), UPS output, bypass line, and any transformer secondary that feeds AC loads. DC voltage mode (V─) is required for: battery strings (12V, 24V, 48V, 240V), DC bus (240V, 400V DC), and all control circuit voltages. Using AC mode on a DC source (or vice versa) gives a reading of zero or nonsense values — not an error message.',
           'Lead placement rule that never changes for voltage and resistance: BLACK lead → COM jack, RED lead → VΩmA jack. The COM jack is the common return for all measurements. The VΩmA jack handles voltage (all ranges), resistance, and small current. The 10A jack is exclusively for current measurement and should never have a lead plugged in during voltage measurement.',
           'Range selection: auto-ranging DMMs (the standard today) automatically select the correct range when you connect. If using a manual-ranging meter, always start at the highest range and step down — connecting a 10V meter to 480V will destroy the meter immediately. On auto-range meters, simply select V AC or V DC, connect the probes, and read the stable value.',
+        ],
+        tables: [
+          {
+            caption: 'DMM setup for common UPS voltage measurements',
+            headers: ['What You Are Measuring', 'Mode', 'Red Lead', 'Black Lead', 'What to Expect'],
+            rows: [
+              ['Utility AC input (120V or 208V)', 'V AC (~)',  'VΩmA', 'COM', '118–122V or 206–210V'],
+              ['UPS AC output',                   'V AC (~)',  'VΩmA', 'COM', 'Should match rated output ± 2%'],
+              ['48V battery string',              'V DC (─)', 'VΩmA', 'COM', '50–53V float; 48V nominal; negative = probes reversed'],
+              ['240V DC bus',                     'V DC (─)', 'VΩmA', 'COM', '240–280V depending on rectifier design'],
+              ['Fuse continuity check',           'Ω or continuity', 'VΩmA', 'COM', '≈0Ω (good); OL (blown)'],
+            ],
+          },
         ],
         keyPoints: [
           'V AC (~) for utility, UPS output, bypass, and transformer secondary voltages',
