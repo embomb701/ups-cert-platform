@@ -51,12 +51,55 @@ export interface PracticalExercise {
   steps: PracticalStep[];
 }
 
+// ── Meter Simulator types ────────────────────────────────────────────────────
+
+export interface MeterTestPoint {
+  id: string;
+  label: string;
+  sublabel?: string;
+  color?: 'red' | 'black' | 'blue' | 'green' | 'gray' | 'orange';
+}
+
+export interface MeterSimTask {
+  id?: string;
+  instruction: string;
+  hint?: string;
+  meterType: 'dmm' | 'clamp' | 'megger';
+  // DMM
+  correctDial?: string;
+  correctRedJack?: 'vomA' | 'a10';
+  correctRedPoint?: string;
+  correctBlackPoint?: string;
+  // Clamp
+  correctClampDial?: string;
+  correctClampAround?: string;
+  // Megger
+  correctMeggerVoltage?: string;
+  correctMeggerLine?: string;
+  correctMeggerEarth?: string;
+  requiresMeggerTest?: boolean;
+  // What the display shows in correct state
+  displayReading: string;
+  // What to show for common wrong setups  {condition key → reading}
+  wrongReadings?: Record<string, string>;
+  explanation: string;
+}
+
+export interface MeterSimExercise {
+  intro: string;
+  circuitLabel: string;
+  circuitDescription: string;
+  testPoints: MeterTestPoint[];
+  tasks: MeterSimTask[];
+}
+
 export interface Slide {
   title: string;
   body: string[];
   keyPoints: string[];
   quiz: QuizQ[];
   practical?: PracticalExercise;
+  meterSim?: MeterSimExercise;
 }
 
 export interface TrainingModule {

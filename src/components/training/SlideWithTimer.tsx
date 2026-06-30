@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import PracticalActivity from './PracticalActivity';
-import type { PracticalExercise } from '@/data/modules';
+import MeterSimulator from './MeterSimulator';
+import type { PracticalExercise, MeterSimExercise } from '@/data/modules';
 
 interface QuizQ {
   q: string;
@@ -17,6 +18,7 @@ interface Slide {
   keyPoints: string[];
   quiz: QuizQ[];
   practical?: PracticalExercise;
+  meterSim?: MeterSimExercise;
 }
 
 interface Props {
@@ -30,6 +32,9 @@ interface Props {
 const REQUIRED_SECONDS = 300;
 
 export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, skipTimer = false }: Props) {
+  const hasMeterSim = !!slide.meterSim;
+  const [meterSimDone, setMeterSimDone] = useState(!hasMeterSim);
+
   // A slide with a practical exercise gates the reading material until the exercise is done
   const hasPractical = !!slide.practical;
   const [practicalDone, setPracticalDone] = useState(!hasPractical);
@@ -164,8 +169,16 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
         </div>
       )}
 
-      {/* PRACTICAL EXERCISE — shown first, gates reading material */}
-      {hasPractical && !practicalDone && (
+      {/* METER SIM — shown first, gates reading material */}
+      {hasMeterSim && !meterSimDone && (
+        <MeterSimulator
+          exercise={slide.meterSim!}
+          onComplete={() => setMeterSimDone(true)}
+        />
+      )}
+
+      {/* PRACTICAL EXERCISE — shown after meterSim (or first if no meterSim), gates reading */}
+      {meterSimDone && hasPractical && !practicalDone && (
         <div className="space-y-4">
           <PracticalActivity
             exercise={slide.practical!}
@@ -174,8 +187,8 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
         </div>
       )}
 
-      {/* READING CONTENT — shown after practical is complete (or immediately if no practical) */}
-      {practicalDone && (
+      {/* READING CONTENT — shown after both pre-activities are complete */}
+      {meterSimDone && practicalDone && (
         <>
           <div>
             <h2 className="text-2xl font-bold text-white mb-4">{slide.title}</h2>

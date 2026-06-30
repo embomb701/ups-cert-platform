@@ -3,7 +3,7 @@ import type { TrainingModule } from './modules';
 export const MODULES_PART4: TrainingModule[] = [
   {
     id: 'motors-generators',
-    num: 20,
+    num: 21,
     title: 'Motors and Generators',
     desc: 'AC and DC motor principles, generator operation, and how rotating machines relate to UPS and backup power systems.',
     slides: [
@@ -105,7 +105,7 @@ export const MODULES_PART4: TrainingModule[] = [
 
   {
     id: 'ups-pdu-configurations',
-    num: 21,
+    num: 22,
     title: 'UPS and PDU Configurations',
     desc: 'Single-module, parallel redundant, and N+1 UPS topologies; PDU types and ratings; power distribution architecture.',
     slides: [
@@ -207,7 +207,7 @@ export const MODULES_PART4: TrainingModule[] = [
 
   {
     id: 'startup-shutdown',
-    num: 22,
+    num: 23,
     title: 'Startup and Shutdown Procedures',
     desc: 'Safe UPS startup and shutdown sequences, transfer procedures, and critical-load protection protocols.',
     slides: [

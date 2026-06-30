@@ -124,7 +124,7 @@ export default function HomePage() {
               <p className="text-blue-300 text-sm mb-5">Jr. FSE Certification Exam included at completion</p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                 {[
-                  '26 modules over 6 months',
+                  '27 modules over 6 months',
                   '78+ slides with 5-min timer per slide',
                   '100% required on every section quiz',
                   'Fail a section → repeat it, 24-hour retry wait',
@@ -376,27 +376,33 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="text-center mb-12">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Curriculum</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">26 modules. 6 months. One career.</h2>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">27 modules. 6 months. One career.</h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             { n: '01–06', title: 'Electrical Foundations', topics: "Electricity, circuits, components, AC/DC, Ohm's law, scientific notation", badge: null },
             { n: '07', title: 'NFPA 70E — Electrical Safety', topics: 'Arc flash hazards, PPE categories 1–4, approach boundaries, energized work permits, safe work practices on UPS equipment', badge: 'FREE CERT' },
             { n: '08', title: 'Lockout/Tagout (LOTO)', topics: 'OSHA 29 CFR 1910.147, six-step de-energization, lockout hardware, UPS multi-source isolation, group LOTO, re-energization sequence', badge: 'FREE CERT' },
-            { n: '09–14', title: 'UPS Core Systems', topics: 'UPS overview, PDUs, rectifiers, inverters, transformers, battery types', badge: null },
-            { n: '15', title: 'Battery Safety', topics: 'PPE, installation, testing, disposal, hazard identification', badge: null },
-            { n: '16–17', title: 'Power Electronics', topics: 'PWM, duty cycle, digital logic, truth tables, control systems', badge: null },
-            { n: '18–19', title: 'Control Systems', topics: 'Relay logic, ladder diagrams, AVR, voltage regulation, feedback loops', badge: null },
-            { n: '20', title: 'Rotating Machines', topics: 'AC/DC motors, generators, synchronization, bearing maintenance', badge: null },
-            { n: '21–23', title: 'Configurations, Procedures & Troubleshooting', topics: 'N+1 redundancy, startup, shutdown, systematic diagnosis, fault codes, PM procedures', badge: null },
-            { n: '24–26', title: 'Repair & Career', topics: 'Component replacement, post-repair commissioning, incident response, career development', badge: null },
+            { n: '09', title: 'Meters & Test Equipment', topics: 'DMM, clamp meter, megger — interactive hands-on simulations, dial selection, lead placement, troubleshooting with all three meters', badge: 'LAB' },
+            { n: '10–15', title: 'UPS Core Systems', topics: 'UPS overview, PDUs, rectifiers, inverters, transformers, battery types', badge: null },
+            { n: '16', title: 'Battery Safety', topics: 'PPE, installation, testing, disposal, hazard identification', badge: null },
+            { n: '17–18', title: 'Power Electronics', topics: 'PWM, duty cycle, digital logic, truth tables, control systems', badge: null },
+            { n: '19–20', title: 'Control Systems', topics: 'Relay logic, ladder diagrams, AVR, voltage regulation, feedback loops', badge: null },
+            { n: '21', title: 'Rotating Machines', topics: 'AC/DC motors, generators, synchronization, bearing maintenance', badge: null },
+            { n: '22–24', title: 'Configurations, Procedures & Troubleshooting', topics: 'N+1 redundancy, startup, shutdown, systematic diagnosis, fault codes, PM procedures', badge: null },
+            { n: '25–27', title: 'Repair & Career', topics: 'Component replacement, post-repair commissioning, incident response, career development', badge: null },
           ].map((item, i) => (
-            <div key={i} className={`p-5 rounded-lg border relative ${item.badge ? 'border-amber-700/60 bg-amber-950/10' : 'border-gray-700 bg-gray-800'}`}>
+            <div key={i} className={`p-5 rounded-lg border relative ${item.badge === 'FREE CERT' ? 'border-amber-700/60 bg-amber-950/10' : item.badge === 'LAB' ? 'border-blue-700/60 bg-blue-950/10' : 'border-gray-700 bg-gray-800'}`}>
               <div className="flex items-center gap-2 mb-1">
-                <span className={`text-xs font-mono font-bold ${item.badge ? 'text-amber-400' : 'text-blue-500'}`}>Module {item.n}</span>
-                {item.badge && (
+                <span className={`text-xs font-mono font-bold ${item.badge === 'FREE CERT' ? 'text-amber-400' : item.badge === 'LAB' ? 'text-blue-400' : 'text-blue-500'}`}>Module {item.n}</span>
+                {item.badge === 'FREE CERT' && (
                   <span className="px-1.5 py-0.5 bg-amber-600/30 border border-amber-600/60 text-amber-300 text-xs font-bold rounded">
-                    {item.badge}
+                    FREE CERT
+                  </span>
+                )}
+                {item.badge === 'LAB' && (
+                  <span className="px-1.5 py-0.5 bg-blue-600/30 border border-blue-600/60 text-blue-300 text-xs font-bold rounded">
+                    INTERACTIVE LAB
                   </span>
                 )}
               </div>
@@ -473,7 +479,7 @@ export default function HomePage() {
             { q: 'What happens if I fail the Jr. FSE test-out?', a: 'You must complete the full 6-month training course before you can attempt the exam again. The test-out is for people already working in the field who know the material.' },
             { q: "What is the Jr. FSE Practice Test?", a: 'The practice test ($14.99) uses the same 50-question format and question pool as the real exam so you can gauge your readiness. No certificate is issued — it\'s for practice only. The real test-out ($299) is human proctored, one attempt, and issues a certification if you pass.' },
             { q: 'Why does the training take 6 months?', a: 'The 1-week minimum between modules is enforced server-side. Real retention requires spacing. Employers know what it took because the timeline is verifiable — it cannot be bypassed.' },
-            { q: 'Is the Jr. FSE exam included in the training course?', a: 'Yes. Completing all 26 modules automatically unlocks your Jr. FSE certification exam at no additional cost. The $1,499 covers everything — including the NFPA 70E and LOTO certificates earned along the way.' },
+            { q: 'Is the Jr. FSE exam included in the training course?', a: 'Yes. Completing all 27 modules automatically unlocks your Jr. FSE certification exam at no additional cost. The $1,499 covers everything — including the NFPA 70E and LOTO certificates earned along the way.' },
             { q: 'What is the FSE exam?', a: "The advanced certification for experienced engineers. Human proctored, live session, $649. Separate from Jr. FSE — you don't need Jr. FSE first, though the training course prepares you well for it." },
           ].map((item, i) => (
             <div key={i} className="border border-gray-700 rounded-lg p-6 bg-gray-800/40">
