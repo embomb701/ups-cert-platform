@@ -1716,6 +1716,19 @@ export const MODULES: TrainingModule[] = [
           'Multiplying powers of 10: add the exponents. (2 × 10^3) × (3 × 10^2) = 6 × 10^5. Dividing powers of 10: subtract the exponents. (8 × 10^6) ÷ (4 × 10^3) = 2 × 10^3.',
           'Converting to/from standard notation: positive exponent → move decimal right (larger number). Negative exponent → move decimal left (smaller number). 3.5 × 10^3 = 3,500. 3.5 × 10^-3 = 0.0035.',
         ],
+        tables: [
+          {
+            caption: 'Scientific notation — electrical quantity examples',
+            headers: ['Quantity', 'Standard Form', 'Scientific Notation', 'Context'],
+            rows: [
+              ['480 kW UPS',          '480,000 W',       '4.8 × 10^5 W',   'Large data center UPS rating'],
+              ['0.47 µF capacitor',   '0.00000047 F',    '4.7 × 10^-7 F',  'Typical snubber / timing capacitor'],
+              ['60 Hz AC',            '60 Hz',           '6.0 × 10^1 Hz',  'US line frequency'],
+              ['25 mA control signal','0.025 A',         '2.5 × 10^-2 A',  'Control board current draw'],
+              ['1 MΩ insulation',     '1,000,000 Ω',     '1.0 × 10^6 Ω',   'Minimum acceptable insulation resistance'],
+            ],
+          },
+        ],
         keyPoints: [
           'Scientific notation: M × 10^N where 1 ≤ M < 10',
           'Positive exponent = large number (move decimal right)',
@@ -1723,6 +1736,43 @@ export const MODULES: TrainingModule[] = [
           'Multiply: add exponents; Divide: subtract exponents',
           'Used to express electrical quantities from pF to MW',
         ],
+        practical: {
+          intro: 'Two scientific notation conversion scenarios from UPS documentation and spec sheets.',
+          steps: [
+            {
+              id: 'sci-1',
+              type: 'scenario',
+              title: 'Scenario A: Reading a Spec Sheet',
+              prompt: 'A UPS spec sheet lists the DC bus filter capacitor as "4.7 × 10^-4 F". A technician reads this as 47 µF and orders a replacement. Is this correct?',
+              scenarioOptions: [
+                { id: 'yes',  label: 'Yes — 4.7 × 10^-4 F = 47 µF. The order is correct.' },
+                { id: 'no',   label: 'No — 4.7 × 10^-4 F = 0.00047 F = 470 µF. The technician moved the decimal wrong; they would order the wrong capacitor.', sublabel: 'Correct — 10^-4 = 100 µF per 1 F, so 4.7 × 10^-4 = 470 µF' },
+                { id: 'same', label: 'Both 47 µF and 470 µF would work — capacitors have wide tolerances' },
+                { id: 'na',   label: 'Cannot determine without knowing the voltage rating' },
+              ],
+              correctScenario: 'no',
+              hint: '1 µF = 10^-6 F. So 10^-4 F = 10^2 µF = 100 µF. 4.7 × 10^-4 F = 4.7 × 100 µF = 470 µF.',
+              correctFeedback: 'Correct. 4.7 × 10^-4 F: convert to µF by dividing by 10^-6 (or multiplying by 10^6): 4.7 × 10^-4 × 10^6 = 4.7 × 10^2 = 470 µF. The technician calculated 47 µF — one order of magnitude too small. Installing a 47 µF capacitor where 470 µF is specified would cause excessive DC bus ripple and potentially inverter instability. Always verify the full conversion before ordering parts.',
+              incorrectFeedback: 'Incorrect. Let\'s convert carefully: 4.7 × 10^-4 F. Since 1 µF = 10^-6 F, we divide: (4.7 × 10^-4) ÷ (10^-6) = 4.7 × 10^(-4+6) = 4.7 × 10^2 = 470 µF. The technician got 47 µF by misplacing the decimal — they would order a capacitor 10× too small.',
+            },
+            {
+              id: 'sci-2',
+              type: 'scenario',
+              title: 'Scenario B: Multiplying Powers of 10',
+              prompt: 'A charger delivers 5 × 10^1 amps at 4.8 × 10^1 volts. Using P = I × V, what is the power in watts, expressed in proper scientific notation?',
+              scenarioOptions: [
+                { id: 'a', label: 'P = (5 × 4.8) × 10^(1+1) = 24 × 10^2 = 2,400W = 2.4 × 10^3 W', sublabel: 'Correct — multiply coefficients, add exponents' },
+                { id: 'b', label: 'P = (5 + 4.8) × 10^(1+1) = 9.8 × 10^2 W' },
+                { id: 'c', label: 'P = (5 × 4.8) × 10^(1×1) = 24 × 10^1 = 240W' },
+                { id: 'd', label: 'P = 5 × 4.8 × 10^2 = 2.4 × 10^3 but written as 24 × 10^2 which is not proper notation' },
+              ],
+              correctScenario: 'a',
+              hint: 'Multiply powers of 10 by adding exponents. Then normalize so the coefficient is between 1 and 10.',
+              correctFeedback: 'Correct. P = I × V = (5 × 10^1) × (4.8 × 10^1) = (5 × 4.8) × 10^(1+1) = 24 × 10^2. Normalize: 24 × 10^2 = 2.4 × 10^3 W = 2,400W. This is a 2.4kW charging load — typical for a mid-size UPS battery charger.',
+              incorrectFeedback: 'Incorrect. To multiply numbers in scientific notation: multiply the coefficients (5 × 4.8 = 24) and add the exponents (1 + 1 = 2). Result: 24 × 10^2. Then normalize to proper form: 24 × 10^2 = 2.4 × 10^3 W. You add exponents, not multiply them.',
+            },
+          ],
+        },
         quiz: [
           { q: '47,000 in scientific notation is:', a: ['47 × 10^3', '4.7 × 10^4', '4.7 × 10^3', '0.47 × 10^5'], correct: 1, exp: '47,000 = 4.7 × 10^4 (move decimal 4 places left to get coefficient between 1 and 10).' },
           { q: '0.00025 in scientific notation is:', a: ['2.5 × 10^4', '25 × 10^-5', '2.5 × 10^-4', '0.25 × 10^-3'], correct: 2, exp: '0.00025 = 2.5 × 10^-4 (coefficient 2.5, move decimal 4 places right to restore original).' },
@@ -1744,6 +1794,22 @@ export const MODULES: TrainingModule[] = [
           'In UPS work you constantly convert between prefixes: a 100µA control signal = 0.1mA = 0.0001A. A 22kΩ resistor = 22,000Ω. A 100mV signal = 0.1V. A 10kVA UPS = 10,000VA. Converting: multiply by the ratio of the two prefix values.',
           'Battery capacity is measured in ampere-hours (Ah) or milliampere-hours (mAh). A 100Ah battery supplies 100 amps for 1 hour (theoretically) or 50 amps for 2 hours, etc. Large UPS battery strings use multiple 100Ah to 500Ah jars connected in series and parallel.',
         ],
+        tables: [
+          {
+            caption: 'SI prefixes in electrical work — from pico to giga',
+            headers: ['Prefix', 'Symbol', 'Power of 10', 'Value', 'Common UPS Usage'],
+            rows: [
+              ['pico',  'p', '10^−12', '0.000000000001', 'Stray capacitance in high-freq circuits'],
+              ['nano',  'n', '10^−9',  '0.000000001',    'Timing capacitors (nF), pulse widths (ns)'],
+              ['micro', 'µ', '10^−6',  '0.000001',       'Filter capacitors (µF), control currents (µA)'],
+              ['milli', 'm', '10^−3',  '0.001',          'Control currents (mA), small voltages (mV)'],
+              ['(base)','—', '10^0',   '1',              'Volts (V), Amps (A), Ohms (Ω)'],
+              ['kilo',  'k', '10^3',   '1,000',          'Kilowatts (kW), kilovolt-amps (kVA), kilohms (kΩ)'],
+              ['mega',  'M', '10^6',   '1,000,000',      'Megaohms (MΩ) for insulation; megawatts (MW)'],
+              ['giga',  'G', '10^9',   '1,000,000,000',  'Gigahertz (GHz) control clocks'],
+            ],
+          },
+        ],
         keyPoints: [
           'milli (m) = 10^-3, micro (µ) = 10^-6, kilo (k) = 10^3, mega (M) = 10^6',
           '1 kW = 1000 W; 1 mA = 0.001 A; 1 µF = 0.000001 F',
@@ -1751,6 +1817,43 @@ export const MODULES: TrainingModule[] = [
           'Know how to convert between prefix levels',
           'Case matters: m = milli (10^-3), M = mega (10^6)',
         ],
+        practical: {
+          intro: 'Two SI prefix scenarios — reading meter output and converting between prefix levels.',
+          steps: [
+            {
+              id: 'si-1',
+              type: 'scenario',
+              title: 'Scenario A: Meter Reading in mA',
+              prompt: 'Your DMM in mA mode shows "3.25 mA" on the display while measuring a control board current. The board spec says maximum draw is 0.005 A. Is the board within spec?',
+              scenarioOptions: [
+                { id: 'over', label: '3.25 mA > 0.005 A — the board is drawing too much current and is out of spec' },
+                { id: 'ok',   label: '3.25 mA = 0.00325 A. The spec limit is 0.005 A = 5 mA. 3.25 mA < 5 mA — the board is within spec.', sublabel: 'Correct — convert to same units before comparing' },
+                { id: 'same', label: '3.25 mA equals 3.25 A — the board is massively over spec' },
+                { id: 'na',   label: 'Cannot compare mA to A without knowing the voltage' },
+              ],
+              correctScenario: 'ok',
+              hint: '0.005 A × 1000 = 5 mA. Now compare 3.25 mA to 5 mA.',
+              correctFeedback: 'Correct. Convert the spec to mA: 0.005 A = 5 mA. Now compare: 3.25 mA < 5 mA. The board is within spec — drawing 65% of its maximum allowed current. When comparing quantities, always convert to the same prefix before making the comparison.',
+              incorrectFeedback: 'Incorrect. Convert to the same units first. 0.005 A × 1000 = 5 mA. The spec limit is 5 mA. Your measurement is 3.25 mA. 3.25 < 5 — within spec. Never compare mA and A directly without conversion.',
+            },
+            {
+              id: 'si-2',
+              type: 'scenario',
+              title: 'Scenario B: Insulation Resistance — Prefix Alert',
+              prompt: 'A megger test on a 240V cable reads "0.8 MΩ." The minimum acceptable insulation resistance for this cable at this voltage is 1000 kΩ. Is the cable safe to re-energize?',
+              scenarioOptions: [
+                { id: 'safe',   label: '0.8 MΩ > 1000 kΩ cannot be determined — they use different prefixes' },
+                { id: 'unsafe', label: '0.8 MΩ = 800 kΩ. The minimum is 1000 kΩ. 800 < 1000 — the cable is BELOW the minimum and should NOT be re-energized.', sublabel: 'Correct — convert to same prefix to compare' },
+                { id: 'ok',     label: '0.8 MΩ is a high resistance — the cable is fine' },
+                { id: 'retest', label: '1000 kΩ equals 1 kΩ so 0.8 MΩ is way more than enough' },
+              ],
+              correctScenario: 'unsafe',
+              hint: '1 MΩ = 1000 kΩ. So 0.8 MΩ = 800 kΩ. Compare 800 kΩ to the 1000 kΩ minimum.',
+              correctFeedback: 'Correct. 0.8 MΩ = 0.8 × 10^6 Ω = 800,000 Ω = 800 kΩ. The minimum is 1000 kΩ = 1,000,000 Ω = 1 MΩ. Since 800 kΩ < 1000 kΩ, the cable fails the insulation test. Re-energizing is not safe — the cable needs to be replaced or further investigated. This is exactly the kind of prefix confusion that causes accidents when people see "0.8 MΩ" and think "large number = safe."',
+              incorrectFeedback: 'Incorrect. Convert both to the same unit: 0.8 MΩ = 800 kΩ. The minimum is 1000 kΩ. 800 kΩ < 1000 kΩ — the cable fails. 1000 kΩ = 1 MΩ, not 1 kΩ. The confusion between mega and kilo prefixes in this scenario can lead to a serious safety error.',
+            },
+          ],
+        },
         quiz: [
           { q: '1 kilowatt (kW) equals:', a: ['100 W', '1000 W', '10,000 W', '0.001 W'], correct: 1, exp: 'Kilo = 10^3. 1 kW = 1 × 10^3 W = 1000 W.' },
           { q: '1 milliamp (mA) equals:', a: ['1000 A', '0.1 A', '0.001 A', '10 A'], correct: 2, exp: 'Milli = 10^-3. 1 mA = 0.001 A.' },
@@ -1772,6 +1875,19 @@ export const MODULES: TrainingModule[] = [
           'Power calculation with mixed units: P = I²R. If I = 25mA = 0.025A and R = 10kΩ = 10,000Ω: P = (0.025)² × 10,000 = 0.000625 × 10,000 = 6.25W. Alternatively, P = I²R = (2.5×10^-2)² × (10^4) = 6.25×10^-4 × 10^4 = 6.25W.',
           'Important unit pairs in UPS work: VA (volt-amperes for apparent power) vs. W (watts for real power). kWh (energy) vs. kW (power). Ah (battery capacity) vs. A (current). Always verify you are using the correct unit for the calculation at hand.',
         ],
+        tables: [
+          {
+            caption: 'Unit conversion quick reference for formula inputs',
+            headers: ['Prefixed Value', 'Conversion', 'Base Unit Value', 'Use In Formula As'],
+            rows: [
+              ['22 kΩ',   '× 1000',  '22,000 Ω',    '22000 for R in V=IR or P=I²R'],
+              ['4.7 µF',  '÷ 10^6',  '0.0000047 F', '4.7e-6 for capacitor calculations'],
+              ['25 mA',   '÷ 1000',  '0.025 A',     '0.025 for I in all power/Ohm formulas'],
+              ['100 kWh', '× 1000',  '100,000 Wh',  '100000 for energy in E = P×t'],
+              ['0.5 MΩ',  '× 10^6',  '500,000 Ω',   '500000 for comparison to kΩ values'],
+            ],
+          },
+        ],
         keyPoints: [
           'Convert all values to base units before applying formulas',
           'Convert result back to convenient prefix for readability',
@@ -1779,6 +1895,43 @@ export const MODULES: TrainingModule[] = [
           'VA ≠ W (apparent vs. real power)',
           'kWh (energy) vs. kW (power) — different quantities',
         ],
+        practical: {
+          intro: 'Two unit-conversion scenarios that trip up technicians who skip the conversion step.',
+          steps: [
+            {
+              id: 'unit-1',
+              type: 'scenario',
+              title: 'Scenario A: Current Through a Known Resistor',
+              prompt: 'A 22kΩ pull-up resistor on a control board sits across a 5V logic signal. What current flows through it? Express your answer in milliamps.',
+              scenarioOptions: [
+                { id: 'a', label: 'I = 5V / 22kΩ = 5/22 = 0.227A = 227 mA — calculate without converting' },
+                { id: 'b', label: 'I = 5V / 22,000Ω = 0.000227A = 0.227 mA', sublabel: 'Correct — convert kΩ to Ω first, then convert A to mA' },
+                { id: 'c', label: 'I = 5V / 22kΩ = 0.227 kA' },
+                { id: 'd', label: 'I = 5/22 = 0.227 — the prefix cancels so units don\'t matter here' },
+              ],
+              correctScenario: 'b',
+              hint: 'Convert 22kΩ to Ω first: 22 × 1000 = 22,000Ω. Then I = V/R = 5/22000. Convert A to mA by × 1000.',
+              correctFeedback: 'Correct. Step 1: 22kΩ = 22,000Ω. Step 2: I = V/R = 5V / 22,000Ω = 0.000227A. Step 3: Convert to mA: 0.000227 × 1000 = 0.227mA. This tiny current is typical for a logic-level pull-up resistor on a microcontroller. It would not trip a fuse but is measurable with a sensitive DMM.',
+              incorrectFeedback: 'Incorrect. Never calculate I = 5/22 using the kΩ prefix directly. 5V ÷ 22kΩ requires converting: I = 5 ÷ 22000 = 0.000227A = 0.227mA. If you write 5/22 = 0.227 and call it amps, you are off by 1000×. The answer is 0.227mA — not 0.227A or 227mA.',
+            },
+            {
+              id: 'unit-2',
+              type: 'scenario',
+              title: 'Scenario B: VA vs. W — Avoid the Billing Dispute',
+              prompt: 'A customer receives a power bill for 3000 kWh over a month. Their data center has a single 20kVA UPS running at 0.8 PF continuously (720 hours in a month). Should they dispute the bill?',
+              scenarioOptions: [
+                { id: 'dispute', label: '20kVA × 720h = 14,400 kVAh ≠ 3000 kWh — the bill is wrong by a huge amount' },
+                { id: 'correct', label: '20kVA × 0.8 PF = 16kW. 16kW × 720h = 11,520 kWh — the bill of 3000 kWh is actually LESS than the expected usage. They are probably only at partial load.', sublabel: 'Correct — VA must be converted to W before calculating energy' },
+                { id: 'same',    label: 'kVA and kW are the same unit — 20kVA × 720h = 14,400 kWh so the bill is too low' },
+                { id: 'na',      label: 'Power factor is needed to answer this question (which we don\'t have)' },
+              ],
+              correctScenario: 'correct',
+              hint: 'Energy billing is in kWh (real power × time). Convert kVA to kW using PF first. 3000 kWh at 720h = only 4.17kW average — the UPS is running at well below full load.',
+              correctFeedback: 'Correct. Maximum real power = 20kVA × 0.8 = 16kW. Maximum energy = 16kW × 720h = 11,520 kWh. The bill is only 3000 kWh, which implies average real load = 3000/720 = 4.17kW — about 26% of UPS capacity. This is very plausible for light usage. There is no basis to dispute the bill; if anything, it confirms the UPS is heavily underloaded. VA ≠ W — never multiply kVA by hours to get kWh.',
+              incorrectFeedback: 'Incorrect. kVA is apparent power, not real power. Energy billing uses real power (kW). Convert first: 20kVA × 0.8 PF = 16kW. Energy at full load would be 16kW × 720h = 11,520 kWh. The 3,000 kWh bill is actually much less than max — implying partial loading (≈4.2kW average). No dispute is warranted. Never confuse kVA with kW.',
+            },
+          ],
+        },
         quiz: [
           { q: 'Before applying Ohm\'s Law, you should:', a: ['Use any prefix units directly', 'Convert all values to base units (A, V, Ω)', 'Convert everything to milliamps', 'Use kilo units throughout'], correct: 1, exp: 'All quantities must be in compatible base units (amps, volts, ohms) before applying Ohm\'s Law to get correct results.' },
           { q: 'I = V/R. V = 15V, R = 4.7kΩ. Current in milliamps is approximately:', a: ['3.19 mA', '31.9 mA', '319 mA', '0.319 mA'], correct: 0, exp: 'I = 15 / 4700 = 0.00319 A = 3.19 mA.' },
