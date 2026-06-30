@@ -657,6 +657,16 @@ export const MODULES: TrainingModule[] = [
           'In UPS systems, large electrolytic capacitors on the DC bus smooth rectified voltage by storing and releasing energy to fill in the gaps between AC peaks. Capacitors degrade over time — electrolyte dries out, ESR (equivalent series resistance) increases, and they can fail catastrophically (bulge or vent). Capacitor failure is one of the most common causes of UPS failure. Always discharge capacitors before working on power electronics.',
           'Capacitors are also used for power factor correction (PFC) banks at the input of large UPS systems. A poorly maintained PFC capacitor bank reduces efficiency and stresses the supply. When a capacitor fails in a UPS, it must be replaced with one of identical rating (capacitance, voltage, temperature, and physical form factor).',
         ],
+        tables: [
+          {
+            caption: 'Passive component quick-reference',
+            headers: ['Component', 'Unit', 'Stores / Opposes', 'Key UPS Role', 'Failure Mode'],
+            rows: [
+              ['Resistor',   'Ohms (Ω)',     'Opposes current',         'Voltage references, current limiting, bleeder',     'Open (no current) or change in value'],
+              ['Capacitor',  'Farads (F)',   'Stores charge in E-field', 'DC bus smoothing, PFC banks, snubber circuits',    'Electrolyte dry-out → high ESR, bulge, vent'],
+            ],
+          },
+        ],
         keyPoints: [
           'Resistors limit current and divide voltage',
           'Capacitors store energy in an electric field, block DC, pass AC',
@@ -664,6 +674,43 @@ export const MODULES: TrainingModule[] = [
           'Capacitors degrade over time — increasing ESR is a warning sign',
           'Always discharge capacitors before working on power electronics',
         ],
+        practical: {
+          intro: 'Two scenarios applying resistor and capacitor knowledge in UPS service.',
+          steps: [
+            {
+              id: 'cap-1',
+              type: 'scenario',
+              title: 'Scenario A: Capacitor Discharge Before Service',
+              prompt: 'You have just shut down a 48V UPS with a large DC bus capacitor bank. The UPS display is off and the input breaker is open. What is the correct action before touching the DC bus terminals inside the cabinet?',
+              scenarioOptions: [
+                { id: 'touch',   label: 'The display is off so it\'s safe — proceed immediately' },
+                { id: 'wait',    label: 'Wait 5 minutes then touch the terminals briefly to check for tingle' },
+                { id: 'discharge', label: 'Use a UPS discharge procedure or a bleeder resistor to verify the capacitors are discharged, then confirm with a meter before touching', sublabel: 'Correct — verify discharge before contact' },
+                { id: 'gloves',  label: 'Put on rubber gloves and touch the terminals — gloves are enough protection' },
+              ],
+              correctScenario: 'discharge',
+              hint: 'Displays use low power and go dark immediately. Large capacitors can hold full DC bus voltage for minutes after shutdown.',
+              correctFeedback: 'Correct. DC bus capacitors in a UPS can hold dangerous voltage for minutes — sometimes tens of minutes — after the unit is shut down. The display going dark means almost nothing; it runs off a separate low-power supply. Always follow the manufacturer\'s discharge procedure or apply a bleeder resistor and verify with a meter that the voltage has fallen below safe levels before making contact.',
+              incorrectFeedback: 'Incorrect. The display going dark is not a reliable indicator that the capacitors are discharged. Large electrolytic capacitors can hold full DC bus voltage for minutes after shutdown. Without verification, you are at serious risk of a fatal shock from DC voltage. Always use a discharge procedure and confirm with a meter.',
+            },
+            {
+              id: 'cap-2',
+              type: 'scenario',
+              title: 'Scenario B: Capacitor Replacement Specification',
+              prompt: 'A DC bus capacitor has failed visually (bulged top). The label reads: 470µF, 400V, 85°C, 35×50mm. Which replacement is acceptable?',
+              scenarioOptions: [
+                { id: 'low-v',  label: '470µF, 200V, 85°C — lower voltage rating is fine since the bus is only 170V' },
+                { id: 'match',  label: '470µF, 400V, 105°C — same capacitance and voltage, higher temperature rated', sublabel: 'Correct — this is a safe upgrade' },
+                { id: 'high-c', label: '1000µF, 400V, 85°C — more capacitance is always better' },
+                { id: 'low-t',  label: '470µF, 400V, 65°C — temperature rating doesn\'t matter if it fits' },
+              ],
+              correctScenario: 'match',
+              hint: 'Never use a lower voltage-rated capacitor. Temperature rating is a minimum — higher is acceptable. Capacitance must be the same.',
+              correctFeedback: 'Correct. The replacement must have matching or higher capacitance, matching or higher voltage rating, and matching or higher temperature rating. A 105°C cap is actually an upgrade over 85°C — it will last longer in a warm UPS environment. Never use a lower voltage-rated capacitor (a 400V DC bus peak can be 565V with ripple). Higher capacitance in a bus filter is generally safe but may not fit and is unnecessary.',
+              incorrectFeedback: 'Incorrect. Capacitor replacement requires matching the voltage rating at minimum (never go lower), matching capacitance, and the temperature rating must be equal or higher. A 200V capacitor on a 400V bus will fail immediately and catastrophically. Temperature rating matters — 65°C in a 85°C environment will fail prematurely.',
+            },
+          ],
+        },
         quiz: [
           { q: 'Capacitance is measured in:', a: ['Ohms', 'Farads', 'Henrys', 'Watts'], correct: 1, exp: 'Capacitance is measured in farads (F). Practical values are usually microfarads (µF) or picofarads (pF).' },
           { q: 'Capacitors in UPS power electronics primarily:', a: ['Convert AC to DC', 'Amplify voltage', 'Smooth DC bus voltage by storing and releasing energy', 'Protect against overload'], correct: 2, exp: 'Large electrolytic capacitors on the DC bus smooth ripple in the rectified voltage.' },
@@ -685,6 +732,18 @@ export const MODULES: TrainingModule[] = [
           'A diode is a semiconductor device that allows current to flow in one direction only (forward-biased) and blocks it in the other direction (reverse-biased). The forward voltage drop is approximately 0.7V for silicon diodes. Diodes are used in rectifiers to convert AC to DC, as protection diodes against reverse polarity, and as freewheeling diodes across inductors.',
           'Zener diodes are designed to operate in reverse breakdown at a specific voltage, making them useful as voltage references and protection devices. In UPS control circuits, zener diodes set precision voltage levels for comparators and protection circuits. A failed diode typically either opens (no current flow) or shorts (current flows both ways) — both conditions disrupt circuit operation.',
         ],
+        tables: [
+          {
+            caption: 'Inductors and diodes — key properties and failures',
+            headers: ['Component', 'Unit', 'What it does', 'UPS Example', 'Failure Symptom'],
+            rows: [
+              ['Inductor',        'Henrys (H)',    'Stores energy in magnetic field; opposes current change',     'Output filter choke, input line reactor',    'Open = no current path; saturated core = no filtering'],
+              ['Freewheeling diode', 'V forward', 'Provides current path when switch opens (prevents kickback)', 'Across IGBT in inverter stage',             'Shorted = transistor destruction; open = voltage spike'],
+              ['Silicon diode',   '~0.7V fwd drop', 'One-way current gate',                                     'Rectifier bridge, reverse polarity protection', 'Shorted = conducts both ways; open = no rectification'],
+              ['Zener diode',     'Vz (breakdown)', 'Conducts in reverse at precise Vz',                        'Voltage reference in control board',        'Shorted = no regulation; open = control voltage collapses'],
+            ],
+          },
+        ],
         keyPoints: [
           'Inductors store energy in magnetic fields, oppose rapid current changes',
           'Inductive kickback = voltage spike when inductor current is interrupted',
@@ -692,6 +751,43 @@ export const MODULES: TrainingModule[] = [
           'Diodes allow current in one direction only',
           'Silicon diode forward voltage drop ≈ 0.7V',
         ],
+        practical: {
+          intro: 'Two scenarios testing inductor and diode knowledge in UPS fault diagnosis.',
+          steps: [
+            {
+              id: 'ind-1',
+              type: 'scenario',
+              title: 'Scenario A: Inductive Kickback Damage',
+              prompt: 'A UPS inverter IGBT transistor has failed shorted. There is no visible burn damage on the IGBT itself. The freewheeling diode across the output inductor measures shorted in both directions with an ohmmeter. What most likely happened?',
+              scenarioOptions: [
+                { id: 'igbt',   label: 'The IGBT failed first and caused the diode to short' },
+                { id: 'diode',  label: 'The freewheeling diode failed open first, allowing inductive kickback voltage to destroy the IGBT', sublabel: 'Correct — diode failure leads to IGBT destruction' },
+                { id: 'over',   label: 'The load was too heavy and overloaded both components' },
+                { id: 'cap',    label: 'A capacitor failure on the DC bus caused both failures' },
+              ],
+              correctScenario: 'diode',
+              hint: 'A freewheeling diode that is now shorted may have first failed open. Think about what happens to the IGBT when the diode that was protecting it is gone.',
+              correctFeedback: 'Correct. The failure sequence is: freewheeling diode fails open → next time the IGBT switches off, the inductor current has no path → inductive kickback spike rises to hundreds of volts → destroys the IGBT. Now the diode measures shorted because it failed in a different mode, or was destroyed by the same event. When replacing the IGBT, always replace the freewheeling diode at the same time — they are a matched pair.',
+              incorrectFeedback: 'Incorrect. The most common failure chain is: freewheeling diode fails first (open circuit) → inductive kickback destroys the IGBT on the next switching cycle. The IGBT has no protection from the inductor energy spike once the diode is gone. A shorted diode reading on a diode that was supposed to be a protection component typically means it failed earlier — possibly open, then the voltage spike caused it to short.',
+            },
+            {
+              id: 'diode-1',
+              type: 'scenario',
+              title: 'Scenario B: Diode Testing with Ohmmeter',
+              prompt: 'You are testing a silicon rectifier diode from a UPS rectifier bridge. With the ohmmeter set to diode test mode, you measure 0.68V in the forward direction and 0.00V (or OL on a good meter) in the reverse direction. What does this indicate?',
+              scenarioOptions: [
+                { id: 'bad',   label: 'The diode is faulty — forward voltage should be higher than 0.68V' },
+                { id: 'shorted', label: 'The diode is shorted — 0.00V in reverse means it conducts both ways' },
+                { id: 'good',  label: 'The diode is good — 0.68V forward (near 0.7V for silicon) and no conduction in reverse is correct behavior', sublabel: 'Correct — this is normal diode behavior' },
+                { id: 'open',  label: 'The diode is open — the reverse measurement confirms it' },
+              ],
+              correctScenario: 'good',
+              hint: 'A good silicon diode drops about 0.6–0.7V forward. In reverse, a good diode blocks — a meter reads OL (overload/infinite resistance). 0.00V reverse means it is shorted.',
+              correctFeedback: 'Correct. A good silicon diode reads 0.6–0.7V in forward bias (diode test mode) and OL (over-limit / infinite resistance) in reverse bias. Your reading of 0.68V forward and OL reverse is textbook healthy diode behavior. A shorted diode reads near 0V in BOTH directions. A failed-open diode reads OL in BOTH directions.',
+              incorrectFeedback: 'Incorrect. A healthy silicon diode reads 0.6–0.7V in forward bias and OL (infinite) in reverse. This diode reads 0.68V forward (within spec) and 0.00V/OL in reverse (blocking correctly). 0.00V in reverse on a good meter means OL — no conduction. If reverse read 0.00V meaning actual near-zero resistance, that would indicate a short. Review the diode test mode interpretation.',
+            },
+          ],
+        },
         quiz: [
           { q: 'Inductance is measured in:', a: ['Farads', 'Ohms', 'Henrys', 'Volts'], correct: 2, exp: 'Inductance is measured in henrys (H), with millihenrys (mH) and microhenrys (µH) being common practical values.' },
           { q: 'Inductors oppose:', a: ['Constant current flow', 'Rapid changes in current', 'High voltage', 'DC power'], correct: 1, exp: 'Inductors oppose changes in current. Constant DC flows through an inductor easily; changing current is opposed.' },
@@ -713,6 +809,18 @@ export const MODULES: TrainingModule[] = [
           'In UPS systems, transformers appear in several places: input isolation transformers to separate the UPS from the supply, output transformers to match load voltage requirements, and battery charger transformers. Some UPS topologies are "transformer-based" (using a large output transformer) while others are "transformerless" (smaller and lighter but without galvanic isolation).',
           'Transformer efficiency is very high (95-99%) but they do generate heat, especially at high loads. Overloading a transformer causes excessive core temperature, insulation breakdown, and eventually failure. Transformers also produce audible hum at line frequency (60Hz in the US) — this is normal. Abnormally loud hum or burning smell indicates overload or failure.',
         ],
+        tables: [
+          {
+            caption: 'Transformer turns ratio and voltage examples',
+            headers: ['Type', 'Turns Ratio (Pri:Sec)', 'Voltage In → Out', 'UPS Application'],
+            rows: [
+              ['Step-down',   '2:1',   '480V → 240V',  'Facility power to UPS input'],
+              ['Step-down',   '4:1',   '480V → 120V',  'UPS output for single-phase load'],
+              ['Isolation',   '1:1',   '120V → 120V',  'Galvanic isolation for medical/sensitive loads'],
+              ['Step-up',     '1:2',   '120V → 240V',  'Output matching for high-voltage loads'],
+            ],
+          },
+        ],
         keyPoints: [
           'Transformers transfer AC energy via electromagnetic induction',
           'Turns ratio determines voltage step-up or step-down',
@@ -720,6 +828,43 @@ export const MODULES: TrainingModule[] = [
           'Isolation transformers provide electrical isolation, not voltage change',
           'Overloaded transformers overheat — burning smell = replace',
         ],
+        practical: {
+          intro: 'Two scenarios applying transformer knowledge during UPS commissioning and service.',
+          steps: [
+            {
+              id: 'xfmr-1',
+              type: 'scenario',
+              title: 'Scenario A: Selecting a Step-Down Transformer',
+              prompt: 'You are commissioning a single-phase 120V UPS from a 480V three-phase panel. You need a step-down transformer to feed the UPS input. The UPS draws 20A at 120V (2400VA). What transformer specification should you select?',
+              scenarioOptions: [
+                { id: 'one-to-one', label: '1:1 isolation transformer — it provides galvanic isolation and matches 480V output' },
+                { id: 'four-to-one', label: '4:1 step-down transformer, rated for at least 2.5 kVA, single-phase 480V primary / 120V secondary', sublabel: 'Correct — 480V to 120V requires 4:1 ratio' },
+                { id: 'two-to-one', label: '2:1 step-down transformer — 480V in → 240V out, close enough' },
+                { id: 'stepup', label: 'Step-up transformer to raise 120V to 480V before the UPS' },
+              ],
+              correctScenario: 'four-to-one',
+              hint: '480V ÷ 120V = 4. The transformer must convert 480V primary to 120V secondary. Turns ratio = 4:1.',
+              correctFeedback: 'Correct. A 4:1 step-down transformer takes 480V primary to 120V secondary (480 ÷ 120 = 4). The kVA rating must match or exceed the load: 2400VA = 2.4 kVA minimum, so a 2.5 or 3 kVA unit is appropriate. Never use a 1:1 isolation transformer for this application — it would output 480V to a 120V UPS input, which would destroy the UPS.',
+              incorrectFeedback: 'Incorrect. The turns ratio needed is 480V ÷ 120V = 4:1. A 2:1 transformer would output 240V (too high). A 1:1 would output 480V (dangerous). The correct choice is a 4:1 step-down at sufficient kVA rating for the load.',
+            },
+            {
+              id: 'xfmr-2',
+              type: 'scenario',
+              title: 'Scenario B: Why the Transformer is Humming Loudly',
+              prompt: 'During a routine PM on a 3-phase UPS installation, you notice the input isolation transformer is humming significantly louder than during your previous visit 6 months ago. There is no burning smell. The UPS is showing 85% load. What is the most likely cause and what should you do?',
+              scenarioOptions: [
+                { id: 'normal', label: 'Transformers always hum — the louder hum is just your ears adapting. No action needed.' },
+                { id: 'overload', label: 'The load has increased toward the transformer\'s rated capacity. The increased core flux causes louder magnetostrictive hum. Document the load increase and check if it is within the transformer\'s rated capacity.', sublabel: 'Correct — higher load = louder hum' },
+                { id: 'failure', label: 'The transformer is about to fail — replace it immediately.' },
+                { id: 'frequency', label: 'The utility frequency has shifted to 120Hz, doubling the hum.' },
+              ],
+              correctScenario: 'overload',
+              hint: 'Transformer hum is caused by magnetostriction — the core vibrating at line frequency. More load = stronger magnetic field = louder hum. No burning smell is a positive sign.',
+              correctFeedback: 'Correct. Louder hum without burning smell strongly suggests increased load. The magnetic field in the core is proportional to load — higher load creates stronger field, more magnetostriction, louder hum. At 85% load you are not overloading (100%+ would generate heat and eventually burning smell), but you should document it and advise the site to monitor. If load grows further or hum becomes abnormal, thermal inspection may be warranted.',
+              incorrectFeedback: 'Incorrect. A significant increase in hum over a known baseline is a meaningful change. Transformer hum increases with load (magnetostriction). At 85% load with louder hum but no burning smell, the transformer is not critically failing but the load increase should be documented. A burning smell would indicate actual overheating.',
+            },
+          ],
+        },
         quiz: [
           { q: 'Transformers work by:', a: ['Converting DC to AC', 'Electromagnetic induction between primary and secondary coils', 'Direct electrical connection between windings', 'Storing energy in capacitors'], correct: 1, exp: 'Transformers use electromagnetic induction — AC in the primary creates a changing magnetic field that induces voltage in the secondary.' },
           { q: 'Why can\'t transformers operate on DC?', a: ['DC voltage is too low', 'DC doesn\'t create a changing magnetic field needed for induction', 'DC has too high a current', 'DC is stored in the core'], correct: 1, exp: 'Induction requires a CHANGING magnetic field. Constant DC creates a constant field — no change, no induction in the secondary.' },
@@ -762,6 +907,18 @@ export const MODULES: TrainingModule[] = [
           'DC has zero frequency — it does not oscillate. This means DC cannot be transformed directly with a standard transformer. To transmit DC power over long distances efficiently, it must either be converted to AC first, or transmitted as High Voltage DC (HVDC) using special converters. Inside a UPS, the rectifier converts AC to DC; the inverter converts DC back to AC.',
           'Current ripple on a DC bus refers to small AC components superimposed on the DC level, caused by the rectification process. Capacitors on the DC bus filter this ripple. Excessive ripple indicates insufficient capacitance (often from aged/failed capacitors) and can cause inverter instability and audible noise.',
         ],
+        tables: [
+          {
+            caption: 'Common UPS DC bus voltages and applications',
+            headers: ['DC Bus Voltage', 'Typical UPS Capacity', 'Battery String Config', 'Notes'],
+            rows: [
+              ['48V DC',   '≤10 kVA',    '24 × 2V cells in series',       'Small rack UPS, telecom systems'],
+              ['120V DC',  '10–30 kVA',  '60 × 2V cells in series',       'Mid-range standalone UPS'],
+              ['240V DC',  '20–80 kVA',  '120 × 2V or 20 × 12V in series', 'Larger tower/modular systems'],
+              ['400V DC',  '40–300+ kVA', '192+ cells or modular pack',   'Modern transformerless high-power UPS'],
+            ],
+          },
+        ],
         keyPoints: [
           'DC flows in one direction only — constant polarity',
           'Common UPS DC bus voltages: 48V, 240V, 400V DC',
@@ -769,6 +926,43 @@ export const MODULES: TrainingModule[] = [
           'Rectifier converts AC to DC; inverter converts DC to AC',
           'DC ripple on the bus is filtered by capacitors',
         ],
+        practical: {
+          intro: 'Two DC power scenarios encountered during UPS battery and bus work.',
+          steps: [
+            {
+              id: 'dc-1',
+              type: 'scenario',
+              title: 'Scenario A: Reversed Polarity on a Battery String',
+              prompt: 'A junior technician accidentally connects the positive terminal of a new 48V battery string to the negative bus bar and the negative terminal to the positive bus bar before switching in the string. What should be done immediately and why?',
+              scenarioOptions: [
+                { id: 'switch', label: 'Switch the string in anyway — the UPS controls will correct the polarity' },
+                { id: 'disc',   label: 'Do not switch in the string. Disconnect it immediately and reconnect with correct polarity before switching in. DC reverse polarity can destroy battery charger electronics, fuses, and bus capacitors instantly.', sublabel: 'Correct — reverse polarity is catastrophic' },
+                { id: 'fuse',   label: 'The fuse will blow and protect everything — switch it in and see what happens' },
+                { id: 'meter',  label: 'Measure the voltage first to confirm polarity, then switch in regardless' },
+              ],
+              correctScenario: 'disc',
+              hint: 'DC polarity must be correct before making the final connection. A fuse protecting on fault current, not on reverse polarity — reverse polarity will still damage electronics before the fuse opens.',
+              correctFeedback: 'Correct. Reverse polarity on a DC battery string is a high-severity fault. The bus capacitors will be reverse-biased immediately (destroying them), the charger rectifier will be reverse-biased, and fuses may blow — but not before semiconductors and capacitors are damaged. The only correct action is to never switch in a reverse-polarity string. Verify polarity with a meter BEFORE making the live connection.',
+              incorrectFeedback: 'Incorrect. UPS controls cannot correct reversed polarity. The moment a reverse-polarity battery string connects to the bus, electrolytic capacitors are reverse-biased (catastrophic failure), charger rectifiers see reverse voltage, and semiconductors are destroyed. Fuses may eventually blow but not fast enough to prevent component damage. Never switch in any DC source without verifying polarity first.',
+            },
+            {
+              id: 'dc-2',
+              type: 'scenario',
+              title: 'Scenario B: Diagnosing DC Bus Ripple',
+              prompt: 'A UPS is generating audible buzz from the inverter output and the AC output voltage shows small oscillations. You set your DMM to AC voltage and measure 4V AC riding on the 240V DC bus. What does this tell you?',
+              scenarioOptions: [
+                { id: 'normal',  label: '4V of AC ripple on 240V DC is normal — less than 2%, not worth investigating' },
+                { id: 'cap',     label: 'Excessive DC bus ripple suggests the filter capacitors have degraded (high ESR). The capacitors are no longer smoothing the rectified voltage effectively. This correlates with the audible buzz and output voltage variations.', sublabel: 'Correct — ripple points to capacitor degradation' },
+                { id: 'rect',    label: 'The rectifier has failed — a working rectifier produces pure DC with zero ripple' },
+                { id: 'load',    label: 'The connected load is injecting AC back onto the DC bus' },
+              ],
+              correctScenario: 'cap',
+              hint: 'DC bus ripple is filtered by bus capacitors. When they age, their ESR rises and they can no longer absorb ripple. The ripple then passes through to the inverter and appears on the output.',
+              correctFeedback: 'Correct. DC bus ripple (AC component on DC) that exceeds spec (typically 1–2% of bus voltage) indicates capacitor degradation. At 240V DC, 4V of ripple is about 1.7% — borderline and worth investigating. The ripple passes through the inverter and causes buzz and output instability. The next step is ESR measurement of the bus capacitors. This is a predictive maintenance finding that could prevent unexpected shutdown.',
+              incorrectFeedback: 'Incorrect. While some ripple is inherent in rectified DC, excessive ripple specifically indicates that the smoothing capacitors are not doing their job. This is the most common finding when bus capacitors age. A working rectifier always produces rippled DC — capacitors smooth it. When they fail, the ripple increases and passes through to the output.',
+            },
+          ],
+        },
         quiz: [
           { q: 'DC (Direct Current) is characterized by:', a: ['Oscillating polarity', 'Constant direction and polarity', 'Zero voltage always', 'Sinusoidal waveform'], correct: 1, exp: 'DC flows in one constant direction and has fixed polarity — positive is always positive, negative is always negative.' },
           { q: 'Which of these is a typical UPS DC bus voltage?', a: ['120V DC', '240V DC', '480V DC', '12V DC'], correct: 1, exp: '240V DC is a common UPS DC bus voltage. 48V DC is common in smaller systems. 400V DC is used in some modern transformerless UPS.' },
@@ -790,6 +984,19 @@ export const MODULES: TrainingModule[] = [
           'Frequency is measured in hertz (Hz). US power is 60Hz; Europe and most of the world use 50Hz. UPS systems are designed for their target frequency. A UPS rated for 60Hz cannot simply be used on a 50Hz supply without adjustment. The inverter in a UPS generates its output frequency independently of the input — in bypass mode, the output frequency must match the input to allow seamless transfer.',
           'AC waveform quality matters to sensitive loads. A pure sine wave is ideal. A UPS inverter should produce a true sine wave output with total harmonic distortion (THD) of less than 5% at rated load. Loads that require clean sine wave output include medical equipment, audio systems, and some variable frequency drives.',
         ],
+        tables: [
+          {
+            caption: 'AC waveform types and UPS output quality',
+            headers: ['Waveform Type', 'THD', 'Load Compatibility', 'UPS Source'],
+            rows: [
+              ['True sine wave',     '<3%',    'All loads including medical, VFDs, audio',  'Online double-conversion UPS inverter'],
+              ['Modified sine wave', '20-45%', 'Resistive loads; damages motors and drives', 'Cheap offline/standby UPS'],
+              ['Square wave',        '>50%',   'Simple resistive loads only',               'Basic ferroresonant designs'],
+              ['Utility sine wave',  '<5%',    'All loads',                                  'Bypass mode from clean utility'],
+            ],
+          },
+        ],
+        widget: 'waveform-viewer',
         keyPoints: [
           'US AC: 60Hz, 120V or 240V single-phase, 208V or 480V three-phase',
           'RMS voltage is the useful power-equivalent voltage (not peak)',
@@ -797,6 +1004,43 @@ export const MODULES: TrainingModule[] = [
           'Inverter output must be true sine wave with low THD',
           'UPS inverter generates its own frequency independently of input',
         ],
+        practical: {
+          intro: 'Two AC power scenarios involving waveform quality and RMS calculations.',
+          steps: [
+            {
+              id: 'ac-1',
+              type: 'scenario',
+              title: 'Scenario A: Modified Sine Wave Damage',
+              prompt: 'A customer plugs a variable frequency drive (VFD) controlling an HVAC fan into a standby UPS on utility power. Utility fails; UPS switches to battery and outputs a modified sine wave. Within 30 minutes the VFD faults and shuts down. What is the most likely cause?',
+              scenarioOptions: [
+                { id: 'power',  label: 'The UPS battery ran out in 30 minutes — needs more battery' },
+                { id: 'wave',   label: 'Modified sine wave contains high harmonic content (high THD). VFDs are sensitive to waveform distortion and fault on poor-quality AC. The VFD was not compatible with a modified sine wave UPS.', sublabel: 'Correct — modified sine wave + VFD = incompatibility' },
+                { id: 'freq',   label: 'The UPS output frequency shifted to 50Hz, confusing the VFD' },
+                { id: 'surge',  label: 'The transfer time from utility to battery caused a voltage surge that damaged the VFD' },
+              ],
+              correctScenario: 'wave',
+              hint: 'VFDs require clean power to operate their internal rectifier and control circuitry. Modified sine wave has significant harmonic content that can cause their protective functions to trip.',
+              correctFeedback: 'Correct. Variable frequency drives have rectifier front ends and sensitive control electronics. High-THD modified sine wave power (20–45% THD) overloads their input rectifier harmonically and can trigger overvoltage or overcurrent protection faults. VFDs require true sine wave UPS protection. Substituting a true sine wave (online double-conversion) UPS would resolve the incompatibility.',
+              incorrectFeedback: 'Incorrect. Standby UPS on battery typically provides runtime of 10–60 minutes for small loads — battery depletion is unlikely in 30 minutes for a fan drive. The root cause is waveform incompatibility: modified sine wave UPS output + VFD = fault. VFDs require true sine wave power.',
+            },
+            {
+              id: 'ac-2',
+              type: 'scenario',
+              title: 'Scenario B: RMS vs. Peak Voltage Confusion',
+              prompt: 'A technician measures UPS output voltage with an oscilloscope and sees the waveform peak at 169V. They report the UPS output voltage is wrong (spec is 120V). Is their diagnosis correct?',
+              scenarioOptions: [
+                { id: 'wrong',  label: 'Yes — the output should peak at 120V. 169V is too high and may damage the load.' },
+                { id: 'right',  label: 'No — 169V peak is exactly correct for a 120V RMS supply. Peak = RMS × √2 = 120 × 1.414 ≈ 169.7V. The technician confused RMS with peak voltage.', sublabel: 'Correct — peak ≠ RMS' },
+                { id: 'maybe',  label: 'Possibly — the oscilloscope may be reading incorrectly; use a DMM instead' },
+                { id: 'bypass', label: 'The UPS is in bypass and the utility voltage is elevated' },
+              ],
+              correctScenario: 'right',
+              hint: 'Voltage specs (120V, 240V) are always given in RMS. Peak voltage is always higher: Peak = RMS × √2.',
+              correctFeedback: 'Correct. All AC voltage ratings (120V, 240V, 480V) are RMS values. The peak of a 120V RMS sine wave is 120 × √2 ≈ 169.7V. A 169V peak reading on an oscilloscope is perfectly normal and expected for a 120V RMS supply. DMMs measuring AC voltage read RMS directly. An oscilloscope shows peak — always divide by √2 to get RMS, or read the scope\'s RMS measurement function.',
+              incorrectFeedback: 'Incorrect. 120V is the RMS value. An oscilloscope shows peak voltage, which is RMS × √2 = 169.7V. This is correct. The mistake was confusing RMS and peak values. Electrical standards always specify RMS, not peak.',
+            },
+          ],
+        },
         quiz: [
           { q: 'US AC power operates at:', a: ['50Hz', '60Hz', '120Hz', '25Hz'], correct: 1, exp: 'US AC power is at 60Hz. Most of the rest of the world uses 50Hz.' },
           { q: 'RMS voltage is:', a: ['The peak voltage of the AC waveform', 'The average voltage of the AC waveform', 'The DC-equivalent voltage for power delivery', 'Half the peak voltage'], correct: 2, exp: 'RMS (root mean square) voltage is the AC equivalent of DC voltage for power calculations — a 120V AC RMS delivers the same power as 120V DC to a resistive load.' },
@@ -818,6 +1062,18 @@ export const MODULES: TrainingModule[] = [
           'Three-phase AC power uses three conductors, each carrying a sine wave 120 degrees out of phase with the others. This system is far more efficient for large power delivery. Data center UPS systems are typically three-phase in and three-phase out (or three-phase in, single-phase out for smaller loads). Line-to-neutral voltage in a 208V three-phase system is 120V. Line-to-neutral in a 480V three-phase system is 277V.',
           'In three-phase systems, a balanced load draws equal current on all three phases. Unbalanced loads (more on one phase than others) cause excessive heating on the overloaded phase and neutral current. In a UPS installation, a field technician must verify load balance across phases and report significant imbalance to site management.',
         ],
+        tables: [
+          {
+            caption: 'Three-phase voltage relationships',
+            headers: ['System Voltage (L-L)', 'Line-to-Neutral', 'Common Use', 'UPS Application'],
+            rows: [
+              ['208V 3Ø',  '120V',  'Small data center, office 3Ø power',          'Three-phase UPS with single-phase PDU outputs'],
+              ['480V 3Ø',  '277V',  'Industrial and large commercial facilities',  'Large UPS input; lighting at 277V L-N'],
+              ['400V 3Ø',  '230V',  'European/international standard',             'International UPS installations'],
+            ],
+          },
+        ],
+        widget: 'power-triangle',
         keyPoints: [
           'Power Factor = Real Power (W) / Apparent Power (VA)',
           'Unity power factor (PF = 1.0) means all apparent power does real work',
@@ -825,6 +1081,43 @@ export const MODULES: TrainingModule[] = [
           'Low PF means more current drawn for same real power',
           'Unbalanced three-phase loads cause overheating and neutral current',
         ],
+        practical: {
+          intro: 'Two power factor and three-phase scenarios from real data center UPS installations.',
+          steps: [
+            {
+              id: 'pf-1',
+              type: 'scenario',
+              title: 'Scenario A: UPS Capacity and Power Factor',
+              prompt: 'A 20 kVA UPS is rated at 0.9 power factor. The data center manager wants to add 16 kW of new server load. Is there enough UPS capacity? Assume the new servers have a 0.95 PF.',
+              scenarioOptions: [
+                { id: 'no-check', label: '20 kVA > 16 kW so there is enough capacity — no need to check further' },
+                { id: 'pf-check', label: 'At 0.95 PF, 16 kW of servers draws 16.8 kVA. UPS max real power = 20 × 0.9 = 18 kW and max VA is 20 kVA. 16.8 kVA < 20 kVA and 16 kW < 18 kW — capacity is sufficient, but you are at 84% VA loading.', sublabel: 'Correct — check both kW and kVA limits' },
+                { id: 'watts',    label: '16 kW < 20 kVA so there is definitely room — power factor doesn\'t matter for UPS sizing' },
+                { id: 'exceed',   label: '16 kW exceeds the 18 kW real power limit — the UPS cannot handle this load' },
+              ],
+              correctScenario: 'pf-check',
+              hint: 'Check both limits: UPS real power limit = VA × PF = 20,000 × 0.9 = 18 kW. UPS VA limit = 20 kVA. Load VA = load W ÷ PF = 16,000 ÷ 0.95 = 16,842 VA.',
+              correctFeedback: 'Correct. You must check both VA and kW limits. The UPS can deliver a maximum of 18 kW (20 kVA × 0.9 PF) and 20 kVA. The load draws 16 kW and 16,842 VA — both within limits at about 84% VA loading. This is good — you have headroom. However, if the data center plans to grow to 20+ kW, the UPS will be the bottleneck.',
+              incorrectFeedback: 'Incorrect. You cannot simply compare kW to kVA — they have different units. You must check against both the UPS\'s kW capacity (VA × PF = 18 kW) and kVA rating (20 kVA). Load VA = 16,000W ÷ 0.95 PF = 16,842 VA. Both 16 kW and 16,842 VA are within limits. Power factor always matters for UPS sizing.',
+            },
+            {
+              id: 'pf-2',
+              type: 'scenario',
+              title: 'Scenario B: Three-Phase Load Imbalance',
+              prompt: 'You measure phase currents on a three-phase 208V UPS output: Phase A = 45A, Phase B = 48A, Phase C = 22A. What is the concern and what should you do?',
+              scenarioOptions: [
+                { id: 'ok',      label: 'These currents are within normal range for 208V three-phase — no action needed' },
+                { id: 'imbal',   label: 'Phase C is carrying roughly half the current of A and B. This significant imbalance (>5% difference) causes excess neutral current and may indicate a tripped branch breaker or uneven load distribution. Document and report to site management for load rebalancing.', sublabel: 'Correct — >15A difference is significant imbalance' },
+                { id: 'replace', label: 'Replace the UPS — this imbalance means the unit is failing' },
+                { id: 'batt',    label: 'Check the battery — phase imbalance often indicates battery degradation' },
+              ],
+              correctScenario: 'imbal',
+              hint: 'Balanced three-phase means all three phases carry roughly equal current. A 26A difference between phase C and the others is more than a minor variation.',
+              correctFeedback: 'Correct. Phase C carrying 22A vs. A/B at 45–48A is a significant imbalance (~50% difference). This causes: elevated neutral current (proportional to the imbalance), increased thermal stress on A and B phases, and reduced efficiency. The most likely cause is uneven load distribution — PDUs or branch circuits are unevenly loaded between phases, or a phase C breaker has tripped. Document the readings and recommend load rebalancing. The UPS itself is likely fine.',
+              incorrectFeedback: 'Incorrect. A 26A difference between phases represents significant imbalance. In a balanced three-phase system, currents should be within 5–10% of each other. Phase C at 22A vs. Phase A at 45A is a ~50% imbalance. This is not a UPS failure but a distribution/load balance problem that causes neutral current, overheating on the heavier phases, and reduced efficiency.',
+            },
+          ],
+        },
         quiz: [
           { q: 'Power Factor is defined as:', a: ['Watts × VA', 'Watts / VA', 'VA / Watts', 'Amps × Volts'], correct: 1, exp: 'PF = Real Power (W) / Apparent Power (VA). Unity PF = 1.0 means 100% efficient use of apparent power.' },
           { q: 'A 10 kVA UPS with 0.8 power factor can deliver how many kilowatts of real power?', a: ['10 kW', '12.5 kW', '8 kW', '0.8 kW'], correct: 2, exp: 'Real power = VA × PF = 10,000 × 0.8 = 8,000W = 8 kW.' },
