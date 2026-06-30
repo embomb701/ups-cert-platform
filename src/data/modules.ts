@@ -93,13 +93,21 @@ export interface MeterSimExercise {
   tasks: MeterSimTask[];
 }
 
+export interface SlideTable {
+  caption?: string;
+  headers: string[];
+  rows: string[][];
+}
+
 export interface Slide {
   title: string;
   body: string[];
+  tables?: SlideTable[];
   keyPoints: string[];
   quiz: QuizQ[];
   practical?: PracticalExercise;
   meterSim?: MeterSimExercise;
+  widget?: string;
 }
 
 export interface TrainingModule {
@@ -126,6 +134,17 @@ export const MODULES: TrainingModule[] = [
           'Charge is measured in coulombs (C). One ampere of current means one coulomb of charge passing a point every second. Opposite charges attract; like charges repel. A voltage difference (potential difference) is what pushes electrons through a conductor. Without a voltage difference, electrons move randomly with no net flow.',
           'Static electricity occurs when charge builds up without a complete circuit. In field service, electrostatic discharge (ESD) can destroy sensitive electronics. Always ground yourself before handling circuit boards.',
         ],
+        tables: [
+          {
+            caption: 'Subatomic particles at a glance',
+            headers: ['Particle', 'Charge', 'Location', 'Role in Electricity'],
+            rows: [
+              ['Proton',   '+ Positive', 'Nucleus',         'Defines element; does not move in circuits'],
+              ['Neutron',  'Neutral',    'Nucleus',         'No role in electrical conduction'],
+              ['Electron', '− Negative', 'Orbital shells',  'Valence electrons flow → create current'],
+            ],
+          },
+        ],
         keyPoints: [
           'Electrons carry negative charge; protons carry positive charge',
           'Free electrons in conductors create current flow',
@@ -133,6 +152,43 @@ export const MODULES: TrainingModule[] = [
           'Static electricity = charge buildup without a circuit',
           'ESD can destroy sensitive electronics — always ground yourself',
         ],
+        practical: {
+          intro: 'Two real ESD and charge scenarios you will face in the field. Choose the correct action.',
+          steps: [
+            {
+              id: 'esd-1',
+              type: 'scenario',
+              title: 'Scenario A: Handling a Control Board',
+              prompt: 'You need to swap a UPS control board. The new board arrived in an anti-static bag. What should you do BEFORE removing it from the bag and touching it?',
+              scenarioOptions: [
+                { id: 'gloves',  label: 'Put on rubber gloves — they insulate you from the board' },
+                { id: 'ground',  label: 'Touch the metal UPS chassis first (or wear an ESD wrist strap) to equalize your charge with the equipment', sublabel: 'Correct approach' },
+                { id: 'fast',    label: 'Work quickly — minimize contact time to reduce ESD risk' },
+                { id: 'carpet',  label: 'Stand on carpet — it absorbs static electricity' },
+              ],
+              correctScenario: 'ground',
+              hint: 'ESD occurs when two objects at different charge potentials make contact. How do you eliminate that difference?',
+              correctFeedback: 'Correct. Touching the metal chassis (or using an ESD wrist strap connected to ground) equalizes your electrostatic potential with the equipment before you handle the board. Rubber gloves insulate you — they do not ground you.',
+              incorrectFeedback: 'Incorrect. Working fast, rubber gloves, or carpet do not prevent ESD. You must equalize your charge by touching a grounded metal surface or wearing an ESD wrist strap before handling sensitive electronics.',
+            },
+            {
+              id: 'esd-2',
+              type: 'scenario',
+              title: 'Scenario B: Charge Buildup Identification',
+              prompt: 'A field tech walks across a carpeted data center floor (low humidity) and feels a small "snap" when touching a metal equipment rack. What physical phenomenon just occurred, and what risk does it pose?',
+              scenarioOptions: [
+                { id: 'short',   label: 'A short circuit in the rack wiring — the rack should be inspected immediately' },
+                { id: 'esd',     label: 'Electrostatic discharge (ESD) — static charge built up on the tech discharged through the rack', sublabel: 'Correct — and electronics nearby could have been damaged' },
+                { id: 'ground',  label: 'Normal grounding — this is the expected behavior of a properly grounded rack' },
+                { id: 'spark',   label: 'A loose AC connection arcing — needs immediate investigation' },
+              ],
+              correctScenario: 'esd',
+              hint: 'Walking on carpet builds up charge on the body through friction (triboelectric effect). What happens when that charge suddenly discharges?',
+              correctFeedback: 'Correct. Walking on carpet in low humidity generates thousands of volts of static charge through triboelectric friction. The "snap" is ESD — that charge discharged through the rack. Any exposed circuit boards nearby could have been damaged even if the tech felt nothing beyond the snap.',
+              incorrectFeedback: 'Incorrect. This is classic ESD from triboelectric charging. The snap you feel is electrostatic charge discharging, not a circuit fault. The danger is to any electronics that shared the discharge path.',
+            },
+          ],
+        },
         quiz: [
           { q: 'What is the charge of an electron?', a: ['Positive', 'Negative', 'Neutral', 'Variable'], correct: 1, exp: 'Electrons carry a negative charge. Protons are positive and neutrons are neutral.' },
           { q: 'What part of an atom is most relevant to electrical conduction?', a: ['Nucleus', 'Neutron', 'Valence electrons', 'Proton'], correct: 2, exp: 'Valence electrons in the outermost shell are loosely held in conductors and free to move, creating current.' },
@@ -154,6 +210,17 @@ export const MODULES: TrainingModule[] = [
           'Resistance (R) is opposition to current flow, measured in ohms (Ω). Every material has resistance. Resistance converts electrical energy to heat. A short circuit is near-zero resistance — current spikes to dangerous levels. An open circuit is infinite resistance — current cannot flow at all.',
           'These three quantities are related by Ohm\'s Law: V = I × R. Increase voltage with fixed resistance, current increases. Increase resistance with fixed voltage, current decreases. This relationship governs everything you measure and troubleshoot in a UPS.',
         ],
+        tables: [
+          {
+            caption: 'V, I, R quick reference',
+            headers: ['Quantity', 'Symbol', 'Unit', 'Measured With', 'UPS Example'],
+            rows: [
+              ['Voltage',    'V', 'Volts (V)',  'DMM V AC or V DC',    '48V DC battery string, 120V AC output'],
+              ['Current',    'I', 'Amperes (A)','DMM A / Clamp meter', '15A UPS output to load'],
+              ['Resistance', 'R', 'Ohms (Ω)',   'DMM Ω (de-energized)','0.3Ω cable resistance, OL = blown fuse'],
+            ],
+          },
+        ],
         keyPoints: [
           'Voltage is electrical pressure, always measured between two points',
           'Current is rate of electron flow (amperes)',
@@ -161,6 +228,44 @@ export const MODULES: TrainingModule[] = [
           'Short circuit = near-zero resistance = dangerously high current',
           'Open circuit = infinite resistance = zero current flow',
         ],
+        widget: 'ohms-law-explorer',
+        practical: {
+          intro: 'Apply Ohm\'s Law to two real UPS fault scenarios. Choose what the reading or symptom tells you.',
+          steps: [
+            {
+              id: 'vcr-1',
+              type: 'scenario',
+              title: 'Scenario A: Hot Wire',
+              prompt: 'During a PM visit you notice that the 10 AWG output cable on a UPS feels noticeably warm — warmer than expected for a wire that should only carry 15A. The circuit has been running for 6 hours. What does this tell you?',
+              scenarioOptions: [
+                { id: 'normal',    label: 'Normal — wires always run warm under any load' },
+                { id: 'overload',  label: 'The wire is carrying more current than its rated capacity (P = I²R heat dissipation is excessive)', sublabel: 'Investigate the load and wire rating' },
+                { id: 'voltage',   label: 'Input voltage is too high — causing excess heat' },
+                { id: 'resistance',label: 'Wire resistance has decreased — less heat should be generated' },
+              ],
+              correctScenario: 'overload',
+              hint: 'Think about what causes a wire to generate heat. Resistance converts electrical energy to heat: P = I²R.',
+              correctFeedback: 'Correct. Heat in a wire is proportional to I²R — if the wire feels unusually hot it is carrying more current than its rated capacity. 10 AWG wire is rated for about 30A (conduit) but even approaching that limit causes noticeable warmth. Check the connected load against the UPS nameplate and wire ampacity.',
+              incorrectFeedback: 'Incorrect. Wire heats up because resistance converts electrical energy into thermal energy (P = I²R). A noticeably warm wire means either the current exceeds the wire\'s ampacity, or there is a poor connection with elevated contact resistance.',
+            },
+            {
+              id: 'vcr-2',
+              type: 'scenario',
+              title: 'Scenario B: Zero Voltage Across a Component',
+              prompt: 'You measure voltage across a fuse (probes on each side). The circuit is live but the fuse reads 0V. What does this tell you?',
+              scenarioOptions: [
+                { id: 'blown',   label: 'Fuse is blown — voltage would appear across a blown fuse (open circuit), not a good one', sublabel: 'Actually this is backward thinking' },
+                { id: 'good',    label: 'Fuse is good — a good fuse has near-zero resistance so near-zero voltage drops across it', sublabel: 'Correct — Ohm\'s Law: V = I × R_fuse ≈ 0' },
+                { id: 'short',   label: 'Circuit is shorted — zero voltage means no current is flowing' },
+                { id: 'meter',   label: 'Meter is broken — there must be some voltage across every component' },
+              ],
+              correctScenario: 'good',
+              hint: 'Use Ohm\'s Law: V = I × R. A good fuse has near-zero resistance. What voltage drops across near-zero resistance?',
+              correctFeedback: 'Correct. A good fuse has near-zero resistance (~0.1Ω). By Ohm\'s Law: V = I × R ≈ 15A × 0.1Ω = 1.5V (or much less for a new fuse). You will read near-zero voltage across a healthy fuse. A BLOWN fuse reads the full supply voltage because the open circuit puts all the voltage across the gap.',
+              incorrectFeedback: 'Think again using Ohm\'s Law: V = I × R. A good fuse has near-zero resistance (R ≈ 0). Multiply any current by near-zero resistance and you get near-zero voltage drop. A blown fuse is an open circuit — all the supply voltage appears across the open gap.',
+            },
+          ],
+        },
         quiz: [
           { q: 'Voltage is best described as:', a: ['Rate of electron flow', 'Opposition to current', 'Electrical pressure between two points', 'Power consumed per second'], correct: 2, exp: 'Voltage is electrical pressure or potential difference — the force that drives electrons through a circuit.' },
           { q: 'Current is measured in:', a: ['Volts', 'Ohms', 'Watts', 'Amperes'], correct: 3, exp: 'Current (I) is measured in amperes (A). It is the rate of electron flow through a conductor.' },
@@ -182,6 +287,27 @@ export const MODULES: TrainingModule[] = [
           'Semiconductors have conductivity between conductors and insulators, and their conductivity can be controlled. Silicon and germanium are common semiconductor materials. Diodes, transistors, and integrated circuits are all semiconductor devices. In a UPS, power semiconductor devices like SCRs (silicon controlled rectifiers) and IGBTs (insulated gate bipolar transistors) control the conversion of AC to DC and back.',
           'Wire sizing is critical. Wire is rated by American Wire Gauge (AWG) — a lower AWG number means a thicker wire with lower resistance and higher current capacity. AWG 4 wire can carry far more current than AWG 18. Undersized wire for a given current load will overheat — a primary cause of electrical fires.',
         ],
+        tables: [
+          {
+            caption: 'Material classification',
+            headers: ['Category', 'Resistivity', 'Examples', 'UPS Application'],
+            rows: [
+              ['Conductor',    'Very low (< 10⁻⁶ Ω·m)', 'Copper, Aluminum, Silver',       'Busbars, wiring, terminals, contacts'],
+              ['Insulator',    'Very high (> 10⁶ Ω·m)',  'PVC, Rubber, Glass, Air',        'Wire jackets, standoffs, conduit'],
+              ['Semiconductor','Controlled (variable)',   'Silicon, Germanium, GaN',        'IGBTs, SCRs, diodes, gate drivers'],
+            ],
+          },
+          {
+            caption: 'Common AWG sizes in UPS field service',
+            headers: ['AWG', 'Diameter', 'Max Current (typical)', 'Common Use'],
+            rows: [
+              ['4',  '5.19 mm', '85–95 A',  'UPS input feeds, main output busbars'],
+              ['10', '2.59 mm', '30–40 A',  'Branch circuit output, battery cables'],
+              ['14', '1.63 mm', '15–20 A',  'Control wiring, signal leads'],
+              ['18', '1.02 mm', '7–10 A',   'Low-current control circuits, sensors'],
+            ],
+          },
+        ],
         keyPoints: [
           'Copper is the primary conductor in UPS systems',
           'Damaged insulation is a fire and shock hazard',
@@ -189,6 +315,44 @@ export const MODULES: TrainingModule[] = [
           'Semiconductors control current in rectifiers and inverters',
           'IGBTs and SCRs are the key power semiconductors in UPS systems',
         ],
+        widget: 'material-sorter',
+        practical: {
+          intro: 'Two field scenarios requiring you to identify materials and respond to hazards correctly.',
+          steps: [
+            {
+              id: 'mat-1',
+              type: 'scenario',
+              title: 'Scenario A: Cracked Cable Insulation',
+              prompt: 'During a visual inspection you notice a 120V AC output cable with badly cracked and brittle PVC insulation. The inner copper conductors are partially visible in two spots. The UPS is currently running under load. What is the correct immediate action?',
+              scenarioOptions: [
+                { id: 'tape',    label: 'Wrap the damaged section in electrical tape immediately — this fixes the hazard quickly' },
+                { id: 'note',    label: 'Log it in the maintenance report for the next scheduled visit — it is not an emergency if the UPS is running' },
+                { id: 'loto',    label: 'Notify the customer, de-energize the circuit using LOTO procedures, and replace the cable before returning to service', sublabel: 'Correct — exposed conductors are an immediate shock and fire hazard' },
+                { id: 'rubber',  label: 'Hold the cable with rubber gloves while continuing to work — rubber insulates, so it is safe' },
+              ],
+              correctScenario: 'loto',
+              hint: 'Exposed copper conductors on a live 120V circuit are an immediate hazard. Taping over the damage does not restore the insulation\'s rated capacity.',
+              correctFeedback: 'Correct. Exposed conductors are an immediate electrical shock and fire hazard — OSHA 1910.303 requires that conductors be covered with insulation rated for the voltage. Tape does not restore rated insulation. The correct action is to notify the customer, perform LOTO on that circuit, and replace the cable.',
+              incorrectFeedback: 'Incorrect. Cracked insulation with exposed conductors is an IMMEDIATE hazard (shock, arc flash, fire). Deferring it or taping it does not eliminate the hazard — insulation tape is not rated as primary insulation for 120V circuits. The circuit must be de-energized and the cable replaced.',
+            },
+            {
+              id: 'mat-2',
+              type: 'scenario',
+              title: 'Scenario B: Wire Gauge Selection',
+              prompt: 'You are replacing a failed output cable on a 120V UPS that delivers up to 30A to the load. The storage van has AWG 10, AWG 14, and AWG 18 wire available. Which should you use?',
+              scenarioOptions: [
+                { id: 'awg18',  label: 'AWG 18 — thinner wire is easier to route through tight spaces' },
+                { id: 'awg14',  label: 'AWG 14 — rated for 15–20A; this should be fine with a 30A load', sublabel: 'Warning: this would be undersized' },
+                { id: 'awg10',  label: 'AWG 10 — rated for 30–40A; properly sized for this circuit', sublabel: 'Correct choice' },
+                { id: 'any',    label: 'Any wire works as long as the insulation color is correct' },
+              ],
+              correctScenario: 'awg10',
+              hint: 'Lower AWG number = thicker wire = more current capacity. Match or exceed the circuit\'s maximum current.',
+              correctFeedback: 'Correct. AWG 10 is rated for 30–40A depending on insulation type and installation method — exactly right for a 30A circuit. AWG 14 is rated for only 15–20A and would overheat, potentially causing a fire. Wire gauge must always match or exceed the circuit\'s maximum current demand.',
+              incorrectFeedback: 'Incorrect. Using undersized wire on a 30A circuit causes the wire to overheat (P = I²R heat). AWG 10 is the minimum appropriate choice — rated for 30–40A. AWG 14 is a 15A wire and AWG 18 is a 7–10A wire; both would overheat dangerously on this circuit.',
+            },
+          ],
+        },
         quiz: [
           { q: 'Which material is the most common conductor in UPS wiring?', a: ['Silver', 'Aluminum', 'Copper', 'Gold'], correct: 2, exp: 'Copper is the standard conductor for UPS and electrical system wiring due to its high conductivity and cost-effectiveness.' },
           { q: 'What does a lower AWG number indicate about a wire?', a: ['Thinner wire with less capacity', 'Thicker wire with more capacity', 'Higher resistance', 'Better insulation'], correct: 1, exp: 'Lower AWG number = thicker wire = lower resistance = higher current carrying capacity.' },

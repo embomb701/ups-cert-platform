@@ -1,9 +1,17 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import PracticalActivity from './PracticalActivity';
 import MeterSimulator from './MeterSimulator';
-import type { PracticalExercise, MeterSimExercise } from '@/data/modules';
+import type { PracticalExercise, MeterSimExercise, SlideTable } from '@/data/modules';
+
+const WIDGETS: Record<string, React.LazyExoticComponent<React.ComponentType>> = {
+  'ohms-law-explorer': lazy(() => import('./widgets/OhmsLawExplorer')),
+  'power-triangle': lazy(() => import('./widgets/PowerTriangle')),
+  'series-parallel-sim': lazy(() => import('./widgets/SeriesParallelSim')),
+  'waveform-viewer': lazy(() => import('./widgets/WaveformViewer')),
+  'material-sorter': lazy(() => import('./widgets/MaterialSorter')),
+};
 
 interface QuizQ {
   q: string;
@@ -15,10 +23,12 @@ interface QuizQ {
 interface Slide {
   title: string;
   body: string[];
+  tables?: SlideTable[];
   keyPoints: string[];
   quiz: QuizQ[];
   practical?: PracticalExercise;
   meterSim?: MeterSimExercise;
+  widget?: string;
 }
 
 interface Props {
@@ -198,6 +208,41 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
               ))}
             </div>
           </div>
+
+          {/* Inline interactive widget */}
+          {slide.widget && WIDGETS[slide.widget] && (() => {
+            const W = WIDGETS[slide.widget!];
+            return (
+              <Suspense fallback={<div className="h-32 rounded-lg bg-gray-800 border border-gray-700 animate-pulse" />}>
+                <W />
+              </Suspense>
+            );
+          })()}
+
+          {/* Data tables */}
+          {slide.tables && slide.tables.map((tbl, ti) => (
+            <div key={ti} className="overflow-x-auto">
+              {tbl.caption && <p className="text-xs text-gray-500 mb-1">{tbl.caption}</p>}
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr>
+                    {tbl.headers.map((h, hi) => (
+                      <th key={hi} className="text-left px-3 py-2 bg-gray-700 border border-gray-600 text-gray-200 font-semibold text-xs uppercase tracking-wide">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tbl.rows.map((row, ri) => (
+                    <tr key={ri} className={ri % 2 === 0 ? 'bg-gray-800' : 'bg-gray-800/60'}>
+                      {row.map((cell, ci) => (
+                        <td key={ci} className="px-3 py-2 border border-gray-700 text-gray-300">{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
 
           {/* Key points */}
           <div className="rounded-lg bg-blue-900/30 border border-blue-700 p-5">
