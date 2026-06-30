@@ -395,6 +395,18 @@ export const MODULES: TrainingModule[] = [
           'UPS battery strings are a key series circuit application. Multiple 2V cells are connected in series to produce 48V, 120V, or 240V strings. If one cell fails open, the entire string loses voltage. A failed cell that shorts creates a voltage imbalance that stresses adjacent cells. Battery voltage across the string can be measured to verify all cells are contributing.',
           'Voltage dividers are series circuits where you intentionally divide voltage across resistors. Control boards use voltage dividers to create reference voltages and scale high voltages to safe levels for measurement circuits.',
         ],
+        tables: [
+          {
+            caption: 'Series circuit rules',
+            headers: ['Property', 'Series Circuit Rule', 'UPS Example'],
+            rows: [
+              ['Current',    'Same through ALL components', 'Every cell in a 48V string carries the same charge current'],
+              ['Voltage',    'Adds up: V_total = V1 + V2 + …', '24 × 2V cells = 48V string'],
+              ['Resistance', 'Adds up: R_total = R1 + R2 + …', 'Cable + fuse + contacts all add resistance to the charge path'],
+              ['Failure',    'One open = entire circuit fails', 'One failed-open cell kills the entire battery string'],
+            ],
+          },
+        ],
         keyPoints: [
           'Series = one path for current, same current through all components',
           'Series total resistance = sum of all resistances',
@@ -402,6 +414,44 @@ export const MODULES: TrainingModule[] = [
           'UPS battery strings are series circuits',
           'One open component kills current flow in the entire series circuit',
         ],
+        widget: 'series-parallel-sim',
+        practical: {
+          intro: 'Two battery string scenarios that apply series circuit principles.',
+          steps: [
+            {
+              id: 'series-1',
+              type: 'scenario',
+              title: 'Scenario A: Dead Battery String',
+              prompt: 'A 48V UPS has a 24-cell lead-acid battery string. During a PM, you measure only 44V across the entire string. Individual cell measurements show 23 cells at 2.05–2.10V and one cell at 0.02V. What is the most likely cause and correct action?',
+              scenarioOptions: [
+                { id: 'charger',  label: 'The charger is faulty — 44V instead of 48V means undercharge. Replace the charger.' },
+                { id: 'cell',     label: 'One cell has failed (0.02V = shorted or failed open). The weak cell brings down the entire string voltage. Replace the failed cell or battery block.', sublabel: 'Correct — series circuit behavior' },
+                { id: 'load',     label: 'The UPS load is too high — drawing the battery voltage down.' },
+                { id: 'ambient',  label: 'Ambient temperature is too high — batteries run at lower voltage in heat.' },
+              ],
+              correctScenario: 'cell',
+              hint: 'In a series circuit, one bad element brings down the entire chain. A cell at 0.02V has essentially failed. 23 × 2.05V = 47.15V; if the bad cell contributes 0V, total = 47.15V ≈ confirmed.',
+              correctFeedback: 'Correct. In a series battery string, every cell\'s voltage adds up. One cell at 0.02V has failed (internal short). It drags the entire string voltage down. The fix is replacing that cell or battery block. After replacement, re-equalize the string and recheck all cell voltages.',
+              incorrectFeedback: 'Incorrect. Look at the individual cell readings: 23 cells × ~2.07V = ~47.6V, but one cell at 0.02V subtracts from the total, giving ~44V. This is classic series circuit failure — one weak link brings down the whole string.',
+            },
+            {
+              id: 'series-2',
+              type: 'scenario',
+              title: 'Scenario B: Series Voltage Divider on Control Board',
+              prompt: 'A UPS control board uses a voltage divider: two 10kΩ resistors in series across 48V, with the midpoint connected to a comparator input. What voltage should appear at the midpoint?',
+              scenarioOptions: [
+                { id: 'v48',  label: '48V — the full supply voltage' },
+                { id: 'v24',  label: '24V — equal resistors divide the voltage equally in series', sublabel: 'Correct — V_mid = V × R2/(R1+R2) = 48 × 0.5 = 24V' },
+                { id: 'v0',   label: '0V — no current flows through resistors in series with the input' },
+                { id: 'v12',  label: '12V — the comparator input reduces the voltage by half again' },
+              ],
+              correctScenario: 'v24',
+              hint: 'Two equal resistors in series form a 50/50 voltage divider. V_midpoint = V_supply × (R2 / (R1 + R2)).',
+              correctFeedback: 'Correct. Two equal resistors divide the voltage equally: V_mid = 48V × (10kΩ / 20kΩ) = 24V. This is how control boards safely scale down 48V battery signals to the 3.3V or 5V range that microcontrollers can read — using a chain of voltage divider resistors.',
+              incorrectFeedback: 'Think about the voltage divider formula: V_out = V_in × R2/(R1+R2). With R1=R2=10kΩ, V_out = 48V × (10/20) = 24V. Equal series resistors split the voltage in half.',
+            },
+          ],
+        },
         quiz: [
           { q: 'In a series circuit, current through each component is:', a: ['Different for each component', 'Zero unless all components work', 'The same through all components', 'Divided equally'], correct: 2, exp: 'In a series circuit there is only one path, so the same current must flow through every component.' },
           { q: 'Total resistance in a series circuit with R1=10Ω, R2=20Ω, R3=30Ω is:', a: ['10Ω', '20Ω', '60Ω', '6Ω'], correct: 2, exp: 'Series total resistance = R1+R2+R3 = 10+20+30 = 60Ω.' },
@@ -423,6 +473,18 @@ export const MODULES: TrainingModule[] = [
           'UPS battery strings in data centers are often connected in parallel after being assembled as series strings. Two 48V strings in parallel still produce 48V but with twice the current capacity and doubled runtime. This is the most common configuration for large UPS systems — multiple strings in parallel provide both capacity and redundancy.',
           'Parallel UPS configurations also protect critical loads by allowing one UPS to fail while others continue to serve the load. Understanding parallel circuits is essential for reading single-line diagrams and understanding how bypass switches reroute power.',
         ],
+        tables: [
+          {
+            caption: 'Parallel vs. series — quick comparison',
+            headers: ['Property', 'Series', 'Parallel', 'UPS Relevance'],
+            rows: [
+              ['Voltage',    'Divides among components',   'Same across all branches',    'Strings in series: voltage adds. Strings in parallel: voltage stays the same'],
+              ['Current',    'Same through all',           'Divides among branches',      'High load → current splits across parallel strings'],
+              ['Resistance', 'Adds up (R_total = ΣR)',    'Decreases (1/R = Σ 1/Rn)',   'Parallel strings lower internal resistance = less voltage sag'],
+              ['Fault',      'One open = all stop',        'One open = others continue',  'Parallel UPS: one unit fails, others carry the load (N+1)'],
+            ],
+          },
+        ],
         keyPoints: [
           'Parallel = same voltage across all branches, current divides',
           'Total parallel resistance is always less than the smallest branch resistance',
@@ -430,6 +492,43 @@ export const MODULES: TrainingModule[] = [
           'Parallel UPS systems provide N+1 redundancy',
           'A failed branch in parallel does not stop other branches',
         ],
+        practical: {
+          intro: 'Two parallel circuit scenarios from real UPS data center environments.',
+          steps: [
+            {
+              id: 'para-1',
+              type: 'scenario',
+              title: 'Scenario A: Adding a Battery String',
+              prompt: 'A 48V UPS currently has two parallel battery strings, each rated 100Ah. A customer wants to add a third identical 100Ah string in parallel. After adding the third string, what changes and what stays the same?',
+              scenarioOptions: [
+                { id: 'voltage',  label: 'Battery voltage increases to 72V (48V × 3 strings)' },
+                { id: 'cap',      label: 'Voltage stays 48V; total Ah capacity increases to 300Ah (more runtime)', sublabel: 'Correct — parallel adds capacity, not voltage' },
+                { id: 'nothing',  label: 'Nothing changes — additional strings are redundant' },
+                { id: 'current',  label: 'Voltage stays 48V but the UPS reduces its output power because of the extra string' },
+              ],
+              correctScenario: 'cap',
+              hint: 'Parallel branches share the same voltage. Current (and therefore Ah capacity) is additive. What does that mean for runtime?',
+              correctFeedback: 'Correct. Parallel strings maintain the same voltage (48V) while tripling the Ah capacity (300Ah). More Ah = more runtime under the same load. The UPS can now sustain the load approximately 3× longer than with one string. This is why data centers add battery cabinets to extend runtime without changing the UPS output voltage.',
+              incorrectFeedback: 'Incorrect. Parallel circuits share the same voltage — adding more strings does NOT increase voltage. Instead, it increases current capacity (Ah). 3 strings × 100Ah = 300Ah total. Same 48V but much longer runtime.',
+            },
+            {
+              id: 'para-2',
+              type: 'scenario',
+              title: 'Scenario B: N+1 UPS Failure',
+              prompt: 'A data center has three 100kW UPS units in N+1 parallel configuration, serving a 200kW load. One UPS fails completely and drops offline. What happens to the load?',
+              scenarioOptions: [
+                { id: 'lose',     label: 'Load is lost — three UPS units are needed to carry 200kW' },
+                { id: 'half',     label: 'Load drops to 100kW — only one UPS remains working' },
+                { id: 'continue', label: 'The two remaining UPS units each pick up 100kW (their full capacity) and the 200kW load continues uninterrupted', sublabel: 'Correct — N+1 means N=2 are needed, 1 is spare' },
+                { id: 'bypass',   label: 'The system switches to utility bypass and operates without protection' },
+              ],
+              correctScenario: 'continue',
+              hint: 'N+1 means: N units needed to carry full load + 1 spare. With N=2 needed, having 3 means any one can fail without a load impact.',
+              correctFeedback: 'Correct. N+1 configuration means there is always one unit beyond what is needed. With a 200kW load and 3 × 100kW UPS units (N=2 needed, N+1=3 installed), the failure of any single unit leaves exactly the capacity needed to carry the full load. Each remaining unit goes from ~67kW to 100kW — both at full capacity. The load continues uninterrupted.',
+              incorrectFeedback: 'Incorrect. N+1 means "N units needed to serve the load plus one extra." With 3 UPS units serving 200kW (N=2 needed), the loss of one unit leaves 2 × 100kW = 200kW — exactly enough capacity. This is the point of N+1 redundancy: any single unit can fail without load interruption.',
+            },
+          ],
+        },
         quiz: [
           { q: 'In a parallel circuit, the voltage across each branch is:', a: ['Different for each branch', 'Divided equally among branches', 'The same for all branches', 'Zero in all branches'], correct: 2, exp: 'All branches in a parallel circuit share the same voltage — they are connected to the same two nodes.' },
           { q: 'If branch 1 draws 3A and branch 2 draws 5A in a parallel circuit, total current is:', a: ['2A', '4A', '8A', '15A'], correct: 2, exp: 'Parallel circuit total current = sum of branch currents: 3+5 = 8A.' },
@@ -451,6 +550,27 @@ export const MODULES: TrainingModule[] = [
           'In practice, KCL helps you find unknown currents in complex parallel circuits. KVL helps you trace voltage drops through a circuit to locate excessive resistance, poor connections, or failed components. If measured drops don\'t add up to the source voltage, you have either a measurement error or an unexpected voltage source (like a bad battery).',
           'When troubleshooting a UPS, you apply KVL every time you trace through the input, rectifier, DC bus, inverter, and output stages. The voltages must balance at each stage. If the output voltage is wrong, trace back through the chain using KVL thinking to isolate which stage is at fault.',
         ],
+        tables: [
+          {
+            caption: 'KCL vs. KVL — What each law tells you',
+            headers: ['Law', 'Statement', 'Applies to', 'UPS Use Case'],
+            rows: [
+              ['KCL', 'Current in = current out at every node', 'Junctions / parallel branches', 'Verify current splits at battery bus — if 20A in and only 18A measured out, there is a leakage path'],
+              ['KVL', 'Voltage drops around any loop sum to zero', 'Closed loops / series paths', 'Trace 480V input → rectifier → DC bus → inverter → output; drops must balance'],
+            ],
+          },
+          {
+            caption: 'UPS stage voltages — KVL trace example (single-phase 120V UPS)',
+            headers: ['Stage', 'Expected Voltage', 'If Wrong — Suspect'],
+            rows: [
+              ['AC Input',      '120V AC',  'Utility outage, blown main fuse'],
+              ['After Rectifier', '170V DC', 'Blown rectifier diode, failed SCR'],
+              ['DC Bus',         '48V DC',   'Battery disconnected, charger fault'],
+              ['Inverter Output', '120V AC', 'Failed IGBT, inverter control fault'],
+              ['Load Output',    '120V AC',  'Bypass switch fault, output short'],
+            ],
+          },
+        ],
         keyPoints: [
           'KCL: Current into a node = current out of a node (current is conserved)',
           'KVL: Sum of voltages around any closed loop = zero',
@@ -458,6 +578,43 @@ export const MODULES: TrainingModule[] = [
           'KCL helps verify current measurements at branch points',
           'Apply these laws when tracing faults through UPS stages',
         ],
+        practical: {
+          intro: 'Apply KVL and KCL to diagnose two real UPS faults.',
+          steps: [
+            {
+              id: 'kvl-1',
+              type: 'scenario',
+              title: 'Scenario A: KVL Fault Trace — Low Output Voltage',
+              prompt: 'A 48V UPS is outputting only 90V AC instead of 120V AC. You measure: AC input = 120V ✓, DC bus = 44V (low, spec is 48V), inverter output = 90V. Using KVL thinking, which stage is most likely at fault?',
+              scenarioOptions: [
+                { id: 'input',   label: 'The AC input rectifier is losing 4V — replace the rectifier diodes' },
+                { id: 'dcbus',   label: 'The DC bus is low at 44V — charger or battery issue is causing reduced DC, leading to reduced inverter output', sublabel: 'Correct — follow the voltage trace' },
+                { id: 'bypass',  label: 'The bypass switch is faulty — replace it' },
+                { id: 'load',    label: 'The load is drawing too much current — reduce the load' },
+              ],
+              correctScenario: 'dcbus',
+              hint: 'In KVL tracing, the first stage that deviates from spec is where you focus. AC input is fine. DC bus is low. The inverter cannot produce proper output from reduced DC input.',
+              correctFeedback: 'Correct. KVL trace: AC input is normal (120V ✓), but DC bus is low (44V vs. 48V spec). The inverter is operating on reduced DC, so its output is proportionally low. The fault is upstream — in the charger circuit or battery (high internal resistance pulling down the bus). You would next check battery float voltage and charger current output.',
+              incorrectFeedback: 'Incorrect. KVL tracing means you follow the signal path and stop at the first point where voltage deviates from spec. AC input is normal, DC bus is low. That is where the fault is. The inverter is simply reproducing what it is given — a low DC bus produces low AC output.',
+            },
+            {
+              id: 'kcl-1',
+              type: 'scenario',
+              title: 'Scenario B: KCL Current Balance — Battery Bus Leak',
+              prompt: 'A clamp meter at the charger output reads 20A flowing into the 48V battery bus. You clamp each battery string and read 8A on string 1, 9A on string 2, and 2A on string 3. Does the current balance, and what does KCL tell you?',
+              scenarioOptions: [
+                { id: 'ok',    label: '8+9+2 = 19A out vs 20A in — close enough, measurement error only' },
+                { id: 'leak',  label: '8+9+2 = 19A — 1A is unaccounted for; KCL says there is a leakage path, possibly to chassis ground or a shorted component', sublabel: 'Correct — KCL reveals a hidden current path' },
+                { id: 'string3', label: 'String 3 is carrying too little current; replace string 3 batteries' },
+                { id: 'meter', label: 'The charger output meter is wrong; recalibrate it' },
+              ],
+              correctScenario: 'leak',
+              hint: 'KCL says total current in must equal total current out. If you can account for only 19A of the 20A the charger is delivering, the missing 1A has to be going somewhere — where?',
+              correctFeedback: 'Correct. KCL is unambiguous: 20A in, 8+9+2 = 19A to the strings. The missing 1A is going somewhere that is not a battery string — a leakage path. This could be a wiring fault, insulation failure, or component shorted to chassis. This finding would trigger a megger insulation test on the DC bus and wiring. String 3 carrying low current is a separate concern (possibly higher internal resistance) but is not the KCL violation.',
+              incorrectFeedback: 'Incorrect. KCL is precise — current cannot disappear. If 20A enters the node and only 19A is accounted for in the three strings, 1A is flowing somewhere else. This is not measurement rounding error for a current this size. A consistent 1A leakage to ground in a 48V system is a real fault that needs investigation.',
+            },
+          ],
+        },
         quiz: [
           { q: 'Kirchhoff\'s Current Law states that at any node:', a: ['Voltage sums to zero', 'Current in equals current out', 'Resistance is constant', 'Power is divided equally'], correct: 1, exp: 'KCL: the sum of currents entering a node equals the sum leaving it. Current is conserved.' },
           { q: 'Kirchhoff\'s Voltage Law states that around any closed loop:', a: ['Current sums to zero', 'Power is constant', 'Sum of all voltages equals zero', 'Resistance sums to supply voltage'], correct: 2, exp: 'KVL: the algebraic sum of all voltage rises and drops around any closed loop equals zero.' },
