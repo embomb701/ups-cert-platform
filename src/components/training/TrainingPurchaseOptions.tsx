@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
-import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 
 export function TrainingPurchaseOptions() {
   return (
@@ -25,24 +24,24 @@ export function TrainingPurchaseOptions() {
               <div className="inline-block px-2.5 py-1 bg-blue-600 text-white text-xs font-bold rounded-full mb-3">
                 RECOMMENDED
               </div>
-              <h2 className="text-2xl font-bold text-white mb-2">6-Month Training Course</h2>
+              <h2 className="text-2xl font-bold text-white mb-2">3-to-6-Month Training Course</h2>
               <p className="text-4xl font-bold text-white mb-1">$1,499</p>
               <p className="text-blue-300 text-sm mb-4">Jr. FSE Certification Exam included at completion</p>
               <p className="text-gray-400 leading-relaxed mb-6 max-w-xl">
-                The complete structured program. 24 modules over 6 months covering everything from
+                The complete structured program. 28 modules in 3–6 months covering everything from
                 electrical fundamentals to advanced UPS systems, battery safety, troubleshooting,
-                and professional field conduct. Pass all 24 modules and the Jr. FSE exam is unlocked
+                and professional field conduct. Pass all 28 modules and the Jr. FSE exam is unlocked
                 at no extra cost.
               </p>
               <ul className="space-y-2 mb-6">
                 {[
-                  '24 training modules · 72 slides',
+                  '28 training modules in 3–6 months',
                   '5-minute timer enforced per slide',
                   '100% required on every section quiz',
                   'Fail a section quiz → repeat the full section, 24-hour retry wait',
                   '100% required on every module test (once per day)',
-                  '1-week minimum between modules',
-                  'Practice test included free',
+                  '3-day minimum between modules',
+                  'Practice exam unlocked free after all 28 modules',
                   'Jr. FSE Certification Exam included',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
@@ -59,29 +58,6 @@ export function TrainingPurchaseOptions() {
                 className="block w-full py-3 px-6 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold rounded-lg text-center transition-colors"
               />
               <p className="text-xs text-gray-500 text-center">Grants immediate training portal access</p>
-            </div>
-          </div>
-        </div>
-
-        {/* ── PRACTICE TEST ───────────────────────────────────────────────── */}
-        <div className="rounded-xl border border-green-800/60 bg-green-950/10 p-6">
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="flex-1">
-              <div className="inline-block px-2 py-0.5 bg-green-700/40 border border-green-700/60 text-green-300 text-xs font-semibold rounded-full mb-2">
-                PRACTICE — NO CERT ISSUED
-              </div>
-              <h2 className="text-xl font-bold text-white mb-1">Jr. FSE Practice Test</h2>
-              <p className="text-3xl font-bold text-white mb-3">$14.99</p>
-              <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
-                Take a real 50-question Jr. FSE exam to see how you score. Same question pool, same
-                format, same time limits. Results and category breakdown shown. No certificate issued —
-                this is for practice only, not a test-out attempt.
-              </p>
-            </div>
-            <div className="flex-shrink-0 min-w-[200px]">
-              <PracticeTestButton
-                className="block w-full py-2.5 px-5 bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
-              />
             </div>
           </div>
         </div>

@@ -1,23 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { ALL_MODULES } from '@/data/index';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   try {
-    // Check for authenticated user
     const authHeader = req.headers.get('Authorization');
     const idToken = authHeader?.split('Bearer ')[1];
 
     let hasAccess = false;
-    let freeViaTraining = false;
+    let allModulesComplete = false;
 
     if (idToken) {
       try {
         const decoded = await adminAuth.verifyIdToken(idToken);
         const uid = decoded.uid;
 
-        // Already has practice test access?
+        // Already has practice test access (granted directly)?
         const ptSnap = await adminDb
           .collection('users').doc(uid)
           .collection('examAccess').doc('practice_test')
@@ -26,15 +26,17 @@ export async function GET(req: NextRequest) {
           hasAccess = true;
         }
 
-        // Has training access? → gets practice test free
+        // Check if all 28 training modules are complete → unlocks practice test free
         if (!hasAccess) {
-          const trainingSnap = await adminDb
+          const progressSnap = await adminDb
             .collection('users').doc(uid)
-            .collection('examAccess').doc('training_portal')
-            .get();
-          if (trainingSnap.exists && trainingSnap.data()?.granted) {
-            freeViaTraining = true;
-          }
+            .collection('trainingProgress').get();
+          const progressMap: Record<string, { completedAt?: unknown; passed?: boolean }> = {};
+          progressSnap.forEach((doc) => { progressMap[doc.id] = doc.data() as typeof progressMap[string]; });
+          allModulesComplete = ALL_MODULES.every((mod) => {
+            const p = progressMap[mod.id] ?? {};
+            return !!(p.completedAt && p.passed);
+          });
         }
       } catch {
         // Invalid token — treat as unauthenticated
@@ -46,13 +48,15 @@ export async function GET(req: NextRequest) {
     const freeNote = settingsSnap.data()?.freeNote ?? null;
 
     return NextResponse.json({
-      free: globalFree || freeViaTraining,
-      freeViaTraining,
-      freeNote: freeViaTraining ? 'Included free with your training course' : freeNote,
-      price: 1499,
+      free: globalFree || allModulesComplete,
+      freeViaTraining: allModulesComplete,
+      freeNote: allModulesComplete
+        ? 'Unlocked — you completed all 28 training modules'
+        : freeNote,
+      price: 0,
       hasAccess,
     });
   } catch {
-    return NextResponse.json({ free: false, price: 1499, hasAccess: false });
+    return NextResponse.json({ free: false, price: 0, hasAccess: false });
   }
 }

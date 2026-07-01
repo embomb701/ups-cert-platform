@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
-import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 
 export const metadata: Metadata = {
   title: 'FSE Academy — UPS Field Service Engineering Career Training',
@@ -130,7 +129,7 @@ export default function HomePage() {
                   'Fail a section → repeat it, 24-hour retry wait',
                   '100% required on every module test (once per day)',
                   '3 day minimum between modules',
-                  'Practice test included free',
+                  'Practice exam unlocked free after all 28 modules',
                   'Jr. FSE Exam included — no extra charge',
                 ].map((t, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
@@ -151,27 +150,6 @@ export default function HomePage() {
               >
                 Create free account first
               </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Jr. FSE Practice Test */}
-        <div className="rounded-xl border border-green-800/60 bg-green-950/10 p-6 mb-6">
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="flex-1">
-              <div className="inline-block px-2 py-0.5 bg-green-700/40 border border-green-700/60 text-green-300 text-xs font-semibold rounded-full mb-2">
-                PRACTICE — NO CERT ISSUED
-              </div>
-              <h3 className="text-xl font-bold text-white mb-1">Jr. FSE Practice Test</h3>
-              <p className="text-3xl font-bold text-white mb-3">$14.99</p>
-              <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
-                Same 50-question format as the real exam. See your score and category breakdown. No certificate — practice only.
-              </p>
-            </div>
-            <div className="flex-shrink-0 min-w-[200px]">
-              <PracticeTestButton
-                className="block w-full py-2.5 px-5 bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
-              />
             </div>
           </div>
         </div>

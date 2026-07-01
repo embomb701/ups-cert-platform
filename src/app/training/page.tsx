@@ -4,7 +4,7 @@ import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { ALL_MODULES } from '@/data/index';
 import Link from 'next/link';
-import { TrainingPurchaseOptions } from '@/components/training/TrainingPurchaseOptions';
+import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,16 +30,108 @@ export default async function TrainingPage() {
     .collection('examAccess').doc('training_portal').get();
   const hasAccess = isAdmin || (accessDoc.exists && accessDoc.data()?.granted);
 
-  if (!hasAccess) {
-    return <TrainingPurchaseOptions />;
-  }
-
   const progressSnap = await adminDb
     .collection('users').doc(uid)
     .collection('trainingProgress').get();
   const progress: Record<string, { completedSlides?: number[]; completedAt?: unknown; passed?: boolean }> = {};
   progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
 
+  // ── FREE TRIAL VIEW ─────────────────────────────────────────────────────────
+  if (!hasAccess) {
+    const freeModules = ALL_MODULES.filter((m) => m.num <= 3);
+    const lockedModules = ALL_MODULES.filter((m) => m.num > 3);
+
+    return (
+      <div className="min-h-screen bg-gray-900 py-10 px-4">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <div>
+            <h1 className="text-3xl font-bold text-white">Training Portal</h1>
+            <p className="text-gray-400 mt-1">Free Trial — UPS Field Service Engineering</p>
+          </div>
+
+          <div className="rounded-lg bg-blue-900/30 border border-blue-700 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <p className="text-white font-semibold">You&apos;re on the free trial</p>
+              <p className="text-gray-400 text-sm mt-1">
+                Lesson 1 of Modules 1, 2 &amp; 3 is unlocked. Enroll to access all 28 modules.
+              </p>
+            </div>
+            <PurchaseButton
+              productId="training_course"
+              label="Enroll — $1,499"
+              className="flex-shrink-0 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold rounded-lg text-sm transition-colors"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <h2 className="text-lg font-semibold text-white">Free Trial Lessons</h2>
+            {freeModules.map((mod) => {
+              const p = progress[mod.id] ?? {};
+              const trialDone = (p.completedSlides ?? []).includes(0);
+              return (
+                <div
+                  key={mod.id}
+                  className={`rounded-lg border p-5 flex items-center justify-between gap-4 ${
+                    trialDone ? 'border-green-800 bg-green-900/10' : 'border-blue-800/60 bg-blue-900/10'
+                  }`}
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${trialDone ? 'bg-green-600 text-white' : 'bg-blue-700 text-white'}`}>
+                      {trialDone ? '✓' : mod.num}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <p className="text-white font-medium truncate">{mod.title}</p>
+                        <span className="px-1.5 py-0.5 bg-blue-600/30 border border-blue-600/60 text-blue-300 text-xs rounded flex-shrink-0">
+                          FREE TRIAL
+                        </span>
+                      </div>
+                      <p className="text-gray-500 text-sm">
+                        {trialDone ? 'Lesson 1 complete' : `Lesson 1 of ${mod.slides.length} available free`}
+                      </p>
+                    </div>
+                  </div>
+                  <Link
+                    href={`/training/${mod.id}`}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex-shrink-0 ${
+                      trialDone ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' : 'bg-blue-600 hover:bg-blue-500 text-white'
+                    }`}
+                  >
+                    {trialDone ? 'Review' : 'Start'}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="space-y-3">
+            <h2 className="text-lg font-semibold text-white">
+              Full Course{' '}
+              <span className="text-gray-500 font-normal text-sm">— {lockedModules.length} more modules locked</span>
+            </h2>
+            <div className="rounded-lg border border-gray-700 bg-gray-800/40 divide-y divide-gray-700/50">
+              {lockedModules.map((mod) => (
+                <div key={mod.id} className="flex items-center gap-3 px-5 py-3 opacity-50">
+                  <span className="text-gray-600 text-sm">🔒</span>
+                  <span className="text-gray-400 text-sm">{mod.num}. {mod.title}</span>
+                </div>
+              ))}
+            </div>
+            <div className="text-center py-4">
+              <PurchaseButton
+                productId="training_course"
+                label="Unlock All 28 Modules — $1,499"
+                className="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
+              />
+              <p className="text-gray-600 text-xs mt-3">Jr. FSE Certification Exam + NFPA 70E &amp; LOTO certificates included</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── FULL PORTAL VIEW ─────────────────────────────────────────────────────────
   const moduleStatuses = ALL_MODULES.map((mod, idx) => {
     const p = progress[mod.id] ?? {};
     const completedSlides = p.completedSlides ?? [];

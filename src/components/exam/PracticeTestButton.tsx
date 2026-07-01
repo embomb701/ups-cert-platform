@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { getIdToken } from '@/lib/firebase/auth';
-import { PurchaseButton } from './PurchaseButton';
 
 interface Status {
   free: boolean;
@@ -107,12 +106,10 @@ export function PracticeTestButton({ className }: { className?: string }) {
     );
   }
 
-  // Paid
+  // Not yet eligible — complete all training modules to unlock
   return (
-    <PurchaseButton
-      productId="practice_test"
-      label="Buy Practice Test — $14.99"
-      className={className}
-    />
+    <div className="text-center space-y-1">
+      <p className="text-gray-400 text-sm">Complete all 28 training modules to unlock the practice exam.</p>
+    </div>
   );
 }

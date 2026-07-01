@@ -26,14 +26,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Slide index out of range' }, { status: 400 });
     }
 
-    // Verify portal access
-    const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
-    if (!accessDoc.exists || !accessDoc.data()?.granted) {
-      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    // Verify portal access — free trial allows slide 0 of modules 1-3
+    const isFreeTrialSlide = mod.num <= 3 && slideIndex === 0;
+    if (!isFreeTrialSlide) {
+      const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
+      if (!isAdmin && (!accessDoc.exists || !accessDoc.data()?.granted)) {
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+      }
     }
 
-    // Verify module unlock (1-week rule between modules) — bypassed for admins
-    if (!isAdmin && mod.num > 1) {
+    // Verify module unlock (3-day rule between modules) — bypassed for admins and free trial
+    if (!isAdmin && !isFreeTrialSlide && mod.num > 1) {
       const prevMod = (await import('@/data/index')).ALL_MODULES.find((m) => m.num === mod.num - 1);
       if (prevMod) {
         const prevProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(prevMod.id).get();

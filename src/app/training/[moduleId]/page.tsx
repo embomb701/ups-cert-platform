@@ -4,6 +4,7 @@ import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { getModule, ALL_MODULES } from '@/data/index';
 import Link from 'next/link';
+import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 interface Props {
   params: Promise<{ moduleId: string }>;
@@ -29,15 +30,18 @@ export default async function ModulePage({ params }: Props) {
   const isAdmin = await checkIsAdmin(uid, userEmail);
 
   const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
-  if (!isAdmin && (!accessDoc.exists || !accessDoc.data()?.granted)) redirect('/training');
+  const hasAccess = isAdmin || (accessDoc.exists && accessDoc.data()?.granted);
 
   const mod = getModule(moduleId);
   if (!mod) notFound();
 
-  // Check 1-week rule from previous module — bypassed for admins
+  const isFreeTrialModule = mod.num <= 3;
+  if (!hasAccess && !isFreeTrialModule) redirect('/training');
+
+  // Check 3-day rule from previous module — bypassed for admins and free trial
   let locked = false;
   let unlockDate: Date | null = null;
-  if (!isAdmin && mod.num > 1) {
+  if (hasAccess && !isAdmin && mod.num > 1) {
     const prevMod = ALL_MODULES.find((m) => m.num === mod.num - 1);
     if (prevMod) {
       const prevProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(prevMod.id).get();
@@ -96,21 +100,37 @@ export default async function ModulePage({ params }: Props) {
           </div>
         ) : (
           <div className="space-y-4">
+            {!hasAccess && (
+              <div className="rounded-lg bg-blue-900/30 border border-blue-700 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div>
+                  <p className="text-white font-semibold text-sm">Free Trial — Lesson 1 only</p>
+                  <p className="text-gray-400 text-xs mt-0.5">Enroll to unlock all {mod.slides.length} lessons and the module test.</p>
+                </div>
+                <PurchaseButton
+                  productId="training_course"
+                  label="Enroll — $1,499"
+                  className="flex-shrink-0 px-4 py-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold rounded-lg text-xs transition-colors"
+                />
+              </div>
+            )}
             <h2 className="text-xl font-semibold text-white">Slides</h2>
             {mod.slides.map((slide, i) => {
               const done = completedSlides.includes(i);
+              const trialLocked = !hasAccess && i > 0;
               return (
-                <div key={i} className={`rounded-lg border p-5 flex items-center justify-between ${done ? 'border-green-800 bg-green-900/20' : 'border-gray-700 bg-gray-800'}`}>
+                <div key={i} className={`rounded-lg border p-5 flex items-center justify-between ${done ? 'border-green-800 bg-green-900/20' : trialLocked ? 'border-gray-800 bg-gray-800/40 opacity-50' : 'border-gray-700 bg-gray-800'}`}>
                   <div className="flex items-center gap-4">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${done ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-400'}`}>
-                      {done ? '✓' : i + 1}
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${done ? 'bg-green-600 text-white' : trialLocked ? 'bg-gray-700 text-gray-500' : 'bg-gray-700 text-gray-400'}`}>
+                      {done ? '✓' : trialLocked ? '🔒' : i + 1}
                     </div>
                     <div>
                       <p className="text-white font-medium">{slide.title}</p>
-                      <p className="text-gray-500 text-sm">{slide.quiz.length} questions · 5 min minimum</p>
+                      <p className="text-gray-500 text-sm">
+                        {trialLocked ? 'Enroll to unlock' : `${slide.quiz.length} questions · 5 min minimum`}
+                      </p>
                     </div>
                   </div>
-                  {(isAdmin || done || i <= startSlide) && (
+                  {!trialLocked && (isAdmin || done || i <= startSlide) && (
                     <Link href={`/training/${moduleId}/slide/${i}`} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${done ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' : 'bg-blue-600 hover:bg-blue-500 text-white'}`}>
                       {done ? 'Review' : 'Start'}
                     </Link>
@@ -119,7 +139,7 @@ export default async function ModulePage({ params }: Props) {
               );
             })}
 
-            {completedSlides.length === mod.slides.length && (
+            {hasAccess && completedSlides.length === mod.slides.length && (
               <div className={`rounded-lg border p-5 flex items-center justify-between ${moduleComplete ? 'border-green-800 bg-green-900/20' : 'border-yellow-800 bg-yellow-900/20'}`}>
                 <div className="flex items-center gap-4">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${moduleComplete ? 'bg-green-600 text-white' : 'bg-yellow-600 text-white'}`}>

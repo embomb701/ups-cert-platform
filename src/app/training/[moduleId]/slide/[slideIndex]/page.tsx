@@ -31,15 +31,21 @@ export default async function SlidePage({ params }: Props) {
   const isAdmin = await checkIsAdmin(uid, userEmail);
 
   const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
-  if (!isAdmin && (!accessDoc.exists || !accessDoc.data()?.granted)) redirect('/training');
+  const hasAccess = isAdmin || (accessDoc.exists && accessDoc.data()?.granted);
 
   const mod = getModule(moduleId);
   if (!mod) notFound();
   if (isNaN(slideIndex) || slideIndex < 0 || slideIndex >= mod.slides.length) notFound();
 
+  const isFreeTrialSlide = mod.num <= 3 && slideIndex === 0;
+  if (!hasAccess && !isFreeTrialSlide) redirect('/training');
+
   const slide = mod.slides[slideIndex];
   const isLast = slideIndex === mod.slides.length - 1;
-  const nextUrl = isLast ? `/training/${moduleId}` : `/training/${moduleId}/slide/${slideIndex + 1}`;
+  // Free trial users return to module overview after lesson 1 (which shows the upgrade prompt)
+  const nextUrl = (isLast || (!hasAccess && isFreeTrialSlide))
+    ? `/training/${moduleId}`
+    : `/training/${moduleId}/slide/${slideIndex + 1}`;
 
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
