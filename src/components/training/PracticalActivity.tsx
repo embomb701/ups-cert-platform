@@ -469,7 +469,7 @@ function ScenarioUI({
           } ${disabled ? 'cursor-default' : 'cursor-pointer'}`}
         >
           <p className="text-gray-200 text-sm leading-relaxed">{opt.label}</p>
-          {opt.sublabel && <p className="text-gray-500 text-xs mt-1">{opt.sublabel}</p>}
+          {opt.sublabel && disabled && <p className="text-gray-500 text-xs mt-1">{opt.sublabel}</p>}
         </button>
       ))}
     </div>
