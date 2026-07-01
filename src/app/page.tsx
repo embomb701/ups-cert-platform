@@ -6,7 +6,7 @@ import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 export const metadata: Metadata = {
   title: 'FSE Academy — UPS Field Service Engineering Career Training',
   description:
-    'Start a $55K–$100K career in critical power systems in 6 months. No college required. Jr. FSE and FSE certification programs by Francis Aiello.',
+    'Start a $55K–$100K career in critical power systems in 3–6 months. No college required. Jr. FSE and FSE certification programs by Francis Aiello.',
 };
 
 export default function HomePage() {
@@ -23,7 +23,7 @@ export default function HomePage() {
               Industry facing critical technician shortage
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Start a <span className="text-blue-400">$55K–$100K</span> career in 6 months.{' '}
+              Start a <span className="text-blue-400">$55K–$100K</span> career in 3–6 months.{' '}
               <span className="text-gray-300">No college. No debt.</span>
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
@@ -51,7 +51,7 @@ export default function HomePage() {
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { stat: '80,000+', label: 'Technicians retiring this decade' },
-              { stat: '6 months', label: 'To your first job in the field' },
+              { stat: '3–6 months', label: 'To your first job in the field' },
               { stat: '$1,499', label: 'Total training program cost' },
               { stat: '$0', label: 'Student loan debt' },
             ].map((item, i) => (
@@ -107,7 +107,7 @@ export default function HomePage() {
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Pricing</span>
           <h2 className="text-3xl font-bold text-white mt-3 mb-4">Choose your path</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Train from scratch with the 6-month course, or test out if you already work in the field.
+            Train from scratch with the 3-to-6-month course, or test out if you already work in the field.
             All paths lead to a verifiable, employer-recognized credential.
           </p>
         </div>
@@ -119,12 +119,12 @@ export default function HomePage() {
               <div className="inline-block px-2.5 py-0.5 bg-blue-600 text-white text-xs font-bold rounded-full mb-3">
                 MOST POPULAR
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">6-Month Training Course</h3>
+              <h3 className="text-2xl font-bold text-white mb-1">3-to-6-Month Training Course</h3>
               <p className="text-4xl font-bold text-white mb-1">$1,499</p>
               <p className="text-blue-300 text-sm mb-5">Jr. FSE Certification Exam included at completion</p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                 {[
-                  '28 modules over 6 months',
+                  '28 modules in 3–6 months',
                   '78+ slides with 5-min timer per slide',
                   '100% required on every section quiz',
                   'Fail a section → repeat it, 24-hour retry wait',
@@ -282,7 +282,7 @@ export default function HomePage() {
             { step: '01', title: '5-Minute Minimum Per Slide', body: 'Each slide has a built-in timer. The section quiz only unlocks after 5 full minutes — enforced server-side.' },
             { step: '02', title: '100% Section Quiz Score', body: 'Every slide has a 10-question quiz. You must answer every question correctly before advancing. Retry as needed.' },
             { step: '03', title: '100% Module Test — Once Per Day', body: 'After all slides, take a 10-question test. 100% required. One attempt per day. Fail, and you redo all slides.' },
-            { step: '04', title: '1 Week Between Modules', body: 'After passing a module test, you wait one week before the next module. This is a 6-month program by design.' },
+            { step: '04', title: '3 Days Between Modules', body: 'After passing a module test, you wait 3 days before the next module unlocks. Complete all 28 modules in as little as 3 months, or take up to 6.' },
           ].map((item, i) => (
             <div key={i} className="p-6 rounded-lg bg-gray-800 border border-gray-700">
               <span className="text-blue-600 text-xs font-bold font-mono">{item.step}</span>
@@ -377,7 +377,7 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="text-center mb-12">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Curriculum</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">28 modules. 6 months. One career.</h2>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">28 modules. 3–6 months. One career.</h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
@@ -483,9 +483,9 @@ export default function HomePage() {
             { q: 'What is the NFPA 70E certificate and is it included?', a: 'Yes — the NFPA 70E Electrical Safety certificate is earned by completing Module 8 and is included free with the training course. It covers arc flash hazards, PPE categories 1–4, approach boundaries, energized work permits, and safe work practices specific to UPS and critical power equipment. It is a standalone, employer-verifiable credential in addition to your Jr. FSE certification.' },
             { q: 'Why do NFPA 70E and LOTO come after the electrical fundamentals instead of first?', a: 'Safety training without electrical knowledge is just memorizing rules. Once you understand fault current, circuit impedance, and how UPS bypass paths work, the arc flash and LOTO standards make complete sense — you can reason about hazards rather than recite procedures. NFPA 70E arc flash categories mean something when you know why high fault current increases incident energy. LOTO multi-source isolation makes sense when you understand that a static bypass can energize the output bus even with the main breaker open.' },
             { q: 'What is the LOTO certificate and is it included?', a: 'Yes — the Lockout/Tagout (LOTO) certificate is earned by completing Module 9 and is included free with the training course. It covers OSHA 29 CFR 1910.147 requirements, the six-step de-energization procedure, lockout hardware, UPS-specific multi-source isolation, group lockout, and re-energization sequences. It is a standalone, employer-verifiable credential.' },
-            { q: 'What happens if I fail the Jr. FSE test-out?', a: 'You must complete the full 6-month training course before you can attempt the exam again. The test-out is for people already working in the field who know the material.' },
+            { q: 'What happens if I fail the Jr. FSE test-out?', a: 'You must complete the full training course before you can attempt the exam again. The test-out is for people already working in the field who know the material.' },
             { q: "What is the Jr. FSE Practice Test?", a: 'The practice test ($14.99) uses the same 50-question format and question pool as the real exam so you can gauge your readiness. No certificate is issued — it\'s for practice only. The real test-out ($299) is human proctored, one attempt, and issues a certification if you pass.' },
-            { q: 'Why does the training take 6 months?', a: 'The 1-week minimum between modules is enforced server-side. Real retention requires spacing. Employers know what it took because the timeline is verifiable — it cannot be bypassed.' },
+            { q: 'How long does the training take?', a: 'The 3-day minimum between modules is enforced server-side. At that pace, all 28 modules can be completed in as little as 3 months. Most people finish in 3–6 months depending on how quickly they pass each module test. The timeline is verifiable — it cannot be bypassed.' },
             { q: 'Is the Jr. FSE exam included in the training course?', a: 'Yes. Completing all 28 modules automatically unlocks your Jr. FSE certification exam at no additional cost. The $1,499 covers everything — including the NFPA 70E and LOTO certificates earned along the way.' },
             { q: 'What is the FSE exam?', a: "The advanced certification for experienced engineers. Human proctored, live session, $649. Separate from Jr. FSE — you don't need Jr. FSE first, though the training course prepares you well for it." },
           ].map((item, i) => (
