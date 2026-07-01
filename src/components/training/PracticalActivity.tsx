@@ -145,6 +145,13 @@ export default function PracticalActivity({ exercise, onComplete }: Props) {
           ))}
         </div>
 
+        {/* Reference image for this step */}
+        {step?.image && (
+          <div className="rounded-lg overflow-hidden border border-gray-700 bg-gray-900">
+            <img src={step.image} alt="Reference diagram" className="w-full h-auto" />
+          </div>
+        )}
+
         {/* Prompt */}
         <p className="text-gray-200 leading-relaxed">{step?.prompt}</p>
 

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import PracticalActivity from './PracticalActivity';
 import MeterSimulator from './MeterSimulator';
-import type { PracticalExercise, MeterSimExercise, SlideTable } from '@/data/modules';
+import type { PracticalExercise, MeterSimExercise, SlideTable, SlideImage } from '@/data/modules';
 
 const WIDGETS: Record<string, React.LazyExoticComponent<React.ComponentType>> = {
   'ohms-law-explorer': lazy(() => import('./widgets/OhmsLawExplorer')),
@@ -23,6 +23,7 @@ interface QuizQ {
 interface Slide {
   title: string;
   body: string[];
+  images?: SlideImage[];
   tables?: SlideTable[];
   keyPoints: string[];
   quiz: QuizQ[];
@@ -45,9 +46,9 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
   const hasMeterSim = !!slide.meterSim;
   const [meterSimDone, setMeterSimDone] = useState(!hasMeterSim);
 
-  // A slide with a practical exercise gates the reading material until the exercise is done
   const hasPractical = !!slide.practical;
   const [practicalDone, setPracticalDone] = useState(!hasPractical);
+  const [showPractical, setShowPractical] = useState(false);
 
   const [secondsLeft, setSecondsLeft] = useState(skipTimer ? 0 : REQUIRED_SECONDS);
   const [timerStarted, setTimerStarted] = useState(false);
@@ -187,18 +188,8 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
         />
       )}
 
-      {/* PRACTICAL EXERCISE — shown after meterSim (or first if no meterSim), gates reading */}
-      {meterSimDone && hasPractical && !practicalDone && (
-        <div className="space-y-4">
-          <PracticalActivity
-            exercise={slide.practical!}
-            onComplete={() => setPracticalDone(true)}
-          />
-        </div>
-      )}
-
-      {/* READING CONTENT — shown after both pre-activities are complete */}
-      {meterSimDone && practicalDone && (
+      {/* READING CONTENT — shown once meterSim (if any) is done */}
+      {meterSimDone && (
         <>
           <div>
             <h2 className="text-2xl font-bold text-white mb-4">{slide.title}</h2>
@@ -208,6 +199,20 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
               ))}
             </div>
           </div>
+
+          {/* Reference images */}
+          {slide.images && slide.images.length > 0 && (
+            <div className={`grid gap-4 ${slide.images.length >= 2 ? 'md:grid-cols-2' : ''}`}>
+              {slide.images.map((img, i) => (
+                <div key={i} className="rounded-lg overflow-hidden border border-gray-700 bg-gray-900">
+                  <img src={img.src} alt={img.alt} className="w-full h-auto" />
+                  {img.caption && (
+                    <p className="text-xs text-gray-500 px-3 py-2 border-t border-gray-800">{img.caption}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Inline interactive widget */}
           {slide.widget && WIDGETS[slide.widget] && (() => {
@@ -257,8 +262,26 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
             </ul>
           </div>
 
-          {/* Quiz toggle */}
-          {timerDone && !showQuiz && (
+          {/* After reading: "Continue to Practical" gate */}
+          {timerDone && hasPractical && !showPractical && !practicalDone && (
+            <button
+              onClick={() => setShowPractical(true)}
+              className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg transition-colors"
+            >
+              Continue to Practical Exercise →
+            </button>
+          )}
+
+          {/* PRACTICAL EXERCISE — shown only after user clicks through */}
+          {timerDone && hasPractical && showPractical && !practicalDone && (
+            <PracticalActivity
+              exercise={slide.practical!}
+              onComplete={() => setPracticalDone(true)}
+            />
+          )}
+
+          {/* Quiz toggle — unlocks after timer AND practical (if any) */}
+          {timerDone && practicalDone && !showQuiz && (
             <button
               onClick={() => setShowQuiz(true)}
               className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors"

@@ -39,7 +39,7 @@ export default async function SlidePage({ params }: Props) {
 
   const slide = mod.slides[slideIndex];
   const isLast = slideIndex === mod.slides.length - 1;
-  const nextUrl = isLast ? `/training/${moduleId}/test` : `/training/${moduleId}/slide/${slideIndex + 1}`;
+  const nextUrl = isLast ? `/training/${moduleId}` : `/training/${moduleId}/slide/${slideIndex + 1}`;
 
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">

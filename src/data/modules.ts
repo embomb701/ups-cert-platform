@@ -31,6 +31,7 @@ export interface PracticalStep {
   type: PracticalStepType;
   title: string;
   prompt: string;
+  image?: string;
   meters?: PracticalMeter[];
   correctMeter?: string;
   dialModes?: PracticalDialMode[];
@@ -99,9 +100,16 @@ export interface SlideTable {
   rows: string[][];
 }
 
+export interface SlideImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface Slide {
   title: string;
   body: string[];
+  images?: SlideImage[];
   tables?: SlideTable[];
   keyPoints: string[];
   quiz: QuizQ[];
