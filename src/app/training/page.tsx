@@ -74,7 +74,7 @@ export default async function TrainingPage() {
       <div className="max-w-4xl mx-auto space-y-8">
         <div>
           <h1 className="text-3xl font-bold text-white">Training Portal</h1>
-          <p className="text-gray-400 mt-1">UPS Field Service Engineering — 24 Module Program</p>
+          <p className="text-gray-400 mt-1">UPS Field Service Engineering — 28 Module Program</p>
         </div>
 
         <div className="rounded-lg bg-gray-800 border border-gray-700 p-6 grid grid-cols-3 gap-6 text-center">
@@ -160,7 +160,7 @@ export default async function TrainingPage() {
           <div className="rounded-lg bg-green-900/30 border border-green-700 p-8 text-center space-y-4">
             <p className="text-green-300 text-2xl font-bold">Training Complete!</p>
             <p className="text-gray-300">
-              You have completed all 24 modules. Your Jr. FSE Certification Exam has been unlocked.
+              You have completed all 28 modules. Your Jr. FSE Certification Exam has been unlocked.
             </p>
             <Link
               href="/exam/rules/jr_fse"
