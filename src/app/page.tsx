@@ -129,7 +129,7 @@ export default function HomePage() {
                   '100% required on every section quiz',
                   'Fail a section → repeat it, 24-hour retry wait',
                   '100% required on every module test (once per day)',
-                  '1 week minimum between modules',
+                  '3 day minimum between modules',
                   'Practice test included free',
                   'Jr. FSE Exam included — no extra charge',
                 ].map((t, i) => (

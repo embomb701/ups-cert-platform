@@ -42,9 +42,9 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({ error: 'Previous module not completed' }, { status: 403 });
         }
         const completedAt = prevData.completedAt.toDate ? prevData.completedAt.toDate() : new Date(prevData.completedAt);
-        const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
-        if (Date.now() - completedAt.getTime() < oneWeekMs) {
-          return NextResponse.json({ error: 'Must wait 1 week after completing previous module', unlockAt: new Date(completedAt.getTime() + oneWeekMs).toISOString() }, { status: 403 });
+        const threeDaysMs = 3 * 24 * 60 * 60 * 1000;
+        if (Date.now() - completedAt.getTime() < threeDaysMs) {
+          return NextResponse.json({ error: 'Must wait 3 days after completing previous module', unlockAt: new Date(completedAt.getTime() + threeDaysMs).toISOString() }, { status: 403 });
         }
       }
     }

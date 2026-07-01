@@ -119,7 +119,7 @@ export default function ModuleTestClient({ moduleId, moduleTitle, questions }: P
             <>
               <p className="text-green-300 font-bold text-2xl">Module Complete!</p>
               <p className="text-green-400">Perfect score: {score}/{questions.length}</p>
-              <p className="text-gray-400 text-sm">You can proceed to the next module after 1 week from today.</p>
+              <p className="text-gray-400 text-sm">You can proceed to the next module after 3 days from today.</p>
               <button onClick={() => router.push('/training')} className="px-8 py-3 bg-green-600 hover:bg-green-500 text-white font-semibold rounded-lg transition-colors">
                 Back to Training Portal
               </button>

@@ -57,8 +57,8 @@ export default async function TrainingPage() {
         const completedAt =
           (prevP.completedAt as { toDate?: () => Date } | undefined)?.toDate?.() ??
           new Date(prevP.completedAt as string);
-        const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
-        if (Date.now() - completedAt.getTime() < oneWeekMs) {
+        const threeDaysMs = 3 * 24 * 60 * 60 * 1000;
+        if (Date.now() - completedAt.getTime() < threeDaysMs) {
           locked = true;
         }
       }
@@ -133,7 +133,7 @@ export default async function TrainingPage() {
                     {moduleComplete
                       ? 'Complete'
                       : locked
-                      ? 'Locked — complete previous module + wait 1 week'
+                      ? 'Locked — complete previous module + wait 3 days'
                       : started
                       ? `${slidesDone}/${mod.slides.length} slides done`
                       : `${mod.slides.length} slides · ${mod.test.length} test questions`}
