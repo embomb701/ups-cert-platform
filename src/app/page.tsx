@@ -100,6 +100,62 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── PROGRAMS ──────────────────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
+        <div className="text-center mb-10">
+          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Training Programs</span>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Two career tracks. One academy.</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Both programs share the same 10-module electrical and safety foundation. Complete it once — it counts toward either certification.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="rounded-xl border-2 border-blue-700 bg-blue-950/20 p-7">
+            <span className="text-blue-400 font-mono text-xs font-bold uppercase tracking-widest">UPS FSE</span>
+            <h3 className="text-xl font-bold text-white mt-2 mb-2">UPS Field Service Engineering</h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Service uninterruptible power supplies protecting hospitals, data centers, financial systems, and military installations.
+            </p>
+            <ul className="space-y-1.5 mb-6">
+              {['28 modules', '3–6 months', 'Jr. UPS FSE certification exam included', '$1,499'].map((t, i) => (
+                <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
+                  <span className="text-blue-400 flex-shrink-0">✓</span>{t}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="#pricing"
+              className="inline-block px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-sm transition-colors"
+            >
+              View pricing →
+            </Link>
+          </div>
+          <div className="rounded-xl border-2 border-orange-900/60 bg-orange-950/10 p-7">
+            <div className="flex items-center gap-2">
+              <span className="text-orange-400 font-mono text-xs font-bold uppercase tracking-widest">Kitchen FSE</span>
+              <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-xs rounded">Coming Soon</span>
+            </div>
+            <h3 className="text-xl font-bold text-white mt-2 mb-2">Commercial Kitchen Field Service Engineering</h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Service commercial kitchen equipment — refrigeration systems, cooking equipment, warewashing, ice machines, and beverage systems.
+            </p>
+            <ul className="space-y-1.5 mb-6">
+              {['26 modules (10 shared with UPS)', '3–6 months', 'Jr. Kitchen FSE certification', 'Enrollment opening soon'].map((t, i) => (
+                <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
+                  <span className="text-orange-400 flex-shrink-0">✓</span>{t}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/training/kitchen"
+              className="inline-block px-5 py-2 border border-orange-800 hover:border-orange-600 text-orange-400 hover:text-orange-300 font-semibold rounded-lg text-sm transition-colors"
+            >
+              Preview curriculum →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── PRICING / ALL OPTIONS ─────────────────────────────────────── */}
       <section id="pricing" className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="text-center mb-12">
