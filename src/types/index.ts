@@ -71,6 +71,9 @@ export const PRODUCTS = {
   EMPLOYER_5PACK: 'employer_5pack',
   EMPLOYER_10PACK: 'employer_10pack',
   SIGNED_BOOK: 'signed_book',
+  TRAINING_KITCHEN: 'training_kitchen',
+  JR_KITCHEN_FSE_TEST_HUMAN: 'jr_kitchen_fse_test_human',
+  PKG_TRAINING_KITCHEN_TESTOUT: 'pkg_training_kitchen_testout',
 } as const;
 
 // Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts

@@ -75,6 +75,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // COMMERCIAL KITCHEN FSE PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_kitchen: {
+    name: 'Commercial Kitchen FSE Training Course + Jr. Kitchen FSE Certification Exam',
+    shortName: 'Kitchen Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_KITCHEN ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_kitchen_fse_test_human: {
+    name: 'Jr. Kitchen FSE Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Kitchen FSE Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_KITCHEN_FSE_HUMAN ?? '',
+  },
+
+  // Kitchen training + test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
+  pkg_training_kitchen_testout: {
+    name: 'Kitchen Training Course + Jr. Kitchen FSE Test-Out (Human Proctored)',
+    shortName: 'Kitchen Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_KITCHEN_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 
