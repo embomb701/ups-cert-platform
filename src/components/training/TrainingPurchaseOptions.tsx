@@ -73,11 +73,6 @@ export function TrainingPurchaseOptions() {
           <div className="rounded-xl border border-amber-800/60 bg-amber-950/10 p-6">
             <div className="flex flex-col md:flex-row md:items-center gap-6">
               <div className="flex-1">
-                <div className="inline-block mb-3">
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-amber-900/60 border border-amber-700 text-amber-300 font-semibold">
-                    HUMAN PROCTORED
-                  </span>
-                </div>
                 <h3 className="text-xl font-bold text-white mb-1">Jr. FSE Test-Out</h3>
                 <p className="text-3xl font-bold text-white mb-3">$299</p>
                 <ul className="space-y-1.5 text-sm text-gray-400">
@@ -100,10 +95,10 @@ export function TrainingPurchaseOptions() {
 
         {/* ── FSE EXAM ────────────────────────────────────────────────────── */}
         <div>
-          <h2 className="text-xl font-bold text-white mb-5">FSE Certification — Human Proctored</h2>
+          <h2 className="text-xl font-bold text-white mb-5">FSE Certification — Advanced Level</h2>
           <div className="rounded-xl border border-gray-700 bg-gray-800 p-6 flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex-1">
-              <h3 className="text-lg font-bold text-white mb-1">FSE Exam — Human Proctored</h3>
+              <h3 className="text-lg font-bold text-white mb-1">FSE Exam</h3>
               <p className="text-3xl font-bold text-white mb-3">$649</p>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm text-gray-400">
                 {['50 questions', 'Human proctored session', '80% to pass', 'Scheduled after purchase', 'FSE Certificate issued', 'Advanced-level content'].map((t, i) => (
@@ -132,7 +127,7 @@ export function TrainingPurchaseOptions() {
           <div className="grid md:grid-cols-2 gap-5">
             {[
               {
-                name: 'Training + Jr. FSE Human Test-Out',
+                name: 'Training + Jr. FSE Test-Out',
                 price: '$1,749',
                 desc: 'Training Course + Jr. FSE Test-Out (Human Proctored)',
                 saving: 'Save $49 vs individual',

@@ -169,9 +169,12 @@ export default function JuniorCertPage() {
                 />
                 <PurchaseButton
                   productId="jr_fse_test_human"
-                  label="Test-Out (Human Proctored) — $299"
+                  label="Buy Test-Out — $299"
                   className="block w-full px-6 py-2.5 rounded-lg bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold text-sm transition-colors text-center"
                 />
+                <p className="text-[11px] text-gray-600 text-center leading-relaxed">
+                  Administered as a live proctored session, scheduled after purchase. One attempt only.
+                </p>
 
                 <div className="relative flex items-center gap-3">
                   <div className="flex-1 border-t border-gray-800" />

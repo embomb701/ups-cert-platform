@@ -221,8 +221,7 @@ export default function HomePage() {
           <div className="rounded-xl border border-amber-800/60 bg-amber-950/10 p-6">
             <div className="flex flex-col md:flex-row md:items-center gap-6">
               <div className="flex-1">
-                <span className="text-xs font-semibold text-amber-300 uppercase tracking-widest">Human Proctored</span>
-                <h4 className="text-xl font-bold text-white mt-2 mb-1">Jr. FSE Test-Out</h4>
+                <h4 className="text-xl font-bold text-white mb-1">Jr. FSE Test-Out</h4>
                 <p className="text-3xl font-bold text-white mb-3">$299</p>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Live proctor session. One attempt — pass and earn your Jr. FSE certification; fail and the training course is required before retrying.
@@ -241,10 +240,10 @@ export default function HomePage() {
 
         {/* FSE Exam */}
         <div className="mb-8">
-          <h3 className="text-lg font-bold text-white mb-5">FSE Certification — Advanced level, human proctored</h3>
+          <h3 className="text-lg font-bold text-white mb-5">FSE Certification — Advanced level</h3>
           <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-6 flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex-1">
-              <h4 className="text-xl font-bold text-white mb-1">FSE Exam — Human Proctored</h4>
+              <h4 className="text-xl font-bold text-white mb-1">FSE Exam</h4>
               <p className="text-3xl font-bold text-white mb-3">$649</p>
               <p className="text-gray-400 text-sm leading-relaxed">
                 The advanced FSE certification for engineers with field experience. Live proctor required.
@@ -267,7 +266,7 @@ export default function HomePage() {
           <p className="text-gray-500 text-sm mb-5">Training course bundled with a test-out option.</p>
           <div className="grid md:grid-cols-2 gap-5">
             {([
-              { name: 'Training + Jr. FSE Human Test-Out', price: '$1,749', id: 'pkg_training_jr_human' },
+              { name: 'Training + Jr. FSE Test-Out', price: '$1,749', id: 'pkg_training_jr_human' },
               { name: 'Training + FSE Exam', price: '$2,099', id: 'pkg_training_fse' },
             ] as const).map((pkg, i) => (
               <div key={i} className="rounded-xl border border-blue-900/50 bg-blue-950/10 p-5">
