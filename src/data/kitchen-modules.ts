@@ -1316,4 +1316,244 @@ export const KITCHEN_MODULES: TrainingModule[] = [
       { q: 'After a suppression discharge, equipment under the hood may return to service:', a: ['As soon as it is wiped down', 'Only after the licensed contractor recharges and re-arms the system (and gas/power are properly restored)', 'The next morning', 'Once the smell fades'], correct: 1, exp: 'The kitchen is unprotected until the system is recharged and re-armed; gas valves and shunt trips restore as part of that process.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 21 — COMMERCIAL DISHWASHERS & WAREWASHING
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-dishwashers',
+    num: 21,
+    title: 'Commercial Dishwashers & Warewashing',
+    desc: 'High-temp and chemical sanitizing machines, wash/rinse systems, booster heaters, chemical dosing, and the water mechanics of clean dishes.',
+    slides: [
+      {
+        title: 'How Commercial Dish Machines Sanitize',
+        body: [
+          'A commercial dish machine has one legal job: sanitized ware. Two technologies deliver it. High-temp machines sanitize with heat: a final rinse of 180°F water (design target; 160°F minimum at the dish surface) delivered by a booster heater. Low-temp (chemical) machines sanitize with chlorine-based sanitizer dosed into a cooler final rinse (typically 120-140°F, 50-100 ppm chlorine). The machine type determines the entire service pattern: high-temp problems are heat problems; low-temp problems are chemistry problems.',
+          'The formats scale with volume: undercounter machines (bars, cafés), door/hood machines (the workhorse — rack slides in, hood pulls down), conveyor machines (racks ride a chain through wash/rinse zones), and flight machines (a continuous belt, no racks, institutional scale). All share the same anatomy: a wash tank with heater holding recirculated detergent water, a wash pump driving spray arms, a timed cycle, and the final sanitizing rinse from fresh water.',
+          'Health codes verify results, and so do you: temperature gauges must work, and the proof standard for high-temp machines is a surface-temperature check (irreversible thermolabel on a plate through a cycle, or a max-registering thermometer) — 160°F at the dish. For low-temp, chlorine test strips on the final rinse. Leave every dish machine call with the sanitizing proof done and written on the ticket: this machine is the health inspector\'s first stop.',
+          'The failure taxonomy to carry in: results problems (dirty, spotted, filmed, or unsanitized ware), cycle problems (will not start, will not fill, will not drain, stuck in cycle), and leak/mechanical problems (doors, pumps, arms, racks). Every complaint sorts into one of the three, and each has its own short list.',
+        ],
+        tables: [
+          {
+            caption: 'High-temp vs low-temp sanitizing',
+            headers: ['', 'High-Temp', 'Low-Temp (Chemical)'],
+            rows: [
+              ['Sanitizer', '180°F final rinse (160°F at dish)', '50-100 ppm chlorine in final rinse'],
+              ['Key hardware', 'Booster heater', 'Sanitizer dosing pump'],
+              ['Verification', 'Thermolabel / max-register thermometer', 'Chlorine test strips'],
+              ['Classic failure', 'Booster underperformance', 'Empty product / failed dosing pump'],
+            ],
+          },
+        ],
+        keyPoints: [
+          'High-temp = heat problems; low-temp = chemistry problems — identify the machine type first',
+          'Proof standard: 160°F at the dish surface (thermolabel) or 50-100 ppm chlorine (test strips)',
+          'Verify and document sanitizing performance on every dish machine call',
+          'Sort every complaint: results, cycle, or leak/mechanical',
+        ],
+        quiz: [
+          {
+            q: 'The sanitizing proof for a high-temp machine is:',
+            a: ['The gauge reading 180°F', 'A thermolabel or max-registering thermometer confirming 160°F at the dish surface', 'Steam visible during rinse', 'The booster power light'],
+            correct: 1,
+            exp: 'Gauges read water in the pipe; codes care about dish-surface temperature. The thermolabel through a cycle is the accepted proof.',
+          },
+          {
+            q: 'A low-temp machine washing well but failing sanitizer test strips most likely has:',
+            a: ['A weak wash pump', 'An empty sanitizer container or failed/airlocked dosing pump', 'A cold wash tank', 'A blocked drain'],
+            correct: 1,
+            exp: 'Low-temp sanitizing is pure chemistry: no chlorine reaching the rinse means no sanitizing, and the dosing system is the suspect chain.',
+          },
+        ],
+      },
+      {
+        title: 'Heat: Tanks, Boosters, and Temperature Complaints',
+        body: [
+          'High-temp machines are a chain of heaters. Incoming hot water (building supply, 110-140°F) fills the wash tank, where a tank heater (element under the water, or steam coil) holds wash temperature around 150-160°F. The booster heater — a compact high-power water heater, electric elements or steam — raises final-rinse water to 180°F. Each heater is a Module 11 element system: elements (R = V²/P), thermostats, high-limits, contactors — plus, because this is kitchen water at its hottest, the heaviest scale burden in the building.',
+          'Temperature complaints localize by which temperature is wrong. Wash temp low: tank heater chain, or the machine is being run faster than the tank can recover (flood of cold racks). Rinse temp low: verify incoming water temperature FIRST — a booster is sized to raise water roughly 40°F, so 100°F incoming water yields a 140°F rinse from a perfectly healthy booster (the building water heater is your fault line, not the machine). Then the booster chain: elements (scale-shrouded elements underheat before they fail), thermostat, and the pressure/flow conditions its sensors demand.',
+          'Scale, once more, with feeling: booster tanks and their elements scale faster than anything else you service. Symptoms: rinse temperature sliding down over weeks, elements failing in rotation, and rinse pressure dropping as the tank throat narrows. Deliming boosters and wash tanks on a schedule (and verifying any water treatment) belongs in every dish-machine PM.',
+          'Steam-heated machines swap elements for steam coils and control valves — the diagnostic logic is identical (heat source, control, high-limit) with steam supply pressure as the "incoming voltage." Verify steam pressure and trap function before condemning coils; a failed steam trap floods the coil with condensate and mimics a dead heater.',
+        ],
+        keyPoints: [
+          'Rinse temp low: check INCOMING water temp first — boosters raise water ~40°F, no more',
+          'Scale-shrouded booster elements underheat before they fail — delime on schedule',
+          'Wash temp low under rush conditions may be recovery capacity, not a fault',
+          'Steam machines: verify steam pressure and traps before condemning coils',
+        ],
+        quiz: [
+          {
+            q: 'A high-temp machine rinses at 145°F. Incoming water to the booster measures 105°F. The correct conclusion is:',
+            a: ['The booster has failed', 'The building water heater is delivering low water — a healthy booster can only add ~40°F', 'The rinse thermostat is misadjusted', 'The machine needs a bigger booster'],
+            correct: 1,
+            exp: 'Boosters are sized for roughly a 40°F rise. 105 + 40 = 145: the booster is doing its job on starved input. Fix the building hot water first.',
+          },
+          {
+            q: 'A booster\'s rinse temperature has drifted down over two months and one element has failed. The underlying condition to fix is:',
+            a: ['Undersized wiring', 'Scale accumulation on elements and tank — delime and address water treatment', 'A weak contactor', 'Excessive rack throughput'],
+            correct: 1,
+            exp: 'Scale insulates elements (falling performance) and overheats them (rotating failures). New elements without deliming repeat the cycle.',
+          },
+        ],
+      },
+      {
+        title: 'Results, Cycles, and Chemistry',
+        body: [
+          'Dirty ware with good temperatures is a mechanics-and-chemistry problem. Walk the wash path: spray arms spinning freely with clear nozzles (food debris and broken glass plug them; scale narrows them), wash pump strong (a worn impeller or a pump strainer full of debris starves every arm), curtains in place on conveyors (missing curtains let zones cross-contaminate), racks correct (wrong racks stack ware into shadows). Detergent dosing next: most machines use conductivity-controlled dosing into the wash tank — a probe coated in grease reads "enough detergent" forever and doses nothing.',
+          'Spotting and film speak chemistry: white film that vinegar dissolves = mineral scale (hard water, exhausted treatment, or rinse-aid empty); film vinegar ignores = detergent residue (over-dosing or weak final rinse); greasy redeposit = wash water exhausted (staff not changing tank water) or detergent under-dosed. The rinse-aid pump (tiny peristaltic, prone to dried-out squeeze tubes) earns its keep here — sheeting action is what makes ware dry spotless.',
+          'Cycle faults follow the machine\'s sequence and its interlocks: will not start = door switch/latch (the #1), then controls; will not fill = fill valve, float/level probe (scale again), or a drain that will not seal (water in, water out); will not drain = drain pump/valve and the plugged standpipe or shared grease-trap line the machine drains into (a slow building drain masquerades as a machine fault); stuck mid-cycle = timers/boards and the temperature holds (some machines wait for rinse temperature — a "stuck" machine may be waiting on a starved booster: circle back to heat).',
+          'Warewashing closes with the professional habits: verify final results with your own eyes (run a full rack), leave dosing rates where the chemical rep set them unless you have cause and document any change, and coach the operator on the free stuff — scrapping practices, tank water changes, curtain placement, deliming schedule. The dish machine is the most operator-dependent appliance in the kitchen; half its "failures" are workflow.',
+        ],
+        keyPoints: [
+          'Dirty ware, good temps: arms, nozzles, pump, strainer, curtains, racks, then detergent probe',
+          'Vinegar test on film: dissolves = mineral/rinse-aid issue; persists = detergent residue',
+          'Will not start = door switch first; will not fill = valve/level probe/drain seal; stuck = may be waiting on rinse temp',
+          'Run a full rack to verify results; document chemical changes; coach operator workflow',
+        ],
+        quiz: [
+          {
+            q: 'Ware exits with a white film. Vinegar on a test plate dissolves it instantly. The film is:',
+            a: ['Detergent residue — reduce dosing', 'Mineral scale/hard-water film — water treatment and rinse-aid are the fix path', 'Bacterial growth', 'Wash-arm grease'],
+            correct: 1,
+            exp: 'Acid-soluble white film is mineral. Check softener/treatment status and rinse-aid delivery; detergent residue would ignore the vinegar.',
+          },
+          {
+            q: 'A conveyor machine washes poorly though pumps and temps check out. Several zone curtains are missing. The curtains matter because:',
+            a: ['They are cosmetic splash guards only', 'They separate zones — without them wash and rinse water cross-contaminate and spray patterns collapse', 'They hold heat in the vent hood', 'They slow the conveyor'],
+            correct: 1,
+            exp: 'Curtains are functional zone barriers. Missing curtains let detergent wash into the rinse and sprays short-circuit — poor results with healthy machinery.',
+          },
+          {
+            q: 'A dish machine "will not start" with power confirmed. The first component to check is:',
+            a: ['The wash pump capacitor', 'The door switch / latch engagement', 'The booster heater', 'The drain valve'],
+            correct: 1,
+            exp: 'The door interlock is the gate for everything and takes the most physical abuse. It is the #1 no-start cause on dish machines.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'High-temp machines sanitize with:', a: ['Chlorine at 50-100 ppm', 'A 180°F final rinse achieving 160°F at the dish surface', 'Quaternary ammonia', 'UV light'], correct: 1, exp: 'Heat sanitizing: 180°F rinse design, proven by 160°F at the ware surface.' },
+      { q: 'Low-temp machines sanitize with:', a: ['160°F wash water', 'Chlorine sanitizer dosed at ~50-100 ppm in the final rinse', 'Steam injection', 'Rinse aid'], correct: 1, exp: 'Chemical sanitizing replaces heat: chlorine concentration verified by test strips.' },
+      { q: 'The booster heater\'s job is to:', a: ['Heat the wash tank', 'Raise final-rinse water roughly 40°F to sanitizing temperature', 'Pressurize the building supply', 'Dry the ware'], correct: 1, exp: 'The booster lifts building hot water (~140°F) to the 180°F rinse — and can only add about 40°F.' },
+      { q: 'Rinse temperature 40°F low with a healthy booster usually traces to:', a: ['The rinse thermostat', 'Low incoming water temperature from the building heater', 'Excess rinse pressure', 'A failed thermolabel'], correct: 1, exp: 'Boosters amplify what they receive. Starved incoming water is the first check on low-rinse-temp calls.' },
+      { q: 'The heaviest scale burden in the kitchen is found in:', a: ['The walk-in evaporator', 'Booster heaters and dish machine tanks', 'Fryer oil', 'The ice bin'], correct: 1, exp: 'Hottest water + constant throughput = fastest scaling. Deliming belongs in every dish machine PM.' },
+      { q: 'A detergent conductivity probe coated in grease causes:', a: ['Over-dosing', 'No detergent dosing — the probe forever reads "enough"', 'Foaming', 'High rinse temperature'], correct: 1, exp: 'The coated probe reports adequate conductivity regardless of actual detergent, so the pump never doses.' },
+      { q: 'Greasy redeposit on washed ware points to:', a: ['Rinse aid overdose', 'Exhausted wash-tank water or under-dosed detergent', 'A hot booster', 'Excess chlorine'], correct: 1, exp: 'Saturated tank water re-paints soil onto ware — tank change discipline and dosing verification are the fixes.' },
+      { q: 'The most common cause of a no-start dish machine is:', a: ['A failed control board', 'The door switch or latch not engaging', 'A tripped booster high-limit', 'Low water pressure'], correct: 1, exp: 'The abused door interlock gates the entire cycle — always the first check.' },
+      { q: 'A machine that fills, then immediately loses its water usually has:', a: ['A cracked wash arm', 'A drain valve/flapper failing to seal', 'An oversized fill valve', 'A stuck float'], correct: 1, exp: 'Water in, water straight out: the drain seal is the leak path to check first.' },
+      { q: 'A conveyor machine "stuck" mid-cycle that resumes after several minutes may be:', a: ['Haunted', 'Waiting on rinse temperature from a starved or scaled booster', 'Suffering belt stretch', 'Out of rinse aid'], correct: 1, exp: 'Temperature-hold logic pauses cycles until sanitizing temp is available — a heat problem wearing a control-problem costume.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 22 — COFFEE, ESPRESSO & BEVERAGE EQUIPMENT
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-beverage-equipment',
+    num: 22,
+    title: 'Coffee, Espresso & Beverage Equipment',
+    desc: 'Brewers, espresso machines, frozen beverage and soft-serve, and post-mix soda systems — small water systems where quality is the product.',
+    slides: [
+      {
+        title: 'Coffee Brewers and Espresso Machines',
+        body: [
+          'A commercial coffee brewer is a small water system: fill valve, heated tank with thermostat and element (hello, Module 11 and scale), a timed dispense valve, and a spray head that showers water over the grounds. Faults are compact and familiar: no brew = fill/level or dispense valve; weak coffee = short water volume (timer, valve flow, or a scale-narrowed spray head that channels water down the middle of the bed); tepid coffee = element/thermostat chain; warmers on the base are simple elements switched per station.',
+          'Espresso machines raise the stakes: a pressure boiler (or dual boilers/thermoblocks) holding water at ~1-1.5 bar for steam and brew water around 200°F, a pump driving ~9 bar through the coffee, group heads with precision gaskets, and steam wands. They are pressure vessels with all the discipline that implies: relief valves sacred, gauges verified, and heating elements interlocked to water level (dry-fire kills boilers). Classic complaints: no steam pressure (element/thermostat/pressurestat chain), pump not building 9 bar (pump wear, or — always — scale in the flow path), leaking group heads (gaskets are consumables), and "sour/bitter shots," which are usually temperature or grind issues that a pressure-and-temperature verification either confirms as equipment or hands back to the barista.',
+          'Water quality is not a footnote here — it is the product. Espresso and coffee water wants filtration and controlled hardness (some minerality brews better than none, which is why straight RO is often wrong for coffee); machine longevity wants scale control. The practical answer is beverage-specific filtration/treatment cartridges, sized and dated, plus descaling per the manufacturer. When a café\'s machines keep failing, audit the treatment system first: an exhausted cartridge quietly executes every machine downstream of it.',
+          'On the counter nearby live the adjacent species: bulk brewers, tea brewers, and hot-water dispensers — all the same tank/element/valve pattern; and airpots/urns whose complaints (cold, slow) are usually their own warmers or seals, not the brewer. The pattern recognition is the skill: everything on the beverage counter is a tank, an element, a thermostat, a valve, and a scale problem in different proportions.',
+        ],
+        keyPoints: [
+          'Brewer faults: fill/dispense valves, timer volume, spray head condition, element chain',
+          'Espresso machines are pressure vessels: relief valves and water-level interlocks are sacrosanct',
+          'Weak shots/no pressure: suspect scale in the flow path before condemning pumps',
+          'Beverage water wants controlled minerality — audit treatment cartridges when machines keep failing',
+        ],
+        quiz: [
+          {
+            q: 'A brewer produces weak coffee; the spray head shows heavy scale with only the center holes open. The mechanism of the weak brew is:',
+            a: ['Water too hot', 'Channeling — water pours down the center of the grounds bed instead of showering evenly', 'Beans too coarse', 'The timer running long'],
+            correct: 1,
+            exp: 'A scaled spray head concentrates flow through the middle, under-extracting the outer bed. Descale/replace the spray head and audit water treatment.',
+          },
+          {
+            q: 'An espresso machine\'s pump gauge reads 6 bar at the group instead of 9. Before replacing the pump you should:',
+            a: ['Rebuild the group head', 'Check for scale restriction in the flow path and verify against a blind-filter pressure test', 'Adjust the pressurestat', 'Change the water filter housing O-ring'],
+            correct: 1,
+            exp: 'Scale restrictions mimic pump wear. A blind-filter (backflush) test isolates true pump output from flow-path losses.',
+          },
+        ],
+      },
+      {
+        title: 'Frozen Beverage and Soft-Serve',
+        body: [
+          'Frozen beverage machines (granita, frozen carbonated drinks) and soft-serve machines are refrigeration systems (Modules 13-15 apply wholesale) wrapped around a product cylinder: refrigerant chills the cylinder wall, a motor-driven auger/beater scrapes the freezing product off the wall and keeps it in motion, and consistency control decides when to run refrigeration (by beater motor torque/amp draw — thicker product loads the motor — or by product temperature/viscosity sensors).',
+          'The mechanical wear parts define the service rhythm: beater blades and scraper edges wear (product gets icy/coarse), drive belts and gearboxes carry heavy loads, and the shaft seals and O-rings around the product cylinder are consumables whose failure shows as product leaking into drip trays or — worse — into the gearbox. O-ring and seal kits, lubricated with food-safe lube only, on schedule, are the difference between a machine and a mess.',
+          'Soft-serve adds dairy, and dairy adds law: these machines pasteurize or hold product cold under strict health rules, demand daily/weekly disassembly and cleaning by staff, and their "failures" are overwhelmingly assembly errors after cleaning — mis-seated beaters, missing O-rings, misassembled door valves. The first diagnostic question on any soft-serve call: "when was it last torn down and who reassembled it?" Verify correct assembly before condemning anything.',
+          'Consistency complaints sort neatly: too soft = refrigeration side (the usual suspects: condenser cleanliness first) or overloaded hopper/mix issues; too hard/icy = consistency control setting, worn beaters, or low mix level freezing product solid; motor overloads tripping = product frozen too hard (control), worn drive, or a gearbox dying. And on any machine with a mix hopper: mix out-of-date or foamed by overfilling behaves like a machine fault — the product is part of the system.',
+        ],
+        keyPoints: [
+          'Frozen beverage = refrigeration + auger: consistency controlled via beater load or product sensors',
+          'Seals and O-rings are scheduled consumables with food-safe lube — leaks into trays/gearboxes otherwise',
+          'Soft-serve "failures" after cleaning are usually reassembly errors — verify assembly first',
+          'Too soft = refrigeration side; too hard/icy = control, beaters, or mix level',
+        ],
+        quiz: [
+          {
+            q: 'A soft-serve machine leaks product into the drip tray after last night\'s cleaning. The most likely cause is:',
+            a: ['A refrigerant leak', 'A missing or mis-seated shaft/door O-ring from reassembly', 'A failed compressor', 'Overfilled hopper'],
+            correct: 1,
+            exp: 'Post-cleaning leaks are assembly casualties: verify every seal and O-ring seat before deeper diagnosis. It is the #1 soft-serve service pattern.',
+          },
+          {
+            q: 'A granita machine serves watery product; its condenser coil is packed with dust. The chain of cause is:',
+            a: ['Weak mix — blame the syrup', 'Blocked condenser → poor refrigeration → cylinder cannot freeze product to consistency', 'Auger spinning too fast', 'Ambient too cold'],
+            correct: 1,
+            exp: 'Module 13\'s first law returns: a suffocated condenser cannot reject heat, so the cylinder never reaches consistency. Clean the coil, then re-evaluate.',
+          },
+        ],
+      },
+      {
+        title: 'Post-Mix Soda and Dispense Systems',
+        body: [
+          'Post-mix soda systems build the drink at the tap: chilled carbonated water and syrup meet at the dispensing valve in a fixed ratio. The chain: a CO2 supply (cylinders or bulk) at regulated pressures, a carbonator (pump, tank, and level probe making soda water), syrup delivery (bag-in-box pumped by CO2-driven diaphragm pumps), a chiller (cold plate in an ice bin, or mechanical remote chiller), and the valves. Every complaint decomposes along that chain.',
+          'Flat soda = carbonation side: CO2 pressure low or off, carbonator pump/probe fault, or warm water (carbonation collapses in warm water — a failed chiller makes "flat" drinks that are really warm drinks). No syrup / all soda = syrup side: empty BIB, a starved CO2 line to the syrup pump, a stalled pump, or a kinked line. Wrong taste = ratio: valves meter water and syrup to a spec (commonly around 5:1); a brix cup or ratio device under the nozzle measures both streams, and valve flow controls adjust them. Off-flavors with correct ratio = water filtration overdue, lines due for sanitizing, or syrup past date.',
+          'CO2 itself deserves respect: it is an asphyxiant that displaces air silently. Bulk CO2 systems and cylinder banks in closed back rooms plus a leak equal a real hazard — many jurisdictions now require CO2 monitors where bulk systems live. If you enter a syrup room and feel breathless or the monitor alarms, leave first and ventilate; never troubleshoot inside a CO2 cloud.',
+          'Beverage closes the equipment tour with a commercial note: soda systems are often maintained under the soda brand\'s own service program, cold plates belong to ice-bin installs, and the boundaries between your contract, the beverage company\'s tech, and the ice machine vendor vary site by site. Learn each account\'s boundaries — the fastest way to burn goodwill is redoing (or breaking) another vendor\'s covered work.',
+        ],
+        keyPoints: [
+          'Flat soda = CO2, carbonator, or WARM WATER (failed chilling) — warm drinks read as flat',
+          'Ratio complaints: measure water and syrup with a brix cup, adjust valve flow controls',
+          'CO2 displaces air silently — respect monitors, ventilate, never work inside a leak',
+          'Know the vendor boundaries on beverage accounts before touching covered equipment',
+        ],
+        quiz: [
+          {
+            q: 'Every flavor on a soda tower pours flat, and drinks feel barely cool. The unified diagnosis is:',
+            a: ['All syrup pumps failed at once', 'The chiller/cold plate has failed — warm water cannot hold carbonation', 'The CO2 blend is wrong', 'All valves need rebuilding'],
+            correct: 1,
+            exp: 'One failure explaining all flavors: carbonation collapses in warm water. Fix the chilling, and the "flat" complaint resolves.',
+          },
+          {
+            q: 'Before working in a back room housing a bulk CO2 tank, the professional precaution is:',
+            a: ['Bring a flashlight', 'Heed the CO2 monitor / ventilate — CO2 displaces air silently and asphyxiates', 'Wear hearing protection', 'Shut off the syrup pumps'],
+            correct: 1,
+            exp: 'CO2 is heavier than air, invisible, and silent. Monitors exist because techs and staff have died in syrup rooms — alarm or breathlessness means leave and ventilate.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Weak coffee from a brewer with a heavily scaled spray head is caused by:', a: ['Overheated water', 'Channeled water flow under-extracting the grounds bed', 'Excess brew volume', 'A slow warmer element'], correct: 1, exp: 'Scale closes outer spray holes; water pours down the bed\'s center and under-extracts the rest.' },
+      { q: 'Espresso machine boiler elements are interlocked to water level because:', a: ['It saves energy', 'Dry-firing destroys the element and boiler', 'Steam pressure rises otherwise', 'The pump needs backpressure'], correct: 1, exp: 'An element exposed by low water overheats instantly — the interlock is boiler protection.' },
+      { q: 'An espresso pump reading low pressure should first be checked against:', a: ['A new gauge', 'Scale restriction via a blind-filter test isolating pump output from flow-path losses', 'A different grinder', 'Higher voltage'], correct: 1, exp: 'Scale mimics pump wear; the blind-filter test separates the two before parts are ordered.' },
+      { q: 'Straight RO water is often wrong for coffee because:', a: ['It is too expensive', 'Some mineral content is needed for proper extraction and flavor', 'It damages pumps', 'It cannot be heated'], correct: 1, exp: 'Beverage treatment aims for controlled minerality, not zero — brew chemistry needs some hardness.' },
+      { q: 'Soft-serve machines that "fail" the morning after cleaning most often have:', a: ['Compressor faults', 'Reassembly errors: mis-seated beaters, missing O-rings, misassembled valves', 'Refrigerant loss overnight', 'Mix spoilage'], correct: 1, exp: 'Daily teardown means daily reassembly risk — verify assembly before condemning components.' },
+      { q: 'Icy, coarse texture from a frozen beverage machine suggests:', a: ['A dirty condenser', 'Worn beater/scraper blades or consistency set too hard / low mix', 'CO2 shortage', 'An oversized compressor'], correct: 1, exp: 'Scraping and consistency control make smooth product; worn blades and over-hard settings make ice.' },
+      { q: 'Soft-serve product too soft with a grease-blanketed condenser is explained by:', a: ['Bad mix', 'The refrigeration side failing to freeze — clean the condenser first', 'A slipping belt', 'An overfilled hopper only'], correct: 1, exp: 'The kitchen\'s first law again: suffocated condensers cannot freeze product to spec.' },
+      { q: 'Soda pouring as all syrup with no fizz from every valve indicates:', a: ['All valves failed', 'Carbonated water side down: CO2, carbonator pump/probe, or water supply', 'Syrup over-pressure', 'Cold plate failure'], correct: 1, exp: 'The common element across all valves is the soda-water supply — the carbonation chain is the suspect.' },
+      { q: 'Drink ratio (water:syrup) is verified with:', a: ['A thermometer', 'A brix cup or ratio device measuring both streams at the valve', 'A manometer', 'Taste testing'], correct: 1, exp: 'The ratio cup catches both streams; valve flow controls adjust to the spec (commonly ~5:1).' },
+      { q: 'The CO2 hazard in beverage back rooms is:', a: ['Flammability', 'Silent air displacement causing asphyxiation', 'Corrosive fumes', 'High-pressure shrapnel only'], correct: 1, exp: 'CO2 quietly fills enclosed spaces from the floor up. Monitors, ventilation, and leaving when alarmed are the discipline.' },
+    ],
+  },
 ];
