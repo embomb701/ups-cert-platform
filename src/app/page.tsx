@@ -142,7 +142,7 @@ export default function HomePage() {
               Service commercial kitchen equipment — refrigeration systems, cooking equipment, warewashing, ice machines, and beverage systems.
             </p>
             <ul className="space-y-1.5 mb-6">
-              {['26 modules (10 shared with UPS)', '3–6 months', 'Jr. Kitchen FSE certification', 'Enrollment opening soon'].map((t, i) => (
+              {['27 modules (10 shared with UPS)', '3–6 months', 'Jr. Kitchen FSE certification', 'Enrollment opening soon'].map((t, i) => (
                 <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
                   <span className="text-orange-400 flex-shrink-0">✓</span>{t}
                 </li>

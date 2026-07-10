@@ -92,7 +92,7 @@ export default async function KitchenPortalPage() {
         <div>
           <h1 className="text-2xl font-bold text-white">Commercial Kitchen Field Service Engineering</h1>
           <p className="text-gray-400 mt-1 text-sm">
-            26 modules · 10 shared foundation + 16 kitchen-specific · Jr. Kitchen FSE certification
+            27 modules · 10 shared foundation + 17 kitchen-specific · Jr. Kitchen FSE certification
           </p>
         </div>
 
@@ -101,7 +101,7 @@ export default async function KitchenPortalPage() {
           <div className="rounded-xl border border-orange-800/60 bg-orange-950/10 p-5">
             <p className="text-orange-300 font-semibold mb-1">Coming Soon — Enrollment Opening Soon</p>
             <p className="text-gray-400 text-sm">
-              Modules 1–3 Lesson 1 are free to preview. Kitchen-specific modules (11–26) are in development.
+              Modules 1–3 Lesson 1 are free to preview. Kitchen-specific modules (11–27) are in development.
               <Link href="/training" className="ml-2 text-orange-400 hover:text-orange-300 underline">← Back to Training Hub</Link>
             </p>
           </div>
@@ -120,7 +120,7 @@ export default async function KitchenPortalPage() {
                 style={{ width: `${(sharedComplete / 10) * 100}%` }}
               />
             </div>
-            <p className="text-gray-500 text-xs mt-2">Kitchen-specific modules 11–26 are in development — check back soon.</p>
+            <p className="text-gray-500 text-xs mt-2">Kitchen-specific modules 11–27 are in development — check back soon.</p>
           </div>
         )}
 
@@ -203,29 +203,50 @@ export default async function KitchenPortalPage() {
           </div>
         </div>
 
-        {/* Section B: Kitchen-specific modules (coming soon) */}
+        {/* Section B: Kitchen-specific modules (coming soon), grouped by track */}
         <div>
           <div className="flex items-center gap-3 mb-3">
-            <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-widest">Kitchen Equipment — Modules 11–26</h2>
+            <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-widest">Kitchen Equipment — Modules 11–27</h2>
             <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-xs rounded">In Development</span>
           </div>
-          <div className="space-y-2">
-            {KITCHEN_MODULE_PLACEHOLDERS.map((placeholder, idx) => (
-              <div
-                key={placeholder.id}
-                className="rounded-lg border border-gray-800 bg-gray-900/30 p-4 opacity-60"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold bg-gray-800 text-gray-600">
-                    {idx + 11}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-gray-500 font-medium text-sm">{placeholder.title}</span>
-                      <span className="px-1.5 py-0.5 bg-gray-800 text-gray-600 text-xs rounded">Coming Soon</span>
-                    </div>
-                    <p className="text-gray-600 text-xs mt-0.5">{placeholder.desc}</p>
-                  </div>
+          <div className="space-y-6">
+            {(['Electrical Systems', 'Refrigeration', 'Fire, Gas & Ventilation', 'Warewashing & Beverage', 'Controls & Professional Service'] as const).map((track) => (
+              <div key={track}>
+                <h3 className="text-xs font-semibold text-orange-400/90 uppercase tracking-widest mb-2">{track}</h3>
+                <div className="space-y-2">
+                  {KITCHEN_MODULE_PLACEHOLDERS.map((placeholder, idx) => {
+                    if (placeholder.track !== track) return null;
+                    return (
+                      <details
+                        key={placeholder.id}
+                        className="rounded-lg border border-gray-800 bg-gray-900/30 group"
+                      >
+                        <summary className="flex items-center gap-4 p-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                          <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold bg-gray-800 text-gray-500">
+                            {idx + 11}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="text-gray-400 font-medium text-sm">{placeholder.title}</span>
+                              <span className="px-1.5 py-0.5 bg-gray-800 text-gray-600 text-xs rounded">Coming Soon</span>
+                            </div>
+                            <p className="text-gray-600 text-xs mt-0.5">{placeholder.desc}</p>
+                          </div>
+                          <span className="flex-shrink-0 text-gray-600 text-xs group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <div className="px-4 pb-4 pl-[68px]">
+                          <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Lesson outline</p>
+                          <ul className="space-y-1">
+                            {placeholder.chapters.map((ch, ci) => (
+                              <li key={ci} className="flex gap-2 text-xs text-gray-500">
+                                <span className="text-orange-500/60 flex-shrink-0">{ci + 1}.</span>{ch}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </details>
+                    );
+                  })}
                 </div>
               </div>
             ))}

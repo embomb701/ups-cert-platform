@@ -181,7 +181,7 @@ export default async function TrainingPage() {
                   Service commercial kitchen equipment — refrigeration systems, cooking equipment, warewashing, ice machines, and more.
                 </p>
                 <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
-                  <span>26 modules</span>
+                  <span>27 modules</span>
                   <span>·</span>
                   <span>10 shared with UPS program</span>
                   <span>·</span>
