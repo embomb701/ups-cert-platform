@@ -4,9 +4,9 @@ import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 
 export const metadata: Metadata = {
-  title: 'Jr. FSE Certification — Test-Out Exam $299 | FSE Academy',
+  title: 'Jr. FSE Certification — Test-Out Exam $299',
   description:
-    'Already working in the field? Test out of the 6-Month Training Course for $299. One attempt — pass and you\'re certified. Fail and you must complete the training to try again.',
+    'Already working in the field? Test out of the 3-to-6-Month Training Course for $299. One attempt — pass and you\'re certified. Fail and you must complete the training to try again.',
 };
 
 export default function JuniorCertPage() {
@@ -20,7 +20,7 @@ export default function JuniorCertPage() {
           </h1>
           <p className="text-gray-400 leading-relaxed max-w-2xl mb-6">
             The Jr. FSE credential validates foundational UPS field service knowledge. There are
-            two paths to earning it — the 6-Month Training Course, or the Test-Out Exam for
+            two paths to earning it — the 3-to-6-Month Training Course, or the Test-Out Exam for
             candidates already working in the industry.
           </p>
           <div className="flex flex-wrap gap-4">
@@ -28,7 +28,7 @@ export default function JuniorCertPage() {
               Test-Out Exam — $299
             </Link>
             <Link href="/training" className="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-colors">
-              6-Month Training Course — $1,499 →
+              3-to-6-Month Training Course — $1,499 →
             </Link>
           </div>
         </div>
@@ -40,9 +40,9 @@ export default function JuniorCertPage() {
           <div className="mb-10">
             <h2 className="text-2xl font-bold text-white mb-2">Test-Out Exam — $299</h2>
             <p className="text-gray-400 max-w-2xl">
-              For experienced technicians already working with UPS systems. Skip the 6-month training
+              For experienced technicians already working with UPS systems. Skip the 3-to-6-month training
               and test directly for your Jr. FSE certification. <strong className="text-white">You get one attempt.</strong>{' '}
-              If you don&apos;t pass, you must complete the full 6-Month Training Course before
+              If you don&apos;t pass, you must complete the full 3-to-6-Month Training Course before
               trying again.
             </p>
           </div>
@@ -147,9 +147,9 @@ export default function JuniorCertPage() {
 
               <div className="pt-2 space-y-3">
                 <div className="card-dark p-5 border-blue-700/60 bg-blue-950/20">
-                  <p className="text-sm font-semibold text-blue-300 mb-1">Best Value: 6-Month Training Course</p>
+                  <p className="text-sm font-semibold text-blue-300 mb-1">Best Value: 3-to-6-Month Training Course</p>
                   <p className="text-xs text-gray-400 mb-1">$1,499 — includes training + Jr. FSE exam at completion</p>
-                  <p className="text-xs text-gray-500 mb-3">Pass all 24 modules → exam unlocked automatically</p>
+                  <p className="text-xs text-gray-500 mb-3">Pass all 28 modules → exam unlocked automatically</p>
                   <Link
                     href="/training"
                     className="block w-full px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-colors text-center"

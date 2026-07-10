@@ -13,7 +13,7 @@ export default function TermsPage() {
           <div>
             <h2 className="text-base font-semibold text-white mb-2">1. Educational Purpose</h2>
             <p>
-              The Field Service Engineering Academy provides educational content, certification exams, and training materials
+              The Mastering Field Service Training Portal provides educational content, certification exams, and training materials
               related to UPS and critical power field service. All products and services on this platform
               are intended for educational purposes only.
             </p>

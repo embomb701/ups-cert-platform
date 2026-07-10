@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
         sgMail.setApiKey(apiKey);
         await sgMail.sendMultiple({
           to: ADMIN_EMAILS,
-          from: { name: 'UPS Cert Platform', email: 'careers@aiellorecruiter.com' },
+          from: { name: 'Mastering Field Service Training Portal', email: 'careers@aiellorecruiter.com' },
           subject: `Contact Form — ${name.trim()}`,
           html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">

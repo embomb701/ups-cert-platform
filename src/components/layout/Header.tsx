@@ -22,9 +22,19 @@ export function Header() {
       <div className="container-site">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-            <span className="text-base font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">
-              FSE Academy
+          <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 text-white flex-shrink-0">
+              <svg className="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+              </svg>
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-sm font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">
+                Mastering Field Service
+              </span>
+              <span className="text-[10px] font-semibold text-blue-400/80 uppercase tracking-[0.18em]">
+                Training Portal
+              </span>
             </span>
           </Link>
 
@@ -63,7 +73,7 @@ export function Header() {
                   </Link>
                   <Link
                     href="/login"
-                    className="px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors"
+                    className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white transition-all shadow-lg shadow-blue-950/50"
                   >
                     Get Started Free
                   </Link>

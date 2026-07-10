@@ -11,9 +11,9 @@ export const STRIPE_PRODUCTS = {
   // TRAINING PROGRAM
   // ─────────────────────────────────────────────────────────────────────────
 
-  // 6-month program: 24 modules, Jr. FSE exam unlocked after completion
+  // 3-to-6-month program: 28 modules, Jr. FSE exam unlocked after completion
   training_course: {
-    name: '6-Month UPS FSE Training Course + Jr. FSE Certification Exam',
+    name: 'UPS FSE Training Course (3–6 Months) + Jr. FSE Certification Exam',
     shortName: 'Training Course',
     priceInCents: 149900,   // $1,499
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_COURSE ?? 'price_1TmJLsB8fedYuRufhjtQgnSS',

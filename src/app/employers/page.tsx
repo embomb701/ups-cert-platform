@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Employer Solutions — FSE Academy',
+  title: 'Employer Solutions — Mastering Field Service',
   description:
-    'Stop absorbing training costs internally. FSE Academy certifies your candidates and new hires before they cost you a day of trainer time.',
+    'Stop absorbing training costs internally. Mastering Field Service certifies your candidates and new hires before they cost you a day of trainer time.',
 };
 
 export default function EmployersPage() {
@@ -22,7 +22,7 @@ export default function EmployersPage() {
             The UPS field service industry has a talent problem — not a people problem.
             There are motivated individuals who want this career. What's missing is a
             cost-effective, standardized way to get them ready before they walk through your door.
-            That's exactly what FSE Academy does.
+            That's exactly what Mastering Field Service does.
           </p>
           <div className="flex flex-wrap gap-4">
             <a href="#packages" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors">
@@ -53,7 +53,7 @@ export default function EmployersPage() {
                   invested in them — and the hidden cost of your "free" in-house training is anything but free.
                 </p>
                 <p className="text-white font-medium">
-                  FSE Academy externalizes that cost. Candidates arrive trained, tested, and certified
+                  Mastering Field Service externalizes that cost. Candidates arrive trained, tested, and certified
                   before they touch your schedule.
                 </p>
               </div>
@@ -153,7 +153,7 @@ export default function EmployersPage() {
             <p className="text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-3">Each seat includes</p>
             <div className="grid sm:grid-cols-3 gap-4">
               {[
-                { icon: '📚', title: 'Training Portal Access', desc: 'Full access to FSE Academy interactive training modules — self-paced, available 24/7' },
+                { icon: '📚', title: 'Training Portal Access', desc: 'Full access to Mastering Field Service interactive training modules — self-paced, available 24/7' },
                 { icon: '🎓', title: 'FSE Human Proctored Exam', desc: 'Live-proctored certification exam with a verifiable certificate upon passing' },
                 { icon: '✍️', title: 'Signed Copy of the Book', desc: 'A personally signed copy of the textbook shipped directly to your candidate' },
               ].map(item => (
@@ -246,7 +246,7 @@ export default function EmployersPage() {
                 <p className="text-xs text-gray-500">(trainer time, lost productivity, repeat attempts)</p>
               </div>
               <div>
-                <p className="text-gray-400 mb-1">FSE Academy 10-seat pack, per person</p>
+                <p className="text-gray-400 mb-1">Mastering Field Service 10-seat pack, per person</p>
                 <p className="text-xl font-mono font-bold text-green-400">$525</p>
                 <p className="text-xs text-gray-500">Trained. Tested. Certified. Book in hand.</p>
               </div>

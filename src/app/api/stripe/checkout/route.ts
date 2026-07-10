@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
               name: product.name,
               description: isPhysicalProduct
                 ? 'Personally signed by Francis Aiello — includes shipping to US addresses'
-                : `FSE Academy — ${product.shortName}`,
+                : `Mastering Field Service — ${product.shortName}`,
             },
           },
           quantity: 1,

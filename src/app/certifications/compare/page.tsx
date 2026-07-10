@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Compare Certifications — FSE Academy',
+  title: 'Compare Certifications',
 };
 
 const rows: { label: string; jr: string; ai: string; human: string }[] = [

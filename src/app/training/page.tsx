@@ -68,7 +68,7 @@ export default async function TrainingPage() {
       <div className="max-w-4xl mx-auto space-y-10">
 
         <div>
-          <h1 className="text-3xl font-bold text-white">FSE Academy</h1>
+          <h1 className="text-3xl font-bold text-white">Mastering Field Service <span className="text-gradient">Training Portal</span></h1>
           <p className="text-gray-400 mt-1">Choose your training program</p>
         </div>
 

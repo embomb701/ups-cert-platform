@@ -219,7 +219,7 @@ export default async function UpsPortalPage() {
               {completedCount === totalModules
                 ? 'All modules complete — '
                 : `Complete all ${totalModules} modules to unlock the `}
-              <Link href="/exam/practice" className="text-blue-400 hover:text-blue-300 underline">
+              <Link href="/exam/rules/practice_jr_fse" className="text-blue-400 hover:text-blue-300 underline">
                 practice exam
               </Link>
               {completedCount < totalModules && ' (free)'}

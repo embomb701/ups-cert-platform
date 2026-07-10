@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
-  title: 'FSE Academy — UPS Field Service Engineering Career Training',
+  title: 'Mastering Field Service Training Portal — Field Service Engineering Career Training',
   description:
     'Start a $55K–$100K career in critical power systems in 3–6 months. No college required. Jr. FSE and FSE certification programs by Francis Aiello.',
 };
@@ -15,6 +15,8 @@ export default function HomePage() {
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-gray-800">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-gray-900 to-gray-900 pointer-events-none" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-60 -left-40 w-[400px] h-[400px] bg-cyan-600/5 rounded-full blur-3xl pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-4 py-20 lg:py-28">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-900/40 border border-blue-700/60 rounded-full text-blue-300 text-xs font-semibold mb-6">
@@ -22,18 +24,18 @@ export default function HomePage() {
               Industry facing critical technician shortage
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Start a <span className="text-blue-400">$55K–$100K</span> career in 3–6 months.{' '}
+              Start a <span className="text-gradient">$55K–$100K</span> career in 3–6 months.{' '}
               <span className="text-gray-300">No college. No debt.</span>
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
               Hospitals, data centers, military installations, and financial networks run 24/7 on
               Uninterruptible Power Supplies. There aren&apos;t enough qualified engineers to keep them
-              running. FSE Academy trains you to fill that gap.
+              running. Mastering Field Service trains you to fill that gap.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/login"
-                className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-lg transition-colors text-center"
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold rounded-lg text-lg transition-all text-center shadow-lg shadow-blue-950/50"
               >
                 Create Free Account
               </Link>
@@ -77,7 +79,7 @@ export default function HomePage() {
               The workforce is aging out faster than it&apos;s being replaced.
             </p>
             <p className="text-gray-300 leading-relaxed font-medium">
-              FSE Academy builds a direct path — no debt, no four-year wait — to a real career in
+              Mastering Field Service builds a direct path — no debt, no four-year wait — to a real career in
               critical power systems.
             </p>
           </div>
@@ -104,7 +106,7 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="text-center mb-10">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Training Programs</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Two career tracks. One academy.</h2>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Two career tracks. One portal.</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Both programs share the same 10-module electrical and safety foundation. Complete it once — it counts toward either certification.
           </p>
@@ -365,7 +367,7 @@ export default function HomePage() {
               when a UPS is in bypass mode.
             </p>
             <p className="text-gray-300 leading-relaxed mb-4 font-medium">
-              At FSE Academy, Modules 1–6 build the electrical foundation first. Module 7 teaches reading
+              At Mastering Field Service, Modules 1–6 build the electrical foundation first. Module 7 teaches reading
               electrical drawings — schematics, one-lines, and wiring diagrams. Module 8 delivers
               NFPA 70E — every arc flash concept lands with full context. Module 9 delivers LOTO —
               and students understand exactly why each step matters on multi-source UPS equipment.
@@ -462,7 +464,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-white mt-3 mb-6">Train your entire service team.</h2>
             <p className="text-gray-400 leading-relaxed mb-8">
               Stop paying premium staffing rates for technicians who don&apos;t know your equipment.
-              FSE Academy trains and certifies your team with the same rigor — 100% test scores required,
+              Mastering Field Service trains and certifies your team with the same rigor — 100% test scores required,
               structured progression, employer-verifiable credentials.
             </p>
             <div className="space-y-3">
@@ -488,7 +490,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-8 space-y-6">
-            <h3 className="text-white font-semibold text-lg">What employers get with FSE Academy graduates</h3>
+            <h3 className="text-white font-semibold text-lg">What employers get with Mastering Field Service graduates</h3>
             {[
               { icon: '📋', title: 'Verified credentials', body: 'Every certification is publicly verifiable by certificate number.' },
               { icon: '🏆', title: 'Proven rigor', body: '100% test scores at every stage. If they have the cert, they earned it.' },

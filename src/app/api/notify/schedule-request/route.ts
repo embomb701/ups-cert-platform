@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
         sgMail.setApiKey(apiKey);
         await sgMail.sendMultiple({
           to: ADMIN_EMAILS,
-          from: { name: 'UPS Cert Platform', email: 'careers@aiellorecruiter.com' },
+          from: { name: 'Mastering Field Service Training Portal', email: 'careers@aiellorecruiter.com' },
           subject: `FSE Exam Scheduling Request — ${name}`,
           html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
                 </tr>
               </table>
               <p style="margin-top:24px;font-size:13px;color:#9ca3af;">
-                View in <a href="https://ups-cert-platform.vercel.app/admin/proctored" style="color:#4f46e5;">Admin → Proctored Orders</a>
+                View in <a href="${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app'}/admin/proctored" style="color:#4f46e5;">Admin → Proctored Orders</a>
               </p>
             </div>
           `,

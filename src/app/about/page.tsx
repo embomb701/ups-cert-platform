@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About — Field Service Engineering Academy',
+  title: 'About',
 };
 
 export default function AboutPage() {
@@ -13,7 +13,7 @@ export default function AboutPage() {
         <div className="container-site max-w-3xl mx-auto">
           <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-3">About Us</p>
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Field Service Engineering Academy
+            Mastering Field Service <span className="text-gradient">Training Portal</span>
           </h1>
           <p className="text-lg text-gray-300 leading-relaxed mb-2">
             A division of <span className="text-white font-semibold">FA Consulting and Recruiting</span>
@@ -78,7 +78,7 @@ export default function AboutPage() {
               <p>
                 Francis is also the author of{' '}
                 <em className="text-gray-200">Mastering Uninterruptible Power Supplies, Field Service Engineering</em> —
-                the technical foundation on which the FSE Academy's certifications are based.
+                the technical foundation on which the Mastering Field Service certifications are based.
                 The book was written specifically to give motivated individuals the knowledge base
                 needed to step into a UPS field service role and perform safely and competently from day one.
               </p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
           <div className="card-dark p-6 mb-8">
             <h3 className="text-base font-semibold text-white mb-3">About the Platform</h3>
             <p className="text-sm text-gray-400 leading-relaxed mb-3">
-              The Field Service Engineering Academy is built to be a serious, industry-backed training
+              The Mastering Field Service Training Portal is built to be a serious, industry-backed training
               and certification platform — not a quick-quiz certificate mill. The goal is a credential
               that actually means something to a hiring manager: proof that a candidate has studied
               the material seriously, retained the foundational knowledge, and is ready to be trained
@@ -126,7 +126,7 @@ export default function AboutPage() {
           <div className="card-dark p-6 bg-amber-950/20 border-amber-900/40 mb-10">
             <h3 className="text-sm font-semibold text-amber-200 mb-2">Independence Statement</h3>
             <p className="text-xs text-gray-400 leading-relaxed">
-              The Field Service Engineering Academy is operated by FA Consulting and Recruiting and
+              The Mastering Field Service Training Portal is operated by FA Consulting and Recruiting and
               is not affiliated with, endorsed by, or sponsored by any employer, manufacturer,
               customer, or service company unless explicitly stated. The certifications offered here
               are educational knowledge credentials. They do not authorize energized electrical work,

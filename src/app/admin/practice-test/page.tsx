@@ -142,7 +142,7 @@ export default function PracticeTestAdminPage() {
             <div className="rounded-lg bg-gray-800/50 border border-gray-700 p-4 text-xs text-gray-500 space-y-1">
               <p><strong className="text-gray-400">What the practice test is:</strong> Same Jr. FSE question bank (50 questions, 90 sec/question). Results and score shown. No certificate issued — it&apos;s for practice only, not a certification attempt.</p>
               <p><strong className="text-gray-400">Free vs paid:</strong> Free mode lets users click &quot;Claim Free Practice Test&quot; on the site — no Stripe. Paid mode sends them through normal Stripe checkout at $14.99.</p>
-              <p><strong className="text-gray-400">This does not affect:</strong> Jr. FSE Test-Out ($299 human proctored), the 6-Month Training Course ($1,499), or any other product.</p>
+              <p><strong className="text-gray-400">This does not affect:</strong> Jr. FSE Test-Out ($299 human proctored), the 3-to-6-Month Training Course ($1,499), or any other product.</p>
             </div>
           </div>
         )}

@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Check if ALL 24 modules are now complete — if so, unlock Jr. FSE exam
+    // Check if ALL modules are now complete — if so, unlock Jr. FSE exam
     let trainingComplete = false;
     if (mod.num === ALL_MODULES.length) {
       // This was the last module — verify all others are complete too

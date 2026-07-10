@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
         const trainingComplete = ALL_MODULES.every((m) => completedModuleIds.has(m.id));
         if (!trainingComplete) {
           return NextResponse.json({
-            error: 'You did not pass the Jr. FSE Test-Out. You must complete the 6-Month Training Course before you can attempt the exam again.',
+            error: 'You did not pass the Jr. FSE Test-Out. You must complete the 3-to-6-Month Training Course before you can attempt the exam again.',
             requiresTraining: true,
           }, { status: 403 });
         }

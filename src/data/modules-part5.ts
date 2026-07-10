@@ -371,12 +371,12 @@ export const MODULES_PART5: TrainingModule[] = [
         title: 'Career Development in Field Service Engineering',
         body: [
           'Career path in UPS/power field service: entry-level (Jr. FSE) → FSE → Senior FSE → Lead FSE / Field Service Manager → Technical Sales Engineer or Applications Engineer. Advancement requires building both technical depth (more complex systems, larger installations) and breadth (multiple product lines, power quality, networking, building management integration).',
-          'Certifications that advance a field service engineering career: (1) FSE Academy certifications (Jr. FSE, FSE) — entry credentials. (2) NICET (National Institute for Certification in Engineering Technologies) — electrical systems. (3) OSHA 10 and 30 — safety compliance. (4) Manufacturer-specific certifications (Eaton, Vertiv, Schneider Electric) — required for warranty service. (5) NABCEP (solar/battery storage). These credentials demonstrate competence and command higher pay.',
+          'Certifications that advance a field service engineering career: (1) Mastering Field Service certifications (Jr. FSE, FSE) — entry credentials. (2) NICET (National Institute for Certification in Engineering Technologies) — electrical systems. (3) OSHA 10 and 30 — safety compliance. (4) Manufacturer-specific certifications (Eaton, Vertiv, Schneider Electric) — required for warranty service. (5) NABCEP (solar/battery storage). These credentials demonstrate competence and command higher pay.',
           'Continuous learning: the power electronics industry evolves — lithium-ion UPS, data center architecture changes, AI data center power demands, grid-edge storage. Successful FSEs read manufacturer bulletins, attend training, and stay current. The technicians who become Senior FSEs and managers are those who invest in continuous learning throughout their careers.',
         ],
         keyPoints: [
           'Career path: Jr. FSE → FSE → Sr. FSE → Management / Sales Engineering',
-          'Key certifications: FSE Academy, NICET, OSHA, manufacturer-specific',
+          'Key certifications: Mastering Field Service, NICET, OSHA, manufacturer-specific',
           'Manufacturer certifications often required for warranty service rights',
           'Industry evolves: Li-ion, AI data centers, grid storage — continuous learning required',
           'Both technical depth and breadth drive advancement',

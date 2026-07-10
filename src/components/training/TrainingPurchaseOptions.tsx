@@ -10,9 +10,9 @@ export function TrainingPurchaseOptions() {
 
         {/* Header */}
         <div className="text-center space-y-3">
-          <h1 className="text-3xl font-bold text-white">UPS Field Service Engineering Academy</h1>
+          <h1 className="text-3xl font-bold text-white">Mastering Field Service <span className="text-gradient">Training Portal</span></h1>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Choose your path to Jr. FSE or FSE certification. Train from scratch with the 6-month
+            Choose your path to Jr. FSE or FSE certification. Train from scratch with the 3-to-6-month
             course, or test out if you already work in the field.
           </p>
         </div>

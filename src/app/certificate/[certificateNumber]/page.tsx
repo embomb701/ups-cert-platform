@@ -83,7 +83,7 @@ export default async function CertificatePrintPage({ params }: Props) {
 
           {/* Issuer */}
           <p className="cert-label text-xs uppercase tracking-[0.25em] text-gray-400 mb-2 mt-4">
-            Mastering UPS Field Service Engineering
+            Mastering Field Service Training Portal
           </p>
 
           {/* Title */}

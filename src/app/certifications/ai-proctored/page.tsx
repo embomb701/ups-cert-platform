@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
-  title: 'FSE AI Proctored Exam — FSE Academy',
+  title: 'FSE AI Proctored Exam',
   description:
     'Take the FSE certification exam with AI-powered proctoring. Webcam-based eye and face tracking monitors exam integrity automatically — no scheduling required.',
 };

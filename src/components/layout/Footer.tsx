@@ -9,10 +9,18 @@ export function Footer() {
       <div className="container-site py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <p className="text-sm font-semibold text-white mb-1">Field Service Engineering Academy</p>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="flex items-center justify-center w-6 h-6 rounded-md bg-gradient-to-br from-blue-500 to-cyan-500 text-white flex-shrink-0">
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+                </svg>
+              </span>
+              <p className="text-sm font-semibold text-white">Mastering Field Service</p>
+            </div>
+            <p className="text-[10px] font-semibold text-blue-400/80 uppercase tracking-[0.18em] mb-2">Training Portal</p>
             <p className="text-xs text-gray-600 mb-3">FA Consulting and Recruiting</p>
             <p className="text-xs text-gray-500 leading-relaxed">
-              Professional UPS field service training, certification, and career development.
+              Professional field service training, certification, and career development.
             </p>
           </div>
 
@@ -48,7 +56,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
-          &copy; {year} FA Consulting and Recruiting. Field Service Engineering Academy. All rights reserved.
+          &copy; {year} FA Consulting and Recruiting. Mastering Field Service Training Portal. All rights reserved.
         </div>
       </div>
 
