@@ -2,7 +2,8 @@ import { redirect, notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
-import { getModule, ALL_MODULES } from '@/data/index';
+import { getModule, getPrevModule } from '@/data/index';
+import { hasTrainingAccess } from '@/lib/utils/trainingAccess';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
@@ -29,11 +30,10 @@ export default async function ModulePage({ params }: Props) {
 
   const isAdmin = await checkIsAdmin(uid, userEmail);
 
-  const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
-  const hasAccess = isAdmin || (accessDoc.exists && accessDoc.data()?.granted);
-
   const mod = getModule(moduleId);
   if (!mod) notFound();
+
+  const hasAccess = isAdmin || (await hasTrainingAccess(uid, mod));
 
   const isFreeTrialModule = mod.num <= 3;
   if (!hasAccess && !isFreeTrialModule) redirect('/training');
@@ -42,7 +42,7 @@ export default async function ModulePage({ params }: Props) {
   let locked = false;
   let unlockDate: Date | null = null;
   if (hasAccess && !isAdmin && mod.num > 1) {
-    const prevMod = ALL_MODULES.find((m) => m.num === mod.num - 1);
+    const prevMod = getPrevModule(mod);
     if (prevMod) {
       const prevProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(prevMod.id).get();
       const prevData = prevProgress.data();

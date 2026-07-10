@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { getModule } from '@/data/index';
+import { getModule, getPrevModule } from '@/data/index';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
+import { hasTrainingAccess } from '@/lib/utils/trainingAccess';
 import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
@@ -26,18 +27,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Slide index out of range' }, { status: 400 });
     }
 
-    // Verify portal access — free trial allows slide 0 of modules 1-3
+    // Verify course access — free trial allows slide 0 of modules 1-3
     const isFreeTrialSlide = mod.num <= 3 && slideIndex === 0;
     if (!isFreeTrialSlide) {
-      const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
-      if (!isAdmin && (!accessDoc.exists || !accessDoc.data()?.granted)) {
+      if (!isAdmin && !(await hasTrainingAccess(uid, mod))) {
         return NextResponse.json({ error: 'Access denied' }, { status: 403 });
       }
     }
 
     // Verify module unlock (3-day rule between modules) — bypassed for admins and free trial
     if (!isAdmin && !isFreeTrialSlide && mod.num > 1) {
-      const prevMod = (await import('@/data/index')).ALL_MODULES.find((m) => m.num === mod.num - 1);
+      const prevMod = getPrevModule(mod);
       if (prevMod) {
         const prevProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(prevMod.id).get();
         const prevData = prevProgress.data();

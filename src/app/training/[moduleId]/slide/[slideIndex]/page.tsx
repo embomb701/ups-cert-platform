@@ -1,8 +1,9 @@
 import { redirect, notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { adminAuth } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { getModule } from '@/data/index';
+import { hasTrainingAccess } from '@/lib/utils/trainingAccess';
 import SlideWithTimer from '@/components/training/SlideWithTimer';
 import Link from 'next/link';
 
@@ -30,11 +31,10 @@ export default async function SlidePage({ params }: Props) {
 
   const isAdmin = await checkIsAdmin(uid, userEmail);
 
-  const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
-  const hasAccess = isAdmin || (accessDoc.exists && accessDoc.data()?.granted);
-
   const mod = getModule(moduleId);
   if (!mod) notFound();
+
+  const hasAccess = isAdmin || (await hasTrainingAccess(uid, mod));
   if (isNaN(slideIndex) || slideIndex < 0 || slideIndex >= mod.slides.length) notFound();
 
   const isFreeTrialSlide = mod.num <= 3 && slideIndex === 0;

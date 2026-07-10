@@ -2,6 +2,7 @@ import { redirect, notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { getModule } from '@/data/index';
+import { hasTrainingAccess } from '@/lib/utils/trainingAccess';
 import ModuleTestClient from '@/components/training/ModuleTestClient';
 import Link from 'next/link';
 
@@ -24,11 +25,10 @@ export default async function ModuleTestPage({ params }: Props) {
     redirect('/login');
   }
 
-  const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
-  if (!accessDoc.exists || !accessDoc.data()?.granted) redirect('/training');
-
   const mod = getModule(moduleId);
   if (!mod) notFound();
+
+  if (!(await hasTrainingAccess(uid, mod))) redirect('/training');
 
   // Check if all slides completed
   const progressDoc = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(moduleId).get();

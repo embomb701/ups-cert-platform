@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
-import { ALL_MODULES } from '@/data/index';
+import { ALL_MODULES, KITCHEN_MODULES } from '@/data/index';
 import { KITCHEN_MODULE_PLACEHOLDERS } from '@/data/courses';
 import Link from 'next/link';
 
@@ -77,6 +77,39 @@ export default async function KitchenPortalPage() {
 
   const sharedComplete = sharedStates.filter((s) => s.completed).length;
 
+  // States for built kitchen-specific modules (nums 11+). Module 11 unlocks
+  // after shared module 10; later kitchen modules follow the kitchen sequence.
+  const kitchenSorted = [...KITCHEN_MODULES].sort((a, b) => a.num - b.num);
+  const kitchenStates = new Map(kitchenSorted.map((mod) => {
+    const p = progress[mod.id] ?? {};
+    const completed = !!(p.completedAt && p.passed);
+
+    let locked = false;
+    let unlockDate: Date | null = null;
+
+    if (!isAdmin && hasAccess) {
+      const prevMod = mod.num === 11
+        ? sharedModules.find((m) => m.num === 10)
+        : kitchenSorted.find((m) => m.num === mod.num - 1);
+      const prevP = prevMod ? (progress[prevMod.id] ?? {}) : {};
+      if (!prevMod || !prevP.completedAt || !prevP.passed) {
+        locked = true;
+      } else {
+        const unlock = getUnlockDate(prevP.completedAt as { toDate?: () => Date } | string);
+        if (Date.now() < unlock.getTime()) {
+          locked = true;
+          unlockDate = unlock;
+        }
+      }
+    }
+
+    const completedSlides = p.completedSlides ?? [];
+    const slideProgress = mod.slides.length > 0 ? (completedSlides.length / mod.slides.length) : 0;
+    return [mod.id, { mod, completed, locked, unlockDate, slideProgress, completedSlides }] as const;
+  }));
+
+  const kitchenBuiltCount = KITCHEN_MODULES.length;
+
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
       <div className="max-w-3xl mx-auto space-y-6">
@@ -101,7 +134,7 @@ export default async function KitchenPortalPage() {
           <div className="rounded-xl border border-orange-800/60 bg-orange-950/10 p-5">
             <p className="text-orange-300 font-semibold mb-1">Coming Soon — Enrollment Opening Soon</p>
             <p className="text-gray-400 text-sm">
-              Modules 1–3 Lesson 1 are free to preview. Kitchen-specific modules (11–27) are in development.
+              Modules 1–3 Lesson 1 are free to preview. {kitchenBuiltCount} of 17 kitchen-specific modules are ready; the rest are in development.
               <Link href="/training" className="ml-2 text-orange-400 hover:text-orange-300 underline">← Back to Training Hub</Link>
             </p>
           </div>
@@ -120,7 +153,7 @@ export default async function KitchenPortalPage() {
                 style={{ width: `${(sharedComplete / 10) * 100}%` }}
               />
             </div>
-            <p className="text-gray-500 text-xs mt-2">Kitchen-specific modules 11–27 are in development — check back soon.</p>
+            <p className="text-gray-500 text-xs mt-2">{kitchenBuiltCount} of 17 kitchen-specific modules are ready — more are added regularly.</p>
           </div>
         )}
 
@@ -207,7 +240,7 @@ export default async function KitchenPortalPage() {
         <div>
           <div className="flex items-center gap-3 mb-3">
             <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-widest">Kitchen Equipment — Modules 11–27</h2>
-            <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-xs rounded">In Development</span>
+            <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-xs rounded">{kitchenBuiltCount} of 17 Ready</span>
           </div>
           <div className="space-y-6">
             {(['Electrical Systems', 'Refrigeration', 'Fire, Gas & Ventilation', 'Warewashing & Beverage', 'Controls & Professional Service'] as const).map((track) => (
@@ -216,6 +249,73 @@ export default async function KitchenPortalPage() {
                 <div className="space-y-2">
                   {KITCHEN_MODULE_PLACEHOLDERS.map((placeholder, idx) => {
                     if (placeholder.track !== track) return null;
+
+                    // Built module → interactive card with lock states
+                    const state = kitchenStates.get(placeholder.id);
+                    if (state) {
+                      const { mod, completed, locked, unlockDate, slideProgress, completedSlides } = state;
+                      const accessible = hasAccess && !locked;
+                      return (
+                        <div
+                          key={placeholder.id}
+                          className={`rounded-lg border p-4 transition-colors ${
+                            completed
+                              ? 'border-green-800/60 bg-green-950/10'
+                              : !hasAccess
+                              ? 'border-gray-800 bg-gray-900/50 opacity-60'
+                              : locked
+                              ? 'border-gray-700 bg-gray-800/30'
+                              : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
+                          }`}
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold ${
+                              completed ? 'bg-green-700 text-white' :
+                              !hasAccess ? 'bg-gray-700 text-gray-500' :
+                              locked ? 'bg-gray-700 text-gray-500' :
+                              'bg-orange-900/60 border border-orange-700/60 text-orange-300'
+                            }`}>
+                              {completed ? '✓' : !hasAccess ? '🔒' : locked ? '⏳' : mod.num}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <span className="text-white font-medium text-sm">{mod.title}</span>
+                              <p className="text-gray-500 text-xs mt-0.5">{mod.desc}</p>
+                              {hasAccess && !completed && slideProgress > 0 && (
+                                <div className="mt-1.5 flex items-center gap-2">
+                                  <div className="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden">
+                                    <div className="h-full bg-orange-500/60 rounded-full" style={{ width: `${slideProgress * 100}%` }} />
+                                  </div>
+                                  <span className="text-gray-500 text-xs flex-shrink-0">{completedSlides.length}/{mod.slides.length} slides</span>
+                                </div>
+                              )}
+                              {hasAccess && locked && unlockDate && (
+                                <p className="text-xs text-yellow-600 mt-1">
+                                  Unlocks {unlockDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} — 3-day wait
+                                </p>
+                              )}
+                              {hasAccess && locked && !unlockDate && (
+                                <p className="text-xs text-gray-500 mt-1">Complete the previous module first</p>
+                              )}
+                              {!hasAccess && (
+                                <p className="text-xs text-gray-600 mt-1">Enroll to unlock</p>
+                              )}
+                            </div>
+                            <div className="flex-shrink-0">
+                              {accessible && (
+                                <Link
+                                  href={`/training/${mod.id}`}
+                                  className="px-3 py-1.5 bg-orange-700 hover:bg-orange-600 text-white text-xs font-semibold rounded transition-colors"
+                                >
+                                  {completed ? 'Review' : slideProgress > 0 ? 'Continue' : 'Start'}
+                                </Link>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    // Not yet built → outline card
                     return (
                       <details
                         key={placeholder.id}
