@@ -941,4 +941,379 @@ export const KITCHEN_MODULES: TrainingModule[] = [
       { q: 'On a remote-rack installation, the case technician\'s default scope is:', a: ['The compressor rack controls', 'Case-side systems: fans, defrost, drains, curtains, valves, controls', 'Store HVAC', 'Everything including rack setpoints'], correct: 1, exp: 'Rack changes affect every case in the store — case techs stay case-side unless explicitly responsible for the rack.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 18 — GAS SYSTEMS & COMBUSTION SAFETY
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-gas-systems',
+    num: 18,
+    title: 'Gas Systems & Combustion Safety',
+    desc: 'Natural gas and propane, regulators, ignition and flame sensing, combustion quality, and the leak-testing discipline that keeps kitchens standing.',
+    slides: [
+      {
+        title: 'Gas Fundamentals: Fuels, Pressures, and Regulators',
+        body: [
+          'Kitchens burn two fuels. Natural gas (mostly methane) arrives by pipeline and is lighter than air — leaks rise. Propane (LP) comes from tanks and is heavier than air — leaks pool at floor level and in pits, which changes where you sniff and how dangerous a small leak is. Appliances are built or converted for one specific fuel: orifice sizes and regulator settings differ because propane carries roughly 2.5 times the energy per cubic foot and runs at higher pressure.',
+          'Gas pressure in kitchens is measured in inches of water column (in. w.c.) — a unit so small that 28 in. w.c. equals about 1 psi. Typical manifold pressures: natural gas appliances around 3.5-4 in. w.c., propane around 10-11 in. w.c. You measure it with a manometer at the appliance pressure tap, with the burners firing. Every gas appliance has a regulator that steps the building supply down to its manifold pressure; a failed or mis-set regulator starves or over-fires every burner downstream at once.',
+          'Fuel conversion is a formal procedure: change the orifices, convert or adjust the regulator, adjust air shutters, and label the appliance. An appliance connected to the wrong fuel is dangerous in both directions — natural gas orifices on propane over-fire wildly (sooting, flame rollout, overheat); propane orifices on natural gas starve to uselessness.',
+          'Know the supply chain you are standing in: building shutoff, appliance shutoff valve (required within reach of each appliance), flexible connector (rated, and never reused after kinking), and quick-disconnects on movable equipment with restraint cables so the connector never carries the pull. Before any burner diagnosis, verify the basics: is the appliance valve fully open, is the flex connector kinked behind a shoved-back fryer, and does the manifold pressure read correct on your manometer while firing?',
+        ],
+        tables: [
+          {
+            caption: 'Natural gas vs propane',
+            headers: ['Property', 'Natural Gas', 'Propane (LP)'],
+            rows: [
+              ['Relative to air', 'Lighter — leaks rise', 'Heavier — leaks pool low'],
+              ['Typical manifold pressure', '~3.5-4 in. w.c.', '~10-11 in. w.c.'],
+              ['Energy per ft³', '~1,000 BTU', '~2,500 BTU'],
+              ['Source', 'Pipeline', 'Tank / cylinder'],
+            ],
+          },
+        ],
+        keyPoints: [
+          'Natural gas rises; propane pools low — it changes leak behavior and where you test',
+          'Manifold pressure is measured in inches w.c. with a manometer, burners firing',
+          'Wrong-fuel orifices are dangerous both directions — conversions are formal procedures',
+          'Check appliance valve, flex connector condition, and manifold pressure before burner diagnosis',
+        ],
+        quiz: [
+          {
+            q: 'Why does a propane leak demand sniffing at floor level?',
+            a: ['Propane detectors only work when low', 'Propane is heavier than air and pools low', 'Propane is odorless above waist height', 'Floor drafts concentrate all gases'],
+            correct: 1,
+            exp: 'LP vapor sinks and accumulates at floor level, in pits and low corners — exactly where an ignition source finds it.',
+          },
+          {
+            q: 'A gas fryer barely produces flame after being shoved back against the wall during cleaning. Your first check is:',
+            a: ['The thermostat', 'A kinked flexible gas connector or partially closed appliance valve', 'The high-limit', 'The burner orifices'],
+            correct: 1,
+            exp: 'Movable equipment pinches its own flex connector constantly. Verify the supply path and manifold pressure before touching burner components.',
+          },
+          {
+            q: 'Natural gas appliances typically run manifold pressure around:',
+            a: ['3.5-4 in. w.c.', '10-11 in. w.c.', '5 psi', '28 psi'],
+            correct: 0,
+            exp: 'NG manifolds run ~3.5-4 in. w.c.; propane runs ~10-11 in. w.c. — one of the reasons fuels are never interchangeable without conversion.',
+          },
+        ],
+      },
+      {
+        title: 'Ignition and Flame Sensing',
+        body: [
+          'Every gas appliance must answer two questions: how do we light the flame, and how do we prove it stayed lit? Lighting: standing pilots (a small always-on flame, still common on ranges and older fryers), spark ignition (a high-voltage electrode clicking at the burner or pilot), and hot-surface ignition (a glowing silicon-carbide or silicon-nitride element, common on newer ovens). Proving: this is the safety heart of the appliance, because gas flowing without flame is the disaster scenario.',
+          'Standing-pilot appliances prove flame with a thermocouple: the pilot flame heats a bimetal junction generating ~25-30 millivolts, which holds open a magnetic safety valve. Pilot goes out → millivolts die → valve snaps shut. A pilot that lights but will not stay lit when you release the button is the classic weak thermocouple (measure it: under ~20mV under flame means replace) — or a pilot flame too small or misaimed to bathe the thermocouple. Thermopiles (stacks of thermocouples, 250-750mV) power entire millivolt control systems on some fryers: same physics, more voltage.',
+          'Electronic systems prove flame by flame rectification: a small AC voltage on the flame sensor rod passes through the ionized flame to ground, and because the flame conducts asymmetrically, a small DC current (measured in microamps) results. The control demands its minimum microamp signal within the trial-for-ignition window or it locks out. The signature failure is a sensor rod coated in oxide or kitchen grime: flame present, current too low, appliance locks out after "lighting perfectly for ten seconds." The fix is famous: gently clean the rod with fine abrasive, verify its porcelain is uncracked, verify a solid burner ground path — because the flame current returns through the burner and appliance chassis.',
+          'Respect the lockout logic. Controls allow limited ignition trials then lock out for a reason: repeated trials pump unburned gas into the appliance and flue. Never bypass a flame sensor, never hold a gas valve open manually, and after any lockout, find out why before resetting a third time. The control is not being difficult — it is refusing to fill the kitchen with gas.',
+        ],
+        keyPoints: [
+          'Thermocouple: ~25-30mV holds the pilot safety valve; weak output = pilot will not stay lit',
+          'Flame rectification proves flame via microamp DC current through the flame to ground',
+          'Dirty sensor rod / bad burner ground = lights then locks out — clean the rod, verify ground',
+          'Lockouts protect against gas accumulation: diagnose the cause, never bypass flame proving',
+        ],
+        quiz: [
+          {
+            q: 'A standing pilot lights but goes out the moment the pilot button is released. The classic cause is:',
+            a: ['High gas pressure', 'A weak thermocouple (or pilot flame not bathing it)', 'A failed thermostat', 'Blocked flue'],
+            correct: 1,
+            exp: 'The thermocouple\'s millivolts hold the safety valve open. Weak output (or a misaimed pilot flame) lets the valve snap shut on release.',
+          },
+          {
+            q: 'A convection oven ignites, runs ten seconds, then shuts down and eventually locks out. The most common culprit is:',
+            a: ['A leaking gas valve', 'A grime-coated flame sensor rod or poor burner ground giving insufficient microamps', 'An oversized orifice', 'A stuck high-limit'],
+            correct: 1,
+            exp: 'Flame is clearly present — the control just cannot prove it. Clean the rod, check its porcelain, and verify the ground path; microamps return through the chassis.',
+          },
+          {
+            q: 'Repeated manual resets of an ignition lockout without diagnosis are dangerous because:',
+            a: ['They wear out the reset button', 'Each failed trial adds unburned gas to the appliance and flue', 'They erase the error history', 'The control loses calibration'],
+            correct: 1,
+            exp: 'Lockout exists to stop gas accumulation after failed trials. Reset-and-retry cycling builds exactly the gas charge the lockout exists to prevent.',
+          },
+        ],
+      },
+      {
+        title: 'Combustion Quality, CO, and Leak Testing',
+        body: [
+          'A healthy gas flame is blue, stable, and quiet, with well-defined inner cones. Yellow, lazy, sooting flames mean incomplete combustion — insufficient primary air (adjust the air shutter), a dirty burner, or an over-fired orifice. Lifting or blowing flames mean too much air or pressure; flashback (burning inside the burner tube) means too little velocity. Every incomplete-combustion flame is manufacturing carbon monoxide.',
+          'CO is the invisible stake in this trade: colorless, odorless, and lethal, produced whenever combustion is incomplete or flue gases spill back into the room. Symptoms in staff (headache, nausea, "the kitchen makes me dizzy") are a red-flag report — treat it as an emergency, not a comfort complaint. A combustion analyzer reading flue gas quantifies what your eyes cannot: CO ppm (air-free CO in flue gas should generally be under 100 ppm for commercial cooking appliances; anything approaching 400 requires immediate correction or shutdown), O2, and flue temperature. Kitchens add a unique factor: appliances live under exhaust hoods, and combustion appliances compete with the hood for air. A hood pulling hard in a kitchen with failed make-up air can starve burners and even reverse flues — Module 20 territory, but the combustion symptoms appear on your gas call.',
+          'Leak testing is not an event; it is a habit. Every fitting you touched gets tested before you leave — approved bubble solution (never dish soap with corrosive salts on stainless steel/gas lines, use gas-rated solution) or an electronic combustible-gas detector. Test method: pressurize normally, brush or spray solution on every joint, watch for growing bubbles. For whole-appliance verification after major work, a manometer standing test (valve off, watch for pressure decay) catches what spot checks miss.',
+          'The gas emergency protocol, memorized: strong gas smell → do not switch anything electrical on or off (a light switch is an ignition source), get people out, shut the gas at the safest accessible point, ventilate with doors, and call the utility/emergency line from outside. You are the professional in the room: staff will follow the calm person with a plan.',
+        ],
+        keyPoints: [
+          'Blue and stable = healthy; yellow/sooty = incomplete combustion = CO production',
+          'Analyzer numbers over eyeball: air-free CO under ~100 ppm; approaching 400 = correct or shut down',
+          'Every fitting touched gets bubble-tested before you leave — no exceptions',
+          'Gas emergency: no electrical switching, evacuate, shut off, ventilate, call from outside',
+        ],
+        quiz: [
+          {
+            q: 'A fryer burner shows lazy yellow flames and soot streaks up the flue. This flame is:',
+            a: ['Normal for propane', 'Incomplete combustion producing CO — correct air/burner condition now', 'Too much primary air', 'Evidence of high gas pressure only'],
+            correct: 1,
+            exp: 'Yellow, sooting flames are oxygen-starved combustion manufacturing CO. Air shutter, burner cleanliness, and orifice sizing are the correction points.',
+          },
+          {
+            q: 'Kitchen staff report afternoon headaches and dizziness near the cook line. Your response is:',
+            a: ['Suggest better ventilation someday', 'Treat as a CO emergency: analyzer check, ventilate, shut down offending equipment as needed', 'Check the walk-in first', 'Schedule a follow-up next week'],
+            correct: 1,
+            exp: 'CO symptoms in staff are a red-alert report. Measure, ventilate, and remove the source — this is the call where the trade saves lives.',
+          },
+          {
+            q: 'During a strong-gas-smell emergency, flipping the lights on or off is prohibited because:',
+            a: ['It wastes electricity', 'Switch arcing can ignite the gas-air mixture', 'The lights interfere with detectors', 'Codes require darkness'],
+            correct: 1,
+            exp: 'Any switching arc is an ignition source in a combustible atmosphere. Leave electrical states as they are, evacuate, shut off gas, ventilate.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Propane leaks differ from natural gas leaks because propane:', a: ['Rises to the ceiling', 'Is heavier than air and pools at floor level', 'Has no odorant', 'Cannot ignite indoors'], correct: 1, exp: 'LP sinks and accumulates low — changing both the hazard and where you test for it.' },
+      { q: 'Kitchen gas manifold pressure is measured with a:', a: ['Refrigeration gauge set', 'Manometer, in inches of water column, while firing', 'Multimeter', 'Combustion analyzer'], correct: 1, exp: 'Inches w.c. is the unit (28 in. w.c. ≈ 1 psi); the manometer connects at the appliance pressure tap with burners on.' },
+      { q: 'Running natural-gas orifices on propane causes:', a: ['Weak, starved flames', 'Severe over-firing with sooting and rollout risk', 'No change', 'Automatic regulator compensation'], correct: 1, exp: 'Propane packs ~2.5x the energy per cubic foot at higher pressure — NG orifices pass far too much fuel.' },
+      { q: 'A thermocouple holding a pilot safety valve generates approximately:', a: ['25-30 millivolts', '5 volts', '120 volts', '25-30 microamps'], correct: 0, exp: 'The pilot-heated junction produces tens of millivolts, just enough to hold the magnetic safety valve open.' },
+      { q: 'Flame rectification proves a flame exists by:', a: ['Measuring flame temperature', 'A microamp DC current conducted through the ionized flame to ground', 'Light detection', 'Gas flow measurement'], correct: 1, exp: 'The flame conducts asymmetrically, rectifying the sensor\'s AC to a small DC current the control counts in microamps.' },
+      { q: 'An appliance that lights, runs seconds, then drops out repeatedly most often needs:', a: ['A new gas valve', 'Its flame sensor rod cleaned and burner ground verified', 'Higher gas pressure', 'A new thermostat'], correct: 1, exp: 'Oxide/grime on the rod chokes the microamp signal; the current also needs a sound ground path through the burner.' },
+      { q: 'The purpose of ignition lockout after failed trials is to:', a: ['Protect the ignitor from wear', 'Prevent unburned gas accumulating in the appliance and flue', 'Save energy', 'Force a service call'], correct: 1, exp: 'Each failed trial dumps gas. Lockout stops the accumulation that repeated blind resets would create.' },
+      { q: 'A healthy gas burner flame appears:', a: ['Tall, yellow, and wavering', 'Blue and stable with defined inner cones', 'Orange with black tips', 'Nearly invisible and lifting off the burner'], correct: 1, exp: 'Blue and stable indicates complete combustion; yellow/sooty flames are CO factories; lifting flames have excess air/velocity.' },
+      { q: 'Air-free CO in commercial appliance flue gas approaching 400 ppm requires:', a: ['A note on the ticket', 'Immediate correction or equipment shutdown', 'Re-test next visit', 'Opening a window'], correct: 1, exp: 'Elevated CO is an active hazard: correct the combustion problem or shut the appliance down before leaving.' },
+      { q: 'Before leaving any gas job you must:', a: ['Reset all lockouts twice', 'Leak-test every fitting you disturbed with approved solution or detector', 'Raise manifold pressure 10%', 'Disable the flame sensor'], correct: 1, exp: 'Every touched joint gets tested, every time. Gas leak discipline is what keeps kitchens standing.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 19 — RANGES, COMBI OVENS & SPECIALTY EQUIPMENT
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-ranges-combiovens',
+    num: 19,
+    title: 'Ranges, Combi Ovens & Specialty Equipment',
+    desc: 'Applying gas and electric skills to the cook line: ranges, gas fryers, combi ovens, and steam-jacketed specialty equipment.',
+    slides: [
+      {
+        title: 'Ranges and Gas Fryers',
+        body: [
+          'The commercial range is the simplest gas appliance you will service — which makes it the place to master fundamentals. Open top burners: a valve per burner, orifice, venturi with air shutter, and (older units) standing pilots or (newer) spark ignition. Complaints map directly: uneven flame = clogged burner ports (boil-overs carbonize in them — clean with a brush and port tool, never drill ports oversize); yellow flame = air shutter or debris in the venturi; pilot outage = thermocouple chain from Module 18. Range ovens add a thermostat-driven oven burner with its own safety valve and pilot/ignitor — a range oven that will not fire while the top works fine isolates the fault to the oven\'s own gas chain.',
+          'Gas fryers marry Module 18 to Module 12\'s fryer logic. Millivolt fryers are beautifully self-contained: a thermopile in the pilot flame powers the gas valve and thermostat directly — no wall plug at all. A dead millivolt fryer is diagnosed with a meter in millivolts: thermopile output (typically 350-750mV loaded), then the circuit through the high-limit and thermostat to the valve coil. Electronic-ignition fryers move the same functions to a control board, spark ignitor, and flame sensor.',
+          'Fryer burners fire into tubes running through the oil (tube-fired) or against the tank walls. Combustion problems show as slow recovery, soot at the flue outlets, or oil temperature lag — and remember the Module 12 rule that recovery complaints can also be thermostat/probe issues; a combustion-side check (flame appearance, flue condition, manifold pressure) separates the two quickly.',
+          'The griddle and broiler variants follow range logic: multiple burners under a plate (thermostatic per section on griddles) or radiants above/below the product (broilers/salamanders — mostly cleaning-related failures, since they live in a rain of grease). Across all of them, the diagnostic frame stays identical: fuel path → ignition → flame proving → control chain. Master it once, apply it everywhere.',
+        ],
+        keyPoints: [
+          'Clogged burner ports from boil-overs cause uneven flames — clean, never drill',
+          'Millivolt fryers run entirely on thermopile power: diagnose with a meter in mV through the safety chain',
+          'Fryer combustion problems (soot, slow recovery) vs control problems: check flame and flue first',
+          'One diagnostic frame everywhere: fuel path → ignition → flame proving → control chain',
+        ],
+        quiz: [
+          {
+            q: 'A range top burner burns unevenly with flame missing along one side after a heavy boil-over. The fix is:',
+            a: ['Increase manifold pressure', 'Clean the carbonized burner ports with brush and port tool', 'Replace the burner valve', 'Drill the ports one size larger'],
+            correct: 1,
+            exp: 'Boil-overs carbonize in ports and block them. Clean to restore the pattern — drilling oversizes the ports and permanently over-fires the burner.',
+          },
+          {
+            q: 'A millivolt gas fryer is completely dead: pilot lights and holds, but the main burner never fires. Your meter should trace:',
+            a: ['120V through the contactor', 'Thermopile millivolts through the high-limit and thermostat to the gas valve coil', 'Microamps at the flame rod', 'Resistance of the heating elements'],
+            correct: 1,
+            exp: 'Millivolt systems are powered entirely by the thermopile. Voltage-drop the mV circuit through each safety and the thermostat to find the open or weak link.',
+          },
+        ],
+      },
+      {
+        title: 'Combi Ovens',
+        body: [
+          'The combi oven — convection heat, steam, or both at once — is the most complex box on the cook line: a convection oven, a steam generator, water systems, drain systems, and a computer, sharing one stainless shell. Service demands system separation: is the complaint in heat (elements or gas burner + blower), steam (generator or direct-spritz injection, water fill, level probes), water/drain (fill valves, drain pumps, condensate tempering), or control (probes, board, door switch)?',
+          'Steam generation is where combis suffer, and the reason is Module 12\'s old enemy at maximum intensity: scale. Boiler-based combis concentrate minerals exactly like ice machines do, and their level probes, heating elements, and drain valves scale up on a schedule set by the local water. Symptoms: slow steam, "fill" faults from blinded level probes, drain valves that will not seal (boiler drains constantly), and eventually element burnout. Water treatment matched to the manufacturer spec (often reverse osmosis with remineralization, or specific filtration) plus rigorous automatic/manual descaling cycles are not optional accessories — they are the difference between a 15-year oven and a 5-year one.',
+          'Combis also self-clean (automated wash systems with detergent and rinse-aid pumps), and door mechanics matter more than on any oven: the door gasket seals steam pressure, the hinges take daily abuse, and a leaking door shows as visible steam plumes, wet floors, long cook times, and error codes. Gasket and hinge inspection is minutes; steam loss diagnosis without it is hours.',
+          'Approach combi faults through the machine\'s own diagnostics first — these are software-rich appliances with genuinely useful error logs and service menus (access codes live in the service manual). Then verify physically: a "steam fault" code plus two minutes watching the level probes fill cycle beats an hour of guessing. And before every combi visit: bring the manual for that model. Combi architectures differ enough between manufacturers that model-specific documentation is a tool, not a crutch.',
+        ],
+        keyPoints: [
+          'Split every combi complaint: heat / steam / water & drain / control',
+          'Scale is the combi killer — water treatment to manufacturer spec plus descaling discipline',
+          'Steam leaks at the door (gasket/hinges) mimic generator faults — inspect the door first',
+          'Use the oven\'s own error logs and service menus, with the model-specific manual in hand',
+        ],
+        quiz: [
+          {
+            q: 'A boiler combi throws repeated fill faults although water supply pressure is good. The classic cause is:',
+            a: ['A failed door switch', 'Scale-blinded water level probes', 'A dead convection blower', 'Wrong detergent'],
+            correct: 1,
+            exp: 'Level probes sense water conductivity; scale coating insulates them so the control never "sees" the water it has. Descale and clean the probes.',
+          },
+          {
+            q: 'A combi runs long cook times with visible steam around the door edge. Before generator diagnosis, check:',
+            a: ['The water filter', 'The door gasket and hinge adjustment', 'The drain pump', 'The control board firmware'],
+            correct: 1,
+            exp: 'Steam escaping the door is capacity walking away. Gasket/hinge inspection takes minutes and explains the symptom directly.',
+          },
+          {
+            q: 'The most important preparation for servicing an unfamiliar combi model is:',
+            a: ['Extra fuses', 'The model-specific service manual and diagnostic access codes', 'A larger manometer', 'Spare door gaskets'],
+            correct: 1,
+            exp: 'Combi architectures vary sharply by manufacturer. The service manual\'s diagnostics, menus, and procedures are primary tools on these machines.',
+          },
+        ],
+      },
+      {
+        title: 'Steam-Jacketed Kettles, Tilt Skillets, and Pressure Equipment',
+        body: [
+          'Steam-jacketed kettles cook with steam condensing inside a double-wall jacket — either self-contained (a sealed jacket with its own element/burner boiling a permanent water charge) or direct-connected to building steam. Self-contained kettles live and die by jacket integrity: the sealed charge of treated water boils, condenses, and returns forever — unless air leaks in or water leaks out. A kettle that heats slowly or unevenly often needs its jacket vacuum re-established (purging air per the manual) or has lost jacket water; both show on the jacket pressure/vacuum gauge. The jacket safety valve is a pressure vessel relief device — test per procedure and never plug, cap, or "upgrade" it.',
+          'Tilt skillets (braising pans) are flat-bottom kettles that tilt to pour: thermostatic elements or gas burners under a thick plate, a tilt mechanism (manual worm gear or motorized), and the usual control chain. Their characteristic wear is mechanical — tilt gear wear, pour-lip damage, and element/wiring fatigue from decades of tilting — plus food-safety-critical thermostat accuracy verified with a surface probe.',
+          'Pressure steamers cook in a sealed compartment above atmospheric pressure, which means they are small pressure vessels with interlocks: a door that cannot open under pressure, a pressure relief valve, gauges, and timers. Respect the interlock chain absolutely — a defeated door interlock on a pressure steamer is a face-level steam explosion waiting for a hurried cook. Test reliefs and interlocks per the manufacturer procedure and document them; this is equipment where "it works" is not the standard — "its safeties work" is.',
+          'Across specialty steam equipment, one qualification note: jurisdictions vary on who may service pressure vessels and building-steam connections. Know your local boundary (some jacket/vessel repairs require certified welders or licensed boiler work) — the professional move is refusing gracefully and referring correctly when a repair crosses into licensed territory.',
+        ],
+        keyPoints: [
+          'Self-contained kettle heating problems: jacket air/water charge — check the jacket gauge first',
+          'Never plug or bypass a jacket safety valve — it is pressure vessel relief',
+          'Pressure steamer door interlocks and reliefs are life-safety: test and document, never defeat',
+          'Know local licensing boundaries on pressure vessels and building steam — refer when required',
+        ],
+        quiz: [
+          {
+            q: 'A self-contained steam-jacketed kettle heats slowly and its jacket gauge shows no vacuum cold. The kettle most likely needs:',
+            a: ['A larger burner', 'Air purged / jacket vacuum re-established and water charge verified per the manual', 'A new thermostat', 'Descaling of the cooking surface'],
+            correct: 1,
+            exp: 'Air in the jacket ruins condensing heat transfer. The cold-vacuum reading is the tell; purge and recharge per procedure.',
+          },
+          {
+            q: 'The door interlock on a pressure steamer exists to:',
+            a: ['Keep heat in', 'Prevent the door opening while the cavity is pressurized — preventing a steam explosion at the operator', 'Save energy', 'Protect the gasket'],
+            correct: 1,
+            exp: 'Opening a pressurized compartment releases explosive steam at face level. The interlock chain is life-safety equipment, tested and never defeated.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Blocked range burner ports after boil-overs should be:', a: ['Drilled larger', 'Cleaned with a brush and port tool', 'Ignored if flame exists', 'Sealed with high-temp epoxy'], correct: 1, exp: 'Cleaning restores the designed flame pattern; drilling permanently over-fires the burner.' },
+      { q: 'A millivolt fryer control system is powered by:', a: ['A 120V wall circuit', 'The pilot-heated thermopile', 'A battery pack', 'The building\'s low-voltage transformer'], correct: 1, exp: 'The thermopile (hundreds of mV) powers valve, thermostat, and safeties — no external power at all.' },
+      { q: 'Soot at a gas fryer\'s flue outlets indicates:', a: ['Normal aging', 'Combustion problems producing CO — inspect burners, air, and venting now', 'Old oil', 'A weak thermopile'], correct: 1, exp: 'Soot is incomplete combustion made visible; treat as a combustion/CO problem, not cosmetics.' },
+      { q: 'The universal gas appliance diagnostic order is:', a: ['Control chain → flame → fuel', 'Fuel path → ignition → flame proving → control chain', 'Ignition → fuel → controls → flame', 'Whatever the error code says'], correct: 1, exp: 'Verify gas supply and pressure, then lighting, then proving, then the control logic — the frame fits every gas appliance.' },
+      { q: 'The most destructive recurring problem in boiler-type combi ovens is:', a: ['Door slams', 'Scale from untreated water', 'Excess detergent', 'Voltage sags'], correct: 1, exp: 'Scale blinds probes, buries elements, and jams drains — water treatment plus descaling discipline is the combi\'s lifeline.' },
+      { q: 'Scale-coated level probes in a combi boiler cause:', a: ['Overheating elements only', 'False fill/water faults because the control cannot sense water conductivity', 'Faster steam production', 'Door leaks'], correct: 1, exp: 'Conductivity probes insulated by scale read "no water" regardless of actual level.' },
+      { q: 'Visible steam escaping a combi door during cooking means:', a: ['The generator is oversized', 'Check gasket and hinges before deeper steam-system diagnosis', 'Normal operation', 'The drain is plugged'], correct: 1, exp: 'Door leaks bleed steam capacity and mimic generator weakness — the two-minute door inspection comes first.' },
+      { q: 'A jacket safety valve on a steam kettle may be:', a: ['Capped if it drips', 'Tested per procedure only — never plugged or bypassed', 'Replaced with a pipe plug temporarily', 'Adjusted to a higher pressure for faster cooking'], correct: 1, exp: 'It is pressure-vessel relief. Defeating it turns a kettle into a bomb; a dripping valve gets replaced, not plugged.' },
+      { q: 'A defeated door interlock on a pressure steamer risks:', a: ['Longer cook times', 'An operator-level steam explosion when the door opens under pressure', 'Higher water bills', 'Gasket wear'], correct: 1, exp: 'The interlock prevents opening under pressure. Its defeat is a direct, severe injury hazard.' },
+      { q: 'When a kettle repair crosses into certified pressure-vessel/boiler work, the professional response is:', a: ['Attempt it carefully', 'Refuse gracefully and refer to appropriately licensed service', 'Have the customer sign a waiver', 'Do it but skip documentation'], correct: 1, exp: 'Licensing boundaries on pressure vessels exist in most jurisdictions — referring correctly protects everyone, including you.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 20 — VENTILATION, HOODS & FIRE SUPPRESSION
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-ventilation-fire',
+    num: 20,
+    title: 'Ventilation, Hoods & Fire Suppression',
+    desc: 'Exhaust hoods, make-up air, NFPA 96 grease safety, and wet-chemical fire suppression — the systems that keep the kitchen breathing and standing.',
+    slides: [
+      {
+        title: 'Hoods, Exhaust, and Make-Up Air',
+        body: [
+          'Everything that cooks does so under a hood. Type I hoods handle grease-producing equipment (fryers, griddles, ranges, charbroilers) and connect to grease-rated ductwork and fans; Type II hoods handle heat and steam only (dishwashers, some ovens). The distinction is legal and structural: grease-laden vapor demands liquid-tight welded ducts, fire-rated clearances, and cleanable design under NFPA 96 — the standard governing commercial kitchen ventilation and fire protection.',
+          'A hood works by capture and containment: the exhaust fan pulls a designed airflow through the hood face, dragging smoke and grease vapor through filters into the duct. Grease filters (baffle type — vertical blades that fling grease into troughs by inertia) are the first line of fire defense: they strip grease before the duct. Mesh filters are not permitted in Type I hoods. Filters must be in place, undamaged, and oriented correctly (baffles vertical, so grease drains) whenever grease equipment operates — a missing filter is an open grease highway to the duct.',
+          'Every cubic foot exhausted must re-enter as make-up air (MUA), through a dedicated MUA unit or transfer air. When MUA fails — dampers stuck, MUA fan dead, filters clogged — the kitchen goes negative: doors slam or whistle, pilot flames outage mysteriously, hoods spill smoke at the edges, gas appliance flues backdraft (CO, Module 18), and the dining room HVAC gets dragged into the kitchen. Diagnosing "the hood is not capturing" therefore always means checking both sides: exhaust performance AND make-up supply.',
+          'Airflow reality checks are simple and persuasive: smoke at the hood edge shows capture or spill directly; a door held open a crack tells you building balance by feel and sound. Instrument checks (anemometer at the filter face against design velocities) quantify it. And the recurring service killers are humble: grease-bound fan bearings and belts on the roof, exhaust fan blades caked into imbalance (vibration → bearing death), hinge kits absent so nobody ever cleans the fan, and MUA filters that have never been changed.',
+        ],
+        keyPoints: [
+          'Type I = grease-rated hood/duct/fan under NFPA 96; Type II = heat/steam only',
+          'Baffle filters are fire safety equipment: in place, undamaged, baffles vertical — always',
+          'Failed make-up air turns the kitchen negative: pilot outages, smoke spill, flue backdrafting',
+          'Check both sides of airflow: exhaust performance and make-up supply, plus roof fan condition',
+        ],
+        quiz: [
+          {
+            q: 'A kitchen suffers mysterious pilot outages, doors that whistle, and smoke rolling out of the hood edges. The unifying cause is:',
+            a: ['Bad thermocouples throughout', 'Failed make-up air leaving the kitchen strongly negative', 'An oversized exhaust fan', 'Low gas pressure'],
+            correct: 1,
+            exp: 'Negative building pressure starves pilots, spills hood capture, and backdrafts flues. Restore make-up air before chasing individual symptoms.',
+          },
+          {
+            q: 'Mesh-style filters found installed in a Type I grease hood should be:',
+            a: ['Cleaned and reinstalled', 'Replaced with proper baffle filters — mesh is not permitted over grease equipment', 'Doubled up for better filtration', 'Left if the customer prefers them'],
+            correct: 1,
+            exp: 'NFPA 96 requires baffle-type grease filters in Type I hoods; mesh loads with grease and becomes fuel above the fire.',
+          },
+        ],
+      },
+      {
+        title: 'Grease, Ducts, and NFPA 96 Discipline',
+        body: [
+          'Grease is fuel, and the exhaust system is a chimney coated in it. Duct fires are the catastrophic kitchen event: a flare-up ignites duct grease, and the fire travels the duct through the building at temperatures that defeat ordinary construction. NFPA 96 is written around preventing exactly this, and its logic shapes everything you touch: liquid-tight ducts, access panels for cleaning, clearance to combustibles, grease-collection at the fan, and — the big one — scheduled professional cleaning of the entire exhaust system by certified cleaners (frequency by cooking volume: solid-fuel and high-volume operations monthly/quarterly, typical kitchens semi-annually).',
+          'Your service role interacts with this constantly. Filters and troughs you handle directly. Visible grease accumulation in the hood plenum or duct entrance, missing access panels, ductwork gaps, or a grease-soaked roof around the fan are conditions you document and report every time you see them — in writing, to the operator. You are not the duct cleaner, but you are frequently the only technically literate set of eyes that looks up there between cleanings.',
+          'Exhaust fans on Type I systems are grease-rated (upblast centrifugal, discharging away from the roof, with grease drains and collection). Service realities: hinge kits let the fan tip up for duct cleaning access (absent hinge kits mean the duct behind the fan never gets cleaned — report it); belts slip in grease-fogged housings; bearings die from imbalance as blades cake. A fan changed without cleaning its housing and verifying drainage inherits the environment that killed its predecessor.',
+          'Interlocks knit ventilation into the rest of the kitchen: NFPA 96 requires that cooking equipment under the hood cannot operate without exhaust running (and makeup air interlocked accordingly) — typically via a current sensor or airflow switch proving the fan. A dead interlock proving switch shows up as "the whole cook line is dead" and gets misdiagnosed as an electrical failure for hours if you do not know the interlock exists. When any hood or suppression work disables cooking, that is by design, not malfunction.',
+        ],
+        keyPoints: [
+          'Duct grease is building-fire fuel: NFPA 96 cleaning schedules by certified cleaners are mandatory',
+          'Document and report visible duct/plenum grease, missing access panels, or grease-soaked roofs — every time',
+          'Type I fans: hinge kits, grease drainage, clean housings — or the new fan dies like the old one',
+          'Cooking equipment is interlocked to exhaust: a failed proving switch mimics a dead cook line',
+        ],
+        quiz: [
+          {
+            q: 'The entire gas cook line is dead, but breakers and gas supply check fine. The overlooked suspect is:',
+            a: ['A failed hood exhaust interlock / proving switch that must run for cooking equipment to operate', 'Simultaneous thermostat failure', 'The fire department shut the street gas', 'All thermocouples aged out together'],
+            correct: 0,
+            exp: 'NFPA 96 interlocks cooking equipment to exhaust operation. A dead fan or failed proving switch disables the line by design.',
+          },
+          {
+            q: 'During an unrelated fryer repair you notice heavy grease stalactites inside the hood plenum. You should:',
+            a: ['Ignore it — not your system', 'Scrape it quickly and move on', 'Document it and report it to the operator in writing as a fire hazard needing certified cleaning', 'Schedule yourself to clean the ducts'],
+            correct: 2,
+            exp: 'Duct/plenum grease is building-fire fuel. Reporting in writing protects lives and liability; certified exhaust cleaners do the remediation.',
+          },
+        ],
+      },
+      {
+        title: 'Wet-Chemical Fire Suppression',
+        body: [
+          'Above every Type I hood sits an automatic fire suppression system — almost universally wet-chemical (UL 300 listed): a tank of potassium-based liquid agent, a releasing mechanism, distribution piping to nozzles aimed at each appliance, the plenum, and the duct, and detection by fusible links (metal elements that melt at rated temperature) or thermal detectors along the hood. When it fires, the agent saponifies burning grease — turns the fuel surface to soap foam — cooling and sealing it against reflash.',
+          'Actuation does three things at once, and you must know all three because you will meet them mid-diagnosis: agent discharges to the protected surfaces; the gas supply to equipment under the hood shuts automatically (a mechanical gas valve or electric solenoid tied to the release); and electrical equipment under the hood typically drops via shunt-trip breakers or contactors. A kitchen where "everything under the hood died and there is a chemical smell" has had a discharge — and a kitchen where gas will not restore may have a tripped suppression gas valve someone missed.',
+          'The service boundary is bright-line: fire suppression systems are inspected, maintained, and recharged ONLY by licensed fire protection contractors on a code-mandated semi-annual schedule. Kitchen equipment techs do not recharge tanks, do not replace fusible links, do not re-aim or cap nozzles, and never move appliances in ways that break nozzle aim — appliance-to-nozzle alignment is part of the listed design. What you DO: verify nozzle caps are present (they keep grease out of nozzles — missing caps get reported), confirm the manual pull station is visible and unobstructed, check inspection tags for currency (out-of-date tags are a written report item), and after ANY appliance relocation, flag that suppression must be reviewed by the fire protection contractor.',
+          'The kitchen fire protocol rounds out your competence: small grease fire → the manual pull station is always an option and shuts fuel down with the discharge; never water on grease, never move a flaming fryer, and class-K portable extinguishers are the follow-up to suppression discharge, not a substitute. After any discharge: equipment under the hood stays down until suppression is recharged and the system re-armed by the licensed contractor — and the cleanup (that soap everywhere) plus gas/electric restoration is where your trade re-enters the story.',
+        ],
+        keyPoints: [
+          'Wet chemical saponifies grease fires and seals against reflash; discharge also kills gas and power under the hood',
+          'Licensed fire protection contractors only: recharge, links, nozzles, aiming — bright-line boundary',
+          'Your checks: nozzle caps present, pull station clear, inspection tags current, report appliance moves',
+          '"Everything under the hood is dead" after a discharge includes tripped gas valves and shunt breakers',
+        ],
+        quiz: [
+          {
+            q: 'After a suppression discharge, the gas cook line will not restore even with breakers reset. The likely reason is:',
+            a: ['Melted gas piping', 'The suppression-linked mechanical gas valve tripped and must be reset/re-armed as part of system restoration', 'Utility shutoff', 'Coincidental regulator failure'],
+            correct: 1,
+            exp: 'Discharge automatically closes the gas valve serving hood equipment. Restoration follows the licensed contractor\'s re-arming of the system.',
+          },
+          {
+            q: 'A customer asks you to swap the fryer and the griddle positions under the hood. Beyond the utilities, you must:',
+            a: ['Nothing else — equipment placement is the customer\'s choice', 'Flag that suppression nozzle aiming is appliance-specific and the fire protection contractor must review the change', 'Re-aim the nozzles yourself to match', 'Remove the nozzle caps for better coverage'],
+            correct: 1,
+            exp: 'Nozzle-to-appliance alignment is part of the listed system design. Moving appliances without suppression review leaves the new arrangement unprotected.',
+          },
+          {
+            q: 'Missing chrome caps on suppression nozzles over the char-broiler should be:',
+            a: ['Ignored — caps are cosmetic', 'Reported: caps keep grease from plugging nozzles, and plugged nozzles fail to discharge', 'Replaced with tape', 'Removed from the other nozzles for symmetry'],
+            correct: 1,
+            exp: 'Blow-off caps protect nozzle orifices from grease loading. A grease-plugged nozzle may not discharge over a fire — report for fire-protection service.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Type I hoods differ from Type II because they:', a: ['Are larger', 'Handle grease-laden vapor and require grease-rated ducts, filters, and suppression per NFPA 96', 'Handle steam only', 'Need no fans'], correct: 1, exp: 'Grease changes everything: welded liquid-tight duct, baffle filters, fire suppression, and cleaning schedules.' },
+      { q: 'Grease baffle filters must be oriented:', a: ['Baffles horizontal', 'Baffles vertical so collected grease drains to the troughs', 'At 45 degrees', 'Orientation does not matter'], correct: 1, exp: 'Vertical baffles let inertially collected grease run down to the collection trough instead of pooling in the airstream.' },
+      { q: 'A strongly negative kitchen (failed make-up air) causes:', a: ['Better hood capture', 'Pilot outages, smoke spill at hood edges, and flue backdrafting', 'Lower CO risk', 'Quieter fans'], correct: 1, exp: 'Exhaust without make-up starves the space: combustion air, hood containment, and flue draft all suffer at once.' },
+      { q: 'Kitchen exhaust duct interiors are cleaned by:', a: ['The equipment tech during PMs', 'Certified exhaust cleaning companies on NFPA 96 schedules', 'The kitchen staff monthly', 'Nobody — ducts self-clean'], correct: 1, exp: 'System-wide grease removal is a certified specialty on code-mandated frequency; techs document and report what they see.' },
+      { q: 'The purpose of exhaust fan hinge kits is:', a: ['Hurricane resistance', 'Tipping the fan up so the duct and fan can actually be cleaned', 'Vibration damping', 'Bird exclusion'], correct: 1, exp: 'Without a hinge kit the duct behind the fan never gets cleaned — a standard write-up item.' },
+      { q: 'Cooking appliances under a Type I hood are interlocked so they:', a: ['Heat faster', 'Cannot operate unless the exhaust system runs', 'Share one thermostat', 'Shut off at closing time'], correct: 1, exp: 'NFPA 96 requires exhaust operation for cooking — a failed proving switch mimics a dead cook line.' },
+      { q: 'Wet-chemical agent extinguishes grease fires by:', a: ['Displacing oxygen with inert gas', 'Saponification — converting the burning grease surface to a sealing soap foam', 'Freezing the oil', 'High-pressure blast'], correct: 1, exp: 'The potassium agent reacts with hot grease to form foam that cools and seals against reflash — the UL 300 principle.' },
+      { q: 'Fusible links in a suppression system:', a: ['Carry electrical current', 'Melt at rated temperature to trigger discharge', 'Filter grease', 'Support the filters'], correct: 1, exp: 'The links are the thermal detection: fire heat melts them, releasing the mechanism.' },
+      { q: 'Recharging suppression tanks and replacing fusible links is work for:', a: ['Any kitchen equipment tech', 'Licensed fire protection contractors only', 'The restaurant manager', 'The duct cleaning crew'], correct: 1, exp: 'Fire suppression maintenance is licensed, code-scheduled work — a bright-line boundary for equipment techs.' },
+      { q: 'After a suppression discharge, equipment under the hood may return to service:', a: ['As soon as it is wiped down', 'Only after the licensed contractor recharges and re-arms the system (and gas/power are properly restored)', 'The next morning', 'Once the smell fades'], correct: 1, exp: 'The kitchen is unprotected until the system is recharged and re-armed; gas valves and shunt trips restore as part of that process.' },
+    ],
+  },
 ];
