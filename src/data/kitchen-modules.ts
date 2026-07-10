@@ -1556,4 +1556,455 @@ export const KITCHEN_MODULES: TrainingModule[] = [
       { q: 'The CO2 hazard in beverage back rooms is:', a: ['Flammability', 'Silent air displacement causing asphyxiation', 'Corrosive fumes', 'High-pressure shrapnel only'], correct: 1, exp: 'CO2 quietly fills enclosed spaces from the floor up. Monitors, ventilation, and leaving when alarmed are the discipline.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 23 — DIGITAL CONTROLS & CONNECTIVITY
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-digital-controls',
+    num: 23,
+    title: 'Digital Controls & Connectivity',
+    desc: 'Microprocessor controls, sensors, error codes, and connected kitchen equipment — diagnosing the computer that runs the appliance.',
+    slides: [
+      {
+        title: 'Inputs, Outputs, and the Control Board',
+        body: [
+          'Modern kitchen equipment replaced electromechanical thermostats and timers with a control board: a microprocessor reading inputs (temperature probes, level probes, door switches, pressure switches, flame sensors) and driving outputs (relays and triacs switching contactors, valves, ignitors, motors, displays). Every board fault call reduces to one question asked three ways: is the input lying, is the output failing, or is the board itself dead?',
+          'Inputs first, because they fail most. Temperature sensing is dominated by thermistors (resistance falls as temperature rises on the common NTC type) and RTDs (resistance rises with temperature, typically 1000Ω-type in kitchen gear): both are verified with an ohmmeter against the manufacturer\'s resistance-temperature chart — a probe reading 50°F wrong makes a healthy board do insane things. Probe wiring matters as much as probes: kitchen vibration, heat, and cleaning chemicals attack connectors; a corroded probe plug adds resistance that reads as temperature error. Switch inputs (doors, pressure, floats) verify with continuity and by watching the board\'s own diagnostic display as you actuate them.',
+          'Outputs are half board, half external: when a load does not run, measure whether the board is delivering the output voltage at its terminal. Output voltage present + load dead = external problem (the Module 11 chain: contactor, motor, element). No output voltage with all input conditions satisfied = board output stage — and many "dead outputs" are really an unsatisfied interlock the logic is honoring, which is why you check inputs first and read the manual\'s ladder of conditions.',
+          'Board replacement discipline: kill power (boards die from live disconnection), photograph every connector before touching, transfer configuration (DIP switches, jumpers, program settings — a new board with wrong configuration creates a second fault), and find out WHY the board died. Boards murdered by water ingress from pressure-washing, chronic overvoltage, or a shorted external load will murder their replacements identically. The board is rarely the root cause; it is usually the victim.',
+        ],
+        keyPoints: [
+          'Every control fault: lying input, failing output, or dead board — in that order of likelihood',
+          'Verify probes with an ohmmeter against the resistance-temperature chart; check connectors too',
+          'Output voltage present = external load problem; absent = check interlock conditions before the board',
+          'Replaced boards die again unless you find what killed the original',
+        ],
+        quiz: [
+          {
+            q: 'An oven overshoots wildly. Its NTC thermistor probe measures 40kΩ at room temperature; the chart says it should read 10kΩ. The correct action is:',
+            a: ['Replace the control board', 'Replace the probe (and inspect its connector) — the board is acting correctly on false data', 'Recalibrate the display', 'Adjust the offset until it cooks right'],
+            correct: 1,
+            exp: 'A probe reading far off-chart feeds the board fiction. The board responds correctly to wrong data — fix the data source.',
+          },
+          {
+            q: 'A board shows the heat cycle active but its heat output terminal measures 0V with all safeties closed. Before condemning the board:',
+            a: ['Replace it — 0V proves it', 'Verify every interlock condition in the manual\'s output logic — many "dead outputs" are the logic honoring an unsatisfied condition', 'Jumper the output to test the contactor', 'Reflash the firmware'],
+            correct: 1,
+            exp: 'Boards withhold outputs when any required condition (door, fan proving, temperature window, time delay) is unmet. Read the ladder before replacing the computer.',
+          },
+          {
+            q: 'The most common reason a replacement control board fails within weeks is:',
+            a: ['Factory defects', 'The root cause that killed the first board (water ingress, shorted load, overvoltage) was never found', 'Static during installation', 'Firmware mismatch'],
+            correct: 1,
+            exp: 'Boards are usually victims, not causes. Diagnose the murder weapon or the replacement inherits it.',
+          },
+        ],
+      },
+      {
+        title: 'Error Codes, Diagnostics, and Service Modes',
+        body: [
+          'Error codes are the appliance\'s testimony — valuable, but testimony, not verdict. A code names the condition the board detected, not the component that caused it: "E31 — high discharge temperature" on a combi tells you what was sensed; whether the cause is a dirty condenser, a failed fan, a lying sensor, or an actual refrigerant fault is still your job. The productive pattern: code → look up its detection logic in the service manual → verify the sensed condition independently with your own instruments → then trace cause.',
+          'Service modes are the underused power tool: most modern kitchen controls hide a technician menu (key sequences or codes from the service manual) exposing live sensor readings, manual output actuation (run THIS fan, open THIS valve, fire THIS ignitor — component testing without disassembly), error history with timestamps, cycle counters, and configuration. Error history converts intermittent complaints from folklore into data: "F2 seventeen times, always around 11am Saturdays" points at the lunch-rush pattern nobody mentioned on the ticket.',
+          'Firmware and configuration round out the software layer: some faults are cured by manufacturer firmware updates (and some plagues are caused by wrong versions); configuration menus set equipment personality (voltage, gas type, altitude, Fahrenheit/Celsius, feature flags) — a unit "broken since installation" is often mis-configured, not defective. Record configuration before and after any change, and after any board swap verify configuration against the data plate and manual, not against memory.',
+          'When boards misbehave randomly — ghost resets, scrambled displays, codes that shotgun across systems — think environment before silicon: supply voltage (measure under load; kitchens brown out at rush), grounding (control electronics need the solid ground path that corroded kitchen connections deny), moisture intrusion (lift the board and look for the pressure-washer stains), and heat (a control compartment whose cooling vents are grease-blocked cooks its own computer). The kitchen is the harshest environment consumer-grade electronics ever face; respect what it does to them.',
+        ],
+        keyPoints: [
+          'Codes name the detected condition, not the guilty component — verify independently, then trace cause',
+          'Learn the service menus: live sensor data, manual output actuation, and error history with timestamps',
+          'Mis-configuration mimics defects: verify config against data plate after every board swap',
+          'Random board behavior: check voltage under load, ground integrity, moisture, and compartment heat first',
+        ],
+        quiz: [
+          {
+            q: 'A fryer intermittently resets mid-shift; error history shows resets cluster at 11:45am daily. Supply voltage at the fryer measures 189V during the lunch rush (rated 208V). The diagnosis is:',
+            a: ['A failing control board', 'Building voltage sag under rush load — an electrical supply problem, not an appliance fault', 'Grease on the display', 'Firmware corruption'],
+            correct: 1,
+            exp: 'Brownouts reset control electronics on schedule with kitchen load. The error history found the pattern; the meter found the cause.',
+          },
+          {
+            q: 'The fastest way to test whether a combi\'s drain pump itself works is:',
+            a: ['Run full cycles and listen', 'Actuate the pump directly from the service menu\'s output test', 'Remove and bench-test it', 'Measure its winding resistance only'],
+            correct: 1,
+            exp: 'Manual output actuation runs the component on command — isolating it from cycle logic and interlocks in seconds.',
+          },
+        ],
+      },
+      {
+        title: 'Connected Kitchens',
+        body: [
+          'Kitchen equipment is joining the network: combis, fryers, refrigeration, and ice machines increasingly ship with WiFi/Ethernet, feeding manufacturer clouds and kitchen-management platforms — remote temperature logging (HACCP compliance automated), error alerts pushed to managers and service companies before staff notice, recipe/menu distribution across chains, and usage analytics. For service, telemetry is a gift: a remote dashboard showing a walk-in\'s temperature climbing since 2am, with compressor cycling data, is diagnosis begun before the truck rolls.',
+          'The tech\'s connectivity duties are mostly practical: getting equipment onto the customer\'s network (kitchens are RF-hostile — stainless steel everywhere; equipment often needs the site\'s IT for credentials and firewall rules), verifying cloud registration per the manufacturer\'s app, and knowing what the platform can tell you before and during a call. Connectivity failures themselves are usually network-side: credentials changed, router replaced, IT blocked the port — verify the appliance\'s network status screen before blaming its radio.',
+          'Connected equipment adds etiquette and boundaries: remote parameter changes (setpoints, recipes) may be locked to the chain\'s corporate account — do not fight the lock, coordinate with it; software/firmware pushed remotely by manufacturers can change behavior between your visits (check version history when "it worked last week"); and customer data (sales volumes visible in usage stats) deserves the same discretion as anything else you see in a business\'s back room.',
+          'Where this heads is worth knowing for module 27\'s career lens: service organizations increasingly triage from telemetry, dispatch with probable-cause and parts predicted, and sell uptime monitoring as a product. The tech who can read a cloud dashboard, correlate it with gauge-and-meter reality on site, and close the loop in the platform\'s work order is the tech the connected-kitchen era promotes.',
+        ],
+        keyPoints: [
+          'Telemetry starts diagnosis before arrival: temperature history and cycling data are evidence',
+          'Connectivity faults are usually network-side: check the appliance\'s network status screen first',
+          'Respect remote-management locks and check firmware version history on "changed behavior" calls',
+          'Reading dashboards + verifying on-site with instruments = the promotable connected-kitchen skill set',
+        ],
+        quiz: [
+          {
+            q: 'A chain\'s connected fryer stopped reporting to its dashboard the week the store replaced its router. The first check is:',
+            a: ['The fryer\'s control board', 'The appliance\'s network status screen and re-joining it to the new network', 'The fryer\'s temperature probe', 'The cloud service status page only'],
+            correct: 1,
+            exp: 'The timeline names the suspect: new router, new credentials. Network-side causes dominate connectivity failures.',
+          },
+          {
+            q: 'Remote telemetry shows a walk-in climbing from 36°F to 50°F between 2-6am with the compressor running continuously. Before arrival, the strongest hypothesis is:',
+            a: ['Staff left the door open all night', 'A capacity-side fault (dirty condenser, low charge, iced evaporator) — running-but-losing points at capacity, not control', 'The board lost its setpoint', 'The telemetry is wrong'],
+            correct: 1,
+            exp: 'Continuous running with rising temperature is a machine trying and failing — capacity-side faults. A door event would show recovery after closing; control faults show not-running.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The diagnostic order for control-system faults is:', a: ['Board, outputs, inputs', 'Inputs (sensors/switches), outputs, then the board itself', 'Firmware first', 'Replace the board and observe'], correct: 1, exp: 'Inputs fail most and make healthy boards act insane; outputs next; the board itself is the last suspect.' },
+      { q: 'An NTC thermistor\'s resistance:', a: ['Rises with temperature', 'Falls as temperature rises', 'Stays constant', 'Depends on voltage'], correct: 1, exp: 'Negative Temperature Coefficient: verify against the chart with an ohmmeter.' },
+      { q: 'Board output terminal shows proper voltage but the motor does not run. The fault is:', a: ['The board output stage', 'External: wiring, contactor, or the motor itself', 'The input sensors', 'The firmware'], correct: 1, exp: 'Voltage delivered = board did its job. The Module 11 load chain takes over from there.' },
+      { q: 'Before unplugging connectors on a control board you should:', a: ['Discharge the display', 'Kill power and photograph the connector layout', 'Warm the board', 'Ground the chassis to neutral'], correct: 1, exp: 'Live disconnection kills boards; photos prevent reassembly errors that create second faults.' },
+      { q: 'An error code tells you:', a: ['Which part to replace', 'The condition the board detected — cause still requires verification', 'The repair procedure', 'Whether warranty applies'], correct: 1, exp: 'Codes are testimony, not verdicts: verify the sensed condition with instruments, then trace cause.' },
+      { q: 'Service-mode error history is most valuable for:', a: ['Warranty claims', 'Converting intermittent complaints into time-stamped patterns', 'Resetting the appliance', 'Impressing the customer'], correct: 1, exp: 'Timestamps and counts turn "it sometimes dies" into "it dies at every lunch rush" — a diagnosable pattern.' },
+      { q: 'A unit "broken since install" that behaves as if built for different conditions likely has:', a: ['Shipping damage', 'Wrong configuration (voltage/gas/altitude/units) — verify config against the data plate', 'A counterfeit board', 'Bad firmware'], correct: 1, exp: 'Configuration sets the appliance\'s personality; mis-set menus mimic hardware defects from day one.' },
+      { q: 'Ghost resets and scrambled displays across an appliance\'s controls suggest checking first:', a: ['Every sensor', 'Supply voltage under load, grounding, moisture, and compartment heat', 'The relay outputs', 'Cloud connectivity'], correct: 1, exp: 'Environment kills kitchen electronics: brownouts, bad grounds, pressure-washer water, and grease-blocked cooling.' },
+      { q: 'A connected appliance that stopped reporting after site IT changes should first be checked at:', a: ['The manufacturer cloud', 'Its own network status screen / rejoining the network', 'The control board', 'The building firewall logs'], correct: 1, exp: 'Network-side causes dominate: credentials and routers change; radios rarely die on schedule with IT work.' },
+      { q: 'Telemetry showing continuous compressor run with climbing box temperature indicates:', a: ['A control fault', 'A capacity-side fault: condenser, charge, or airflow', 'A door left open briefly', 'Telemetry error'], correct: 1, exp: 'Trying-but-losing is capacity; not-trying is control. Remote data sorts the call before the truck rolls.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 24 — PREVENTIVE MAINTENANCE PROGRAMS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-preventive-maintenance',
+    num: 24,
+    title: 'Preventive Maintenance Programs',
+    desc: 'PM as a discipline and a product: what to check, how often, how to document it, and why kitchens buy it.',
+    slides: [
+      {
+        title: 'Why PM Sells and What It Contains',
+        body: [
+          'A commercial kitchen loses money by the minute when equipment dies mid-service: a failed walk-in can cost thousands in product; a dead fryer or dish machine can close a line or the whole house. Preventive maintenance exists because the math is lopsided — a scheduled visit costs a fraction of one emergency call plus its downtime, and this course has already taught you why: nearly every killer fault (grease-blanketed condensers, scale-buried elements, worn door gaskets, blinded probes, greasy fan bearings) is a slow, visible, preventable accumulation.',
+          'A kitchen PM visit has a rhythm built from everything you now know. Refrigeration: condenser and evaporator coils cleaned, gaskets paper-tested, drains flushed and heaters verified, temperatures logged against spec, ice machine cleaned/sanitized per schedule. Cooking: burners and pilots inspected and flames judged, elements and connections checked, thermostats verified against a calibrated probe, high-limits tested, oil and combustion condition noted. Warewashing: delime per water conditions, arms and nozzles cleared, dosing verified with strips/labels, final-rinse proof documented. Ventilation: filters, visible plenum condition, fan belts and bearings, interlock function. Everything: cords, plugs, legs and casters, and the water treatment cartridges that protect it all — dated and changed.',
+          'Frequency follows duty: quarterly is the workhorse cadence for full kitchen PM, with monthly touches for high-abuse items (ice machine cleaning in yeast-heavy operations, fryer boil-outs, condenser washes in grease-heavy stores) and semi-annual/annual for deeper work (combi descale cycles, calibrations, ventilation deep checks). Water treatment changes ride their own gallons-or-months schedule. A good program tunes cadence per site — the pizza shop\'s ice machine and the seafood house\'s walk-ins do not live identical lives.',
+        ],
+        keyPoints: [
+          'PM economics: scheduled visits cost a fraction of emergency downtime — that is the pitch and the truth',
+          'Every PM item traces to a killer fault you now know: coils, scale, gaskets, probes, belts, filters',
+          'Quarterly full-kitchen cadence, tuned per site: monthly high-abuse touches, deeper semi-annual work',
+          'Water treatment cartridges are PM\'s quiet backbone — dated, changed, documented',
+        ],
+        quiz: [
+          {
+            q: 'The strongest honest argument for a kitchen PM contract is:',
+            a: ['It voids fewer warranties', 'Most catastrophic kitchen failures are slow, visible accumulations that scheduled visits catch cheaply', 'It guarantees no failures ever', 'Techs prefer scheduled work'],
+            correct: 1,
+            exp: 'Dirty condensers, scale, worn gaskets, greasy bearings: the killers accumulate visibly. PM interrupts them at a fraction of downtime cost.',
+          },
+          {
+            q: 'PM frequency should be set by:',
+            a: ['A universal industry standard', 'Each site\'s duty and conditions — grease load, water quality, hours, and equipment mix', 'The customer\'s budget alone', 'Manufacturer defaults only'],
+            correct: 1,
+            exp: 'Quarterly is the workhorse baseline, but the yeast-heavy bakery\'s ice machine and the grease-heavy grill\'s condensers earn monthly attention.',
+          },
+        ],
+      },
+      {
+        title: 'Documentation, Agreements, and Warranty',
+        body: [
+          'PM without documentation is rumor. Every visit produces a written record per unit: what was inspected, measured values (temperatures, pressures, sanitizer ppm, rinse proof), what was cleaned/adjusted/replaced, and — the high-value line — conditions noted and recommendations made. That recommendations line is where PM protects everyone: "condenser fan bearing noisy, replacement recommended" dated three months before the walk-in failure is the difference between a trusted advisor and a lawsuit defendant. Photos cost nothing and settle everything.',
+          'Service agreements formalize the deal, and you should understand what yours covers even if you never write one: scope (which equipment, which tasks, what cadence), what is included (labor? parts? priority response?) versus billable, response-time commitments for covered customers, and exclusions (abuse, operator error, acts of grease). Techs live the agreement\'s edges daily: knowing whether the dead pump in front of you is covered work, billable work, or quote-first work is as much a part of professionalism as the repair.',
+          'Warranty is the third documentation domain. Equipment warranties (typically 1 year parts and labor through authorized servicers, longer on specific components like compressors or tanks) demand: verified model/serial and install date, failure documentation the manufacturer accepts, authorization before major repairs, correct claim procedure, and returned parts tagged and shipped as directed. Two field rules: never tell a customer definitively "that is warranty" before verification (unverified promises come out of somebody\'s pocket), and document root cause even on warranty jobs — warranty replaces the victim, but your Module 15/23 discipline still has to catch the murderer or the claim repeats.',
+          'The commercial loop closes here: PM visits generate the condition reports; condition reports generate approved repairs; documented repairs build the trust that renews agreements. The technician who writes clearly, photographs faithfully, and recommends honestly is not doing paperwork — they are building the book of business that keeps them employed at the top rate.',
+        ],
+        keyPoints: [
+          'Every PM visit: measured values, actions taken, and dated recommendations — with photos',
+          'Know your agreement\'s edges: covered vs billable vs quote-first, per equipment and task',
+          'Never promise warranty before verification; follow claim procedure; tag and return parts',
+          'Documentation is the product: condition reports → approved repairs → renewed trust',
+        ],
+        quiz: [
+          {
+            q: 'Three months after your PM report noted "compressor start components weakening, replacement recommended — declined by manager," the walk-in fails overnight. Your documentation:',
+            a: ['Is irrelevant now', 'Protects your company and frames the failure as a declined recommendation, not negligence', 'Should be revised after the fact', 'Voids the customer\'s insurance'],
+            correct: 1,
+            exp: 'Dated findings with declined recommendations are exactly why PM documentation exists — for the customer\'s planning and everyone\'s protection.',
+          },
+          {
+            q: 'A customer insists a failed 3-year-old fryer element "must be warranty." The professional response is:',
+            a: ['Agree to keep goodwill', 'Verify model/serial, install date, and warranty terms before making any commitment', 'Refuse outright', 'Split the difference on the bill'],
+            correct: 1,
+            exp: 'Warranty is a verifiable fact, not a negotiation. Unverified promises become someone\'s unplanned expense — usually yours.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The economic case for PM rests on:', a: ['Cheaper parts in bulk', 'Scheduled visits costing far less than emergency failures plus downtime and product loss', 'Manufacturer rebates', 'Fewer invoices'], correct: 1, exp: 'One prevented walk-in failure or line-down event pays for a year of visits.' },
+      { q: 'The single most failure-preventing PM task in kitchens is:', a: ['Tightening screws', 'Cleaning condenser coils (and the airflow they need)', 'Updating firmware', 'Replacing all gaskets annually'], correct: 1, exp: 'The grease-dusted condenser is the #1 root cause in kitchen refrigeration — PM interrupts it on schedule.' },
+      { q: 'High-temp dish machine PM must document:', a: ['Detergent brand', 'Final-rinse sanitizing proof (temperature at the ware)', 'Rack count', 'Water bill'], correct: 1, exp: 'Sanitizing proof is the health-code heart of the machine — measured and written every visit.' },
+      { q: 'Water treatment cartridges on PM programs are:', a: ['Optional extras', 'Dated, changed on schedule, and documented — they protect everything downstream', 'Cleaned and reused', 'Only for espresso machines'], correct: 1, exp: 'Exhausted treatment quietly executes steamers, boosters, combis, and ice machines. The cartridge date is cheap insurance.' },
+      { q: 'A noted-but-declined PM recommendation should be:', a: ['Deleted to avoid friction', 'Documented with date and the decline — it protects both parties later', 'Repeated verbally only', 'Escalated to the manufacturer'], correct: 1, exp: 'The dated, declined recommendation is the professional record when the predicted failure arrives.' },
+      { q: 'Service agreement "edges" a tech must know are:', a: ['Font and formatting', 'What is covered vs billable vs quote-first for the equipment in front of them', 'The salesperson\'s commission', 'Renewal dates only'], correct: 1, exp: 'Whether this repair is covered work changes what you do next — knowing is part of the job.' },
+      { q: 'Before telling a customer a repair is under warranty you must:', a: ['Check their payment history', 'Verify model/serial, install date, and terms', 'Call the distributor', 'Nothing — goodwill first'], correct: 1, exp: 'Warranty is verifiable fact; premature promises become unfunded costs.' },
+      { q: 'On warranty repairs, root-cause diagnosis is:', a: ['Skippable — the part is free', 'Still mandatory, or the replacement fails and the claim repeats', 'The manufacturer\'s job', 'Only for compressors'], correct: 1, exp: 'Warranty replaces victims; your diagnosis still has to catch the killer (scale, voltage, water, airflow).' },
+      { q: 'Photos on PM and repair tickets are:', a: ['Unprofessional', 'Cheap, decisive documentation of conditions found and work done', 'A privacy violation', 'Only for insurance claims'], correct: 1, exp: 'A photo of the grease-blanketed coil or the scale-buried element settles every later question.' },
+      { q: 'The commercial loop PM documentation feeds is:', a: ['Reports → filing cabinet', 'Condition reports → approved repairs → trust → renewed agreements', 'Photos → social media', 'Findings → warranty claims'], correct: 1, exp: 'Honest, documented findings are how PM programs grow — the paperwork is the product.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 25 — SYSTEMATIC TROUBLESHOOTING & DIAGNOSTICS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-troubleshooting',
+    num: 25,
+    title: 'Systematic Troubleshooting & Diagnostics',
+    desc: 'The capstone method: one diagnostic frame across electrical, gas, refrigeration, and water — plus repair-vs-replace judgment.',
+    slides: [
+      {
+        title: 'The Universal Method',
+        body: [
+          'Seventeen modules of equipment reduce to one method. 1) DEFINE the complaint precisely — interrogate the operator: What exactly does it do? Since when? All the time or sometimes-when? What changed (new staff, new cleaning routine, renovation, that new fan)? Half of diagnosis is turning "the oven is broken" into "the second shelf bakes pale on weekends." 2) VERIFY the complaint yourself — reproduce it, measure it; you cannot fix what you have not observed, and you will bill embarrassingly for fixing what did not exist. 3) LOCALIZE to a subsystem — every appliance in this course decomposes: power/fuel supply → conversion (elements, burners, compressor) → distribution (air, water, refrigerant) → control (sensors, logic, safeties). The walkarounds, control-chain traces, and freeze/harvest observations you have learned are all localization rituals. 4) ISOLATE the component with instruments — meter, manometer, gauges, thermometer: measurements, not vibes. 5) REPAIR, then 6) VERIFY THE FIX under real conditions — a full cycle, a full rack, a full recovery to setpoint — and 7) FIND THE ROOT CAUSE so the repair survives you: the burned element was killed by scale; the dead board was killed by the pressure washer; the seized compressor was killed by the condenser. Fix the killer, not just the corpse.',
+          'The method has force-multipliers. Split-half: on any chain (the control ladder, a gas train, a water path), test the middle first — each measurement halves the search space; the fifteen-component chain falls in four measurements. Swap-test: identical adjacent equipment (fryer banks, twin valves) lets you exchange a suspect part and watch whether the fault follows it. Pattern library: everything this course taught — the 208/240 trap, the welded contactor, the frost signatures, the microamp-starved flame rod, the scale-blinded probe — is a catalog of priors; check the catalog before checking everything.',
+          'And the discipline that separates professionals: change ONE variable at a time (shotgun repairs that "fix" things teach nothing and often un-fix under warranty), write down readings as you take them (memory lies by the third measurement), and when truly stuck, re-verify your assumptions from zero — the "dead" circuit that was never actually verified dead, the "correct" gas pressure measured with burners off, the data plate nobody read. Stuck diagnoses are almost always a false assumption, not a mysterious machine.',
+        ],
+        keyPoints: [
+          'Define → verify → localize → isolate → repair → verify fix → root cause: every call, every system',
+          'Split-half search on chains; swap-tests on twins; the course\'s fault patterns as your priors',
+          'One variable at a time, readings written down, fixes verified under real load',
+          'Stuck? Re-verify assumptions from zero — the mystery is usually a false premise',
+        ],
+        quiz: [
+          {
+            q: 'A 12-component control chain shows an open somewhere. Split-half search finds it in at most:',
+            a: ['12 measurements', 'About 4 measurements (halving each time)', '6 measurements', '2 measurements'],
+            correct: 1,
+            exp: '12 → 6 → 3 → 1-2: binary search collapses chains logarithmically. Test the middle, not the ends.',
+          },
+          {
+            q: 'You replace three parts at once and the fryer works. The problem with this "win" is:',
+            a: ['Inventory paperwork', 'You learned nothing, billed for two innocent parts, and cannot answer which fix holds when it recurs', 'The parts needed burn-in', 'Nothing — results matter'],
+            correct: 1,
+            exp: 'Shotgun repairs destroy the information the fault contained. One variable at a time is slower per step and faster per truth.',
+          },
+          {
+            q: 'The step that keeps a correct repair from failing again in eight weeks is:',
+            a: ['Torque-checking fasteners', 'Root-cause analysis — identifying what killed the failed component', 'Premium replacement parts', 'A longer test cycle'],
+            correct: 1,
+            exp: 'Elements die of scale, boards die of water, compressors die of condensers. Replace the victim AND arrest the killer.',
+          },
+        ],
+      },
+      {
+        title: 'Cross-System Reasoning',
+        body: [
+          'Real kitchen faults ignore subsystem boundaries, and the best diagnosticians reason across them. The course\'s recurring cross-system chains: WATER → EVERYTHING (untreated water kills steamer elements, blinds combi probes, plugs espresso paths, films dishware — one exhausted cartridge, five "unrelated" tickets); AIRFLOW → REFRIGERATION AND COMBUSTION (the failed make-up air unit that starves fryer burners, spills the hood, AND runs every condenser hot in a now-negative 95°F kitchen); POWER QUALITY → ELECTRONICS (the rush-hour brownout resetting boards across the cook line); VENTILATION INTERLOCKS → "EVERYTHING DIED" (the proving switch that shut the whole line down by design).',
+          'Multi-symptom calls are therefore a gift: symptoms that share a cause point at it. Three flavors flat at the soda tower = the shared carbonation/chilling chain, not three valves. Every gas appliance sooting = building gas pressure or combustion air, not five dirty burners. Walk-in AND prep table AND ice machine all struggling since Tuesday = what changed Tuesday in their shared environment (condenser airflow? Ambient? Power?). Ask "what do the victims share?" before dispatching yourself down five separate rabbit holes.',
+          'Repair-versus-replace is the judgment layer on top of diagnosis, and it is a numbers conversation delivered honestly: repair cost against replacement cost, age against expected service life, this failure against the unit\'s failure history (the third compressor conversation is really a replacement conversation), efficiency and refrigerant obsolescence (repairing an R-404A antique into its fourth leak has a compliance clock ticking), parts availability, and downtime tolerance (the only fryer in a food truck buys repairs a fourth back-up fryer never would). Your job is the honest framing with numbers — "this repair is $900 on a $2,400 unit in year nine of a ten-year life" — and the customer\'s job is the decision.',
+          'The capstone habit: after every interesting call, close the loop on yourself. What did the fault turn out to be? What was the earliest evidence that pointed there? What would have found it faster? Diagnosticians are built call by call from exactly that review — the pattern library grows, the priors sharpen, and the tech who does this for five years walks into kitchens knowing what is wrong before the tool bag opens. That tech is Module 27\'s subject: the one who becomes the lead, the trainer, the manager.',
+        ],
+        keyPoints: [
+          'Shared-cause reasoning: multi-symptom calls point at what the victims share',
+          'Water, airflow, power quality, and interlocks are the great cross-system killers',
+          'Repair-vs-replace: honest numbers (cost, age, history, refrigerant, downtime) — customer decides',
+          'Review every interesting call: earliest evidence, faster path — that is how diagnosticians are built',
+        ],
+        quiz: [
+          {
+            q: 'Since Tuesday: the walk-in runs warm, the prep table struggles, and the ice machine\'s production halved. The diagnostic question to ask FIRST is:',
+            a: ['Which unit is oldest?', 'What do all three share, and what changed Tuesday (ambient heat, condenser airflow, power)?', 'Which has the lowest charge?', 'Who serviced them last?'],
+            correct: 1,
+            exp: 'Three refrigeration victims with one onset date share an environmental cause — find Tuesday\'s change before opening three sealed systems.',
+          },
+          {
+            q: 'A 9-year-old reach-in (typical life ~10-12 years) needs a $900 compressor; replacement is $2,400. The professional move is:',
+            a: ['Just do the repair — it is authorized work', 'Present both numbers with age and history honestly and let the customer decide', 'Refuse the repair', 'Recommend replacement to raise the ticket'],
+            correct: 1,
+            exp: 'Repair-vs-replace is the customer\'s economic decision, made well only when the tech frames the numbers honestly.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The correct first step on any service call is:', a: ['Open the control panel', 'Define and verify the complaint precisely — reproduce and measure it', 'Check the breaker', 'Read error codes'], correct: 1, exp: 'You cannot fix what you have not observed; precise definition halves the diagnosis.' },
+      { q: 'Every kitchen appliance localizes into the subsystems:', a: ['Left side, right side', 'Supply → conversion → distribution → control', 'Analog vs digital', 'Wet vs dry'], correct: 1, exp: 'Power/fuel in, conversion to heat/cold/motion, distribution by air/water/refrigerant, governed by controls — the universal decomposition.' },
+      { q: 'Split-half diagnosis means:', a: ['Two techs working opposite ends', 'Testing the middle of a chain so each measurement halves the search space', 'Checking half the appliance per visit', 'Splitting the invoice'], correct: 1, exp: 'Binary search on any chain: logarithmic instead of linear hunting.' },
+      { q: 'A swap-test is valid when:', a: ['Any two parts look similar', 'Identical adjacent equipment lets a suspect part move and the fault follow (or not)', 'The part is cheap', 'The manual allows it'], correct: 1, exp: 'Twin fryer banks and matched valves let the fault vote: it follows the guilty part.' },
+      { q: 'Changing several parts at once is poor practice because:', a: ['It is slower', 'It destroys causal information, bills innocents, and leaves recurrence unexplainable', 'Manufacturers forbid it', 'It voids calibration'], correct: 1, exp: 'One variable at a time preserves the information the fault contains.' },
+      { q: 'A correct repair without root-cause analysis:', a: ['Is complete', 'Leaves the killer in place — the replacement dies on the same schedule', 'Just needs documentation', 'Earns the same trust'], correct: 1, exp: 'Scale, water, airflow, and voltage kill again unless arrested.' },
+      { q: 'Multi-symptom calls across several machines are best opened by asking:', a: ['Which machine matters most?', 'What do the victims share, and what changed at symptom onset?', 'Which is under warranty?', 'Which is loudest?'], correct: 1, exp: 'Shared-cause reasoning: environment, water, power, and airflow serve many machines at once.' },
+      { q: 'A whole cook line dead with good breakers should immediately suggest:', a: ['Mass appliance failure', 'A shared upstream cause — like the hood exhaust interlock/proving switch', 'Vandalism', 'A utility brownout only'], correct: 1, exp: 'NFPA 96 interlocks kill the line by design when exhaust proving fails — the classic shared-cause trap.' },
+      { q: 'Repair-vs-replace framing belongs to:', a: ['The tech\'s preference', 'Honest numbers — repair cost, unit age/life, failure history, refrigerant status, downtime — with the customer deciding', 'The manufacturer', 'Whoever pays the invoice'], correct: 1, exp: 'The tech frames facts; the customer owns the economic decision.' },
+      { q: 'The habit that builds diagnostic mastery over years is:', a: ['Collecting service manuals', 'Reviewing each interesting call: what was the earliest evidence and the faster path?', 'Memorizing error codes', 'Upgrading tools annually'], correct: 1, exp: 'The post-call review grows the pattern library that lets veterans smell the fault from the doorway.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 26 — STARTUP, COMMISSIONING & CUSTOMER HANDOFF
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-startup-commissioning',
+    num: 26,
+    title: 'Startup, Commissioning & Customer Handoff',
+    desc: 'Installation verification, startup procedure, operator training, and the documentation that closes an install professionally.',
+    slides: [
+      {
+        title: 'Installation Verification and Startup',
+        body: [
+          'Commissioning is proving a machine is installed right before proving it runs right — because startup on a bad installation certifies a future failure. The verification sweep, before anything powers on: UTILITIES — supply voltage/phase against the data plate (the 208/240 trap is born at installation), correctly sized and dedicated breakers, gas type and manifold pressure verified with your manometer (a propane-converted unit on natural gas is an installation error you catch NOW), water supply pressure and treatment in place, drains with proper air gaps (direct-plumbed drains on food equipment violate code). PLACEMENT — clearances to combustibles per the data plate, condenser breathing room, level (fryers drain and doors swing by level; refrigeration oil returns by level), under the hood if it cooks (with suppression nozzle coverage confirmed for the new arrangement — Module 20), and restrained flexible gas connectors on castered equipment.',
+          'Then startup per the manufacturer\'s sequence — which exists because order matters: combis prime their generators before heating; refrigeration establishes oil and pressures before loading; gas equipment proves ignition and combustion (flame appearance, manometer under fire) before calibration. During startup you baseline the unit: record operating temperatures, pressures, amp draws, and combustion values while it is new and right. That baseline sheet is a gift to every future tech — including you — because "what should it read?" now has a documented answer for this exact unit.',
+          'Run the machine through a real cycle under real conditions — a full preheat and recovery, a rack through the dish machine with sanitizing proof, ice through a full freeze-harvest, product to temperature in the blast chiller. Commissioning is complete when the machine has done its actual job once, measured, in front of you.',
+        ],
+        keyPoints: [
+          'Verify utilities against the data plate BEFORE power-on: voltage/phase, gas type and pressure, water, drains, breakers',
+          'Placement is performance: clearances, condenser air, level, hood coverage, restrained connectors',
+          'Follow the manufacturer\'s startup sequence and record a baseline (temps, pressures, amps, combustion)',
+          'Done means the machine performed its real job once, measured, in front of you',
+        ],
+        quiz: [
+          {
+            q: 'A new fryer\'s data plate says 240V/3Ø; the receptacle measures 208V/3Ø. The commissioning action is:',
+            a: ['Start it anyway — it will just run a little slow', 'Stop and resolve the supply mismatch now — element output and warranty both depend on it', 'Derate the thermostat', 'Swap elements for 208V versions yourself and continue'],
+            correct: 1,
+            exp: 'Commissioning exists to catch exactly this. Starting up a mismatched unit certifies chronic complaints and a warranty argument.',
+          },
+          {
+            q: 'Recording baseline readings (temps, pressures, amps) at startup matters because:',
+            a: ['Manufacturers require it for registration', 'It documents what THIS healthy unit reads — the reference every future diagnosis will wish it had', 'It fills out the invoice', 'Codes demand it'],
+            correct: 1,
+            exp: 'A documented healthy baseline turns future "is this reading normal?" questions into lookups instead of guesses.',
+          },
+        ],
+      },
+      {
+        title: 'Operator Training and Professional Handoff',
+        body: [
+          'The most reliable predictor of a new machine\'s service history is not the brand — it is the training of the people who use and clean it daily. You have seen the evidence all course: soft-serve "failures" that are reassembly errors, prep tables defeated by overfilled pans, boil-overs clogging burners, pressure-washed control boards, dish machines run on exhausted tank water. Handoff training targets exactly these: daily operation (startup, shutdown, what normal looks and sounds like), cleaning boundaries (what gets cleaned how, and the NEVER list — never pressure-wash controls, never hose electrical compartments, never scrape the evaporator), consumable duties (filters, oil, deliming schedules, treatment cartridge dates), and the difference between operator tasks and service calls (reset one high-limit trip? Maybe. Reset it daily? Call).',
+          'Train the people who actually do the work — the opening cook and the closing dishwasher, not just the manager — and train show-then-do: walk it, then watch them do it. Leave the laminated quick-card (normal readings, daily/weekly duties, "call service if" triggers, and the service number) mounted on or near the unit. Ten minutes of handoff training prevents the plurality of year-one service calls, and the calls it prevents are the unprofitable, trust-eroding kind.',
+          'Close with documentation: a commissioning report (installation verified with any deficiencies noted and who owns them, startup measurements/baseline, real-cycle results with sanitizing or temperature proof where applicable, training delivered and to whom) — signed by the customer. Register the warranty with model, serial, and startup date, and leave the paperwork trail organized (manuals to the manager, quick-card on the machine, report copies to the office and your file). Deficiency handling is a professional skill of its own: what you found, whose scope fixes it (electrician? plumber? GC?), and what limits it imposes meanwhile — in writing, without drama. The signed commissioning report is the birth certificate of the machine\'s service life and frequently the first page of a service relationship that outlives the warranty.',
+        ],
+        keyPoints: [
+          'Train the actual operators, show-then-do, with the NEVER list explicit (pressure washing kills boards)',
+          'Leave the quick-card: normal readings, duties, call-service triggers, and your number',
+          'Commissioning report: verification, baseline, real-cycle proof, training record — customer-signed',
+          'Deficiencies: documented, scoped to the right trade, limits stated — in writing, without drama',
+        ],
+        quiz: [
+          {
+            q: 'The highest-leverage ten minutes at a new equipment handoff is spent on:',
+            a: ['Reviewing the invoice', 'Training the actual daily operators on operation, cleaning boundaries, and call-service triggers', 'Photographing the install', 'Registering the warranty'],
+            correct: 1,
+            exp: 'Operator behavior drives year-one service history. The NEVER list and the quick-card prevent the most common, least profitable calls.',
+          },
+          {
+            q: 'During commissioning you find the site electrician landed the new combi on an undersized breaker. You should:',
+            a: ['Fix the breaker yourself to finish the job', 'Document the deficiency, assign it to the electrical scope in writing, and state what is limited until corrected', 'Start the unit and let the breaker prove itself', 'Cancel the commissioning silently'],
+            correct: 1,
+            exp: 'Deficiency handling: found, documented, routed to the owning trade, with interim limits stated. Professional, in writing, no drama.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Commissioning begins with:', a: ['The first heat cycle', 'Verifying the installation (utilities, placement, code items) against the data plate before power-on', 'Warranty registration', 'Operator training'], correct: 1, exp: 'Startup on a bad install certifies future failures — verification comes first.' },
+      { q: 'The voltage check at commissioning catches:', a: ['Loose terminals', 'The 208/240 mismatch that otherwise becomes years of "slow equipment" complaints', 'Reversed polarity only', 'Utility billing errors'], correct: 1, exp: 'Supply-vs-data-plate mismatch is born at installation and cheapest to fix on day one.' },
+      { q: 'Food equipment drains require:', a: ['Direct plumbing to the sewer', 'An air gap to prevent backflow contamination', 'A trap primer', 'Copper piping only'], correct: 1, exp: 'The air gap is a code-required backflow barrier between food equipment and drainage.' },
+      { q: 'Relocating cooking appliances under a hood requires suppression review because:', a: ['The hood may be too small', 'Nozzle aiming is appliance-specific in the listed design', 'Fire codes tax relocations', 'The gas flex may be short'], correct: 1, exp: 'Module 20\'s rule surfaces at commissioning: nozzle-to-appliance alignment is part of the fire system design.' },
+      { q: 'Startup baseline documentation should include:', a: ['Only the serial number', 'Operating temps, pressures, amp draws, and combustion values while the unit is new and right', 'The installer\'s names', 'Photos only'], correct: 1, exp: 'The healthy baseline is the reference every future diagnosis will lean on.' },
+      { q: 'Commissioning is complete when:', a: ['The unit powers on', 'The machine has performed its real job once, measured (full cycle, sanitizing/temperature proof as applicable)', 'The customer pays', 'The packaging is removed'], correct: 1, exp: 'Real work, measured, in front of you — not just lights and fans.' },
+      { q: 'Handoff training should be delivered to:', a: ['The owner only', 'The people who actually operate and clean the machine daily', 'The GC', 'Whoever signs'], correct: 1, exp: 'The opening cook and closing dishwasher determine the machine\'s service history.' },
+      { q: 'The explicit NEVER list for operators includes:', a: ['Never adjust the thermostat', 'Never pressure-wash controls or hose electrical compartments', 'Never clean the condenser', 'Never call service'], correct: 1, exp: 'Water intrusion from aggressive cleaning is a leading killer of kitchen control electronics.' },
+      { q: 'An installation deficiency found at commissioning is handled by:', a: ['Fixing it regardless of trade', 'Documenting it, assigning it to the owning scope in writing, and stating interim limits', 'Ignoring it if the unit runs', 'Canceling the install'], correct: 1, exp: 'Route it to the right trade, on paper, with consequences stated — professionalism without drama.' },
+      { q: 'The signed commissioning report functions as:', a: ['A sales receipt', 'The machine\'s service-life birth certificate: verification, baseline, proof, and training record', 'A warranty substitute', 'Internal paperwork only'], correct: 1, exp: 'It anchors warranty, future diagnosis, and the service relationship in one signed document.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 27 — CAREER IN COMMERCIAL KITCHEN FIELD SERVICE
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'kitchen-career',
+    num: 27,
+    title: 'Career in Commercial Kitchen Field Service',
+    desc: 'The job market, the certification ladder (EPA 608, CFESA, manufacturer schools), customer craft, and where the career leads.',
+    slides: [
+      {
+        title: 'The Market and the Certification Ladder',
+        body: [
+          'Every restaurant, hospital cafeteria, school kitchen, hotel, stadium, grocery deli, and ghost kitchen in the country runs equipment that breaks, and the technicians who fix it are in chronic short supply — the same demographic cliff driving the UPS trade (Module 28 of that course tells the twin story): an aging workforce, too few entrants, and equipment growing more complex. Employers include dedicated commercial kitchen service companies (many CFESA-member firms), manufacturers\' own service arms, chain restaurants\' in-house teams, and general facilities companies. Entry technicians typically start in the $45-60K range, experienced multi-discipline techs (refrigeration + cooking + steam) commonly reach $70-90K, and lead/specialist roles — with the certifications below and OEM authorizations — exceed that, before the overtime that kitchen emergencies reliably supply.',
+          'The certification ladder is concrete and worth climbing in order. EPA 608 (legally required for refrigerant work — Module 13): study Core + Type II at minimum; the Universal certification (all types) is the standard flex. CFESA (Commercial Food Equipment Service Association) certification is the industry\'s own credential track — written exams in Electric, Gas, Steam, and Refrigeration; certify in three or more (with the customer-service module) and you are a CFESA Certified Master Technician, the recognized top card in this trade. Manufacturer schools (Hobart, Rational, Middleby brands, Frymaster, Manitowoc/Welbilt, Hoshizaki, Taylor and many more) grant the model-specific training and warranty authorization that make you dispatchable — and more billable — on their equipment; companies routinely fund these because authorized techs are how they win OEM warranty work. Round it out per your niche: food-safety handler cards for working in live kitchens, gas-work qualifications where jurisdictions require them, and the OSHA-10/electrical safety base this course already gave you.',
+          'This course\'s certificate — with the shared electrical foundation, NFPA-70E discipline, and meter craft of Modules 1-10 — is your entry credential: proof to an employer that the fundamentals are installed and the expensive part (safe habits) is already trained. Pair it with EPA 608 within your first months on the job; let your employer route you into CFESA and manufacturer schools from there.',
+        ],
+        keyPoints: [
+          'Chronic technician shortage across every food-service vertical; complexity is rising, supply is not',
+          'Ladder: EPA 608 (legal gate) → CFESA categories → Master Technician; manufacturer schools = warranty authorization',
+          'Entry ~$45-60K; multi-discipline $70-90K; lead/OEM-authorized above that, plus reliable overtime',
+          'This certificate + EPA 608 in your first months is the proven entry combination',
+        ],
+        quiz: [
+          {
+            q: 'The certification legally required before independent refrigerant work is:',
+            a: ['CFESA Master Technician', 'EPA Section 608', 'OSHA-30', 'A manufacturer school certificate'],
+            correct: 1,
+            exp: '608 is the federal legal gate for opening systems and buying refrigerant; everything else is professional credential on top.',
+          },
+          {
+            q: 'CFESA Master Technician status requires:',
+            a: ['Ten years of service', 'Certification in three or more categories (Electric, Gas, Steam, Refrigeration) plus the customer-service module', 'A manufacturer sponsorship', 'An engineering degree'],
+            correct: 1,
+            exp: 'Master Technician is the trade\'s recognized top credential — three-plus written category certifications earn it.',
+          },
+          {
+            q: 'Manufacturer training schools matter economically because they:',
+            a: ['Are vacations', 'Grant warranty authorization that makes you dispatchable and billable on that brand\'s OEM work', 'Replace EPA 608', 'Are required by OSHA'],
+            correct: 1,
+            exp: 'Authorized techs are how service companies win manufacturer warranty contracts — which is why employers fund the schools.',
+          },
+        ],
+      },
+      {
+        title: 'The Craft of the Job and Where It Leads',
+        body: [
+          'Kitchen service has a texture no other trade quite matches: you work in someone\'s livelihood, during their workday, around fire, water, 400°F oil, and a head chef whose lunch rush you are standing in. The soft-skill set is therefore part of the trade: announce yourself and work clean (food safety around your work area — your drill shavings cannot end up near prep), communicate in operator language ("the part that releases the ice was failing; it is replaced and I watched two perfect harvests" beats a part number), deliver bad news with options (repair/replace framing from Module 25), and leave every site cleaner than found with the paperwork done — the Module 24 loop: documentation is the product. Reliability compounds: kitchens remember the tech who showed up during the Saturday disaster, and route-density and contract renewals follow that reputation.',
+          'Build the working kit deliberately: the Module 10 meter craft (DMM, clamp, megger where appropriate) plus manometer and combustion analyzer (Module 18), refrigeration gauges/scale/vacuum instruments and recovery gear (Module 15), thermometers you trust and verify (Module 17), and the humble decisive kit — gasket rollers, port brushes, coil combs, test strips, thermolabels. Van stock mirrors the failure patterns you now know: contactors, elements for your route\'s common units, universal thermostats and high-limits, gaskets, O-ring kits, dosing tubes, capacitors, and the water-treatment cartridges that fix root causes.',
+          'The paths from the truck: LEAD/SENIOR TECH and field trainer (the Module 25 reviewer who builds other diagnosticians); SPECIALIST (the region\'s combi wizard or espresso/refrigeration authority — depth pays); SERVICE MANAGER/OPERATIONS (dispatch, contracts, P&L — the documentation habit is the audition); TECHNICAL SALES/OEM ROLES (factory service reps, trainers, and territory managers are overwhelmingly ex-techs); and OWNERSHIP — kitchen service is a fragmented industry of route-sized companies, and the tech with five years of route relationships, a master ticket or two, and clean paperwork habits is looking at the most realistic small-business runway in the trades. Every one of those doors opens off the same hallway: diagnose honestly, document faithfully, keep learning the ladder. Welcome to the trade.',
+        ],
+        keyPoints: [
+          'Soft skills are trade skills: work clean in live kitchens, speak operator language, frame options honestly',
+          'Kit and van stock mirror the course\'s failure patterns — including water treatment (root causes, not corpses)',
+          'Paths: lead/trainer, specialist, service manager, OEM/technical sales, and realistic ownership',
+          'Every path opens off the same hallway: honest diagnosis, faithful documentation, continuous learning',
+        ],
+        quiz: [
+          {
+            q: 'Explaining a completed repair to a kitchen manager is best done by:',
+            a: ['Quoting part numbers and error codes', 'Operator language plus proof: what failed, what was done, and the verified result you watched', 'Leaving the old part on the counter', 'Emailing the service manual section'],
+            correct: 1,
+            exp: '"It is fixed and I watched it do its job correctly" in plain language is the communication the customer buys.',
+          },
+          {
+            q: 'The most realistic ownership runway in this trade exists because:',
+            a: ['Franchises are cheap', 'The industry is fragmented into route-sized companies where five years of relationships and clean paperwork is a viable foundation', 'Equipment is easy to finance', 'Manufacturers sell territories'],
+            correct: 1,
+            exp: 'Kitchen service remains a local-relationship business — the documented, trusted tech is most of the way to a company.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The commercial kitchen service labor market is characterized by:', a: ['Oversupply of techs', 'Chronic shortage with rising equipment complexity', 'Declining demand', 'Automation replacing techs'], correct: 1, exp: 'Aging workforce, few entrants, more complex equipment — the same shortage story as critical power.' },
+      { q: 'EPA 608 Universal certification covers:', a: ['Small appliances only', 'All appliance types/categories of refrigerant work', 'Only R-290 systems', 'Automotive systems'], correct: 1, exp: 'Universal = all types; the standard professional target beyond the Type II minimum.' },
+      { q: 'CFESA written certification categories are:', a: ['Bronze, Silver, Gold', 'Electric, Gas, Steam, and Refrigeration', 'Level 1-4', 'Cooking and Cooling'], correct: 1, exp: 'The four category exams (plus customer service) build to Master Technician at three or more.' },
+      { q: 'Manufacturer warranty authorization typically requires:', a: ['Five years in trade', 'Completing that manufacturer\'s training school', 'CFESA membership', 'A state license'], correct: 1, exp: 'OEM schools grant the model training and the authorization that makes warranty work dispatchable to you.' },
+      { q: 'Experienced multi-discipline kitchen techs commonly earn:', a: ['$30-40K', 'Roughly $70-90K, with leads and specialists above that', 'Minimum wage plus tips', '$150K to start'], correct: 1, exp: 'Refrigeration + cooking + steam breadth, with certifications, is what moves techs into the upper band.' },
+      { q: 'Working in a live kitchen requires:', a: ['Working only after hours', 'Clean-work discipline: protecting food areas from your debris and coordinating around service', 'A food handler manager on site', 'Shutting the kitchen down'], correct: 1, exp: 'You are a guest in a food-production environment during its workday — cleanliness and coordination are trade skills.' },
+      { q: 'Van stock should be built from:', a: ['Whatever is on sale', 'The failure patterns of your route\'s equipment — contactors, elements, gaskets, O-rings, treatment cartridges', 'One of every part', 'Manufacturer starter kits only'], correct: 1, exp: 'Stock mirrors the priors: the parts this course\'s fault patterns predict you will need.' },
+      { q: 'The audition for service management roles is largely:', a: ['Seniority', 'The documentation, communication, and reliability habits shown as a tech', 'A management degree', 'Sales numbers'], correct: 1, exp: 'Dispatch, contracts, and P&L are run on exactly the habits Modules 24-26 train.' },
+      { q: 'The specialist path (combi wizard, espresso authority) pays because:', a: ['Specialists work less', 'Depth on complex, high-value equipment commands premium rates and OEM relationships', 'It avoids paperwork', 'Generalists are being phased out'], correct: 1, exp: 'The hardest boxes (combis, espresso, refrigeration racks) reward the deepest techs.' },
+      { q: 'The common foundation of every advancement path in this trade is:', a: ['Certifications alone', 'Honest diagnosis, faithful documentation, and continuous learning', 'Overtime volume', 'Brand loyalty'], correct: 1, exp: 'Lead, specialist, manager, OEM, or owner — all are built on the same three habits.' },
+    ],
+  },
 ];
