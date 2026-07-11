@@ -2,8 +2,8 @@ import { redirect, notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
-import { getModule, getPrevModule } from '@/data/index';
-import { hasTrainingAccess } from '@/lib/utils/trainingAccess';
+import { getModule } from '@/data/index';
+import { getGrantedCourseKeys, moduleUnlockState } from '@/lib/utils/trainingAccess';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
@@ -33,30 +33,20 @@ export default async function ModulePage({ params }: Props) {
   const mod = getModule(moduleId);
   if (!mod) notFound();
 
-  const hasAccess = isAdmin || (await hasTrainingAccess(uid, mod));
+  const grantedKeys = await getGrantedCourseKeys(uid, mod);
+  const hasAccess = isAdmin || grantedKeys.length > 0;
 
   const isFreeTrialModule = mod.num <= 3;
   if (!hasAccess && !isFreeTrialModule) redirect('/training');
 
-  // Check 3-day rule from previous module — bypassed for admins and free trial
+  // Check 3-day rule from the previous module in the user's enrolled course
+  // sequence(s) — bypassed for admins and free trial
   let locked = false;
   let unlockDate: Date | null = null;
   if (hasAccess && !isAdmin && mod.num > 1) {
-    const prevMod = getPrevModule(mod);
-    if (prevMod) {
-      const prevProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(prevMod.id).get();
-      const prevData = prevProgress.data();
-      if (!prevData?.completedAt) {
-        locked = true;
-      } else {
-        const completedAt = prevData.completedAt.toDate ? prevData.completedAt.toDate() : new Date(prevData.completedAt);
-        const threeDaysMs = 3 * 24 * 60 * 60 * 1000;
-        if (Date.now() - completedAt.getTime() < threeDaysMs) {
-          locked = true;
-          unlockDate = new Date(completedAt.getTime() + threeDaysMs);
-        }
-      }
-    }
+    const state = await moduleUnlockState(uid, mod, grantedKeys);
+    locked = state.locked;
+    unlockDate = state.unlockDate;
   }
 
   const progressDoc = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(moduleId).get();

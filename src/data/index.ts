@@ -7,15 +7,17 @@ import { MODULES_PART3 } from './modules-part3';
 import { MODULES_PART4 } from './modules-part4';
 import { MODULES_PART5 } from './modules-part5';
 import { KITCHEN_MODULES } from './kitchen-modules';
+import { HVAC_MODULES } from './hvac-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
-// modules live in KITCHEN_MODULES (nums 11-27) so the UPS training-completion
-// check (ALL_MODULES.every) is unaffected. Modules 1-10 are shared by both
-// courses.
+// modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
+// HVAC_MODULES (course positions 13-25) so the UPS training-completion check
+// (ALL_MODULES.every) is unaffected. Modules 1-10 are shared by all courses;
+// the two generic refrigeration modules are shared by Kitchen and HVAC.
 export const ALL_MODULES = [
   ...MODULES,
   ...MODULES_SCHEMATICS,
@@ -28,19 +30,30 @@ export const ALL_MODULES = [
 ];
 
 export function getModule(id: string): TrainingModule | null {
-  return ALL_MODULES.find((m) => m.id === id) ?? KITCHEN_MODULES.find((m) => m.id === id) ?? null;
+  return (
+    ALL_MODULES.find((m) => m.id === id) ??
+    KITCHEN_MODULES.find((m) => m.id === id) ??
+    HVAC_MODULES.find((m) => m.id === id) ??
+    null
+  );
 }
 
 export function isKitchenModule(mod: TrainingModule): boolean {
   return mod.id.startsWith('kitchen-');
 }
 
-// Which examAccess doc(s) grant access to a module. Shared foundation
-// modules (1-10) are accessible from any course enrollment; the generic
-// refrigeration modules are shared between the Kitchen and HVAC courses.
+export function isHvacModule(mod: TrainingModule): boolean {
+  return mod.id.startsWith('hvac-');
+}
+
+// The generic refrigeration modules built for the Kitchen course are shared
+// with the HVAC course (positions 11-12 in the HVAC sequence).
 const HVAC_SHARED_KITCHEN_IDS = ['kitchen-refrigeration-cycle', 'kitchen-refrigeration-service'];
 
+// Which examAccess doc(s) grant access to a module. Shared foundation
+// modules (1-10) are accessible from any course enrollment.
 export function accessKeysForModule(mod: TrainingModule): string[] {
+  if (isHvacModule(mod)) return ['training_hvac'];
   if (isKitchenModule(mod)) {
     return HVAC_SHARED_KITCHEN_IDS.includes(mod.id)
       ? ['training_kitchen', 'training_hvac']
@@ -50,11 +63,54 @@ export function accessKeysForModule(mod: TrainingModule): string[] {
   return ['training_portal'];
 }
 
-// Previous module within the module's own course sequence (for the 3-day
-// unlock rule). Kitchen module 11 follows shared module 10; kitchen modules
-// 12+ follow the kitchen sequence. UPS modules follow the UPS sequence.
+// ── Course sequences ────────────────────────────────────────────────────
+// Ordered module lists per course (keyed by examAccess key). Used for the
+// 3-day unlock rule: a module unlocks when the previous module in the
+// user's enrolled course sequence is complete.
+const byNum = (a: TrainingModule, b: TrainingModule) => a.num - b.num;
+const FOUNDATION = ALL_MODULES.filter((m) => m.num <= 10).sort(byNum);
+
+export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
+  training_portal: [...ALL_MODULES].sort(byNum),
+  training_kitchen: [...FOUNDATION, ...[...KITCHEN_MODULES].sort(byNum)],
+  training_hvac: [
+    ...FOUNDATION,
+    ...KITCHEN_MODULES.filter((m) => HVAC_SHARED_KITCHEN_IDS.includes(m.id)).sort(byNum),
+    ...[...HVAC_MODULES].sort(byNum),
+  ],
+};
+
+// Previous module for a course sequence (null if first or not in sequence).
+export function prevModuleInCourse(courseKey: string, mod: TrainingModule): TrainingModule | null {
+  const seq = COURSE_SEQUENCES[courseKey];
+  if (!seq) return null;
+  const idx = seq.findIndex((m) => m.id === mod.id);
+  if (idx <= 0) return null;
+  return seq[idx - 1];
+}
+
+// Candidate previous modules across the courses that include this module.
+// The unlock rule accepts ANY enrolled course whose predecessor is complete
+// — so shared modules unlock correctly for whichever course the student is on.
+export function prevModuleCandidates(mod: TrainingModule, courseKeys?: string[]): TrainingModule[] {
+  const keys = courseKeys ?? accessKeysForModule(mod);
+  const seen = new Set<string>();
+  const out: TrainingModule[] = [];
+  for (const key of keys) {
+    const prev = prevModuleInCourse(key, mod);
+    if (prev && !seen.has(prev.id)) {
+      seen.add(prev.id);
+      out.push(prev);
+    }
+  }
+  return out;
+}
+
+// Back-compat single-prev helper (UPS/kitchen callers). Prefer
+// prevModuleCandidates for shared modules.
 export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.num <= 1) return null;
+  if (isHvacModule(mod)) return prevModuleInCourse('training_hvac', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }

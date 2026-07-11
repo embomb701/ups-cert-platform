@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
-import { ALL_MODULES } from '@/data/index';
+import { ALL_MODULES, COURSE_SEQUENCES } from '@/data/index';
 import { HVAC_MODULE_PLACEHOLDERS } from '@/data/courses';
 import Link from 'next/link';
 
@@ -39,6 +39,48 @@ export default async function HvacPortalPage() {
     return !!(p.completedAt && p.passed);
   }).length;
 
+  // States for built HVAC-course modules beyond the foundation (positions 11+
+  // in the HVAC sequence: shared refrigeration core + built hvac-* modules).
+  const hvacSeq = COURSE_SEQUENCES['training_hvac'];
+  const threeDaysMs = 3 * 24 * 60 * 60 * 1000;
+  const isComplete = (id: string) => {
+    const p = progress[id] ?? {};
+    return !!(p.completedAt && p.passed);
+  };
+  const getUnlock = (id: string): Date | null => {
+    const p = progress[id] ?? {};
+    if (!p.completedAt || !p.passed) return null;
+    const c = p.completedAt as { toDate?: () => Date } | string;
+    const completedAt = typeof c === 'string' ? new Date(c) : (c as { toDate: () => Date }).toDate();
+    return new Date(completedAt.getTime() + threeDaysMs);
+  };
+
+  const hvacStates = new Map(
+    hvacSeq.filter((m) => m.num > 10 || m.id.startsWith('kitchen-') || m.id.startsWith('hvac-')).flatMap((mod) => {
+      const idx = hvacSeq.findIndex((m) => m.id === mod.id);
+      if (idx < 10) return []; // foundation handled separately
+      const completed = isComplete(mod.id);
+      let locked = false;
+      let unlockDate: Date | null = null;
+      if (!isAdmin && hasAccess) {
+        const prev = hvacSeq[idx - 1];
+        if (!prev || !isComplete(prev.id)) {
+          locked = true;
+        } else {
+          const unlock = getUnlock(prev.id);
+          if (unlock && Date.now() < unlock.getTime()) {
+            locked = true;
+            unlockDate = unlock;
+          }
+        }
+      }
+      const completedSlides = (progress[mod.id]?.completedSlides ?? []) as number[];
+      const slideProgress = mod.slides.length > 0 ? completedSlides.length / mod.slides.length : 0;
+      return [[mod.id, { mod, position: idx + 1, completed, locked, unlockDate, slideProgress, completedSlides }] as const];
+    })
+  );
+  const hvacBuiltCount = hvacStates.size; // built modules beyond foundation (of 15)
+
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
       <div className="max-w-3xl mx-auto space-y-6">
@@ -62,8 +104,8 @@ export default async function HvacPortalPage() {
         <div className="rounded-xl border border-teal-800/60 bg-teal-950/10 p-5">
           <p className="text-teal-300 font-semibold mb-1">Coming Soon — Curriculum in Development</p>
           <p className="text-gray-400 text-sm">
-            The foundation modules (1–10) and the two refrigeration core modules are already built and shared
-            with the other programs. HVAC-specific modules (13–25) are outlined below.
+            The foundation modules (1–10) plus {hvacBuiltCount} of the 15 HVAC-track modules are built;
+            the rest are outlined below and in development.
             <Link href="/training" className="ml-2 text-teal-400 hover:text-teal-300 underline">← Back to Training Hub</Link>
           </p>
         </div>
@@ -115,6 +157,77 @@ export default async function HvacPortalPage() {
                 <div className="space-y-2">
                   {HVAC_MODULE_PLACEHOLDERS.map((placeholder, idx) => {
                     if (placeholder.track !== track) return null;
+
+                    // Built module → interactive card with lock states
+                    const state = hvacStates.get(placeholder.id);
+                    if (state) {
+                      const { mod, position, completed, locked, unlockDate, slideProgress, completedSlides } = state;
+                      const accessible = hasAccess && !locked;
+                      return (
+                        <div
+                          key={placeholder.id}
+                          className={`rounded-lg border p-4 transition-colors ${
+                            completed
+                              ? 'border-green-800/60 bg-green-950/10'
+                              : !hasAccess
+                              ? 'border-gray-800 bg-gray-900/50 opacity-60'
+                              : locked
+                              ? 'border-gray-700 bg-gray-800/30'
+                              : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
+                          }`}
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold ${
+                              completed ? 'bg-green-700 text-white' :
+                              !hasAccess || locked ? 'bg-gray-700 text-gray-500' :
+                              'bg-teal-900/60 border border-teal-700/60 text-teal-300'
+                            }`}>
+                              {completed ? '✓' : !hasAccess ? '🔒' : locked ? '⏳' : position}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-white font-medium text-sm">{mod.title}</span>
+                                {placeholder.sharedFrom && (
+                                  <span className="px-1.5 py-0.5 bg-green-900/40 border border-green-800/60 text-green-400 text-xs rounded">Shared with Kitchen FSE</span>
+                                )}
+                              </div>
+                              <p className="text-gray-500 text-xs mt-0.5">{mod.desc}</p>
+                              {hasAccess && !completed && slideProgress > 0 && (
+                                <div className="mt-1.5 flex items-center gap-2">
+                                  <div className="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden">
+                                    <div className="h-full bg-teal-500/60 rounded-full" style={{ width: `${slideProgress * 100}%` }} />
+                                  </div>
+                                  <span className="text-gray-500 text-xs flex-shrink-0">{completedSlides.length}/{mod.slides.length} slides</span>
+                                </div>
+                              )}
+                              {hasAccess && locked && unlockDate && (
+                                <p className="text-xs text-yellow-600 mt-1">
+                                  Unlocks {unlockDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} — 3-day wait
+                                </p>
+                              )}
+                              {hasAccess && locked && !unlockDate && (
+                                <p className="text-xs text-gray-500 mt-1">Complete the previous module first</p>
+                              )}
+                              {!hasAccess && (
+                                <p className="text-xs text-gray-600 mt-1">Enrollment opens soon</p>
+                              )}
+                            </div>
+                            <div className="flex-shrink-0">
+                              {accessible && (
+                                <Link
+                                  href={`/training/${mod.id}`}
+                                  className="px-3 py-1.5 bg-teal-700 hover:bg-teal-600 text-white text-xs font-semibold rounded transition-colors"
+                                >
+                                  {completed ? 'Review' : slideProgress > 0 ? 'Continue' : 'Start'}
+                                </Link>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    // Not yet built → outline card
                     return (
                       <details
                         key={placeholder.id}

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { getModule, getPrevModule } from '@/data/index';
+import { getModule } from '@/data/index';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
-import { hasTrainingAccess } from '@/lib/utils/trainingAccess';
+import { getGrantedCourseKeys, moduleUnlockState } from '@/lib/utils/trainingAccess';
 import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
@@ -29,26 +29,23 @@ export async function POST(req: NextRequest) {
 
     // Verify course access — free trial allows slide 0 of modules 1-3
     const isFreeTrialSlide = mod.num <= 3 && slideIndex === 0;
-    if (!isFreeTrialSlide) {
-      if (!isAdmin && !(await hasTrainingAccess(uid, mod))) {
+    let grantedKeys: string[] = [];
+    if (!isAdmin) {
+      grantedKeys = await getGrantedCourseKeys(uid, mod);
+      if (!isFreeTrialSlide && grantedKeys.length === 0) {
         return NextResponse.json({ error: 'Access denied' }, { status: 403 });
       }
     }
 
-    // Verify module unlock (3-day rule between modules) — bypassed for admins and free trial
+    // Verify module unlock (3-day rule within the user's enrolled course
+    // sequence) — bypassed for admins and free trial
     if (!isAdmin && !isFreeTrialSlide && mod.num > 1) {
-      const prevMod = getPrevModule(mod);
-      if (prevMod) {
-        const prevProgress = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(prevMod.id).get();
-        const prevData = prevProgress.data();
-        if (!prevData?.completedAt) {
-          return NextResponse.json({ error: 'Previous module not completed' }, { status: 403 });
+      const state = await moduleUnlockState(uid, mod, grantedKeys);
+      if (state.locked) {
+        if (state.unlockDate) {
+          return NextResponse.json({ error: 'Must wait 3 days after completing previous module', unlockAt: state.unlockDate.toISOString() }, { status: 403 });
         }
-        const completedAt = prevData.completedAt.toDate ? prevData.completedAt.toDate() : new Date(prevData.completedAt);
-        const threeDaysMs = 3 * 24 * 60 * 60 * 1000;
-        if (Date.now() - completedAt.getTime() < threeDaysMs) {
-          return NextResponse.json({ error: 'Must wait 3 days after completing previous module', unlockAt: new Date(completedAt.getTime() + threeDaysMs).toISOString() }, { status: 403 });
-        }
+        return NextResponse.json({ error: 'Previous module not completed' }, { status: 403 });
       }
     }
 
