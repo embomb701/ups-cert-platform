@@ -1023,4 +1023,349 @@ export const HVAC_MODULES: TrainingModule[] = [
       { q: 'A drive-served fan stuck at max with howling ducts is investigated first at:', a: ['The drive\'s IGBTs', 'The speed reference — commonly a failed duct static-pressure sensor', 'The motor bearings', 'The supply breaker'], correct: 1, exp: 'The drive obeys its reference; a lying static sensor floors the loop. Inputs before electronics — always.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 22 — HVAC REFRIGERANTS & CHARGING PRACTICES
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'hvac-refrigerants-charging',
+    num: 22,
+    title: 'HVAC Refrigerants & Charging Practices',
+    desc: 'The refrigerant transition (R-22 legacy, R-410A, A2Ls), charging by the right method, line-set discipline, and circuit accessories.',
+    slides: [
+      {
+        title: 'The Refrigerant Transition',
+        body: [
+          'HVAC is living through its second refrigerant revolution in a working lifetime. R-22 (the ozone-depleting classic) has been production-banned since 2020 — millions of R-22 systems still run, served only by recovered/reclaimed supply at painful prices, which reframes every big R-22 repair as a repair-vs-replace conversation. R-410A replaced it as the standard — higher pressures (roughly 50-70% above R-22; gauge sets and components are rated accordingly) — and is itself now being phased down under the AIM Act\'s HFC schedule because of its high global warming potential (GWP ~2,088).',
+          'The successors are the A2L class — R-454B and R-32 dominating new residential/light-commercial equipment — with GWPs a third or less of R-410A and one new property that changes shop practice: MILD flammability (the "2L" = lower flammability, hard to ignite, slow flame — not propane, but not nothing). A2L equipment and practice: refrigerant leak sensors on coils that drive blower purges, rated recovery machines/hoses/vacuum pumps, no open flames or sparks during charging in enclosed spaces, ventilation awareness, and cylinder handling per the class (left-hand threads and red-band markings distinguish A2L cylinders).',
+          'The rules riding along: EPA 608 covers all of it (recovery mandatory, venting illegal — your kitchen-course legal foundation applies verbatim), refrigerant cylinders and reclaim paperwork matter more as supplies tighten, and mixing refrigerants remains the cardinal sin (a topped-off mystery blend is unservicable and must be recovered as contaminated). Identify before you connect: the data plate, the service-port labels, and when in doubt a refrigerant identifier — because an R-22 gauge habit on an R-410A system misreads everything, and cross-charging destroys systems.',
+          'Career-practical: the transition IS the work. Techs entering now will spend a decade retrofitting, replacing, and servicing across three refrigerant generations simultaneously — the tech fluent in the PT charts, pressure classes, and handling rules of all three (plus the tooling literacy for A2L) is the tech dispatchers trust with the new equipment.',
+        ],
+        tables: [
+          {
+            caption: 'Three refrigerant generations',
+            headers: ['Refrigerant', 'Status', 'Key property'],
+            rows: [
+              ['R-22', 'Banned production; recovered supply only', 'Ozone-depleting; legacy systems, expensive gas'],
+              ['R-410A', 'Phasing down (AIM Act)', 'High pressure; GWP ~2,088'],
+              ['R-454B / R-32', 'Current new equipment', 'A2L mildly flammable; ~1/3 the GWP or less'],
+            ],
+          },
+        ],
+        keyPoints: [
+          'R-22 repairs are repair-vs-replace conversations; R-410A runs much higher pressures',
+          'A2Ls (R-454B, R-32) are mildly flammable: rated tools, leak sensors, no ignition sources, ventilation',
+          'Identify the refrigerant before connecting anything; never mix — contaminated blends get recovered',
+          'Fluency across all three generations is the employability edge of this decade',
+        ],
+        quiz: [
+          {
+            q: 'A 2009 R-22 condenser needs a $1,400 compressor plus refrigerant at scarcity prices. The professional framing is:',
+            a: ['Just repair it — R-22 is still legal to use', 'Present repair vs replacement honestly: legal-but-scarce refrigerant, unit age, and the economics of investing in a dead platform', 'Retrofit it to R-410A by swapping gas', 'Refuse service'],
+            correct: 1,
+            exp: 'Serving R-22 systems is legal with recovered supply, but big repairs on the dead platform demand the honest numbers conversation. Drop-in gas swaps between pressure classes are not a thing.',
+          },
+          {
+            q: 'The practical meaning of the A2L classification is:',
+            a: ['Toxic refrigerant', 'Mildly flammable: hard to ignite and slow-burning, but demanding rated equipment, no ignition sources, and sensor/ventilation discipline', 'Explosive like propane', 'No special handling'],
+            correct: 1,
+            exp: '2L = lower flammability. Not propane (A3), but real enough to change tools, cylinders, and work habits.',
+          },
+          {
+            q: 'You connect gauges to an unlabeled system and the pressures make no sense against any single PT chart. A previous tech may have topped off with a different refrigerant. The correct action is:',
+            a: ['Average the two PT charts', 'Treat the charge as contaminated: recover it into a dedicated cylinder for reclaim/destruction, evacuate, and recharge with the correct single refrigerant', 'Add more of whichever is cheaper', 'Vent it and start over'],
+            correct: 1,
+            exp: 'Mixed refrigerants have no valid PT chart and cannot be serviced. Recover as contaminated (never vent), then rebuild the charge properly.',
+          },
+        ],
+      },
+      {
+        title: 'Charging Discipline and Circuit Accessories',
+        body: [
+          'The charging decision tree, consolidated: FROM EMPTY (after repair + evacuation below 500 microns) → weigh in the nameplate charge plus line-set adders. VERIFYING/TRIMMING a running system → TXV/EEV systems charge to SUBCOOLING (target on the data plate, typically 8-12°F); fixed-orifice systems charge to SUPERHEAT per the manufacturer chart (outdoor dry bulb + return wet bulb). ALWAYS with airflow verified first, coils clean, stable run time, and conditions inside the table limits — the prerequisites are the difference between charging and gambling.',
+          'Line-set discipline completes the installation-quality picture: size per manufacturer tables (undersized suction lines tax capacity; oversized risk oil return), respect maximum lengths and lifts, trap and pitch per the manual for oil return on long risers, braze with nitrogen flowing (the black oxide scale from open-air brazing is what kills TXVs and plugs driers downstream — a five-cent nitrogen habit prevents thousand-dollar failures), and pressure-test + evacuate to the same standards as any sealed system.',
+          'The circuit accessories earn their keep: FILTER-DRIERS (liquid-line standard; suction driers for burnout cleanup — replace, never reuse, any drier after opening a system, and remember the kitchen lesson: a temperature drop across a drier means it is plugged), SIGHT GLASSES (bubbles = flash gas from undercharge or restriction — but modern practice trusts subcooling over glass-gazing), CRANKCASE HEATERS (keep refrigerant from migrating into compressor oil during off cycles — a failed heater plus a cold snap equals a slugging start), and ACCUMULATORS on heat pumps (catching liquid from the winter evaporator before it reaches the compressor).',
+          'And the honesty rule that closes every refrigerant conversation, one more time with feeling: a system that needed refrigerant HAS A LEAK. "Topping off" annually is renting the customer their own failure while venting regulated gas by installment. Find it (electronic, bubbles, UV dye, nitrogen isolation), fix it, prove it with a standing pressure test or vacuum hold, and document the repair. The tech who fixes leaks builds a book of loyal customers; the topper-offer builds a route of future emergencies.',
+        ],
+        keyPoints: [
+          'From empty: weigh in + line adders; TXV → subcooling; fixed orifice → superheat charts; air first, always',
+          'Braze with nitrogen flowing — open-air oxide scale murders TXVs and driers downstream',
+          'Replace driers whenever the system is opened; a temp drop across one = plugged',
+          'A system that needed gas has a leak: find, fix, prove, document — never sell top-offs',
+        ],
+        quiz: [
+          {
+            q: 'Six months after another company\'s compressor swap, the TXV sticks and the new liquid-line drier shows a temperature drop. Opening the line set reveals black flakes. The root cause was:',
+            a: ['Cheap parts', 'Brazing without flowing nitrogen — oxide scale from the repair now circulates through the circuit', 'Wrong refrigerant', 'Overcharge'],
+            correct: 1,
+            exp: 'Open-air brazing lines the tubing with cupric-oxide scale that the refrigerant then harvests into valves and driers. The nitrogen purge habit exists to prevent exactly this cascade.',
+          },
+          {
+            q: 'A heat pump\'s crankcase heater failed in November. The winter risk is:',
+            a: ['High head pressure', 'Refrigerant migrating into cold compressor oil between cycles, then a slugging, oil-washed start', 'Frozen condensate', 'Reversing valve damage'],
+            correct: 1,
+            exp: 'Refrigerant migrates to the coldest point — an off compressor — and dissolves into the oil. The next start pumps foam and liquid: the crankcase heater is compressor life insurance.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'R-22 today is:', a: ['Freely manufactured', 'Production-banned — legacy systems run on recovered/reclaimed supply at scarcity prices', 'The current standard', 'An A2L refrigerant'], correct: 1, exp: 'The phase-out reframes major R-22 repairs as replacement conversations.' },
+      { q: 'R-410A relative to R-22 operates at:', a: ['Lower pressures', 'Substantially higher pressures, requiring rated gauges and components', 'Identical pressures', 'Vacuum'], correct: 1, exp: 'Roughly 50-70% higher pressures — hardware and habits must be rated for it.' },
+      { q: 'The A2L classification of R-454B and R-32 means:', a: ['Highly toxic', 'Mildly flammable — rated tools, leak sensors, no ignition sources, ventilation awareness', 'Explosive', 'Ozone-depleting'], correct: 1, exp: 'Lower-flammability class: hard to ignite, but it changes cylinders, machines, and work practice.' },
+      { q: 'Mixed/unknown refrigerant in a system must be:', a: ['Topped off with the majority component', 'Recovered as contaminated for reclaim/destruction, then the system evacuated and recharged correctly', 'Vented and replaced', 'Left alone'], correct: 1, exp: 'Blends have no PT chart and cannot be serviced; venting remains illegal regardless.' },
+      { q: 'The correct charge method for a from-empty TXV split system is:', a: ['Charge to a clear sight glass', 'Weigh in nameplate charge plus line-set adders, then verify subcooling', 'Superheat chart', 'Fill to 120 psi suction'], correct: 1, exp: 'Weight sets the charge; subcooling verifies it — with airflow confirmed before either.' },
+      { q: 'Brazing refrigerant lines requires nitrogen flowing because:', a: ['It speeds the torch', 'It prevents internal oxide scale that later plugs TXVs and driers', 'Code requires inert gas', 'It cools the joint'], correct: 1, exp: 'Open-air brazing scale is the hidden killer of valves downstream — the cheapest prevention in the trade.' },
+      { q: 'Any time a sealed system is opened, the filter-drier is:', a: ['Inspected and reused', 'Replaced — driers are one-use moisture/debris sponges', 'Optional', 'Bypassed temporarily'], correct: 1, exp: 'A loaded drier protects nothing; replacement is standard practice on every opening.' },
+      { q: 'A heat pump accumulator exists to:', a: ['Store extra oil', 'Catch liquid refrigerant from the winter evaporator before it slugs the compressor', 'Increase subcooling', 'Silence the compressor'], correct: 1, exp: 'Cold-weather evaporators can send liquid down the suction line; the accumulator intercepts it.' },
+      { q: 'Bubbles in a liquid-line sight glass indicate:', a: ['Healthy flow', 'Flash gas from undercharge or upstream restriction — verify with subcooling', 'Overcharge', 'Moisture'], correct: 1, exp: 'Flash gas means incomplete condensation or pressure loss; subcooling numbers settle which.' },
+      { q: 'The professional response to "just top it off like every spring" is:', a: ['Annual top-offs at a discount', 'Leak detection, repair, proof (pressure/vacuum hold), and documentation — a leaking system is not a service plan', 'Switching refrigerants', 'A bigger unit'], correct: 1, exp: 'Recurring gas loss is a leak: fixing it is the repair; renting refrigerant by installment is not.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 23 — SEASONAL PREVENTIVE MAINTENANCE
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'hvac-preventive-maintenance',
+    num: 23,
+    title: 'Seasonal Preventive Maintenance',
+    desc: 'Spring cooling and fall heating PMs: the seasonal checklist discipline that carries HVAC service companies and prevents the failures you now understand.',
+    slides: [
+      {
+        title: 'The Cooling-Season PM',
+        body: [
+          'HVAC PM runs on the calendar: spring tune-ups prepare cooling before the first heat wave; fall visits prepare heating before the first freeze. The business logic mirrors the kitchen course\'s Module 24 — every killer fault you have studied is a slow, visible accumulation — but with a seasonal rhythm: maintenance agreements typically sell two visits a year, and the spring rush IS the industry\'s hiring season.',
+          'The spring (cooling) visit, built from everything you know: CONDENSER coil washed (with the fins straightened and clearance verified), EVAPORATOR coil inspected/cleaned as access allows, FILTERS replaced and the filtration sanity-checked against static (Module 14), CONDENSATE drains flushed, traps verified, float switches tested (the summer flood-preventer), BLOWER wheel condition and (belt-drive) belt/pulley service, ELECTRICAL: contactor contacts, dual capacitor measured against rating (the summer-failure champion, caught for dollars in spring), wire lugs and disconnect condition, compressor and fan amps recorded against nameplate.',
+          'Then the performance verification that separates a PM from a filter change: temperature split against conditions (Module 13), suction/liquid readings ONLY when the non-invasive numbers disagree (the kitchen walkaround rule — every gauge connection costs a little charge), and superheat/subcooling verified when connected. RECORD EVERYTHING: this year\'s amps, splits, and capacitor readings are next year\'s drift detection — the baseline habit from commissioning, annualized.',
+          'The spring PM\'s honest upsell menu writes itself from your modules: weak-but-alive capacitors, contactors with pitted contacts, marginal condensate protection (no float switch on an attic unit above a nursery = an easy, honest recommendation), filtration mismatches, and duct/static findings. Documented recommendations, priced, declined-or-approved in writing — the kitchen documentation loop, seasonal edition.',
+        ],
+        keyPoints: [
+          'Spring = cooling readiness; fall = heating readiness; agreements sell the two-visit rhythm',
+          'The spring core: coils, filters, condensate (test the float!), blower, capacitor measured, amps recorded',
+          'Gauges only when non-invasive numbers disagree — the walkaround rule survives in HVAC',
+          'Record readings year over year: drift detection is the PM\'s compound interest',
+        ],
+        quiz: [
+          {
+            q: 'During a spring PM, the dual run capacitor measures 38µF on a 45µF ±6% rating. The unit runs fine today. The professional move is:',
+            a: ['Note nothing — it runs', 'Document the out-of-tolerance reading and recommend replacement now, before the July failure it predicts', 'Replace it silently and bill later', 'Add a hard-start kit instead'],
+            correct: 1,
+            exp: 'A capacitor 15% under rating in April is a heat-wave failure in waiting. Catching drift is the entire point of measured, recorded PM.',
+          },
+          {
+            q: 'The reason PM visits record amps, splits, and capacitor values rather than just checking them is:',
+            a: ['Billing justification', 'Year-over-year comparison reveals drift long before failure — the baseline habit annualized', 'Warranty requirements', 'Route tracking'],
+            correct: 1,
+            exp: 'A single reading says "okay today"; a trend says "failing by August." Recorded baselines convert PM from inspection to prediction.',
+          },
+        ],
+      },
+      {
+        title: 'The Heating-Season PM and the Agreement Business',
+        body: [
+          'The fall (heating) visit is combustion-safety season: HEAT EXCHANGER inspection (visual + flame-disturbance + analyzer per Module 17 — this is when cracks are found, before the family runs the furnace all winter), BURNERS cleaned and flame quality judged, FLAME SENSOR cleaned proactively (the thirty-second act that prevents the December no-heat call), IGNITER checked (hot-surface igniters measured for resistance and handled like the quartz they are), PRESSURE SWITCH and draft verified with the manometer, GAS PRESSURE verified and connections leak-tested, SAFETIES exercised per procedure (limits, rollouts — never jumpered, always verified), CONDENSATE (condensing furnaces) cleaned and freeze-protected, and CO measured in flue and supply air — the analyzer closes every fall visit.',
+          'Heat pumps get their own fall ritual: defrost cycle forced and observed, reversing valve exercised in both directions, auxiliary strips staged and amp-verified (finding the dead strip bank in October beats discovering it at 10°F), outdoor coil cleaned, and the crankcase heater confirmed warm — plus the balance-point/changeover logic sanity check on dual-fuel systems.',
+          'The agreement economics deserve a tech\'s-eye understanding: maintenance agreements smooth revenue across seasons, guarantee the spring/fall workload, buy customer loyalty (agreement customers call THEIR company, get priority in the rushes they now avoid causing), and generate the documented-recommendation pipeline that feeds honest repair revenue. Your role in that machine: visits done thoroughly, findings documented with photos and readings, recommendations made honestly, and the difference between covered/billable/quote-first known before you speak — the kitchen agreement lessons, verbatim.',
+          'The seasonal PM close mirrors the whole curriculum: what you check is what fails; what fails is what you have studied; and the tech who works the checklist with meters and writes down what they find graduates from tune-up labor to trusted advisor within a season or two. PM is where new HVAC techs are made — and where the best ones are noticed.',
+        ],
+        keyPoints: [
+          'Fall = combustion safety: exchanger, flame sensor (clean proactively), draft, gas leaks, safeties, CO',
+          'Heat pumps: force defrost, exercise the valve, verify aux strips and crankcase heat in October',
+          'Agreements smooth seasons, buy loyalty, and feed the documented-recommendation pipeline',
+          'PM is where new techs are made — meters, checklists, and written findings get noticed',
+        ],
+        quiz: [
+          {
+            q: 'The single highest-value proactive act on a fall furnace PM is:',
+            a: ['Repainting the cabinet', 'Cleaning the flame sensor and verifying the microamp signal — preventing the classic mid-winter lockout', 'Raising gas pressure for winter', 'Replacing the thermostat batteries'],
+            correct: 1,
+            exp: 'The oxidized flame rod is the most common winter no-heat. Thirty seconds of abrasive cloth in October prevents the emergency call in January.',
+          },
+          {
+            q: 'A fall heat pump PM finds one of two 10kW strip banks open. The customer says "it heated fine last night." The correct framing is:',
+            a: ['No action — comfort is fine', 'Repair now: the dead bank means half the auxiliary/emergency capacity, which will be missed during defrost and the first deep cold', 'Wait for a complaint', 'Disable the other bank to match'],
+            correct: 1,
+            exp: 'Mild-weather comfort hides missing aux capacity. The shortfall appears at the worst moment — defrost cycles and design-cold nights. Fix it found, not failed.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'HVAC PM runs seasonally because:', a: ['Techs prefer spring', 'Cooling must be verified before summer and combustion safety before winter — matching failure seasons', 'Parts are cheaper then', 'Utilities require it'], correct: 1, exp: 'Two visits bracket the two demand seasons — and the two failure rushes.' },
+      { q: 'The spring PM\'s most failure-preventing electrical measurement is:', a: ['Thermostat voltage', 'The run capacitor value against its rating', 'Doorbell transformer', 'Bulb wattage'], correct: 1, exp: 'Capacitors drift toward summer failure; measuring catches them for dollars before the heat-wave stranding.' },
+      { q: 'Testing the condensate float switch in spring prevents:', a: ['Compressor failure', 'Summer ceiling/water damage from a clogged drain going unprotected', 'High head pressure', 'Filter loading'], correct: 1, exp: 'The float is the flood insurance; a PM that does not prove it works has not protected the home.' },
+      { q: 'Gauges are connected during PM:', a: ['On every unit, every visit', 'Only when non-invasive readings (splits, amps, temps) disagree with health', 'Never', 'Only in fall'], correct: 1, exp: 'The walkaround rule: every connection costs charge and risk; the numbers usually speak without it.' },
+      { q: 'Recording this year\'s amps and splits matters because:', a: ['Invoicing requires it', 'Next year\'s comparison reveals drift before failure', 'Manufacturers collect it', 'It fills the ticket'], correct: 1, exp: 'Trend beats snapshot: recorded baselines turn PM into prediction.' },
+      { q: 'The fall visit centers on:', a: ['Coil washing', 'Combustion safety: heat exchanger, flame proving, draft, gas integrity, safeties, and CO measurement', 'Refrigerant top-offs', 'Duct cleaning'], correct: 1, exp: 'Heating PM is the annual combustion-safety audit before the family lives with the fire all winter.' },
+      { q: 'Proactively cleaning the flame sensor each fall prevents:', a: ['Blower failures', 'The mid-winter ignition-lockout no-heat call', 'High gas bills', 'Pressure switch faults'], correct: 1, exp: 'The most common furnace failure, prevented by the cheapest maintenance act in the trade.' },
+      { q: 'Fall heat pump PM must verify:', a: ['Only the filter', 'Defrost operation, reversing valve, auxiliary strip staging/amps, and crankcase heat', 'Just the thermostat', 'Refrigerant color'], correct: 1, exp: 'Winter-mode functions cannot be assumed from summer performance — exercise and measure each one.' },
+      { q: 'Maintenance agreements benefit the service company by:', a: ['Eliminating repairs', 'Smoothing seasonal revenue, guaranteeing workload, building loyalty, and feeding documented repair pipelines', 'Raising prices invisibly', 'Avoiding documentation'], correct: 1, exp: 'The agreement is the business engine; the tech\'s thorough, documented visits are its fuel.' },
+      { q: 'Exercised safeties (limits, rollouts) during PM are:', a: ['Jumpered for the season', 'Verified functional per procedure and never bypassed', 'Removed if nuisance-prone', 'Adjusted hotter'], correct: 1, exp: 'The kitchen rule forever: safeties are witnesses and guardians — proven, never silenced.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 24 — HVAC TROUBLESHOOTING CAPSTONE
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'hvac-troubleshooting',
+    num: 24,
+    title: 'HVAC Troubleshooting Capstone',
+    desc: 'No-cool and no-heat decision trees, comfort complaints with healthy equipment, and cross-system reasoning — the universal method, HVAC edition.',
+    slides: [
+      {
+        title: 'The No-Cool and No-Heat Trees',
+        body: [
+          'The universal method from your training (define → verify → localize → isolate → repair → verify → root cause) needs only its HVAC decision trees. NO-COOL, outdoor unit dead: thermostat call verified (Y at the stat), 24V present at the contactor coil? No → control chain (Module 20: transformer, fuse, safeties, float switch — the tripped condensate float is the #1 humiliation-avoider check). Yes → contactor pulls? No → coil/contactor. Yes → capacitor, then compressor/fan electrical (Module 15\'s dual-cap champion). Outdoor unit RUNS but no cooling: airflow first (filter! coil! blower!), then splits, then gauges → the refrigeration-core patterns (undercharge, restriction, airflow-masquerade).',
+          'NO-HEAT (gas furnace) is Module 17\'s stall map run in order: call → board status LED → inducer → pressure switch chain → igniter → gas valve → flame proving → blower. Each stall point has its suspect list, and the board\'s fault code plus five minutes of watching a full ignition attempt localizes nearly everything. NO-HEAT (heat pump): is the outdoor unit running? Strips carrying silently? Defrost stuck? Reversing valve position? — with the electric-bill clue and valve temperature checks from Module 15.',
+          'The intermittents demand the kitchen course\'s patience upgrades: error histories read (boards, VFDs, BAS trends are your flight recorders), conditions correlated (time of day, weather, occupancy — the rush-hour brownout has an HVAC twin in the afternoon-sun attic), and one variable changed at a time. The swap-test lives here too: identical RTUs on one roof, twin circuits in one unit, matched VAV boxes — let the fault vote.',
+          'And HVAC\'s special trap, named and avoided: charging the airflow problem. More refrigerant has been needlessly added to systems with dirty filters, dead blowers, and iced coils than to all the leaking systems combined. The discipline "air before refrigerant, always" is this capstone\'s single most valuable sentence.',
+        ],
+        keyPoints: [
+          'Outdoor-dead no-cool: stat call → 24V at coil → contactor → capacitor → motors; float switch early',
+          'No-heat: run the Module 17 sequence and let the stall point name the suspects',
+          'Intermittents: error histories + condition correlation + one variable at a time',
+          'Air before refrigerant, always — never charge an airflow problem',
+        ],
+        quiz: [
+          {
+            q: 'No-cool call: the indoor blower runs, but the outdoor unit is silent. Y reads 24V at the thermostat but 0V at the condenser contactor coil, and the air handler sits in a pan with a float switch. The most probable finding is:',
+            a: ['A failed compressor', 'The condensate float switch has opened the Y circuit — check the drain pan before anything else', 'A dead thermostat', 'A tripped breaker'],
+            correct: 1,
+            exp: 'The float interrupts Y precisely to create this symptom instead of a ceiling stain. The 24V-present-here, absent-there measurement walks you straight to it.',
+          },
+          {
+            q: 'A system cools weakly; suction pressure is low. Before adding refrigerant, the capstone rule demands:',
+            a: ['Adding a pound and rechecking', 'Verifying airflow (filter, blower, coil, ducts) — low airflow mimics low charge on the gauges', 'Replacing the TXV', 'Condemning the compressor'],
+            correct: 1,
+            exp: 'A starved evaporator reads low-suction whether the starvation is refrigerant or AIR. Charging an airflow problem overcharges the system the moment airflow is restored.',
+          },
+        ],
+      },
+      {
+        title: 'Comfort Complaints and Cross-System Reasoning',
+        body: [
+          'The hardest calls have healthy equipment: "the back bedroom is always hot," "it is cold but muggy," "it cannot keep up on the worst days." These are SYSTEM complaints — airflow distribution (Module 14: branch sizing, return paths, flex sins), latent capacity (Module 13: oversizing, runtime), envelope reality (that bonus room over the garage), and load-vs-capacity honesty (design conditions are design conditions; a 95°F-design system on a 105°F day holding 78°F inside is WORKING). The professional deliverable on these calls is often measurement, explanation, and options — duct modifications, zoning, dehumidification, envelope referrals — in writing, not a parts swap.',
+          'Cross-system reasoning is HVAC\'s daily bread because everything shares: POWER (one sagging leg of three-phase brownouts every board on the roof), AIR (a failed economizer damper starves ventilation AND wrecks humidity), WATER (one fouled cooling tower sickens every chiller downstream — the kitchen\'s shared-condenser epidemic at plant scale), and CONTROLS (a BAS schedule or override explains "everything broke Tuesday" more often than four simultaneous failures do). Multi-symptom calls ask the same question they asked in kitchens: what do the victims share, and what changed at onset?',
+          'Repair-vs-replace in HVAC adds its own multipliers to the honest-numbers framework: EFFICIENCY deltas are real money (a SEER-8 relic vs modern equipment can halve cooling bills), REFRIGERANT platform (R-22 repairs invest in a dead platform; R-410A now carries its own phase-down clock), age vs the 15-20-year expectancy, and the failure-history file your PM records built. Same rule as always: frame the numbers honestly, recommend, and let the customer own the decision.',
+          'Close the loop like a professional: verify the fix under real load (a full cooling pull-down, a complete heat cycle, a defrost observed), record what the failure was and what the earliest evidence had been, and feed your pattern library. The diagnostician\'s compound interest — the kitchen course\'s closing lesson — pays identically here: five years of honest post-call reviews builds the tech who diagnoses from the driveway.',
+        ],
+        keyPoints: [
+          'Healthy-equipment complaints are system complaints: distribution, latent, envelope, load-vs-design',
+          'Cross-system: what do the victims share (power, air, water, controls) and what changed at onset?',
+          'Repair-vs-replace adds efficiency deltas and refrigerant-platform clocks to the honest numbers',
+          'Verify under real load, review every interesting call, grow the pattern library',
+        ],
+        quiz: [
+          {
+            q: 'On a 104°F record afternoon (local design temp 96°F), a healthy, correctly charged system holds the house at 79°F against a 74°F setpoint, running continuously. The correct customer conversation is:',
+            a: ['The system has failed and needs replacement', 'The system is performing at design: extreme-day shortfall is a load/design reality — options include shading, envelope, or capacity additions, in writing', 'Add refrigerant for the heat wave', 'Lower the charge for summer'],
+            correct: 1,
+            exp: 'Equipment sized to design conditions falls behind beyond them — by design. Honest explanation plus options beats a false condemnation or a needless "repair."',
+          },
+          {
+            q: 'Since Tuesday: three RTUs on one building log random board resets, and the VFD faults undervoltage each afternoon. The productive first question is:',
+            a: ['Which RTU is oldest?', 'What do they share — and what changed Tuesday? (Utility work, a failing phase, new load on the service)', 'Which brand of board fails most?', 'Are the filters dirty?'],
+            correct: 1,
+            exp: 'Shared-cause reasoning: one sagging supply leg explains all four "failures." The victims\' common denominator outranks any individual diagnosis.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The first checks on a silent outdoor unit are:', a: ['Gauges and charge', 'Thermostat call, then 24V at the contactor coil — walking the control chain', 'Compressor windings', 'Duct static'], correct: 1, exp: 'Control before power before refrigerant: most silent condensers are control-chain finds.' },
+      { q: 'A tripped condensate float switch presents as:', a: ['Water hammer', 'No-cooling with the blower often still running — Y interrupted by design', 'High head pressure', 'Blown breaker'], correct: 1, exp: 'The float kills cooling to prevent the flood; it is the no-cool call\'s first cheap answer.' },
+      { q: 'Furnace no-heat diagnosis follows:', a: ['Random component testing', 'The sequence of operation to its stall point, guided by the board code', 'Gas pressure first always', 'Blower first always'], correct: 1, exp: 'Module 17\'s map: the failed step names the suspects; watching one full attempt localizes nearly everything.' },
+      { q: '"Air before refrigerant" exists because:', a: ['Air is easier to check', 'Airflow faults mimic charge faults on gauges, and charging an airflow problem mischarges the system', 'Refrigerant is expensive', 'EPA requires it'], correct: 1, exp: 'Low airflow reads as low suction; the added gas becomes overcharge when the filter is finally changed.' },
+      { q: 'Intermittent electronic faults are cracked by:', a: ['Replacing all boards', 'Error histories plus correlating conditions (time, weather, load) with one-variable discipline', 'Waiting for hard failure', 'Power cycling weekly'], correct: 1, exp: 'The flight-recorder habit: histories and patterns convert ghosts into schedules.' },
+      { q: 'A hot back bedroom with healthy equipment is usually:', a: ['A charge problem', 'A distribution/system issue: branch airflow, return path, envelope load', 'A thermostat fault', 'Compressor wear'], correct: 1, exp: 'Comfort complaints with healthy equipment are Module 14/13 system stories, answered with measurement and options.' },
+      { q: 'Extreme-weather "cannot keep up" on a design-sized system is:', a: ['Equipment failure', 'Design reality — capacity is sized to design conditions, and beyond them continuous running with indoor drift is expected', 'Low charge', 'Duct leakage'], correct: 1, exp: 'Design conditions bound the promise; the honest conversation covers load options, not false repairs.' },
+      { q: 'Simultaneous odd behavior across all rooftop equipment suggests first:', a: ['Coincidental failures', 'A shared cause: power quality, BAS command, or a common utility/service change', 'Bad luck', 'One brand defect'], correct: 1, exp: 'The kitchen\'s shared-cause law: what do the victims share, and what changed at onset?' },
+      { q: 'HVAC repair-vs-replace framing adds:', a: ['Nothing beyond cost', 'Efficiency deltas and refrigerant-platform clocks (R-22 dead, R-410A phasing) to age, history, and downtime', 'Paint condition', 'Brand loyalty'], correct: 1, exp: 'Energy savings and refrigerant futures are real money — honest numbers, customer decision.' },
+      { q: 'A repair is verified by:', a: ['The part powering on', 'Real-load operation observed: full pull-down, complete heat cycle, defrost as applicable', 'Customer signature', 'No codes for five minutes'], correct: 1, exp: '"Runs" is not "works": the machine does its actual job, measured, before the truck leaves.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 25 — CAREER IN HVAC FIELD SERVICE
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'hvac-career',
+    num: 25,
+    title: 'Career in HVAC Field Service',
+    desc: 'The biggest trade of the three: markets, licensing, NATE and the certification ladder, the toolkit, and where HVAC careers lead.',
+    slides: [
+      {
+        title: 'The Market and the Ladder',
+        body: [
+          'HVAC is the largest of the three trades this portal teaches — hundreds of thousands of technicians, chronic shortage anyway (the same demographic cliff: retirements outrunning entrants while heat pumps, A2L transitions, and electrification EXPAND the work). The market segments cleanly: RESIDENTIAL service and replacement (the biggest employer of entry techs; fast pace, sales-adjacent), LIGHT COMMERCIAL (RTU country — restaurants, retail, offices; your kitchen-course customer base from the roof), COMMERCIAL/INDUSTRIAL (chillers, BAS, hospitals, campuses — union and specialty paths), and adjacent niches (controls, refrigeration-heavy grocery work, test-and-balance, energy services).',
+          'Compensation tracks the ladder: entry residential techs commonly start $40-55K; experienced service techs $60-85K; commercial/chiller/controls specialists and union journeymen north of that, with lead and supervisory roles beyond — plus the overtime that heat waves and cold snaps reliably print. Geography and licensing regimes swing the numbers, but the shortage keeps the floor rising everywhere.',
+          'The credential ladder, in order of attack: EPA 608 (the legal gate — Universal is the standard target, and this curriculum has prepared the concepts), STATE/LOCAL LICENSING where applicable (varies wildly: journeyman cards, contractor licenses, gas-work endorsements — know your jurisdiction), NATE certification (the industry\'s recognized knowledge credential: Core plus specialties like Air Conditioning, Heat Pumps, Gas Heating — the HVAC analog of the kitchen course\'s CFESA), and MANUFACTURER schools (the same warranty-authorization economics as kitchen equipment: Carrier/Trane/Lennox/Daikin training makes you dispatchable on their gear, and VRF certification opens that growing door).',
+          'This certificate plus EPA 608 is the entry combination; NATE Core within the first year and a specialty per year after is a credible pace an employer will often fund. The shared foundation you carry — electrical discipline, meter craft, refrigeration physics, combustion safety, and the documentation habit — is precisely the differentiator hiring managers complain they cannot find.',
+        ],
+        keyPoints: [
+          'Largest trade, chronic shortage, expanding scope (heat pumps, A2L, electrification)',
+          'Segments: residential, light commercial (RTUs), commercial/industrial, and specialty niches',
+          'Ladder: EPA 608 Universal → state licensing → NATE Core + specialties → manufacturer schools',
+          'Entry $40-55K; experienced $60-85K; specialists/journeymen beyond — overtime rides the weather',
+        ],
+        quiz: [
+          {
+            q: 'The certification path that most directly parallels the kitchen trade\'s CFESA credential is:',
+            a: ['OSHA-30', 'NATE — the industry\'s recognized knowledge certification with core and specialty exams', 'EPA 609', 'LEED'],
+            correct: 1,
+            exp: 'NATE is HVAC\'s industry credential ladder: Core plus specialties, employer-recognized, and typically employer-funded once you are producing.',
+          },
+          {
+            q: 'Manufacturer training schools matter economically because:',
+            a: ['They are vacations', 'Warranty authorization makes you dispatchable and billable on that brand — and VRF work is gated behind them', 'They replace EPA 608', 'They issue tools'],
+            correct: 1,
+            exp: 'The kitchen-course lesson identically: OEM authorization is how service companies win warranty work, and how techs become the ones sent to the good equipment.',
+          },
+        ],
+      },
+      {
+        title: 'The Kit, the Craft, and the Paths',
+        body: [
+          'Build the kit deliberately from the curriculum: the FOUNDATION set (DMM with capacitance and microamps, clamp meter, megger where appropriate — Modules 1-10), the AIR set (digital psychrometer, dual-port manometer for static, anemometer as budget allows — Modules 13-14), the COMBUSTION set (analyzer, gas manometer, leak detector — Module 17), the REFRIGERATION set (digital gauges/probes, scale, micron gauge, vacuum pump, recovery machine, A2L-rated as the fleet turns — refrigeration core + Module 22), and the closing miscellany that solves half of real calls: quality thermometers, fin combs, coil cleaner, a smoke pencil, and the inspection mirror/borescope.',
+          'Van stock mirrors the failure patterns you now own: capacitors in the common sizes (the #1 part), contactors, universal ignition and flame-sensing parts, condensate fittings/pumps/float switches, filters in route sizes, belts, fuses, 24V transformers, and the fasteners/sealants of curb-and-cabinet life. Stock what the modules taught you fails.',
+          'The soft craft transfers whole from the kitchen course: work clean in occupied homes and businesses (shoe covers are the residential handshake), translate findings into operator language with photos, frame repair-vs-replace honestly (the HVAC version carries efficiency and refrigerant-platform numbers), document everything, and close loops. Residential adds the sales-pressure reality: some shops push replacement hard — the durable career move is the honest one, because homeowners remember who told them the truth, and reputation compounds faster than commission.',
+          'The paths off the truck: SENIOR/LEAD TECH and field trainer; COMMERCIAL specialist (chillers, BAS/controls — the Module 21 literacy is the on-ramp); INSTALLER-to-INSTALL-MANAGER track; COMFORT ADVISOR/sales (honest techs make the best ones); SERVICE MANAGER/OPERATIONS; OEM technical roles; TEST-AND-BALANCE and energy-services specialties; and OWNERSHIP — HVAC remains a fragmented, route-relationship business where the licensed tech with five documented years and a clean reputation has the trades\' most-traveled path to their own company. Same hallway as always: honest diagnosis, faithful documentation, continuous learning. Three courses, one portal, one set of habits — go build the career.',
+        ],
+        keyPoints: [
+          'Kit tracks the curriculum: foundation, air, combustion, refrigeration sets — A2L-rated as fleets turn',
+          'Van stock = the failure patterns: capacitors first, then contactors, ignition parts, condensate gear',
+          'Honesty outcompounds commission in residential — reputation is the durable asset',
+          'Paths: lead, commercial/controls specialist, install, sales, management, OEM, ownership',
+        ],
+        quiz: [
+          {
+            q: 'The most frequently replaced part in residential HVAC — and therefore the van-stock priority — is:',
+            a: ['Compressors', 'Run capacitors in the common sizes', 'TXVs', 'Blower motors'],
+            correct: 1,
+            exp: 'The dual run capacitor is the trade\'s bread-and-butter failure: stock the sizes, test against ratings, and carry a universal for the odd one.',
+          },
+          {
+            q: 'The strongest long-term career asset in residential HVAC service is:',
+            a: ['Commission maximization on every call', 'A reputation for honest diagnosis and framing — homeowners remember who told them the truth', 'Speed above all', 'Brand tattoos'],
+            correct: 1,
+            exp: 'Replacement-pressure shops exist, but reputation compounds: the honest tech\'s referrals, reviews, and eventual customer list are the real equity.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The HVAC trade\'s labor outlook is:', a: ['Shrinking with automation', 'Chronic shortage with expanding scope (heat pumps, A2L transition, electrification)', 'Stable and saturated', 'Seasonal only'], correct: 1, exp: 'Retirements outrun entrants while the work itself grows — the strongest shortage story of the three trades.' },
+      { q: 'The legal prerequisite for refrigerant work is:', a: ['NATE Core', 'EPA Section 608 certification (Universal as the standard target)', 'A contractor license', 'Manufacturer school'], correct: 1, exp: '608 is federal law; everything else is professional credential on top of it.' },
+      { q: 'NATE certification is:', a: ['A state license', 'The industry\'s recognized knowledge credential: Core plus specialty exams', 'An EPA program', 'A union card'], correct: 1, exp: 'The HVAC analog of CFESA: employer-recognized, specialty-structured, usually employer-funded.' },
+      { q: 'Light-commercial HVAC work centers on:', a: ['Window units', 'Packaged rooftop units serving restaurants, retail, and offices', 'Central plants', 'Mini-splits only'], correct: 1, exp: 'RTU country — and the same buildings whose kitchens the sister course serves.' },
+      { q: 'Entry-level HVAC compensation typically starts around:', a: ['$25-30K', '$40-55K, rising to $60-85K with experience and beyond for specialists', '$100K', 'Commission only'], correct: 1, exp: 'The shortage keeps floors rising; overtime rides every heat wave and cold snap.' },
+      { q: 'The air-side instruments the curriculum demands are:', a: ['Only a thermometer', 'A digital psychrometer and a manometer for static pressure', 'A refractometer', 'A light meter'], correct: 1, exp: 'Modules 13-14 in hardware: WB/DB/RH plus TESP are the airflow diagnosis kit.' },
+      { q: 'A2L refrigerant adoption affects the toolkit by requiring:', a: ['No changes', 'A2L-rated recovery machines, hoses, and leak detection as fleets transition', 'Different meters', 'Heavier gauges only'], correct: 1, exp: 'The mildly flammable class carries equipment ratings — the transition is a tooling event too.' },
+      { q: 'Van stock should be organized around:', a: ['Whatever distributors discount', 'The trade\'s failure patterns: capacitors, contactors, ignition/flame parts, condensate protection', 'One of everything', 'Seasonal decorations'], correct: 1, exp: 'Stock the priors: the modules\' failure catalog is the packing list.' },
+      { q: 'The controls/BAS specialty path builds on:', a: ['Sheet metal skills', 'Module 21 literacy: DDC architecture, sensor truth, and VFDs', 'Refrigeration only', 'Sales training'], correct: 1, exp: 'Commercial buildings run on controls; the tech who reads them writes their own ticket.' },
+      { q: 'The common foundation of every path — lead, specialist, manager, owner — is:', a: ['Certifications alone', 'Honest diagnosis, faithful documentation, and continuous learning', 'Overtime hours', 'Brand loyalty'], correct: 1, exp: 'Three courses, one portal, one answer: the habits are the career.' },
+    ],
+  },
 ];
