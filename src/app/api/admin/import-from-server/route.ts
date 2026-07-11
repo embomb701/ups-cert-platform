@@ -13,6 +13,8 @@ import jrFseAll from '../../../../../data/questions/jr-fse-all-questions.json';
 import bookJrFse from '../../../../../data/questions/book-jr-fse-questions.json';
 import fscSample from '../../../../../data/questions/fsc-sample.json';
 import bookFse from '../../../../../data/questions/book-fse-questions.json';
+import kitchenFresh from '../../../../../data/questions/kitchen-jr-fse-fresh.json';
+import { buildKitchenBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -22,6 +24,9 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'book-jr-fse-questions.json': bookJrFse as QuestionRecord[],
   'fsc-sample.json':           fscSample as QuestionRecord[],
   'book-fse-questions.json':   bookFse as QuestionRecord[],
+  'kitchen-jr-fse-fresh.json': kitchenFresh as QuestionRecord[],
+  // Derived from kitchen course content (shared modules 1-10 + kitchen 11-27)
+  'kitchen-jr-fse-derived':    buildKitchenBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -30,6 +35,8 @@ const FILE_ORDER = [
   'book-jr-fse-questions.json',
   'fsc-sample.json',
   'book-fse-questions.json',
+  'kitchen-jr-fse-fresh.json',
+  'kitchen-jr-fse-derived',
 ];
 
 export async function POST(req: NextRequest) {

@@ -121,6 +121,12 @@ export async function POST(req: NextRequest) {
         await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').update({ testOutFailed: true });
       }
     }
+    if (!passed && attempt.examLevel === 'jr_kitchen_fse' && (attempt as { testOut?: boolean }).testOut) {
+      await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_kitchen_fse').set(
+        { testOut: true, testOutFailed: true },
+        { merge: true }
+      );
+    }
 
     // Issue certificate if passed and not flagged
     if (passed && !flagged) {
@@ -129,6 +135,8 @@ export async function POST(req: NextRequest) {
       const certTitle =
         attempt.examLevel === 'jr_fse'
           ? 'Junior UPS Field Service Certification'
+          : attempt.examLevel === 'jr_kitchen_fse'
+          ? 'Junior Commercial Kitchen Field Service Certification'
           : 'UPS Field Service Certification';
 
       await adminDb.collection('certificates').doc(certificateId).set({

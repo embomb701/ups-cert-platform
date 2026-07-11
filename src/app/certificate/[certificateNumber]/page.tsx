@@ -38,6 +38,7 @@ export default async function CertificatePrintPage({ params }: Props) {
 
   const levelLabel =
     cert.examLevel === 'jr_fse' ? 'Junior Field Service Engineer'
+    : cert.examLevel === 'jr_kitchen_fse' ? 'Junior Commercial Kitchen Field Service Engineer'
     : 'Field Service Engineer';
 
   return (

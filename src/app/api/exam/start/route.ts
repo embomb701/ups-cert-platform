@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     const examLevel = (isPractice ? 'jr_fse' : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -137,6 +137,93 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    let kitchenTestOut = false;
+    if (examLevel === 'jr_kitchen_fse') {
+      // Two access paths: training completion grant, or a proctor-unlocked test-out order
+      const accessSnap = await adminDb
+        .collection('users').doc(uid)
+        .collection('examAccess').doc('jr_kitchen_fse')
+        .get();
+      const accessData = accessSnap.exists ? accessSnap.data()! : null;
+      const hasTrainingGrant = !!accessData?.granted;
+
+      let hasReadyTestOut = false;
+      if (!hasTrainingGrant) {
+        const readyOrder = await adminDb
+          .collection('proctoredExamOrders')
+          .where('userId', '==', uid)
+          .where('productId', '==', 'jr_kitchen_fse_test_human')
+          .where('status', '==', 'ready')
+          .limit(1)
+          .get();
+        hasReadyTestOut = !readyOrder.empty;
+        kitchenTestOut = hasReadyTestOut;
+      }
+
+      if (!hasTrainingGrant && !hasReadyTestOut) {
+        return NextResponse.json({
+          error: 'No valid Jr. Kitchen FSE exam access found. Complete the Kitchen training course, or purchase the test-out and wait for your proctor session to be unlocked.',
+        }, { status: 403 });
+      }
+
+      // Failed test-out lock: kitchen training must be completed before retrying
+      if (accessData?.testOut && accessData?.testOutFailed) {
+        const allProgressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
+        const completedModuleIds = new Set<string>();
+        allProgressSnap.forEach((doc) => {
+          const d = doc.data();
+          if (d.passed && d.completedAt) completedModuleIds.add(doc.id);
+        });
+        const { ALL_MODULES, KITCHEN_MODULES } = await import('@/data/index');
+        const kitchenCourse = [...ALL_MODULES.filter((m) => m.num <= 10), ...KITCHEN_MODULES];
+        const trainingComplete = kitchenCourse.every((m) => completedModuleIds.has(m.id));
+        if (!trainingComplete) {
+          return NextResponse.json({
+            error: 'You did not pass the Jr. Kitchen FSE Test-Out. You must complete the Kitchen Training Course before you can attempt the exam again.',
+            requiresTraining: true,
+          }, { status: 403 });
+        }
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_kitchen_fse').update({ testOutFailed: false });
+      }
+
+      // Account cooldown (filter in memory to avoid composite index)
+      const recentAttempts = await adminDb
+        .collection('examAttempts')
+        .where('userId', '==', uid)
+        .where('examLevel', '==', 'jr_kitchen_fse')
+        .get();
+      const now = new Date();
+      const activeCooldown = recentAttempts.docs.find((d) => {
+        const cooldownUntil = d.data().cooldownUntil?.toDate?.();
+        return cooldownUntil && cooldownUntil > now;
+      });
+      if (activeCooldown) {
+        return NextResponse.json({
+          error:
+            'A recent Jr. Kitchen FSE Exam attempt has already been associated with this account or network. Attempts are limited to once every 90 days. Contact support if you believe this is an error.',
+          cooldownUntil: activeCooldown.data().cooldownUntil?.toDate(),
+        }, { status: 429 });
+      }
+
+      // IP cooldown
+      const ipLocks = await adminDb
+        .collection('ipExamLocks')
+        .where('ipHash', '==', ipHash)
+        .where('examLevel', '==', 'jr_kitchen_fse')
+        .get();
+      const activeIpLock = ipLocks.docs.find((d) => {
+        const data = d.data();
+        const cooldownUntil = data.cooldownUntil?.toDate?.();
+        return cooldownUntil && cooldownUntil > now && !data.clearedByAdmin;
+      });
+      if (activeIpLock) {
+        return NextResponse.json({
+          error:
+            'A recent Jr. Kitchen FSE Exam attempt has already been associated with this account or network. Attempts are limited to once every 90 days. Contact support if you believe this is an error.',
+        }, { status: 429 });
+      }
+    }
+
     if (examLevel === 'fse') {
       // FSE: verify proctor has unlocked this session
       const readyOrder = await adminDb
@@ -188,9 +275,16 @@ export async function POST(req: NextRequest) {
       email,
       displayName,
       candidateName: candidateName || displayName || email,
-      productId: isPractice ? 'practice_test' : (examLevel === 'jr_fse' ? 'jr_fse_test_human' : 'fse_proctored_exam'),
+      productId: isPractice
+        ? 'practice_test'
+        : examLevel === 'jr_fse'
+        ? 'jr_fse_test_human'
+        : examLevel === 'jr_kitchen_fse'
+        ? 'jr_kitchen_fse_test_human'
+        : 'fse_proctored_exam',
       examLevel,
       isPractice,
+      testOut: kitchenTestOut,
       status: 'in_progress',
       startedAt: FieldValue.serverTimestamp(),
       startIpHash: ipHash,
@@ -205,18 +299,18 @@ export async function POST(req: NextRequest) {
       suspiciousEventsCount: 0,
       suspiciousRiskLevel: 'low',
       flaggedForReview: false,
-      // Practice tests have no cooldown; real Jr. FSE attempts get 90-day cooldown
-      cooldownUntil: (!isPractice && examLevel === 'jr_fse') ? cooldownUntil : null,
+      // Practice tests have no cooldown; real Jr. attempts get 90-day cooldown
+      cooldownUntil: (!isPractice && (examLevel === 'jr_fse' || examLevel === 'jr_kitchen_fse')) ? cooldownUntil : null,
       proctored: examLevel === 'fse',
       proctoringType: examLevel === 'fse' ? 'human' : null,
     });
 
-    // Set IP lock only for real (non-practice) Jr. FSE attempts
-    if (!isPractice && examLevel === 'jr_fse') {
+    // Set IP lock only for real (non-practice) Jr.-level attempts
+    if (!isPractice && (examLevel === 'jr_fse' || examLevel === 'jr_kitchen_fse')) {
       await adminDb.collection('ipExamLocks').add({
         ipHash,
-        examLevel: 'jr_fse',
-        productId: 'jr_fse_test_human',
+        examLevel,
+        productId: examLevel === 'jr_fse' ? 'jr_fse_test_human' : 'jr_kitchen_fse_test_human',
         userId: uid,
         email,
         attemptId,

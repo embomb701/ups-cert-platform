@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { getModule, ALL_MODULES } from '@/data/index';
+import { getModule, ALL_MODULES, KITCHEN_MODULES } from '@/data/index';
 import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
@@ -81,32 +81,22 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Check if ALL modules are now complete — if so, unlock Jr. FSE exam
-    let trainingComplete = false;
-    if (mod.num === ALL_MODULES.length) {
-      // This was the last module — verify all others are complete too
-      const allProgressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
-      const completedIds = new Set<string>();
-      allProgressSnap.forEach((doc) => {
-        const d = doc.data();
-        if (d.passed && d.completedAt) completedIds.add(doc.id);
-      });
-      // Include the current module we just passed
-      completedIds.add(moduleId);
-      trainingComplete = ALL_MODULES.every((m) => completedIds.has(m.id));
-    } else {
-      // Fast check: count completed modules
-      const allProgressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
-      const completedIds = new Set<string>();
-      allProgressSnap.forEach((doc) => {
-        const d = doc.data();
-        if (d.passed && d.completedAt) completedIds.add(doc.id);
-      });
-      completedIds.add(moduleId);
-      trainingComplete = ALL_MODULES.every((m) => completedIds.has(m.id));
-    }
+    // Check course completion — passing a module can complete the UPS course
+    // (modules 1-28) and/or the Kitchen course (shared 1-10 + kitchen 11-27).
+    const allProgressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
+    const completedIds = new Set<string>();
+    allProgressSnap.forEach((doc) => {
+      const d = doc.data();
+      if (d.passed && d.completedAt) completedIds.add(doc.id);
+    });
+    // Include the current module we just passed
+    completedIds.add(moduleId);
 
-    if (trainingComplete) {
+    const upsComplete = ALL_MODULES.every((m) => completedIds.has(m.id));
+    const kitchenCourse = [...ALL_MODULES.filter((m) => m.num <= 10), ...KITCHEN_MODULES];
+    const kitchenComplete = kitchenCourse.every((m) => completedIds.has(m.id));
+
+    if (upsComplete) {
       // Grant Jr. FSE exam access (from training path, not test-out)
       const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse_pending').get();
       const pendingData = pendingDoc.data();
@@ -118,6 +108,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    if (kitchenComplete) {
+      // Grant Jr. Kitchen FSE exam access (from training path, not test-out)
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_kitchen_fse_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_kitchen_fse').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
+    const trainingComplete = upsComplete || kitchenComplete;
     return NextResponse.json({ passed: true, results, trainingComplete });
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });

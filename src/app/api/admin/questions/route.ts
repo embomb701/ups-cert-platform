@@ -17,11 +17,13 @@ export async function GET(req: NextRequest) {
 
     const collection = adminDb.collection('questionBank');
 
-    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap] = await Promise.all([
+    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap] = await Promise.all([
       collection.where('examLevel', '==', 'jr_fse').count().get(),
       collection.where('examLevel', '==', 'jr_fse').where('active', '==', true).count().get(),
       collection.where('examLevel', 'in', ['fse', 'fse_ai']).count().get(),
       collection.where('examLevel', 'in', ['fse', 'fse_ai']).where('active', '==', true).count().get(),
+      collection.where('examLevel', '==', 'jr_kitchen_fse').count().get(),
+      collection.where('examLevel', '==', 'jr_kitchen_fse').where('active', '==', true).count().get(),
     ]);
 
     return NextResponse.json({
@@ -32,6 +34,10 @@ export async function GET(req: NextRequest) {
       fse: {
         total: fseSnap.data().count,
         active: fseActiveSnap.data().count,
+      },
+      jr_kitchen_fse: {
+        total: kitchenSnap.data().count,
+        active: kitchenActiveSnap.data().count,
       },
     });
   } catch (err: any) {

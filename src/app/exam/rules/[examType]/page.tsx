@@ -61,10 +61,17 @@ export default function ExamRulesPage() {
   const [candidateName, setCandidateName] = useState('');
 
   const isPractice = examType === 'practice_jr_fse';
-  const isJr = examType === 'jr_fse' || isPractice;
-  const rules = isJr ? RULES_JR : RULES_FSE;
+  const isKitchen = examType === 'jr_kitchen_fse';
+  const isJr = examType === 'jr_fse' || isPractice || isKitchen;
+  const rules = isKitchen
+    ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Kitchen FSE Exam'))
+    : isJr
+    ? RULES_JR
+    : RULES_FSE;
   const examLabel = isPractice
     ? 'Jr. FSE Practice Test — Results Only, No Certificate'
+    : isKitchen
+    ? 'Junior Commercial Kitchen Field Service Certification'
     : isJr
     ? 'Junior UPS Field Service Certification'
     : 'UPS Field Service Certification';

@@ -238,7 +238,7 @@ export default function DashboardPage() {
             <div className="space-y-2">
               {attempts.map(a => (
                 <div key={a.id} className="flex items-center justify-between text-sm py-2 border-b border-gray-800 last:border-0">
-                  <span className="text-gray-400">{a.examLevel === 'jr_fse' ? 'Jr. FSE' : a.examLevel === 'fse_ai' ? 'FSE AI' : 'FSE'}</span>
+                  <span className="text-gray-400">{a.examLevel === 'jr_fse' ? 'Jr. FSE' : a.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : a.examLevel === 'fse_ai' ? 'FSE AI' : 'FSE'}</span>
                   <span className={a.passed ? 'text-green-400' : a.passed === false ? 'text-red-400' : 'text-gray-400'}>
                     {a.passed === true ? `Passed (${Math.round(a.score ?? 0)}%)` : a.passed === false ? `Failed (${Math.round(a.score ?? 0)}%)` : 'In progress'}
                   </span>

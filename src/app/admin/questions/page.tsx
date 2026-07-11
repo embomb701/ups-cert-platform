@@ -14,10 +14,12 @@ const SERVER_FILES = [
   'book-jr-fse-questions.json',
   'fsc-sample.json',
   'book-fse-questions.json',
+  'kitchen-jr-fse-fresh.json',
+  'kitchen-jr-fse-derived',
 ];
 
 export default function AdminQuestionsPage() {
-  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats } | null>(null);
+  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
   const [serverImporting, setServerImporting] = useState(false);
@@ -132,7 +134,7 @@ export default function AdminQuestionsPage() {
         </div>
 
         {/* Bank stats */}
-        <div className="grid md:grid-cols-2 gap-4 mb-8">
+        <div className="grid md:grid-cols-3 gap-4 mb-8">
           <div className="card-dark p-5">
             <h3 className="text-sm font-semibold text-white mb-2">Jr. FSE Bank</h3>
             {statsLoading ? (
@@ -161,14 +163,29 @@ export default function AdminQuestionsPage() {
               </>
             ) : <p className="text-xs text-red-400">Failed to load</p>}
           </div>
+          <div className="card-dark p-5">
+            <h3 className="text-sm font-semibold text-white mb-2">Jr. Kitchen FSE Bank</h3>
+            {statsLoading ? (
+              <p className="text-xs text-gray-500">Loading…</p>
+            ) : stats?.jr_kitchen_fse ? (
+              <>
+                <p className="text-2xl font-bold text-orange-400">{stats.jr_kitchen_fse.active.toLocaleString()}</p>
+                <p className="text-xs text-gray-500">active of {stats.jr_kitchen_fse.total.toLocaleString()} total · target 1,000</p>
+                <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
+                  <div className="h-full bg-orange-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_kitchen_fse.active / 1000) * 100)}%` }} />
+                </div>
+              </>
+            ) : <p className="text-xs text-red-400">Failed to load</p>}
+          </div>
         </div>
 
         {/* One-click server import */}
         <div className="card-dark p-6 mb-6 border-indigo-900/50">
           <h2 className="text-sm font-semibold text-white mb-1">Import All Questions from Server</h2>
           <p className="text-xs text-gray-500 mb-4">
-            Imports all 5 question bank files directly from the server — no upload needed.
-            Adds ~595 Jr. FSE and ~435 FSE questions. Safe to run multiple times (skips existing).
+            Imports all question bank files directly from the server — no upload needed.
+            Adds ~595 Jr. FSE, ~435 FSE, and ~500 Jr. Kitchen FSE questions (derived from
+            course content plus fresh scenario questions). Safe to run multiple times (skips existing).
           </p>
           <button
             onClick={handleServerImport}
