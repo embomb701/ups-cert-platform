@@ -640,4 +640,387 @@ export const HVAC_MODULES: TrainingModule[] = [
       { q: 'In a dual-fuel system, below the balance point the system:', a: ['Runs heat pump plus furnace together', 'Switches from heat pump to furnace — the two never heat the same coil simultaneously', 'Uses strips only', 'Shuts down'], correct: 1, exp: 'Gas replaces (never joins) the heat pump below the economic/capacity balance point; the changeover logic is where faults hide.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 18 — CHILLERS, BOILERS & HYDRONIC SYSTEMS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'hvac-chillers-hydronics',
+    num: 18,
+    title: 'Chillers, Boilers & Hydronic Systems',
+    desc: 'When buildings move water instead of air: chilled water plants, cooling towers, boilers, pumps — and the boundaries of entry-level scope.',
+    slides: [
+      {
+        title: 'Why Big Buildings Move Water',
+        body: [
+          'Air is a terrible freight carrier: a duct big enough to cool a high-rise floor would be the size of a hallway. Water carries roughly 3,500 times more heat per unit volume, so large buildings centralize their refrigeration into a chiller plant and distribute cooling as chilled water (typically supplied around 44°F, returning around 54°F) through pipes to air handlers and fan-coil units, where coils transfer the cooling into room air. Heating mirrors it: boilers make hot water (or steam) that loops to the same kinds of terminal units.',
+          'The chiller is the refrigeration core at industrial scale: an evaporator that chills the water loop (water in tubes, refrigerant around them — or vice versa), a compressor (scroll, screw, or centrifugal as size climbs), and a condenser that is either air-cooled (a large outdoor coil bank) or water-cooled — rejecting heat into a second loop, the condenser water loop, which carries it to a cooling tower on the roof.',
+          'The cooling tower is the building\'s outdoor sweat gland: condenser water sprays over fill material while a fan drives air through, and evaporation (Module 13\'s latent heat, working for you now) rejects the heat. Tower vocabulary: RANGE (water temperature drop across the tower) and APPROACH (how close the leaving water gets to the ambient wet-bulb temperature — a healthy tower approaches within a few degrees of wet bulb, which is why muggy days cripple towers even when they are clean).',
+          'Tower service reality is water reality: fill scales and fouls, spray nozzles clog, basins grow biology, and float valves stick — the kitchen course\'s water lessons at building scale. One item is life-safety: warm, aerated water in towers can host Legionella; drift from a neglected tower has caused fatal outbreaks. Tower water treatment programs and cleaning schedules are not optional, and any tower visibly fouled, untreated, or drifting excessively is a document-and-report item with the same seriousness as a gas leak.',
+        ],
+        keyPoints: [
+          'Chilled water (~44°F supply / ~54°F return) distributes central cooling; boilers mirror it for heat',
+          'Water-cooled chillers reject heat via a condenser-water loop to a cooling tower',
+          'Tower health = approach to wet bulb; humid days legitimately cripple tower capacity',
+          'Legionella risk makes tower treatment/cleaning a life-safety, report-in-writing matter',
+        ],
+        quiz: [
+          {
+            q: 'A water-cooled chiller trips on high head pressure during a heat wave. The condenser water entering it is 12°F warmer than design, and the tower\'s approach to wet bulb has ballooned. The investigation belongs at:',
+            a: ['The chiller\'s refrigerant charge', 'The cooling tower: fouled fill, clogged nozzles, fan performance, water treatment', 'The chilled water pumps', 'The building thermostats'],
+            correct: 1,
+            exp: 'The chiller can only reject heat into the water the tower returns. A wide approach says the tower is not doing its evaporation job — the kitchen dirty-condenser story, at building scale.',
+          },
+          {
+            q: 'Cooling towers carry a unique life-safety concern because:',
+            a: ['They operate at high pressure', 'Warm aerated water can host Legionella, and drift can spread it — treatment and cleaning are mandatory', 'Their fans are unguarded', 'They use ammonia'],
+            correct: 1,
+            exp: 'Legionnaires\' outbreaks trace to neglected towers. Treatment programs and cleanliness are documented, non-negotiable duties.',
+          },
+        ],
+      },
+      {
+        title: 'Boilers and Hot-Water Heating',
+        body: [
+          'Hydronic heating centers on the boiler: a gas burner (everything from the combustion modules applies — ignition, flame proving, venting, combustion analysis) heating a water vessel. Modern condensing boilers modulate firing rate and, like condensing furnaces, extract latent heat until flue gas condenses — earning their efficiency only when return water is cool enough (below ~130°F) to condense against, which is why outdoor-reset controls that lower water temperature in mild weather are efficiency\'s best friend.',
+          'The hydronic loop\'s supporting cast: CIRCULATOR PUMPS (wet-rotor circulators in light systems, base-mounted pumps in plants — failures are electrical, bearing, or coupler; a pump running but not moving water suggests air binding or a closed valve), EXPANSION TANKS (absorb water\'s thermal expansion; a waterlogged tank shows as relief-valve weeping every heat cycle), AIR MANAGEMENT (air separators and vents, because entrained air blocks coils and makes the gurgling noises customers describe), and the PRESSURE-RELIEF VALVE — a boiler\'s relief is sacred pressure-vessel safety, tested per procedure, never plugged (the steam-kettle rule at building scale).',
+          'The fill/pressure system quietly runs everything: a pressure-reducing fill valve maintains loop pressure (typically ~12-15 psi residential, higher for taller buildings — one psi per 2.3 feet of height plus margin). Low pressure = air in high points, no flow upstairs; a relief valve discharging = overpressure from a failed fill valve, waterlogged expansion tank, or an actual overheat. Diagnosing hydronics is largely reading the pressure gauge, the temperatures in and out, and listening for air.',
+          'Steam heating survives in older buildings and institutions: a boiler makes low-pressure steam that rises to radiators, condenses (surrendering its latent heat — psychrometrics\' big brother), and returns as condensate. Its service world — traps, vents, water level controls, low-water cutoffs — is its own trade with licensing thresholds in many jurisdictions. Entry-level scope: understand the principle, respect the low-water cutoff (a dry-fired steam boiler is a catastrophic failure), and refer per local licensing, exactly like the kettle rule from the kitchen course.',
+        ],
+        keyPoints: [
+          'Condensing boilers earn efficiency only with cool return water — outdoor reset is the enabler',
+          'Waterlogged expansion tank → relief weeping each cycle; low loop pressure → air-bound upper floors',
+          'Relief valves are pressure-vessel safety: test per procedure, never plug — the kettle rule at scale',
+          'Steam systems and their low-water cutoffs carry licensing boundaries — know yours and refer',
+        ],
+        quiz: [
+          {
+            q: 'A hydronic system\'s relief valve discharges a cup of water every heating cycle. The gauge climbs from 15 to 29 psi as the boiler heats. The classic cause is:',
+            a: ['An oversized boiler', 'A waterlogged expansion tank no longer absorbing thermal expansion', 'A failed circulator', 'Excess air in the loop'],
+            correct: 1,
+            exp: 'Expansion has to go somewhere. A failed (water-filled) expansion tank turns every heat-up into an overpressure event that the relief vents — replace/recharge the tank.',
+          },
+          {
+            q: 'Third-floor radiators are cold and gurgle; loop pressure reads 8 psi on a three-story building. The first correction is:',
+            a: ['A bigger pump', 'Restore proper fill pressure (and purge air) — 8 psi cannot lift water and hold air out of the third floor', 'New radiators', 'A hotter boiler setpoint'],
+            correct: 1,
+            exp: 'One psi per 2.3 ft of height plus margin: a three-story loop needs ~15+ psi. Low pressure lets air collect exactly where the complaint lives.',
+          },
+        ],
+      },
+      {
+        title: 'Terminal Units, Pumps, and the Scope Boundary',
+        body: [
+          'Where the water meets the air, you are back on home turf: AIR HANDLERS with chilled/hot water coils (airflow rules identical to Module 14; coil performance read by water and air temperature deltas), FAN-COIL UNITS in rooms (filters, blowers, condensate — the mini air handler in every hotel room), and VAV (variable air volume) BOXES that throttle air to zones, often with hot-water reheat coils. Their control valves — two-way and three-way, driven by actuators — are the hydronic version of dampers, and stuck valves/actuators are to hydronics what stuck dampers are to economizers.',
+          'The diagnostic instrument set extends naturally: water temperature in/out of any coil (delta-T tells you heat transfer), pressure gauges across pumps and strainers (a clogged strainer shows as pressure drop and starved flow — strainers are the water world\'s dirty filter), and flow indications from balancing valves where fitted. A coil with good water flow and temperatures but poor air-side performance sends you back to airflow; good air with weak water delta sends you to valves, strainers, air binding, or plant supply temperature.',
+          'Glycol loops (freeze-protected systems for rooftop coils, snow-melt, and cold climates) add a fluid consideration: glycol percentage is measured with a refractometer, affects heat capacity and pump load, and must not be topped off with plain water into oblivion. Any loop that keeps needing fluid has a leak to find — hydronic leaks announce themselves as stains, scale trails, and pressure drops.',
+          'The scope boundary, stated plainly: entry-level HVAC FSEs OWN terminal units, circulators, fill systems, air management, tower cleaning support, and coil/valve service; chiller internals (opening refrigerant circuits of large machines, centrifugal/screw compressor work), steam boiler internals, and burner management systems on large boilers belong to licensed/factory-trained specialists in most jurisdictions. The professional move you already know from kettles and suppression systems: diagnose to the boundary, document, and refer — being the tech who knows exactly where their license ends is a hiring criterion, not a weakness.',
+        ],
+        keyPoints: [
+          'Coil diagnosis triangulates: water delta-T, air delta-T, and flow evidence decide which side is sick',
+          'Strainers are the water world\'s dirty filter; stuck control valves are its stuck dampers',
+          'Glycol loops: measure percentage, never dilute blindly, and chase every recurring fluid loss to a leak',
+          'Own the terminal/loop scope; refer chiller internals, steam, and big-burner work per licensing',
+        ],
+        quiz: [
+          {
+            q: 'An AHU chilled-water coil delivers warm supply air. Water enters at 44°F but returns at 45°F (design delta 10°F); airflow checks normal. The finding means:',
+            a: ['The coil is transferring heavily', 'Almost no heat transfer is occurring — suspect low water flow (strainer, valve, air binding) since the water passes through barely warmed', 'The chiller plant has failed', 'The filter is dirty'],
+            correct: 1,
+            exp: 'A 1°F water rise with normal air across the coil means the water is not picking up heat — flow starvation or bypass, not plant temperature. Check strainer, valve position, and air in the coil.',
+          },
+          {
+            q: 'A glycol rooftop loop needs fluid every month. The professional response is:',
+            a: ['Keep topping off with water', 'Find and repair the leak, then restore the correct glycol percentage verified by refractometer', 'Switch to plain water in summer', 'Install a bigger expansion tank'],
+            correct: 1,
+            exp: 'Recurring loss = leak, and water top-offs silently dilute freeze protection toward a burst coil. Fix the leak; verify the mix.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Large buildings distribute cooling as chilled water because:', a: ['Water is cheaper than air', 'Water carries vastly more heat per volume than air, shrinking distribution to pipes', 'Fans are unreliable', 'Codes require it'], correct: 1, exp: 'Thousands of times the heat capacity per volume: pipes replace hallway-sized ducts.' },
+      { q: 'Typical chilled water design temperatures are:', a: ['34°F supply / 40°F return', '≈44°F supply / ≈54°F return', '60°F supply / 70°F return', '32°F both ways'], correct: 1, exp: 'The classic 44/54 with a 10°F design delta — the numbers coil diagnosis is read against.' },
+      { q: 'A cooling tower rejects heat primarily by:', a: ['Radiation', 'Evaporation of a portion of the condenser water', 'Compression', 'Conduction to the roof'], correct: 1, exp: 'Latent heat of evaporation does the work — which ties tower capacity to ambient wet bulb.' },
+      { q: 'Tower APPROACH is:', a: ['The water temperature drop across the tower', 'How close leaving water gets to ambient wet-bulb temperature', 'Fan speed margin', 'Basin depth'], correct: 1, exp: 'Approach measures tower effectiveness; range measures the drop. A widening approach = a sick tower.' },
+      { q: 'Neglected cooling towers are a life-safety issue because of:', a: ['Electrocution risk', 'Legionella growth and drift', 'Refrigerant release', 'Fan noise'], correct: 1, exp: 'Warm aerated water + neglect = Legionella habitat; treatment and cleaning are mandatory, documented duties.' },
+      { q: 'Condensing boilers achieve their rated efficiency only when:', a: ['Fired at maximum', 'Return water is cool enough (≲130°F) for flue gas to condense — hence outdoor reset', 'Burning propane', 'Loop pressure is high'], correct: 1, exp: 'No condensation, no latent recovery: cool return water is the whole trick, and reset controls provide it.' },
+      { q: 'A relief valve that weeps each heating cycle with pressure climbing sharply indicates:', a: ['Normal expansion', 'A waterlogged expansion tank (or failed fill valve) — never plug the relief', 'A weak circulator', 'Undersized piping'], correct: 1, exp: 'Expansion with nowhere to go becomes overpressure; the relief is the witness and must stay in service.' },
+      { q: 'Hydronic loop fill pressure must account for:', a: ['Pipe color', 'Building height — about 1 psi per 2.3 feet plus margin, or upper floors air-bind', 'Pump brand', 'Boiler age'], correct: 1, exp: 'Static height sets minimum pressure; low fill = cold, gurgling top floors.' },
+      { q: 'A clogged strainer in a hydronic loop presents as:', a: ['High water delta-T', 'Pressure drop across it and starved flow downstream — the water-side dirty filter', 'Air noise', 'Boiler lockout'], correct: 1, exp: 'Strainers protect coils and pumps and clog like filters; gauge pressure across them tells the story.' },
+      { q: 'Entry-level hydronic scope typically excludes:', a: ['Circulator replacement', 'Chiller refrigerant-circuit internals, steam boiler work, and large burner management — licensed/factory territory', 'Coil cleaning', 'Expansion tank service'], correct: 1, exp: 'Diagnose to the boundary, document, refer — the kettle/suppression rule at plant scale.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 19 — VENTILATION & INDOOR AIR QUALITY
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'hvac-ventilation-iaq',
+    num: 19,
+    title: 'Ventilation & Indoor Air Quality',
+    desc: 'Outside air, CO2, filtration, building pressure, and energy recovery — the air people actually breathe, and the complaints it generates.',
+    slides: [
+      {
+        title: 'Why Buildings Need Outside Air',
+        body: [
+          'People consume a building\'s air: occupants exhale CO2, furnishings and cleaners off-gas, kitchens and bathrooms make moisture and odor. Ventilation replaces stale air with outdoor air, and ASHRAE Standard 62.1 codifies how much — driven by occupancy and floor area, roughly 15-20 CFM per person for typical spaces. The delivery mechanisms you have already met: economizer minimum positions on RTUs (Module 16), dedicated outdoor-air systems in bigger buildings, and simple fresh-air intakes on smaller equipment.',
+          'CO2 is the practical proxy for ventilation adequacy: outdoor air runs ~420 ppm, and indoor levels climbing past ~1,000-1,100 ppm signal under-ventilation for the occupancy (drowsy meeting rooms are a real physiological effect, not folklore). Demand-controlled ventilation (DCV) uses CO2 sensors to modulate outdoor air with actual occupancy — saving energy in empty rooms, opening up for the crowd. DCV faults are sensor faults in disguise: a drifted CO2 sensor (they need periodic calibration or auto-baseline) either starves a full room or heats/cools the outdoors for an empty one.',
+          'Ventilation is an energy bill: every CFM of outdoor air must be conditioned from outdoor to indoor state (Module 13 math — and the latent half dominates in humid climates). Energy recovery ventilators (ERVs) and heat recovery ventilators (HRVs) reclaim most of that cost by exchanging heat (HRV) or heat AND moisture (ERV) between exhaust and intake streams in a core or wheel. Service points: cores/wheels foul with dust (capacity and static both suffer), wheel belts and motors fail, and frost control matters in cold climates.',
+          'The failure geography you already know from kitchens and RTUs: intakes located near exhausts, loading docks, or flue terminations re-inhale contamination (walk the outside and look); dampers and actuators seize exactly like economizers; and screens/louvers clog with cottonwood and lint. Ventilation diagnosis is mostly conscientious looking — at where air enters, what it passes, and whether the movers actually move.',
+        ],
+        keyPoints: [
+          'ASHRAE 62.1 sets outdoor-air minimums (~15-20 CFM/person typical); economizer minimums often deliver it',
+          'CO2 ≈ ventilation gauge: ~420 outdoor, >1,000-1,100 ppm indoor = under-ventilated for occupancy',
+          'DCV faults are usually CO2 sensor calibration faults — starving rooms or conditioning the outdoors',
+          'ERV/HRV cores foul and freeze; intake placement near exhausts is the classic self-poisoning',
+        ],
+        quiz: [
+          {
+            q: 'A conference room turns drowsy in every long meeting; CO2 logs to 1,600 ppm while the DCV damper never moves. The likely fault is:',
+            a: ['Undersized cooling', 'The CO2 sensor (drifted/failed) never reporting occupancy, so demand-controlled ventilation never opens', 'Too much outdoor air', 'A failed thermostat'],
+            correct: 1,
+            exp: 'DCV can only respond to what its sensor reports. A drifted sensor starves the full room — calibrate/replace, then verify damper response.',
+          },
+          {
+            q: 'An ERV differs from an HRV because the ERV:',
+            a: ['Runs only in winter', 'Exchanges moisture as well as heat between exhaust and intake air', 'Uses refrigerant', 'Filters better'],
+            correct: 1,
+            exp: 'The E is enthalpy: ERVs transfer latent (moisture) plus sensible energy — the humid-climate choice, per Module 13\'s latent lesson.',
+          },
+        ],
+      },
+      {
+        title: 'Filtration and Building Pressure',
+        body: [
+          'Filtration graduated from equipment protection to occupant health, and the MERV scale maps it: MERV 6-8 catches dust and protects coils; MERV 11-13 captures fine dust, pollen, and much of the respirable particulate people care about; HEPA (beyond MERV 16) is true containment territory for healthcare and labs. The engineering never changes from Module 14: filtration efficiency costs static pressure, and the honest answer to "we want MERV 13" is a media-area calculation (deeper cabinets, more pleats, bigger return) — not just a denser filter jammed in the old slot to strangle the blower.',
+          'Real IAQ complaints deserve a measurement vocabulary beyond temperature: PARTICULATES (PM2.5 meters are now cheap and persuasive — smoke events, print shops, renovations), CO2 (ventilation adequacy), CO (combustion intrusion — treat per the gas modules), HUMIDITY (mold\'s enabler above ~60% RH sustained; static and dry sinuses below ~30%), and VOCs (the "new carpet smell" family — ventilation is usually the answer). A tech who shows up with meters converts "the air feels bad" arguments into readings and fixes.',
+          'Building pressure ties the whole airflow story together: exhaust fans, ventilation intake, duct leakage, and stack effect (warm air rising out of tall buildings pulls air in low) net out to a slight pressure signature. Design intent is usually slightly POSITIVE for commercial spaces (conditioned air leaks out; unfiltered air stays out). A NEGATIVE building announces itself: doors that slam or stand open, whistling entries, drafts, humid air sucked through walls (summer mold in wall cavities), fireplace and flue backdrafting — the kitchen make-up-air story generalized to every building type.',
+          'Diagnosing pressure is satisfyingly physical: a smoke pencil or tissue at a cracked door tells direction; a micromanometer across the envelope quantifies it; the causes inventory is always the same ledger — what exhausts (hoods, bathroom fans, dryers, process exhaust) versus what supplies (OA dampers, make-up units, infiltration). Balance the ledger and the mystery drafts, odors traveling between suites, and elevator-door whistles resolve.',
+        ],
+        keyPoints: [
+          'MERV upgrades are media-area engineering (Module 14), not denser filters in old slots',
+          'Measure IAQ: PM2.5, CO2, CO, RH, VOC — readings end "the air feels bad" arguments',
+          'Sustained RH above ~60% enables mold; below ~30% brings static and complaints',
+          'Building pressure = exhaust vs supply ledger; negative buildings whistle, draft, and mold',
+        ],
+        quiz: [
+          {
+            q: 'A dental office upgraded to MERV 13 filters in the same 1-inch slots; two weeks later coils are freezing and the blower is loud. The engineering error was:',
+            a: ['Wrong MERV direction', 'Ignoring the static-pressure budget — high-MERV needs more media area (deep cabinets), not denser 1-inch filters', 'Filters installed backwards', 'Undersized condenser'],
+            correct: 1,
+            exp: 'Module 14 again: efficiency costs static. Deep-pleat media cabinets buy the pressure back; dense 1-inch filters strangle the system.',
+          },
+          {
+            q: 'A restaurant\'s dining room doors whistle inward and outside odors ride in; the kitchen exhaust runs full tilt with a failed make-up air unit. The building is:',
+            a: ['Positively pressurized', 'Negatively pressurized — exhaust exceeds supply, and the envelope is making up the difference', 'Neutrally balanced', 'Over-ventilated'],
+            correct: 1,
+            exp: 'The exhaust/supply ledger is unbalanced; every crack becomes an intake. Restore make-up air and the doors go quiet — the cross-trade classic.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'ASHRAE 62.1 governs:', a: ['Refrigerant handling', 'Minimum outdoor-air ventilation rates for occupied buildings', 'Duct sizing', 'Filter ratings'], correct: 1, exp: 'The ventilation standard: outdoor air per person and per floor area, delivered and verifiable.' },
+      { q: 'Indoor CO2 near 1,500 ppm in an occupied room indicates:', a: ['A gas leak', 'Under-ventilation for the occupancy', 'Excellent air quality', 'Refrigerant displacement'], correct: 1, exp: 'CO2 proxies ventilation adequacy: outdoor ~420 ppm; sustained >1,000-1,100 ppm means the room is starved of outdoor air.' },
+      { q: 'Demand-controlled ventilation modulates outdoor air based on:', a: ['Outdoor temperature', 'CO2 (occupancy) sensing', 'Duct static', 'Time of day only'], correct: 1, exp: 'DCV matches ventilation to actual occupancy — and inherits every fault of its CO2 sensors.' },
+      { q: 'An ERV transfers ______ between exhaust and intake:', a: ['Only heat', 'Heat and moisture', 'Only moisture', 'CO2'], correct: 1, exp: 'Enthalpy recovery: sensible + latent, cutting the cost of conditioning ventilation air, especially in humid climates.' },
+      { q: 'Ventilation intakes must be located:', a: ['Near exhaust outlets for short ducts', 'Away from exhausts, flues, and loading docks — or the building re-inhales contamination', 'On the north side', 'At ground level always'], correct: 1, exp: 'Walk the outside: intake placement is the most literal IAQ diagnosis there is.' },
+      { q: 'Sustained indoor RH above about 60% risks:', a: ['Static electricity', 'Mold growth and dust mite proliferation', 'Dry sinuses', 'Nothing'], correct: 1, exp: 'Humidity is mold\'s enabler; the 30-60% band is the comfort AND health target.' },
+      { q: 'The honest way to deliver a MERV 13 upgrade is:', a: ['Denser 1-inch filters', 'Media-area engineering: deep-pleat cabinets sized to the system\'s static budget', 'Doubling blower speed', 'Removing the old filter rack'], correct: 1, exp: 'Filtration efficiency costs static; surface area pays the bill without strangling airflow.' },
+      { q: 'Commercial buildings are usually designed to run:', a: ['Strongly negative', 'Slightly positive so conditioned air leaks out and unfiltered air stays out', 'Exactly neutral', 'Alternating daily'], correct: 1, exp: 'Slight positive pressure keeps the envelope defending itself; negative buildings inhale their problems.' },
+      { q: 'A negatively pressurized building announces itself by:', a: ['Quiet doors', 'Whistling entries, doors that fight you, drafts, and backdrafting flues', 'Lower bills', 'High supply static'], correct: 1, exp: 'The envelope becomes the make-up air path — audible, tangible, and dangerous around combustion.' },
+      { q: 'The building-pressure diagnosis ledger compares:', a: ['Supply vs return ducts', 'Everything exhausting air vs everything supplying it (plus stack effect)', 'CFM vs BTU', 'Indoor vs outdoor CO2'], correct: 1, exp: 'Hoods, dryers, and exhaust fans against OA dampers and make-up units: balance the ledger, cure the building.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 20 — THERMOSTATS & 24V CONTROL CIRCUITS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'hvac-controls',
+    num: 20,
+    title: 'Thermostats & 24V Control Circuits',
+    desc: 'The R-W-Y-G-C alphabet: low-voltage control wiring, thermostat logic, and reading sequences of operation with a meter.',
+    slides: [
+      {
+        title: 'The 24V Backbone and Its Alphabet',
+        body: [
+          'Nearly all residential and light-commercial HVAC is commanded through a 24VAC control circuit fed by a small transformer in the equipment. The thermostat is a set of switches connecting the hot side (R) to command wires; the equipment answers. The alphabet, burned in: R (24V hot — Rc/Rh split systems have separate cooling/heating transformers), C (common — the return path, and the wire smart thermostats starve without), Y/Y2 (cooling stages: pulls the condenser contactor), W/W2 (heating stages), G (indoor blower fan), O/B (heat pump reversing valve — O energized in cooling for most brands, B in heating for a few).',
+          'Every call you already understand maps to this alphabet: cooling = R connected to Y and G (condenser + blower); heat (furnace) = R to W (the furnace board runs its own blower per Module 17\'s sequence); heat pump heat = R to Y and G with O/B setting the valve direction. The thermostat is just switching; ALL the intelligence lives in what the equipment does with each energized terminal — which is why sequence-of-operation literacy beats thermostat-brand trivia.',
+          'Meter technique on 24V circuits is a compact craft: measure R to C for transformer health (~24-28VAC); measure each command terminal to C to see what the thermostat is calling; measure across a switch or safety to find the drop (24V across a closed device = it is actually open — the voltage-drop hunting from your foundation modules, at control voltage). A shorted control circuit announces itself by killing the transformer or, on protected boards, blowing the 3A or 5A automotive-style fuse — a blown board fuse means FIND THE SHORT (chafed thermostat wire, shorted contactor coil, a nest in the condenser wiring) before installing the next fuse.',
+          'Thermostat placement and mechanics still matter in a digital age: a stat on a wall warmed by afternoon sun, above a lamp, or over a supply draft lies to the whole system; loose wall anchors change its thermal contact; and the heat-anticipator era (adjustable resistors in mechanical stats) survives in enough old buildings to be worth recognizing. When comfort complaints defy equipment diagnosis, stand where the thermostat stands and feel what it feels.',
+        ],
+        tables: [
+          {
+            caption: 'The 24V alphabet',
+            headers: ['Terminal', 'Function'],
+            rows: [
+              ['R (Rc/Rh)', '24V hot from transformer(s)'],
+              ['C', 'Common — return path (smart stats need it)'],
+              ['Y / Y2', 'Cooling stage 1 / 2 (condenser contactor)'],
+              ['W / W2', 'Heating stage 1 / 2'],
+              ['G', 'Indoor blower fan'],
+              ['O / B', 'Reversing valve (O = energized cooling, most brands)'],
+            ],
+          },
+        ],
+        keyPoints: [
+          'R to C is transformer health; each terminal to C shows what is being called',
+          '24V measured ACROSS a "closed" device means it is open — voltage-drop hunting at control scale',
+          'A blown board fuse = find the control-circuit short before replacing the fuse',
+          'Stand where the stat stands: placement lies produce system-wide comfort complaints',
+        ],
+        quiz: [
+          {
+            q: 'The condenser will not run. At the air handler, R-to-C reads 26VAC and Y-to-C reads 26VAC with cooling called. At the condenser, Y-to-C reads 0V. The fault is:',
+            a: ['The thermostat', 'The Y conductor between air handler and condenser (or its splices) — the call is leaving but not arriving', 'The contactor coil', 'The transformer'],
+            correct: 1,
+            exp: 'The command exists at the source and is absent at the destination: the wire path between them (weather-exposed and chafed at the condenser entry, classically) is the suspect.',
+          },
+          {
+            q: 'A board\'s 3A control fuse blows the moment the thermostat calls cooling. The professional next step is:',
+            a: ['Install a 10A fuse', 'Hunt the short on the Y circuit — chafed stat wire or a shorted contactor coil — before any new fuse', 'Replace the thermostat', 'Replace the board'],
+            correct: 1,
+            exp: 'The fuse is doing its job against a real short that appears when Y energizes. Bigger fuses convert a protected fault into a burned transformer or board.',
+          },
+          {
+            q: 'A house is always too cold in the evening although equipment tests perfectly. The thermostat wall gets blasted by a west-facing sunset window. The mechanism is:',
+            a: ['Failing batteries', 'The stat senses the sun-heated wall as room temperature and over-cools the actual space', 'Undersized ducts', 'A miswired O terminal'],
+            correct: 1,
+            exp: 'The system serves whatever its sensor experiences. A lying location produces faithful equipment executing bad orders — relocate or shade the sensor.',
+          },
+        ],
+      },
+      {
+        title: 'Sequences of Operation and Smart Thermostats',
+        body: [
+          'A sequence of operation is the paragraph that says what SHOULD happen: "On Y1, the board verifies pressures, closes the contactor, and starts the condenser fan; blower runs on G…" Every piece of equipment has one (service manual, panel sticker, or engineering docs on commercial jobs), and diagnosis is the art of finding the first step where reality diverges from the paragraph. You have used this on furnaces (Module 17\'s stall map) — the habit generalizes to everything with a control board.',
+          'Time delays are sequence steps too, and they generate false complaints: compressor short-cycle timers (typically 5 minutes — protecting against restarting into head pressure), blower-off delays, defrost minimum-run timers, staging delays. The customer who reports "it takes forever to come back on after we fiddle with it" is describing a protection feature; the tech who cannot tell a delay from a fault replaces boards for behaving correctly.',
+          'Smart and communicating thermostats change the failure surface: they need the C wire (or a power-stealing workaround/add-a-wire kit whose symptoms are flickering displays and phantom equipment cycling), they hide staging and configuration in menus (heat pump O/B orientation, stage timings, fan profiles — a mis-configured stat imitates hardware faults exactly like the kitchen module\'s mis-configured boards), and communicating families (proprietary two-wire buses) marry stat and equipment brands, replacing your R-W-Y-G instincts with the manufacturer\'s app and error codes.',
+          'The professional pattern with any unfamiliar control: get the sequence (manual, QR code on the door, tech-support line), observe where the sequence stalls, verify electrically at that step, and only then condemn. Controls are where HVAC most rewards patience over parts — the sequence is the map, the meter is the compass, and the board is (still, always) the last suspect.',
+        ],
+        keyPoints: [
+          'Diagnosis = find the first step where reality diverges from the written sequence',
+          'Know the delays: 5-minute compressor timers and staging delays are features, not faults',
+          'Power-stealing smart stats without C wires cause flicker and phantom cycling — pull the C',
+          'Mis-configured thermostat menus imitate hardware faults; verify configuration like wiring',
+        ],
+        quiz: [
+          {
+            q: 'After a power blink, a homeowner reports their AC "takes five minutes to come back and must be broken." The explanation is:',
+            a: ['A failing capacitor', 'The compressor short-cycle protection timer — a designed delay that protects against restarting into high head pressure', 'Low refrigerant', 'A weak thermostat battery'],
+            correct: 1,
+            exp: 'Anti-short-cycle timers are universal protection. Recognizing designed delays prevents replacing healthy parts for correct behavior.',
+          },
+          {
+            q: 'A newly installed smart thermostat without a C wire causes the furnace blower to pulse briefly at random. The mechanism is:',
+            a: ['Defective furnace board', 'Power-stealing: the stat sips current through equipment circuits, occasionally enough to twitch relays', 'Wi-Fi interference', 'Oversized transformer'],
+            correct: 1,
+            exp: 'Without a common, the stat powers itself through the call wires — the phantom-cycling signature. Pull a C wire or fit the add-a-wire kit.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'In the 24V alphabet, energizing R-to-Y-to-G produces:', a: ['Heating', 'Cooling: condenser contactor plus indoor blower', 'Fan only', 'Defrost'], correct: 1, exp: 'Y pulls the outdoor contactor, G runs the blower — the standard cooling call.' },
+      { q: 'The C terminal provides:', a: ['Cooling stage 2', 'The 24V common return path — required by smart thermostats', 'Compressor power', 'Condensate pump control'], correct: 1, exp: 'C completes the control circuit; power-stealing stats without it flicker and phantom-cycle.' },
+      { q: 'Transformer health is verified by measuring:', a: ['R to Y', 'R to C (~24-28VAC)', 'W to G', 'O to B'], correct: 1, exp: 'Hot-to-common shows the control supply; everything else is switching downstream of it.' },
+      { q: '24V measured ACROSS a supposedly closed safety switch means:', a: ['It is closed and healthy', 'It is actually open — dropping the full control voltage', 'The meter is faulty', 'The transformer is overloaded'], correct: 1, exp: 'Voltage-drop logic at control scale: closed contacts read ~0V across; the full 24V appears across the open point.' },
+      { q: 'A repeatedly blowing 3A board fuse demands:', a: ['A 5A fuse', 'Finding the control-circuit short (chafed wires, shorted coils) before re-fusing', 'A new transformer', 'Bypassing the fuse holder'], correct: 1, exp: 'The fuse protects the transformer and board from a real short; upsizing it relocates the burning.' },
+      { q: 'The O terminal on most heat pump brands:', a: ['Runs auxiliary heat', 'Energizes the reversing valve in COOLING', 'Starts the blower', 'Is unused'], correct: 1, exp: 'O = energized in cooling (B = heating on some brands) — mis-set O/B makes systems heat when cooling is called.' },
+      { q: 'A sequence of operation is used diagnostically by:', a: ['Reading it after the repair', 'Finding the first step where observed behavior diverges from the written sequence', 'Skipping to the last step', 'Comparing brands'], correct: 1, exp: 'The sequence is the map; the divergence point localizes the fault to a testable step.' },
+      { q: 'The 5-minute compressor delay after power interruption exists to:', a: ['Save energy', 'Prevent restarting against unequalized head pressure', 'Let refrigerant settle into the compressor', 'Meet code'], correct: 1, exp: 'Starting into high head stalls and damages compressors; the timer lets pressures equalize.' },
+      { q: 'A mis-configured smart thermostat (wrong O/B, wrong stage timing) presents as:', a: ['Obvious display errors', 'Convincing hardware faults — verify configuration with the same rigor as wiring', 'Wi-Fi problems', 'Blown fuses'], correct: 1, exp: 'Configuration is the software wiring; the kitchen course\'s mis-config lesson applies to stats verbatim.' },
+      { q: 'Comfort complaints that defy equipment diagnosis warrant:', a: ['A bigger system', 'Evaluating the thermostat\'s location and what its wall actually experiences', 'More refrigerant', 'Duct replacement'], correct: 1, exp: 'The system obeys its sensor. Sun, lamps, drafts, and hollow cold walls make honest equipment misbehave.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 21 — BUILDING AUTOMATION, DDC & VFDs
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'hvac-bas',
+    num: 21,
+    title: 'Building Automation, DDC & VFDs',
+    desc: 'When the building runs the equipment: automation architecture, sensors and their drift, variable-frequency drives, and working the controls boundary.',
+    slides: [
+      {
+        title: 'The Automated Building',
+        body: [
+          'Past a certain size, buildings stop using thermostats and start using a Building Automation System (BAS): networked digital controllers (DDC — direct digital control) reading sensors, running programmed logic, and driving actuators, with a front-end (a graphics workstation or web dashboard) where operators see and command everything. Your RTU, AHU, VAV boxes, chillers, and pumps become points on a network — and "no cooling in suite 210" becomes a question you can often answer from a screen before touching a ladder.',
+          'The architecture in plain terms: FIELD DEVICES (temperature/pressure/CO2 sensors, damper and valve actuators, current switches proving motors) wire to CONTROLLERS (a VAV controller per box, an AHU controller per unit) which network together (BACnet is the dominant open protocol; Modbus common at equipment interfaces; proprietary systems persist everywhere) up to SUPERVISORS and the front-end. The practical takeaways: every automated decision is only as good as its sensor, and every network device has both a physical side (24V power, wiring, the actual damper) and a data side (its points on the bus).',
+          'Your entry-level BAS literacy: read the graphics (space temp, setpoint, damper %, valve %, fan status — the story of what the system THINKS is happening), compare it against physical reality (the eternal diagnostic move: graphics say the damper is 80% open — is it?), and understand overrides (operators and past techs leave points overridden in "hand"; a unit misbehaving under an old forgotten override is a classic). The command hierarchy matters: a point in hand/override ignores the logic, and finding it beats hours of ghost-chasing.',
+          'The sensor-truth discipline generalizes everything you know: a drifted space sensor makes a healthy VAV box freeze a room (kitchen probe lesson); a failed duct static sensor sends a supply fan hunting or screaming (this module\'s VFD section); a stuck OA damper defeats the DCV logic (Module 19). Calibration checks — reference thermometer against the BAS reading — belong in commercial PM exactly like coil cleaning.',
+        ],
+        keyPoints: [
+          'BAS = sensors → controllers → network → front-end; BACnet dominates open protocols',
+          'Graphics show what the system THINKS; verify against physical reality every time',
+          'Hunt forgotten overrides ("hand") before hunting ghosts',
+          'Sensor calibration checks belong in commercial PM like coil cleaning',
+        ],
+        quiz: [
+          {
+            q: 'The BAS graphic shows a VAV damper commanded to 85% with normal airflow expected, but the room is stuffy and a flow hood shows almost no supply air. The next move is:',
+            a: ['Recalibrate the graphic', 'Physically inspect the box: verify the actuator actually drives the damper to 85% — command vs reality is the diagnosis', 'Reboot the front-end', 'Raise the setpoint'],
+            correct: 1,
+            exp: 'Graphics report commands and feedback, not truth. A stripped actuator coupling shows perfect on screen and motionless in the duct.',
+          },
+          {
+            q: 'An AHU has behaved strangely for months; you find its supply fan point set to "hand" at 60% from some forgotten past service call. The lesson is:',
+            a: ['Hand mode is fine long-term', 'Check for overrides early — a point in hand ignores all logic and imitates every possible fault', 'The controller is failing', 'The fan needed 60%'],
+            correct: 1,
+            exp: 'Overrides outlive their reasons. The override check is the BAS equivalent of checking whether the breaker is on.',
+          },
+        ],
+      },
+      {
+        title: 'Variable-Frequency Drives',
+        body: [
+          'A VFD (variable-frequency drive) is a UPS student\'s homecoming: rectifier → DC bus → IGBT inverter, synthesizing variable-frequency AC to run a motor at variable speed. Fans and pumps obey affinity laws — flow scales with speed, but POWER scales with the CUBE of speed — so a fan at 80% speed draws roughly half the power. That cube law is why VFDs conquered commercial HVAC: a supply fan trimmed to actual demand instead of riding a damper saves enormous energy.',
+          'Field VFD literacy: the drive follows a SPEED REFERENCE (from the BAS, a static-pressure sensor loop, or a keypad) between programmed minimum and maximum; accel/decel ramps soften changes; and the drive protects itself and the motor with fault codes worth reading like furnace codes — overcurrent (mechanical binding, shorted motor), overvoltage (often decel too fast — the motor regenerates into the DC bus), undervoltage (supply sags), overtemperature (dirty heatsink/fan — the drive is power electronics with the same cooling needs as everything in that family). Fault HISTORY plus timestamps converts intermittents into patterns, kitchen-style.',
+          'Respect the DC bus: capacitors hold lethal charge after disconnection (your UPS discipline, verbatim — verify discharge per the drive\'s manual and your meter before touching). Never megger a motor with the drive connected (the test voltage kills IGBTs); disconnect motor leads first. And know the bypass: many installations include a contactor arrangement to run the motor across-the-line if the drive dies — proving the motor runs in bypass isolates drive vs motor in one move.',
+          'Common drive-adjacent failures that get blamed on drives: a failed duct static-pressure sensor driving the fan to scream at max or idle at min (check the reference before the drive); motor bearing failure masquerading as overcurrent; harmonics/nuisance interactions on shared power (drives are noisy neighbors — line reactors exist for a reason); and condensation in drives mounted in unconditioned mechanical rooms. The drive is a computer that makes three-phase power: diagnose its inputs, outputs, and cooling like any board — and its bus like any UPS.',
+        ],
+        keyPoints: [
+          'VFD = rectifier → DC bus → IGBT inverter; fan power scales with speed CUBED — the energy story',
+          'Read fault codes and history; overvoltage on decel and overtemp from dirty heatsinks are classics',
+          'DC bus caps hold lethal charge; never megger a motor with the drive connected',
+          'Check the speed reference (static sensor) before the drive, and use bypass to isolate drive vs motor',
+        ],
+        quiz: [
+          {
+            q: 'A supply-fan VFD runs at 100% and the ductwork howls; the BAS shows duct static reading 0.1 in. w.c. against a 1.5 setpoint, but a manometer at the sensor tap reads 1.6. The fault is:',
+            a: ['The VFD', 'The duct static-pressure sensor/transmitter lying low — the drive is faithfully chasing a false reading', 'The fan belt', 'The supply ducts'],
+            correct: 1,
+            exp: 'The drive obeys its reference. A dead/drifted static sensor reads starved, so the loop floors the fan — verify the sensor before the drive, always.',
+          },
+          {
+            q: 'Before megger-testing a motor served by a VFD you must:',
+            a: ['Set the drive to maximum', 'Disconnect the motor leads from the drive — megger voltage destroys the drive\'s IGBTs', 'Ground the DC bus', 'Remove the keypad'],
+            correct: 1,
+            exp: 'Insulation-test voltage into the drive\'s output stage kills it. Isolate the motor first; verify the bus is discharged besides.',
+          },
+          {
+            q: 'A fan slowed to 50% speed draws approximately what fraction of full-speed power?',
+            a: ['50%', 'About 12-13% — power scales with the cube of speed', '75%', '25%'],
+            correct: 1,
+            exp: '0.5³ = 0.125. The affinity-law cube is the entire economic argument for variable speed.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'DDC stands for:', a: ['Dual damper control', 'Direct digital control — networked controllers running programmed logic', 'Delayed defrost cycle', 'Damper drive circuit'], correct: 1, exp: 'Digital controllers replace thermostat switching with programmed, networked logic.' },
+      { q: 'The dominant open protocol in building automation is:', a: ['USB', 'BACnet', 'HDMI', 'Zigbee'], correct: 1, exp: 'BACnet dominates open BAS networking, with Modbus common at equipment interfaces.' },
+      { q: 'BAS graphics should be treated as:', a: ['Ground truth', 'What the system thinks — always verifiable against physical reality', 'Marketing displays', 'Configuration backups'], correct: 1, exp: 'Command and feedback are not the same as motion and flow: verify at the equipment.' },
+      { q: 'A point left in "hand"/override:', a: ['Follows the schedule', 'Ignores all programmed logic — a classic source of long-standing mystery behavior', 'Alarms daily', 'Resets at midnight'], correct: 1, exp: 'Overrides outlive their reasons; checking for them is step one on any BAS-served equipment.' },
+      { q: 'A drifted space temperature sensor on a VAV box causes:', a: ['Network failure', 'The box faithfully serving a false temperature — freezing or cooking the room', 'Actuator wear', 'Filter loading'], correct: 1, exp: 'The kitchen probe lesson at building scale: controls are only as honest as their sensors.' },
+      { q: 'A VFD produces variable speed by:', a: ['Series resistors', 'Rectifying to a DC bus and inverting to variable-frequency AC through IGBTs', 'Gear reduction', 'Voltage taps'], correct: 1, exp: 'Rectifier → DC bus → IGBT inverter — the UPS architecture driving a motor.' },
+      { q: 'Fan affinity laws mean a fan at 80% speed draws about:', a: ['80% power', 'Half the power — power scales with speed cubed', '20% power', 'Full power'], correct: 1, exp: '0.8³ ≈ 0.51: the cube law is the VFD energy story.' },
+      { q: 'A VFD overvoltage fault during deceleration usually indicates:', a: ['Utility surges', 'Decel ramp too fast — the motor regenerates into the DC bus', 'A failed keypad', 'Low motor insulation'], correct: 1, exp: 'A spinning load driven to slow quickly becomes a generator; longer decel or braking options absorb it.' },
+      { q: 'VFD DC bus capacitors demand:', a: ['No special care', 'UPS-style discharge verification before touching — they hold lethal charge after power-off', 'Weekly discharge', 'Grounding straps only'], correct: 1, exp: 'The same capacitor discipline as UPS work: verify discharge per manual and meter.' },
+      { q: 'A drive-served fan stuck at max with howling ducts is investigated first at:', a: ['The drive\'s IGBTs', 'The speed reference — commonly a failed duct static-pressure sensor', 'The motor bearings', 'The supply breaker'], correct: 1, exp: 'The drive obeys its reference; a lying static sensor floors the loop. Inputs before electronics — always.' },
+    ],
+  },
 ];
