@@ -36,10 +36,17 @@ export function isKitchenModule(mod: TrainingModule): boolean {
 }
 
 // Which examAccess doc(s) grant access to a module. Shared foundation
-// modules (1-10) are accessible from either course enrollment.
+// modules (1-10) are accessible from any course enrollment; the generic
+// refrigeration modules are shared between the Kitchen and HVAC courses.
+const HVAC_SHARED_KITCHEN_IDS = ['kitchen-refrigeration-cycle', 'kitchen-refrigeration-service'];
+
 export function accessKeysForModule(mod: TrainingModule): string[] {
-  if (isKitchenModule(mod)) return ['training_kitchen'];
-  if (mod.num <= 10) return ['training_portal', 'training_kitchen'];
+  if (isKitchenModule(mod)) {
+    return HVAC_SHARED_KITCHEN_IDS.includes(mod.id)
+      ? ['training_kitchen', 'training_hvac']
+      : ['training_kitchen'];
+  }
+  if (mod.num <= 10) return ['training_portal', 'training_kitchen', 'training_hvac'];
   return ['training_portal'];
 }
 

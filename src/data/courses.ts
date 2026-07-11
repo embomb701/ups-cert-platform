@@ -265,6 +265,237 @@ export const KITCHEN_MODULE_PLACEHOLDERS: KitchenModulePlaceholder[] = [
   },
 ];
 
+// ─────────────────────────────────────────────────────────────────────────
+// HVAC FSE course outline — modules 11-25 (foundation 1-10 shared with all
+// programs; modules 11-12 reuse the Kitchen course's generic refrigeration
+// modules; 13-25 are HVAC-specific and in development).
+// ─────────────────────────────────────────────────────────────────────────
+
+export type HvacTrack =
+  | 'Refrigeration Core'
+  | 'Air & Comfort'
+  | 'Heating & Cooling Equipment'
+  | 'Controls & Building Systems'
+  | 'Professional Service';
+
+export interface HvacModulePlaceholder {
+  id: string;
+  title: string;
+  desc: string;
+  track: HvacTrack;
+  chapters: string[];
+  /** id of an existing module reused from another course (content already built) */
+  sharedFrom?: string;
+}
+
+export const HVAC_MODULE_PLACEHOLDERS: HvacModulePlaceholder[] = [
+  // ── REFRIGERATION CORE (shared with Kitchen FSE — content ready) ───────
+  {
+    id: 'kitchen-refrigeration-cycle',
+    sharedFrom: 'kitchen-refrigeration-cycle',
+    title: 'The Refrigeration Cycle',
+    desc: 'Phase change, the four components, refrigerants, pressures, superheat and subcooling — identical physics whether the box cools food or a building',
+    track: 'Refrigeration Core',
+    chapters: [
+      'Heat, phase change, and how refrigeration moves heat',
+      'The four components: compressor, condenser, metering device, evaporator',
+      'Refrigerants, EPA 608, superheat and subcooling',
+    ],
+  },
+  {
+    id: 'kitchen-refrigeration-service',
+    sharedFrom: 'kitchen-refrigeration-service',
+    title: 'Refrigeration Troubleshooting & Service',
+    desc: 'Gauge diagnosis, leak detection, recovery/evacuation/charging, and compressor electrical testing — the sealed-system craft',
+    track: 'Refrigeration Core',
+    chapters: [
+      'Reading the system: pressures, superheat, subcooling patterns',
+      'Leak detection, recovery, and charging',
+      'Compressor electrical diagnosis',
+    ],
+  },
+
+  // ── AIR & COMFORT ───────────────────────────────────────────────────────
+  {
+    id: 'hvac-psychrometrics',
+    title: 'Psychrometrics & Human Comfort',
+    desc: 'What comfort actually is: the temperature-humidity relationship that all HVAC exists to control',
+    track: 'Air & Comfort',
+    chapters: [
+      'Dry bulb, wet bulb, dew point, and relative humidity',
+      'Reading the psychrometric chart (without fear)',
+      'Sensible vs latent heat — why humidity is half the cooling job',
+      'Comfort zones, setpoints, and why occupants complain',
+      'Measuring air conditions: hygrometers and wet-bulb tools in the field',
+    ],
+  },
+  {
+    id: 'hvac-air-distribution',
+    title: 'Air Distribution, Ductwork & Airflow',
+    desc: 'Blowers, static pressure, CFM, filters, and balancing — most "refrigeration" complaints are airflow complaints',
+    track: 'Air & Comfort',
+    chapters: [
+      'Blowers and fan laws: PSC, ECM, and belt-drive',
+      'Static pressure: measuring with a manometer, total external static',
+      'CFM measurement and the airflow targets (≈400 CFM/ton)',
+      'Ductwork: supply, return, leakage, and common design sins',
+      'Filters and MERV ratings — the cheapest fix in HVAC',
+      'Balancing basics: dampers, registers, and room-by-room complaints',
+    ],
+  },
+
+  // ── HEATING & COOLING EQUIPMENT ────────────────────────────────────────
+  {
+    id: 'hvac-split-heatpumps',
+    title: 'Split Systems & Heat Pumps',
+    desc: 'The workhorse: condensing units, air handlers, heat pumps, reversing valves, and defrost',
+    track: 'Heating & Cooling Equipment',
+    chapters: [
+      'Split system anatomy: condenser, line set, evaporator coil, air handler',
+      'Heat pumps: running the cycle backwards through the reversing valve',
+      'Heat pump defrost cycles and auxiliary/emergency heat',
+      'Mini-splits and VRF basics: inverter compressors and communicating controls',
+      'Charging split systems: subcooling (TXV) and superheat (fixed orifice) methods',
+      'Classic split-system failure patterns',
+    ],
+  },
+  {
+    id: 'hvac-rtus',
+    title: 'Packaged Rooftop Units & Economizers',
+    desc: 'RTUs: the commercial workhorse — cooling, gas heat, and free-cooling economizers in one curb-mounted box',
+    track: 'Heating & Cooling Equipment',
+    chapters: [
+      'RTU anatomy and roof work safety',
+      'Staging: multi-compressor and multi-burner capacity control',
+      'Economizers: free cooling, dampers, actuators, and why most are broken',
+      'Curb, condensate, and weather integrity',
+      'RTU service rhythm: belts, bearings, coils, and controls',
+    ],
+  },
+  {
+    id: 'hvac-heating',
+    title: 'Furnaces & Heating Systems',
+    desc: 'Gas furnaces (heat exchangers, inducers, ignition sequences) and electric heat — building on the gas combustion module skills',
+    track: 'Heating & Cooling Equipment',
+    chapters: [
+      'Gas furnace sequence of operation: call → inducer → pressure switch → ignition → flame proving → blower',
+      'Heat exchangers: cracks, CO risk, and inspection',
+      'Ignition systems and flame sensing (hot-surface, direct spark, flame rod)',
+      'High-limit, rollout, and pressure switches — the safety chain',
+      'Electric heat strips, sequencers, and heat pump auxiliary heat',
+      'Condensing furnaces: secondary heat exchangers and condensate handling',
+    ],
+  },
+  {
+    id: 'hvac-chillers-hydronics',
+    title: 'Chillers, Boilers & Hydronic Systems',
+    desc: 'Water as the heat carrier: chilled water plants, cooling towers, boilers, pumps, and hydronic loops',
+    track: 'Heating & Cooling Equipment',
+    chapters: [
+      'Hydronic principles: why big buildings move water instead of air',
+      'Chillers: evaporator barrels, condenser water, and capacity control',
+      'Cooling towers: approach, range, water treatment, and Legionella awareness',
+      'Boilers and hot-water loops: aquastats, circulators, and expansion tanks',
+      'Pumps, valves, and hydronic balancing basics',
+      'The scope boundary: operator-level vs licensed chiller/boiler work',
+    ],
+  },
+  {
+    id: 'hvac-ventilation-iaq',
+    title: 'Ventilation & Indoor Air Quality',
+    desc: 'Outside air, CO2, filtration, and building pressure — the air people actually breathe',
+    track: 'Heating & Cooling Equipment',
+    chapters: [
+      'Why buildings need outside air: ASHRAE 62.1 in plain language',
+      'Demand-controlled ventilation and CO2 sensors',
+      'ERVs and HRVs: recovering energy from exhaust air',
+      'Filtration deep-dive: MERV, HEPA, and pressure-drop tradeoffs',
+      'Building pressurization: infiltration, exfiltration, and door complaints',
+      'IAQ complaints: diagnosing odors, humidity, and stuffiness systematically',
+    ],
+  },
+
+  // ── CONTROLS & BUILDING SYSTEMS ────────────────────────────────────────
+  {
+    id: 'hvac-controls',
+    title: 'Thermostats & 24V Control Circuits',
+    desc: 'The R-W-Y-G-C alphabet: low-voltage control wiring, thermostats, and sequences of operation',
+    track: 'Controls & Building Systems',
+    chapters: [
+      'The 24V transformer and the control-circuit alphabet (R, W, Y, G, C, O/B)',
+      'Conventional, heat pump, and communicating thermostat wiring',
+      'Sequences of operation: reading and verifying them with a meter',
+      'Contactors, relays, and defrost boards in the control chain',
+      'Smart thermostats: the C-wire problem and common mis-installs',
+    ],
+  },
+  {
+    id: 'hvac-bas',
+    title: 'Building Automation, DDC & VFDs',
+    desc: 'When the building runs the equipment: automation systems, sensors, and variable-speed drives',
+    track: 'Controls & Building Systems',
+    chapters: [
+      'BAS/DDC architecture: controllers, sensors, actuators, and front-ends',
+      'Common protocols in plain terms: BACnet, Modbus, and proprietary systems',
+      'Sensors and calibration: temperature, pressure, CO2, and what drift does',
+      'VFDs: what they do, basic parameters, and fault codes',
+      'Working alongside controls contractors: the service boundary',
+    ],
+  },
+
+  // ── PROFESSIONAL SERVICE ───────────────────────────────────────────────
+  {
+    id: 'hvac-refrigerants-charging',
+    title: 'HVAC Refrigerants & Charging Practices',
+    desc: 'R-410A to A2L transition, charging methods by metering device, and refrigerant-circuit discipline at HVAC scale',
+    track: 'Professional Service',
+    chapters: [
+      'The refrigerant transition: R-22 legacy, R-410A, and A2L (R-454B, R-32)',
+      'A2L handling: sensors, rated tools, and ventilation discipline',
+      'Charging by subcooling, superheat, and weigh-in — choosing the right method',
+      'Line sets: sizing, length limits, and oil return',
+      'Filter-driers, sight glasses, and circuit accessories',
+    ],
+  },
+  {
+    id: 'hvac-preventive-maintenance',
+    title: 'Seasonal Preventive Maintenance',
+    desc: 'Spring cooling and fall heating PMs: the checklist discipline that carries HVAC service companies',
+    track: 'Professional Service',
+    chapters: [
+      'Why HVAC PM is seasonal and how contracts are structured',
+      'Cooling-season PM: coils, charge verification, drains, capacitors, amps',
+      'Heating-season PM: heat exchangers, combustion, safeties, CO checks',
+      'Documentation, baselines, and the recommendations pipeline',
+    ],
+  },
+  {
+    id: 'hvac-troubleshooting',
+    title: 'HVAC Troubleshooting Capstone',
+    desc: 'No-cool, no-heat, and comfort complaints: the universal method applied across airflow, refrigeration, and controls',
+    track: 'Professional Service',
+    chapters: [
+      'The no-cool decision tree: power → controls → airflow → refrigeration',
+      'The no-heat decision tree: call → safety chain → ignition → distribution',
+      'Comfort complaints with healthy equipment: airflow, humidity, and zoning',
+      'Cross-system reasoning: when controls, air, and refrigerant faults imitate each other',
+      'Repair vs replace in HVAC: efficiency, refrigerant phase-outs, and honest framing',
+    ],
+  },
+  {
+    id: 'hvac-career',
+    title: 'Career in HVAC Field Service',
+    desc: 'The biggest trade of the three: licensing, NATE, unions, and where HVAC careers lead',
+    track: 'Professional Service',
+    chapters: [
+      'The HVAC job market: residential, commercial, and industrial paths',
+      'Certifications: EPA 608, NATE, state licensing, and manufacturer training',
+      'Tools of the trade and building the van',
+      'Career paths: lead, controls specialist, chiller tech, estimator, owner',
+    ],
+  },
+];
+
 export interface TrainingCourse {
   id: string;
   title: string;
@@ -272,7 +503,7 @@ export interface TrainingCourse {
   tagline: string;
   accessKey: string;
   certTitle: string;
-  color: 'blue' | 'orange';
+  color: 'blue' | 'orange' | 'teal';
   totalModules: number;
   stripeProductId: string;
   testOutProductId: string;
@@ -304,6 +535,19 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 27,
     stripeProductId: 'training_kitchen',
     testOutProductId: 'jr_kitchen_fse_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'hvac',
+    title: 'HVAC Field Service Engineering',
+    shortTitle: 'HVAC FSE',
+    tagline: 'Service heating, cooling, and ventilation — split systems, rooftop units, chillers, and building controls.',
+    accessKey: 'training_hvac',
+    certTitle: 'Jr. HVAC Field Service Engineer',
+    color: 'teal',
+    totalModules: 25,
+    stripeProductId: 'training_hvac',
+    testOutProductId: 'jr_hvac_fse_test_human',
     comingSoon: true,
   },
 ];
