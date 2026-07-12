@@ -95,6 +95,37 @@ async function grantJrKitchenFseAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantHvacTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_hvac')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_hvac_fse_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrHvacFseAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_hvac_fse_test_human',
+    examLevel: 'jr_hvac_fse',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. HVAC FSE Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantJrFseAccess(
   userId: string,
   purchaseId: string,
@@ -187,6 +218,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_kitchen_testout':
       await grantKitchenTrainingAccess(userId, pid);
       await grantJrKitchenFseAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (HVAC) ──────────────────────────────────
+    case 'training_hvac':
+      await grantHvacTrainingAccess(userId, pid);
+      break;
+
+    // ── HVAC Test-Out ───────────────────────────────────────────────────────
+    case 'jr_hvac_fse_test_human':
+      await grantJrHvacFseAccess(userId, pid);
+      break;
+
+    // ── Package: HVAC Training + HVAC Test-Out ──────────────────────────────
+    case 'pkg_training_hvac_testout':
+      await grantHvacTrainingAccess(userId, pid);
+      await grantJrHvacFseAccess(userId, pid);
       break;
 
     // ── Practice test ($14.99 — no cert issued, not a test-out) ──────────

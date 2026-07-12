@@ -16,10 +16,12 @@ const SERVER_FILES = [
   'book-fse-questions.json',
   'kitchen-jr-fse-fresh.json',
   'kitchen-jr-fse-derived',
+  'hvac-jr-fse-fresh.json',
+  'hvac-jr-fse-derived',
 ];
 
 export default function AdminQuestionsPage() {
-  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats } | null>(null);
+  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
   const [serverImporting, setServerImporting] = useState(false);
@@ -134,7 +136,7 @@ export default function AdminQuestionsPage() {
         </div>
 
         {/* Bank stats */}
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="card-dark p-5">
             <h3 className="text-sm font-semibold text-white mb-2">Jr. FSE Bank</h3>
             {statsLoading ? (
@@ -173,6 +175,20 @@ export default function AdminQuestionsPage() {
                 <p className="text-xs text-gray-500">active of {stats.jr_kitchen_fse.total.toLocaleString()} total · target 1,000</p>
                 <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
                   <div className="h-full bg-orange-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_kitchen_fse.active / 1000) * 100)}%` }} />
+                </div>
+              </>
+            ) : <p className="text-xs text-red-400">Failed to load</p>}
+          </div>
+          <div className="card-dark p-5">
+            <h3 className="text-sm font-semibold text-white mb-2">Jr. HVAC FSE Bank</h3>
+            {statsLoading ? (
+              <p className="text-xs text-gray-500">Loading…</p>
+            ) : stats?.jr_hvac_fse ? (
+              <>
+                <p className="text-2xl font-bold text-teal-400">{stats.jr_hvac_fse.active.toLocaleString()}</p>
+                <p className="text-xs text-gray-500">active of {stats.jr_hvac_fse.total.toLocaleString()} total · target 1,000</p>
+                <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
+                  <div className="h-full bg-teal-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_hvac_fse.active / 1000) * 100)}%` }} />
                 </div>
               </>
             ) : <p className="text-xs text-red-400">Failed to load</p>}

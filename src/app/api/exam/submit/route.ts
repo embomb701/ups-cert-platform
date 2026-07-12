@@ -121,8 +121,8 @@ export async function POST(req: NextRequest) {
         await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').update({ testOutFailed: true });
       }
     }
-    if (!passed && attempt.examLevel === 'jr_kitchen_fse' && (attempt as { testOut?: boolean }).testOut) {
-      await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_kitchen_fse').set(
+    if (!passed && (attempt.examLevel === 'jr_kitchen_fse' || attempt.examLevel === 'jr_hvac_fse') && (attempt as { testOut?: boolean }).testOut) {
+      await adminDb.collection('users').doc(uid).collection('examAccess').doc(attempt.examLevel).set(
         { testOut: true, testOutFailed: true },
         { merge: true }
       );
@@ -137,6 +137,8 @@ export async function POST(req: NextRequest) {
           ? 'Junior UPS Field Service Certification'
           : attempt.examLevel === 'jr_kitchen_fse'
           ? 'Junior Commercial Kitchen Field Service Certification'
+          : attempt.examLevel === 'jr_hvac_fse'
+          ? 'Junior HVAC Field Service Certification'
           : 'UPS Field Service Certification';
 
       await adminDb.collection('certificates').doc(certificateId).set({

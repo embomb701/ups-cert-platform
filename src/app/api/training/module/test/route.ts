@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { getModule, ALL_MODULES, KITCHEN_MODULES } from '@/data/index';
+import { getModule, ALL_MODULES, KITCHEN_MODULES, COURSE_SEQUENCES } from '@/data/index';
 import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
@@ -95,6 +95,7 @@ export async function POST(req: NextRequest) {
     const upsComplete = ALL_MODULES.every((m) => completedIds.has(m.id));
     const kitchenCourse = [...ALL_MODULES.filter((m) => m.num <= 10), ...KITCHEN_MODULES];
     const kitchenComplete = kitchenCourse.every((m) => completedIds.has(m.id));
+    const hvacComplete = COURSE_SEQUENCES['training_hvac'].every((m) => completedIds.has(m.id));
 
     if (upsComplete) {
       // Grant Jr. FSE exam access (from training path, not test-out)
@@ -120,7 +121,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const trainingComplete = upsComplete || kitchenComplete;
+    if (hvacComplete) {
+      // Grant Jr. HVAC FSE exam access (from training path, not test-out)
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_hvac_fse_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_hvac_fse').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
+    const trainingComplete = upsComplete || kitchenComplete || hvacComplete;
     return NextResponse.json({ passed: true, results, trainingComplete });
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });

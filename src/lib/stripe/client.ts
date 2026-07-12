@@ -102,6 +102,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // HVAC FSE PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_hvac: {
+    name: 'HVAC FSE Training Course + Jr. HVAC FSE Certification Exam',
+    shortName: 'HVAC Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_HVAC ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_hvac_fse_test_human: {
+    name: 'Jr. HVAC FSE Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. HVAC FSE Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_HVAC_FSE_HUMAN ?? '',
+  },
+
+  // HVAC training + test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
+  pkg_training_hvac_testout: {
+    name: 'HVAC Training Course + Jr. HVAC FSE Test-Out (Human Proctored)',
+    shortName: 'HVAC Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_HVAC_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

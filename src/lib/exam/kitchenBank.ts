@@ -1,20 +1,24 @@
 /**
- * Jr. Kitchen FSE question bank — derived from course content.
+ * Derived question banks — built from course content.
  *
- * Converts the slide quizzes and module tests of the kitchen course
- * (shared foundation modules 1-10 + kitchen modules 11-27) into
- * questionBank records with examLevel 'jr_kitchen_fse'. IDs are stable
- * (module id + slide/test index) so re-imports merge instead of duplicating.
+ * Converts the slide quizzes and module tests of a course into
+ * questionBank records. IDs are stable (prefix + module id + slide/test
+ * index) so re-imports merge instead of duplicating.
+ *
+ * - Kitchen course (shared 1-10 + kitchen 11-27) → examLevel 'jr_kitchen_fse'
+ * - HVAC course (shared 1-10 + refrigeration core + hvac 13-25) → 'jr_hvac_fse'
  */
 
-import { ALL_MODULES, KITCHEN_MODULES } from '@/data/index';
+import { ALL_MODULES, KITCHEN_MODULES, HVAC_MODULES } from '@/data/index';
 import type { TrainingModule, QuizQ } from '@/data/modules';
 
 const CHOICE_IDS = ['A', 'B', 'C', 'D'] as const;
 
+type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse';
+
 interface BankQuestion {
   id: string;
-  examLevel: 'jr_kitchen_fse';
+  examLevel: DerivedExamLevel;
   category: string;
   subcategory: string;
   difficulty: 'easy' | 'medium' | 'hard';
@@ -33,13 +37,14 @@ interface BankQuestion {
 function toBankQuestion(
   q: QuizQ,
   id: string,
+  examLevel: DerivedExamLevel,
   mod: TrainingModule,
   subcategory: string,
   difficulty: 'easy' | 'medium' | 'hard',
 ): BankQuestion {
   return {
     id,
-    examLevel: 'jr_kitchen_fse',
+    examLevel,
     category: mod.title,
     subcategory,
     difficulty,
@@ -48,7 +53,7 @@ function toBankQuestion(
     correctAnswerId: CHOICE_IDS[q.correct],
     explanation: q.exp,
     referenceBookSection: `Module ${mod.num} — ${mod.title}`,
-    safetyCritical: /LOTO|lockout|NFPA|arc flash|high-limit|carbon monoxide|\bCO\b|suppression|interlock|asphyxi/i.test(q.q + q.exp),
+    safetyCritical: /LOTO|lockout|NFPA|arc flash|high-limit|carbon monoxide|\bCO\b|suppression|interlock|asphyxi|rollout|relief valve|Legionella|backdraft/i.test(q.q + q.exp),
     reviewRequired: false,
     active: true,
     estimatedTimeSeconds: 60,
@@ -56,23 +61,34 @@ function toBankQuestion(
   };
 }
 
-export function buildKitchenBankQuestions(): BankQuestion[] {
-  // Kitchen course = shared foundation modules 1-10 + kitchen modules 11-27
-  const courseModules = [
-    ...ALL_MODULES.filter((m) => m.num <= 10),
-    ...KITCHEN_MODULES,
-  ];
-
+function buildBank(
+  courseModules: TrainingModule[],
+  examLevel: DerivedExamLevel,
+  idPrefix: string,
+): BankQuestion[] {
   const out: BankQuestion[] = [];
   for (const mod of courseModules) {
     mod.slides.forEach((slide, si) => {
       slide.quiz.forEach((q, qi) => {
-        out.push(toBankQuestion(q, `kjr_${mod.id}_s${si}q${qi}`, mod, slide.title, 'easy'));
+        out.push(toBankQuestion(q, `${idPrefix}_${mod.id}_s${si}q${qi}`, examLevel, mod, slide.title, 'easy'));
       });
     });
     mod.test.forEach((q, ti) => {
-      out.push(toBankQuestion(q, `kjr_${mod.id}_t${ti}`, mod, 'Module Test', 'medium'));
+      out.push(toBankQuestion(q, `${idPrefix}_${mod.id}_t${ti}`, examLevel, mod, 'Module Test', 'medium'));
     });
   }
   return out;
+}
+
+const FOUNDATION = ALL_MODULES.filter((m) => m.num <= 10);
+const REFRIGERATION_CORE = KITCHEN_MODULES.filter((m) =>
+  ['kitchen-refrigeration-cycle', 'kitchen-refrigeration-service'].includes(m.id)
+);
+
+export function buildKitchenBankQuestions(): BankQuestion[] {
+  return buildBank([...FOUNDATION, ...KITCHEN_MODULES], 'jr_kitchen_fse', 'kjr');
+}
+
+export function buildHvacBankQuestions(): BankQuestion[] {
+  return buildBank([...FOUNDATION, ...REFRIGERATION_CORE, ...HVAC_MODULES], 'jr_hvac_fse', 'hjr');
 }

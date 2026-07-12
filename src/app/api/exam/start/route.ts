@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     const examLevel = (isPractice ? 'jr_fse' : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse', 'jr_kitchen_fse'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -137,12 +137,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Jr.-level course exams (Kitchen, HVAC) share the same access model:
+    // training-completion grant OR a proctor-unlocked test-out order.
+    const JR_COURSE_EXAMS: Record<string, { label: string; productId: string }> = {
+      jr_kitchen_fse: { label: 'Jr. Kitchen FSE', productId: 'jr_kitchen_fse_test_human' },
+      jr_hvac_fse: { label: 'Jr. HVAC FSE', productId: 'jr_hvac_fse_test_human' },
+    };
+
     let kitchenTestOut = false;
-    if (examLevel === 'jr_kitchen_fse') {
-      // Two access paths: training completion grant, or a proctor-unlocked test-out order
+    const jrCourse = JR_COURSE_EXAMS[examLevel];
+    if (jrCourse) {
       const accessSnap = await adminDb
         .collection('users').doc(uid)
-        .collection('examAccess').doc('jr_kitchen_fse')
+        .collection('examAccess').doc(examLevel)
         .get();
       const accessData = accessSnap.exists ? accessSnap.data()! : null;
       const hasTrainingGrant = !!accessData?.granted;
@@ -152,7 +159,7 @@ export async function POST(req: NextRequest) {
         const readyOrder = await adminDb
           .collection('proctoredExamOrders')
           .where('userId', '==', uid)
-          .where('productId', '==', 'jr_kitchen_fse_test_human')
+          .where('productId', '==', jrCourse.productId)
           .where('status', '==', 'ready')
           .limit(1)
           .get();
@@ -162,11 +169,11 @@ export async function POST(req: NextRequest) {
 
       if (!hasTrainingGrant && !hasReadyTestOut) {
         return NextResponse.json({
-          error: 'No valid Jr. Kitchen FSE exam access found. Complete the Kitchen training course, or purchase the test-out and wait for your proctor session to be unlocked.',
+          error: `No valid ${jrCourse.label} exam access found. Complete the training course, or purchase the test-out and wait for your proctor session to be unlocked.`,
         }, { status: 403 });
       }
 
-      // Failed test-out lock: kitchen training must be completed before retrying
+      // Failed test-out lock: the course training must be completed before retrying
       if (accessData?.testOut && accessData?.testOutFailed) {
         const allProgressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
         const completedModuleIds = new Set<string>();
@@ -174,23 +181,24 @@ export async function POST(req: NextRequest) {
           const d = doc.data();
           if (d.passed && d.completedAt) completedModuleIds.add(doc.id);
         });
-        const { ALL_MODULES, KITCHEN_MODULES } = await import('@/data/index');
-        const kitchenCourse = [...ALL_MODULES.filter((m) => m.num <= 10), ...KITCHEN_MODULES];
-        const trainingComplete = kitchenCourse.every((m) => completedModuleIds.has(m.id));
+        const { COURSE_SEQUENCES } = await import('@/data/index');
+        const courseKey = examLevel === 'jr_kitchen_fse' ? 'training_kitchen' : 'training_hvac';
+        const courseModules = COURSE_SEQUENCES[courseKey];
+        const trainingComplete = courseModules.every((m) => completedModuleIds.has(m.id));
         if (!trainingComplete) {
           return NextResponse.json({
-            error: 'You did not pass the Jr. Kitchen FSE Test-Out. You must complete the Kitchen Training Course before you can attempt the exam again.',
+            error: `You did not pass the ${jrCourse.label} Test-Out. You must complete the training course before you can attempt the exam again.`,
             requiresTraining: true,
           }, { status: 403 });
         }
-        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_kitchen_fse').update({ testOutFailed: false });
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc(examLevel).update({ testOutFailed: false });
       }
 
       // Account cooldown (filter in memory to avoid composite index)
       const recentAttempts = await adminDb
         .collection('examAttempts')
         .where('userId', '==', uid)
-        .where('examLevel', '==', 'jr_kitchen_fse')
+        .where('examLevel', '==', examLevel)
         .get();
       const now = new Date();
       const activeCooldown = recentAttempts.docs.find((d) => {
@@ -200,7 +208,7 @@ export async function POST(req: NextRequest) {
       if (activeCooldown) {
         return NextResponse.json({
           error:
-            'A recent Jr. Kitchen FSE Exam attempt has already been associated with this account or network. Attempts are limited to once every 90 days. Contact support if you believe this is an error.',
+            `A recent ${jrCourse.label} Exam attempt has already been associated with this account or network. Attempts are limited to once every 90 days. Contact support if you believe this is an error.`,
           cooldownUntil: activeCooldown.data().cooldownUntil?.toDate(),
         }, { status: 429 });
       }
@@ -209,7 +217,7 @@ export async function POST(req: NextRequest) {
       const ipLocks = await adminDb
         .collection('ipExamLocks')
         .where('ipHash', '==', ipHash)
-        .where('examLevel', '==', 'jr_kitchen_fse')
+        .where('examLevel', '==', examLevel)
         .get();
       const activeIpLock = ipLocks.docs.find((d) => {
         const data = d.data();
@@ -219,7 +227,7 @@ export async function POST(req: NextRequest) {
       if (activeIpLock) {
         return NextResponse.json({
           error:
-            'A recent Jr. Kitchen FSE Exam attempt has already been associated with this account or network. Attempts are limited to once every 90 days. Contact support if you believe this is an error.',
+            `A recent ${jrCourse.label} Exam attempt has already been associated with this account or network. Attempts are limited to once every 90 days. Contact support if you believe this is an error.`,
         }, { status: 429 });
       }
     }
@@ -279,8 +287,8 @@ export async function POST(req: NextRequest) {
         ? 'practice_test'
         : examLevel === 'jr_fse'
         ? 'jr_fse_test_human'
-        : examLevel === 'jr_kitchen_fse'
-        ? 'jr_kitchen_fse_test_human'
+        : jrCourse
+        ? jrCourse.productId
         : 'fse_proctored_exam',
       examLevel,
       isPractice,
@@ -300,17 +308,17 @@ export async function POST(req: NextRequest) {
       suspiciousRiskLevel: 'low',
       flaggedForReview: false,
       // Practice tests have no cooldown; real Jr. attempts get 90-day cooldown
-      cooldownUntil: (!isPractice && (examLevel === 'jr_fse' || examLevel === 'jr_kitchen_fse')) ? cooldownUntil : null,
+      cooldownUntil: (!isPractice && (examLevel === 'jr_fse' || !!jrCourse)) ? cooldownUntil : null,
       proctored: examLevel === 'fse',
       proctoringType: examLevel === 'fse' ? 'human' : null,
     });
 
     // Set IP lock only for real (non-practice) Jr.-level attempts
-    if (!isPractice && (examLevel === 'jr_fse' || examLevel === 'jr_kitchen_fse')) {
+    if (!isPractice && (examLevel === 'jr_fse' || jrCourse)) {
       await adminDb.collection('ipExamLocks').add({
         ipHash,
         examLevel,
-        productId: examLevel === 'jr_fse' ? 'jr_fse_test_human' : 'jr_kitchen_fse_test_human',
+        productId: examLevel === 'jr_fse' ? 'jr_fse_test_human' : jrCourse!.productId,
         userId: uid,
         email,
         attemptId,
