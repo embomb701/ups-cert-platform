@@ -872,4 +872,343 @@ export const GENERATOR_MODULES: TrainingModule[] = [
       { q: 'The entry tech\'s value in a paralleling plant is:', a: ['Reprogramming the master PLC', 'Owning the generators feeding it, observing/documenting sequences, and speaking the vocabulary that earns the switchgear apprenticeship', 'Adjusting relays', 'Racking breakers untrained'], correct: 1, exp: 'The generators are yours; the literacy is the ladder into the premium rooms — with the boundary respected.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 22 — GENERATORS IN CRITICAL POWER SYSTEMS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-critical-power',
+    num: 22,
+    title: 'Generators in Critical Power Systems',
+    desc: 'Where the generator meets the UPS: the critical power chain, NEC 700/701/702, hospital systems, and data center redundancy.',
+    slides: [
+      {
+        title: 'The Critical Power Chain and the NEC Classes',
+        body: [
+          'The full picture this portal has been building toward: UTILITY → service gear → ATS → (generator on failure) → distribution → UPS → PDU → the critical load. The UPS (the sister course\'s whole subject) bridges the seconds between outage and generator acceptance with its batteries; the generator carries the hours and days the batteries never could. A field engineer fluent in BOTH sides of that handshake — and the courses share their foundation for exactly this reason — is the rare and valuable animal in critical power.',
+          'The NEC classifies standby systems by what fails if they fail: ARTICLE 700 EMERGENCY SYSTEMS (life safety — egress lighting, alarms, hospital life-support branches: transfer within 10 seconds, dedicated wiring separation, the strictest testing), ARTICLE 701 LEGALLY REQUIRED STANDBY (systems whose loss creates hazards — some ventilation, communication: 60-second transfer), and ARTICLE 702 OPTIONAL STANDBY (business protection — the data floor, the process line, the house: no mandated transfer time; the owner\'s money, the owner\'s rules). One generator often serves several classes through separate ATSs with load-priority logic — and knowing WHICH class each switch serves tells you the stakes and rules of everything you touch.',
+          'Healthcare stacks its own layer (NEC 517, NFPA 99): the ESSENTIAL ELECTRICAL SYSTEM with its separated branches — LIFE SAFETY (egress, alarms), CRITICAL (patient care), EQUIPMENT (the machinery). Hospital generator work carries the discipline of module 23\'s NFPA 110 at its strictest, and the emotional weight said plainly: this generator IS someone\'s ventilator during the outage. Test days at hospitals are choreographed, documented, and never casual.',
+          'Load-priority logic ties it together on shared plants: emergency loads transfer first and shed never; optional loads wait or shed if capacity tightens (module 21\'s add/shed steps). Reading a one-line diagram of a critical facility — which busses, which ATSs, which class, which priority — is the module 7 skill (drawings) at its highest-stakes application, and the first thing you do on any new critical site.',
+        ],
+        keyPoints: [
+          'The chain: utility → ATS/generator → UPS → load; batteries bridge seconds, the generator carries days',
+          'NEC 700 (life safety, 10s) / 701 (legally required, 60s) / 702 (optional) — class sets stakes and rules',
+          'Healthcare adds NEC 517/NFPA 99 branch separation: life safety, critical, equipment',
+          'Read the one-line first on every critical site: which ATS serves which class at which priority',
+        ],
+        quiz: [
+          {
+            q: 'A facility\'s single generator feeds three ATSs: egress lighting, stairwell pressurization fans, and the data floor. Under NEC classification these are most likely:',
+            a: ['All Article 702', 'Article 700 (egress), 701 (pressurization), and 702 (data floor) respectively — one plant, three rule sets', 'All Article 700', 'Unclassified'],
+            correct: 1,
+            exp: 'Life-safety egress = 700; legally required hazard-prevention = 701; the business\'s data floor = 702. The class on each switch sets its transfer time, wiring, and testing rules.',
+          },
+          {
+            q: 'During a capacity crunch on a shared standby plant, load-priority logic will:',
+            a: ['Shed all loads equally', 'Shed optional (702) loads while emergency (700) loads are never shed', 'Shed the emergency loads first as smallest', 'Trip the generator'],
+            correct: 1,
+            exp: 'Priority follows classification: life safety holds at all costs; the owner\'s optional loads wait or shed. Module 21\'s add/shed steps implement exactly this hierarchy.',
+          },
+        ],
+      },
+      {
+        title: 'The Generator-UPS Handshake',
+        body: [
+          'Generators and UPSs are complicated dance partners, and their friction points are field-legendary. FREQUENCY WINDOWS: a UPS syncs its bypass and input expectations to a stable frequency; a generator recovering from load steps wobbles (module 14\'s transient response), and a UPS with tight input tolerance may reject generator power repeatedly — cycling to battery on power it "should" accept. The fixes live on both sides: generator governor tuning/sizing, and UPS input-window settings (generator mode) that the UPS tech — perhaps your UPS-course colleague, perhaps you wearing both hats — configures.',
+          'NONLINEAR LOAD DISTORTION: a UPS rectifier is a harmonic-rich load, and a generator\'s higher source impedance lets those harmonics distort the very bus voltage the UPS is judging (module 18\'s power-quality lesson). Undersized generators feeding big UPS rectifiers can chase their own tails — voltage distortion → UPS complains → drops load → voltage cleans → reaccepts → repeats. Sizing rules of thumb exist (generator kW comfortably above UPS input demand, historically 1.5-2x for old rectifiers, tighter with modern IGBT front ends), and input filters/12-pulse/active front ends on the UPS side are the engineering answers.',
+          'STEP LOADS AND RAMPS: slamming a big UPS (plus mechanical loads) onto a just-started generator invites the under-frequency roll-off spiral; well-designed systems stage load steps (ATS priorities, UPS walk-in/soft-start features that ramp rectifier demand over seconds). BATTERY-CHARGER INTERACTION: after a long outage, every UPS on site simultaneously bulk-charges its strings — a hidden load block the sizing must anticipate.',
+          'Your field role in the handshake: recognize the symptoms (UPS on battery while the generator runs "fine"; cyclic accept/reject; alarms on both machines timestamped in interleaved logs), collect BOTH machines\' event logs (module 19 + the UPS\'s), verify generator-side stability with your own instruments (frequency/voltage recording under the actual load steps), and coordinate the two-sided fix. Sites with both maintenance contracts under one roof — yours — resolve these in days; split-vendor finger-pointing takes months, which is itself a sales argument the module hands you.',
+        ],
+        keyPoints: [
+          'UPS input windows vs generator frequency wobble: the classic accept/reject cycling complaint',
+          'Rectifier harmonics distort high-impedance generator busses — sizing and front-end engineering answer it',
+          'Stage the load steps: walk-in/soft-start and ATS priorities prevent the roll-off spiral',
+          'Collect BOTH event logs and record the handshake with your own instruments — one-vendor sites win',
+        ],
+        quiz: [
+          {
+            q: 'During outages, a data center\'s UPS repeatedly cycles: accepts generator power, drops to battery, reaccepts, endlessly. The generator panel reads "normal." The productive investigation is:',
+            a: ['Replace the UPS batteries', 'Record generator frequency/voltage during the events and compare against the UPS input-tolerance settings — the handshake, not either machine alone, is the fault', 'Overhaul the governor immediately', 'Bigger batteries'],
+            correct: 1,
+            exp: 'The classic generator-UPS friction: transient wobble outside a tight input window. Instrument recordings plus both event logs localize which side to tune — governor response, UPS generator-mode window, or sizing.',
+          },
+          {
+            q: 'An hour after a long outage ends and utility returns, the facility generator (still exercising) struggles under an unexpected load block. The hidden load is likely:',
+            a: ['HVAC restart', 'Every UPS on site simultaneously bulk-recharging its depleted battery strings', 'Lighting inrush', 'The ATS coils'],
+            correct: 1,
+            exp: 'Post-outage battery recharge is a real, simultaneous, sustained load block that sizing and load-step planning must anticipate — the UPS course\'s batteries arriving on the generator\'s bill.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'In the critical power chain, the UPS exists to:', a: ['Replace the generator', 'Bridge the seconds between outage and generator acceptance; the generator carries the long haul', 'Charge the starting batteries', 'Regulate utility power only'], correct: 1, exp: 'Batteries buy seconds-to-minutes; engines buy hours-to-days: partners, not competitors.' },
+      { q: 'NEC Article 700 systems must accept load within:', a: ['60 seconds', '10 seconds', '5 minutes', 'No requirement'], correct: 1, exp: 'Emergency (life-safety) systems: 10 seconds — the number module 13\'s block heaters exist to meet.' },
+      { q: 'NEC Article 702 covers:', a: ['Hospital life support', 'Optional standby — business-protection loads on the owner\'s terms', 'Egress lighting', 'Fire pumps'], correct: 1, exp: 'The data floor and the business: no mandated transfer time, the owner\'s money and rules.' },
+      { q: 'Hospital essential electrical systems separate into:', a: ['Two feeders', 'Life safety, critical, and equipment branches (NEC 517/NFPA 99)', 'AC and DC systems', 'Red and blue busses'], correct: 1, exp: 'Branch separation with distinct rules — and the strictest testing culture in the trade.' },
+      { q: 'The first act on any new critical site is:', a: ['A load bank test', 'Reading the one-line: which busses, ATSs, classes, and priorities', 'Fuel sampling', 'Megger testing'], correct: 1, exp: 'Module 7\'s drawing skill at maximum stakes: the one-line is the map of what everything you touch protects.' },
+      { q: 'A UPS rejecting generator power it "should" accept usually involves:', a: ['Bad fuel', 'Generator frequency/voltage transients outside the UPS input window — a two-sided tuning problem', 'A failed ATS', 'Undersized wiring'], correct: 1, exp: 'The handshake: governor response and UPS generator-mode tolerance meet in the middle, verified by recordings.' },
+      { q: 'UPS rectifiers distort generator bus voltage because:', a: ['They are DC devices', 'Their harmonic currents act on the generator\'s higher source impedance', 'They overspeed the engine', 'They unbalance phases'], correct: 1, exp: 'Module 18\'s power-quality lesson: nonlinear loads + high impedance = distortion the UPS then judges.' },
+      { q: 'UPS walk-in/soft-start features exist to:', a: ['Save energy', 'Ramp rectifier demand over seconds so a just-started generator is not slammed', 'Protect the batteries', 'Silence alarms'], correct: 1, exp: 'Staged load steps keep the engine out of the under-frequency roll-off spiral.' },
+      { q: 'The post-outage hidden load block on generators is:', a: ['Elevator testing', 'Simultaneous UPS battery recharge across the facility', 'Utility backfeed', 'Lighting'], correct: 1, exp: 'Every depleted string bulk-charges at once — a sustained block the sizing must anticipate.' },
+      { q: 'Generator-UPS disputes resolve fastest when:', a: ['Vendors litigate', 'One service organization holds both machines\' logs, instruments, and contracts', 'The utility mediates', 'Both are replaced'], correct: 1, exp: 'Split-vendor finger-pointing takes months; the dual-fluency tech (this portal\'s graduate) closes it in days.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 23 — NFPA 110 & COMPLIANCE TESTING
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-nfpa110',
+    num: 23,
+    title: 'NFPA 110 & Compliance Testing',
+    desc: 'The standard that runs standby power: levels and types, weekly/monthly/annual testing, load banks, and the documentation the AHJ will ask for.',
+    slides: [
+      {
+        title: 'The Standard and the Testing Calendar',
+        body: [
+          'NFPA 110 (Standard for Emergency and Standby Power Systems) is the operating system of this trade: it defines system LEVELS (Level 1 — failure could cost human life, hospitals and egress systems; Level 2 — failure is less critical), TYPES (the required response time: Type 10 = 10 seconds, Type 60, Type M and so on), and CLASSES (minimum runtime in hours the fuel supply must provide: Class 6, 48, X). A hospital\'s "Level 1, Type 10, Class X" designation tells you the stakes, the speed, and the fuel endurance in three words — and dictates the maintenance regime that follows.',
+          'The testing calendar is the trade\'s heartbeat. WEEKLY: inspection of the EPSS (Emergency Power Supply System) — the walkaround this course has been teaching all along (fluids, charger, heater, controller in AUTO, fuel, leaks), with the generator typically exercised. MONTHLY: the load test — the generator must run under load for at least 30 minutes, loaded to either the minimum nameplate percentage NFPA prescribes (30% where applicable) or the available building load per the applicable edition and AHJ — module 17\'s wet-stacking lesson written into law. Transfer switches: exercised monthly under conditions simulating utility failure (module 20\'s honest transfer test).',
+          'ANNUAL and periodic escalations: fuel testing (module 17\'s bottom samples formalized), battery maintenance per manufacturer and standard, and where monthly building load cannot meet the prescribed loading, a SUPPLEMENTAL ANNUAL LOAD BANK TEST (continuous loaded run stepping to higher percentages per the standard). And the big one on the calendar: the TRIENNIAL 4-HOUR TEST (Level 1 systems, every 36 months: a sustained loaded run proving endurance, commonly load-banked). These tests are choreographed site events — coordinated, staffed, documented — and running them well is a service specialty in itself.',
+          'The AHJ (authority having jurisdiction — fire marshal, Joint Commission surveyor in hospitals, insurer) enforces through DOCUMENTATION: the written record of every weekly, monthly, and annual item, with readings, is what compliance IS in an audit. The kitchen course\'s documentation religion reaches its formal peak here: a test that happened without a record legally never happened, and the service company\'s log program (paper or platform) is as much the product as the wrench work.',
+        ],
+        tables: [
+          {
+            caption: 'NFPA 110 designation shorthand',
+            headers: ['Term', 'Means', 'Example'],
+            rows: [
+              ['Level 1 / 2', 'Life-safety stakes / lesser', 'Hospital = Level 1'],
+              ['Type 10 / 60 / M', 'Seconds to accept load', 'Type 10 = 10 seconds'],
+              ['Class 6 / 48 / X', 'Hours of fuel runtime', 'Class X = as specified (e.g., 96h)'],
+            ],
+          },
+        ],
+        keyPoints: [
+          'Level = stakes, Type = seconds to load, Class = hours of fuel: the three-word system designation',
+          'Weekly inspection, monthly 30-minute LOADED test, monthly ATS transfer, annual fuel/battery work',
+          'Load bank supplements when building load is insufficient; triennial 4-hour endurance test on Level 1',
+          'Documentation IS compliance: an unrecorded test legally never happened',
+        ],
+        quiz: [
+          {
+            q: 'A hospital generator is designated Level 1, Type 10, Class 48. This means:',
+            a: ['48 kW, 10 cylinders, priority 1', 'Life-safety stakes, load acceptance within 10 seconds, and fuel for at least 48 hours of runtime', 'One of 48 generators', 'Ten-year-old unit, level site'],
+            correct: 1,
+            exp: 'The three-word shorthand: Level (stakes) / Type (seconds) / Class (fuel hours). It dictates the block heater, the testing calendar, and the tank size in one line.',
+          },
+          {
+            q: 'A facility\'s monthly tests run the generator for 30 minutes at the building\'s available load — which is only 12% of nameplate. Per NFPA 110 practice, the site needs:',
+            a: ['Nothing more — 30 minutes is 30 minutes', 'A supplemental annual load bank test (and ideally better monthly loading) — light-load testing alone under-exercises and wet-stacks the diesel', 'Weekly load banks', 'A smaller generator'],
+            correct: 1,
+            exp: 'Loading requirements exist because of module 17\'s physics: chronic 12% running is maintenance into failure. The load bank supplies the honest work the building cannot.',
+          },
+        ],
+      },
+      {
+        title: 'Running the Tests and Selling the Program',
+        body: [
+          'Test-day craft makes the difference between a compliance chore and a diagnostic goldmine. Preparation: notify stakeholders (a hospital monthly test involves clinical coordination; module 22\'s stakes), stage instruments (you will record voltages, frequency, currents per phase, oil pressure, coolant and exhaust temperatures, transfer times against Type ratings — with a stopwatch on the sequence), and walk the system first (a pre-test walkaround catches the low coolant BEFORE it becomes a mid-test shutdown with an audience).',
+          'During the run, the readings ARE the service: each 15-minute interval\'s data builds the trend file (module 23 HVAC-style baselines — this year\'s exhaust temp at 50% load against last year\'s is wear surveillance), transfer timing proves the Type rating, and load bank steps prove capability while burning out wet-stack deposits. Failures DURING tests are gifts on your terms: a set that dies at minute 22 of a monthly test just failed safely, with you present, instead of at hour 22 of a hurricane.',
+          'Load bank practice: resistive banks (portable trailer or permanent) apply precise kW in steps; resistive/reactive banks add kVAR for full alternator/regulator proof (module 18/21 territory on bigger gear). Protocol: connect per procedure (cabling ampacity, ventilation of the bank\'s own heat, exhaust clearances), step per the standard\'s schedule, record at each step, and watch the machine — smoking joints, drifting temperatures, and hunting governors reveal themselves under staged load like nowhere else.',
+          'The business synthesis this trade hands you: the NFPA 110 calendar IS a service contract renewal engine — weekly/monthly items the site staff may perform (that you train and audit), monthly/annual items the contract covers, load banking and fuel programs as recurring specialties, and the documentation platform binding it all. The generator PM conversation is unique in the trades because the customer is often legally REQUIRED to buy what you are selling — your job is to be the provider whose records survive the audit and whose tests find the failures first.',
+        ],
+        keyPoints: [
+          'Pre-test walkaround prevents mid-test embarrassments; stopwatch the transfer against the Type rating',
+          'Interval readings build the year-over-year trend file — tests are wear surveillance, not just compliance',
+          'A failure during a test is the system failing safely, on your terms — the argument for honest loading',
+          'The NFPA calendar is a legally mandated service contract: be the provider whose records survive audits',
+        ],
+        quiz: [
+          {
+            q: 'During a monthly test a generator shuts down on high coolant temperature at minute 25. The professional framing to the anxious facility manager is:',
+            a: ['The test broke the generator', 'The test just caught a real cooling failure safely, with help present — exactly what testing exists for; now we diagnose before the real outage does this at hour 22', 'Tests should be shorter', 'Skip next month to be safe'],
+            correct: 1,
+            exp: 'Tests fail systems on your terms. The alternative discovery scenario is a mid-hurricane shutdown — the framing that turns an awkward moment into the case for the program.',
+          },
+          {
+            q: 'The record-keeping standard for NFPA 110 compliance is:',
+            a: ['Memory and good intentions', 'Written/platform documentation of every weekly, monthly, and annual item with readings — what the AHJ audit actually inspects', 'Photos only', 'The controller\'s internal log alone'],
+            correct: 1,
+            exp: 'Compliance is the paper (or platform). Controller logs support but do not replace the documented program — an unrecorded test never happened to an auditor.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'NFPA 110 Level 1 designates systems where:', a: ['Fuel is diesel', 'Failure could result in loss of human life', 'Output exceeds 1 MW', 'The AHJ owns the site'], correct: 1, exp: 'Level = stakes: hospitals, egress, life safety carry Level 1 and its strictest regime.' },
+      { q: 'Type 10 means:', a: ['Ten-year service life', 'Load acceptance within 10 seconds', 'Ten percent loading', 'Ten tests annually'], correct: 1, exp: 'Type is the seconds-to-load rating — the requirement module 13\'s readiness chain exists to meet.' },
+      { q: 'Class in NFPA 110 shorthand specifies:', a: ['Enclosure rating', 'Minimum hours of fuel-supplied runtime', 'Voltage class', 'Sound level'], correct: 1, exp: 'Class = endurance: the tank sizing and fuel program requirement in hours.' },
+      { q: 'The monthly NFPA 110 generator test requires:', a: ['A no-load 10-minute run', 'At least 30 minutes under load (per the prescribed loading rules)', 'A 4-hour run', 'Fuel sampling'], correct: 1, exp: 'Thirty loaded minutes monthly — the anti-wet-stacking physics of module 17 written into standard.' },
+      { q: 'Monthly ATS requirements include:', a: ['Contact replacement', 'Exercising the transfer switch under simulated utility failure', 'Repainting', 'Megger testing'], correct: 1, exp: 'The mechanism needs its exercise as much as the engine — module 20\'s frozen-switch lesson codified.' },
+      { q: 'When building load cannot meet prescribed test loading, the standard practice is:', a: ['Skip loading requirements', 'A supplemental annual load bank test at stepped higher loads', 'Testing at night', 'Halving test duration'], correct: 1, exp: 'The load bank supplies honest work: compliance, capability proof, and wet-stack burn-off in one visit.' },
+      { q: 'Level 1 systems additionally require every 36 months:', a: ['Engine replacement', 'A sustained 4-hour loaded test proving endurance', 'New batteries', 'Tank replacement'], correct: 1, exp: 'The triennial endurance proof — a choreographed, documented site event and a service specialty.' },
+      { q: 'Test-day readings at intervals matter because:', a: ['They fill the form', 'They build year-over-year trend files — wear surveillance riding on compliance', 'The AHJ watches live', 'They calibrate the meters'], correct: 1, exp: 'This year\'s exhaust temp at 50% vs last year\'s is diagnosis; the compliance run doubles as bloodwork.' },
+      { q: 'A generator failure during a scheduled test is best understood as:', a: ['Test-induced damage', 'The system failing safely on your terms instead of during the real emergency', 'Grounds to reduce testing', 'An AHJ violation'], correct: 1, exp: 'Tests exist to surface failures with help present and stakes low — the program\'s core argument.' },
+      { q: 'To an AHJ auditor, a test without documentation is:', a: ['Assumed completed', 'A test that never happened — the record IS the compliance', 'Acceptable with a verbal account', 'The controller log\'s problem'], correct: 1, exp: 'The documented program is the product: readings, dates, signatures, surviving the audit.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 24 — GENERATOR TROUBLESHOOTING CAPSTONE
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-troubleshooting',
+    num: 24,
+    title: 'Generator Troubleshooting Capstone',
+    desc: 'Fail-to-start, fail-to-transfer, and power-quality trees — the universal method applied to standby power, with the whole course as your suspects list.',
+    slides: [
+      {
+        title: 'The Fail-to-Start Tree',
+        body: [
+          'The universal method (define → verify → localize → isolate → repair → verify → root cause) meets the generator\'s defining complaint: it did not start. The tree, walked in evidence order: (1) DID THE COMMAND ARRIVE? Controller display shows the start signal (ATS contacts, module 20\'s two wires, exercise clock). No signal = upstream. (2) DID IT ATTEMPT? Not in AUTO (module 13\'s ritual — check first, always, without embarrassment: it leads the industry statistics), active shutdown lockout awaiting reset, E-stop depressed. (3) DID IT CRANK? Module 13\'s chain: battery voltage under crank, cranking circuit drops, starter, crank relay. (4) DID IT FIRE? Module 14\'s trinity — fuel (solenoid energized? day tank? filters? air in lines — module 17), air, compression — with the block heater (module 13) behind hard cold starts. (5) DID IT STAY RUNNING? Fired-then-died points at fuel delivery under demand, sensor trips (module 19\'s lying senders — verify with gauges), or the pickup making a running engine invisible.',
+          'Each branch carries its own verification discipline learned module by module: the controller\'s event log timestamps which step failed (module 19 — read it FIRST; it converts the whole tree into a single branch); voltage-under-load testing proves batteries and cabling (module 13); mechanical gauges arbitrate sender trips (module 14); cracked-line foam finds suction air (module 17).',
+          'FAIL-TO-TRANSFER is the second tree (module 20): generator running healthily but the building dark walks the ATS side — generator power acceptable AT THE ATS SENSING TERMINALS (measure there, not at the generator: the feeder between them has failed before), acceptability setpoints, transfer timer, mechanism. The mirrored complaint — generator runs, transfers, but RETRANSFER or shutdown never happens — walks the same chain backward (utility sensing, retransfer delay, cooldown logic).',
+          'And the trade\'s most important non-technical diagnostic: WHEN did it fail vs when was it last KNOWN GOOD? A generator that failed the morning after a service visit interrogates the visit (the not-in-AUTO statistic again); one that failed in the first real outage after years of no-load tests interrogates the testing program (modules 17/23); one that failed at hour 30 of a hurricane interrogates fuel quality and endurance planning. The timeline is the first witness.',
+        ],
+        keyPoints: [
+          'Read the event log FIRST: it collapses the whole tree into one timestamped branch',
+          'The tree: command → AUTO → crank → fire → stay running — each branch a module you own',
+          'Fail-to-transfer: measure at the ATS sensing terminals; the feeder between has failed before',
+          'The timeline is the first witness: after service? first real outage? deep into the storm?',
+        ],
+        quiz: [
+          {
+            q: 'A generator failed to start during an outage. Its event log shows the start signal arriving, three full crank cycles, and overcrank lockout — battery voltage healthy throughout. The tree branch to walk is:',
+            a: ['The cranking circuit', 'Fire: fuel delivery (solenoid, day tank, filters, air-in-lines), air, compression — it cranked well and never lit', 'The ATS sensing', 'The alternator'],
+            correct: 1,
+            exp: 'Good cranking with no fire is module 14\'s trinity, with module 17\'s fuel path as the leading suspects. The log already cleared the command and crank branches.',
+          },
+          {
+            q: 'The building went dark; the generator started and runs perfectly at its terminals, but the ATS never saw acceptable generator power. The measurement that localizes the fault is:',
+            a: ['Voltage at the generator breaker', 'Voltage/frequency AT THE ATS GENERATOR SENSING TERMINALS — the feeder or connections between the machines may be the failure', 'Battery voltage', 'Fuel pressure'],
+            correct: 1,
+            exp: 'Measure where the decision is made. Good power leaving the generator and absent at the ATS indicts the path between — breakers, feeders, connections.',
+          },
+        ],
+      },
+      {
+        title: 'Power Problems, Shared Causes, and the Professional Close',
+        body: [
+          'The runs-but-power-wrong family resolves through the two-knob fork drilled since module 14: FREQUENCY wrong or unstable = engine side (governor, fuel delivery, pickup, overload); VOLTAGE wrong at correct frequency = excitation side (AVR, sensing, rotating diodes, module 18\'s chain); BOTH sagging under load = the engine cannot carry (air/fuel/turbo starvation, module 17\'s loaded-filter classic) or genuine overload; voltage tracking frequency down on load steps = the roll-off feature, not a fault. Add per-phase literacy: one phase low/dead = stator path or connections; imbalance heating = load distribution or connections — lugs before windings, always.',
+          'Shared-cause reasoning carries from every course: multiple simultaneous failures interrogate what the victims share. Both generators at a site fail the same morning = shared fuel supply (water/bug in the common tank), shared control power, or the same service visit\'s error. Generator AND UPS AND controls all misbehaving = station battery/charger systems (the DC that runs everything), or the common bus. The what-changed question (weather, load, fuel delivery, service) opens every multi-symptom investigation.',
+          'Root cause in this trade has a legal-grade edge: an outage-day failure often triggers insurance, contractual, even regulatory review — your documented diagnosis may be read by lawyers. The discipline: preserve the event logs (export before ANY clearing), photograph conditions found, distinguish observed fact from inference in writing, and resist premature verdicts pressured by an anxious site ("just say it was the utility"). The kitchen course\'s honest-documentation habit, at deposition quality.',
+          'And the capstone\'s closing loop, one last time: verify the repair under REAL conditions (a start test, a loaded run, a full transfer cycle — never just "it cranks now"), correct the condition that caused it (the failed charger behind the dead battery; the testing program behind the wet-stacked engine; the fuel program behind the slimed filters), log what the earliest evidence was, and feed the pattern library. Standby power is the trade where your machine is judged entirely by the ten seconds it exists for — build the habits that make those seconds boring.',
+        ],
+        keyPoints: [
+          'The fork forever: frequency = engine, voltage = excitation, both-under-load = can\'t carry or overload',
+          'Multi-failure mornings interrogate shared systems: common fuel, DC/control power, the same service visit',
+          'Outage failures get legal review: preserve logs, photograph, separate fact from inference in writing',
+          'Verify under real conditions and fix the condition behind the component — make the ten seconds boring',
+        ],
+        quiz: [
+          {
+            q: 'Both generators at a data center died within an hour of each other during a long outage, filters slimed black. The shared-cause investigation targets:',
+            a: ['Two coincidental engine failures', 'The common fuel supply — module 17\'s tank-bottom water and diesel bug, stirred and drawn by the extended run', 'The paralleling controls', 'Both AVRs'],
+            correct: 1,
+            exp: 'Simultaneous victims share causes: one contaminated bulk tank feeds both engines the same sludge on the same schedule. The classic multi-set outage failure.',
+          },
+          {
+            q: 'After an outage-day generator failure at a hospital, the administrator asks you to clear the alarms and get it running before the inspection. The professional sequence is:',
+            a: ['Clear and restart immediately', 'Export/preserve the event log and document conditions FIRST, then diagnose, repair, and verify — the record protects everyone, including the hospital', 'Refuse to touch it', 'Blame the utility verbally'],
+            correct: 1,
+            exp: 'Outage failures at Level 1 sites carry legal weight. Preserving the evidence before restoration is professional protection for every party — and usually what the inspection itself will demand.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The first diagnostic act on any generator failure is:', a: ['Crank it and listen', 'Reading the controller event log — it collapses the tree to a timestamped branch', 'Fuel sampling', 'Battery replacement'], correct: 1, exp: 'The witness statement first: which step failed, when, with what readings.' },
+      { q: 'The industry\'s statistically leading start-failure causes are:', a: ['Alternator faults', 'Batteries/starting systems and not-in-AUTO — the human and DC failures', 'Governor drift', 'Bad injectors'], correct: 1, exp: 'Modules 11-13\'s territory plus the human ritual: check AUTO without embarrassment, always.' },
+      { q: 'Cranks-strong-never-fires walks:', a: ['The ATS tree', 'Fuel (solenoid, day tank, filters, air), air, compression — with the block heater behind cold-start versions', 'The excitation chain', 'The load bank'], correct: 1, exp: 'The diesel trinity with module 17\'s fuel path leading — after the log clears command and crank.' },
+      { q: 'Generator runs perfectly but the ATS never accepts it. Measure:', a: ['At the generator terminals only', 'At the ATS generator-side sensing terminals — the path between machines fails too', 'Battery voltage', 'Exhaust temperature'], correct: 1, exp: 'Measure where the decision is made; feeders and connections between have failed before.' },
+      { q: 'Output voltage sagging in lockstep with frequency during block loads is:', a: ['A failing AVR', 'Under-frequency roll-off protecting the engine — the feature, not a fault', 'A stator short', 'ATS chatter'], correct: 1, exp: 'V/Hz behavior: voltage follows the lugging engine down and back by design (module 18).' },
+      { q: 'One phase dead on an otherwise healthy generator suggests:', a: ['Governor failure', 'A stator winding path or connection fault — check lugs and connections before condemning windings', 'AVR failure', 'Fuel starvation'], correct: 1, exp: 'Per-phase faults are path faults: the discolored lug story before the rewind story.' },
+      { q: 'Two generators failing simultaneously interrogates:', a: ['Random chance', 'What they share: common fuel, DC/control power, or the same recent service', 'Their serial numbers', 'The weather only'], correct: 1, exp: 'Shared-cause reasoning from every course: simultaneous victims share a system.' },
+      { q: 'Before clearing alarms after an outage-day failure:', a: ['Nothing — clear away', 'Export and preserve event logs and document found conditions — the record may face legal review', 'Notify the utility', 'Disconnect the batteries'], correct: 1, exp: 'Outage failures trigger insurance/regulatory scrutiny; the preserved log protects all parties.' },
+      { q: 'A repair is verified by:', a: ['A successful crank', 'Real-condition proof: start test, loaded run, full transfer cycle as applicable', 'No alarms for an hour', 'Customer satisfaction'], correct: 1, exp: '"It cranks" is not "it will carry the hospital": prove the actual duty before leaving.' },
+      { q: 'Fixing the component without the condition behind it (charger, fuel program, testing regime) means:', a: ['The job is done', 'The failure returns on schedule — root cause is the course\'s oldest rule', 'Warranty covers the rest', 'Better luck next time'], correct: 1, exp: 'Dead batteries follow dead chargers; slimed filters follow untested tanks: arrest the killer, not just the victim.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 25 — CAREER IN POWER GENERATION SERVICE
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-career',
+    num: 25,
+    title: 'Career in Power Generation Service',
+    desc: 'The generator trade: markets, EGSA certification, manufacturer schools, the kit, and where standby power careers lead.',
+    slides: [
+      {
+        title: 'The Market and the Ladder',
+        body: [
+          'Power generation service is the critical-infrastructure trade at its purest: data centers multiplying on AI demand (every hyperscale campus is a generator PLANT — dozens of multi-megawatt sets), healthcare\'s regulatory floor (every hospital, by law, forever), telecom, water/wastewater, grid-instability-driven commercial standby, home standby\'s explosive decade (Generac\'s market), and RENTAL POWER (events, construction, disaster response — a whole parallel industry with its own fleets and crews). The technician shortage story repeats a fourth time, with a twist: generator work\'s diesel-mechanic + electrical dual nature makes qualified techs the scarcest of the four trades this portal teaches.',
+          'Compensation reflects it: entry generator techs commonly start $45-60K; experienced field techs $65-90K; data-center/paralleling specialists, switchgear-adjacent roles, and OEM senior techs range higher still — with storm response and outage overtime famously lucrative (mutual-aid deployments after hurricanes are the trade\'s gold-rush seasons, voluntary and well-paid).',
+          'The credential ladder: EGSA (Electrical Generating Systems Association) certification is the trade\'s own — the Apprentice then Journeyman Technician certifications are the recognized industry credentials this course\'s content points directly toward. MANUFACTURER schools carry the same warranty-authorization economics as every other course: Cummins, Caterpillar, Kohler, Generac, MTU programs make you dispatchable on their fleets (and home-standby dealer certifications — Generac\'s especially — are the residential market\'s entry ticket). Adjacent credentials compound: your EPA 608 (if you carry it from the other tracks) for generator-room HVAC awareness, NFPA 70E discipline (foundational here), CDL for towing rental/load-bank trailers, and eventually NETA-adjacent switchgear training for the module 21 ceiling.',
+          'This certificate + the foundation\'s electrical discipline is the entry ticket; EGSA Apprentice within the first year and a manufacturer school via your employer is the standard opening sequence. And the UPS-course synergy deserves its own line: the dual-certified UPS + Generator tech is the complete critical-power field engineer — the exact profile data center service organizations struggle hardest to hire, and the profile this portal was built to produce.',
+        ],
+        keyPoints: [
+          'Markets: data centers (plants of sets), healthcare (legally required), rental/storm response, home standby',
+          'The dual diesel-electrical nature makes generator techs the scarcest of the four trades',
+          'Ladder: EGSA Apprentice → Journeyman; manufacturer schools = warranty dispatchability',
+          'UPS + Generator dual certification = the complete critical-power engineer this portal produces',
+        ],
+        quiz: [
+          {
+            q: 'The trade\'s recognized industry certification for generator technicians is:',
+            a: ['NATE', 'EGSA Apprentice and Journeyman Technician certifications', 'CFESA', 'ASE'],
+            correct: 1,
+            exp: 'The Electrical Generating Systems Association runs the trade\'s credential ladder — the generator analog of NATE and CFESA in the sister courses.',
+          },
+          {
+            q: 'The career profile data center service organizations struggle hardest to hire is:',
+            a: ['HVAC-only techs', 'The dual-fluency UPS + Generator critical-power field engineer — both sides of the module 22 handshake', 'Fuel-polishing specialists', 'Rental drivers'],
+            correct: 1,
+            exp: 'The generator-UPS handshake needs techs who own both machines. The portal\'s shared foundation and paired courses exist to produce exactly that engineer.',
+          },
+        ],
+      },
+      {
+        title: 'The Kit, the Craft, and the Paths',
+        body: [
+          'The kit assembles from every module: the FOUNDATION electrical set (DMM with min/max recording for crank tests, clamp meter — DC-capable for battery work, megger for module 18), the ENGINE set (mechanical oil-pressure gauge, infrared thermometer, coolant refractometer and test strips, fuel sampling gear, filter wrenches), the POWER set (phase rotation meter for three-phase verification, recording power analyzer as you grow into module 22 handshake work), and the trade\'s specifics: battery load tester and hydrometer, manometer for gaseous trains, and the stopwatch that times every sequence. Van stock mirrors the failure patterns: batteries and terminals, belts, hoses, filters (oil/fuel/air per route fleet), senders, magnetic pickups, fuel solenoids, and charger fuses.',
+          'The craft habits are this portal\'s four-course refrain, tuned to standby stakes: the DEPARTURE RITUAL above all (AUTO, breakers, valves, charger, heater — on the ticket, every visit); documentation at NFPA/legal grade (module 23-24); the walkaround religion (most generator failures announce themselves to whoever looks weekly); honest testing (loaded, recorded, trended); and customer translation — you are selling uptime and compliance to people who think about the generator only when it fails, so the trend file and the storm story are your language.',
+          'Career paths off the truck: SENIOR/LEAD FIELD TECH and storm-response team lead; DATA CENTER RESIDENT tech (embedded at one campus — regular hours, deep systems); PARALLELING/SWITCHGEAR specialist (module 21\'s ladder, via NETA-adjacent training); CONTROLS specialist (module 19 depth across OEM platforms); RENTAL POWER operations (fleet, logistics, event/disaster work); SALES ENGINEERING (sizing and specifying — techs who can do module 22 math sell honestly); SERVICE MANAGEMENT; and OWNERSHIP — generator service companies are route-relationship businesses like all four trades, with the added moat that compliance contracts (module 23) renew themselves.',
+          'The four-course portal closes its loop here: one electrical foundation, four equipment worlds, one method (define, verify, localize, isolate, repair, verify, root-cause), one documentation religion, and one career thesis — the technician who diagnoses honestly, documents faithfully, and keeps learning owns their future in any of these rooms. Pick your room, or earn keys to several. Welcome to the trade.',
+        ],
+        keyPoints: [
+          'Kit highlights: min/max DMM for crank tests, battery load tester, mechanical gauges, manometer, stopwatch',
+          'Van stock = the failure patterns: batteries, belts, filters, senders, pickups, solenoids, charger fuses',
+          'The departure ritual is the trade\'s signature habit — on the ticket, every visit, forever',
+          'Paths: storm lead, data center resident, switchgear/controls specialist, rental ops, sales, ownership',
+        ],
+        quiz: [
+          {
+            q: 'The DMM feature that makes crank testing practical single-handed is:',
+            a: ['Auto-ranging', 'Min/max recording — capturing the voltage sag during the crank you are busy commanding', 'Backlight', 'Bluetooth'],
+            correct: 1,
+            exp: 'Min/max catches the transient sag while your hands run the start: the module 13 measurement made practical solo.',
+          },
+          {
+            q: 'The generator trade\'s contract moat compared to the other three trades is:',
+            a: ['Higher parts margins', 'Compliance: NFPA 110 testing regimes are legally required, making the service calendar self-renewing', 'Longer equipment life', 'Fewer competitors'],
+            correct: 1,
+            exp: 'Hospitals and Level 1 sites must buy the testing program by law — the recurring-revenue engine module 23 taught, now as career strategy.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The generator technician shortage is sharpest because the trade requires:', a: ['CDL licensing', 'Dual competence: diesel-mechanical AND electrical/controls skills', 'Night work', 'Travel'], correct: 1, exp: 'Engine techs and electricians abound separately; the combination is the scarcest profile of the four trades.' },
+      { q: 'The trade\'s own certification ladder is run by:', a: ['NFPA', 'EGSA — Apprentice and Journeyman Technician certifications', 'OSHA', 'IEEE'], correct: 1, exp: 'The Electrical Generating Systems Association credentials are the industry\'s recognized ladder.' },
+      { q: 'Manufacturer schools (Cummins, CAT, Generac, Kohler) provide:', a: ['General theory', 'Warranty authorization and fleet dispatchability — the same economics as every course\'s OEM lesson', 'EPA certification', 'Union membership'], correct: 1, exp: 'Authorized techs get the OEM work; home-standby dealer programs are the residential entry ticket.' },
+      { q: 'Storm/mutual-aid response work is:', a: ['Mandatory and unpaid', 'Voluntary, intense, and famously well-compensated — the trade\'s gold-rush seasons', 'Only for rental companies', 'Illegal across state lines'], correct: 1, exp: 'Disaster deployments pay premium rates for the techs willing and equipped to go.' },
+      { q: 'Entry generator technician compensation typically starts around:', a: ['$30K', '$45-60K, with experienced techs at $65-90K and specialists beyond', '$100K', 'Commission only'], correct: 1, exp: 'The scarcity premium shows across the range — plus the overtime that outages reliably print.' },
+      { q: 'The battery-work meter feature this trade leans on hardest is:', a: ['Capacitance', 'DC clamp capability and min/max recording for crank-sag capture', 'Duty cycle', 'Temperature probes'], correct: 1, exp: 'DC current and transient sag are the daily battery measurements of modules 11-13.' },
+      { q: 'Van stock priorities in generator service are:', a: ['Alternators and radiators', 'Batteries/terminals, filters, belts/hoses, senders, pickups, solenoids, charger fuses', 'Load banks', 'Switchgear breakers'], correct: 1, exp: 'Stock the statistical failures: the DC system and the consumable path lead every list.' },
+      { q: 'The data center resident tech path offers:', a: ['Maximum travel', 'Embedded depth at one campus with regular hours — the plant becomes yours', 'Only night shifts', 'No advancement'], correct: 1, exp: 'Residency trades route variety for system depth at the trade\'s premium sites.' },
+      { q: 'The compliance moat of generator service contracts exists because:', a: ['Customers are loyal', 'NFPA 110 testing is legally required at Level 1 sites — the calendar renews itself', 'Parts are proprietary', 'Fuel programs lock in'], correct: 1, exp: 'Law mandates the program; the provider with audit-proof records keeps it — module 23 as business model.' },
+      { q: 'The portal\'s four-course career thesis is:', a: ['Specialize immediately and narrowly', 'Honest diagnosis, faithful documentation, and continuous learning own the future in any equipment room', 'Certifications replace experience', 'Sales beats service'], correct: 1, exp: 'One foundation, one method, one documentation religion — four rooms whose keys are the same three habits.' },
+    ],
+  },
 ];
