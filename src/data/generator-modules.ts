@@ -427,4 +427,449 @@ export const GENERATOR_MODULES: TrainingModule[] = [
       { q: 'The block heater PM check consists of:', a: ['Replacing it annually', 'Warm-hose touch test, amp draw against rating, hose/clamp inspection', 'Megger testing monthly', 'Nothing — they are sealed'], correct: 1, exp: 'One minute per visit protects the 10-second start: heat present, current right, hoses sound.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 17 — DIESEL FUEL SYSTEMS, STORAGE & QUALITY
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-fuel-systems',
+    num: 17,
+    title: 'Diesel Fuel Systems, Storage & Quality',
+    desc: 'Tanks, day tanks, transfer pumps, fuel polishing, diesel bug, and wet stacking — the fuel problems that quietly kill standby reliability.',
+    slides: [
+      {
+        title: 'The Fuel Path',
+        body: [
+          'Diesel gets from storage to cylinder through a path you must know cold: MAIN TANK (sub-base under the unit, above-ground outside, or underground) → transfer pump (if remote) → DAY TANK (a smaller local tank keeping engine-ready fuel at the right head, with its own level controls and pumps on bigger installs) → primary filter/water separator → engine lift pump → secondary filters → injection system → and RETURN lines carrying hot excess fuel back (diesels return significant fuel — which warms and stirs the tank).',
+          'Injection has generations: mechanical inline/rotary pumps with mechanical injectors (older sets — timed, rugged, rebuildable), electronic unit injectors, and COMMON RAIL (a high-pressure rail feeding electronically fired injectors at tens of thousands of psi — precise, quiet, and utterly intolerant of dirty fuel or amateur line-opening: rail pressures maim; respect published procedures absolutely).',
+          'Air is the fuel path\'s classic saboteur: suction-side leaks (fittings, filter seals, day-tank pickups) admit air that shows as hard starting, hunting (module 14), stumbling under load, and dying after running — with NO visible fuel leak, because the leak is on the vacuum side. Cracking lines to check for foam, pressurizing the suction side, or clear-hose inspection finds them. After any filter change or run-out, bleeding/priming per the engine\'s procedure is the difference between a start and an hour of cranking.',
+          'Filters and separators earn their keep in dirty-fuel reality: primary separators spin/settle water out (drain the bowl on the walkaround — water in the bowl is a message about the tank), secondaries protect injection at fine microns, and vacuum/restriction gauges across filters tell you when they are loading before the engine stumbles. A generator that runs clean at idle and starves at load with a healthy tank often has just this: loaded filters flowing enough for idle, not for demand.',
+        ],
+        keyPoints: [
+          'Know the path: main tank → transfer → day tank → separator → lift pump → filters → injection → return',
+          'Common rail = extreme pressure: dirty fuel intolerance and published-procedure-only line work',
+          'Suction-side air leaks cause hard starts/hunting/stall with no visible leak — hunt the vacuum side',
+          'Water in the separator bowl is a tank-condition message; restriction gauges predict filter starvation',
+        ],
+        quiz: [
+          {
+            q: 'A generator starts hard, hunts at load, and dies minutes after each run; no fuel leaks are visible anywhere. The classic cause is:',
+            a: ['A failing injection pump', 'An air leak on the suction side of the fuel system — air enters where fuel does not exit', 'Water in the fuel', 'A clogged return line'],
+            correct: 1,
+            exp: 'Vacuum-side leaks admit air invisibly. Foam in cracked lines or clear-hose inspection finds what no drip ever will — the classic hunting/stall root cause.',
+          },
+          {
+            q: 'A set idles perfectly but loses power and smokes at load; fuel filters have never been changed and the restriction gauge reads deep in the red. The mechanism is:',
+            a: ['Bad injectors', 'Loaded filters that pass idle flow but starve full-load demand', 'Weak batteries', 'Governor drift'],
+            correct: 1,
+            exp: 'Filters fail progressively: idle\'s trickle passes, load\'s torrent does not. The restriction gauge is the early warning the PM should have read.',
+          },
+        ],
+      },
+      {
+        title: 'Fuel Quality: The Silent Reliability Killer',
+        body: [
+          'Standby diesel has a storage problem trucks never face: the fuel SITS — for months or years — and diesel degrades. The threat list: WATER (condensation breathes into tanks through vents daily; water sinks, corrodes, feeds biology, and destroys common-rail systems), MICROBIAL GROWTH ("diesel bug" — bacteria and fungi living at the fuel/water interface, forming slime mats that slough off and kill filters in hours, classically discovered during an extended outage when the tank gets stirred and drawn down), OXIDATION/AGING (gums and darkening — modern ULSD ages faster than old diesel did), and CONTAMINATION from deliveries.',
+          'The defense program: keep tanks FULL (less air space = less condensation breathing), TEST fuel annually or better on critical sites (lab samples pulled from the tank BOTTOM where water and bug live — clean top samples lie), TREAT with biocide when growth appears (and expect the die-off to load filters — plan the filter changes), and POLISH: fuel-polishing systems circulate tank contents through filtration/water separation, portable rigs as a service or permanent systems on critical sites. Polishing plus testing is a legitimate, recurring service line — data centers buy it the way kitchens buy hood cleaning.',
+          'The catastrophic pattern to burn into memory: a site\'s generator runs its monthly 30-minute tests for years on the clean upper fuel, then a real 3-day outage draws the tank down, stirs the bottom, and the accumulated water/bug sludge hits the filters six hours in — the generator dies mid-outage with "no warning." Bottom-sampling, polishing, and honest tank assessments exist to prevent exactly this story, and it is the story that sells them.',
+          'Storage compliance basics ride along: containment (double-wall tanks or dikes), leak monitoring on regulated tanks, venting, spill provisions at fills, and fuel gauging that actually works (stick the tank when gauges matter — electronic senders fail like all senders). Know your jurisdiction\'s lines: tank INSTALLATION and major repairs are licensed specialty work; monitoring, sampling, polishing coordination, and documentation are squarely yours.',
+        ],
+        keyPoints: [
+          'Diesel bug lives at the fuel/water interface and kills filters when a REAL outage stirs the tank',
+          'Sample from the tank bottom — clean top samples lie; keep tanks full against condensation',
+          'Biocide treatment sheds debris: plan filter changes behind it; polishing is a recurring service line',
+          'Tank install/repair is licensed territory; sampling, polishing, and documentation are yours',
+        ],
+        quiz: [
+          {
+            q: 'A generator passed every monthly 30-minute test for three years, then died six hours into a real outage with filters full of black slime. The mechanism was:',
+            a: ['Coincidental injector failure', 'Diesel bug and water accumulated at the tank bottom — short tests never drew deep or stirred the tank; the real outage did', 'Sabotage', 'Fuel gelling'],
+            correct: 1,
+            exp: 'The classic standby tragedy: clean-top-fuel tests pass while the bottom builds sludge. Bottom sampling and polishing programs exist because of exactly this story.',
+          },
+          {
+            q: 'Standby fuel tanks are kept as full as practical because:',
+            a: ['Fuel is cheaper in bulk', 'Less air space means less daily condensation breathing — less water, less bug habitat', 'Full tanks stabilize the unit', 'Regulations require it'],
+            correct: 1,
+            exp: 'Tanks inhale humid air as they cool each night; the condensation becomes the water layer the bug lives on. Full tanks breathe less.',
+          },
+        ],
+      },
+      {
+        title: 'Wet Stacking and Load Discipline',
+        body: [
+          'Diesels are built to work, and standby diesels mostly do not — which creates their signature disease: WET STACKING. Running at light load (rule of thumb: chronically below ~30% of rating), a diesel never reaches full combustion temperatures; unburned fuel and soot accumulate in the exhaust — cylinders glaze, injectors carbon up, and the stack literally drips wet black residue ("slobber"). Left chronic, power capability degrades and the engine that tests fine at idle cannot carry its rated load when the real outage demands it.',
+          'The signs on the walkaround: black oily residue weeping from exhaust joints, excessive black smoke when load finally is applied, and a history of no-load or light-load-only exercise. The cure is heat and work: run the unit under substantial load (manufacturers commonly prescribe operating at ≥30% for exercise, and burn-off runs at higher loads to clean an already-slobbered engine — sustained loaded running that brings exhaust temps up and burns the deposits out).',
+          'This is why LOAD MATTERS in testing (module 23 formalizes it): a generator exercised weekly at no load is being maintained INTO failure. Building-load tests use the facility itself; when the building cannot supply enough (or transfer is unacceptable), a LOAD BANK — a portable or permanent resistive (or resistive/reactive) load — provides the work. Load banking is simultaneously a compliance test, a wet-stacking cure, and the only honest proof the set can carry its nameplate.',
+          'Fuel consumption literacy rounds out the module: a loaded diesel burns roughly 7 gallons per hour per 100 kW (very rough field number) — so tank sizing translates to runtime (a 500-gallon tank on a 150 kW set at full load ≈ two days), day tanks buffer hours not days, and refueling logistics during extended outages are part of the emergency plan you help customers think through. The tech who can talk runtime, fuel testing, and load discipline is talking resilience — the language the customer\'s boss speaks.',
+        ],
+        keyPoints: [
+          'Chronic light-load running wet-stacks diesels: glazing, carbon, slobber, lost capability',
+          'Exercise under real load (≥~30%); burn-off runs cure slobbered engines',
+          'No-load weekly exercise is maintenance INTO failure — load banks provide honest work',
+          'Runtime math: ~7 gal/hr per 100 kW loaded; tank size = outage endurance',
+        ],
+        quiz: [
+          {
+            q: 'A generator exercised weekly at no load for years shows black oily residue weeping from exhaust joints and smokes heavily when loaded. The condition and cure are:',
+            a: ['Failed turbo seals; replace the turbo', 'Wet stacking from chronic light load; sustained loaded running (load bank burn-off) to restore it', 'Overfueling; replace injectors', 'Normal diesel behavior'],
+            correct: 1,
+            exp: 'Slobber is unburned fuel and soot from an engine never worked hot. The cure is the work it was denied — loaded burn-off runs, then a corrected exercise program.',
+          },
+          {
+            q: 'A hospital asks how long their 500-gallon tank runs a 250 kW generator at full load. The field estimate is roughly:',
+            a: ['A week', 'About 28 hours (≈17.5 gal/hr at 250 kW)', 'Four days', 'Two hours'],
+            correct: 1,
+            exp: '~7 gal/hr per 100 kW → ~17.5 gal/hr at 250 kW → 500 ÷ 17.5 ≈ 28-29 hours. Runtime math turns tanks into honest emergency-planning numbers.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'A day tank exists to:', a: ['Store a month of fuel', 'Keep engine-ready fuel local at proper head, fed from main storage', 'Cool the return fuel', 'Meet EPA rules only'], correct: 1, exp: 'The day tank buffers the engine from remote main storage with its own level controls and pumps.' },
+      { q: 'Common-rail injection systems demand:', a: ['Nothing special', 'Extremely clean fuel and published-procedure-only work — rail pressures are dangerous', 'Weekly bleeding', 'Leaded fuel'], correct: 1, exp: 'Tens of thousands of psi: contamination destroys it and careless line-opening injures people.' },
+      { q: 'Suction-side air leaks present as:', a: ['Visible drips', 'Hard starts, hunting, stall-after-running — with no visible leak', 'High fuel pressure', 'White smoke only'], correct: 1, exp: 'Air enters where fuel does not exit; the vacuum side leaks invisibly and corrupts delivery.' },
+      { q: 'Water found in the separator bowl means:', a: ['Normal condensation to ignore', 'The tank has water — investigate and address the source, not just the bowl', 'Bad fuel delivery only', 'A failed lift pump'], correct: 1, exp: 'The bowl is the messenger: tank water feeds corrosion and diesel bug until removed.' },
+      { q: '"Diesel bug" is:', a: ['A fuel additive', 'Microbial growth at the fuel/water interface whose slime kills filters', 'Injector wear', 'Cold-weather gelling'], correct: 1, exp: 'Bacteria/fungi mats slough off and plug filtration — classically during the real outage that stirs the tank.' },
+      { q: 'Fuel samples for quality testing are pulled from:', a: ['The filler neck', 'The tank BOTTOM, where water and growth live', 'The return line', 'The day tank top'], correct: 1, exp: 'Top fuel lies. The bottom sample tells the truth about water, bug, and sediment.' },
+      { q: 'After biocide treatment of an infected tank, expect:', a: ['Immediate clean fuel', 'Die-off debris loading filters — schedule changes behind the treatment', 'Higher fuel pressure', 'No further action ever'], correct: 1, exp: 'Killing the mat sheds it into the fuel; polishing and staged filter changes complete the cure.' },
+      { q: 'Wet stacking is caused by:', a: ['Overloading', 'Chronic light-load running that never reaches full combustion temperature', 'Water in fuel', 'Cold coolant only'], correct: 1, exp: 'Unburned fuel and soot accumulate in an under-worked diesel: glazing, carbon, slobber, lost capacity.' },
+      { q: 'The honest proof a generator can carry nameplate load is:', a: ['A clean no-load run', 'A load bank (or real building load) test at substantial load', 'New filters', 'A strong crank'], correct: 1, exp: 'Only work proves capability — and the same loaded running cures and prevents wet stacking.' },
+      { q: 'A loaded diesel burns roughly:', a: ['1 gal/hr per 100 kW', '7 gal/hr per 100 kW', '20 gal/hr per 100 kW', '0.5 gal/hr per 100 kW'], correct: 1, exp: 'The field number that converts tank gallons into outage endurance for emergency planning.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 18 — ALTERNATORS & VOLTAGE REGULATION
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-alternators',
+    num: 18,
+    title: 'Alternators & Voltage Regulation',
+    desc: 'Synchronous alternators, brushless excitation, and AVRs — where engine rotation becomes regulated electrical power.',
+    slides: [
+      {
+        title: 'The Synchronous Alternator',
+        body: [
+          'The alternator is where the UPS student comes home: a rotating magnetic field (the ROTOR, carrying DC field windings) sweeps past stationary output windings (the STATOR), inducing three-phase AC whose frequency is rotor speed (module 14\'s law) and whose VOLTAGE is set by field strength. Control the field current and you control output voltage — that single sentence is this whole module.',
+          'Modern generator alternators are BRUSHLESS: instead of brushes feeding the rotor, a small EXCITER generator rides the same shaft — its stator carries DC from the regulator, its rotor generates AC that a ROTATING RECTIFIER (diodes spinning on the shaft) converts to DC for the main field. No brushes to wear; the price is a diode set spinning at 1800 RPM whose failure is a classic fault (output voltage low and unresponsive — diode testing is a standard alternator procedure). Many sets add a PMG (permanent magnet generator) pilot exciter so the regulator has clean, load-independent supply power.',
+          'The AVR (automatic voltage regulator) closes the loop: it senses output voltage and drives exciter field current to hold the setpoint through load swings. AVR literacy: sensing wiring matters (lost sensing = voltage runaway or collapse — some AVRs fail safe, some fail high), adjustment pots/settings (voltage, stability/gain, under-frequency roll-off) are set per book values not by feel, and UNDER-FREQUENCY ROLL-OFF is the clever bit — when the engine lugs below ~57-58 Hz, the AVR deliberately reduces voltage (V/Hz protection) so the engine can recover: sagging voltage during a block load is often the AVR protecting the engine, not failing.',
+          'The diagnostic fork from module 14, now completed from the other side: WRONG/UNSTABLE VOLTAGE at correct frequency lives here — AVR, sensing, exciter, rotating diodes, or the windings themselves. NO VOLTAGE at all (a healthy engine spinning a dead stator) has its own short list: AVR failure, loss of residual magnetism (older self-excited sets need FLASHING the field — a controlled procedure applying momentary DC per the manual), rotating diodes, or an open in the excitation chain.',
+        ],
+        keyPoints: [
+          'Field current controls voltage; RPM controls frequency — the two-knob model of the alternator',
+          'Brushless = exciter + rotating rectifier: spinning diode failure is the classic low-voltage fault',
+          'Under-frequency roll-off deliberately sags voltage to help a lugging engine — protection, not failure',
+          'No-voltage short list: AVR, residual magnetism (field flashing), rotating diodes, excitation chain',
+        ],
+        quiz: [
+          {
+            q: 'A generator holds exactly 60.0 Hz but outputs only 380V on a 480V system, unresponsive to AVR adjustment. The classic suspect is:',
+            a: ['The governor', 'Failed rotating rectifier diodes starving the main field', 'Low fuel pressure', 'The transfer switch'],
+            correct: 1,
+            exp: 'Perfect frequency clears the engine. Low, unresponsive voltage with a working AVR points down the excitation chain — the spinning diode set is the classic culprit, testable per procedure.',
+          },
+          {
+            q: 'During a large block load, output voltage dips well below setpoint while frequency sags to 57.5 Hz, then both recover together. This behavior is:',
+            a: ['A failing AVR', 'Under-frequency roll-off: the AVR reducing voltage on purpose so the lugging engine can recover', 'A shorted stator', 'Governor hunting'],
+            correct: 1,
+            exp: 'V/Hz protection trades voltage for engine recovery during load steps. Voltage tracking frequency down and back is the signature of the feature, not a fault.',
+          },
+          {
+            q: 'An older self-excited generator that sat for years spins perfectly but produces zero output voltage. The likely first procedure is:',
+            a: ['Replace the stator', 'Field flashing — restoring lost residual magnetism per the manufacturer procedure', 'A new governor', 'Rewinding the rotor'],
+            correct: 1,
+            exp: 'Self-excitation bootstraps from residual magnetism, which long storage can lose. Controlled momentary DC to the field per the book restores it.',
+          },
+        ],
+      },
+      {
+        title: 'Testing, Connections, and Power Quality',
+        body: [
+          'Alternator testing is your meter craft on big windings: INSULATION RESISTANCE (megger, windings to ground — moisture is the great enemy of sitting alternators; low readings often recover with drying procedures before anyone condemns a rewind), WINDING RESISTANCE (phase-to-phase should match closely; imbalance suggests shorted turns), DIODE TESTING (each rotating diode forward/reverse with the set stopped), and EXCITER checks per the book. Always with the machine locked out and, on capacitor-fitted systems, discharged — the UPS disciplines apply verbatim.',
+          'Reconnectable alternators bring transformer literacy to the pad: twelve-lead machines reconnect for voltages (208/240/480, wye/delta) per the nameplate diagrams — and a "wrong voltage everywhere by the same ratio" complaint on a new install is often a reconnection or sensing-tap error, not a fault. Grounding and bonding per the installation design (separately derived system decisions, neutral switching at the ATS — module 20\'s territory) complete the connection picture.',
+          'Generator power quality matters more as loads got electronic: voltage BALANCE between phases (imbalance heats motors — measure all three pairs), WAVEFORM quality (nonlinear UPS/VFD loads distort generator output more than utility because generator source impedance is higher — the reason generator/UPS compatibility engineering exists, module 22), and TRANSIENT RESPONSE (how far voltage/frequency dip and how fast they recover on load steps — specified, testable with a load bank, and the number data centers care about most).',
+          'Field wisdom for the fork\'s edge cases: single-phase output loss = one stator winding path or connection (check lugs before condemning windings — a hot, discolored lug is a resistance story you already know); nuisance voltage instability that tracks engine hunting is a GOVERNOR problem arriving dressed as an AVR problem (stabilize frequency first, then judge voltage); and any alternator work beyond diodes/AVR/connections (rewinds, bearing replacement on big machines) is specialty shop territory — diagnose, document, refer.',
+        ],
+        keyPoints: [
+          'Megger sitting alternators before condemning: moisture reads low and often dries out',
+          'Twelve-lead reconnection errors masquerade as faults on new installs — verify against the nameplate',
+          'Voltage instability that tracks frequency instability is a governor problem in an AVR costume',
+          'Diodes, AVR, connections are field scope; rewinds and big-machine internals are the shop\'s',
+        ],
+        quiz: [
+          {
+            q: 'A generator\'s output voltage wobbles constantly. Watching the panel, frequency wobbles in exact sympathy. The productive first repair territory is:',
+            a: ['The AVR stability pot', 'The engine/governor — stabilize frequency first, then judge the voltage regulation', 'The rotating diodes', 'The stator windings'],
+            correct: 1,
+            exp: 'Voltage rides frequency through the AVR\'s V/Hz behavior. A hunting governor makes a healthy AVR look unstable — module 14\'s fork applies before any AVR adjustment.',
+          },
+          {
+            q: 'A long-stored generator meggers at 0.5 MΩ windings-to-ground. Before recommending a rewind you should:',
+            a: ['Condemn the alternator', 'Apply drying procedures (heat/circulation per the book) and re-test — moisture absorption is common and recoverable', 'Flash the field', 'Bypass the megger test'],
+            correct: 1,
+            exp: 'Sitting windings absorb moisture; controlled drying often restores insulation readings entirely. Rewinds are condemned only after drying fails.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Alternator output voltage is controlled by:', a: ['Engine RPM', 'Field (excitation) current', 'The transfer switch', 'Stator size'], correct: 1, exp: 'RPM sets frequency; field strength sets voltage — the two-knob model.' },
+      { q: 'Brushless excitation delivers DC to the main field via:', a: ['Carbon brushes', 'A shaft-mounted exciter and rotating rectifier diodes', 'A battery', 'The AVR directly'], correct: 1, exp: 'The exciter\'s AC is rectified by diodes spinning on the shaft — no brushes, but a testable diode set.' },
+      { q: 'Failed rotating diodes classically present as:', a: ['High frequency', 'Low output voltage unresponsive to AVR adjustment at correct frequency', 'Engine hunting', 'No cranking'], correct: 1, exp: 'A starved main field cannot make voltage regardless of AVR effort — the classic excitation-chain fault.' },
+      { q: 'A PMG (pilot exciter) provides:', a: ['Engine starting power', 'Clean, load-independent supply power for the voltage regulator', 'Battery charging', 'Frequency sensing'], correct: 1, exp: 'The permanent-magnet pilot keeps the AVR powered regardless of output distortion or load.' },
+      { q: 'Under-frequency roll-off causes:', a: ['Voltage collapse faults', 'Deliberate voltage reduction when the engine lugs, aiding recovery', 'Frequency boost', 'Diode failure'], correct: 1, exp: 'V/Hz protection: sagging voltage during block loads is often the feature working, not a defect.' },
+      { q: 'Zero output from a healthy-spinning older self-excited set often needs:', a: ['A rewind', 'Field flashing to restore residual magnetism', 'New bearings', 'A bigger AVR'], correct: 1, exp: 'Self-excitation bootstraps from residual magnetism, lost in storage and restored by the controlled flashing procedure.' },
+      { q: 'Low megger readings on a stored alternator first warrant:', a: ['Immediate rewind', 'Drying procedures and re-test — moisture is common and recoverable', 'Higher test voltage', 'Ignoring the reading'], correct: 1, exp: 'Moisture absorption dominates storage insulation loss; drying restores most machines.' },
+      { q: 'Identical wrong voltage on all phases of a newly installed 12-lead machine suggests:', a: ['Stator failure', 'A reconnection or sensing-tap error against the nameplate diagram', 'Bad fuel', 'Governor miscalibration'], correct: 1, exp: 'Proportionally wrong everywhere = configuration, not damage. Verify the lead connection first.' },
+      { q: 'Voltage instability tracking frequency instability is diagnosed as:', a: ['An AVR fault', 'A governor/engine problem — stabilize frequency before judging regulation', 'Diode failure', 'Load imbalance'], correct: 1, exp: 'The AVR follows V/Hz: hunting engines dress up as unstable regulators.' },
+      { q: 'Field scope on alternators ends at:', a: ['All internal work', 'Diodes, AVR, connections, testing — rewinds and major internals go to specialty shops', 'Nothing — refer everything', 'Bearing replacement on all machines'], correct: 1, exp: 'Diagnose, document, refer: the boundary discipline of every course, applied to big rotating iron.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 19 — GENERATOR CONTROLLERS, SENSORS & ALARMS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-controls',
+    num: 19,
+    title: 'Generator Controllers, Sensors & Alarms',
+    desc: 'The control panel: start sequences, senders, alarm hierarchies, event logs, and remote monitoring of standby assets.',
+    slides: [
+      {
+        title: 'The Controller and Its Sequence',
+        body: [
+          'The generator controller is the machine\'s brain and witness: it watches utility/remote start signals, runs the start sequence, monitors every sensor, protects the engine and alternator, and records everything. Modern controllers (Deep Sea, ComAp, and the OEM families from Cummins/CAT/Generac/Kohler) are the kitchen-course control boards grown up — and the same discipline applies: inputs first, outputs second, the board itself last.',
+          'Master the AUTO start sequence as a stall map, exactly like the furnace: (1) START SIGNAL arrives (ATS contacts closing, remote input, or scheduled exercise). (2) PRE-START: alarms checked, prelube/glow where fitted, fuel solenoid commanded. (3) CRANK: starter engaged for a programmed cycle (e.g., 10s crank / 10s rest × 3 attempts) while the controller watches for DISCONNECT SPEED — the RPM (from the magnetic pickup or alternator frequency) proving the engine fired, at which crank drops out. (4) WARMUP/protection-arming delays (oil pressure must appear within seconds or trip). (5) Ready to load — the ATS or breaker takes over (module 20). (6) On stop: COOLDOWN idle (module 14\'s turbo lesson, programmed), then fuel solenoid drops.',
+          'Every no-start interrogation walks that sequence: Did the signal arrive (controller display shows the call)? Did it attempt crank (relay click, starter engagement — module 13\'s chain)? Did it crank but never "see" firing (a failed magnetic pickup makes a RUNNING engine look dead to the controller, which keeps cranking into it or trips overcrank — the classic pickup fault)? Did it fire and immediately trip (the alarm list tells you: oil pressure sender circuit, coolant level, emergency stop)? The controller\'s event log timestamps each step — read it before touching anything.',
+          'Sensor literacy inherits from every course: SENDERS (resistive oil pressure/temp senders verified against chart with an ohmmeter, and against reality with mechanical gauges — module 14\'s "senders lie"), SWITCHES (pressure/temp/level — continuity tested, actuated where possible), the MAGNETIC PICKUP (an AC generator counting flywheel teeth: verify output voltage while cranking, gap per spec, and remember its dual role in crank-disconnect AND governor speed sensing on many sets), and wiring in a vibrating, hot, oily environment — chafed harnesses cause more "controller faults" than controllers do.',
+        ],
+        keyPoints: [
+          'Learn the AUTO sequence as a stall map: signal → pre-start → crank → disconnect speed → warmup → load',
+          'A failed magnetic pickup makes a running engine invisible: overcrank trips and crank-into-running-engine',
+          'Senders verified by ohmmeter AND mechanical gauge; harness chafe outnumbers controller failures',
+          'The event log timestamps every step — read the witness before touching the machine',
+        ],
+        quiz: [
+          {
+            q: 'A generator cranks, clearly fires and runs — then the starter keeps grinding into the running engine until an overcrank alarm. The classic fault is:',
+            a: ['The starter solenoid', 'The magnetic pickup (or its wiring): the controller never saw disconnect speed from an engine it cannot hear', 'The fuel solenoid', 'The oil pressure sender'],
+            correct: 1,
+            exp: 'Crank disconnect depends on the speed signal. A dead pickup leaves the controller blind to the running engine — the signature is exactly this grinding overlap.',
+          },
+          {
+            q: 'A set starts, runs three seconds, and trips "low oil pressure" every attempt. A mechanical gauge shows 45 psi in those seconds. The fault is:',
+            a: ['The oil pump', 'The sender/switch or its circuit — pressure is real but the controller cannot see it', 'The pickup', 'Worn bearings'],
+            correct: 1,
+            exp: 'Real pressure + trip = a lying sensor circuit. The mechanical-gauge verification (module 14) separates the $20 sender from the $20,000 engine every time.',
+          },
+        ],
+      },
+      {
+        title: 'Alarms, Logs, and Remote Monitoring',
+        body: [
+          'Controllers speak in a two-tier hierarchy you must respect: WARNINGS (pre-alarms — high coolant temp approaching, low fuel, charger fail, battery voltage low — the set keeps running while asking for help) and SHUTDOWNS (the module 14 hard trips — the set stops to save itself). The professional rules: every warning gets investigated before it graduates to a shutdown at 2 a.m.; every shutdown gets root-caused before reset (the fryer rule, forever); and NOTHING gets bypassed to "keep it available" — a generator that destroys itself during the outage helped no one.',
+          'The EVENT LOG is the finest diagnostic gift in this trade: timestamped starts, stops, alarms, and operating parameters. An intermittent complaint ("it shut down last Tuesday, ran fine since") becomes archaeology: the log shows high coolant temperature climbing over 20 minutes at 40% load on a 95°F afternoon — and you are now diagnosing a specific cooling-capacity event instead of a ghost. Export/photograph logs before clearing anything, and correlate with weather, load, and site events like the kitchen course taught.',
+          'Remote monitoring completed the transformation of generator service: controllers ship with (or gain via gateways) connectivity feeding OEM platforms and third-party fleet dashboards — start/stop notifications, alarm push, fuel level, battery voltage, and exercise results across a whole fleet from one screen. For service companies this is triage gold (module 23\'s telemetry lesson): the dead battery charger announces itself weeks before the failed start, IF someone owns the watching. Offering monitored-fleet service — you watch, you dispatch, you document — is the generator trade\'s version of the PM contract engine.',
+          'Controller configuration closes the panel: crank cycles, delays, setpoints, exercise schedules (day/time/duration/loaded-or-not — module 23), and communication settings all live in menus behind passwords. The kitchen configuration lesson verbatim: record settings before changes, verify against spec after any controller swap (a replacement controller with default settings is a different machine), and leave the exercise clock set — an un-programmed exerciser silently ends the weekly self-test regime the site thinks it has.',
+        ],
+        keyPoints: [
+          'Warnings run-and-report; shutdowns stop-and-protect: investigate the first, root-cause the second, bypass neither',
+          'The event log turns intermittents into archaeology — export before clearing, correlate with load/weather',
+          'Remote monitoring = pre-failure triage: the dead charger announces itself weeks early if someone watches',
+          'Controller swaps demand configuration verification: defaults make it a different machine',
+        ],
+        quiz: [
+          {
+            q: 'A customer reports their generator "randomly shut down last week but is fine now." Your first diagnostic act is:',
+            a: ['A test run', 'Reading the controller event log: the timestamped alarm and parameters around the shutdown', 'Replacing the batteries', 'A fuel sample'],
+            correct: 1,
+            exp: 'The controller witnessed everything: which trip, what the temperatures/pressures were doing, for how long. The log converts the ghost story into a specific event.',
+          },
+          {
+            q: 'After a controller replacement, the generator runs but the weekly exercise never happens and cooldown seems absent. The cause is:',
+            a: ['A defective new controller', 'Default configuration — the exercise schedule, delays, and setpoints were never programmed to match the old unit', 'A failed pickup', 'Wrong battery voltage'],
+            correct: 1,
+            exp: 'The kitchen board lesson at generator scale: a controller is its configuration. Record before, program after, verify against spec.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Crank disconnect is triggered by:', a: ['A timer alone', 'The controller sensing firing speed via the magnetic pickup or alternator frequency', 'Oil pressure', 'The operator'], correct: 1, exp: 'The speed signal proves the engine fired; crank drops out at disconnect RPM.' },
+      { q: 'A typical automatic crank cycle is:', a: ['Continuous until start', 'Programmed bursts with rests (e.g., 10s crank / 10s rest × 3) then overcrank lockout', 'One 60-second attempt', 'Two seconds maximum'], correct: 1, exp: 'Cycled cranking protects the starter and batteries; overcrank stops a hopeless no-start.' },
+      { q: 'Oil pressure must appear within seconds of firing or:', a: ['A warning logs', 'The controller trips the engine — the never-bypassed protection', 'The AVR reduces voltage', 'Cooldown begins'], correct: 1, exp: 'Bearings die in seconds unlubricated; the arming delay expires and the trip is absolute.' },
+      { q: 'Warnings differ from shutdowns because warnings:', a: ['Stop the engine gently', 'Keep the set running while flagging developing problems for investigation', 'Clear themselves', 'Only occur off-line'], correct: 1, exp: 'The two-tier hierarchy: pre-alarms ask for help; shutdowns take it. Both get investigated.' },
+      { q: 'A failed magnetic pickup can cause:', a: ['Low oil pressure', 'Overcrank trips and cranking into a running engine — plus governor chaos where it feeds speed control', 'High coolant temp', 'AVR failure'], correct: 1, exp: 'Blind to speed, the controller cannot disconnect crank; where the governor shares the signal, speed control corrupts too.' },
+      { q: 'Resistive senders are verified by:', a: ['Visual inspection', 'Ohmmeter against the resistance chart AND a mechanical gauge against reality', 'Replacement on schedule', 'The controller display'], correct: 1, exp: 'Two-source truth: the chart proves the sender, the gauge proves the engine — senders lie in both directions.' },
+      { q: 'More "controller faults" are actually caused by:', a: ['Firmware bugs', 'Chafed, vibration-damaged wiring harnesses in the hot oily engine environment', 'Operator error', 'Lightning'], correct: 1, exp: 'The harness lives hard; the controls lesson of every course — wiring before boards.' },
+      { q: 'Before clearing a controller event log you should:', a: ['Nothing — clear freely', 'Export or photograph it — the timestamped history is diagnostic archaeology', 'Reset all alarms twice', 'Disconnect the battery'], correct: 1, exp: 'The log is the witness statement for every intermittent; preserve it before anything erases it.' },
+      { q: 'Remote monitoring platforms earn their keep by:', a: ['Replacing PMs', 'Announcing developing failures (charger loss, battery decline, failed exercises) before the outage finds them', 'Starting generators remotely for fun', 'Reducing fuel use'], correct: 1, exp: 'Watched fleets fail rarely: the monitoring + dispatch + documentation loop is the generator PM engine.' },
+      { q: 'An un-programmed exercise schedule after controller work means:', a: ['Nothing — exercise is optional', 'The weekly self-test regime silently ended — verify and restore the schedule', 'Better fuel economy', 'The ATS takes over exercising'], correct: 1, exp: 'Sites believe the exerciser is running; a defaulted controller quietly stopped it. Verify configuration after every swap.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 20 — AUTOMATIC TRANSFER SWITCHES
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-ats',
+    num: 20,
+    title: 'Automatic Transfer Switches',
+    desc: 'The ATS: sensing the outage, starting the generator, and moving the load — with two live sources in one cabinet.',
+    slides: [
+      {
+        title: 'Anatomy and the Transfer Sequence',
+        body: [
+          'The automatic transfer switch is the decision-maker of standby power: it watches utility power, commands the generator when utility fails, moves the load, and moves it back — automatically, in the middle of the night, with nobody there. Anatomy: UTILITY (normal) source lugs, GENERATOR (emergency) source lugs, LOAD lugs, a mechanically interlocked transfer mechanism (the two sources must never connect to each other), voltage/frequency sensing on both sources, a controller with its timers, and the engine-start contacts wired to module 19\'s controller.',
+          'The sequence, end to end: (1) Utility fails/degrades below setpoints. (2) TIME DELAY ENGINE START (typically 1-3 seconds — riding through blinks so the generator does not start for every flicker). (3) Engine-start contacts close; the generator starts (module 13-19\'s whole story). (4) The ATS watches the generator side; when voltage AND frequency are acceptable (module 18-14), (5) TRANSFER to emergency after its delay. (6) Utility returns: RETRANSFER DELAY (typically many minutes — proving utility stability before giving the load back). (7) Retransfer, then (8) ENGINE COOLDOWN run, unloaded, then stop. Every timer exists for a reason, and knowing the reasons lets you read a site\'s behavior.',
+          'Transfer TYPES answer the question "what happens to the load mid-move": OPEN TRANSITION (break-before-make — the standard; the load blinks momentarily on each transfer), DELAYED TRANSITION (open, pause in neutral, then close — the pause lets motor fields decay so big motors are not slammed with out-of-phase power; elevator and pump sites love it), and CLOSED TRANSITION (make-before-break — a momentary sub-cycle parallel of utility and generator so the load never blinks; requires sync-check supervision and utility blessing, and drags module 21\'s paralleling physics into the ATS cabinet).',
+          'The service rhythm: exercise clocks (the ATS often runs the weekly generator exercise, loaded or unloaded — verify the schedule exists and matches intent, module 19\'s lesson), contact inspection per manufacturer intervals (transfer contacts carry full building current and erode), mechanism lubrication, sensing calibration, and control-wiring integrity between ATS and generator (the engine-start pair is the most important two wires on the site: many "generator failed to start" outages were actually these wires or their connections failing to deliver the command).',
+        ],
+        keyPoints: [
+          'Learn the timer chain: start delay (ride-through) → generator acceptable → transfer → retransfer delay → cooldown',
+          'Open transition blinks; delayed transition protects big motors; closed transition never blinks but parallels sources',
+          'The engine-start wire pair is the site\'s most critical circuit — many "generator failures" are its failures',
+          'Exercise clocks, contact wear, and sensing calibration are the ATS service rhythm',
+        ],
+        quiz: [
+          {
+            q: 'During an outage the generator started and ran perfectly at the pad, but the building stayed dark; the ATS never transferred. The generator-side voltage at the ATS sensing terminals reads correct. The suspect territory is:',
+            a: ['The alternator', 'The ATS itself: its acceptability sensing/settings, transfer timer, or the transfer mechanism/controller', 'The engine governor', 'The utility'],
+            correct: 1,
+            exp: 'Good power delivered to a switch that never moved: the decision-maker is the fault. Sensing setpoints, timers, and mechanism are the interrogation — with two live sources demanding full safety discipline.',
+          },
+          {
+            q: 'A pump station\'s motors slam violently on every retransfer with an open-transition ATS. The engineered fix is:',
+            a: ['Faster transfer', 'Delayed-transition transfer — the neutral pause lets motor fields decay before reconnection', 'Bigger motors', 'Closed transition without supervision'],
+            correct: 1,
+            exp: 'Spinning motors hold residual voltage; instant out-of-phase reconnection slams them mechanically and electrically. The programmed pause is exactly the cure.',
+          },
+        ],
+      },
+      {
+        title: 'ATS Safety and Service Discipline',
+        body: [
+          'The ATS cabinet is the most dangerous place in the standby system for one reason: TWO SOURCES. Utility dead does not mean the cabinet is dead (the generator side may be live, or start any second); generator locked out does not kill the utility side. LOTO on an ATS means BOTH sources — utility disconnect AND generator (controller to OFF, per its lockout provisions, and battery/start circuit secured for work in the cabinet) — plus verification testing of every section you will touch, remembering the control transformers and sensing circuits that stay live from either side. Arc-flash PPE per the site\'s labels applies at service-entrance-rated gear especially.',
+          'Service-entrance-rated ATSs add the utility MAIN function (disconnect and often service OCPD) into the same enclosure — with the utility neutral bonded there and everything that implies. SWITCHED-NEUTRAL (4-pole) ATSs exist for separately derived generator installations: whether the neutral transfers with the phases is an installation-design fact you verify, not guess, because it determines grounding behavior and ground-fault sensing on both sources.',
+          'Testing an ATS honestly requires making it work: monthly/periodic transfer testing (NFPA 110 territory, module 23) by simulated utility failure (the test switch or opening the normal source per procedure — coordinated with the facility, because the load WILL blink on open transition), observing the full sequence with a stopwatch against the programmed delays, and inspecting contacts/mechanism on the manufacturer\'s schedule with both sources locked out. Bypass-isolation ATSs — the hospital-grade design — let you test and service the transfer mechanism while a manual bypass carries the load: learn the drawout/bypass procedure per the specific unit before touching one.',
+          'The failure catalog: sensing relays/boards drifting (transfers at wrong thresholds, or utility "acceptable" while lights flicker), timer failures, contact erosion (heat discoloration at lugs — the resistance story), mechanism binding (exercised rarely, then fails to move during the real event — mechanisms need their exercise as much as engines), and the humble engine-start wiring. And the sales truth the whole module teaches: an un-exercised, un-inspected ATS is the single point of failure that makes every dollar spent on the generator worthless.',
+        ],
+        keyPoints: [
+          'Two-source LOTO: utility AND generator secured, every section verified — the cabinet\'s defining hazard',
+          'Neutral handling (3-pole vs 4-pole switched neutral) is installation design — verify, never guess',
+          'Bypass-isolation designs allow service under load — learn each unit\'s procedure first',
+          'Mechanisms fail from lack of exercise: the untested ATS is the system\'s single point of failure',
+        ],
+        quiz: [
+          {
+            q: 'Before working inside an ATS cabinet during a utility outage, the required assumption is:',
+            a: ['The cabinet is dead — utility is out', 'Both sources are potentially live: the generator side is hot or may start automatically — LOTO both sources and verify every section', 'Only the load lugs are dangerous', 'Sensing circuits are always dead'],
+            correct: 1,
+            exp: 'The outage that killed utility just made the generator side live (or about to be). Two-source LOTO with verification is the non-negotiable ATS discipline.',
+          },
+          {
+            q: 'A facility\'s generator has been flawless for years, but during a real outage the ATS mechanism failed to move — it had never been transfer-tested. The lesson is:',
+            a: ['ATSs are unreliable', 'The un-exercised transfer mechanism is the system\'s single point of failure: periodic transfer testing is as essential as engine exercise', 'Open transition is obsolete', 'The generator should be bigger'],
+            correct: 1,
+            exp: 'Mechanisms bind when never moved. A perfect generator behind a frozen switch delivers nothing — the module\'s selling truth for real testing programs.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The time-delay engine start (1-3s) exists to:', a: ['Warm the starter', 'Ride through momentary utility blinks without starting the generator', 'Protect the ATS contacts', 'Charge the batteries'], correct: 1, exp: 'Every flicker should not launch a diesel; the short delay filters blinks from outages.' },
+      { q: 'The ATS transfers to generator only when:', a: ['The engine cranks', 'Generator voltage AND frequency reach acceptable setpoints', 'Oil pressure appears', 'Ten minutes pass'], correct: 1, exp: 'Acceptability sensing protects the load from bad power — module 14/18\'s numbers become permission.' },
+      { q: 'The long retransfer delay exists because:', a: ['Contacts need cooling', 'Utility must prove stable before the load returns — outages often recur in clusters', 'Generators need runtime', 'Codes require exactly 30 minutes'], correct: 1, exp: 'Bouncing back to a flickering utility re-blinks the load repeatedly; the delay demands sustained stability.' },
+      { q: 'After retransfer, the generator:', a: ['Stops instantly', 'Runs an unloaded cooldown before stopping', 'Stays running for an hour by code', 'Transfers to a load bank'], correct: 1, exp: 'The programmed cooldown protects the turbo and engine (module 14) after loaded running.' },
+      { q: 'Delayed-transition ATSs pause in neutral to:', a: ['Save contact wear', 'Let motor residual fields decay before reconnection — protecting large motors', 'Test the generator', 'Satisfy utilities'], correct: 1, exp: 'Out-of-phase reconnection slams spinning motors; the pause is the engineered mercy.' },
+      { q: 'Closed-transition transfer requires:', a: ['Nothing special', 'Sync-check supervision (and utility approval) — it momentarily parallels the sources', 'A bigger generator', 'A 4-pole switch'], correct: 1, exp: 'Make-before-break means a real parallel: module 21\'s physics supervised into a sub-cycle overlap.' },
+      { q: 'The most safety-critical fact about ATS cabinets is:', a: ['High enclosure temperature', 'Two sources: either side may be live or become live regardless of the other', 'Sharp edges', 'DC control voltage'], correct: 1, exp: 'Utility-dead ≠ cabinet-dead. Two-source LOTO with verification defines ATS work.' },
+      { q: 'Whether an ATS switches the neutral (4-pole) is determined by:', a: ['Technician preference', 'The installation\'s separately-derived-system design — verified, never guessed', 'The generator size', 'Utility policy alone'], correct: 1, exp: 'Neutral switching sets grounding and ground-fault behavior; it is design fact, not field option.' },
+      { q: 'Bypass-isolation ATSs exist so that:', a: ['Transfers happen faster', 'The transfer mechanism can be tested/serviced while a manual bypass carries the load', 'Neutrals can float', 'Generators parallel'], correct: 1, exp: 'Hospital-grade serviceability: learn each unit\'s drawout/bypass procedure before touching it.' },
+      { q: 'Many "generator failed to start during the outage" events are actually:', a: ['Fuel failures', 'Failures of the engine-start wiring/contacts between ATS and controller — the command never arrived', 'Alternator faults', 'Operator error'], correct: 1, exp: 'Two humble wires carry the whole system\'s purpose; their integrity is checked on every ATS service.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 21 — PARALLELING & SWITCHGEAR BASICS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'gen-paralleling',
+    num: 21,
+    title: 'Paralleling & Switchgear Basics',
+    desc: 'Multiple generators on one bus: synchronization, load sharing, paralleling switchgear — and where entry-level scope ends.',
+    slides: [
+      {
+        title: 'Synchronization: Joining the Bus',
+        body: [
+          'Large facilities parallel generators — multiple sets on one bus — for capacity (loads bigger than one engine), redundancy (N+1: any one set can fail), and efficiency (run only the engines the load needs). The physics gate is SYNCHRONIZATION: before a generator\'s breaker may close onto a live bus, it must match that bus in VOLTAGE (within a few percent), FREQUENCY (nearly equal — a slight positive slip is used so the incoming set picks up load), and PHASE ANGLE (the waveforms aligned at the moment of closure).',
+          'Closing out of sync is the most violent event in the power world short of a fault: the bus instantly drags the incoming machine into step, with torque transients that can shear couplings, damage windings, and trip everything. This is why SYNC-CHECK RELAYS (permissive devices that block breaker closure outside tight windows) supervise every paralleling point, why automatic synchronizers trim the governor and AVR to walk the incoming machine into the window, and why the old manual synchroscope-and-lamps skill still gets taught: understanding what the automation is doing is what lets you diagnose it.',
+          'Once paralleled, the division of labor becomes counterintuitive and essential: on a shared bus, an individual governor\'s fuel setting controls that machine\'s kW SHARE (real power), and its AVR/excitation controls its kVAR share (reactive power) — not the bus frequency and voltage, which belong to the system. Load-sharing controls (droop, or isochronous load-sharing lines/networks — module 14\'s vocabulary matured) coordinate the fleet so engines divide kW proportionally; cross-current/droop compensation divides kVAR. A set hogging or shedding kW has a governor/load-share problem; one circulating vars has an excitation/compensation problem.',
+          'The operational sequences complete the picture: dead-bus start (first set closes onto a dead bus without sync — someone must be first, and the controls arbitrate who), subsequent sets synchronize on, load ramps and soft transfers, and reverse-power protection (a motoring generator — engine failed, alternator driving it as a motor — trips on reverse power before it burns fuel backwards). These are the behaviors you will watch paralleling switchgear perform; understanding them is the entry ticket.',
+        ],
+        keyPoints: [
+          'Sync = matching voltage, frequency (slight slip), and phase angle before closure; sync-check relays enforce it',
+          'Out-of-sync closure shears couplings and damages windings — the trade\'s most violent mistake',
+          'On a shared bus: governor sets a machine\'s kW share, excitation its kVAR share',
+          'Dead-bus logic, load ramps, and reverse-power protection are the sequences to recognize',
+        ],
+        quiz: [
+          {
+            q: 'On a two-generator bus, unit A carries 80% of the kW while unit B loafs at 20%, though both are rated equally. Frequency and voltage are normal. The territory to investigate is:',
+            a: ['Unit A\'s alternator', 'The governors/load-sharing controls — kW division among paralleled sets is a fuel/governor function', 'Unit B\'s AVR', 'The bus itself'],
+            correct: 1,
+            exp: 'On a shared bus, each machine\'s kW share follows its governor/load-share settings. Voltage/excitation problems would show as kVAR imbalance instead.',
+          },
+          {
+            q: 'A sync-check relay refuses to permit a generator breaker to close even though the panel meters "look close." The professional response is:',
+            a: ['Jumper the relay — meters are close enough', 'Trust the permissive: verify the sync inputs and the actual match (voltage/slip/phase) — the relay exists to prevent the most damaging closure in the trade', 'Close the breaker manually', 'Trip the bus first'],
+            correct: 1,
+            exp: 'The sync check is the last guard before coupling-shearing torque. "Close" by meter eyeball is not in-window; diagnose why, never bypass.',
+          },
+        ],
+      },
+      {
+        title: 'Switchgear, Protection, and the Scope Boundary',
+        body: [
+          'Paralleling SWITCHGEAR is the bus\'s home: generator breakers (electrically operated, often drawout), the paralleling controls (synchronizers, load-share modules or integrated PLC-based masters), PROTECTION relays (overcurrent, reverse power, over/under voltage and frequency, differential on larger machines), metering, and master controls sequencing the whole plant (start priorities, load add/shed steps, bus optimization). Modern systems concentrate all of it into redundant PLC masters with HMI screens — the BAS lesson of the HVAC course applies: the screen shows what the system thinks; verification is physical.',
+          'Load management rides the same gear: LOAD ADD/SHED steps (non-critical loads shed if plant capacity tightens, restored in priority order), generator START PRIORITIES rotating run hours across the fleet, and on utility-paralleled plants, the import/export controls and utility PROTECTION requirements (anti-islanding and interconnection relays) that come with operating in parallel with the grid — a regulated, utility-blessed domain with its own testing regime.',
+          'Your entry-level scope in a switchgear room, stated plainly: OWN the generators themselves (everything modules 13-19 taught — the engines, alternators, controllers feeding this room), the observation and documentation of sequences (watching a plant exercise and recording what stepped wrong is real diagnostic contribution), first-line electrical checks at the generator ends, and the housekeeping/inspection items your PM covers. DEFER: protection relay settings and testing (a licensed/NETA-certified specialty), breaker internal maintenance (drawout racking has its own training and arc-flash reality), PLC master programming, and any utility-interconnection work. The kettle/suppression/chiller rule at its highest-stakes form: diagnose to the boundary, document, refer.',
+          'Why this module matters to the entry tech anyway: paralleling sites are where generator careers point (module 25) — data centers, hospitals, and utility plants pay the premium for exactly this literacy, and the tech who arrives already speaking sync, load share, and reverse power gets invited into the switchgear apprenticeship that the parts-changer never sees. Watch every plant sequence you legally can, log what you saw, and collect the vocabulary — it is the ladder.',
+        ],
+        keyPoints: [
+          'Switchgear = breakers + sync/load-share controls + protection relays + master sequencing (PLC/HMI)',
+          'Load add/shed, start priorities, and utility-parallel protections are recognized behaviors, not settings you touch',
+          'Defer: relay settings/testing (NETA territory), breaker internals, PLC programming, utility interconnection',
+          'The literacy is the career ladder: paralleling sites pay the premium for exactly this vocabulary',
+        ],
+        quiz: [
+          {
+            q: 'During a plant test, generator 3\'s breaker trips on "reverse power" moments after paralleling. The physical meaning is:',
+            a: ['Too much output current', 'Generator 3\'s engine stopped producing power and the bus began motoring it — the alternator was driving the engine', 'A grounded neutral', 'Excess kVAR'],
+            correct: 1,
+            exp: 'Reverse power = the machine consuming instead of producing: a failed/fuel-starved engine being spun as a motor. The relay trips it before damage — investigate the engine, not the relay.',
+          },
+          {
+            q: 'A customer asks you to "just adjust the protection relay pickup since it keeps tripping." The correct response is:',
+            a: ['Adjust it 10% and monitor', 'Decline and refer: protection settings are engineered and their modification/testing is licensed (NETA-type) specialty work — investigate WHY it trips instead', 'Bypass the relay temporarily', 'Replace the relay'],
+            correct: 1,
+            exp: 'Protection settings implement an engineered coordination study. Field-adjusting them to silence trips removes protection precisely where it proved needed — diagnose the cause, document, refer the settings question.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Facilities parallel generators for:', a: ['Simpler wiring', 'Capacity, redundancy (N+1), and efficiency (run only what the load needs)', 'Lower fuel quality tolerance', 'Quieter operation'], correct: 1, exp: 'One bus, many engines: bigger loads, survivable failures, and right-sized running.' },
+      { q: 'Synchronization requires matching:', a: ['Only voltage', 'Voltage, frequency (slight slip), and phase angle', 'Only frequency', 'kW and kVAR'], correct: 1, exp: 'All three within tight windows before the breaker may close onto a live bus.' },
+      { q: 'Closing a generator breaker badly out of sync causes:', a: ['A minor flicker', 'Violent torque transients: sheared couplings, winding damage, tripped plant', 'Reverse rotation', 'Fuel dilution'], correct: 1, exp: 'The bus yanks the machine into step instantly — the most damaging mistake in the trade.' },
+      { q: 'Sync-check relays:', a: ['Speed up transfers', 'Block breaker closure outside the permitted sync window — never to be bypassed', 'Measure fuel', 'Balance kVAR'], correct: 1, exp: 'The last permissive guard before closure; diagnosing why it refuses beats overriding it.' },
+      { q: 'On a shared bus, an individual machine\'s kW share is set by:', a: ['Its AVR', 'Its governor/load-share control (fuel)', 'The bus voltage', 'Its breaker'], correct: 1, exp: 'Fuel = real power share; excitation = kVAR share — the paralleled division of labor.' },
+      { q: 'kVAR circulating between paralleled sets points to:', a: ['Governor problems', 'Excitation/AVR and droop-compensation issues', 'Fuel restrictions', 'Bus faults'], correct: 1, exp: 'Reactive power follows excitation: cross-current compensation and AVR matching divide the vars.' },
+      { q: 'Reverse-power protection trips a generator that:', a: ['Overproduces kW', 'Is being motored by the bus after its engine fails', 'Exceeds voltage', 'Loses its exciter only'], correct: 1, exp: 'A dead engine becomes a load; the relay removes it before the backwards-driven damage.' },
+      { q: 'Dead-bus logic exists because:', a: ['Buses need cleaning', 'The first generator must close onto a dead bus without sync — controls arbitrate which one', 'Utilities require it', 'Load banks need priority'], correct: 1, exp: 'Someone is always first; the plant controls elect and permit exactly one dead-bus closure.' },
+      { q: 'Protection relay settings and testing belong to:', a: ['Any generator tech', 'Licensed/NETA-certified specialists implementing the coordination study', 'The customer', 'The utility only'], correct: 1, exp: 'Engineered protection is not field-adjustable scope: diagnose causes, document, refer settings.' },
+      { q: 'The entry tech\'s value in a paralleling plant is:', a: ['Reprogramming the master PLC', 'Owning the generators feeding it, observing/documenting sequences, and speaking the vocabulary that earns the switchgear apprenticeship', 'Adjusting relays', 'Racking breakers untrained'], correct: 1, exp: 'The generators are yours; the literacy is the ladder into the premium rooms — with the boundary respected.' },
+    ],
+  },
 ];
