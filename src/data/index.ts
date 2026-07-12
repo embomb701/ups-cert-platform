@@ -8,10 +8,11 @@ import { MODULES_PART4 } from './modules-part4';
 import { MODULES_PART5 } from './modules-part5';
 import { KITCHEN_MODULES } from './kitchen-modules';
 import { HVAC_MODULES } from './hvac-modules';
+import { GENERATOR_MODULES } from './generator-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES, HVAC_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
 // modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
@@ -34,6 +35,7 @@ export function getModule(id: string): TrainingModule | null {
     ALL_MODULES.find((m) => m.id === id) ??
     KITCHEN_MODULES.find((m) => m.id === id) ??
     HVAC_MODULES.find((m) => m.id === id) ??
+    GENERATOR_MODULES.find((m) => m.id === id) ??
     null
   );
 }
@@ -84,10 +86,10 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
     ...KITCHEN_MODULES.filter((m) => HVAC_SHARED_KITCHEN_IDS.includes(m.id)).sort(byNum),
     ...[...HVAC_MODULES].sort(byNum),
   ],
-  // Generator-specific modules (gen-*) join this sequence as they are built.
   training_generator: [
     ...FOUNDATION,
     ...ALL_MODULES.filter((m) => GENERATOR_SHARED_UPS_IDS.includes(m.id)).sort(byNum),
+    ...[...GENERATOR_MODULES].sort(byNum),
   ],
 };
 
@@ -122,6 +124,7 @@ export function prevModuleCandidates(mod: TrainingModule, courseKeys?: string[])
 export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.num <= 1) return null;
   if (isHvacModule(mod)) return prevModuleInCourse('training_hvac', mod);
+  if (mod.id.startsWith('gen-')) return prevModuleInCourse('training_generator', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }
