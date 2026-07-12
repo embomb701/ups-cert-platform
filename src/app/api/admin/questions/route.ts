@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     const collection = adminDb.collection('questionBank');
 
-    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap] = await Promise.all([
+    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap] = await Promise.all([
       collection.where('examLevel', '==', 'jr_fse').count().get(),
       collection.where('examLevel', '==', 'jr_fse').where('active', '==', true).count().get(),
       collection.where('examLevel', 'in', ['fse', 'fse_ai']).count().get(),
@@ -26,6 +26,8 @@ export async function GET(req: NextRequest) {
       collection.where('examLevel', '==', 'jr_kitchen_fse').where('active', '==', true).count().get(),
       collection.where('examLevel', '==', 'jr_hvac_fse').count().get(),
       collection.where('examLevel', '==', 'jr_hvac_fse').where('active', '==', true).count().get(),
+      collection.where('examLevel', '==', 'jr_gen_fse').count().get(),
+      collection.where('examLevel', '==', 'jr_gen_fse').where('active', '==', true).count().get(),
     ]);
 
     return NextResponse.json({
@@ -44,6 +46,10 @@ export async function GET(req: NextRequest) {
       jr_hvac_fse: {
         total: hvacSnap.data().count,
         active: hvacActiveSnap.data().count,
+      },
+      jr_gen_fse: {
+        total: genSnap.data().count,
+        active: genActiveSnap.data().count,
       },
     });
   } catch (err: any) {

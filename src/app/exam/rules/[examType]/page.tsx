@@ -63,11 +63,14 @@ export default function ExamRulesPage() {
   const isPractice = examType === 'practice_jr_fse';
   const isKitchen = examType === 'jr_kitchen_fse';
   const isHvac = examType === 'jr_hvac_fse';
-  const isJr = examType === 'jr_fse' || isPractice || isKitchen || isHvac;
+  const isGen = examType === 'jr_gen_fse';
+  const isJr = examType === 'jr_fse' || isPractice || isKitchen || isHvac || isGen;
   const rules = isKitchen
     ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Kitchen FSE Exam'))
     : isHvac
     ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. HVAC FSE Exam'))
+    : isGen
+    ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Generator FSE Exam'))
     : isJr
     ? RULES_JR
     : RULES_FSE;
@@ -77,6 +80,8 @@ export default function ExamRulesPage() {
     ? 'Junior Commercial Kitchen Field Service Certification'
     : isHvac
     ? 'Junior HVAC Field Service Certification'
+    : isGen
+    ? 'Junior Power Generation Field Service Certification'
     : isJr
     ? 'Junior UPS Field Service Certification'
     : 'UPS Field Service Certification';

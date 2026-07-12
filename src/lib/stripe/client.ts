@@ -129,6 +129,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // GENERATOR (POWER GENERATION) FSE PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_generator: {
+    name: 'Power Generation FSE Training Course + Jr. Generator FSE Certification Exam',
+    shortName: 'Generator Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_GENERATOR ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_gen_fse_test_human: {
+    name: 'Jr. Generator FSE Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Generator FSE Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_GEN_FSE_HUMAN ?? '',
+  },
+
+  // Generator training + test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
+  pkg_training_generator_testout: {
+    name: 'Generator Training Course + Jr. Generator FSE Test-Out (Human Proctored)',
+    shortName: 'Generator Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_GENERATOR_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

@@ -15,7 +15,8 @@ import fscSample from '../../../../../data/questions/fsc-sample.json';
 import bookFse from '../../../../../data/questions/book-fse-questions.json';
 import kitchenFresh from '../../../../../data/questions/kitchen-jr-fse-fresh.json';
 import hvacFresh from '../../../../../data/questions/hvac-jr-fse-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions } from '@/lib/exam/kitchenBank';
+import generatorFresh from '../../../../../data/questions/generator-jr-fse-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -27,9 +28,11 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'book-fse-questions.json':   bookFse as QuestionRecord[],
   'kitchen-jr-fse-fresh.json': kitchenFresh as QuestionRecord[],
   'hvac-jr-fse-fresh.json':    hvacFresh as QuestionRecord[],
+  'generator-jr-fse-fresh.json': generatorFresh as QuestionRecord[],
   // Derived from course content (shared foundation + course-specific modules)
   'kitchen-jr-fse-derived':    buildKitchenBankQuestions() as unknown as QuestionRecord[],
   'hvac-jr-fse-derived':       buildHvacBankQuestions() as unknown as QuestionRecord[],
+  'generator-jr-fse-derived':  buildGeneratorBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -42,6 +45,8 @@ const FILE_ORDER = [
   'kitchen-jr-fse-derived',
   'hvac-jr-fse-fresh.json',
   'hvac-jr-fse-derived',
+  'generator-jr-fse-fresh.json',
+  'generator-jr-fse-derived',
 ];
 
 export async function POST(req: NextRequest) {

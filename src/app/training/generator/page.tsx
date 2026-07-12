@@ -111,24 +111,48 @@ export default async function GeneratorPortalPage() {
           </p>
         </div>
 
-        {/* Foundation progress — anyone who has done shared modules sees credit */}
-        {(hasAccess || sharedComplete > 0) && (
-          <div className="rounded-lg bg-gray-800/50 border border-gray-700 p-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-white font-medium text-sm">Foundation modules: {sharedComplete}/10 complete</span>
-              <span className="text-gray-400 text-sm">{Math.round((sharedComplete / 10) * 100)}%</span>
-            </div>
-            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-amber-500 rounded-full transition-all"
-                style={{ width: `${(sharedComplete / 10) * 100}%` }}
-              />
-            </div>
-            <p className="text-gray-500 text-xs mt-2">
-              Foundation and battery-module progress carries over from the other programs — complete a module once, it counts everywhere.
-            </p>
-          </div>
-        )}
+        {/* Course progress — anyone who has done shared modules sees credit */}
+        {(hasAccess || sharedComplete > 0) && (() => {
+          const trackComplete = [...genStates.values()].filter((s) => s.completed).length;
+          const totalCourse = 10 + genBuiltCount;
+          const totalDone = sharedComplete + trackComplete;
+          const courseComplete = genBuiltCount === 15 && totalDone === totalCourse;
+          return (
+            <>
+              <div className="rounded-lg bg-gray-800/50 border border-gray-700 p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-white font-medium text-sm">Course progress: {totalDone}/{totalCourse} modules complete</span>
+                  <span className="text-gray-400 text-sm">{Math.round((totalDone / totalCourse) * 100)}%</span>
+                </div>
+                <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-amber-500 rounded-full transition-all"
+                    style={{ width: `${(totalDone / totalCourse) * 100}%` }}
+                  />
+                </div>
+                <p className="text-gray-500 text-xs mt-2">
+                  {courseComplete
+                    ? 'All modules complete — your Jr. Generator FSE certification exam is unlocked.'
+                    : 'Foundation and battery-module progress carries over from the other programs — complete a module once, it counts everywhere.'}
+                </p>
+              </div>
+              {courseComplete && (
+                <div className="rounded-xl border-2 border-green-700 bg-green-950/20 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <p className="text-white font-semibold">🎓 Jr. Generator FSE Certification Exam</p>
+                    <p className="text-gray-400 text-sm mt-0.5">Training complete — you earned this attempt. AI proctored, once every 90 days.</p>
+                  </div>
+                  <Link
+                    href="/exam/rules/jr_gen_fse"
+                    className="flex-shrink-0 px-5 py-2.5 bg-green-700 hover:bg-green-600 text-white font-semibold rounded-lg text-sm text-center transition-colors"
+                  >
+                    Start Exam →
+                  </Link>
+                </div>
+              )}
+            </>
+          );
+        })()}
 
         {/* Foundation summary */}
         <div>

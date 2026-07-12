@@ -171,7 +171,7 @@ export default function ExamPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <span className={session.examLevel.startsWith('jr_') ? 'badge-jr' : 'badge-fse'}>
-              {isPractice ? 'Jr. FSE Practice Test' : session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : session.examLevel === 'jr_hvac_fse' ? 'Jr. HVAC FSE' : 'FSE'} Exam
+              {isPractice ? 'Jr. FSE Practice Test' : session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : session.examLevel === 'jr_hvac_fse' ? 'Jr. HVAC FSE' : session.examLevel === 'jr_gen_fse' ? 'Jr. Generator FSE' : 'FSE'} Exam
             </span>
           </div>
             <ExamTimer

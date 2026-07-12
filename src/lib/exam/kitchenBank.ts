@@ -9,12 +9,12 @@
  * - HVAC course (shared 1-10 + refrigeration core + hvac 13-25) → 'jr_hvac_fse'
  */
 
-import { ALL_MODULES, KITCHEN_MODULES, HVAC_MODULES } from '@/data/index';
+import { ALL_MODULES, KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES } from '@/data/index';
 import type { TrainingModule, QuizQ } from '@/data/modules';
 
 const CHOICE_IDS = ['A', 'B', 'C', 'D'] as const;
 
-type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse';
+type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse';
 
 interface BankQuestion {
   id: string;
@@ -91,4 +91,12 @@ export function buildKitchenBankQuestions(): BankQuestion[] {
 
 export function buildHvacBankQuestions(): BankQuestion[] {
   return buildBank([...FOUNDATION, ...REFRIGERATION_CORE, ...HVAC_MODULES], 'jr_hvac_fse', 'hjr');
+}
+
+const BATTERY_CORE = ALL_MODULES.filter((m) =>
+  ['battery-types', 'battery-safety'].includes(m.id)
+);
+
+export function buildGeneratorBankQuestions(): BankQuestion[] {
+  return buildBank([...FOUNDATION, ...BATTERY_CORE, ...GENERATOR_MODULES], 'jr_gen_fse', 'gjr');
 }

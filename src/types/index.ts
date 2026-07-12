@@ -2,7 +2,7 @@
 // Core shared types for UPS Certification Platform
 // ============================================================
 
-export type ExamLevel = 'jr_fse' | 'fse' | 'jr_kitchen_fse' | 'jr_hvac_fse';
+export type ExamLevel = 'jr_fse' | 'fse' | 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse';
 export type UserRole = 'user' | 'admin' | 'proctor';
 export type CertificateStatus = 'valid' | 'expired' | 'revoked' | 'under_review';
 export type PurchaseStatus = 'pending' | 'complete' | 'refunded' | 'failed';
@@ -77,6 +77,9 @@ export const PRODUCTS = {
   TRAINING_HVAC: 'training_hvac',
   JR_HVAC_FSE_TEST_HUMAN: 'jr_hvac_fse_test_human',
   PKG_TRAINING_HVAC_TESTOUT: 'pkg_training_hvac_testout',
+  TRAINING_GENERATOR: 'training_generator',
+  JR_GEN_FSE_TEST_HUMAN: 'jr_gen_fse_test_human',
+  PKG_TRAINING_GENERATOR_TESTOUT: 'pkg_training_generator_testout',
 } as const;
 
 // Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts

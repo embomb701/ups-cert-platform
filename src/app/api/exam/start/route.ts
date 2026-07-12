@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     const examLevel = (isPractice ? 'jr_fse' : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -139,9 +139,10 @@ export async function POST(req: NextRequest) {
 
     // Jr.-level course exams (Kitchen, HVAC) share the same access model:
     // training-completion grant OR a proctor-unlocked test-out order.
-    const JR_COURSE_EXAMS: Record<string, { label: string; productId: string }> = {
-      jr_kitchen_fse: { label: 'Jr. Kitchen FSE', productId: 'jr_kitchen_fse_test_human' },
-      jr_hvac_fse: { label: 'Jr. HVAC FSE', productId: 'jr_hvac_fse_test_human' },
+    const JR_COURSE_EXAMS: Record<string, { label: string; productId: string; courseKey: string }> = {
+      jr_kitchen_fse: { label: 'Jr. Kitchen FSE', productId: 'jr_kitchen_fse_test_human', courseKey: 'training_kitchen' },
+      jr_hvac_fse: { label: 'Jr. HVAC FSE', productId: 'jr_hvac_fse_test_human', courseKey: 'training_hvac' },
+      jr_gen_fse: { label: 'Jr. Generator FSE', productId: 'jr_gen_fse_test_human', courseKey: 'training_generator' },
     };
 
     let kitchenTestOut = false;
@@ -182,8 +183,7 @@ export async function POST(req: NextRequest) {
           if (d.passed && d.completedAt) completedModuleIds.add(doc.id);
         });
         const { COURSE_SEQUENCES } = await import('@/data/index');
-        const courseKey = examLevel === 'jr_kitchen_fse' ? 'training_kitchen' : 'training_hvac';
-        const courseModules = COURSE_SEQUENCES[courseKey];
+        const courseModules = COURSE_SEQUENCES[jrCourse.courseKey];
         const trainingComplete = courseModules.every((m) => completedModuleIds.has(m.id));
         if (!trainingComplete) {
           return NextResponse.json({
