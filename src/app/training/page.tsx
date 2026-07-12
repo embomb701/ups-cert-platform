@@ -260,6 +260,42 @@ export default async function TrainingPage() {
               </div>
             </div>
           </div>
+          {/* ── Generator Course ───────────────────────────────────────── */}
+          <div className={`rounded-xl border-2 p-6 ${courseAccess.generator ? 'border-amber-700 bg-amber-950/20' : 'border-gray-700 bg-gray-800/50'}`}>
+            <div className="flex flex-col md:flex-row md:items-start gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-amber-400 font-mono text-xs font-bold uppercase tracking-widest">Generator FSE</span>
+                  {courseAccess.generator && (
+                    <span className="px-2 py-0.5 bg-amber-600/30 border border-amber-600/60 text-amber-300 text-xs rounded">Enrolled</span>
+                  )}
+                  <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-300 text-xs rounded">Coming Soon</span>
+                </div>
+                <h2 className="text-xl font-bold text-white mb-1">Power Generation Field Service Engineering</h2>
+                <p className="text-gray-400 text-sm mb-3">
+                  Service standby and prime power — diesel and gas generators, transfer switches, and critical power systems.
+                </p>
+                <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
+                  <span>25 modules</span>
+                  <span>·</span>
+                  <span>12 shared with other programs</span>
+                  <span>·</span>
+                  <span>Jr. Power Generation FSE certification</span>
+                </div>
+              </div>
+              <div className="flex-shrink-0 flex flex-col gap-2 min-w-[160px]">
+                <div className="text-center py-2 px-4 border border-gray-700 rounded-lg">
+                  <p className="text-gray-500 text-xs">Enrollment opens soon</p>
+                </div>
+                <Link
+                  href="/training/generator"
+                  className="block w-full py-2 px-4 border border-gray-600 hover:border-gray-400 text-gray-400 hover:text-white rounded-lg text-xs text-center transition-colors"
+                >
+                  Preview outline →
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Shared foundation note */}
@@ -267,8 +303,9 @@ export default async function TrainingPage() {
           <p className="text-gray-300 font-medium text-sm mb-1">10 shared foundation modules</p>
           <p className="text-gray-500 text-sm">
             Modules 1–10 — electrical theory, safety (NFPA 70E + LOTO), and test equipment — are identical across all programs.
-            Complete them once and they count toward every certification. The HVAC program additionally shares the
-            two refrigeration core modules with the Kitchen program.
+            Complete them once and they count toward every certification. The HVAC program additionally shares the two
+            refrigeration core modules with the Kitchen program, and the Generator program shares the two battery
+            modules with the UPS program.
           </p>
         </div>
 

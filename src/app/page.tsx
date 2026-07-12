@@ -106,12 +106,12 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="text-center mb-10">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Training Programs</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Three career tracks. One portal.</h2>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Four career tracks. One portal.</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Every program shares the same 10-module electrical and safety foundation. Complete it once — it counts toward every certification.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="rounded-xl border-2 border-blue-700 bg-blue-950/20 p-7">
             <span className="text-blue-400 font-mono text-xs font-bold uppercase tracking-widest">UPS FSE</span>
             <h3 className="text-xl font-bold text-white mt-2 mb-2">UPS Field Service Engineering</h3>
@@ -174,6 +174,29 @@ export default function HomePage() {
             <Link
               href="/training/hvac"
               className="inline-block px-5 py-2 border border-teal-800 hover:border-teal-600 text-teal-400 hover:text-teal-300 font-semibold rounded-lg text-sm transition-colors"
+            >
+              Preview curriculum →
+            </Link>
+          </div>
+          <div className="rounded-xl border-2 border-amber-900/60 bg-amber-950/10 p-7">
+            <div className="flex items-center gap-2">
+              <span className="text-amber-400 font-mono text-xs font-bold uppercase tracking-widest">Generator FSE</span>
+              <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-xs rounded">Coming Soon</span>
+            </div>
+            <h3 className="text-xl font-bold text-white mt-2 mb-2">Power Generation Field Service Engineering</h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Service standby and prime power — diesel and gas generators, transfer switches, and critical power systems.
+            </p>
+            <ul className="space-y-1.5 mb-6">
+              {['25 modules (12 shared)', '3–6 months', 'Jr. Power Generation FSE certification', 'Enrollment opening soon'].map((t, i) => (
+                <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
+                  <span className="text-amber-400 flex-shrink-0">✓</span>{t}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/training/generator"
+              className="inline-block px-5 py-2 border border-amber-800 hover:border-amber-600 text-amber-400 hover:text-amber-300 font-semibold rounded-lg text-sm transition-colors"
             >
               Preview curriculum →
             </Link>

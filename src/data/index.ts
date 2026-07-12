@@ -47,19 +47,25 @@ export function isHvacModule(mod: TrainingModule): boolean {
 }
 
 // The generic refrigeration modules built for the Kitchen course are shared
-// with the HVAC course (positions 11-12 in the HVAC sequence).
+// with the HVAC course (positions 11-12 in the HVAC sequence); the UPS
+// battery modules are shared with the Generator course (positions 11-12).
 const HVAC_SHARED_KITCHEN_IDS = ['kitchen-refrigeration-cycle', 'kitchen-refrigeration-service'];
+const GENERATOR_SHARED_UPS_IDS = ['battery-types', 'battery-safety'];
+
+const ALL_COURSE_KEYS = ['training_portal', 'training_kitchen', 'training_hvac', 'training_generator'];
 
 // Which examAccess doc(s) grant access to a module. Shared foundation
 // modules (1-10) are accessible from any course enrollment.
 export function accessKeysForModule(mod: TrainingModule): string[] {
   if (isHvacModule(mod)) return ['training_hvac'];
+  if (mod.id.startsWith('gen-')) return ['training_generator'];
   if (isKitchenModule(mod)) {
     return HVAC_SHARED_KITCHEN_IDS.includes(mod.id)
       ? ['training_kitchen', 'training_hvac']
       : ['training_kitchen'];
   }
-  if (mod.num <= 10) return ['training_portal', 'training_kitchen', 'training_hvac'];
+  if (mod.num <= 10) return ALL_COURSE_KEYS;
+  if (GENERATOR_SHARED_UPS_IDS.includes(mod.id)) return ['training_portal', 'training_generator'];
   return ['training_portal'];
 }
 
@@ -77,6 +83,11 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
     ...FOUNDATION,
     ...KITCHEN_MODULES.filter((m) => HVAC_SHARED_KITCHEN_IDS.includes(m.id)).sort(byNum),
     ...[...HVAC_MODULES].sort(byNum),
+  ],
+  // Generator-specific modules (gen-*) join this sequence as they are built.
+  training_generator: [
+    ...FOUNDATION,
+    ...ALL_MODULES.filter((m) => GENERATOR_SHARED_UPS_IDS.includes(m.id)).sort(byNum),
   ],
 };
 

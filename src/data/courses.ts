@@ -496,6 +496,235 @@ export const HVAC_MODULE_PLACEHOLDERS: HvacModulePlaceholder[] = [
   },
 ];
 
+// ─────────────────────────────────────────────────────────────────────────
+// Generator (Power Generation) FSE course outline — modules 11-25.
+// Foundation 1-10 shared with all programs; modules 11-12 reuse the UPS
+// course's battery modules (content already built); 13-25 are
+// generator-specific and in development.
+// ─────────────────────────────────────────────────────────────────────────
+
+export type GeneratorTrack =
+  | 'Batteries & Starting'
+  | 'Engines & Fuel'
+  | 'Generation & Controls'
+  | 'Transfer & Integration'
+  | 'Compliance & Professional Service';
+
+export interface GeneratorModulePlaceholder {
+  id: string;
+  title: string;
+  desc: string;
+  track: GeneratorTrack;
+  chapters: string[];
+  /** id of an existing module reused from another course (content already built) */
+  sharedFrom?: string;
+}
+
+export const GENERATOR_MODULE_PLACEHOLDERS: GeneratorModulePlaceholder[] = [
+  // ── BATTERIES & STARTING (11-12 shared with UPS FSE — content ready) ────
+  {
+    id: 'battery-types',
+    sharedFrom: 'battery-types',
+    title: 'Battery Types and Chemistry',
+    desc: 'Lead-acid fundamentals, VRLA, and alternative chemistries — the same batteries that back UPS systems crank the generators',
+    track: 'Batteries & Starting',
+    chapters: [
+      'Lead-acid battery fundamentals',
+      'VRLA batteries and critical-power applications',
+      'Alternative battery technologies (NiCd, NiMH, Li-ion)',
+    ],
+  },
+  {
+    id: 'battery-safety',
+    sharedFrom: 'battery-safety',
+    title: 'Battery Safety and Handling',
+    desc: 'Hazards, PPE, installation, connection, and testing — battery discipline is identical across UPS and generator work',
+    track: 'Batteries & Starting',
+    chapters: [
+      'Hazards and PPE requirements',
+      'Battery installation and connection',
+      'Battery testing and maintenance',
+    ],
+  },
+  {
+    id: 'gen-starting-systems',
+    title: 'Starting Systems & Cranking Circuits',
+    desc: 'Starters, battery chargers, and cranking circuits — the systems behind the #1 generator failure: failure to start',
+    track: 'Batteries & Starting',
+    chapters: [
+      'Cranking circuits: starter motors, solenoids, and cabling',
+      'Station battery chargers: float/equalize, alarms, and why they fail quietly',
+      'Cranking-circuit diagnosis: voltage drop under crank (the meter test that finds it all)',
+      'Block heaters and cold-start readiness',
+      'Why generators fail to start: the statistics and the checklist',
+    ],
+  },
+
+  // ── ENGINES & FUEL ──────────────────────────────────────────────────────
+  {
+    id: 'gen-engine-fundamentals',
+    title: 'Diesel Engine Fundamentals',
+    desc: 'The four-stroke diesel: compression ignition, turbocharging, governors, and the mechanical heart of standby power',
+    track: 'Engines & Fuel',
+    chapters: [
+      'Four-stroke compression-ignition cycle',
+      'Air systems: turbochargers, aftercoolers, and air filters',
+      'Governors and speed control — why 1800 RPM means 60 Hz',
+      'Engine protection: oil pressure, coolant temp, overspeed shutdowns',
+      'Reading an engine: sight, sound, smoke color, and gauges',
+    ],
+  },
+  {
+    id: 'gen-gaseous-engines',
+    title: 'Gaseous-Fueled Engines',
+    desc: 'Natural gas and propane gensets: spark ignition, fuel trains, and the gas-safety discipline applied to engines',
+    track: 'Engines & Fuel',
+    chapters: [
+      'Spark-ignition gaseous engines vs diesel',
+      'Gas fuel trains: regulators, solenoid valves, and leak discipline',
+      'Ignition systems and misfire diagnosis',
+      'Derating, altitude, and fuel-quality realities',
+      'Bi-fuel and dual-fuel configurations',
+    ],
+  },
+  {
+    id: 'gen-cooling-lubrication',
+    title: 'Cooling, Lubrication & Block Heaters',
+    desc: 'Radiators, coolant chemistry, oil systems, and the block heaters that make 10-second starts possible',
+    track: 'Engines & Fuel',
+    chapters: [
+      'Cooling systems: radiators, thermostats, pumps, and remote radiators',
+      'Coolant chemistry: mixtures, DCA/SCA additives, and testing',
+      'Lubrication: oil circuits, pressures, analysis programs',
+      'Block heaters: sizing, failure symptoms, and NFPA 110 start requirements',
+      'Leaks, hoses, and belts: the walkaround that prevents failures',
+    ],
+  },
+  {
+    id: 'gen-fuel-systems',
+    title: 'Diesel Fuel Systems, Storage & Quality',
+    desc: 'Tanks, day tanks, transfer pumps, fuel polishing, and the fuel-quality problems that kill standby reliability',
+    track: 'Engines & Fuel',
+    chapters: [
+      'Fuel paths: main tanks, day tanks, transfer pumps, and priming',
+      'Injection systems overview: mechanical to common-rail',
+      'Fuel quality: water, microbial growth ("diesel bug"), and polishing systems',
+      'Tank compliance basics: containment, venting, and gauging',
+      'Wet stacking: what underloaded diesels do to themselves',
+    ],
+  },
+
+  // ── GENERATION & CONTROLS ───────────────────────────────────────────────
+  {
+    id: 'gen-alternators',
+    title: 'Alternators & Voltage Regulation',
+    desc: 'Synchronous alternators, excitation, and AVRs — where engine rotation becomes regulated electrical power',
+    track: 'Generation & Controls',
+    chapters: [
+      'Synchronous alternator construction and operation',
+      'Excitation systems: brushless exciters and PMGs',
+      'Automatic voltage regulators: sensing, stability, and adjustment',
+      'Frequency vs voltage: engine problems vs alternator problems',
+      'Alternator testing: insulation, diodes, and winding checks',
+    ],
+  },
+  {
+    id: 'gen-controls',
+    title: 'Generator Controllers, Sensors & Alarms',
+    desc: 'The control panel: start sequences, sensors, alarm codes, and remote monitoring of standby assets',
+    track: 'Generation & Controls',
+    chapters: [
+      'Controller anatomy: start/stop logic, cooldown timers, and modes',
+      'Sensors and senders: pressure, temperature, speed, and level',
+      'Alarm and shutdown hierarchies — warnings vs shutdowns',
+      'Event logs and remote monitoring platforms',
+      'The controller as witness: reading the story of a failed start',
+    ],
+  },
+
+  // ── TRANSFER & INTEGRATION ─────────────────────────────────────────────
+  {
+    id: 'gen-ats',
+    title: 'Automatic Transfer Switches',
+    desc: 'The ATS: sensing the outage, starting the generator, and moving the load — open, delayed, and closed transition',
+    track: 'Transfer & Integration',
+    chapters: [
+      'ATS anatomy and the transfer sequence end to end',
+      'Open, delayed, and closed-transition transfer types',
+      'Time delays: engine start, transfer, retransfer, and cooldown',
+      'Exercisers and scheduled testing',
+      'ATS service safety: two live sources in one cabinet',
+    ],
+  },
+  {
+    id: 'gen-paralleling',
+    title: 'Paralleling & Switchgear Basics',
+    desc: 'Multiple generators on one bus: synchronization, load sharing, and where entry-level scope ends',
+    track: 'Transfer & Integration',
+    chapters: [
+      'Why parallel: capacity, redundancy, and load demand',
+      'Synchronization: voltage, frequency, and phase matching',
+      'Load sharing: droop and isochronous control in plain terms',
+      'Paralleling switchgear: breakers, protection, and controls',
+      'The scope boundary: what belongs to switchgear specialists',
+    ],
+  },
+  {
+    id: 'gen-critical-power',
+    title: 'Generators in Critical Power Systems',
+    desc: 'Where the generator meets the UPS: data centers, hospitals, and NEC emergency vs standby classifications',
+    track: 'Transfer & Integration',
+    chapters: [
+      'The critical power chain: utility → ATS → generator → UPS → load',
+      'NEC Article 700/701/702: emergency, legally required, and optional standby',
+      'Hospital and life-safety systems: what the classifications demand',
+      'Generator-UPS interaction: ride-through, frequency windows, and load steps',
+      'Data center redundancy: N, N+1, 2N in the generator plant',
+    ],
+  },
+
+  // ── COMPLIANCE & PROFESSIONAL SERVICE ──────────────────────────────────
+  {
+    id: 'gen-nfpa110',
+    title: 'NFPA 110 & Compliance Testing',
+    desc: 'The standard that runs standby power: levels, types, weekly/monthly/annual testing, load banks, and documentation',
+    track: 'Compliance & Professional Service',
+    chapters: [
+      'NFPA 110 levels, types, and classes in plain language',
+      'Weekly inspections and monthly load tests: what must happen and be recorded',
+      'Annual testing and the 3-year 4-hour test',
+      'Load bank testing: when building load is not enough, and curing wet stacking',
+      'Documentation: the records the AHJ and the insurer will ask for',
+    ],
+  },
+  {
+    id: 'gen-troubleshooting',
+    title: 'Generator Troubleshooting Capstone',
+    desc: 'Fail-to-start, fail-to-transfer, and power-quality trees — the universal method applied to standby power',
+    track: 'Compliance & Professional Service',
+    chapters: [
+      'The fail-to-start tree: batteries → cranking → fuel → engine → controller',
+      'The fail-to-transfer tree: sensing → start signal → ATS logic → mechanism',
+      'Runs-but-power-wrong: voltage, frequency, and regulation diagnosis',
+      'Shutdown investigations: reading the controller\'s story',
+      'PM programs for generators: the compliance calendar as the maintenance plan',
+    ],
+  },
+  {
+    id: 'gen-career',
+    title: 'Career in Power Generation Service',
+    desc: 'The generator trade: EGSA certification, manufacturer schools, and where standby power careers lead',
+    track: 'Compliance & Professional Service',
+    chapters: [
+      'The market: data centers, healthcare, telecom, and rental power',
+      'EGSA certification and the credential ladder',
+      'Manufacturer schools: Cummins, Generac, Caterpillar, Kohler',
+      'The kit and the truck: what generator techs carry',
+      'Career paths: field tech to switchgear, controls, sales, and ownership',
+    ],
+  },
+];
+
 export interface TrainingCourse {
   id: string;
   title: string;
@@ -503,7 +732,7 @@ export interface TrainingCourse {
   tagline: string;
   accessKey: string;
   certTitle: string;
-  color: 'blue' | 'orange' | 'teal';
+  color: 'blue' | 'orange' | 'teal' | 'amber';
   totalModules: number;
   stripeProductId: string;
   testOutProductId: string;
@@ -548,6 +777,19 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 25,
     stripeProductId: 'training_hvac',
     testOutProductId: 'jr_hvac_fse_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'generator',
+    title: 'Power Generation Field Service Engineering',
+    shortTitle: 'Generator FSE',
+    tagline: 'Service standby and prime power — diesel and gas generators, transfer switches, and critical power systems.',
+    accessKey: 'training_generator',
+    certTitle: 'Jr. Power Generation Field Service Engineer',
+    color: 'amber',
+    totalModules: 25,
+    stripeProductId: 'training_generator',
+    testOutProductId: 'jr_gen_fse_test_human',
     comingSoon: true,
   },
 ];
