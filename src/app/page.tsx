@@ -1,6 +1,19 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { COURSES } from '@/data/courses';
+
+// Literal accent classes per course color (Tailwind cannot see dynamic names)
+const PROGRAM_ACCENTS: Record<string, string> = {
+  orange: 'text-orange-400',
+  teal: 'text-teal-400',
+  amber: 'text-amber-400',
+  violet: 'text-violet-400',
+  yellow: 'text-yellow-400',
+  green: 'text-green-400',
+  sky: 'text-sky-400',
+  rose: 'text-rose-400',
+};
 
 export const metadata: Metadata = {
   title: 'Mastering Field Service Training Portal — Field Service Engineering Career Training',
@@ -107,101 +120,60 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="text-center mb-10">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Training Programs</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Four career tracks. One portal.</h2>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Nine career tracks. One portal.</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Every program shares the same 10-module electrical and safety foundation. Complete it once — it counts toward every certification.
+            Every program shares the same 10-module electrical and safety foundation — and the trades share
+            specialty cores where they overlap. Complete a module once; it counts toward every certification.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="rounded-xl border-2 border-blue-700 bg-blue-950/20 p-7">
-            <span className="text-blue-400 font-mono text-xs font-bold uppercase tracking-widest">UPS FSE</span>
-            <h3 className="text-xl font-bold text-white mt-2 mb-2">UPS Field Service Engineering</h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              Service uninterruptible power supplies protecting hospitals, data centers, financial systems, and military installations.
-            </p>
-            <ul className="space-y-1.5 mb-6">
-              {['28 modules', '3–6 months', 'Jr. UPS FSE certification exam included', '$1,499'].map((t, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
-                  <span className="text-blue-400 flex-shrink-0">✓</span>{t}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="#pricing"
-              className="inline-block px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-sm transition-colors"
-            >
-              View pricing →
-            </Link>
-          </div>
-          <div className="rounded-xl border-2 border-orange-900/60 bg-orange-950/10 p-7">
-            <div className="flex items-center gap-2">
-              <span className="text-orange-400 font-mono text-xs font-bold uppercase tracking-widest">Kitchen FSE</span>
-              <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-xs rounded">Coming Soon</span>
+
+        {/* Featured: the live UPS program */}
+        <div className="rounded-xl border-2 border-blue-700 bg-blue-950/20 p-7 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <span className="text-blue-400 font-mono text-xs font-bold uppercase tracking-widest">UPS FSE</span>
+                <span className="px-2 py-0.5 bg-green-900/40 border border-green-700/60 text-green-400 text-xs rounded">Enrolling Now</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mt-2 mb-2">UPS Field Service Engineering</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Service uninterruptible power supplies protecting hospitals, data centers, financial systems, and
+                military installations. 28 modules · 3–6 months · Jr. UPS FSE certification exam included · $1,499.
+              </p>
             </div>
-            <h3 className="text-xl font-bold text-white mt-2 mb-2">Commercial Kitchen Field Service Engineering</h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              Service commercial kitchen equipment — refrigeration systems, cooking equipment, warewashing, ice machines, and beverage systems.
-            </p>
-            <ul className="space-y-1.5 mb-6">
-              {['27 modules (10 shared with UPS)', '3–6 months', 'Jr. Kitchen FSE certification', 'Enrollment opening soon'].map((t, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
-                  <span className="text-orange-400 flex-shrink-0">✓</span>{t}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/training/kitchen"
-              className="inline-block px-5 py-2 border border-orange-800 hover:border-orange-600 text-orange-400 hover:text-orange-300 font-semibold rounded-lg text-sm transition-colors"
-            >
-              Preview curriculum →
-            </Link>
-          </div>
-          <div className="rounded-xl border-2 border-teal-900/60 bg-teal-950/10 p-7">
-            <div className="flex items-center gap-2">
-              <span className="text-teal-400 font-mono text-xs font-bold uppercase tracking-widest">HVAC FSE</span>
-              <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-xs rounded">Coming Soon</span>
+            <div className="flex-shrink-0">
+              <Link
+                href="#pricing"
+                className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-sm transition-colors"
+              >
+                View pricing →
+              </Link>
             </div>
-            <h3 className="text-xl font-bold text-white mt-2 mb-2">HVAC Field Service Engineering</h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              Service heating, cooling, and ventilation — split systems, heat pumps, rooftop units, chillers, and building controls.
-            </p>
-            <ul className="space-y-1.5 mb-6">
-              {['25 modules (12 shared)', '3–6 months', 'Jr. HVAC FSE certification', 'Enrollment opening soon'].map((t, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
-                  <span className="text-teal-400 flex-shrink-0">✓</span>{t}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/training/hvac"
-              className="inline-block px-5 py-2 border border-teal-800 hover:border-teal-600 text-teal-400 hover:text-teal-300 font-semibold rounded-lg text-sm transition-colors"
-            >
-              Preview curriculum →
-            </Link>
           </div>
-          <div className="rounded-xl border-2 border-amber-900/60 bg-amber-950/10 p-7">
-            <div className="flex items-center gap-2">
-              <span className="text-amber-400 font-mono text-xs font-bold uppercase tracking-widest">Generator FSE</span>
-              <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-xs rounded">Coming Soon</span>
-            </div>
-            <h3 className="text-xl font-bold text-white mt-2 mb-2">Power Generation Field Service Engineering</h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              Service standby and prime power — diesel and gas generators, transfer switches, and critical power systems.
-            </p>
-            <ul className="space-y-1.5 mb-6">
-              {['25 modules (12 shared)', '3–6 months', 'Jr. Power Generation FSE certification', 'Enrollment opening soon'].map((t, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
-                  <span className="text-amber-400 flex-shrink-0">✓</span>{t}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/training/generator"
-              className="inline-block px-5 py-2 border border-amber-800 hover:border-amber-600 text-amber-400 hover:text-amber-300 font-semibold rounded-lg text-sm transition-colors"
-            >
-              Preview curriculum →
-            </Link>
-          </div>
+        </div>
+
+        {/* Coming-soon tracks, data-driven */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {COURSES.filter((course) => course.comingSoon).map((course) => {
+            const accent = PROGRAM_ACCENTS[course.color] ?? 'text-violet-400';
+            return (
+              <Link
+                key={course.id}
+                href={`/training/${course.id}`}
+                className="rounded-xl border border-gray-800 bg-gray-900/50 p-5 hover:border-gray-600 transition-colors group"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`font-mono text-[11px] font-bold uppercase tracking-widest ${accent}`}>{course.shortTitle}</span>
+                  <span className="px-1.5 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-[10px] rounded">Soon</span>
+                </div>
+                <p className="text-white font-semibold text-sm mb-1 group-hover:text-gray-100">{course.title}</p>
+                <p className="text-gray-500 text-xs leading-relaxed mb-3">{course.tagline}</p>
+                <span className="text-gray-500 text-xs group-hover:text-gray-300 transition-colors">
+                  {course.totalModules} modules · Preview curriculum →
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </section>
 

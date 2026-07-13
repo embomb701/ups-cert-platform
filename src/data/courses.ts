@@ -725,6 +725,118 @@ export const GENERATOR_MODULE_PLACEHOLDERS: GeneratorModulePlaceholder[] = [
   },
 ];
 
+// ─────────────────────────────────────────────────────────────────────────
+// Generic course outlines — newer courses (Data Center, Solar/BESS, EV
+// Charging, DC Plants, Battery Tech) use one shared placeholder shape,
+// rendered by the shared OutlinePortal component.
+// ─────────────────────────────────────────────────────────────────────────
+
+export interface CourseModulePlaceholder {
+  id: string;
+  title: string;
+  desc: string;
+  track: string;
+  chapters: string[];
+  /** id of an existing module reused from another course (content already built) */
+  sharedFrom?: string;
+}
+
+export interface CourseOutline {
+  tracks: string[];
+  modules: CourseModulePlaceholder[];
+}
+
+export const COURSE_OUTLINES: Record<string, CourseOutline> = {
+  // ── DATA CENTER CRITICAL FACILITIES ─────────────────────────────────────
+  // The capstone bundle: mostly assembled from existing UPS, Generator, and
+  // HVAC modules, plus four data-center-specific modules.
+  datacenter: {
+    tracks: ['Critical Power — UPS Side', 'Critical Power — Generator Side', 'Cooling & Airflow', 'Data Center Operations'],
+    modules: [
+      { id: 'ups-overview', sharedFrom: 'ups-overview', track: 'Critical Power — UPS Side', title: 'Overview of UPS Systems', desc: 'Topologies, components, and architecture — the machines that bridge the outage', chapters: ['What a UPS is and why it matters', 'Standby, line-interactive, double-conversion topologies', 'UPS components and system architecture'] },
+      { id: 'pdu-sts', sharedFrom: 'pdu-sts', track: 'Critical Power — UPS Side', title: 'PDU, RPP, and STS Systems', desc: 'The distribution layer between UPS and the racks', chapters: ['Power distribution units', 'Remote power panels and downstream distribution', 'Static transfer switches'] },
+      { id: 'rectifiers', sharedFrom: 'rectifiers', track: 'Critical Power — UPS Side', title: 'Rectifiers', desc: 'AC to DC conversion — the front end of every UPS and charger', chapters: ['Rectifier fundamentals', 'Half-wave and full-wave rectification', 'Bridge rectifiers and filtering'] },
+      { id: 'inverters', sharedFrom: 'inverters', track: 'Critical Power — UPS Side', title: 'Inverters', desc: 'DC back to AC — the output stage that carries the critical load', chapters: ['Inverter fundamentals', 'PWM inverters and output characteristics', 'Inverter monitoring and alarms'] },
+      { id: 'battery-types', sharedFrom: 'battery-types', track: 'Critical Power — UPS Side', title: 'Battery Types and Chemistry', desc: 'The strings that buy the seconds', chapters: ['Lead-acid fundamentals', 'VRLA and data center applications', 'Li-ion and alternatives'] },
+      { id: 'battery-safety', sharedFrom: 'battery-safety', track: 'Critical Power — UPS Side', title: 'Battery Safety and Handling', desc: 'PPE, installation, testing — battery-room discipline', chapters: ['Hazards and PPE', 'Installation and connection', 'Testing and maintenance'] },
+      { id: 'gen-starting-systems', sharedFrom: 'gen-starting-systems', track: 'Critical Power — Generator Side', title: 'Starting Systems & Cranking Circuits', desc: 'The ten seconds that matter — batteries, chargers, block heaters', chapters: ['The cranking circuit', 'Station battery chargers', 'Cold starts and readiness'] },
+      { id: 'gen-controls', sharedFrom: 'gen-controls', track: 'Critical Power — Generator Side', title: 'Generator Controllers, Sensors & Alarms', desc: 'Start sequences, event logs, remote monitoring', chapters: ['The controller and its sequence', 'Alarms, logs, and remote monitoring'] },
+      { id: 'gen-ats', sharedFrom: 'gen-ats', track: 'Critical Power — Generator Side', title: 'Automatic Transfer Switches', desc: 'Sensing the outage and moving the load — two live sources in one cabinet', chapters: ['Anatomy and the transfer sequence', 'ATS safety and service discipline'] },
+      { id: 'gen-critical-power', sharedFrom: 'gen-critical-power', track: 'Critical Power — Generator Side', title: 'Generators in Critical Power Systems', desc: 'NEC 700/701/702 and the generator-UPS handshake', chapters: ['The critical power chain and NEC classes', 'The generator-UPS handshake'] },
+      { id: 'gen-nfpa110', sharedFrom: 'gen-nfpa110', track: 'Critical Power — Generator Side', title: 'NFPA 110 & Compliance Testing', desc: 'The testing calendar and documentation the AHJ demands', chapters: ['The standard and the testing calendar', 'Running the tests and selling the program'] },
+      { id: 'hvac-psychrometrics', sharedFrom: 'hvac-psychrometrics', track: 'Cooling & Airflow', title: 'Psychrometrics & Human Comfort', desc: 'Temperature, humidity, dew point — the physics of cooling', chapters: ['Temperature and moisture', 'Sensible and latent heat', 'Measuring air in the field'] },
+      { id: 'hvac-air-distribution', sharedFrom: 'hvac-air-distribution', track: 'Cooling & Airflow', title: 'Air Distribution, Ductwork & Airflow', desc: 'Blowers, static pressure, CFM — air delivery fundamentals', chapters: ['Blowers and the air they move', 'Static pressure', 'Ducts, filters, and balancing'] },
+      { id: 'hvac-chillers-hydronics', sharedFrom: 'hvac-chillers-hydronics', track: 'Cooling & Airflow', title: 'Chillers, Boilers & Hydronic Systems', desc: 'Chilled water plants and cooling towers — how big buildings move heat', chapters: ['Why big buildings move water', 'Boilers and hot-water heating', 'Terminal units and the scope boundary'] },
+      { id: 'dc-cooling', track: 'Data Center Operations', title: 'Data Center Cooling Systems', desc: 'CRAC/CRAH units, hot/cold aisle containment, economization, and the liquid-cooling transition', chapters: ['Heat load: why every watt of IT is a watt of cooling', 'CRAC vs CRAH: DX and chilled-water room cooling', 'Hot/cold aisle, containment, and airflow management on the raised floor', 'Economizer and free-cooling strategies at data center scale', 'Liquid cooling: rear-door, direct-to-chip, and immersion — the AI-era shift', 'Temperature/humidity envelopes (ASHRAE TC 9.9) and why they widened'] },
+      { id: 'dc-monitoring', track: 'Data Center Operations', title: 'EPMS, BMS & DCIM Monitoring', desc: 'The monitoring stacks: electrical power monitoring, building management, and data center infrastructure management', chapters: ['The three stacks: EPMS (power), BMS (mechanical), DCIM (capacity/assets)', 'One-line literacy on the EPMS: reading the live power chain', 'Alarm philosophies: severity tiers, nuisance alarms, and alarm fatigue', 'Sensors and metering: branch circuit monitoring, PDU metering, environmental probes', 'Using trends for diagnosis: the monitoring stack as your event log'] },
+      { id: 'dc-operations', track: 'Data Center Operations', title: 'Critical Facility Operations Discipline', desc: 'MOPs, SOPs, EOPs, change management, and rounds — the operational culture that keeps five-nines alive', chapters: ['Why data centers run on procedure: the cost of a millisecond', 'MOPs, SOPs, and EOPs: written procedure as the only way work happens', 'Change management: approvals, windows, and back-out plans', 'Rounds and readings: the walkaround formalized into shifts', 'Incident response: roles, communication, and the post-incident review', 'Concurrent maintainability: N, N+1, 2N and what you may touch when'] },
+      { id: 'dc-career', track: 'Data Center Operations', title: 'Career in Data Center Facilities', desc: 'The premium room: CFT roles, certifications, and the operator-to-chief path', chapters: ['The data center job market: hyperscale, colo, enterprise, edge', 'Roles: critical facility tech, shift lead, chief engineer, facility manager', 'Certifications: this portal + OEM schools + industry credentials (CDCP, Uptime accreditations)', 'Compensation and shift-work reality', 'The dual-fluency thesis: UPS + Generator + Cooling in one tech'] },
+    ],
+  },
+
+  // ── SOLAR + BATTERY ENERGY STORAGE ──────────────────────────────────────
+  solar: {
+    tracks: ['Batteries & Storage Core', 'Photovoltaics', 'Power Conversion & Code', 'Professional Service'],
+    modules: [
+      { id: 'battery-types', sharedFrom: 'battery-types', track: 'Batteries & Storage Core', title: 'Battery Types and Chemistry', desc: 'Lead-acid through lithium — the chemistry BESS is built on', chapters: ['Lead-acid fundamentals', 'VRLA applications', 'Li-ion and alternatives'] },
+      { id: 'battery-safety', sharedFrom: 'battery-safety', track: 'Batteries & Storage Core', title: 'Battery Safety and Handling', desc: 'The safety discipline that scales from strings to containers', chapters: ['Hazards and PPE', 'Installation and connection', 'Testing and maintenance'] },
+      { id: 'solar-pv-fundamentals', track: 'Photovoltaics', title: 'PV Cell & Module Fundamentals', desc: 'How sunlight becomes DC: cells, modules, IV curves, and the factors that steal production', chapters: ['The photovoltaic effect and cell construction', 'Modules, ratings, and the IV curve', 'Irradiance, temperature, and shading: what moves production', 'Module technologies: mono, bifacial, thin film', 'Degradation, hot spots, and module-level faults'] },
+      { id: 'solar-arrays-dc', track: 'Photovoltaics', title: 'Arrays, Strings & DC-Side Design', desc: 'Series/parallel string math, combiners, MPPT, and DC-side safety', chapters: ['String math: voltage adds in series, current in parallel', 'Cold-temperature Voc: why string sizing is a winter calculation', 'Combiner boxes, fusing, and DC home runs', 'MPPT: how inverters hunt the power point', 'DC arc faults and the unique dangers of a source you cannot turn off'] },
+      { id: 'solar-inverters', track: 'Power Conversion & Code', title: 'Solar Inverters & Power Electronics', desc: 'String, central, and microinverters — the UPS student meets the grid-tie inverter', chapters: ['Grid-tie inverter anatomy: the familiar DC-to-AC story', 'String vs central vs micro/optimizer architectures', 'Anti-islanding and grid-support functions (IEEE 1547)', 'Inverter diagnostics: error codes, curves, and event logs', 'Hybrid inverters: PV + battery + grid in one box'] },
+      { id: 'solar-installation-codes', track: 'Power Conversion & Code', title: 'NEC 690/705, Rapid Shutdown & Interconnection', desc: 'The code layer: labeling, rapid shutdown, disconnects, and utility interconnection', chapters: ['NEC 690: the solar article in plain language', 'Rapid shutdown: why, how, and testing it', 'NEC 705: interconnection and the 120% rule', 'Grounding, bonding, and labeling requirements', 'Permits, AHJs, and utility approval flows'] },
+      { id: 'solar-bess-systems', track: 'Batteries & Storage Core', title: 'Battery Energy Storage Systems', desc: 'BESS at residential and commercial scale: BMS, containers, and how storage stacks with solar', chapters: ['BESS architectures: residential wall units to container systems', 'The BMS: cell balancing, protection, and its data as your event log', 'Charge/discharge strategies: self-consumption, backup, demand response', 'AC-coupled vs DC-coupled storage', 'Commissioning a BESS: verification before energization'] },
+      { id: 'solar-bess-safety', track: 'Batteries & Storage Core', title: 'BESS Safety & NFPA 855', desc: 'Thermal runaway, fire codes, and the safety discipline of large lithium installations', chapters: ['Thermal runaway: mechanism, propagation, and why prevention is everything', 'NFPA 855 and UL 9540/9540A in plain terms', 'Spacing, enclosures, and suppression systems', 'Damaged/faulted lithium handling and emergency response', 'The documentation and inspection regime'] },
+      { id: 'solar-commissioning', track: 'Professional Service', title: 'Commissioning & Performance Verification', desc: 'IV curve tracing, thermal imaging, and proving a system performs to model', chapters: ['Commissioning sequence: mechanical → DC → AC → monitoring', 'IV curve tracing: the diagnostic that sees string health', 'Thermal imaging for modules and connections', 'Performance ratio: actual vs modeled production', 'Monitoring platform setup and owner handoff'] },
+      { id: 'solar-troubleshooting', track: 'Professional Service', title: 'Solar + Storage Troubleshooting Capstone', desc: 'Underproduction, inverter faults, and storage misbehavior — the universal method on the roof', chapters: ['The underproduction tree: monitoring → strings → modules → inverter', 'Inverter fault families and their meanings', 'BESS complaints: capacity fade, imbalance, communication faults', 'Ground faults and isolation testing on live-source arrays', 'The service economics: O&M contracts and monitoring-driven dispatch'] },
+      { id: 'solar-career', track: 'Professional Service', title: 'Career in Solar & Storage', desc: 'NABCEP, the growth curve, and where solar/BESS careers lead', chapters: ['The market: residential, C&I, utility-scale, and O&M', 'NABCEP certifications and the credential ladder', 'Adjacent tickets: electrical licensing paths and OSHA', 'Career paths: installer → service tech → commissioning → O&M management'] },
+    ],
+  },
+
+  // ── EV CHARGING INFRASTRUCTURE ──────────────────────────────────────────
+  evcharging: {
+    tracks: ['Charging Fundamentals', 'DC Fast Charging', 'Networks & Sites', 'Professional Service'],
+    modules: [
+      { id: 'ev-charging-levels', track: 'Charging Fundamentals', title: 'Charging Levels, Standards & Connectors', desc: 'L1/L2/DCFC, J1772, NACS, CCS — the landscape and the handshake between car and charger', chapters: ['Level 1, Level 2, DC fast: power levels and use cases', 'Connectors: J1772, CCS, NACS/Tesla, CHAdeMO legacy', 'The charging handshake: pilot signals and communication', 'Onboard vs offboard chargers: where the power conversion lives', 'The EVSE is a smart contactor; the DCFC is a power plant'] },
+      { id: 'ev-l2-service', track: 'Charging Fundamentals', title: 'Level 2 Charger Systems & Service', desc: 'The workhorse EVSE: installation quality, GFCI behavior, and the faults that strand commuters', chapters: ['L2 anatomy: contactor, pilot board, metering, cable/connector', 'Circuit sizing, load calculation, and NEC 625', 'CCID/ground-fault behavior and nuisance trips', 'Cable and connector wear: the highest-touch failure point', 'Commercial L2 fleets: load sharing and multi-port units'] },
+      { id: 'ev-dcfc-power', track: 'DC Fast Charging', title: 'DCFC Power Electronics', desc: 'Inside the fast charger: rectifier stacks, power modules, and the UPS student\'s homecoming', chapters: ['DCFC architecture: AC input → rectifier/PFC → isolated DC stages → the vehicle', 'Power modules: paralleled converter bricks and their failure/derating behavior', 'Cooling: air and liquid-cooled cabinets (dirty filters strike again)', 'DC bus and capacitor safety discipline (the UPS rules verbatim)', 'Module-level diagnosis: derated chargers and the sick-brick pattern'] },
+      { id: 'ev-dcfc-cables', track: 'DC Fast Charging', title: 'High-Power Cables, Cooling & Connectors', desc: 'Liquid-cooled cables, connector thermals, and the mechanical wear life of public hardware', chapters: ['Why 350 kW needs liquid-cooled cables', 'Coolant loops in cables and cabinets: leaks, pumps, and temps', 'Connector thermal sensing and charge derating', 'Public-hardware abuse: drops, drive-offs, vandalism, and retractors', 'Cable/connector replacement discipline'] },
+      { id: 'ev-networks', track: 'Networks & Sites', title: 'Networks, Payment & OCPP Diagnostics', desc: 'The software layer: OCPP, backends, payment systems — and why so many "broken" chargers are network faults', chapters: ['OCPP in plain language: charger-to-backend messaging', 'Session flow: authorize → start → meter → stop → settle', 'Cellular/network connectivity: the desert of dead modems', 'Remote diagnostics and firmware management', 'The uptime problem: why network faults dominate public-charger complaints'] },
+      { id: 'ev-site-power', track: 'Networks & Sites', title: 'Site Power, Utility & Load Management', desc: 'Getting megawatts to a parking lot: transformers, demand charges, load management, and storage-buffered sites', chapters: ['Site one-lines: utility service, transformers, switchgear to chargers', 'Demand charges and why load management exists', 'Power sharing/rotation among chargers', 'Battery-buffered charging sites (the BESS crossover)', 'Utility coordination and interconnection realities'] },
+      { id: 'ev-troubleshooting', track: 'Professional Service', title: 'EV Charger Troubleshooting Capstone', desc: 'Dead units, failed sessions, and derated charging — the universal method at the charging plaza', chapters: ['The dead-charger tree: power → boards → network → software', 'Failed-session diagnosis: handshake, payment, vehicle-side faults', 'Derated charging: modules, cooling, cable temps', 'Using backend logs with on-site instruments (both event logs, always)', 'Field safety: DC bus discipline and two-source thinking at battery-buffered sites'] },
+      { id: 'ev-career', track: 'Professional Service', title: 'Career in EV Charging Infrastructure', desc: 'EVITP, network operators, and the buildout decade', chapters: ['The market: networks, OEMs, contractors, fleet depots', 'EVITP certification and electrical licensing context', 'Uptime contracts: the service business model of charging', 'Career paths: field tech → commissioning → network operations'] },
+    ],
+  },
+
+  // ── DC POWER PLANTS (TELECOM) ───────────────────────────────────────────
+  dcplants: {
+    tracks: ['Batteries Core', 'Plant Architecture', 'Sites & Service'],
+    modules: [
+      { id: 'battery-types', sharedFrom: 'battery-types', track: 'Batteries Core', title: 'Battery Types and Chemistry', desc: 'The strings that hold up the network', chapters: ['Lead-acid fundamentals', 'VRLA applications', 'Li-ion and alternatives'] },
+      { id: 'battery-safety', sharedFrom: 'battery-safety', track: 'Batteries Core', title: 'Battery Safety and Handling', desc: 'Battery-room discipline, telecom edition', chapters: ['Hazards and PPE', 'Installation and connection', 'Testing and maintenance'] },
+      { id: 'dcp-architecture', track: 'Plant Architecture', title: '-48V DC Plant Architecture', desc: 'Why telecom runs on -48V DC and how a plant is put together', chapters: ['Why -48V: history, corrosion, and the always-on architecture', 'Plant anatomy: rectifiers, battery strings, distribution, controller', 'Float operation: the load rides the bus, batteries ride behind it', 'Plant sizing: N+1 rectifiers and reserve-time math', 'Grounding and return: positive-ground discipline'] },
+      { id: 'dcp-rectifiers', track: 'Plant Architecture', title: 'Rectifier Shelves & Plant Controllers', desc: 'Modular rectifiers, hot-swap discipline, and the controller that runs the plant', chapters: ['Modular rectifier shelves: paralleled bricks, hot-swappable', 'Float/equalize voltages and temperature compensation', 'The plant controller: alarms, thresholds, remote monitoring', 'Rectifier failure patterns and the sick-brick diagnosis', 'AC feeds and transfer: where the generator course connects'] },
+      { id: 'dcp-distribution', track: 'Plant Architecture', title: 'DC Distribution, Fusing & LVD', desc: 'BDFBs, fuse panels, low-voltage disconnects, and working a live DC bus safely', chapters: ['Distribution: BDFB/BDCBB panels, fuses and breakers', 'Low-voltage disconnect: sacrificing loads to save the batteries', 'Live-bus work discipline: insulated tools, one-conductor-at-a-time', 'Fuse verification and load balancing across feeds', 'Cabling, lugs, and the millivolt-drop hunt at high DC current'] },
+      { id: 'dcp-sites', track: 'Sites & Service', title: 'Cell Sites, Huts & Outside Plant Power', desc: 'The field reality: towers, huts, gensets, and the reserve-time religion', chapters: ['Site anatomy: shelter power, tower loads, environmental systems', 'Reserve time: battery hours as the network\'s survival metric', 'Site generators and portable-genset connections (the generator crossover)', 'Remote monitoring and storm-response operations', 'Access, safety, and RF awareness on tower sites'] },
+      { id: 'dcp-career', track: 'Sites & Service', title: 'Career in Telecom Power', desc: 'Carriers, contractors, and the always-on career', chapters: ['The market: carriers, tower companies, DAS/small cell, contractors', 'Certifications and carrier-specific quals', 'Storm response and route work realities', 'Career paths: field tech → power engineer → operations'] },
+    ],
+  },
+
+  // ── BATTERY TECHNICIAN ──────────────────────────────────────────────────
+  battery: {
+    tracks: ['Chemistry & Safety Core', 'Testing & Service', 'Applications & Career'],
+    modules: [
+      { id: 'battery-types', sharedFrom: 'battery-types', track: 'Chemistry & Safety Core', title: 'Battery Types and Chemistry', desc: 'The foundation: lead-acid through lithium', chapters: ['Lead-acid fundamentals', 'VRLA applications', 'Li-ion and alternatives'] },
+      { id: 'battery-safety', sharedFrom: 'battery-safety', track: 'Chemistry & Safety Core', title: 'Battery Safety and Handling', desc: 'The discipline that keeps battery techs alive', chapters: ['Hazards and PPE', 'Installation and connection', 'Testing and maintenance'] },
+      { id: 'bat-lead-acid-deep', track: 'Chemistry & Safety Core', title: 'Lead-Acid Systems Deep Dive', desc: 'Flooded and VRLA in depth: charging regimes, failure modes, and life management', chapters: ['Flooded cells: electrolyte, specific gravity, watering discipline', 'VRLA in depth: recombination, dry-out, thermal runaway', 'Charging regimes: float, equalize, temperature compensation', 'Failure modes: sulfation, corrosion, plate shedding, connection drift', 'Life expectancy math and end-of-life criteria'] },
+      { id: 'bat-lithium', track: 'Chemistry & Safety Core', title: 'Lithium Systems & the BMS', desc: 'Li-ion chemistries, battery management systems, and the safety architecture around them', chapters: ['Chemistry families: LFP, NMC, and what each trades', 'Cells, modules, packs: the lithium hierarchy', 'The BMS: balancing, protection limits, state estimation', 'Reading BMS data: the battery\'s own event log', 'Transport, storage, and damaged-cell handling rules'] },
+      { id: 'bat-testing', track: 'Testing & Service', title: 'Battery Testing & Diagnostics', desc: 'Capacity tests, impedance/conductance trending, thermography — proving what a string can actually deliver', chapters: ['Why voltage lies: charge state vs capacity', 'Capacity/discharge testing: the honest test (IEEE 450/1188 literacy)', 'Impedance and conductance: trending as early warning', 'Thermal imaging: connections and cells under load', 'Interpreting results: the weakest-cell reality of series strings'] },
+      { id: 'bat-installation', track: 'Testing & Service', title: 'String Installation, Replacement & Commissioning', desc: 'Torque, interconnects, commissioning charges, and the craft of swapping strings in live systems', chapters: ['Replacement planning: live-system risk and isolation strategies', 'Racking, spill containment, and room requirements', 'Torque and interconnect discipline: the millivolt hunt', 'Commissioning: initial charge, baseline readings, documentation', 'Disposal and recycling chains (lead\'s virtuous loop, lithium\'s maturing one)'] },
+      { id: 'bat-motive', track: 'Applications & Career', title: 'Motive Power & Industrial Chargers', desc: 'Forklift and industrial batteries: opportunity charging, watering systems, and the warehouse market', chapters: ['Motive-power duty: deep cycling vs standby float', 'Industrial chargers: conventional, opportunity, fast', 'Watering systems and maintenance programs', 'Fleet battery management and rotation', 'The lithium transition in motive power'] },
+      { id: 'bat-career', track: 'Applications & Career', title: 'Career in Battery Service', desc: 'The specialist who serves every other trade on this portal', chapters: ['The market: UPS strings, telecom, BESS, motive, rental', 'Where battery techs sit in every other course\'s world', 'Certifications and IEEE-standard literacy as a differentiator', 'Career paths: string tech → test specialist → BESS commissioning'] },
+    ],
+  },
+};
+
 export interface TrainingCourse {
   id: string;
   title: string;
@@ -732,7 +844,7 @@ export interface TrainingCourse {
   tagline: string;
   accessKey: string;
   certTitle: string;
-  color: 'blue' | 'orange' | 'teal' | 'amber';
+  color: 'blue' | 'orange' | 'teal' | 'amber' | 'violet' | 'yellow' | 'green' | 'sky' | 'rose';
   totalModules: number;
   stripeProductId: string;
   testOutProductId: string;
@@ -790,6 +902,71 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 25,
     stripeProductId: 'training_generator',
     testOutProductId: 'jr_gen_fse_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'datacenter',
+    title: 'Data Center Critical Facilities',
+    shortTitle: 'Data Center CFT',
+    tagline: 'Run the rooms that run the internet — UPS, generators, cooling, and operations discipline in one role.',
+    accessKey: 'training_datacenter',
+    certTitle: 'Jr. Data Center Critical Facilities Technician',
+    color: 'violet',
+    totalModules: 28,
+    stripeProductId: 'training_datacenter',
+    testOutProductId: 'jr_dc_cft_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'solar',
+    title: 'Solar & Battery Energy Storage',
+    shortTitle: 'Solar/BESS FSE',
+    tagline: 'Service PV arrays, inverters, and battery energy storage — the fastest-growing electrical trade in America.',
+    accessKey: 'training_solar',
+    certTitle: 'Jr. Solar & Storage Field Service Engineer',
+    color: 'yellow',
+    totalModules: 21,
+    stripeProductId: 'training_solar',
+    testOutProductId: 'jr_solar_fse_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'evcharging',
+    title: 'EV Charging Infrastructure',
+    shortTitle: 'EV Charging Tech',
+    tagline: 'Service Level 2 and DC fast chargers — power electronics, networks, and the buildout decade.',
+    accessKey: 'training_evcharging',
+    certTitle: 'Jr. EV Charging Infrastructure Technician',
+    color: 'green',
+    totalModules: 18,
+    stripeProductId: 'training_evcharging',
+    testOutProductId: 'jr_ev_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'dcplants',
+    title: 'Telecom DC Power Plants',
+    shortTitle: 'DC Plant Tech',
+    tagline: 'Service the -48V plants, battery strings, and cell-site power that keep the network alive.',
+    accessKey: 'training_dcplants',
+    certTitle: 'Jr. Telecom Power Technician',
+    color: 'sky',
+    totalModules: 17,
+    stripeProductId: 'training_dcplants',
+    testOutProductId: 'jr_dcp_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'battery',
+    title: 'Battery Systems Technician',
+    shortTitle: 'Battery Tech',
+    tagline: 'The specialist trade inside every other: strings, BESS, testing, and lithium — batteries as a career.',
+    accessKey: 'training_battery',
+    certTitle: 'Jr. Battery Systems Technician',
+    color: 'rose',
+    totalModules: 18,
+    stripeProductId: 'training_battery',
+    testOutProductId: 'jr_battery_tech_test_human',
     comingSoon: true,
   },
 ];

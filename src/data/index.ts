@@ -48,50 +48,57 @@ export function isHvacModule(mod: TrainingModule): boolean {
   return mod.id.startsWith('hvac-');
 }
 
-// The generic refrigeration modules built for the Kitchen course are shared
-// with the HVAC course (positions 11-12 in the HVAC sequence); the UPS
-// battery modules are shared with the Generator course (positions 11-12).
-const HVAC_SHARED_KITCHEN_IDS = ['kitchen-refrigeration-cycle', 'kitchen-refrigeration-service'];
-const GENERATOR_SHARED_UPS_IDS = ['battery-types', 'battery-safety'];
-
-const ALL_COURSE_KEYS = ['training_portal', 'training_kitchen', 'training_hvac', 'training_generator'];
-
-// Which examAccess doc(s) grant access to a module. Shared foundation
-// modules (1-10) are accessible from any course enrollment.
-export function accessKeysForModule(mod: TrainingModule): string[] {
-  if (isHvacModule(mod)) return ['training_hvac'];
-  if (mod.id.startsWith('gen-')) return ['training_generator'];
-  if (isKitchenModule(mod)) {
-    return HVAC_SHARED_KITCHEN_IDS.includes(mod.id)
-      ? ['training_kitchen', 'training_hvac']
-      : ['training_kitchen'];
-  }
-  if (mod.num <= 10) return ALL_COURSE_KEYS;
-  if (GENERATOR_SHARED_UPS_IDS.includes(mod.id)) return ['training_portal', 'training_generator'];
-  return ['training_portal'];
-}
-
 // ── Course sequences ────────────────────────────────────────────────────
-// Ordered module lists per course (keyed by examAccess key). Used for the
-// 3-day unlock rule: a module unlocks when the previous module in the
-// user's enrolled course sequence is complete.
+// Ordered module lists per course (keyed by examAccess key), containing only
+// BUILT modules. Used for the 3-day unlock rule (a module unlocks when the
+// previous module in the user's enrolled course sequence is complete) and to
+// derive which enrollments grant access to a module.
 const byNum = (a: TrainingModule, b: TrainingModule) => a.num - b.num;
 const FOUNDATION = ALL_MODULES.filter((m) => m.num <= 10).sort(byNum);
+const byIds = (source: TrainingModule[], ids: string[]) =>
+  ids.map((id) => source.find((m) => m.id === id)).filter((m): m is TrainingModule => !!m);
+
+const HVAC_SHARED_KITCHEN_IDS = ['kitchen-refrigeration-cycle', 'kitchen-refrigeration-service'];
+const BATTERY_CORE_IDS = ['battery-types', 'battery-safety'];
 
 export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
   training_portal: [...ALL_MODULES].sort(byNum),
   training_kitchen: [...FOUNDATION, ...[...KITCHEN_MODULES].sort(byNum)],
   training_hvac: [
     ...FOUNDATION,
-    ...KITCHEN_MODULES.filter((m) => HVAC_SHARED_KITCHEN_IDS.includes(m.id)).sort(byNum),
+    ...byIds(KITCHEN_MODULES, HVAC_SHARED_KITCHEN_IDS),
     ...[...HVAC_MODULES].sort(byNum),
   ],
   training_generator: [
     ...FOUNDATION,
-    ...ALL_MODULES.filter((m) => GENERATOR_SHARED_UPS_IDS.includes(m.id)).sort(byNum),
+    ...byIds(ALL_MODULES, BATTERY_CORE_IDS),
     ...[...GENERATOR_MODULES].sort(byNum),
   ],
+  // Data Center CFT: assembled from existing UPS, Generator, and HVAC
+  // modules in curriculum order; dc-* modules join as they are built.
+  training_datacenter: [
+    ...FOUNDATION,
+    ...byIds(ALL_MODULES, ['ups-overview', 'pdu-sts', 'rectifiers', 'inverters', 'battery-types', 'battery-safety']),
+    ...byIds(GENERATOR_MODULES, ['gen-starting-systems', 'gen-controls', 'gen-ats', 'gen-critical-power', 'gen-nfpa110']),
+    ...byIds(HVAC_MODULES, ['hvac-psychrometrics', 'hvac-air-distribution', 'hvac-chillers-hydronics']),
+  ],
+  // Solar/BESS, DC Plants, and Battery Tech share the battery core;
+  // their course-specific modules join as they are built.
+  training_solar: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS)],
+  training_evcharging: [...FOUNDATION],
+  training_dcplants: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS)],
+  training_battery: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS)],
 };
+
+// Which examAccess doc(s) grant access to a module — derived from course
+// sequence membership, so shared modules automatically accept every course
+// that includes them.
+export function accessKeysForModule(mod: TrainingModule): string[] {
+  const keys = Object.entries(COURSE_SEQUENCES)
+    .filter(([, seq]) => seq.some((m) => m.id === mod.id))
+    .map(([key]) => key);
+  return keys.length > 0 ? keys : ['training_portal'];
+}
 
 // Previous module for a course sequence (null if first or not in sequence).
 export function prevModuleInCourse(courseKey: string, mod: TrainingModule): TrainingModule | null {

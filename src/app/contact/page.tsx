@@ -46,8 +46,8 @@ export default function ContactPage() {
           <div className="md:col-span-2 space-y-6">
             <div>
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Phone</p>
-              <a href="tel:5555555555" className="text-white font-medium hover:text-indigo-300 transition-colors">
-                (555) 555-5555
+              <a href="tel:4844160134" className="text-white font-medium hover:text-indigo-300 transition-colors">
+                (484) 416-0134
               </a>
             </div>
             <div>
