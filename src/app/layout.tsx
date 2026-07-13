@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: '%s | Mastering Field Service',
   },
   description:
-    'Professional field service training and certification from FA Consulting and Recruiting. UPS and Commercial Kitchen FSE programs based on Mastering Uninterruptible Power Supplies, Field Service Engineering by Francis Aiello.',
+    'Professional field service training and certification from FA Consulting and Recruiting. Four career tracks — UPS, Commercial Kitchen, HVAC, and Power Generation — built on one shared electrical foundation, by Francis Aiello.',
   openGraph: {
     type: 'website',
     locale: 'en_US',

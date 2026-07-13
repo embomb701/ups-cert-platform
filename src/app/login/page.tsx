@@ -102,16 +102,16 @@ export default function LoginPage() {
             A <span className="text-gradient">$55K–$100K</span> career the industry is desperate to fill.
           </h2>
           <p className="text-gray-400 leading-relaxed mb-8">
-            Hospitals, data centers, and military installations run 24/7 on Uninterruptible Power Supplies.
-            The Mastering Field Service Training Portal trains and certifies you to service them — structured
-            self-paced program, no degree required.
+            UPS systems, commercial kitchens, HVAC, and standby generators all need technicians the
+            industry cannot find. The Mastering Field Service Training Portal trains and certifies you
+            in the track you choose — structured, self-paced, no degree required.
           </p>
           <div className="space-y-4">
             {[
-              '28-module structured training, done in 3–6 months',
+              'Four career tracks on one shared electrical foundation',
+              'Structured training completed in 3–6 months',
               'Jr. FSE certification exam included at completion',
               '$1,499 total — less than one month of college tuition',
-              'Credential recognized by employers in critical power',
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
                 <span className="text-green-400 font-bold text-lg mt-0.5">✓</span>

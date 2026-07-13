@@ -5,7 +5,7 @@ import { PurchaseButton } from '@/components/exam/PurchaseButton';
 export const metadata: Metadata = {
   title: 'Mastering Field Service Training Portal — Field Service Engineering Career Training',
   description:
-    'Start a $55K–$100K career in critical power systems in 3–6 months. No college required. Jr. FSE and FSE certification programs by Francis Aiello.',
+    'Start a $55K–$100K field service career in 3–6 months. No college required. UPS, Commercial Kitchen, HVAC, and Power Generation certification tracks by Francis Aiello.',
 };
 
 export default function HomePage() {
@@ -28,9 +28,10 @@ export default function HomePage() {
               <span className="text-gray-300">No college. No debt.</span>
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
-              Hospitals, data centers, military installations, and financial networks run 24/7 on
-              Uninterruptible Power Supplies. There aren&apos;t enough qualified engineers to keep them
-              running. Mastering Field Service trains you to fill that gap.
+              Hospitals, data centers, restaurants, and every commercial building run on equipment
+              that breaks — UPS systems, kitchen equipment, HVAC, and standby generators. There
+              aren&apos;t enough qualified technicians to keep it all running. Mastering Field Service
+              trains you to fill that gap, in the track you choose.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
