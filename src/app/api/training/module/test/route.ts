@@ -110,7 +110,16 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Free practice exams unlock on course completion (UPS uses its legacy
+    // practice_test doc via the claim flow; the other courses grant directly)
+    const grantPractice = (doc: string) =>
+      adminDb.collection('users').doc(uid).collection('examAccess').doc(doc).set(
+        { granted: true, free: true, freeViaTraining: true, grantedAt: FieldValue.serverTimestamp() },
+        { merge: true }
+      );
+
     if (kitchenComplete) {
+      await grantPractice('practice_jr_kitchen_fse');
       // Grant Jr. Kitchen FSE exam access (from training path, not test-out)
       const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_kitchen_fse_pending').get();
       const pendingData = pendingDoc.data();
@@ -123,6 +132,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (hvacComplete) {
+      await grantPractice('practice_jr_hvac_fse');
       // Grant Jr. HVAC FSE exam access (from training path, not test-out)
       const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_hvac_fse_pending').get();
       const pendingData = pendingDoc.data();
@@ -135,6 +145,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (generatorComplete) {
+      await grantPractice('practice_jr_gen_fse');
       // Grant Jr. Generator FSE exam access (from training path, not test-out)
       const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_gen_fse_pending').get();
       const pendingData = pendingDoc.data();

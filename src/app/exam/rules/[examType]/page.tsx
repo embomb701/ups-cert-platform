@@ -60,7 +60,13 @@ export default function ExamRulesPage() {
   const [accepted, setAccepted] = useState(false);
   const [candidateName, setCandidateName] = useState('');
 
-  const isPractice = examType === 'practice_jr_fse';
+  const PRACTICE_LABELS: Record<string, string> = {
+    practice_jr_fse: 'Jr. FSE Practice Test — Results Only, No Certificate',
+    practice_jr_kitchen_fse: 'Jr. Kitchen FSE Practice Test — Results Only, No Certificate',
+    practice_jr_hvac_fse: 'Jr. HVAC FSE Practice Test — Results Only, No Certificate',
+    practice_jr_gen_fse: 'Jr. Generator FSE Practice Test — Results Only, No Certificate',
+  };
+  const isPractice = examType in PRACTICE_LABELS;
   const isKitchen = examType === 'jr_kitchen_fse';
   const isHvac = examType === 'jr_hvac_fse';
   const isGen = examType === 'jr_gen_fse';
@@ -75,7 +81,7 @@ export default function ExamRulesPage() {
     ? RULES_JR
     : RULES_FSE;
   const examLabel = isPractice
-    ? 'Jr. FSE Practice Test — Results Only, No Certificate'
+    ? PRACTICE_LABELS[examType]
     : isKitchen
     ? 'Junior Commercial Kitchen Field Service Certification'
     : isHvac

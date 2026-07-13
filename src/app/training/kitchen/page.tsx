@@ -169,7 +169,10 @@ export default async function KitchenPortalPage() {
                 <div className="rounded-xl border-2 border-green-700 bg-green-950/20 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <p className="text-white font-semibold">🎓 Jr. Kitchen FSE Certification Exam</p>
-                    <p className="text-gray-400 text-sm mt-0.5">Training complete — you earned this attempt. AI proctored, once every 90 days.</p>
+                    <p className="text-gray-400 text-sm mt-0.5">
+                      Training complete — you earned this attempt. AI proctored, once every 90 days.
+                      Warm up with the free <Link href="/exam/rules/practice_jr_kitchen_fse" className="text-green-400 hover:text-green-300 underline">practice exam</Link> first — unlimited attempts, no cooldown.
+                    </p>
                   </div>
                   <Link
                     href="/exam/rules/jr_kitchen_fse"

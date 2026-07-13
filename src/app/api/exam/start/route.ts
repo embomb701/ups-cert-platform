@@ -36,9 +36,18 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const rawExamLevel = body.examLevel as string;
-    // practice_jr_fse uses the jr_fse question bank but skips cooldowns and cert issuance
-    const isPractice = rawExamLevel === 'practice_jr_fse';
-    const examLevel = (isPractice ? 'jr_fse' : rawExamLevel) as ExamLevel;
+    // Practice exams use their course's question bank but skip cooldowns and
+    // cert issuance. Each requires its own examAccess doc (granted free on
+    // course training completion; UPS keeps its legacy practice_test doc).
+    const PRACTICE_EXAMS: Record<string, { bank: ExamLevel; accessDoc: string; label: string }> = {
+      practice_jr_fse: { bank: 'jr_fse', accessDoc: 'practice_test', label: 'Jr. FSE' },
+      practice_jr_kitchen_fse: { bank: 'jr_kitchen_fse', accessDoc: 'practice_jr_kitchen_fse', label: 'Jr. Kitchen FSE' },
+      practice_jr_hvac_fse: { bank: 'jr_hvac_fse', accessDoc: 'practice_jr_hvac_fse', label: 'Jr. HVAC FSE' },
+      practice_jr_gen_fse: { bank: 'jr_gen_fse', accessDoc: 'practice_jr_gen_fse', label: 'Jr. Generator FSE' },
+    };
+    const practice = PRACTICE_EXAMS[rawExamLevel];
+    const isPractice = !!practice;
+    const examLevel = (practice ? practice.bank : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
     if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse'].includes(examLevel)) {
@@ -47,15 +56,15 @@ export async function POST(req: NextRequest) {
 
     const ipHash = hashIp(getRealIp(req));
 
-    // Practice test: verify practice_test access, skip cooldown/IP checks
-    if (isPractice) {
+    // Practice test: verify the practice access doc, skip cooldown/IP checks
+    if (practice) {
       const practiceSnap = await adminDb
         .collection('users').doc(uid)
-        .collection('examAccess').doc('practice_test')
+        .collection('examAccess').doc(practice.accessDoc)
         .get();
       if (!practiceSnap.exists || !practiceSnap.data()?.granted) {
         return NextResponse.json({
-          error: 'No practice test access found. Purchase the Jr. FSE Practice Test to continue.',
+          error: `No ${practice.label} practice exam access found. The practice exam unlocks free when you complete the training course.`,
         }, { status: 403 });
       }
     }

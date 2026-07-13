@@ -15,7 +15,14 @@ export default function ExamPage() {
   const searchParams = useSearchParams();
   const { user, loading } = useAuth();
   const examType = (params?.examType as string) ?? 'jr_fse';
-  const isPractice = examType === 'practice_jr_fse';
+  // Practice exam types map to the certification bank they draw from
+  const PRACTICE_MAP: Record<string, ExamLevel> = {
+    practice_jr_fse: 'jr_fse',
+    practice_jr_kitchen_fse: 'jr_kitchen_fse',
+    practice_jr_hvac_fse: 'jr_hvac_fse',
+    practice_jr_gen_fse: 'jr_gen_fse',
+  };
+  const isPractice = examType in PRACTICE_MAP;
   const candidateName = searchParams?.get('name') ?? '';
 
   const [session, setSession] = useState<ExamSessionState | null>(null);
@@ -47,7 +54,7 @@ export default function ExamPage() {
         }
         setSession({
           attemptId: data.attemptId,
-          examLevel: (isPractice ? 'jr_fse' : examType) as ExamLevel,
+          examLevel: (isPractice ? PRACTICE_MAP[examType] : examType) as ExamLevel,
           questions: data.questions,
           currentIndex: 0,
           answers: {},
@@ -171,7 +178,7 @@ export default function ExamPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <span className={session.examLevel.startsWith('jr_') ? 'badge-jr' : 'badge-fse'}>
-              {isPractice ? 'Jr. FSE Practice Test' : session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : session.examLevel === 'jr_hvac_fse' ? 'Jr. HVAC FSE' : session.examLevel === 'jr_gen_fse' ? 'Jr. Generator FSE' : 'FSE'} Exam
+              {(session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : session.examLevel === 'jr_hvac_fse' ? 'Jr. HVAC FSE' : session.examLevel === 'jr_gen_fse' ? 'Jr. Generator FSE' : 'FSE') + (isPractice ? ' Practice' : '')} Exam
             </span>
           </div>
             <ExamTimer
