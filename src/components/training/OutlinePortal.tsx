@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
-import { ALL_MODULES } from '@/data/index';
+import { ALL_MODULES, getModule } from '@/data/index';
 import { COURSES, COURSE_OUTLINES } from '@/data/courses';
 import Link from 'next/link';
 
@@ -48,7 +48,7 @@ export async function OutlinePortal({ courseId }: { courseId: string }) {
     if (d.passed && d.completedAt) done.add(doc.id);
   });
   const sharedComplete = ALL_MODULES.filter((m) => m.num <= 10 && done.has(m.id)).length;
-  const sharedReady = outline.modules.filter((m) => m.sharedFrom).length;
+  const sharedReady = outline.modules.filter((m) => m.sharedFrom || getModule(m.id)).length;
 
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
@@ -114,6 +114,8 @@ export async function OutlinePortal({ courseId }: { courseId: string }) {
                               <span className="text-gray-400 font-medium text-sm">{placeholder.title}</span>
                               {placeholder.sharedFrom ? (
                                 <span className={`px-1.5 py-0.5 border text-xs rounded ${c.sharedBadge}`}>Content Ready — Shared</span>
+                              ) : getModule(placeholder.id) ? (
+                                <span className={`px-1.5 py-0.5 border text-xs rounded ${c.sharedBadge}`}>Content Ready</span>
                               ) : (
                                 <span className="px-1.5 py-0.5 bg-gray-800 text-gray-600 text-xs rounded">Coming Soon</span>
                               )}

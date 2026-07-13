@@ -121,6 +121,7 @@ export function generateCertNumber(examLevel: ExamLevel): string {
     : examLevel === 'jr_kitchen_fse' ? 'KJR'
     : examLevel === 'jr_hvac_fse' ? 'HJR'
     : examLevel === 'jr_gen_fse' ? 'GJR'
+    : examLevel === 'jr_dc_cft' ? 'DCT'
     : 'FSE';
   const year = new Date().getFullYear();
   const rand = uuidv4().split('-')[0].toUpperCase();

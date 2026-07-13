@@ -20,10 +20,12 @@ const SERVER_FILES = [
   'hvac-jr-fse-derived',
   'generator-jr-fse-fresh.json',
   'generator-jr-fse-derived',
+  'datacenter-jr-fresh.json',
+  'datacenter-jr-derived',
 ];
 
 export default function AdminQuestionsPage() {
-  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats } | null>(null);
+  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
   const [serverImporting, setServerImporting] = useState(false);
@@ -205,6 +207,20 @@ export default function AdminQuestionsPage() {
                 <p className="text-xs text-gray-500">active of {stats.jr_gen_fse.total.toLocaleString()} total · target 1,000</p>
                 <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
                   <div className="h-full bg-amber-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_gen_fse.active / 1000) * 100)}%` }} />
+                </div>
+              </>
+            ) : <p className="text-xs text-red-400">Failed to load</p>}
+          </div>
+          <div className="card-dark p-5">
+            <h3 className="text-sm font-semibold text-white mb-2">Jr. Data Center CFT Bank</h3>
+            {statsLoading ? (
+              <p className="text-xs text-gray-500">Loading…</p>
+            ) : stats?.jr_dc_cft ? (
+              <>
+                <p className="text-2xl font-bold text-violet-400">{stats.jr_dc_cft.active.toLocaleString()}</p>
+                <p className="text-xs text-gray-500">active of {stats.jr_dc_cft.total.toLocaleString()} total · target 1,000</p>
+                <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
+                  <div className="h-full bg-violet-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_dc_cft.active / 1000) * 100)}%` }} />
                 </div>
               </>
             ) : <p className="text-xs text-red-400">Failed to load</p>}

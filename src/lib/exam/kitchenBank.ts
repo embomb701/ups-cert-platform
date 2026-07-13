@@ -9,12 +9,12 @@
  * - HVAC course (shared 1-10 + refrigeration core + hvac 13-25) → 'jr_hvac_fse'
  */
 
-import { ALL_MODULES, KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES } from '@/data/index';
+import { ALL_MODULES, KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, COURSE_SEQUENCES } from '@/data/index';
 import type { TrainingModule, QuizQ } from '@/data/modules';
 
 const CHOICE_IDS = ['A', 'B', 'C', 'D'] as const;
 
-type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse';
+type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft';
 
 interface BankQuestion {
   id: string;
@@ -99,4 +99,9 @@ const BATTERY_CORE = ALL_MODULES.filter((m) =>
 
 export function buildGeneratorBankQuestions(): BankQuestion[] {
   return buildBank([...FOUNDATION, ...BATTERY_CORE, ...GENERATOR_MODULES], 'jr_gen_fse', 'gjr');
+}
+
+export function buildDataCenterBankQuestions(): BankQuestion[] {
+  // The DC course sequence IS the curriculum: foundation + shared cores + dc-* modules
+  return buildBank(COURSE_SEQUENCES['training_datacenter'], 'jr_dc_cft', 'dct');
 }

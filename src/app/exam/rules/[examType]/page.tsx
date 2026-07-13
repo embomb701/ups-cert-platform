@@ -65,18 +65,22 @@ export default function ExamRulesPage() {
     practice_jr_kitchen_fse: 'Jr. Kitchen FSE Practice Test — Results Only, No Certificate',
     practice_jr_hvac_fse: 'Jr. HVAC FSE Practice Test — Results Only, No Certificate',
     practice_jr_gen_fse: 'Jr. Generator FSE Practice Test — Results Only, No Certificate',
+    practice_jr_dc_cft: 'Jr. Data Center CFT Practice Test — Results Only, No Certificate',
   };
   const isPractice = examType in PRACTICE_LABELS;
   const isKitchen = examType === 'jr_kitchen_fse';
   const isHvac = examType === 'jr_hvac_fse';
   const isGen = examType === 'jr_gen_fse';
-  const isJr = examType === 'jr_fse' || isPractice || isKitchen || isHvac || isGen;
+  const isDc = examType === 'jr_dc_cft';
+  const isJr = examType === 'jr_fse' || isPractice || isKitchen || isHvac || isGen || isDc;
   const rules = isKitchen
     ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Kitchen FSE Exam'))
     : isHvac
     ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. HVAC FSE Exam'))
     : isGen
     ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Generator FSE Exam'))
+    : isDc
+    ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Data Center CFT Exam'))
     : isJr
     ? RULES_JR
     : RULES_FSE;
@@ -88,6 +92,8 @@ export default function ExamRulesPage() {
     ? 'Junior HVAC Field Service Certification'
     : isGen
     ? 'Junior Power Generation Field Service Certification'
+    : isDc
+    ? 'Junior Data Center Critical Facilities Certification'
     : isJr
     ? 'Junior UPS Field Service Certification'
     : 'UPS Field Service Certification';

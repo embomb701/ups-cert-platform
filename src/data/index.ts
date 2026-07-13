@@ -9,10 +9,11 @@ import { MODULES_PART5 } from './modules-part5';
 import { KITCHEN_MODULES } from './kitchen-modules';
 import { HVAC_MODULES } from './hvac-modules';
 import { GENERATOR_MODULES } from './generator-modules';
+import { DATACENTER_MODULES } from './datacenter-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
 // modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
@@ -36,6 +37,7 @@ export function getModule(id: string): TrainingModule | null {
     KITCHEN_MODULES.find((m) => m.id === id) ??
     HVAC_MODULES.find((m) => m.id === id) ??
     GENERATOR_MODULES.find((m) => m.id === id) ??
+    DATACENTER_MODULES.find((m) => m.id === id) ??
     null
   );
 }
@@ -75,12 +77,13 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
     ...[...GENERATOR_MODULES].sort(byNum),
   ],
   // Data Center CFT: assembled from existing UPS, Generator, and HVAC
-  // modules in curriculum order; dc-* modules join as they are built.
+  // modules in curriculum order, plus the dc-* specific modules.
   training_datacenter: [
     ...FOUNDATION,
     ...byIds(ALL_MODULES, ['ups-overview', 'pdu-sts', 'rectifiers', 'inverters', 'battery-types', 'battery-safety']),
     ...byIds(GENERATOR_MODULES, ['gen-starting-systems', 'gen-controls', 'gen-ats', 'gen-critical-power', 'gen-nfpa110']),
     ...byIds(HVAC_MODULES, ['hvac-psychrometrics', 'hvac-air-distribution', 'hvac-chillers-hydronics']),
+    ...[...DATACENTER_MODULES].sort(byNum),
   ],
   // Solar/BESS, DC Plants, and Battery Tech share the battery core;
   // their course-specific modules join as they are built.
@@ -132,6 +135,7 @@ export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.num <= 1) return null;
   if (isHvacModule(mod)) return prevModuleInCourse('training_hvac', mod);
   if (mod.id.startsWith('gen-')) return prevModuleInCourse('training_generator', mod);
+  if (mod.id.startsWith('dc-')) return prevModuleInCourse('training_datacenter', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }

@@ -156,6 +156,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // DATA CENTER CRITICAL FACILITIES PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_datacenter: {
+    name: 'Data Center Critical Facilities Training Course + Jr. CFT Certification Exam',
+    shortName: 'Data Center Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_DATACENTER ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_dc_cft_test_human: {
+    name: 'Jr. Data Center CFT Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Data Center CFT Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_DC_CFT_HUMAN ?? '',
+  },
+
+  // Data center training + test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
+  pkg_training_datacenter_testout: {
+    name: 'Data Center Training Course + Jr. CFT Test-Out (Human Proctored)',
+    shortName: 'Data Center Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_DATACENTER_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

@@ -44,13 +44,14 @@ export async function POST(req: NextRequest) {
       practice_jr_kitchen_fse: { bank: 'jr_kitchen_fse', accessDoc: 'practice_jr_kitchen_fse', label: 'Jr. Kitchen FSE' },
       practice_jr_hvac_fse: { bank: 'jr_hvac_fse', accessDoc: 'practice_jr_hvac_fse', label: 'Jr. HVAC FSE' },
       practice_jr_gen_fse: { bank: 'jr_gen_fse', accessDoc: 'practice_jr_gen_fse', label: 'Jr. Generator FSE' },
+      practice_jr_dc_cft: { bank: 'jr_dc_cft', accessDoc: 'practice_jr_dc_cft', label: 'Jr. Data Center CFT' },
     };
     const practice = PRACTICE_EXAMS[rawExamLevel];
     const isPractice = !!practice;
     const examLevel = (practice ? practice.bank : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -152,6 +153,7 @@ export async function POST(req: NextRequest) {
       jr_kitchen_fse: { label: 'Jr. Kitchen FSE', productId: 'jr_kitchen_fse_test_human', courseKey: 'training_kitchen' },
       jr_hvac_fse: { label: 'Jr. HVAC FSE', productId: 'jr_hvac_fse_test_human', courseKey: 'training_hvac' },
       jr_gen_fse: { label: 'Jr. Generator FSE', productId: 'jr_gen_fse_test_human', courseKey: 'training_generator' },
+      jr_dc_cft: { label: 'Jr. Data Center CFT', productId: 'jr_dc_cft_test_human', courseKey: 'training_datacenter' },
     };
 
     let kitchenTestOut = false;

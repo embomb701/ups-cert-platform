@@ -21,6 +21,7 @@ export default function ExamPage() {
     practice_jr_kitchen_fse: 'jr_kitchen_fse',
     practice_jr_hvac_fse: 'jr_hvac_fse',
     practice_jr_gen_fse: 'jr_gen_fse',
+    practice_jr_dc_cft: 'jr_dc_cft',
   };
   const isPractice = examType in PRACTICE_MAP;
   const candidateName = searchParams?.get('name') ?? '';
@@ -178,7 +179,7 @@ export default function ExamPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <span className={session.examLevel.startsWith('jr_') ? 'badge-jr' : 'badge-fse'}>
-              {(session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : session.examLevel === 'jr_hvac_fse' ? 'Jr. HVAC FSE' : session.examLevel === 'jr_gen_fse' ? 'Jr. Generator FSE' : 'FSE') + (isPractice ? ' Practice' : '')} Exam
+              {(session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : session.examLevel === 'jr_hvac_fse' ? 'Jr. HVAC FSE' : session.examLevel === 'jr_gen_fse' ? 'Jr. Generator FSE' : session.examLevel === 'jr_dc_cft' ? 'Jr. Data Center CFT' : 'FSE') + (isPractice ? ' Practice' : '')} Exam
             </span>
           </div>
             <ExamTimer
