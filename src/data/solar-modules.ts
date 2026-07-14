@@ -357,4 +357,420 @@ export const SOLAR_MODULES: TrainingModule[] = [
       { q: 'PTO (Permission To Operate) is:', a: ['The AHJ inspection', 'The utility\'s authorization gate — no export before it, regardless of inspection status', 'The installer sign-off', 'A module certification'], correct: 1, exp: 'Separate from the AHJ: the interconnection agreement\'s finish line, breached by early energization.' },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 17 — BATTERY ENERGY STORAGE SYSTEMS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'solar-bess-systems',
+    num: 17,
+    title: 'Battery Energy Storage Systems',
+    desc: 'BESS from wall units to containers: architectures, the BMS as the battery\'s brain, operating modes, and AC vs DC coupling.',
+    slides: [
+      {
+        title: 'BESS Architectures and the BMS',
+        body: [
+          'Battery storage completes what module 15\'s anti-islanding conversation started: PV without storage dies with the grid; PV WITH storage rides through. The residential/commercial BESS landscape: WALL UNITS (10-20 kWh lithium packs — the Powerwall class — with integrated or paired hybrid inverters), STACKED/RACK systems (modular batteries scaling to tens of kWh in garages and small commercial rooms), and CONTAINERIZED BESS (utility/C&I scale — the shipping-container battery plants marching across substations, with their own HVAC, fire systems, and module-18 safety world).',
+          'Under every skin, the same hierarchy from your battery modules: CELLS (almost universally lithium — LFP increasingly dominant for stationary storage: safer chemistry, longer cycle life, no cobalt) grouped into MODULES, modules into PACKS/CABINETS, managed by the BMS. The BMS (Battery Management System) is the battery\'s brain and your primary service interface: it balances cells, enforces charge/discharge limits (voltage, current, temperature windows), estimates SOC (state of charge) and SOH (state of health), and — critically — DISCONNECTS the battery through its contactors when limits are violated.',
+          'BMS literacy is the trade skill: its data is the battery\'s event log (the every-course rule — cell voltages, temperatures, balancing activity, fault history), its fault hierarchy explains "dead" batteries (a BESS offline on a cell-overvoltage or temperature fault is PROTECTING itself — root-cause before reset, the fryer rule at 400 volts), and its cell-level detail finds the weak module (one cell group sagging under load = the module to swap; the series-string weakest-cell reality from your battery testing module, now instrumented).',
+          'Operating MODES define what the customer bought: SELF-CONSUMPTION (store solar noon, spend solar evening — maximizing own-use where export pays poorly), BACKUP (hold reserve for outages — the anti-islanding exception via transfer equipment), TIME-OF-USE arbitrage (charge cheap, discharge expensive), and grid-services programs (VPPs — utility-dispatched fleets). Mode misconfiguration is a real complaint category: a battery set to backup-only "never doing anything" is working exactly as configured — the kitchen mis-config lesson, in storage clothes.',
+        ],
+        keyPoints: [
+          'Hierarchy: cells (LFP rising) → modules → packs, ruled by the BMS brain',
+          'The BMS balances, limits, estimates SOC/SOH, and disconnects on violations — root-cause its faults before reset',
+          'Cell-level BMS data finds the weak module: the instrumented weakest-cell hunt',
+          'Modes matter: self-consumption, backup, TOU, VPP — "idle" batteries are often just configured that way',
+        ],
+        quiz: [
+          {
+            q: 'A homeowner reports their battery "never does anything" — SOC sits at 100% for weeks while grid power flows normally. The first check is:',
+            a: ['BMS failure', 'The operating mode: a backup-reserve configuration holds full charge by design, awaiting an outage', 'Dead cells', 'Inverter faults'],
+            correct: 1,
+            exp: 'Backup mode is supposed to look idle. Mode configuration against the customer\'s actual intent (self-consumption? TOU?) is the mis-config lesson before any hardware suspicion.',
+          },
+          {
+            q: 'A BESS dropped offline on a cell-overtemperature fault overnight and the customer wants it reset immediately. The professional sequence is:',
+            a: ['Reset — it is probably a glitch', 'Read the BMS logs first: which cells, what temperature, what was happening — the battery disconnected to protect itself, and lithium temperature faults get root-caused before any reset', 'Replace the whole pack', 'Disable temperature protection'],
+            correct: 1,
+            exp: 'The fryer high-limit rule at pack scale, with module 18\'s stakes: a lithium thermal complaint is never reset-and-hope. The BMS log says which cells and why.',
+          },
+        ],
+      },
+      {
+        title: 'Coupling, Sizing Truths, and Commissioning',
+        body: [
+          'AC-COUPLED storage pairs a battery inverter with any existing PV system (retrofit-friendly; PV AC output charges the battery through its own inverter; round-trip efficiency pays double conversion) — with a critical islanding detail: during off-grid operation the battery inverter FORMS the island grid and the PV inverter syncs to it; the battery inverter throttles PV by frequency-shifting when the battery fills (frequency-watt in action — module 15\'s grid citizenship running a micro-grid of one house). DC-COUPLED storage puts battery and PV on a shared DC bus inside a hybrid inverter (new-install default; one conversion stage; charge-from-solar even when the grid is down and the AC side is dark).',
+          'Sizing truths for honest customer conversations: kWh is ENERGY (how long), kW is POWER (how much at once) — a 13.5 kWh / 5 kW battery runs a 4 kW load for ~3 hours but can NEVER start a 6 kW well pump regardless of charge; SURGE ratings govern motor starting (the well-pump and AC-condenser questions of every backup consult — soft-starters are the frequent companion sale); and whole-home vs PARTIAL-HOME backup (a protected-loads subpanel of the circuits that matter) is the design conversation that prevents the "why did my battery die in two hours" callback.',
+          'BESS COMMISSIONING is procedure-grade work: physical install per listing (spacing/clearances — module 18 territory), firmware alignment across battery, inverter, and gateway (version-mismatched components produce the weirdest faults in the industry — the update-first rule of storage service), configuration (modes, reserve %, current limits, and CT PLACEMENT — the consumption CTs that tell the system which way power flows: reversed or misplaced CTs make batteries charge when they should discharge, the single most common storage commissioning error), and a full functional test: grid-loss simulation, backup pickup verified, throttling observed, recharge confirmed.',
+          'Storage service economics mirror every course: monitoring-driven fleets (module 19), degradation conversations grounded in SOH data (batteries fade — warranty thresholds typically guarantee ~70% at 10 years; the trend file tells the story), and the maintenance rhythm of firmware, torque checks, thermal inspection, and BMS log review. The battery is the newest machine in this portal — and the one whose habits you already own from modules 11-12.',
+        ],
+        keyPoints: [
+          'AC-coupled: retrofit + frequency-shift PV throttling off-grid; DC-coupled: hybrid default, charges dark',
+          'kWh = how long, kW = how much, surge = motor starting — the honest sizing triangle',
+          'Reversed/misplaced consumption CTs are the #1 commissioning error: batteries behave backwards',
+          'Firmware alignment first: version mismatch is storage\'s weird-fault factory',
+        ],
+        quiz: [
+          {
+            q: 'Off-grid during an outage, a customer\'s AC-coupled PV inverter keeps cycling off as the battery approaches full. This behavior is:',
+            a: ['A failing PV inverter', 'The battery inverter frequency-shifting to throttle PV production into a full battery — island power management working as designed', 'Anti-islanding malfunction', 'Grid interference'],
+            correct: 1,
+            exp: 'In the island, the battery inverter is the grid-former and speaks IEEE-1547 frequency-watt to the PV inverter: rising frequency = "back off." Designed behavior that generates service calls.',
+          },
+          {
+            q: 'A newly commissioned battery charges from the grid at peak rates and discharges at midnight — backwards from its TOU program. The classic error is:',
+            a: ['Defective battery', 'Consumption/solar CTs reversed or misplaced — the system\'s power-direction senses are backwards', 'Wrong chemistry', 'Utility meter fault'],
+            correct: 1,
+            exp: 'The CTs are the system\'s eyes on power flow. Reversed CTs invert every decision — the most common storage commissioning error, found with a clamp meter and the monitoring live view.',
+          },
+          {
+            q: 'A 13.5 kWh / 5 kW-rated battery cannot start the customer\'s 6 kW well pump even at 100% charge because:',
+            a: ['The battery is degraded', 'Power rating (kW), not energy (kWh), caps instantaneous delivery — and motor surges demand even more; a soft-starter or bigger power stage is the fix', 'The pump is 240 V', 'The BMS is limiting temperature'],
+            correct: 1,
+            exp: 'kWh is the tank; kW is the pipe. The honest sizing triangle (energy, power, surge) is the backup consult\'s core math.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The dominant stationary-storage chemistry trend is:', a: ['Lead-acid', 'LFP lithium — safer, longer cycle life, cobalt-free', 'NiCd', 'Sodium exclusively'], correct: 1, exp: 'LFP\'s thermal stability and cycle life made it the stationary default.' },
+      { q: 'The BMS\'s protective disconnect means a "dead" BESS is often:', a: ['Scrap', 'Protecting itself from a limit violation — read its logs and root-cause before reset', 'A wiring fault', 'A firmware bug always'], correct: 1, exp: 'The fryer rule at pack scale: the disconnect is a witness statement, not a defect.' },
+      { q: 'SOC and SOH are:', a: ['Interchangeable', 'State of charge (how full now) and state of health (capacity remaining vs new)', 'Voltage readings', 'BMS brands'], correct: 1, exp: 'SOC is today\'s fuel gauge; SOH is the aging story warranties are written against.' },
+      { q: 'A backup-reserve-mode battery sitting at 100% SOC for weeks is:', a: ['Faulty', 'Working exactly as configured — holding reserve for an outage', 'Overcharged', 'Miswired'], correct: 1, exp: 'Mode literacy before hardware suspicion: idle-looking backup batteries are on duty.' },
+      { q: 'DC-coupled storage\'s distinctive capability is:', a: ['Cheaper install always', 'Charging from solar even when the grid and AC side are down — shared DC bus in the hybrid', 'No BMS needed', 'Higher voltage'], correct: 1, exp: 'One conversion stage and dark-charging: the new-install default architecture.' },
+      { q: 'AC-coupled systems throttle PV off-grid by:', a: ['Physical disconnects', 'The battery inverter shifting island frequency — frequency-watt telling the PV inverter to back off', 'Shading panels', 'Reversing CTs'], correct: 1, exp: 'The grid-former speaks 1547 to its one-house grid; cycling PV near full battery is by design.' },
+      { q: 'kWh vs kW vs surge on a spec sheet mean:', a: ['The same thing three ways', 'Energy duration, continuous power, and motor-starting headroom — the honest sizing triangle', 'AC vs DC vs peak', 'Charge vs discharge vs idle'], correct: 1, exp: 'The tank, the pipe, and the kick: every backup consult\'s core math.' },
+      { q: 'The most common storage commissioning error is:', a: ['Wrong wire color', 'Reversed or misplaced consumption CTs inverting the system\'s power-flow senses', 'Over-torqued lugs', 'Missing labels'], correct: 1, exp: 'Backwards CTs make batteries charge at peak and discharge at midnight — clamp meter plus live view finds it.' },
+      { q: 'Version-mismatched firmware across battery/inverter/gateway causes:', a: ['Nothing — versions are cosmetic', 'The industry\'s weirdest faults — alignment is the update-first rule of storage service', 'Faster charging', 'Warranty extension'], correct: 1, exp: 'Storage components negotiate constantly; mismatched dialects produce ghost behavior.' },
+      { q: 'Typical lithium storage warranties guarantee roughly:', a: ['100% forever', '~70% capacity at ~10 years — SOH trends tell the real story', '50% at 2 years', 'No capacity terms'], correct: 1, exp: 'Degradation is designed-for: the SOH trend file grounds every fade conversation.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 18 — BESS SAFETY & NFPA 855
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'solar-bess-safety',
+    num: 18,
+    title: 'BESS Safety & NFPA 855',
+    desc: 'Thermal runaway, the codes and listings that contain it, and the handling/emergency discipline of large lithium systems.',
+    slides: [
+      {
+        title: 'Thermal Runaway: The Hazard That Writes the Rules',
+        body: [
+          'Every rule in this module exists because of one failure mode: THERMAL RUNAWAY. An abused lithium cell (overcharged, over-discharged then charged, crushed, punctured, internally shorted, or overheated) can enter a self-accelerating exothermic decomposition: temperature rises → chemistry breaks down releasing heat and flammable gas → temperature rises faster. A cell in runaway vents electrolyte gases (white "smoke" that is actually flammable vapor — a pre-ignition warning), can jet flame, and — the system-level nightmare — PROPAGATES: heating its neighbors past their trigger point, cascading cell to cell, module to module.',
+          'Runaway is chemistry-dependent (LFP\'s higher trigger temperature and gentler energy release is WHY it conquered stationary storage — but LFP is resistant, not immune) and, crucially, ONCE STARTED IT DOES NOT NEED OXYGEN: the cell\'s own chemistry supplies the oxidizer, which is why smothering does not work, why water\'s job is COOLING neighbors to stop propagation rather than extinguishing, and why "extinguished" battery fires reignite hours or days later. Stranded-energy awareness completes the picture: a burned pack\'s surviving cells remain charged and dangerous through the cleanup.',
+          'PREVENTION is therefore the entire game, and the layers you service ARE the prevention: the BMS enforcing the operating window (module 17 — its limits are runaway\'s first fence), mechanical protection (clearances, impact protection — the garage wall unit\'s biggest daily threat is the family car), thermal management (packs\' cooling systems and the ambient limits in listings), and CHARGE DISCIPLINE (never charging a frozen, swollen, damaged, or deeply-over-discharged battery — the intake questions of every battery service call).',
+          'Field trigger-awareness, the walkaround catalog: SWELLING (a bulging module is venting-pressure evidence — do not charge, do not puncture, escalate per procedure), impact damage or drops (damaged = quarantine, even if it "seems fine" — runaway can begin hours after mechanical abuse), heat complaints and BMS temperature-fault history, and water exposure (flooded packs are compromised packs). The trade\'s posture: lithium is safely serviceable EXACTLY as long as its rules are respected — the same sentence your gas modules taught, with a different fuel.',
+        ],
+        keyPoints: [
+          'Runaway is self-accelerating and self-oxidizing: smothering fails; water COOLS neighbors to stop cascade',
+          'Vented white vapor is flammable pre-ignition gas; "out" battery fires reignite — stranded energy persists',
+          'The BMS window, mechanical protection, thermal management, and charge discipline ARE the prevention',
+          'Swollen, dropped, frozen-charged, or flooded packs: quarantine and escalate — never charge damage',
+        ],
+        quiz: [
+          {
+            q: 'A garage wall battery shows visible case swelling after a BMS overvoltage fault history. The correct field response is:',
+            a: ['Push the case flat and reset the BMS', 'Do not charge, do not puncture, isolate per procedure, and escalate — swelling is venting-pressure evidence of a compromised pack', 'Discharge it fully with a load bank', 'Drill a vent hole'],
+            correct: 1,
+            exp: 'A swollen lithium module is a pre-runaway warning label written by the cell itself. Quarantine and manufacturer/disposal procedures — never mechanical "fixes."',
+          },
+          {
+            q: 'Fire crews "extinguished" a small BESS fire an hour ago; the customer asks you to begin cleanup. The lithium-specific danger is:',
+            a: ['Toxic soot only', 'Reignition: runaway chemistry self-oxidizes and stranded energy persists in surviving cells — battery fires relight hours or days later', 'Voltage backfeed to the grid', 'Slippery floors'],
+            correct: 1,
+            exp: 'Water stops propagation by cooling; it does not "put out" the chemistry. Post-fire packs are treated as energized, unstable hazards under specialist protocols.',
+          },
+        ],
+      },
+      {
+        title: 'NFPA 855, Listings, and Emergency Discipline',
+        body: [
+          'NFPA 855 is the installation standard for stationary energy storage — the BESS sibling of the generator course\'s NFPA 110 — and its shape matters to you: capacity thresholds triggering its scope, LOCATION rules (what may live in dwellings/garages vs dedicated rooms vs outdoors — residential unit-size caps and their spacing), SEPARATION distances between units and from openings/exits, maximum stored energy per room/area, and required fire detection/suppression by installation class. When a homeowner asks "why can\'t we just add four more wall batteries in the garage," 855\'s aggregate limits and spacing tables are the answer.',
+          'The LISTING layer: UL 9540 certifies the SYSTEM (battery + inverter + controls as a tested combination — mixing unlisted combinations voids the basis of the permit), and UL 9540A is the TEST METHOD that characterizes thermal-runaway propagation behavior (its report tells AHJs whether/how a product cascades — driving the spacing and suppression the code assigns). Your field translation: install and service TO THE LISTING (spacing, orientation, ambient limits in the manual are certification conditions, not suggestions), and recognize that undocumented substitutions (a different battery model on an existing inverter) are code events, not parts swaps.',
+          'Emergency discipline for the technician: pre-plan awareness (know the site\'s disconnects and the FIRST-RESPONDER placards module 16\'s labeling world extends here), the vented-gas rule (white vapor from a pack = flammable atmosphere + likely toxic — evacuate and ventilate thinking, not diagnosis-in-the-cloud thinking: your CO and gaseous-fuel reflexes transfer), electrical isolation BEFORE approach where procedure allows (contactors open ≠ terminals dead — the pack side stays live, module 12\'s discipline), and the referral boundary: fire events, damaged-pack recovery, and disposal logistics belong to specialists and manufacturer programs — your job is recognition, isolation, documentation, and the call.',
+          'Round out with transport/storage rules you will actually touch: lithium modules ship as Class 9 dangerous goods (documentation and packaging rules for warranty returns — the swollen module does NOT ride loose in your van), site storage of spares within listed limits, and end-of-life chains (manufacturer take-back and lithium recyclers — the maturing loop this industry is building). The kitchen course\'s "documentation is the product" and the generator course\'s "legal-grade evidence" habits both apply whenever a battery event occurs: BESS incidents are insurance events by default.',
+        ],
+        keyPoints: [
+          'NFPA 855 = the 110 of storage: location, separation, aggregate limits, detection/suppression',
+          'UL 9540 lists the system combination; 9540A characterizes propagation — install to the listing',
+          'Vented vapor = evacuate/ventilate reflexes; contactors open ≠ pack terminals dead',
+          'Damaged packs, fires, disposal: recognize, isolate, document, refer — Class 9 shipping for returns',
+        ],
+        quiz: [
+          {
+            q: 'A customer wants a fifth and sixth wall battery added in their attached garage. The code-literate first check is:',
+            a: ['Wall stud spacing', 'NFPA 855 aggregate energy limits and unit separation rules for dwelling garages — capacity caps may force a different location or design', 'Paint color for heat', 'HOA approval'],
+            correct: 1,
+            exp: '855\'s residential tables cap per-unit and aggregate energy with spacing requirements. "Just add more" meets a real code ceiling — the answer is design, not squeezing.',
+          },
+          {
+            q: 'A warranty-replacement battery module (slightly swollen) needs to go back to the manufacturer. It travels:',
+            a: ['Loose in the van bed with tools', 'As Class 9 dangerous goods per the manufacturer\'s packaging and documentation program — damaged lithium has its own shipping rules', 'In the customer\'s trunk', 'Only by drone'],
+            correct: 1,
+            exp: 'Lithium is regulated freight, and damaged/recalled lithium doubly so. The RMA program\'s packaging instructions are law, not suggestion.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Thermal runaway is:', a: ['A BMS software bug', 'Self-accelerating exothermic cell decomposition that can cascade to neighbors', 'Inverter overheating', 'Rapid discharge'], correct: 1, exp: 'Heat begets breakdown begets heat: the failure mode that writes every storage rule.' },
+      { q: 'Runaway does not need external oxygen because:', a: ['It burns hydrogen', 'The cell chemistry supplies its own oxidizer — smothering fails; cooling neighbors is the strategy', 'Packs are sealed', 'It is electrical, not fire'], correct: 1, exp: 'Self-oxidizing chemistry: water\'s job is propagation-stopping cooling, and reignition risk persists.' },
+      { q: 'White vapor venting from a lithium pack is:', a: ['Steam — harmless', 'Flammable, likely toxic electrolyte gas — a pre-ignition warning demanding evacuation reflexes', 'Coolant leak', 'Dust'], correct: 1, exp: 'The vented-gas rule: your gaseous-fuel and CO reflexes transfer to the battery room.' },
+      { q: 'A swollen battery module is:', a: ['Cosmetic', 'Venting-pressure evidence: quarantine, never charge or puncture, escalate', 'Normal in summer', 'Recoverable by pressing flat'], correct: 1, exp: 'The cell wrote its own warning label; mechanical "fixes" are ignition attempts.' },
+      { q: 'LFP dominance in stationary storage owes to:', a: ['Cheapest energy density', 'Higher runaway trigger temperature and gentler failure — resistant (not immune) chemistry', 'Cobalt content', 'Faster charging only'], correct: 1, exp: 'Chemistry-level safety margins made LFP the stationary default.' },
+      { q: 'NFPA 855 governs:', a: ['Cell manufacturing', 'ESS installation: locations, separation, aggregate limits, detection/suppression', 'Utility tariffs', 'Module recycling only'], correct: 1, exp: 'The storage sibling of NFPA 110 — the answer to "why can\'t we just add more batteries here."' },
+      { q: 'UL 9540 vs 9540A:', a: ['Identical documents', 'System-combination listing vs the propagation-characterization test method that informs spacing/suppression', 'US vs Canada', 'AC vs DC ratings'], correct: 1, exp: 'The listing and the fire-behavior test: together they define what the AHJ permits.' },
+      { q: 'Installing to the listing means:', a: ['Any compatible-looking combination', 'Spacing, orientation, ambient, and component combinations per certification — substitutions are code events', 'Following the sales quote', 'Torque specs only'], correct: 1, exp: 'The manual\'s conditions are the certification\'s conditions; unlisted mixes void the permit\'s basis.' },
+      { q: 'With BMS contactors open, pack terminals are:', a: ['Dead', 'Still live on the pack side — battery-module isolation discipline applies', 'Grounded', 'Below 12 V'], correct: 1, exp: 'Contactor state is not terminal state: the module-12 verification rules never retire.' },
+      { q: 'After any BESS fire or damage event, the technician\'s role is:', a: ['Extinguish and repair', 'Recognition, isolation, documentation, and referral to specialist/manufacturer programs — these are insurance events by default', 'Immediate disassembly', 'Silent disposal'], correct: 1, exp: 'Legal-grade evidence habits plus the referral boundary: damaged lithium belongs to specialists.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 19 — COMMISSIONING & PERFORMANCE VERIFICATION
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'solar-commissioning',
+    num: 19,
+    title: 'Commissioning & Performance Verification',
+    desc: 'IV-curve tracing, IR imaging, performance ratio, and monitoring handoff — proving a system performs to model.',
+    slides: [
+      {
+        title: 'The Commissioning Sequence and Its Instruments',
+        body: [
+          'Solar commissioning proves four layers in order — MECHANICAL (racking torque per spec, module clamps, roof penetrations flashed, bonding continuity), DC (per-string Voc and polarity BEFORE first inverter connection — reversed strings destroy input stages; short-circuit or operating current per string against irradiance-adjusted expectations; insulation resistance to ground), AC (grid voltage/rotation at the inverter, protection settings per the interconnection profile), and SYSTEM (inverter startup per manual, rapid-shutdown initiation/recovery verified, monitoring commissioned) — with the generator course\'s baseline religion throughout: today\'s recorded numbers are every future diagnosis\'s reference.',
+          'IV-CURVE TRACING is the commissioning instrument that separates professionals: a tracer sweeps each string and plots the measured curve against the modeled curve for the moment\'s measured irradiance and temperature (tracers pair with a pyranometer/reference cell and temperature probes). One trace answers what hours of guesswork cannot: LOW CURRENT everywhere = soiling/irradiance measurement issues; LOW VOLTAGE = missing modules in string or wrong count; STEPS = mismatch, shading, bypass diodes conducting (module 13\'s reading, now quantified); ROUNDED KNEE = series-resistance problems — degraded connectors and cabling. Commissioning traces filed per string are the fleet\'s birth certificates.',
+          'THERMAL IMAGING (IR) rides every commissioning and PM: modules scanned under load reveal hot cells and hot spots (module 13\'s hazard, visualized), and every DC connection point — combiner lugs, disconnect terminals, connector pairs — gets the warm-spot hunt your foundation taught (a connector 20°C above its twin is tomorrow\'s AFCI trip or fire). Drone IR scales this to large arrays; the physics is identical.',
+          'The remaining verification set: TORQUE with marked witness lines (terminations per spec — the loose-lug story of every course), POLARITY discipline (the one mistake with instant hardware cost), GROUND-CONTINUITY spot checks across the bonded racking system, and RSD FUNCTIONAL TEST (module 16: initiate, measure boundary voltage collapse, restore). The habit stack is familiar by design — this module is your foundation instruments meeting a new machine.',
+        ],
+        keyPoints: [
+          'Order: mechanical → DC (Voc/polarity BEFORE inverter!) → AC → system, with everything recorded',
+          'IV traces vs model: low-I = light/soiling, low-V = count, steps = mismatch, soft knee = resistance',
+          'IR under load: hot cells and warm connections are tomorrow\'s failures, visible today',
+          'Reversed string polarity destroys inverter inputs — the check that precedes first connection',
+        ],
+        quiz: [
+          {
+            q: 'A commissioning IV trace of one string shows the expected current but roughly one module\'s worth of missing voltage, with a clean curve shape. The likely find is:',
+            a: ['Soiling', 'A module missing from the string (or one bypassed entirely) — string count/wiring against the design', 'High irradiance', 'A failing tracer'],
+            correct: 1,
+            exp: 'Voltage adds in series: a whole module\'s Voc absent with normal current and shape means the string is one module short of design — count, wiring, or a fully-bypassed unit.',
+          },
+          {
+            q: 'An IR scan under load shows one MC4 pair 25°C hotter than every neighbor. The professional action is:',
+            a: ['Note it as within tolerance', 'Treat it as a failing connection: de-energize per procedure, inspect/remake the connection, and re-scan — warm today is arcing tomorrow', 'Spray it with coolant', 'Increase string fusing'],
+            correct: 1,
+            exp: 'The warm-connection hunt of every course: resistance heating at a DC connector is the AFCI trip and fire precursor. Fix it while it is only warm.',
+          },
+        ],
+      },
+      {
+        title: 'Performance Ratio and the Monitoring Handoff',
+        body: [
+          'PERFORMANCE RATIO (PR) is the industry\'s honesty metric: actual energy delivered ÷ energy the modeled system should deliver given the ACTUAL measured irradiance and temperature over the period. PR strips the weather out of the argument — a customer\'s "it made less than last month" may be pure weather (PR steady), while "PR fell from 0.84 to 0.71" is a real system problem hiding under a sunny month\'s decent totals. Healthy fixed arrays typically run PR ~0.75-0.85; commissioning establishes the site\'s baseline PR, and PM revisits it.',
+          'The production-verification stack at commissioning: measured AC output against expectation for the moment\'s conditions (clamp/inverter data vs irradiance math), energy-model comparison across the first weeks (monitoring makes this automatic), and the documentation set — as-built string map (which modules on which MPPT — the map every future string diagnosis needs), commissioning traces and IR images, recorded settings, and the interconnection/PTO paper trail (module 16). The kitchen course\'s birth-certificate commissioning lesson applies verbatim.',
+          'MONITORING HANDOFF makes the fleet serviceable: gateway online and reporting (cellular/WiFi/Ethernet — the connectivity realities of the kitchen course\'s IoT lesson), per-device visibility verified (every optimizer/micro reporting; every string\'s channel mapped and LABELED in the platform to match the as-built), alert thresholds and recipients configured (who learns about the failure — the service company, ideally, before the customer), and the OWNER walkthrough: what the app shows, what normal looks like, what to call about. Fleets whose monitoring was commissioned lazily generate the "it\'s been down for four months" calls that embarrass everyone.',
+          'And the closing habit transfer: commissioning IS sales for the service relationship — the documented baseline, the labeled monitoring, the owner who understands their normal: every one converts into the O&M contract (module 20\'s economics) that makes solar service a business instead of a callback pool. Document like the generator course, verify like the HVAC course, and hand off like the professional this portal trained.',
+        ],
+        keyPoints: [
+          'PR = actual ÷ modeled-for-actual-weather: the metric that separates weather from faults',
+          'The as-built string map + traces + IR + settings = the system\'s birth certificate',
+          'Monitoring handoff: every device reporting, channels labeled to match as-built, alerts routed to the servicer',
+          'Commissioned baselines and literate owners convert directly into O&M contracts',
+        ],
+        quiz: [
+          {
+            q: 'A customer complains production dropped 20% versus last month. Monitoring shows PR steady at 0.83 both months. The explanation is:',
+            a: ['Hidden degradation', 'Weather: the system converted the available sun at unchanged efficiency — last month simply had more sun', 'Inverter derating', 'Meter error'],
+            correct: 1,
+            exp: 'PR strips weather from the argument. Steady PR with lower totals is climatology, not fault — the honesty metric doing its job in the customer conversation.',
+          },
+          {
+            q: 'The single commissioning artifact that most accelerates every future string-level diagnosis is:',
+            a: ['The sales proposal', 'The as-built string map with monitoring channels labeled to match — which modules, which string, which MPPT', 'A photo of the crew', 'The torque wrench certificate'],
+            correct: 1,
+            exp: 'Monitoring granularity is only as useful as its mapping. "String 7 is low" means nothing until string 7 is findable on the roof — the map is the Rosetta stone.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Per-string Voc and polarity are verified:', a: ['After a week of operation', 'Before first inverter connection — reversed strings destroy input stages', 'Only on cloudy days', 'By the utility'], correct: 1, exp: 'The instant-hardware-cost mistake: polarity is proven before anything is plugged.' },
+      { q: 'An IV curve\'s rounded/soft knee indicates:', a: ['Excess irradiance', 'Series-resistance problems: degraded connectors and cabling', 'Perfect health', 'Cold weather'], correct: 1, exp: 'Resistance rounds the power point: the connector catalog\'s curve signature.' },
+      { q: 'Steps in a string IV trace mean:', a: ['A tracer fault', 'Mismatch within the string — shading, damaged groups, bypass diodes conducting', 'Grid instability', 'Perfect balance'], correct: 1, exp: 'Each step is a sacrificed cell group: module 13\'s reading, quantified at commissioning.' },
+      { q: 'IR scanning of connections under load hunts:', a: ['Loose insulation colors', 'Resistance heating — warm points that become arcs and fires', 'UV damage', 'Moisture ingress directly'], correct: 1, exp: 'The universal warm-connection hunt applied to DC: 20°C over its twin is a finding, not a note.' },
+      { q: 'Performance Ratio compares:', a: ['This month vs last month', 'Actual energy vs modeled energy for the ACTUAL measured weather', 'AC vs DC power', 'PR is a battery metric'], correct: 1, exp: 'Weather-normalized honesty: steady PR = climate variation; falling PR = real problem.' },
+      { q: 'Healthy fixed-array PR typically runs:', a: ['0.30-0.40', '~0.75-0.85', '0.99+', 'Above 1.0'], correct: 1, exp: 'The baseline band commissioning establishes and PM re-verifies.' },
+      { q: 'The as-built string map documents:', a: ['Sales commissions', 'Which modules form which string on which MPPT, matched to labeled monitoring channels', 'Roof shingle type', 'Cable colors'], correct: 1, exp: 'The Rosetta stone between monitoring alarms and physical rooftop locations.' },
+      { q: 'Rapid-shutdown functional testing at commissioning verifies:', a: ['Label adhesion', 'Initiation collapses boundary voltage and the system recovers on restore', 'Transmitter branding', 'Breaker torque'], correct: 1, exp: 'The fire-day system is proven on a good day — initiate, measure, restore, verify.' },
+      { q: 'Monitoring alerts should route first to:', a: ['Only the homeowner', 'The servicing company — fleets are triaged from dashboards before customers notice', 'The utility', 'No one, to avoid noise'], correct: 1, exp: 'The telemetry lesson: the servicer who sees the failure first owns the relationship (and avoids the four-months-down call).' },
+      { q: 'Commissioning documentation converts commercially into:', a: ['Nothing', 'The O&M service relationship: baselines, labeled monitoring, and literate owners become contracts', 'Higher module prices', 'Utility rebates only'], correct: 1, exp: 'The birth-certificate lesson: commissioning done right is the service business\'s foundation.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 20 — SOLAR + STORAGE TROUBLESHOOTING CAPSTONE
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'solar-troubleshooting',
+    num: 20,
+    title: 'Solar + Storage Troubleshooting Capstone',
+    desc: 'Underproduction trees, inverter and storage fault families, ground-fault hunts on live arrays — the universal method on the roof.',
+    slides: [
+      {
+        title: 'The Underproduction Tree',
+        body: [
+          'Solar\'s defining complaint is a number, not a noise: "it is making less than it should." The tree, monitoring-first (module 19\'s triage): SYSTEM-DEAD → inverter/RSD/AC-side (is the array obediently shut down? Module 16\'s transmitter check; is the AC breaker/grid present?); ONE STRING LOW/DEAD → that string\'s DC chain (fuse, connectors, wiring — arrive with the map); ONE MODULE LOW (granular fleets) → that module/optimizer/micro; EVERYTHING PROPORTIONALLY LOW → the shared causes: soiling, uniform degradation, inverter derating (thermal — the attic in July), or clipping (an undersized-inverter design reality, not a fault); NEW STEPWISE PATTERN → shading changes (that tree grew; that vent pipe\'s winter shadow) — the seasonal-shadow literacy of module 13.',
+          'The weather-normalization discipline guards the whole tree: compare against irradiance-adjusted expectation or PR (module 19), never raw month-to-month totals — half of "underproduction" complaints are climatology, resolved with the PR conversation, not a ladder. The other half divide by the tree, and the tree\'s first split (monitoring granularity) usually finishes the localization before the truck moves.',
+          'On-roof verification tools per branch: the clamp meter for string currents (mid-day comparisons between sibling strings — the healthy twins betray the sick one), IV tracer for the definitive string signature, IR for hot spots and connections, and irradiance reference for honest expectations. The split-half instinct applies literally: a dead string\'s fault is hunted by voltage checks at accessible midpoints — combiner, transitions, connector clusters.',
+          'The recurring solar-specific catalog, consolidated: MC4/connector failures (the #1), string fuse opens (find WHY — a fuse that opened saw backfeed or fault current), RSD component failures (obedient-shutdown mysteries), bypass-diode failures (persistent one-module steps, J-box heat), optimizer/micro unit failures (granular dropouts with per-unit codes), and soiling/shading evolution. Add module 17-18 for storage and you hold the whole domain\'s suspect file.',
+        ],
+        keyPoints: [
+          'Monitoring-first triage: system/string/module/proportional/stepwise each name their branch',
+          'Weather-normalize before diagnosing: PR resolves half of all underproduction complaints',
+          'Sibling-string comparison with a clamp meter is the roof\'s fastest split-half',
+          'The catalog: connectors, string fuses (find why), RSD, bypass diodes, optimizers, shade evolution',
+        ],
+        quiz: [
+          {
+            q: 'Monitoring shows every string down exactly ~30% on clear days, with normal voltages and a smooth proportional pattern. The suspect class is:',
+            a: ['A string fuse', 'Shared causes: uniform soiling, inverter thermal derating, or clipping — proportional-everything points at the common path or surface', 'One failed optimizer', 'A grid fault'],
+            correct: 1,
+            exp: 'Uniform proportional loss is the shared-cause signature (the kitchen epidemic lesson): the common surface (soiling) or the common electronics (derate/clipping), not any single string.',
+          },
+          {
+            q: 'A string fuse is found open. The professional action is:',
+            a: ['Replace it and leave when production resumes', 'Find why it opened — string fuses see backfeed into faults; megger and inspect the string before and after re-fusing', 'Install a larger fuse', 'Bypass it temporarily'],
+            correct: 1,
+            exp: 'The every-course fuse rule: protection that operated is a witness. The string took fault or backfeed current from its parallel siblings — find the fault the fuse survived.',
+          },
+        ],
+      },
+      {
+        title: 'Storage Faults and the Combined System',
+        body: [
+          'Storage complaints sort into the module-17 frame: NOT CHARGING (mode/reserve configuration first — the "idle by design" catalog; then CT placement/orientation — the backwards-eyes classic; then BMS limits — temperature-blocked charging in cold garages is designed lithium protection, not failure); NOT DISCHARGING (mode again, minimum-reserve settings, BMS protective states); CAPACITY COMPLAINTS ("it used to last all night" → SOH trend data versus load-growth honesty — the new hot tub story lives in the consumption graph); and OFFLINE/FAULTED (BMS logs first, always — the battery\'s own event log outranks every guess).',
+          'Backup failures deserve their own tree because they surface at the worst moment: WHOLE-HOME-DARK during outage → transfer equipment (did the island form? — gateway/transfer switch function, the ATS lesson in solar clothes), backup-loads-subpanel mapping (that circuit was never on the protected panel — the two-hours-and-dead expectations conversation), and capacity/surge reality (module 17\'s sizing triangle meeting the well pump). TEST the island at commissioning and PM: simulated grid loss, pickup verified — the generator course\'s transfer-testing religion, translated.',
+          'Combined-system reasoning ties the capstone: PV charging depends on storage state (full battery + export limits = throttled PV that looks "broken" — frequency-shift in AC-coupled islands, curtailment settings on-grid); storage health depends on PV sizing (a chronically under-charged battery in a shaded-array home is a design mismatch presenting as battery complaints); and the monitoring platform sees both sides — read the POWER FLOW graphs (PV/battery/grid/load traces over a day answer most "why did it do that" questions visually, the EPMS-trend lesson at house scale).',
+          'The capstone\'s close, familiar by now: verify fixes under real conditions (a full sun-day\'s trace, an island test, a charge/discharge cycle), root-cause the root cause (the failed connector\'s water path; the reversed CT\'s missing commissioning check; the shading\'s actual tree), feed the pattern library, and document to the standard every course set. Nine trades, one method — the roof just adds sunshine.',
+        ],
+        keyPoints: [
+          'Storage order: mode/config → CTs → BMS limits/logs → hardware; cold-garage charge blocks are protection',
+          'Backup failures: island formation, protected-panel mapping, sizing triangle — test transfers like generators',
+          'Full-battery PV throttling and under-sized-array battery starvation are system stories, not unit faults',
+          'Power-flow graphs answer most "why" questions visually — read them before rolling',
+        ],
+        quiz: [
+          {
+            q: 'Each cold morning a garage-mounted battery refuses to charge until midday; BMS logs show low-temperature charge inhibition. This is:',
+            a: ['A failing BMS', 'Lithium charge protection working: charging frozen cells causes plating damage — the BMS waits for safe temperature (heater kits/relocation are the design answers)', 'Reversed CTs', 'Inverter derating'],
+            correct: 1,
+            exp: 'Module 18\'s charge discipline, automated: cold-charge inhibition protects the cells. The finding is environmental design (heating, location), not a defect.',
+          },
+          {
+            q: 'During an outage test, the island forms and the battery carries the house — but the kitchen refrigerator is dark. The explanation is:',
+            a: ['Battery undersized', 'That circuit is not on the protected-loads subpanel — a backup-scope mapping issue, not a power failure', 'Refrigerator surge', 'Inverter fault'],
+            correct: 1,
+            exp: 'Partial-home backup protects the panel it protects. The commissioning walkthrough and panel schedule set expectations; the fix is scope/design, not capacity.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'The first triage question on underproduction is:', a: ['Which module failed', 'What the monitoring pattern shows: system/string/module/proportional/stepwise', 'The customer\'s bill', 'Panel brand'], correct: 1, exp: 'Monitoring granularity localizes the fault class before the truck moves.' },
+      { q: 'Half of underproduction complaints resolve via:', a: ['Module replacement', 'Weather-normalization: PR analysis showing climate, not fault', 'Firmware updates', 'String re-fusing'], correct: 1, exp: 'Raw month totals lie; PR separates climatology from real problems.' },
+      { q: 'Proportional-everything-low points at:', a: ['One bad string', 'Shared causes: soiling, thermal derate, clipping — the common surface or path', 'Grid frequency', 'One optimizer'], correct: 1, exp: 'The shared-cause law: uniform loss = common cause, never a single component.' },
+      { q: 'The roof\'s fastest string diagnosis is:', a: ['Removing modules', 'Clamp-meter sibling comparison: healthy twins betray the sick string', 'Night testing', 'Warranty forms'], correct: 1, exp: 'Mid-day sibling currents are the literal split-half on the roof.' },
+      { q: 'An opened string fuse demands:', a: ['A bigger fuse', 'Finding the fault it protected against before re-fusing — megger and inspect the string', 'Immediate replacement only', 'Ignoring if production is okay'], correct: 1, exp: 'The universal fuse rule: it operated because current flowed where it should not.' },
+      { q: 'A battery that will not charge below 32°F garage temps is exhibiting:', a: ['BMS failure', 'Designed lithium cold-charge protection against plating damage', 'CT reversal', 'Inverter throttling'], correct: 1, exp: 'Charge discipline automated: the answer is heat/location design, not a reset.' },
+      { q: '"It used to last all night" capacity complaints are grounded against:', a: ['Customer memory', 'SOH trend data AND the consumption graph — degradation vs load growth honestly separated', 'Module warranties', 'Weather records'], correct: 1, exp: 'The new hot tub lives in the load trace; real fade lives in SOH — the data settles it.' },
+      { q: 'Backup circuits that stay dark during a successful island indicate:', a: ['Battery failure', 'Protected-loads panel scope: those circuits were never in the backup design', 'Frequency drift', 'A dead gateway'], correct: 1, exp: 'Partial-home backup covers its subpanel; scope conversations beat capacity accusations.' },
+      { q: 'A "broken" PV array that throttles every afternoon in an off-grid island with a full battery is:', a: ['Failing', 'Being curtailed by design — nowhere for the energy to go; frequency-shift/curtailment at work', 'Shaded', 'Underperforming its PR'], correct: 1, exp: 'Energy must have a destination: full battery + no grid = intentional throttle (module 17\'s island lesson).' },
+      { q: 'The most information-dense view for combined-system "why" questions is:', a: ['The inverter nameplate', 'The daily power-flow graph: PV, battery, grid, and load traces together', 'The string map alone', 'Utility bills'], correct: 1, exp: 'The house-scale EPMS trend: most behavioral mysteries resolve visually in the flow graph.' },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // MODULE 21 — CAREER IN SOLAR & STORAGE
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    id: 'solar-career',
+    num: 21,
+    title: 'Career in Solar & Storage',
+    desc: 'The fastest-growing electrical trade: market segments, NABCEP, the O&M business, and where solar careers lead.',
+    slides: [
+      {
+        title: 'The Market and the Ladder',
+        body: [
+          'Solar employs more people than any other electricity-generation technology in America, and storage attach rates are climbing toward ubiquity — the growth story is structural (costs down an order of magnitude in 15 years, policy tailwinds, and the electrification wave), and the SERVICE side is its least-crowded corner: installation booms attracted crews by the thousand, but the fleets they built now age into an O&M market desperate for diagnostic talent. A portal graduate arrives with precisely the scarce half: electrical fundamentals, instrument literacy, batteries, and the troubleshooting method.',
+          'The segments and their textures: RESIDENTIAL (install crews, and the service/warranty divisions that mint techs into diagnosticians), COMMERCIAL & INDUSTRIAL (rooftop and carport scale — string-inverter fleets, real O&M contracts), UTILITY-SCALE (tracker fields and central inverters — a plant-operations world adjacent to the generator course\'s), O&M SPECIALISTS (third-party fleet caretakers — the pure-service employers), and STORAGE-FIRST roles (BESS commissioning and service — the module 17-18 skill premium, growing fastest of all).',
+          'NABCEP is the industry\'s credential ladder: entry ASSOCIATE credentials (PV and storage flavors — realistic first-year targets that this course\'s content maps toward), the flagship PV INSTALLATION PROFESSIONAL, and — the service tech\'s crown — the PV TECHNICAL SALES and SYSTEM INSPECTOR/COMMISSIONING & MAINTENANCE specialist paths. Electrical LICENSING context varies by state (some require solar work under electrical licenses — the journeyman path pairs powerfully with this trade), and manufacturer certifications (inverter and battery OEMs) carry the same warranty-authorization economics as every course: the certified tech is the dispatchable tech.',
+          'Compensation: install-crew entry commonly $40-55K; SERVICE/O&M techs $55-80K with experience; commissioning specialists, BESS-fluent techs, and utility-scale plant roles above that — with the observation this portal has earned the right to repeat: diagnostic scarcity pays. The tech who can trace an IV curve, read a BMS log, and write a root-cause report is not competing with installation labor.',
+        ],
+        keyPoints: [
+          'Install boomed; SERVICE is the under-supplied side — aging fleets need diagnosticians',
+          'Segments: residential service, C&I O&M, utility-scale plants, storage-first roles (fastest premium)',
+          'NABCEP Associate → Professional/specialist paths; state licensing and OEM certs ride along',
+          'Service/O&M $55-80K+, commissioning and BESS fluency above — diagnostic scarcity pays',
+        ],
+        quiz: [
+          {
+            q: 'The structurally under-supplied corner of the solar labor market is:',
+            a: ['Panel installation labor', 'Service/O&M diagnostics: the boom built fleets faster than it built technicians who can troubleshoot them', 'Sales', 'Permitting clerks'],
+            correct: 1,
+            exp: 'Install crews scaled with the boom; the aging-fleet service market did not. The portal graduate\'s diagnostic stack lands on the scarce side.',
+          },
+          {
+            q: 'The industry\'s recognized certification body is:',
+            a: ['EGSA', 'NABCEP — Associate through Professional and specialist credentials', 'CFESA', 'NATE'],
+            correct: 1,
+            exp: 'NABCEP is solar\'s ladder, the analog of NATE/CFESA/EGSA in the sibling trades — with Associate credentials as realistic first-year targets.',
+          },
+        ],
+      },
+      {
+        title: 'The Kit, the Craft, and the Paths',
+        body: [
+          'The kit from the curriculum: the FOUNDATION set (DMM rated for the DC voltages you will meet, clamp with DC capability, megger for the module-14 hunts), the SOLAR set (IV-curve tracer as you grow into commissioning work, irradiance reference cell, IR camera — the three that separate diagnosticians from part-swappers), the SAFETY set (glove program per site policy, opaque module covers for the rare truly-dead requirement, lockout gear), and the STORAGE additions (manufacturer interface tools/apps — the BMS conversation happens through them). Van stock mirrors the catalog: MC4 connectors and the CORRECT crimper (brand-matched — the mixing sin), string fuses, sealants/flashing spares, and the label stock module 16 made you respect.',
+          'The craft habits translate whole, with solar\'s additions: SUN-WINDOW planning (production diagnosis needs producing hours; connector work loves early/late light), WEATHER discipline (roofs, wind, and wet tile — the trade\'s fall hazards outrank its electrical ones statistically: harness discipline is life discipline), the CUSTOMER-EDUCATION load (solar owners watch their apps like day traders — the PR conversation, the seasonal expectation reset, and the mode-configuration walkthrough are recurring deliverables), and the documentation religion that O&M contracts are literally built from.',
+          'The service-business shape: O&M CONTRACTS (annual inspections, monitoring response, PR reporting — recurring revenue with the kitchen-course economics), monitoring-driven dispatch (the fleet dashboard as triage — module 19\'s handoff done right feeding module 20\'s tree), warranty administration (module/inverter/battery claims are process work the disciplined tech turns into a service line), and the retrofit wave (aging fleets need RSD upgrades, storage additions, inverter replacements — installation skills applied surgically to live systems).',
+          'The paths: SERVICE TECH → COMMISSIONING SPECIALIST (the tracer-and-report expert new construction demands) → O&M LEAD/manager; the STORAGE SPECIALIST branch (BESS commissioning, C&I storage, the coming V2X world); UTILITY-SCALE plant operations (the generator course\'s plant discipline under different panels); TECHNICAL SALES and system design; and OWNERSHIP — solar O&M is young enough that the route-density land grab is still on, and the documented, monitored, honest operator wins it. Same hallway as all nine rooms: honest diagnosis, faithful documentation, continuous learning — carried up a ladder, in sunshine.',
+        ],
+        keyPoints: [
+          'The differentiator kit: IV tracer, irradiance reference, IR camera — plus brand-correct MC4 tooling',
+          'Fall protection outranks electrical statistically: harness discipline is life discipline',
+          'O&M contracts + monitoring dispatch + warranty administration = the recurring-revenue engine',
+          'Paths: commissioning specialist, storage/BESS branch, utility plants, design/sales, ownership',
+        ],
+        quiz: [
+          {
+            q: 'Statistically, the solar service trade\'s greatest injury hazard is:',
+            a: ['DC arc flash', 'Falls — roof work makes harness and ladder discipline the trade\'s first safety religion', 'Battery fires', 'Heat stroke alone'],
+            correct: 1,
+            exp: 'The electrical hazards are real and trained-for; gravity injures more solar workers than electricity. Fall protection is the discipline that brings techs home.',
+          },
+          {
+            q: 'The three instruments that most distinguish a solar diagnostician from a parts-swapper are:',
+            a: ['Bigger ladders, more fuses, spare inverters', 'IV-curve tracer, irradiance reference, and IR camera — measurement against model, honestly normalized', 'Drone, tablet, megaphone', 'Two multimeters and hope'],
+            correct: 1,
+            exp: 'Module 19\'s stack: trace against model at measured irradiance, image the heat. The tech who measures owns the diagnosis — and the O&M contract.',
+          },
+        ],
+      },
+    ],
+    test: [
+      { q: 'Solar\'s labor-market structure means the portal graduate is scarcest in:', a: ['Panel hauling', 'Service/O&M diagnostics for the aging installed fleet', 'Door-to-door sales', 'Racking assembly'], correct: 1, exp: 'The boom built systems faster than troubleshooters; diagnosis is the under-supplied side.' },
+      { q: 'NABCEP Associate credentials are:', a: ['Lifetime achievements', 'Realistic first-year targets this curriculum maps toward', 'Utility requirements', 'Only for engineers'], correct: 1, exp: 'The entry rung of solar\'s recognized ladder, with Professional and specialist paths above.' },
+      { q: 'OEM inverter/battery certifications matter because:', a: ['They replace NABCEP', 'Warranty authorization makes the certified tech the dispatchable tech — the every-course economics', 'They are free', 'Code requires them'], correct: 1, exp: 'The manufacturer-school lesson, ninth verse: authorization routes the work.' },
+      { q: 'Experienced solar service/O&M technicians commonly earn:', a: ['$25-35K', '$55-80K, with commissioning and BESS specialists above', 'Minimum wage plus sun', '$150K to start'], correct: 1, exp: 'Diagnostic scarcity pays: the service side clears well above install labor.' },
+      { q: 'The trade\'s statistically dominant injury mechanism is:', a: ['Arc flash', 'Falls from roofs and ladders — harness discipline first', 'Chemical exposure', 'Lifting'], correct: 1, exp: 'Gravity beats electricity in the injury statistics: fall protection is safety religion #1.' },
+      { q: 'MC4 crimp tooling must be:', a: ['Any pliers', 'Brand-matched to the connector system — mixed components are the classic failure seed', 'Hydraulic always', 'Borrowed'], correct: 1, exp: 'The connector catalog begins at the crimper: brand-correct tooling and components, always.' },
+      { q: 'O&M contracts are built from:', a: ['Handshakes', 'Documented baselines, labeled monitoring, PR reporting, and response commitments', 'Panel warranties', 'Utility mandates'], correct: 1, exp: 'The recurring-revenue engine: commissioning artifacts and monitoring discipline become the product.' },
+      { q: 'The retrofit wave in aging fleets includes:', a: ['Nothing serviceable', 'RSD upgrades, storage additions, and inverter replacements on live systems', 'Repainting modules', 'Removing monitoring'], correct: 1, exp: 'Yesterday\'s installs need today\'s code and storage — surgical installation skills on energized fleets.' },
+      { q: 'The storage-specialist branch is attractive because:', a: ['Less training needed', 'BESS commissioning/service demand is growing fastest and pays the premium', 'No customer contact', 'It avoids roofs entirely'], correct: 1, exp: 'Modules 17-18\'s skills meet the attach-rate curve: storage fluency is the premium lane.' },
+      { q: 'The portal\'s career thesis, in its solar verse:', a: ['Sunshine sells itself', 'Honest diagnosis, faithful documentation, continuous learning — measured against model, in every room including this one', 'Certifications alone suffice', 'Install fast, move on'], correct: 1, exp: 'Nine rooms, one hallway: the habits are the career, on the roof as everywhere.' },
+    ],
+  },
 ];
