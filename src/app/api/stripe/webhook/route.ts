@@ -188,6 +188,37 @@ async function grantJrDcCftAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantSolarTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_solar')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_solar_fse_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrSolarFseAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_solar_fse_test_human',
+    examLevel: 'jr_solar_fse',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Solar FSE Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantJrFseAccess(
   userId: string,
   purchaseId: string,
@@ -328,6 +359,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_datacenter_testout':
       await grantDataCenterTrainingAccess(userId, pid);
       await grantJrDcCftAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Solar/BESS) ──────────────────────────────
+    case 'training_solar':
+      await grantSolarTrainingAccess(userId, pid);
+      break;
+
+    // ── Solar Test-Out ─────────────────────────────────────────────────────────
+    case 'jr_solar_fse_test_human':
+      await grantJrSolarFseAccess(userId, pid);
+      break;
+
+    // ── Package: Solar Training + Test-Out ────────────────────────────────────
+    case 'pkg_training_solar_testout':
+      await grantSolarTrainingAccess(userId, pid);
+      await grantJrSolarFseAccess(userId, pid);
       break;
 
     // ── Practice test ($14.99 — no cert issued, not a test-out) ──────────

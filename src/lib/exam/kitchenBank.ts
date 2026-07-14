@@ -14,7 +14,7 @@ import type { TrainingModule, QuizQ } from '@/data/modules';
 
 const CHOICE_IDS = ['A', 'B', 'C', 'D'] as const;
 
-type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft';
+type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse';
 
 interface BankQuestion {
   id: string;
@@ -104,4 +104,8 @@ export function buildGeneratorBankQuestions(): BankQuestion[] {
 export function buildDataCenterBankQuestions(): BankQuestion[] {
   // The DC course sequence IS the curriculum: foundation + shared cores + dc-* modules
   return buildBank(COURSE_SEQUENCES['training_datacenter'], 'jr_dc_cft', 'dct');
+}
+
+export function buildSolarBankQuestions(): BankQuestion[] {
+  return buildBank(COURSE_SEQUENCES['training_solar'], 'jr_solar_fse', 'sjr');
 }

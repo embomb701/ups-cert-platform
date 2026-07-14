@@ -66,34 +66,28 @@ export default function ExamRulesPage() {
     practice_jr_hvac_fse: 'Jr. HVAC FSE Practice Test — Results Only, No Certificate',
     practice_jr_gen_fse: 'Jr. Generator FSE Practice Test — Results Only, No Certificate',
     practice_jr_dc_cft: 'Jr. Data Center CFT Practice Test — Results Only, No Certificate',
+    practice_jr_solar_fse: 'Jr. Solar FSE Practice Test — Results Only, No Certificate',
+  };
+  // Jr-course exam display config: rules token + certification label
+  const JR_COURSE_META: Record<string, { token: string; label: string }> = {
+    jr_kitchen_fse: { token: 'Jr. Kitchen FSE Exam', label: 'Junior Commercial Kitchen Field Service Certification' },
+    jr_hvac_fse: { token: 'Jr. HVAC FSE Exam', label: 'Junior HVAC Field Service Certification' },
+    jr_gen_fse: { token: 'Jr. Generator FSE Exam', label: 'Junior Power Generation Field Service Certification' },
+    jr_dc_cft: { token: 'Jr. Data Center CFT Exam', label: 'Junior Data Center Critical Facilities Certification' },
+    jr_solar_fse: { token: 'Jr. Solar FSE Exam', label: 'Junior Solar & Storage Field Service Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
-  const isKitchen = examType === 'jr_kitchen_fse';
-  const isHvac = examType === 'jr_hvac_fse';
-  const isGen = examType === 'jr_gen_fse';
-  const isDc = examType === 'jr_dc_cft';
-  const isJr = examType === 'jr_fse' || isPractice || isKitchen || isHvac || isGen || isDc;
-  const rules = isKitchen
-    ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Kitchen FSE Exam'))
-    : isHvac
-    ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. HVAC FSE Exam'))
-    : isGen
-    ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Generator FSE Exam'))
-    : isDc
-    ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', 'Jr. Data Center CFT Exam'))
+  const jrCourse = JR_COURSE_META[examType];
+  const isJr = examType === 'jr_fse' || isPractice || !!jrCourse;
+  const rules = jrCourse
+    ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', jrCourse.token))
     : isJr
     ? RULES_JR
     : RULES_FSE;
   const examLabel = isPractice
     ? PRACTICE_LABELS[examType]
-    : isKitchen
-    ? 'Junior Commercial Kitchen Field Service Certification'
-    : isHvac
-    ? 'Junior HVAC Field Service Certification'
-    : isGen
-    ? 'Junior Power Generation Field Service Certification'
-    : isDc
-    ? 'Junior Data Center Critical Facilities Certification'
+    : jrCourse
+    ? jrCourse.label
     : isJr
     ? 'Junior UPS Field Service Certification'
     : 'UPS Field Service Certification';

@@ -98,6 +98,7 @@ export async function POST(req: NextRequest) {
     const hvacComplete = COURSE_SEQUENCES['training_hvac'].every((m) => completedIds.has(m.id));
     const generatorComplete = COURSE_SEQUENCES['training_generator'].every((m) => completedIds.has(m.id));
     const datacenterComplete = COURSE_SEQUENCES['training_datacenter'].every((m) => completedIds.has(m.id));
+    const solarComplete = COURSE_SEQUENCES['training_solar'].every((m) => completedIds.has(m.id));
 
     if (upsComplete) {
       // Grant Jr. FSE exam access (from training path, not test-out)
@@ -171,7 +172,20 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete;
+    if (solarComplete) {
+      await grantPractice('practice_jr_solar_fse');
+      // Grant Jr. Solar FSE exam access (from training path, not test-out)
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_solar_fse_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_solar_fse').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
+    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete;
     return NextResponse.json({ passed: true, results, trainingComplete });
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });

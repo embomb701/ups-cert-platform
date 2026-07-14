@@ -183,6 +183,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // SOLAR & BATTERY ENERGY STORAGE PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_solar: {
+    name: 'Solar & Storage FSE Training Course + Jr. Solar FSE Certification Exam',
+    shortName: 'Solar/BESS Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_SOLAR ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_solar_fse_test_human: {
+    name: 'Jr. Solar & Storage FSE Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Solar FSE Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_SOLAR_FSE_HUMAN ?? '',
+  },
+
+  // Solar training + test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
+  pkg_training_solar_testout: {
+    name: 'Solar/BESS Training Course + Jr. Solar FSE Test-Out (Human Proctored)',
+    shortName: 'Solar Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_SOLAR_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 
