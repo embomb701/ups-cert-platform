@@ -11,10 +11,11 @@ import { HVAC_MODULES } from './hvac-modules';
 import { GENERATOR_MODULES } from './generator-modules';
 import { DATACENTER_MODULES } from './datacenter-modules';
 import { SOLAR_MODULES } from './solar-modules';
+import { EV_MODULES } from './ev-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
 // modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
@@ -40,6 +41,7 @@ export function getModule(id: string): TrainingModule | null {
     GENERATOR_MODULES.find((m) => m.id === id) ??
     DATACENTER_MODULES.find((m) => m.id === id) ??
     SOLAR_MODULES.find((m) => m.id === id) ??
+    EV_MODULES.find((m) => m.id === id) ??
     null
   );
 }
@@ -90,7 +92,7 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
   // Solar/BESS, DC Plants, and Battery Tech share the battery core;
   // their course-specific modules join as they are built.
   training_solar: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS), ...[...SOLAR_MODULES].sort(byNum)],
-  training_evcharging: [...FOUNDATION],
+  training_evcharging: [...FOUNDATION, ...[...EV_MODULES].sort(byNum)],
   training_dcplants: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS)],
   training_battery: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS)],
 };
@@ -139,6 +141,7 @@ export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.id.startsWith('gen-')) return prevModuleInCourse('training_generator', mod);
   if (mod.id.startsWith('dc-')) return prevModuleInCourse('training_datacenter', mod);
   if (mod.id.startsWith('solar-')) return prevModuleInCourse('training_solar', mod);
+  if (mod.id.startsWith('ev-')) return prevModuleInCourse('training_evcharging', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }
