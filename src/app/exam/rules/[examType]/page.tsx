@@ -67,6 +67,7 @@ export default function ExamRulesPage() {
     practice_jr_gen_fse: 'Jr. Generator FSE Practice Test — Results Only, No Certificate',
     practice_jr_dc_cft: 'Jr. Data Center CFT Practice Test — Results Only, No Certificate',
     practice_jr_solar_fse: 'Jr. Solar FSE Practice Test — Results Only, No Certificate',
+    practice_jr_ev_tech: 'Jr. EV Tech Practice Test — Results Only, No Certificate',
   };
   // Jr-course exam display config: rules token + certification label
   const JR_COURSE_META: Record<string, { token: string; label: string }> = {
@@ -75,6 +76,7 @@ export default function ExamRulesPage() {
     jr_gen_fse: { token: 'Jr. Generator FSE Exam', label: 'Junior Power Generation Field Service Certification' },
     jr_dc_cft: { token: 'Jr. Data Center CFT Exam', label: 'Junior Data Center Critical Facilities Certification' },
     jr_solar_fse: { token: 'Jr. Solar FSE Exam', label: 'Junior Solar & Storage Field Service Certification' },
+    jr_ev_tech: { token: 'Jr. EV Tech Exam', label: 'Junior EV Charging Infrastructure Technician Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];

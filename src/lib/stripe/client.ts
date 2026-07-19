@@ -210,6 +210,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // EV CHARGING INFRASTRUCTURE PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_evcharging: {
+    name: 'EV Charging Infrastructure Training Course + Jr. EV Charging Tech Certification Exam',
+    shortName: 'EV Charging Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_EVCHARGING ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_ev_tech_test_human: {
+    name: 'Jr. EV Charging Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. EV Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_EV_TECH_HUMAN ?? '',
+  },
+
+  // EV Charging training + test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
+  pkg_training_evcharging_testout: {
+    name: 'EV Charging Training Course + Jr. EV Tech Test-Out (Human Proctored)',
+    shortName: 'EV Charging Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_EVCHARGING_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 
