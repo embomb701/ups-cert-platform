@@ -14,7 +14,7 @@ import type { TrainingModule, QuizQ } from '@/data/modules';
 
 const CHOICE_IDS = ['A', 'B', 'C', 'D'] as const;
 
-type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech' | 'jr_battery_tech';
+type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech' | 'jr_battery_tech' | 'jr_dc_engineer';
 
 interface BankQuestion {
   id: string;
@@ -120,4 +120,8 @@ export function buildDcPlantsBankQuestions(): BankQuestion[] {
 
 export function buildBatteryBankQuestions(): BankQuestion[] {
   return buildBank(COURSE_SEQUENCES['training_battery'], 'jr_battery_tech', 'batjr');
+}
+
+export function buildDcEngineerBankQuestions(): BankQuestion[] {
+  return buildBank(COURSE_SEQUENCES['training_dcengineer'], 'jr_dc_engineer', 'dcejr');
 }

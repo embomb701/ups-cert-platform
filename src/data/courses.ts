@@ -821,6 +821,39 @@ export const COURSE_OUTLINES: Record<string, CourseOutline> = {
     ],
   },
 
+  // ── DATA CENTER ENGINEER ────────────────────────────────────────────────
+  // The engineering sequel to the CFT course: design, sizing, commissioning,
+  // and credentials. Shares the full CFT technical foundation (UPS, generator,
+  // HVAC, and DC ops modules) and adds six engineering-specific modules.
+  dcengineer: {
+    tracks: ['Critical Power & Cooling Foundation', 'Engineering Design', 'Commissioning & Career'],
+    modules: [
+      { id: 'ups-overview', sharedFrom: 'ups-overview', track: 'Critical Power & Cooling Foundation', title: 'Overview of UPS Systems', desc: 'The power chain\'s core machine — topologies and architecture', chapters: ['Double-conversion, line-interactive, and standby topologies', 'UPS system architecture'] },
+      { id: 'pdu-sts', sharedFrom: 'pdu-sts', track: 'Critical Power & Cooling Foundation', title: 'PDU, RPP, and STS Systems', desc: 'Distribution between UPS and racks', chapters: ['Power distribution units', 'Static transfer switches'] },
+      { id: 'rectifiers', sharedFrom: 'rectifiers', track: 'Critical Power & Cooling Foundation', title: 'Rectifiers', desc: 'AC to DC — the UPS front end', chapters: ['Rectifier fundamentals', 'Bridge rectifiers and filtering'] },
+      { id: 'inverters', sharedFrom: 'inverters', track: 'Critical Power & Cooling Foundation', title: 'Inverters', desc: 'DC to AC — the UPS output stage', chapters: ['Inverter fundamentals', 'PWM and output characteristics'] },
+      { id: 'battery-types', sharedFrom: 'battery-types', track: 'Critical Power & Cooling Foundation', title: 'Battery Types and Chemistry', desc: 'The strings that hold the load during transfer', chapters: ['Lead-acid and VRLA', 'Li-ion and alternatives'] },
+      { id: 'battery-safety', sharedFrom: 'battery-safety', track: 'Critical Power & Cooling Foundation', title: 'Battery Safety and Handling', desc: 'PPE, installation, and testing', chapters: ['Hazards and PPE', 'Testing and maintenance'] },
+      { id: 'gen-starting-systems', sharedFrom: 'gen-starting-systems', track: 'Critical Power & Cooling Foundation', title: 'Starting Systems & Cranking Circuits', desc: 'The ten seconds that matter', chapters: ['Cranking circuit and battery chargers', 'Cold-start readiness'] },
+      { id: 'gen-controls', sharedFrom: 'gen-controls', track: 'Critical Power & Cooling Foundation', title: 'Generator Controllers, Sensors & Alarms', desc: 'Start sequences and event logs', chapters: ['Controller and sequence', 'Alarms and remote monitoring'] },
+      { id: 'gen-ats', sharedFrom: 'gen-ats', track: 'Critical Power & Cooling Foundation', title: 'Automatic Transfer Switches', desc: 'Two live sources — the safety and service discipline', chapters: ['Transfer sequence', 'ATS safety'] },
+      { id: 'gen-critical-power', sharedFrom: 'gen-critical-power', track: 'Critical Power & Cooling Foundation', title: 'Generators in Critical Power Systems', desc: 'NEC 700/701/702 and the generator-UPS handshake', chapters: ['Critical power chain and NEC classes'] },
+      { id: 'gen-nfpa110', sharedFrom: 'gen-nfpa110', track: 'Critical Power & Cooling Foundation', title: 'NFPA 110 & Compliance Testing', desc: 'The testing calendar and documentation', chapters: ['The standard and testing calendar'] },
+      { id: 'hvac-psychrometrics', sharedFrom: 'hvac-psychrometrics', track: 'Critical Power & Cooling Foundation', title: 'Psychrometrics & Human Comfort', desc: 'Temperature, humidity, dew point — the air physics', chapters: ['Temperature and moisture', 'Sensible and latent heat'] },
+      { id: 'hvac-air-distribution', sharedFrom: 'hvac-air-distribution', track: 'Critical Power & Cooling Foundation', title: 'Air Distribution, Ductwork & Airflow', desc: 'Blowers, static pressure, CFM', chapters: ['Blowers and static pressure', 'Filters and balancing'] },
+      { id: 'hvac-chillers-hydronics', sharedFrom: 'hvac-chillers-hydronics', track: 'Critical Power & Cooling Foundation', title: 'Chillers, Boilers & Hydronic Systems', desc: 'Chilled water plants and cooling towers', chapters: ['Why big buildings move water', 'Pumps, valves, and hydronic balancing'] },
+      { id: 'dc-cooling', sharedFrom: 'dc-cooling', track: 'Critical Power & Cooling Foundation', title: 'Data Center Cooling Systems', desc: 'CRAC/CRAH, containment, and the liquid-cooling transition', chapters: ['CRAC vs CRAH and the room airflow circuit', 'Containment, ASHRAE envelopes, and liquid cooling'] },
+      { id: 'dc-monitoring', sharedFrom: 'dc-monitoring', track: 'Critical Power & Cooling Foundation', title: 'EPMS, BMS & DCIM Monitoring', desc: 'The three monitoring stacks — reading what the facility knows', chapters: ['The three stacks: EPMS, BMS, DCIM', 'Alarms, trends, and event forensics'] },
+      { id: 'dc-operations', sharedFrom: 'dc-operations', track: 'Critical Power & Cooling Foundation', title: 'Critical Facility Operations Discipline', desc: 'MOPs, SOPs, EOPs — the operational culture engineers design for', chapters: ['Why data centers run on procedure', 'Redundancy, rounds, and incident response'] },
+      { id: 'dce-design', track: 'Engineering Design', title: 'Data Center Design Fundamentals', desc: 'Tier methodology, site selection, redundancy architecture, and PUE design targets', chapters: ['Tier methodology and site selection', 'Redundancy architecture and PUE design'] },
+      { id: 'dce-electrical', track: 'Engineering Design', title: 'Electrical System Design', desc: 'MV service, switchgear, generator/UPS sizing, distribution, harmonics, and power density', chapters: ['Service entrance, switchgear, and standby sizing', 'Power distribution, density, and harmonics'] },
+      { id: 'dce-mechanical', track: 'Engineering Design', title: 'Mechanical System Design', desc: 'Cooling load, chiller plant, economizers, CRAC/CRAH sizing, and PUE arithmetic', chapters: ['Cooling load and chilled water plant design', 'Economizers, CRAC/CRAH sizing, and PUE arithmetic'] },
+      { id: 'dce-cabling', track: 'Engineering Design', title: 'Structured Cabling and Physical Infrastructure', desc: 'TIA-942 hierarchy, fiber/copper selection, cable management, and physical security design', chapters: ['TIA-942 cabling architecture', 'Physical security design'] },
+      { id: 'dce-commissioning', track: 'Commissioning & Career', title: 'Commissioning and Acceptance Testing', desc: 'Commissioning levels, FAT/SAT, IST scenarios, and the handover package', chapters: ['Commissioning levels and factory acceptance', 'Integrated systems testing and handover'] },
+      { id: 'dce-career', track: 'Commissioning & Career', title: 'Career as a Data Center Engineer', desc: 'MEP firms, commissioning roles, PE licensing, ATD/RCDD credentials, and the AI decade opportunity', chapters: ['The engineering career path', 'Credentials and the AI decade opportunity'] },
+    ],
+  },
+
   // ── BATTERY TECHNICIAN ──────────────────────────────────────────────────
   battery: {
     tracks: ['Chemistry & Safety Core', 'Testing & Service', 'Applications & Career'],
@@ -844,7 +877,7 @@ export interface TrainingCourse {
   tagline: string;
   accessKey: string;
   certTitle: string;
-  color: 'blue' | 'orange' | 'teal' | 'amber' | 'violet' | 'yellow' | 'green' | 'sky' | 'rose';
+  color: 'blue' | 'orange' | 'teal' | 'amber' | 'violet' | 'yellow' | 'green' | 'sky' | 'rose' | 'cyan';
   totalModules: number;
   stripeProductId: string;
   testOutProductId: string;
@@ -967,6 +1000,19 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 18,
     stripeProductId: 'training_battery',
     testOutProductId: 'jr_battery_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'dcengineer',
+    title: 'Data Center Engineer',
+    shortTitle: 'DC Engineer',
+    tagline: 'Design, commission, and verify mission-critical facilities — tier methodology, electrical/mechanical sizing, and the engineering credential for the AI buildout decade.',
+    accessKey: 'training_dcengineer',
+    certTitle: 'Jr. Data Center Engineer',
+    color: 'cyan',
+    totalModules: 34,
+    stripeProductId: 'training_dcengineer',
+    testOutProductId: 'jr_dc_engineer_test_human',
     comingSoon: true,
   },
 ];

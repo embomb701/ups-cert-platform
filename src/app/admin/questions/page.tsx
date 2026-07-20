@@ -30,10 +30,12 @@ const SERVER_FILES = [
   'dcp-jr-derived',
   'battery-jr-fresh.json',
   'battery-jr-derived',
+  'dc-engineer-jr-fresh.json',
+  'dc-engineer-jr-derived',
 ];
 
 export default function AdminQuestionsPage() {
-  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats } | null>(null);
+  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats; jr_dc_engineer?: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
   const [serverImporting, setServerImporting] = useState(false);
@@ -285,6 +287,20 @@ export default function AdminQuestionsPage() {
                 <p className="text-xs text-gray-500">active of {stats.jr_battery_tech.total.toLocaleString()} total · target 1,000</p>
                 <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
                   <div className="h-full bg-lime-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_battery_tech.active / 1000) * 100)}%` }} />
+                </div>
+              </>
+            ) : <p className="text-xs text-red-400">Failed to load</p>}
+          </div>
+          <div className="card-dark p-5">
+            <h3 className="text-sm font-semibold text-white mb-2">Jr. DC Engineer Bank</h3>
+            {statsLoading ? (
+              <p className="text-xs text-gray-500">Loading…</p>
+            ) : stats?.jr_dc_engineer ? (
+              <>
+                <p className="text-2xl font-bold text-cyan-400">{stats.jr_dc_engineer.active.toLocaleString()}</p>
+                <p className="text-xs text-gray-500">active of {stats.jr_dc_engineer.total.toLocaleString()} total · target 1,000</p>
+                <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
+                  <div className="h-full bg-cyan-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_dc_engineer.active / 1000) * 100)}%` }} />
                 </div>
               </>
             ) : <p className="text-xs text-red-400">Failed to load</p>}

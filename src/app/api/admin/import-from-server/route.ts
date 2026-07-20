@@ -21,7 +21,8 @@ import solarFresh from '../../../../../data/questions/solar-jr-fresh.json';
 import evFresh from '../../../../../data/questions/ev-jr-fresh.json';
 import dcpFresh from '../../../../../data/questions/dcp-jr-fresh.json';
 import batteryFresh from '../../../../../data/questions/battery-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions } from '@/lib/exam/kitchenBank';
+import dcEngineerFresh from '../../../../../data/questions/dc-engineer-jr-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -39,6 +40,7 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'ev-jr-fresh.json':          evFresh as QuestionRecord[],
   'dcp-jr-fresh.json':         dcpFresh as QuestionRecord[],
   'battery-jr-fresh.json':     batteryFresh as QuestionRecord[],
+  'dc-engineer-jr-fresh.json': dcEngineerFresh as QuestionRecord[],
   // Derived from course content (shared foundation + course-specific modules)
   'kitchen-jr-fse-derived':    buildKitchenBankQuestions() as unknown as QuestionRecord[],
   'hvac-jr-fse-derived':       buildHvacBankQuestions() as unknown as QuestionRecord[],
@@ -48,6 +50,7 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'ev-jr-derived':             buildEvChargingBankQuestions() as unknown as QuestionRecord[],
   'dcp-jr-derived':            buildDcPlantsBankQuestions() as unknown as QuestionRecord[],
   'battery-jr-derived':        buildBatteryBankQuestions() as unknown as QuestionRecord[],
+  'dc-engineer-jr-derived':    buildDcEngineerBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -72,6 +75,8 @@ const FILE_ORDER = [
   'dcp-jr-derived',
   'battery-jr-fresh.json',
   'battery-jr-derived',
+  'dc-engineer-jr-fresh.json',
+  'dc-engineer-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

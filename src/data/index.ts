@@ -14,10 +14,11 @@ import { SOLAR_MODULES } from './solar-modules';
 import { EV_MODULES } from './ev-modules';
 import { DCPLANTS_MODULES } from './dcplants-modules';
 import { BATTERY_MODULES } from './battery-modules';
+import { DCENGINEER_MODULES } from './dcengineer-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
 // modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
@@ -46,6 +47,7 @@ export function getModule(id: string): TrainingModule | null {
     EV_MODULES.find((m) => m.id === id) ??
     DCPLANTS_MODULES.find((m) => m.id === id) ??
     BATTERY_MODULES.find((m) => m.id === id) ??
+    DCENGINEER_MODULES.find((m) => m.id === id) ??
     null
   );
 }
@@ -99,6 +101,16 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
   training_evcharging: [...FOUNDATION, ...[...EV_MODULES].sort(byNum)],
   training_dcplants: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS), ...[...DCPLANTS_MODULES].sort(byNum)],
   training_battery: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS), ...[...BATTERY_MODULES].sort(byNum)],
+  // Data Center Engineer: foundation + UPS tech core + generator ops + HVAC cooling +
+  // the three DC-specific ops modules (cooling, monitoring, operations) + DCE engineering modules
+  training_dcengineer: [
+    ...FOUNDATION,
+    ...byIds(ALL_MODULES, ['ups-overview', 'pdu-sts', 'rectifiers', 'inverters', 'battery-types', 'battery-safety']),
+    ...byIds(GENERATOR_MODULES, ['gen-starting-systems', 'gen-controls', 'gen-ats', 'gen-critical-power', 'gen-nfpa110']),
+    ...byIds(HVAC_MODULES, ['hvac-psychrometrics', 'hvac-air-distribution', 'hvac-chillers-hydronics']),
+    ...byIds(DATACENTER_MODULES, ['dc-cooling', 'dc-monitoring', 'dc-operations']),
+    ...[...DCENGINEER_MODULES].sort(byNum),
+  ],
 };
 
 // Which examAccess doc(s) grant access to a module — derived from course
@@ -148,6 +160,7 @@ export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.id.startsWith('ev-')) return prevModuleInCourse('training_evcharging', mod);
   if (mod.id.startsWith('dcp-')) return prevModuleInCourse('training_dcplants', mod);
   if (mod.id.startsWith('bat-')) return prevModuleInCourse('training_battery', mod);
+  if (mod.id.startsWith('dce-')) return prevModuleInCourse('training_dcengineer', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }

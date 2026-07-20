@@ -312,6 +312,37 @@ async function grantJrDcpTechAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantDcEngineerTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_dcengineer')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_dc_engineer_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrDcEngineerAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_dc_engineer_test_human',
+    examLevel: 'jr_dc_engineer',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Data Center Engineer Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantJrFseAccess(
   userId: string,
   purchaseId: string,
@@ -516,6 +547,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_battery_testout':
       await grantBatteryTrainingAccess(userId, pid);
       await grantJrBatteryTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Data Center Engineer) ─────────────────────
+    case 'training_dcengineer':
+      await grantDcEngineerTrainingAccess(userId, pid);
+      break;
+
+    // ── DC Engineer Test-Out ──────────────────────────────────────────────────
+    case 'jr_dc_engineer_test_human':
+      await grantJrDcEngineerAccess(userId, pid);
+      break;
+
+    // ── Package: DC Engineer Training + Test-Out ─────────────────────────────
+    case 'pkg_training_dcengineer_testout':
+      await grantDcEngineerTrainingAccess(userId, pid);
+      await grantJrDcEngineerAccess(userId, pid);
       break;
 
     // ── Practice test ($14.99 — no cert issued, not a test-out) ──────────

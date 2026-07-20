@@ -291,6 +291,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // DATA CENTER ENGINEER PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_dcengineer: {
+    name: 'Data Center Engineer Training Course + Jr. DC Engineer Certification Exam',
+    shortName: 'DC Engineer Training Course',
+    priceInCents: 199900,   // $1,999 (premium: 34 modules)
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_DCENGINEER ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_dc_engineer_test_human: {
+    name: 'Jr. Data Center Engineer Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. DC Engineer Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_DC_ENGINEER_HUMAN ?? '',
+  },
+
+  // DC Engineer training + test-out ($1,999 + $299 = $2,298 → $2,199, save $99)
+  pkg_training_dcengineer_testout: {
+    name: 'DC Engineer Training Course + Jr. DC Engineer Test-Out (Human Proctored)',
+    shortName: 'DC Engineer Training + Test-Out Package',
+    priceInCents: 219900,   // $2,199
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_DCENGINEER_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

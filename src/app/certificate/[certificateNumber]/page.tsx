@@ -46,6 +46,7 @@ export default async function CertificatePrintPage({ params }: Props) {
     : cert.examLevel === 'jr_ev_tech' ? 'Junior EV Charging Infrastructure Technician'
     : cert.examLevel === 'jr_dcp_tech' ? 'Junior Telecom DC Power Plants Technician'
     : cert.examLevel === 'jr_battery_tech' ? 'Junior Battery Systems Technician'
+    : cert.examLevel === 'jr_dc_engineer' ? 'Junior Data Center Engineer'
     : 'Field Service Engineer';
 
   return (
