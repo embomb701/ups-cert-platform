@@ -250,6 +250,37 @@ async function grantJrEvTechAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantBatteryTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_battery')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_battery_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrBatteryTechAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_battery_tech_test_human',
+    examLevel: 'jr_battery_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Battery Tech Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantDcPlantsTrainingAccess(userId: string, purchaseId: string) {
   await adminDb
     .collection('users').doc(userId)
@@ -469,6 +500,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_dcplants_testout':
       await grantDcPlantsTrainingAccess(userId, pid);
       await grantJrDcpTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Battery Systems) ─────────────────────────
+    case 'training_battery':
+      await grantBatteryTrainingAccess(userId, pid);
+      break;
+
+    // ── Battery Systems Test-Out ──────────────────────────────────────────────
+    case 'jr_battery_tech_test_human':
+      await grantJrBatteryTechAccess(userId, pid);
+      break;
+
+    // ── Package: Battery Systems Training + Test-Out ─────────────────────────
+    case 'pkg_training_battery_testout':
+      await grantBatteryTrainingAccess(userId, pid);
+      await grantJrBatteryTechAccess(userId, pid);
       break;
 
     // ── Practice test ($14.99 — no cert issued, not a test-out) ──────────

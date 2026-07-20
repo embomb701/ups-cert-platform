@@ -264,6 +264,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // BATTERY SYSTEMS TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_battery: {
+    name: 'Battery Systems Technician Training Course + Jr. Battery Tech Certification Exam',
+    shortName: 'Battery Tech Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_BATTERY ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_battery_tech_test_human: {
+    name: 'Jr. Battery Systems Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Battery Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_BATTERY_TECH_HUMAN ?? '',
+  },
+
+  // Battery Tech training + test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
+  pkg_training_battery_testout: {
+    name: 'Battery Tech Training Course + Jr. Battery Tech Test-Out (Human Proctored)',
+    shortName: 'Battery Tech Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_BATTERY_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 
