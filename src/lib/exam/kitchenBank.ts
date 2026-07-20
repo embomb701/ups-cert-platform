@@ -9,12 +9,12 @@
  * - HVAC course (shared 1-10 + refrigeration core + hvac 13-25) → 'jr_hvac_fse'
  */
 
-import { ALL_MODULES, KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, EV_MODULES, COURSE_SEQUENCES } from '@/data/index';
+import { ALL_MODULES, KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, EV_MODULES, DCPLANTS_MODULES, COURSE_SEQUENCES } from '@/data/index';
 import type { TrainingModule, QuizQ } from '@/data/modules';
 
 const CHOICE_IDS = ['A', 'B', 'C', 'D'] as const;
 
-type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech';
+type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech';
 
 interface BankQuestion {
   id: string;
@@ -112,4 +112,8 @@ export function buildSolarBankQuestions(): BankQuestion[] {
 
 export function buildEvChargingBankQuestions(): BankQuestion[] {
   return buildBank(COURSE_SEQUENCES['training_evcharging'], 'jr_ev_tech', 'evjr');
+}
+
+export function buildDcPlantsBankQuestions(): BankQuestion[] {
+  return buildBank(COURSE_SEQUENCES['training_dcplants'], 'jr_dcp_tech', 'dcpjr');
 }

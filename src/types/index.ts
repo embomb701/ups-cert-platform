@@ -2,7 +2,7 @@
 // Core shared types for UPS Certification Platform
 // ============================================================
 
-export type ExamLevel = 'jr_fse' | 'fse' | 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech';
+export type ExamLevel = 'jr_fse' | 'fse' | 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech';
 export type UserRole = 'user' | 'admin' | 'proctor';
 export type CertificateStatus = 'valid' | 'expired' | 'revoked' | 'under_review';
 export type PurchaseStatus = 'pending' | 'complete' | 'refunded' | 'failed';
@@ -89,6 +89,9 @@ export const PRODUCTS = {
   TRAINING_EVCHARGING: 'training_evcharging',
   JR_EV_TECH_TEST_HUMAN: 'jr_ev_tech_test_human',
   PKG_TRAINING_EVCHARGING_TESTOUT: 'pkg_training_evcharging_testout',
+  TRAINING_DCPLANTS: 'training_dcplants',
+  JR_DCP_TECH_TEST_HUMAN: 'jr_dcp_tech_test_human',
+  PKG_TRAINING_DCPLANTS_TESTOUT: 'pkg_training_dcplants_testout',
 } as const;
 
 // Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts

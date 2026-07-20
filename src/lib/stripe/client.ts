@@ -237,6 +237,33 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // TELECOM DC POWER PLANTS PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_dcplants: {
+    name: 'Telecom DC Power Plants Training Course + Jr. DC Plants Tech Certification Exam',
+    shortName: 'DC Plants Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_DCPLANTS ?? '',
+  },
+
+  // Human proctored test-out: skip training — one attempt only, fail = must train
+  jr_dcp_tech_test_human: {
+    name: 'Jr. DC Plants Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. DC Plants Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_DCP_TECH_HUMAN ?? '',
+  },
+
+  // DC Plants training + test-out ($1,499 + $299 = $1,798 → $1,749, save $49)
+  pkg_training_dcplants_testout: {
+    name: 'DC Plants Training Course + Jr. DC Plants Tech Test-Out (Human Proctored)',
+    shortName: 'DC Plants Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_DCPLANTS_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

@@ -19,7 +19,8 @@ import generatorFresh from '../../../../../data/questions/generator-jr-fse-fresh
 import datacenterFresh from '../../../../../data/questions/datacenter-jr-fresh.json';
 import solarFresh from '../../../../../data/questions/solar-jr-fresh.json';
 import evFresh from '../../../../../data/questions/ev-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions } from '@/lib/exam/kitchenBank';
+import dcpFresh from '../../../../../data/questions/dcp-jr-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -35,6 +36,7 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'datacenter-jr-fresh.json':  datacenterFresh as QuestionRecord[],
   'solar-jr-fresh.json':       solarFresh as QuestionRecord[],
   'ev-jr-fresh.json':          evFresh as QuestionRecord[],
+  'dcp-jr-fresh.json':         dcpFresh as QuestionRecord[],
   // Derived from course content (shared foundation + course-specific modules)
   'kitchen-jr-fse-derived':    buildKitchenBankQuestions() as unknown as QuestionRecord[],
   'hvac-jr-fse-derived':       buildHvacBankQuestions() as unknown as QuestionRecord[],
@@ -42,6 +44,7 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'datacenter-jr-derived':     buildDataCenterBankQuestions() as unknown as QuestionRecord[],
   'solar-jr-derived':          buildSolarBankQuestions() as unknown as QuestionRecord[],
   'ev-jr-derived':             buildEvChargingBankQuestions() as unknown as QuestionRecord[],
+  'dcp-jr-derived':            buildDcPlantsBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -62,6 +65,8 @@ const FILE_ORDER = [
   'solar-jr-derived',
   'ev-jr-fresh.json',
   'ev-jr-derived',
+  'dcp-jr-fresh.json',
+  'dcp-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

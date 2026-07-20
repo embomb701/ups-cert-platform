@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
         await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').update({ testOutFailed: true });
       }
     }
-    const JR_COURSE_LEVELS = ['jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech'];
+    const JR_COURSE_LEVELS = ['jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech'];
     if (!passed && JR_COURSE_LEVELS.includes(attempt.examLevel) && (attempt as { testOut?: boolean }).testOut) {
       await adminDb.collection('users').doc(uid).collection('examAccess').doc(attempt.examLevel).set(
         { testOut: true, testOutFailed: true },
@@ -148,6 +148,8 @@ export async function POST(req: NextRequest) {
           ? 'Junior Solar & Storage Field Service Certification'
           : attempt.examLevel === 'jr_ev_tech'
           ? 'Junior EV Charging Infrastructure Technician Certification'
+          : attempt.examLevel === 'jr_dcp_tech'
+          ? 'Junior Telecom DC Power Plants Technician Certification'
           : 'UPS Field Service Certification';
 
       await adminDb.collection('certificates').doc(certificateId).set({

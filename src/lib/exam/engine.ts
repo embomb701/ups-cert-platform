@@ -124,6 +124,7 @@ export function generateCertNumber(examLevel: ExamLevel): string {
     : examLevel === 'jr_dc_cft' ? 'DCT'
     : examLevel === 'jr_solar_fse' ? 'SJR'
     : examLevel === 'jr_ev_tech' ? 'EVT'
+    : examLevel === 'jr_dcp_tech' ? 'DCP'
     : 'FSE';
   const year = new Date().getFullYear();
   const rand = uuidv4().split('-')[0].toUpperCase();

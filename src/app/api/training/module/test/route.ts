@@ -100,6 +100,7 @@ export async function POST(req: NextRequest) {
     const datacenterComplete = COURSE_SEQUENCES['training_datacenter'].every((m) => completedIds.has(m.id));
     const solarComplete = COURSE_SEQUENCES['training_solar'].every((m) => completedIds.has(m.id));
     const evChargingComplete = COURSE_SEQUENCES['training_evcharging'].every((m) => completedIds.has(m.id));
+    const dcPlantsComplete = COURSE_SEQUENCES['training_dcplants'].every((m) => completedIds.has(m.id));
 
     if (upsComplete) {
       // Grant Jr. FSE exam access (from training path, not test-out)
@@ -198,7 +199,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete;
+    if (dcPlantsComplete) {
+      await grantPractice('practice_jr_dcp_tech');
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_dcp_tech_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_dcp_tech').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
+    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete;
     return NextResponse.json({ passed: true, results, trainingComplete });
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
