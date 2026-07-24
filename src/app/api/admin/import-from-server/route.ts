@@ -24,7 +24,9 @@ import batteryFresh from '../../../../../data/questions/battery-jr-fresh.json';
 import dcEngineerFresh from '../../../../../data/questions/dc-engineer-jr-fresh.json';
 import marineFresh from '../../../../../data/questions/marine-jr-fresh.json';
 import poolFresh from '../../../../../data/questions/pool-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions } from '@/lib/exam/kitchenBank';
+import hvacTechFresh from '../../../../../data/questions/hvac-tech-jr-fresh.json';
+import solarInstFresh from '../../../../../data/questions/solar-installer-jr-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -45,6 +47,8 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'dc-engineer-jr-fresh.json': dcEngineerFresh as QuestionRecord[],
   'marine-jr-fresh.json':      marineFresh as QuestionRecord[],
   'pool-jr-fresh.json':        poolFresh as QuestionRecord[],
+  'hvac-tech-jr-fresh.json':   hvacTechFresh as QuestionRecord[],
+  'solar-installer-jr-fresh.json': solarInstFresh as QuestionRecord[],
   // Derived from course content (shared foundation + course-specific modules)
   'kitchen-jr-fse-derived':    buildKitchenBankQuestions() as unknown as QuestionRecord[],
   'hvac-jr-fse-derived':       buildHvacBankQuestions() as unknown as QuestionRecord[],
@@ -57,6 +61,8 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'dc-engineer-jr-derived':    buildDcEngineerBankQuestions() as unknown as QuestionRecord[],
   'marine-jr-derived':         buildMarineBankQuestions() as unknown as QuestionRecord[],
   'pool-jr-derived':           buildPoolBankQuestions() as unknown as QuestionRecord[],
+  'hvac-tech-jr-derived':      buildHvacTechBankQuestions() as unknown as QuestionRecord[],
+  'solar-installer-jr-derived': buildSolarInstBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -87,6 +93,10 @@ const FILE_ORDER = [
   'marine-jr-derived',
   'pool-jr-fresh.json',
   'pool-jr-derived',
+  'hvac-tech-jr-fresh.json',
+  'hvac-tech-jr-derived',
+  'solar-installer-jr-fresh.json',
+  'solar-installer-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

@@ -895,6 +895,32 @@ export const COURSE_OUTLINES: Record<string, CourseOutline> = {
       { id: 'bat-career', track: 'Applications & Career', title: 'Career in Battery Service', desc: 'The specialist who serves every other trade on this portal', chapters: ['The market: UPS strings, telecom, BESS, motive, rental', 'Where battery techs sit in every other course\'s world', 'Certifications and IEEE-standard literacy as a differentiator', 'Career paths: string tech → test specialist → BESS commissioning'] },
     ],
   },
+
+  // ── HVAC TECHNICIAN ──────────────────────────────────────────────────────
+  'hvac-tech': {
+    tracks: ['Refrigeration & Electrical', 'Systems & Comfort', 'Codes & Career'],
+    modules: [
+      { id: 'hvact-refrigeration', track: 'Refrigeration & Electrical', title: 'Refrigeration Cycle & Thermodynamics', desc: 'Vapor-compression cycle, P-H diagrams, superheat, subcooling, and charging methods', chapters: ['Four-component cycle', 'P-H diagram and refrigerant states', 'Superheat target 8–12°F', 'Subcooling target 10–15°F', 'Charging by weight and field superheat method', 'Blend fractionation and liquid charging'] },
+      { id: 'hvact-electrical', track: 'Refrigeration & Electrical', title: 'Electrical Controls & Safety', desc: 'Contactors, capacitors, motor circuits, NEC Article 440, and LOTO procedures', chapters: ['Contactor coil 24V / contacts line voltage', 'PSC motor and run capacitor ±10%', 'Dual-run capacitors (HERM/FAN/COM)', 'NEC 440: 125% RLA conductors, MOCP, disconnect within sight', 'OSHA 1910.147 LOTO — all energy sources', 'Test-before-touch protocol'] },
+      { id: 'hvact-heatpump', track: 'Systems & Comfort', title: 'Heat Pumps & Mini-Splits', desc: 'Reversing valve, defrost cycle, SEER2/HSPF2, and mini-split installation', chapters: ['Reversing valve — O/B wiring energized-cooling convention', 'Heating mode: outdoor coil = evaporator', 'Defrost cycle — aux heat energizes, outdoor fan stops', 'SEER2/HSPF2 updated test conditions', 'Inverter compressor variable-speed advantages', 'Flare connections — no field brazing'] },
+      { id: 'hvact-airhandling', track: 'Systems & Comfort', title: 'Air Handling & Distribution', desc: 'Ductwork design, TESP, MERV ratings, filtration, and IAQ', chapters: ['Total external static pressure (TESP)', 'Manual D duct sizing procedure', 'MERV 8–11 residential sweet spot', 'Return duct undersizing — most common error', 'Flex duct: 4-foot max support, no kinks', 'CO₂ demand-controlled ventilation'] },
+      { id: 'hvact-epa608', track: 'Codes & Career', title: 'EPA Section 608 & Refrigerant Handling', desc: 'Recovery requirements, AIM Act, A2L safety, GWP, and the R-410A phase-out', chapters: ['Section 608 prohibition on knowing venting', 'Four certification types: I, II, III, Universal', 'ARI 700 purity for reclaimed refrigerant', 'AIM Act: 85% HFC phasedown by 2036', 'R-410A prohibited in new equipment after Jan 1 2025', 'A2L (R-454B, R-32): flammability precautions and leak detection'] },
+      { id: 'hvact-career', track: 'Codes & Career', title: 'HVAC Troubleshooting & Career Path', desc: 'Systematic diagnosis, NATE certification, state licensing, and career progression', chapters: ['Four-quadrant pressure check', 'Fault signature library: high/low suction + high/low discharge', 'True RMS meter for VFD/inverter systems', 'NATE Core + specialty exams', 'EPA 608 federal requirement vs state HVAC license', 'Career path: apprentice → journeyman → specialty tech → contractor'] },
+    ],
+  },
+
+  // ── SOLAR INSTALLER ──────────────────────────────────────────────────────
+  'solar-inst': {
+    tracks: ['PV Fundamentals & Codes', 'Equipment & Storage', 'Installation & Career'],
+    modules: [
+      { id: 'sinst-pv-fundamentals', track: 'PV Fundamentals & Codes', title: 'PV Cell Physics & System Design', desc: 'I-V curves, STC ratings, temperature coefficients, irradiance, shading, and system sizing', chapters: ['Photovoltaic effect and I-V curve', 'STC: 1000 W/m², 25°C cell, AM1.5', 'Temperature coefficient of Pmax: –0.35%/°C typical', 'Peak sun hours (PSH) and PVWatts', 'Shading and bypass diodes', 'Derate factors and system sizing'] },
+      { id: 'sinst-nec690', track: 'PV Fundamentals & Codes', title: 'NEC Article 690 & Solar Safety', desc: 'String voltage limits, conductor sizing, rapid shutdown, AFCI, and grounding', chapters: ['NEC 690.7: 600V residential, 1000V commercial max DC', 'NEC 690.8: conductors at 125% Isc', 'Max string Voc at record low temperature', 'NEC 690.12: RSD ≤30V in 30 seconds', 'NEC 690.11: AFCI — DC arcs are self-sustaining', 'UL 2703 bonding hardware and EGC'] },
+      { id: 'sinst-inverters', track: 'Equipment & Storage', title: 'String Inverters & Power Optimizers', desc: 'MPPT, grid-tie anti-islanding, dual-MPPT strings, power optimizers, and microinverters', chapters: ['MPPT algorithm and I-V tracking', 'Anti-islanding per UL 1741 / IEEE 1547', 'String sizing: Vmin and Vmax both checked', 'Transformerless inverters and isolation monitoring', 'Power optimizers: DC-DC per module', 'Microinverters: AC at each module, built-in RSD'] },
+      { id: 'sinst-battery', track: 'Equipment & Storage', title: 'Battery Storage Systems & NEC 706', desc: 'AC/DC coupling, LiFePO4 chemistry, BMS, and energy storage system safety', chapters: ['AC-coupled vs DC-coupled efficiency', 'Hybrid inverter backup operation', 'LiFePO4 thermal stability vs NMC', 'BMS: overcharge, over-discharge, thermal protection', 'NEC 706: disconnect, UL 9540 listing, ventilation', 'Depth of discharge and cycle life'] },
+      { id: 'sinst-mounting', track: 'Installation & Career', title: 'Mounting, Racking & Commissioning', desc: 'Roof attachment, structural loading, conduit methods, and commissioning procedures', chapters: ['Lag bolt 2.5" minimum rafter penetration', 'Flashing every roof penetration', 'Dead load, snow load, wind uplift', 'USE-2/PV Wire for outdoor exposed conductors', 'Pre-commissioning: Voc and Isc measurement per string', 'AHJ inspection and utility PTO required before energizing'] },
+      { id: 'sinst-nabcep', track: 'Installation & Career', title: 'NABCEP Certification & Solar Career', desc: 'NABCEP PV Associate vs PVIP, state licensing, solar design tools, and career progression', chapters: ['NABCEP PV Associate: knowledge-based, no experience minimum', 'NABCEP PVIP: 58 hours field experience + advanced exam', 'State electrical licensing vs NABCEP credential', 'Federal ITC 30% (2024–2032)', 'Aurora Solar and PVWatts design tools', 'Career path: installer → lead → designer → contractor; storage specialty premium'] },
+    ],
+  },
 };
 
 export interface TrainingCourse {
@@ -904,7 +930,7 @@ export interface TrainingCourse {
   tagline: string;
   accessKey: string;
   certTitle: string;
-  color: 'blue' | 'orange' | 'teal' | 'amber' | 'violet' | 'yellow' | 'green' | 'sky' | 'rose' | 'cyan';
+  color: 'blue' | 'orange' | 'teal' | 'amber' | 'violet' | 'yellow' | 'green' | 'sky' | 'rose' | 'cyan' | 'emerald';
   totalModules: number;
   stripeProductId: string;
   testOutProductId: string;
@@ -1066,6 +1092,32 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 17,
     stripeProductId: 'training_pool',
     testOutProductId: 'jr_pool_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'hvac-tech',
+    title: 'HVAC Technician',
+    shortTitle: 'HVAC Tech',
+    tagline: 'Service residential and light-commercial HVAC systems — refrigeration cycle, heat pumps, controls, EPA 608, A2L refrigerants, and NATE certification.',
+    accessKey: 'training_hvac_tech',
+    certTitle: 'Jr. HVAC Technician',
+    color: 'emerald',
+    totalModules: 16,
+    stripeProductId: 'training_hvac_tech',
+    testOutProductId: 'jr_hvac_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'solar-inst',
+    title: 'Solar Installer',
+    shortTitle: 'Solar Installer',
+    tagline: 'Install and commission residential and commercial solar PV systems — NEC 690, string design, MLPE, battery storage, and NABCEP certification.',
+    accessKey: 'training_solar_inst',
+    certTitle: 'Jr. Solar Installer',
+    color: 'amber',
+    totalModules: 16,
+    stripeProductId: 'training_solar_inst',
+    testOutProductId: 'jr_solar_inst_test_human',
     comingSoon: true,
   },
 ];

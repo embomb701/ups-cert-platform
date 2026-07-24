@@ -36,10 +36,14 @@ const SERVER_FILES = [
   'marine-jr-derived',
   'pool-jr-fresh.json',
   'pool-jr-derived',
+  'hvac-tech-jr-fresh.json',
+  'hvac-tech-jr-derived',
+  'solar-installer-jr-fresh.json',
+  'solar-installer-jr-derived',
 ];
 
 export default function AdminQuestionsPage() {
-  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats; jr_dc_engineer?: BankStats; jr_marine_tech?: BankStats; jr_pool_tech?: BankStats } | null>(null);
+  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats; jr_dc_engineer?: BankStats; jr_marine_tech?: BankStats; jr_pool_tech?: BankStats; jr_hvac_tech?: BankStats; jr_solar_inst?: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
   const [serverImporting, setServerImporting] = useState(false);
@@ -333,6 +337,36 @@ export default function AdminQuestionsPage() {
                 <p className="text-xs text-gray-500">active of {stats.jr_pool_tech.total.toLocaleString()} total · target 1,000</p>
                 <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
                   <div className="h-full bg-sky-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_pool_tech.active / 1000) * 100)}%` }} />
+                </div>
+              </>
+            ) : <p className="text-xs text-red-400">Failed to load</p>}
+          </div>
+
+          <div className="card-dark p-5">
+            <h3 className="text-sm font-semibold text-white mb-2">Jr. HVAC Tech Bank</h3>
+            {statsLoading ? (
+              <p className="text-xs text-gray-500">Loading…</p>
+            ) : stats?.jr_hvac_tech ? (
+              <>
+                <p className="text-2xl font-bold text-emerald-400">{stats.jr_hvac_tech.active.toLocaleString()}</p>
+                <p className="text-xs text-gray-500">active of {stats.jr_hvac_tech.total.toLocaleString()} total · target 1,000</p>
+                <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
+                  <div className="h-full bg-emerald-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_hvac_tech.active / 1000) * 100)}%` }} />
+                </div>
+              </>
+            ) : <p className="text-xs text-red-400">Failed to load</p>}
+          </div>
+
+          <div className="card-dark p-5">
+            <h3 className="text-sm font-semibold text-white mb-2">Jr. Solar Installer Bank</h3>
+            {statsLoading ? (
+              <p className="text-xs text-gray-500">Loading…</p>
+            ) : stats?.jr_solar_inst ? (
+              <>
+                <p className="text-2xl font-bold text-amber-400">{stats.jr_solar_inst.active.toLocaleString()}</p>
+                <p className="text-xs text-gray-500">active of {stats.jr_solar_inst.total.toLocaleString()} total · target 1,000</p>
+                <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
+                  <div className="h-full bg-amber-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_solar_inst.active / 1000) * 100)}%` }} />
                 </div>
               </>
             ) : <p className="text-xs text-red-400">Failed to load</p>}

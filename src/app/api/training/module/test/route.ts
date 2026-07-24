@@ -105,6 +105,8 @@ export async function POST(req: NextRequest) {
     const dcEngineerComplete = COURSE_SEQUENCES['training_dcengineer'].every((m) => completedIds.has(m.id));
     const marineComplete = COURSE_SEQUENCES['training_marine'].every((m) => completedIds.has(m.id));
     const poolComplete = COURSE_SEQUENCES['training_pool'].every((m) => completedIds.has(m.id));
+    const hvacTechComplete = COURSE_SEQUENCES['training_hvac_tech'].every((m) => completedIds.has(m.id));
+    const solarInstComplete = COURSE_SEQUENCES['training_solar_inst'].every((m) => completedIds.has(m.id));
 
     if (upsComplete) {
       // Grant Jr. FSE exam access (from training path, not test-out)
@@ -263,7 +265,31 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete || batteryComplete || dcEngineerComplete || marineComplete || poolComplete;
+    if (hvacTechComplete) {
+      await grantPractice('practice_jr_hvac_tech');
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_hvac_tech_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_hvac_tech').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
+    if (solarInstComplete) {
+      await grantPractice('practice_jr_solar_inst');
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_solar_inst_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_solar_inst').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
+    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete || batteryComplete || dcEngineerComplete || marineComplete || poolComplete || hvacTechComplete || solarInstComplete;
     return NextResponse.json({ passed: true, results, trainingComplete });
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });

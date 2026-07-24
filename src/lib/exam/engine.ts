@@ -129,6 +129,8 @@ export function generateCertNumber(examLevel: ExamLevel): string {
     : examLevel === 'jr_dc_engineer' ? 'DCE'
     : examLevel === 'jr_marine_tech' ? 'MAR'
     : examLevel === 'jr_pool_tech' ? 'POL'
+    : examLevel === 'jr_hvac_tech' ? 'HVT'
+    : examLevel === 'jr_solar_inst' ? 'SLR'
     : 'FSE';
   const year = new Date().getFullYear();
   const rand = uuidv4().split('-')[0].toUpperCase();

@@ -405,6 +405,68 @@ async function grantJrPoolTechAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantHvacTechTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_hvac_tech')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_hvac_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrHvacTechAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_hvac_tech_test_human',
+    examLevel: 'jr_hvac_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. HVAC Tech Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
+async function grantSolarInstTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_solar_inst')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_solar_inst_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrSolarInstAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_solar_inst_test_human',
+    examLevel: 'jr_solar_inst',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Solar Installer Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantJrFseAccess(
   userId: string,
   purchaseId: string,
@@ -657,6 +719,38 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_pool_testout':
       await grantPoolTrainingAccess(userId, pid);
       await grantJrPoolTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (HVAC Technician) ─────────────────────────
+    case 'training_hvac_tech':
+      await grantHvacTechTrainingAccess(userId, pid);
+      break;
+
+    // ── HVAC Tech Test-Out ────────────────────────────────────────────────────
+    case 'jr_hvac_tech_test_human':
+      await grantJrHvacTechAccess(userId, pid);
+      break;
+
+    // ── Package: HVAC Tech Training + Test-Out ────────────────────────────────
+    case 'pkg_training_hvac_tech_testout':
+      await grantHvacTechTrainingAccess(userId, pid);
+      await grantJrHvacTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Solar Installer) ──────────────────────────
+    case 'training_solar_inst':
+      await grantSolarInstTrainingAccess(userId, pid);
+      break;
+
+    // ── Solar Installer Test-Out ──────────────────────────────────────────────
+    case 'jr_solar_inst_test_human':
+      await grantJrSolarInstAccess(userId, pid);
+      break;
+
+    // ── Package: Solar Installer Training + Test-Out ──────────────────────────
+    case 'pkg_training_solar_inst_testout':
+      await grantSolarInstTrainingAccess(userId, pid);
+      await grantJrSolarInstAccess(userId, pid);
       break;
 
     // ── Practice test ($14.99 — no cert issued, not a test-out) ──────────

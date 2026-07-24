@@ -368,6 +368,56 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // HVAC TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_hvac_tech: {
+    name: 'HVAC Technician Training Course + Jr. HVAC Tech Certification Exam',
+    shortName: 'HVAC Tech Training Course',
+    priceInCents: 149900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_HVAC_TECH ?? '',
+  },
+
+  jr_hvac_tech_test_human: {
+    name: 'Jr. HVAC Technician Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. HVAC Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_HVAC_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_hvac_tech_testout: {
+    name: 'HVAC Tech Training Course + Jr. HVAC Tech Test-Out (Human Proctored)',
+    shortName: 'HVAC Tech Training + Test-Out Package',
+    priceInCents: 174900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_HVAC_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SOLAR INSTALLER PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_solar_inst: {
+    name: 'Solar Installer Training Course + Jr. Solar Installer Certification Exam',
+    shortName: 'Solar Installer Training Course',
+    priceInCents: 149900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_SOLAR_INST ?? '',
+  },
+
+  jr_solar_inst_test_human: {
+    name: 'Jr. Solar Installer Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Solar Installer Test-Out (Human Proctored)',
+    priceInCents: 29900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_SOLAR_INST_HUMAN ?? '',
+  },
+
+  pkg_training_solar_inst_testout: {
+    name: 'Solar Installer Training Course + Jr. Solar Installer Test-Out (Human Proctored)',
+    shortName: 'Solar Installer Training + Test-Out Package',
+    priceInCents: 174900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_SOLAR_INST_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 
