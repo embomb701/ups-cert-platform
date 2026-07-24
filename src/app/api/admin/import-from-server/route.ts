@@ -26,7 +26,8 @@ import marineFresh from '../../../../../data/questions/marine-jr-fresh.json';
 import poolFresh from '../../../../../data/questions/pool-jr-fresh.json';
 import hvacTechFresh from '../../../../../data/questions/hvac-tech-jr-fresh.json';
 import solarInstFresh from '../../../../../data/questions/solar-installer-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions } from '@/lib/exam/kitchenBank';
+import windTechFresh from '../../../../../data/questions/wind-turbine-jr-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -49,6 +50,7 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'pool-jr-fresh.json':        poolFresh as QuestionRecord[],
   'hvac-tech-jr-fresh.json':   hvacTechFresh as QuestionRecord[],
   'solar-installer-jr-fresh.json': solarInstFresh as QuestionRecord[],
+  'wind-turbine-jr-fresh.json': windTechFresh as QuestionRecord[],
   // Derived from course content (shared foundation + course-specific modules)
   'kitchen-jr-fse-derived':    buildKitchenBankQuestions() as unknown as QuestionRecord[],
   'hvac-jr-fse-derived':       buildHvacBankQuestions() as unknown as QuestionRecord[],
@@ -63,6 +65,7 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'pool-jr-derived':           buildPoolBankQuestions() as unknown as QuestionRecord[],
   'hvac-tech-jr-derived':      buildHvacTechBankQuestions() as unknown as QuestionRecord[],
   'solar-installer-jr-derived': buildSolarInstBankQuestions() as unknown as QuestionRecord[],
+  'wind-turbine-jr-derived':   buildWindTurbineBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -97,6 +100,8 @@ const FILE_ORDER = [
   'hvac-tech-jr-derived',
   'solar-installer-jr-fresh.json',
   'solar-installer-jr-derived',
+  'wind-turbine-jr-fresh.json',
+  'wind-turbine-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

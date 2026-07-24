@@ -921,6 +921,19 @@ export const COURSE_OUTLINES: Record<string, CourseOutline> = {
       { id: 'sinst-nabcep', track: 'Installation & Career', title: 'NABCEP Certification & Solar Career', desc: 'NABCEP PV Associate vs PVIP, state licensing, solar design tools, and career progression', chapters: ['NABCEP PV Associate: knowledge-based, no experience minimum', 'NABCEP PVIP: 58 hours field experience + advanced exam', 'State electrical licensing vs NABCEP credential', 'Federal ITC 30% (2024–2032)', 'Aurora Solar and PVWatts design tools', 'Career path: installer → lead → designer → contractor; storage specialty premium'] },
     ],
   },
+
+  // ── WIND TURBINE TECHNICIAN ───────────────────────────────────────────────
+  'wind-tech': {
+    tracks: ['Wind Resource & Drivetrain', 'Electrical & Controls', 'Safety & Career'],
+    modules: [
+      { id: 'wtur-wind-resource', track: 'Wind Resource & Drivetrain', title: 'Wind Resource & Rotor Aerodynamics', desc: 'Power equation, Betz limit, IEC wind classes, hub-height extrapolation, TSR, and wake losses', chapters: ['P = 1/2 rho A v^3 Cp', 'IEC Classes I/II/III', 'Power law hub-height scaling', 'Betz limit 59.3%', 'Tip speed ratio 7-9', 'Wake effect and spacing'] },
+      { id: 'wtur-drivetrain', track: 'Wind Resource & Drivetrain', title: 'Drivetrain, Gearbox & Bearing Systems', desc: 'Gear ratios, ISO 4406 oil analysis, planetary stage failure modes, vibration analysis, and alignment', chapters: ['3-stage gearbox 80:1-110:1', 'ISO 4406 cleanliness code', 'Planetary stage micropitting', 'SRB/TRB main bearings', 'BPFO/BPFI vibration frequencies', 'Laser alignment tolerances'] },
+      { id: 'wtur-electrical', track: 'Electrical & Controls', title: 'Electrical Systems & Grid Interconnection', desc: 'DFIG +/-30% slip, full-power converter, IGBT cooling, LVRT, nacelle transformer, and lightning protection', chapters: ['DFIG stator direct, rotor via 30% converter', 'FPC 100% power decoupling', 'IGBT max 150 degrees C', 'LVRT stay connected + reactive boost', 'Buchholz relay protection', '34.5 kV collection system'] },
+      { id: 'wtur-controls', track: 'Electrical & Controls', title: 'Turbine Controls, SCADA & Fault Diagnosis', desc: 'Pitch control, emergency feathering, yaw drive, cable twist, OPC-UA SCADA, and power curve analysis', chapters: ['Pitch fine at below-rated, feather above rated', 'Battery-backed emergency feather', 'Yaw: cos^3 power loss per degree', 'Cable twist +/-3 turns limit', 'ISO 10816 Zone C/D thresholds', 'Power curve binning per IEC 61400-12'] },
+      { id: 'wtur-safety', track: 'Safety & Career', title: 'Tower Climbing, Fall Protection & Electrical Safety', desc: '5,000 lb anchors, GWO WAH, 100% tie-off, LOTO for wind turbines, arc flash PPE, and confined space', chapters: ['PFAS anchor 5,000 lb OSHA requirement', 'GWO WAH certification', '100% tie-off Y-lanyard transfers', 'LOTO: LV + MV + feeder lockout + test before touch', 'NFPA 70E Category 1/2 at 690 V', 'Hub confined space permit + atmospheric test'] },
+      { id: 'wtur-career', track: 'Safety & Career', title: 'Maintenance, Blade Inspection & Wind Career', desc: 'PM schedules, leading edge erosion, LPS continuity, GWO certifications, and career progression', chapters: ['6-month minor / annual major PM', 'Blade LEE 2-5% AEP loss + LEP repair', 'LPS continuity <= 1 ohm IEC 61400-24', 'Gearbox borescope and spalling', 'GWO BST 5 modules valid 2 years', 'Tech I -> Tech II -> Senior Tech -> Site Manager'] },
+    ],
+  },
 };
 
 export interface TrainingCourse {
@@ -1118,6 +1131,19 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_solar_inst',
     testOutProductId: 'jr_solar_inst_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'wind-tech',
+    title: 'Wind Turbine Technician',
+    shortTitle: 'Wind Turbine',
+    tagline: 'Service utility-scale wind turbines — drivetrain, electrical systems, SCADA, LVRT, GWO safety, and AWEA career pathways.',
+    accessKey: 'training_wind_tech',
+    certTitle: 'Jr. Wind Turbine Technician',
+    color: 'sky',
+    totalModules: 16,
+    stripeProductId: 'training_wind_tech',
+    testOutProductId: 'jr_wind_tech_test_human',
     comingSoon: true,
   },
 ];

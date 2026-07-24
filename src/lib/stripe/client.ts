@@ -418,6 +418,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // WIND TURBINE TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_wind_tech: {
+    name: 'Wind Turbine Technician Training Course + Jr. Wind Turbine Technician Certification Exam',
+    shortName: 'Wind Turbine Technician Training Course',
+    priceInCents: 149900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_WIND_TECH ?? '',
+  },
+
+  jr_wind_tech_test_human: {
+    name: 'Jr. Wind Turbine Technician Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Wind Turbine Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_WIND_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_wind_tech_testout: {
+    name: 'Wind Turbine Technician Training Course + Jr. Wind Turbine Tech Test-Out (Human Proctored)',
+    shortName: 'Wind Turbine Tech Training + Test-Out Package',
+    priceInCents: 174900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_WIND_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

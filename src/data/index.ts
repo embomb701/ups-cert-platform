@@ -19,10 +19,11 @@ import { MARINE_MODULES } from './marine-modules';
 import { POOL_MODULES } from './pool-modules';
 import { HVAC_TECH_MODULES } from './hvac-tech-modules';
 import { SOLAR_INSTALLER_MODULES } from './solar-installer-modules';
+import { WIND_TURBINE_MODULES } from './wind-turbine-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES, MARINE_MODULES, POOL_MODULES, HVAC_TECH_MODULES, SOLAR_INSTALLER_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES, MARINE_MODULES, POOL_MODULES, HVAC_TECH_MODULES, SOLAR_INSTALLER_MODULES, WIND_TURBINE_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
 // modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
@@ -56,6 +57,7 @@ export function getModule(id: string): TrainingModule | null {
     POOL_MODULES.find((m) => m.id === id) ??
     HVAC_TECH_MODULES.find((m) => m.id === id) ??
     SOLAR_INSTALLER_MODULES.find((m) => m.id === id) ??
+    WIND_TURBINE_MODULES.find((m) => m.id === id) ??
     null
   );
 }
@@ -113,6 +115,7 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
   training_pool: [...FOUNDATION, ...[...POOL_MODULES].sort(byNum)],
   training_hvac_tech: [...FOUNDATION, ...[...HVAC_TECH_MODULES].sort(byNum)],
   training_solar_inst: [...FOUNDATION, ...[...SOLAR_INSTALLER_MODULES].sort(byNum)],
+  training_wind_tech: [...FOUNDATION, ...[...WIND_TURBINE_MODULES].sort(byNum)],
   // Data Center Engineer: foundation + UPS tech core + generator ops + HVAC cooling +
   // the three DC-specific ops modules (cooling, monitoring, operations) + DCE engineering modules
   training_dcengineer: [
@@ -177,6 +180,7 @@ export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.id.startsWith('pool-')) return prevModuleInCourse('training_pool', mod);
   if (mod.id.startsWith('hvact-')) return prevModuleInCourse('training_hvac_tech', mod);
   if (mod.id.startsWith('sinst-')) return prevModuleInCourse('training_solar_inst', mod);
+  if (mod.id.startsWith('wtur-')) return prevModuleInCourse('training_wind_tech', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }

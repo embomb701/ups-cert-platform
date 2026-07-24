@@ -54,13 +54,14 @@ export async function POST(req: NextRequest) {
       practice_jr_pool_tech: { bank: 'jr_pool_tech', accessDoc: 'practice_jr_pool_tech', label: 'Jr. Pool Tech' },
       practice_jr_hvac_tech: { bank: 'jr_hvac_tech', accessDoc: 'practice_jr_hvac_tech', label: 'Jr. HVAC Tech' },
       practice_jr_solar_inst: { bank: 'jr_solar_inst', accessDoc: 'practice_jr_solar_inst', label: 'Jr. Solar Installer' },
+      practice_jr_wind_tech: { bank: 'jr_wind_tech', accessDoc: 'practice_jr_wind_tech', label: 'Jr. Wind Turbine Tech' },
     };
     const practice = PRACTICE_EXAMS[rawExamLevel];
     const isPractice = !!practice;
     const examLevel = (practice ? practice.bank : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -172,6 +173,7 @@ export async function POST(req: NextRequest) {
       jr_pool_tech: { label: 'Jr. Pool Tech', productId: 'jr_pool_tech_test_human', courseKey: 'training_pool' },
       jr_hvac_tech: { label: 'Jr. HVAC Tech', productId: 'jr_hvac_tech_test_human', courseKey: 'training_hvac_tech' },
       jr_solar_inst: { label: 'Jr. Solar Installer', productId: 'jr_solar_inst_test_human', courseKey: 'training_solar_inst' },
+      jr_wind_tech: { label: 'Jr. Wind Turbine Tech', productId: 'jr_wind_tech_test_human', courseKey: 'training_wind_tech' },
     };
 
     let kitchenTestOut = false;
