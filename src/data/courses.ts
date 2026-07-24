@@ -922,6 +922,19 @@ export const COURSE_OUTLINES: Record<string, CourseOutline> = {
     ],
   },
 
+  // ── ELEVATOR TECHNICIAN ───────────────────────────────────────────────────
+  'elevator-tech': {
+    tracks: ['Mechanics & Drive Systems', 'Electrical & Safety', 'Hydraulics & Career'],
+    modules: [
+      { id: 'elev-mechanics', track: 'Mechanics & Drive Systems', title: 'Elevator Types, Traction & Drive Systems', desc: 'Traction vs hydraulic, roping configurations, counterweight, VVVF drives, and machine-room-less design', chapters: ['Traction vs hydraulic: sheave vs ram', '1:1 and 2:1 roping; counterweight 40-50% rated load', 'VVVF regenerative drives: 35-50% energy savings', 'Gearless vs geared machines', 'Machine room vs MRL: 60-90 F requirement'] },
+      { id: 'elev-electrical', track: 'Mechanics & Drive Systems', title: 'Controllers, Door Systems & Interlocks', desc: 'Relay vs microprocessor controllers, door operator types, ASME A17.1 door interlocks, and traveling cable systems', chapters: ['Relay logic vs microprocessor controllers', 'VVVF door operators: smooth speed ramp', 'Door interlocks: mechanical AND electrical per ASME A17.1 2.12', 'Nudging: reduced-force close after ~20s dwell', 'Traveling cable: junction box to moving car'] },
+      { id: 'elev-safety', track: 'Electrical & Safety', title: 'Safety Devices & ASME A17.1 Codes', desc: 'Governors, car safeties, spring and oil buffers, pit safety equipment, and firefighter operation Phase I and Phase II', chapters: ['Governor trips at 115% contract speed', 'Instantaneous safety <=150 fpm; gradual above 150 fpm', 'Oil buffers required above 200 fpm (no rebound)', 'Pit stop switch within 3 feet of access door', 'Phase I lobby recall; Phase II in-car firefighter control'] },
+      { id: 'elev-hydraulic', track: 'Hydraulics & Career', title: 'Hydraulic Elevator Systems', desc: 'Hydraulic power units, jack types, rupture valves, lowering control, and temperature compensation', chapters: ['HPU: motor-pump, tank, valve manifold', 'In-ground, telescoping, and holeless jack types', 'Rupture valve closes at 0.3 m/s above rated lowering speed', 'Drift limit: 3 inches per 15 minutes per ASME A17.1', 'ISO 4406 oil cleanliness monitoring'] },
+      { id: 'elev-maintenance', track: 'Hydraulics & Career', title: 'Preventive Maintenance & Troubleshooting', desc: 'Hoist rope inspection, lubrication schedules, door adjustment, vibration analysis, and systematic fault diagnosis', chapters: ['6x19 rope: 6 broken wires per lay = retire; 8:1 safety factor', 'Guide rail lubrication and sheave groove inspection', 'Door gap max 3/8 inch; closing KE max 2.5 ft-lb', 'ISO 10816 vibration zone limits for rotating components', 'Fault code log: first step for no-movement diagnosis'] },
+      { id: 'elev-career', track: 'Hydraulics & Career', title: 'Inspections, Modernization & Elevator Career', desc: 'ASME A17.3 for existing elevators, QEI credential, periodic inspections, modernization scope, and NEIEP/IUEC career pathways', chapters: ['ASME A17.3: existing elevator safety code', 'QEI credential: ASME/NAESA, renew every 3 years', 'Category 1 annual; Category 5 every 5 years', 'Controller/drive modernization: acceptance test + QEI witness required', 'NEIEP 4-year apprenticeship; BLS $99K median; 6% growth'] },
+    ],
+  },
+
   // ── WIND TURBINE TECHNICIAN ───────────────────────────────────────────────
   'wind-tech': {
     tracks: ['Wind Resource & Drivetrain', 'Electrical & Controls', 'Safety & Career'],
@@ -1144,6 +1157,19 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_wind_tech',
     testOutProductId: 'jr_wind_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'elevator-tech',
+    title: 'Elevator Technician',
+    shortTitle: 'Elevator Tech',
+    tagline: 'Install and service elevators — traction and hydraulic systems, ASME A17.1 codes, VVVF drives, safety devices, and NEIEP/IUEC career pathways.',
+    accessKey: 'training_elevator_tech',
+    certTitle: 'Jr. Elevator Technician',
+    color: 'teal',
+    totalModules: 16,
+    stripeProductId: 'training_elevator_tech',
+    testOutProductId: 'jr_elevator_tech_test_human',
     comingSoon: true,
   },
 ];

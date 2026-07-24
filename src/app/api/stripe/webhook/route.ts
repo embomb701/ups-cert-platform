@@ -498,6 +498,37 @@ async function grantJrWindTechAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantElevatorTechTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_elevator_tech')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_elevator_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrElevatorTechAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_elevator_tech_test_human',
+    examLevel: 'jr_elevator_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Elevator Tech Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantJrFseAccess(
   userId: string,
   purchaseId: string,
@@ -782,6 +813,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_solar_inst_testout':
       await grantSolarInstTrainingAccess(userId, pid);
       await grantJrSolarInstAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Elevator Technician) ────────────────────
+    case 'training_elevator_tech':
+      await grantElevatorTechTrainingAccess(userId, pid);
+      break;
+
+    // ── Elevator Tech Test-Out ────────────────────────────────────────────────
+    case 'jr_elevator_tech_test_human':
+      await grantJrElevatorTechAccess(userId, pid);
+      break;
+
+    // ── Package: Elevator Tech Training + Test-Out ───────────────────────────
+    case 'pkg_training_elevator_tech_testout':
+      await grantElevatorTechTrainingAccess(userId, pid);
+      await grantJrElevatorTechAccess(userId, pid);
       break;
 
     // ── Standalone training course (Wind Turbine Technician) ─────────────────

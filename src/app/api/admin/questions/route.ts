@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     const collection = adminDb.collection('questionBank');
 
-    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap, hvacTechSnap, hvacTechActiveSnap, solarInstSnap, solarInstActiveSnap, windTechSnap, windTechActiveSnap] = await Promise.all([
+    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap, hvacTechSnap, hvacTechActiveSnap, solarInstSnap, solarInstActiveSnap, windTechSnap, windTechActiveSnap, elevatorTechSnap, elevatorTechActiveSnap] = await Promise.all([
       collection.where('examLevel', '==', 'jr_fse').count().get(),
       collection.where('examLevel', '==', 'jr_fse').where('active', '==', true).count().get(),
       collection.where('examLevel', 'in', ['fse', 'fse_ai']).count().get(),
@@ -50,6 +50,8 @@ export async function GET(req: NextRequest) {
       collection.where('examLevel', '==', 'jr_solar_inst').where('active', '==', true).count().get(),
       collection.where('examLevel', '==', 'jr_wind_tech').count().get(),
       collection.where('examLevel', '==', 'jr_wind_tech').where('active', '==', true).count().get(),
+      collection.where('examLevel', '==', 'jr_elevator_tech').count().get(),
+      collection.where('examLevel', '==', 'jr_elevator_tech').where('active', '==', true).count().get(),
     ]);
 
     return NextResponse.json({
@@ -116,6 +118,10 @@ export async function GET(req: NextRequest) {
       jr_wind_tech: {
         total: windTechSnap.data().count,
         active: windTechActiveSnap.data().count,
+      },
+      jr_elevator_tech: {
+        total: elevatorTechSnap.data().count,
+        active: elevatorTechActiveSnap.data().count,
       },
     });
   } catch (err: any) {

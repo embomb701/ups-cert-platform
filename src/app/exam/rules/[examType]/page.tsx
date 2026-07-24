@@ -76,6 +76,7 @@ export default function ExamRulesPage() {
     practice_jr_hvac_tech: 'Jr. HVAC Tech Practice Test — Results Only, No Certificate',
     practice_jr_solar_inst: 'Jr. Solar Installer Practice Test — Results Only, No Certificate',
     practice_jr_wind_tech: 'Jr. Wind Turbine Tech Practice Test — Results Only, No Certificate',
+    practice_jr_elevator_tech: 'Jr. Elevator Tech Practice Test — Results Only, No Certificate',
   };
   // Jr-course exam display config: rules token + certification label
   const JR_COURSE_META: Record<string, { token: string; label: string }> = {
@@ -93,6 +94,7 @@ export default function ExamRulesPage() {
     jr_hvac_tech: { token: 'Jr. HVAC Tech Exam', label: 'Junior HVAC Technician Certification' },
     jr_solar_inst: { token: 'Jr. Solar Installer Exam', label: 'Junior Solar Installer Certification' },
     jr_wind_tech: { token: 'Jr. Wind Turbine Tech Exam', label: 'Junior Wind Turbine Technician Certification' },
+    jr_elevator_tech: { token: 'Jr. Elevator Tech Exam', label: 'Junior Elevator Technician Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];

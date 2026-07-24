@@ -443,6 +443,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // ELEVATOR TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_elevator_tech: {
+    name: 'Elevator Technician Training Course + Jr. Elevator Technician Certification Exam',
+    shortName: 'Elevator Technician Training Course',
+    priceInCents: 149900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_ELEVATOR_TECH ?? '',
+  },
+
+  jr_elevator_tech_test_human: {
+    name: 'Jr. Elevator Technician Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Elevator Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_ELEVATOR_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_elevator_tech_testout: {
+    name: 'Elevator Technician Training Course + Jr. Elevator Tech Test-Out (Human Proctored)',
+    shortName: 'Elevator Tech Training + Test-Out Package',
+    priceInCents: 174900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_ELEVATOR_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 
