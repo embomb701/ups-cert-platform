@@ -56,13 +56,14 @@ export async function POST(req: NextRequest) {
       practice_jr_solar_inst: { bank: 'jr_solar_inst', accessDoc: 'practice_jr_solar_inst', label: 'Jr. Solar Installer' },
       practice_jr_wind_tech: { bank: 'jr_wind_tech', accessDoc: 'practice_jr_wind_tech', label: 'Jr. Wind Turbine Tech' },
       practice_jr_elevator_tech: { bank: 'jr_elevator_tech', accessDoc: 'practice_jr_elevator_tech', label: 'Jr. Elevator Tech' },
+      practice_jr_fire_alarm_tech: { bank: 'jr_fire_alarm_tech', accessDoc: 'practice_jr_fire_alarm_tech', label: 'Jr. Fire Alarm Tech' },
     };
     const practice = PRACTICE_EXAMS[rawExamLevel];
     const isPractice = !!practice;
     const examLevel = (practice ? practice.bank : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -176,6 +177,7 @@ export async function POST(req: NextRequest) {
       jr_solar_inst: { label: 'Jr. Solar Installer', productId: 'jr_solar_inst_test_human', courseKey: 'training_solar_inst' },
       jr_wind_tech: { label: 'Jr. Wind Turbine Tech', productId: 'jr_wind_tech_test_human', courseKey: 'training_wind_tech' },
       jr_elevator_tech: { label: 'Jr. Elevator Tech', productId: 'jr_elevator_tech_test_human', courseKey: 'training_elevator_tech' },
+      jr_fire_alarm_tech: { label: 'Jr. Fire Alarm Tech', productId: 'jr_fire_alarm_tech_test_human', courseKey: 'training_fire_alarm_tech' },
     };
 
     let kitchenTestOut = false;

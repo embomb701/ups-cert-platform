@@ -468,6 +468,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // FIRE ALARM & SUPPRESSION TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_fire_alarm_tech: {
+    name: 'Fire Alarm & Suppression Technician Training Course + Jr. Fire Alarm Technician Certification Exam',
+    shortName: 'Fire Alarm Technician Training Course',
+    priceInCents: 149900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_FIRE_ALARM_TECH ?? '',
+  },
+
+  jr_fire_alarm_tech_test_human: {
+    name: 'Jr. Fire Alarm Technician Certification Exam (Human Proctored)',
+    shortName: 'Jr. Fire Alarm Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FIRE_ALARM_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_fire_alarm_tech_testout: {
+    name: 'Fire Alarm Technician Training Course + Jr. Fire Alarm Tech Test-Out (Human Proctored)',
+    shortName: 'Fire Alarm Tech Training + Test-Out Package',
+    priceInCents: 174900,
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_FIRE_ALARM_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

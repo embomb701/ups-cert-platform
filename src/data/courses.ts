@@ -935,6 +935,19 @@ export const COURSE_OUTLINES: Record<string, CourseOutline> = {
     ],
   },
 
+  // ── FIRE ALARM & SUPPRESSION TECHNICIAN ─────────────────────────────────
+  'fire-alarm-tech': {
+    tracks: ['Detection & Control', 'Suppression Systems', 'ITM & Career'],
+    modules: [
+      { id: 'fire-fundamentals', track: 'Detection & Control', title: 'Fire Alarm Systems & NFPA 72 Fundamentals', desc: 'Alarm system types, initiating devices, addressable vs conventional, and the National Fire Alarm and Signaling Code', chapters: ['NFPA 72: National Fire Alarm and Signaling Code', 'Conventional zones vs addressable SLC addresses', 'Ionization: fast-flaming fires; photoelectric: smoldering fires', 'Fixed-temp heat: 135 F standard; rate-of-rise: 12 F/min', 'Class A vs Class B wiring: redundant return vs EOL resistor'] },
+      { id: 'fire-panels', track: 'Detection & Control', title: 'Control Panels, NAC Circuits & Notification Appliances', desc: 'FACP programming, SLC loops, NAC circuits, horns, strobes, voice evacuation, and output module wiring', chapters: ['FACP battery backup: 24 hours standby + 5 minutes alarm', 'SLC polling: hundreds of addressable devices per loop', 'NAC: power to horns, strobes, speakers; supervised', 'Strobes: synchronize within 200 ms; Temporal-3 evacuation signal', 'VES: 10 dB above ambient; MNS all-hazard override'] },
+      { id: 'fire-suppression', track: 'Suppression Systems', title: 'Suppression Systems: Sprinklers & Clean Agents', desc: 'NFPA 13 sprinkler types, wet/dry/pre-action/deluge systems, clean agent suppression, and kitchen hood systems', chapters: ['Wet pipe: always water; dry pipe: pressurized air in piping', 'Double-interlock pre-action: detection + head required', 'Deluge: open heads flood zone on valve trip; aircraft hangars', 'FM-200: ~7-8% design concentration; Novec 1230: zero ODP', 'NFPA 17A wet chemical: saponification; K-class extinguishers'] },
+      { id: 'fire-itm', track: 'ITM & Career', title: 'Inspection, Testing & Maintenance (NFPA 72 & NFPA 25)', desc: 'Required frequencies for alarm and sprinkler ITM, acceptance testing, and documentation requirements', chapters: ['Smoke detectors: annual functional test with listed aerosol', 'Battery: 24-hour discharge + 5-minute alarm load test', 'NFPA 25: standard heads replace at 50 years; fast-response at 20', 'Dry pipe trip test: water to inspector test valve within 60 seconds', '100% acceptance test required; records kept for life of system'] },
+      { id: 'fire-troubleshoot', track: 'ITM & Career', title: 'Troubleshooting, Ground Faults & Special Hazard Systems', desc: 'Common trouble conditions, ground fault isolation, VESDA aspirating detection, CO systems, and special hazard applications', chapters: ['Ground fault: NFPA 72 must not cause alarm or prevent signaling', 'Isolation modules: isolate SLC short without disabling loop', 'VESDA: 0.001-0.2% obscuration/m; data centers, clean rooms', 'CO: NFPA 720; no alarm at 70 ppm/60 min; alarm at 400 ppm/15 min', 'CO2 total-flooding: toxic above 5%; pre-discharge alarm required'] },
+      { id: 'fire-career', track: 'ITM & Career', title: 'Codes, NICET Certification & Career Paths', desc: 'AHJ roles, listing agencies, NICET certification levels, career outlook, and the fire protection job market', chapters: ['AHJ (fire marshal/department) approves plans and accepts system', 'UL listing and FM Approvals: nationally recognized test labs', 'NICET Level II: 2 years + exam; journeyman standard', 'NICET renewed every 3 years; Level IV requires 10 years', 'BLS median ~$63,000-$65,000; 5-7% growth; CFPE from SFPE'] },
+    ],
+  },
+
   // ── WIND TURBINE TECHNICIAN ───────────────────────────────────────────────
   'wind-tech': {
     tracks: ['Wind Resource & Drivetrain', 'Electrical & Controls', 'Safety & Career'],
@@ -1170,6 +1183,19 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_elevator_tech',
     testOutProductId: 'jr_elevator_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'fire-alarm-tech',
+    title: 'Fire Alarm & Suppression Technician',
+    shortTitle: 'Fire Alarm Tech',
+    tagline: 'Install and service fire alarm systems — NFPA 72, addressable panels, sprinklers, clean agents, ITM, and NICET certification pathways.',
+    accessKey: 'training_fire_alarm_tech',
+    certTitle: 'Jr. Fire Alarm Technician',
+    color: 'rose',
+    totalModules: 16,
+    stripeProductId: 'training_fire_alarm_tech',
+    testOutProductId: 'jr_fire_alarm_tech_test_human',
     comingSoon: true,
   },
 ];

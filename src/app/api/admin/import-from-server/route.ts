@@ -28,7 +28,8 @@ import hvacTechFresh from '../../../../../data/questions/hvac-tech-jr-fresh.json
 import solarInstFresh from '../../../../../data/questions/solar-installer-jr-fresh.json';
 import windTechFresh from '../../../../../data/questions/wind-turbine-jr-fresh.json';
 import elevatorTechFresh from '../../../../../data/questions/elevator-tech-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions } from '@/lib/exam/kitchenBank';
+import fireAlarmTechFresh from '../../../../../data/questions/fire-alarm-tech-jr-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions, buildFireAlarmTechBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -69,6 +70,8 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'solar-installer-jr-derived': buildSolarInstBankQuestions() as unknown as QuestionRecord[],
   'wind-turbine-jr-derived':   buildWindTurbineBankQuestions() as unknown as QuestionRecord[],
   'elevator-tech-jr-derived':  buildElevatorTechBankQuestions() as unknown as QuestionRecord[],
+  'fire-alarm-tech-jr-fresh.json': fireAlarmTechFresh as unknown as QuestionRecord[],
+  'fire-alarm-tech-jr-derived': buildFireAlarmTechBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -107,6 +110,8 @@ const FILE_ORDER = [
   'wind-turbine-jr-derived',
   'elevator-tech-jr-fresh.json',
   'elevator-tech-jr-derived',
+  'fire-alarm-tech-jr-fresh.json',
+  'fire-alarm-tech-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

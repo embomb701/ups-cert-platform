@@ -109,6 +109,7 @@ export async function POST(req: NextRequest) {
     const solarInstComplete = COURSE_SEQUENCES['training_solar_inst'].every((m) => completedIds.has(m.id));
     const windTechComplete = COURSE_SEQUENCES['training_wind_tech'].every((m) => completedIds.has(m.id));
     const elevatorTechComplete = COURSE_SEQUENCES['training_elevator_tech'].every((m) => completedIds.has(m.id));
+    const fireAlarmTechComplete = COURSE_SEQUENCES['training_fire_alarm_tech'].every((m) => completedIds.has(m.id));
 
     if (upsComplete) {
       // Grant Jr. FSE exam access (from training path, not test-out)
@@ -315,7 +316,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete || batteryComplete || dcEngineerComplete || marineComplete || poolComplete || hvacTechComplete || solarInstComplete || windTechComplete || elevatorTechComplete;
+    if (fireAlarmTechComplete) {
+      await grantPractice('practice_jr_fire_alarm_tech');
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fire_alarm_tech_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fire_alarm_tech').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
+    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete || batteryComplete || dcEngineerComplete || marineComplete || poolComplete || hvacTechComplete || solarInstComplete || windTechComplete || elevatorTechComplete || fireAlarmTechComplete;
     return NextResponse.json({ passed: true, results, trainingComplete });
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });

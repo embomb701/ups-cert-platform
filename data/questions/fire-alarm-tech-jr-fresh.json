@@ -1,0 +1,302 @@
+[
+  {
+    "id": "frat_fresh_001",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-fundamentals",
+    "question": "Which NFPA standard is the primary code governing fire alarm system design, installation, and testing?",
+    "choices": [
+      { "id": "A", "text": "NFPA 13" },
+      { "id": "B", "text": "NFPA 25" },
+      { "id": "C", "text": "NFPA 72" },
+      { "id": "D", "text": "NFPA 101" }
+    ],
+    "correctAnswerId": "C",
+    "explanation": "NFPA 72 is the National Fire Alarm and Signaling Code and is the primary standard for fire alarm system design, installation, testing, and maintenance in the United States.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_002",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-fundamentals",
+    "question": "Ionization smoke detectors respond fastest to which type of fire condition?",
+    "choices": [
+      { "id": "A", "text": "Slow-smoldering fires with large smoke particles" },
+      { "id": "B", "text": "Fast-flaming fires with small combustion particles" },
+      { "id": "C", "text": "Electrical arc fires producing ultraviolet radiation" },
+      { "id": "D", "text": "Only fires involving flammable liquids" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "Ionization detectors sense small combustion particles produced by fast-flaming fires. Photoelectric detectors are faster for slow-smoldering fires that produce larger, visible smoke particles.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_003",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-fundamentals",
+    "question": "A standard fixed-temperature heat detector typically activates at what temperature?",
+    "choices": [
+      { "id": "A", "text": "100 degrees F" },
+      { "id": "B", "text": "120 degrees F" },
+      { "id": "C", "text": "135 degrees F" },
+      { "id": "D", "text": "165 degrees F" }
+    ],
+    "correctAnswerId": "C",
+    "explanation": "Standard fixed-temperature heat detectors activate at 135 degrees F (57 degrees C). High-temperature ratings (190-300 degrees F) are used in boiler rooms, attics, and other warm environments.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_004",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-fundamentals",
+    "question": "Rate-of-rise heat detectors activate when the temperature rises faster than what rate?",
+    "choices": [
+      { "id": "A", "text": "5 degrees F per minute" },
+      { "id": "B", "text": "12 degrees F per minute" },
+      { "id": "C", "text": "20 degrees F per minute" },
+      { "id": "D", "text": "35 degrees F per minute" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "Rate-of-rise heat detectors trigger when the temperature rises more than 12 degrees F per minute, providing early warning of rapidly developing fires before the fixed temperature set point is reached.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_005",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-panels",
+    "question": "Per NFPA 72, the minimum secondary battery backup requirement for a fire alarm system is:",
+    "choices": [
+      { "id": "A", "text": "8 hours standby and 5 minutes alarm" },
+      { "id": "B", "text": "24 hours standby and 5 minutes alarm" },
+      { "id": "C", "text": "48 hours standby and 15 minutes alarm" },
+      { "id": "D", "text": "72 hours standby and 30 minutes alarm" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "NFPA 72 requires the secondary (battery) power supply to provide at least 24 hours of standby power followed by 5 minutes of full alarm operation.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_006",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-panels",
+    "question": "The Temporal-3 audible evacuation signal consists of:",
+    "choices": [
+      { "id": "A", "text": "One long continuous tone" },
+      { "id": "B", "text": "Three short pulses, a pause, repeated" },
+      { "id": "C", "text": "Four pulses followed by a long tone" },
+      { "id": "D", "text": "Alternating high-low tones continuously" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "Temporal-3 (T3) is the ANSI/NFPA 72 standard evacuation signal: three short pulses (0.5 s on, 0.5 s off) followed by a 1.5 s pause, repeated continuously. It is the universally recognized fire evacuation signal.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_007",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-panels",
+    "question": "Per NFPA 72, corridor strobes must synchronize within what time period of each other?",
+    "choices": [
+      { "id": "A", "text": "50 milliseconds" },
+      { "id": "B", "text": "100 milliseconds" },
+      { "id": "C", "text": "200 milliseconds" },
+      { "id": "D", "text": "500 milliseconds" }
+    ],
+    "correctAnswerId": "C",
+    "explanation": "NFPA 72 requires all strobes in the same field of view to synchronize within 200 milliseconds of each other to prevent the combined flicker rate from reaching frequencies that could trigger photosensitive seizures.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_008",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-panels",
+    "question": "The minimum audible sound level required in sleeping areas by NFPA 72 is:",
+    "choices": [
+      { "id": "A", "text": "55 dBA at the pillow" },
+      { "id": "B", "text": "70 dBA at the pillow" },
+      { "id": "C", "text": "85 dBA at 10 feet" },
+      { "id": "D", "text": "90 dBA at the appliance" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "NFPA 72 requires a minimum of 70 dBA measured at the pillow level in sleeping areas to ensure occupants are awakened during a fire alarm.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_009",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-suppression",
+    "question": "Which type of sprinkler system maintains water in the piping at all times and discharges immediately when a head activates?",
+    "choices": [
+      { "id": "A", "text": "Dry pipe" },
+      { "id": "B", "text": "Pre-action" },
+      { "id": "C", "text": "Deluge" },
+      { "id": "D", "text": "Wet pipe" }
+    ],
+    "correctAnswerId": "D",
+    "explanation": "Wet pipe sprinkler systems maintain water in the piping under pressure at all times. When a sprinkler head activates, water discharges immediately without any valve trip required.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_010",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-suppression",
+    "question": "Dry pipe sprinkler systems are designed for use in:",
+    "choices": [
+      { "id": "A", "text": "High-temperature boiler rooms" },
+      { "id": "B", "text": "Unheated spaces subject to freezing" },
+      { "id": "C", "text": "Data centers requiring pre-discharge warning" },
+      { "id": "D", "text": "Aircraft hangars needing instant total coverage" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "Dry pipe systems use pressurized air to keep water out of the piping, making them suitable for unheated parking structures, warehouses, and attic spaces where water in the piping could freeze and damage the system.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_011",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-suppression",
+    "question": "A double-interlock pre-action system prevents accidental water discharge by requiring:",
+    "choices": [
+      { "id": "A", "text": "Two smoke detectors activating in the same zone" },
+      { "id": "B", "text": "Both fire detection activation AND a sprinkler head opening" },
+      { "id": "C", "text": "Manual operator confirmation before water flows" },
+      { "id": "D", "text": "Two consecutive sprinkler heads to activate" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "Double-interlock pre-action systems require both the detection system to activate (opening the pre-action valve) AND a sprinkler head to open before water can flow, preventing accidental discharge from either source alone.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_012",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-suppression",
+    "question": "Which NFPA standard governs clean agent fire suppression systems such as FM-200 and Novec 1230?",
+    "choices": [
+      { "id": "A", "text": "NFPA 13" },
+      { "id": "B", "text": "NFPA 17A" },
+      { "id": "C", "text": "NFPA 25" },
+      { "id": "D", "text": "NFPA 2001" }
+    ],
+    "correctAnswerId": "D",
+    "explanation": "NFPA 2001, Standard on Clean Agent Fire Extinguishing Systems, governs the design, installation, testing, and maintenance of total flooding clean agent systems including FM-200 and Novec 1230.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_013",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-suppression",
+    "question": "Wet chemical kitchen hood suppression systems use agents that suppress cooking oil fires primarily through:",
+    "choices": [
+      { "id": "A", "text": "High-pressure water mist cooling" },
+      { "id": "B", "text": "Nitrogen flooding to displace oxygen" },
+      { "id": "C", "text": "Saponification converting oils to a soapy foam" },
+      { "id": "D", "text": "Carbon dioxide smothering" }
+    ],
+    "correctAnswerId": "C",
+    "explanation": "Wet chemical agents (potassium-based solutions) saponify hot cooking oils, converting them to a soapy foam that seals the oil surface, cools it, and prevents re-ignition.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_014",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-itm",
+    "question": "Per NFPA 72, how often must automatic smoke detectors be functionally tested?",
+    "choices": [
+      { "id": "A", "text": "Monthly" },
+      { "id": "B", "text": "Quarterly" },
+      { "id": "C", "text": "Semi-annually" },
+      { "id": "D", "text": "Annually" }
+    ],
+    "correctAnswerId": "D",
+    "explanation": "NFPA 72 Chapter 14 requires annual functional testing of automatic smoke detectors using listed aerosol, heated air, or magnetic test tools as appropriate for the detector type.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_015",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-itm",
+    "question": "NFPA 25 requires standard (non-fast-response) sprinkler heads to be tested or replaced at:",
+    "choices": [
+      { "id": "A", "text": "20 years" },
+      { "id": "B", "text": "30 years" },
+      { "id": "C", "text": "40 years" },
+      { "id": "D", "text": "50 years" }
+    ],
+    "correctAnswerId": "D",
+    "explanation": "NFPA 25 requires standard sprinkler heads to be field tested or replaced at 50 years from the date of installation. Fast-response heads require testing or replacement at 20 years.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_016",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-itm",
+    "question": "For a dry pipe sprinkler system annual trip test, water must reach the inspector test valve within:",
+    "choices": [
+      { "id": "A", "text": "30 seconds" },
+      { "id": "B", "text": "60 seconds" },
+      { "id": "C", "text": "90 seconds" },
+      { "id": "D", "text": "120 seconds" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "NFPA 25 requires that water reach the inspector test valve within 60 seconds of the dry pipe valve tripping. Exceeding this time indicates system problems that could delay fire suppression.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_017",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-troubleshoot",
+    "question": "Per NFPA 72, a single ground fault on a fire alarm circuit must:",
+    "choices": [
+      { "id": "A", "text": "Immediately trigger a fire alarm" },
+      { "id": "B", "text": "Not cause an inadvertent alarm or prevent alarm signaling" },
+      { "id": "C", "text": "Automatically disable the entire SLC loop" },
+      { "id": "D", "text": "Trigger the suppression system as a precaution" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "NFPA 72 requires that a single ground fault must not cause an inadvertent alarm or prevent the system from correctly signaling a real fire. Ground faults are treated as trouble conditions requiring investigation.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_018",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-troubleshoot",
+    "question": "VESDA aspirating smoke detection systems provide earlier warning than conventional spot detectors by:",
+    "choices": [
+      { "id": "A", "text": "Using a higher power supply voltage for faster sensor response" },
+      { "id": "B", "text": "Actively drawing air samples through a pipe network to a sensitive detection chamber" },
+      { "id": "C", "text": "Connecting directly to the sprinkler system for simultaneous suppression" },
+      { "id": "D", "text": "Detecting heat instead of smoke for faster response" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "VESDA uses a fan to actively pull air samples through a network of pipes to a highly sensitive laser detection chamber. This active sampling detects smoke at concentrations far below what passive spot detectors would sense.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_019",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-career",
+    "question": "NICET Level II fire alarm certification is the common minimum requirement for fire alarm technicians because it requires:",
+    "choices": [
+      { "id": "A", "text": "10 years of experience and a design examination" },
+      { "id": "B", "text": "2 years of experience and a written examination" },
+      { "id": "C", "text": "A state professional engineering license" },
+      { "id": "D", "text": "Completion of a 4-year apprenticeship program" }
+    ],
+    "correctAnswerId": "B",
+    "explanation": "NICET Level II requires passing a written examination and demonstrating approximately 2 years of relevant work experience. It is the journeyman-level standard recognized by many jurisdictions for independent fire alarm technicians.",
+    "active": true
+  },
+  {
+    "id": "frat_fresh_020",
+    "examLevel": "jr_fire_alarm_tech",
+    "category": "fire-alarm-career",
+    "question": "NICET fire alarm certifications must be renewed every:",
+    "choices": [
+      { "id": "A", "text": "1 year" },
+      { "id": "B", "text": "2 years" },
+      { "id": "C", "text": "3 years" },
+      { "id": "D", "text": "5 years" }
+    ],
+    "correctAnswerId": "C",
+    "explanation": "NICET certifications are valid for 3 years and must be renewed through continuing education units or retesting to ensure technicians remain current with evolving codes, standards, and technology.",
+    "active": true
+  }
+]
