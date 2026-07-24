@@ -2,7 +2,7 @@
 // Core shared types for UPS Certification Platform
 // ============================================================
 
-export type ExamLevel = 'jr_fse' | 'fse' | 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech' | 'jr_battery_tech' | 'jr_dc_engineer';
+export type ExamLevel = 'jr_fse' | 'fse' | 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech' | 'jr_battery_tech' | 'jr_dc_engineer' | 'jr_marine_tech' | 'jr_pool_tech';
 export type UserRole = 'user' | 'admin' | 'proctor';
 export type CertificateStatus = 'valid' | 'expired' | 'revoked' | 'under_review';
 export type PurchaseStatus = 'pending' | 'complete' | 'refunded' | 'failed';
@@ -98,6 +98,12 @@ export const PRODUCTS = {
   TRAINING_DCENGINEER: 'training_dcengineer',
   JR_DC_ENGINEER_TEST_HUMAN: 'jr_dc_engineer_test_human',
   PKG_TRAINING_DCENGINEER_TESTOUT: 'pkg_training_dcengineer_testout',
+  TRAINING_MARINE: 'training_marine',
+  JR_MARINE_TECH_TEST_HUMAN: 'jr_marine_tech_test_human',
+  PKG_TRAINING_MARINE_TESTOUT: 'pkg_training_marine_testout',
+  TRAINING_POOL: 'training_pool',
+  JR_POOL_TECH_TEST_HUMAN: 'jr_pool_tech_test_human',
+  PKG_TRAINING_POOL_TESTOUT: 'pkg_training_pool_testout',
 } as const;
 
 // Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts

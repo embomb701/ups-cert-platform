@@ -318,6 +318,56 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // MARINE TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_marine: {
+    name: 'Marine Systems Technician Training Course + Jr. Marine Tech Certification Exam',
+    shortName: 'Marine Tech Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_MARINE ?? '',
+  },
+
+  jr_marine_tech_test_human: {
+    name: 'Jr. Marine Systems Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Marine Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_MARINE_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_marine_testout: {
+    name: 'Marine Tech Training Course + Jr. Marine Tech Test-Out (Human Proctored)',
+    shortName: 'Marine Tech Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_MARINE_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POOL EQUIPMENT TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_pool: {
+    name: 'Pool Equipment Technician Training Course + Jr. Pool Tech Certification Exam',
+    shortName: 'Pool Equipment Tech Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_POOL ?? '',
+  },
+
+  jr_pool_tech_test_human: {
+    name: 'Jr. Pool Equipment Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Pool Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_POOL_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_pool_testout: {
+    name: 'Pool Equipment Tech Training Course + Jr. Pool Tech Test-Out (Human Proctored)',
+    shortName: 'Pool Equipment Tech Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_POOL_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

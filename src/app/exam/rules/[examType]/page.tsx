@@ -71,6 +71,8 @@ export default function ExamRulesPage() {
     practice_jr_dcp_tech: 'Jr. DC Plants Tech Practice Test — Results Only, No Certificate',
     practice_jr_battery_tech: 'Jr. Battery Tech Practice Test — Results Only, No Certificate',
     practice_jr_dc_engineer: 'Jr. DC Engineer Practice Test — Results Only, No Certificate',
+    practice_jr_marine_tech: 'Jr. Marine Tech Practice Test — Results Only, No Certificate',
+    practice_jr_pool_tech: 'Jr. Pool Tech Practice Test — Results Only, No Certificate',
   };
   // Jr-course exam display config: rules token + certification label
   const JR_COURSE_META: Record<string, { token: string; label: string }> = {
@@ -83,6 +85,8 @@ export default function ExamRulesPage() {
     jr_dcp_tech: { token: 'Jr. DC Plants Tech Exam', label: 'Junior Telecom DC Power Plants Technician Certification' },
     jr_battery_tech: { token: 'Jr. Battery Tech Exam', label: 'Junior Battery Systems Technician Certification' },
     jr_dc_engineer: { token: 'Jr. DC Engineer Exam', label: 'Junior Data Center Engineer Certification' },
+    jr_marine_tech: { token: 'Jr. Marine Tech Exam', label: 'Junior Marine Systems Technician Certification' },
+    jr_pool_tech: { token: 'Jr. Pool Tech Exam', label: 'Junior Pool Equipment Technician Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];

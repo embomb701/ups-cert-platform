@@ -15,10 +15,12 @@ import { EV_MODULES } from './ev-modules';
 import { DCPLANTS_MODULES } from './dcplants-modules';
 import { BATTERY_MODULES } from './battery-modules';
 import { DCENGINEER_MODULES } from './dcengineer-modules';
+import { MARINE_MODULES } from './marine-modules';
+import { POOL_MODULES } from './pool-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES, MARINE_MODULES, POOL_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
 // modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
@@ -48,6 +50,8 @@ export function getModule(id: string): TrainingModule | null {
     DCPLANTS_MODULES.find((m) => m.id === id) ??
     BATTERY_MODULES.find((m) => m.id === id) ??
     DCENGINEER_MODULES.find((m) => m.id === id) ??
+    MARINE_MODULES.find((m) => m.id === id) ??
+    POOL_MODULES.find((m) => m.id === id) ??
     null
   );
 }
@@ -101,6 +105,8 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
   training_evcharging: [...FOUNDATION, ...[...EV_MODULES].sort(byNum)],
   training_dcplants: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS), ...[...DCPLANTS_MODULES].sort(byNum)],
   training_battery: [...FOUNDATION, ...byIds(ALL_MODULES, BATTERY_CORE_IDS), ...[...BATTERY_MODULES].sort(byNum)],
+  training_marine: [...FOUNDATION, ...[...MARINE_MODULES].sort(byNum)],
+  training_pool: [...FOUNDATION, ...[...POOL_MODULES].sort(byNum)],
   // Data Center Engineer: foundation + UPS tech core + generator ops + HVAC cooling +
   // the three DC-specific ops modules (cooling, monitoring, operations) + DCE engineering modules
   training_dcengineer: [
@@ -161,6 +167,8 @@ export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.id.startsWith('dcp-')) return prevModuleInCourse('training_dcplants', mod);
   if (mod.id.startsWith('bat-')) return prevModuleInCourse('training_battery', mod);
   if (mod.id.startsWith('dce-')) return prevModuleInCourse('training_dcengineer', mod);
+  if (mod.id.startsWith('marine-')) return prevModuleInCourse('training_marine', mod);
+  if (mod.id.startsWith('pool-')) return prevModuleInCourse('training_pool', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }

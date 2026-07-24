@@ -97,7 +97,7 @@ export default async function CertificateVerifyPage({ params }: Props) {
             <div className="flex justify-between border-b border-gray-800 pb-3">
               <span className="text-sm text-gray-500">Level</span>
               <span className="text-sm text-white">
-                {cert.examLevel === 'jr_fse' ? 'Junior FSE' : cert.examLevel === 'jr_kitchen_fse' ? 'Junior Kitchen FSE' : cert.examLevel === 'jr_hvac_fse' ? 'Junior HVAC FSE' : cert.examLevel === 'jr_gen_fse' ? 'Junior Generator FSE' : cert.examLevel === 'jr_dc_cft' ? 'Junior Data Center CFT' : cert.examLevel === 'jr_solar_fse' ? 'Junior Solar FSE' : cert.examLevel === 'jr_ev_tech' ? 'Junior EV Tech' : cert.examLevel === 'jr_dcp_tech' ? 'Junior DC Plants Tech' : cert.examLevel === 'jr_battery_tech' ? 'Junior Battery Tech' : cert.examLevel === 'jr_dc_engineer' ? 'Junior DC Engineer' : 'FSE (Human Proctored)'}
+                {cert.examLevel === 'jr_fse' ? 'Junior FSE' : cert.examLevel === 'jr_kitchen_fse' ? 'Junior Kitchen FSE' : cert.examLevel === 'jr_hvac_fse' ? 'Junior HVAC FSE' : cert.examLevel === 'jr_gen_fse' ? 'Junior Generator FSE' : cert.examLevel === 'jr_dc_cft' ? 'Junior Data Center CFT' : cert.examLevel === 'jr_solar_fse' ? 'Junior Solar FSE' : cert.examLevel === 'jr_ev_tech' ? 'Junior EV Tech' : cert.examLevel === 'jr_dcp_tech' ? 'Junior DC Plants Tech' : cert.examLevel === 'jr_battery_tech' ? 'Junior Battery Tech' : cert.examLevel === 'jr_dc_engineer' ? 'Junior DC Engineer' : cert.examLevel === 'jr_marine_tech' ? 'Junior Marine Tech' : cert.examLevel === 'jr_pool_tech' ? 'Junior Pool Tech' : 'FSE (Human Proctored)'}
               </span>
             </div>
             <div className="flex justify-between border-b border-gray-800 pb-3">

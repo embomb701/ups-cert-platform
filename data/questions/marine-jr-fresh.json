@@ -1,0 +1,302 @@
+[
+  {
+    "id": "marjr_fresh_001",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A customer complains their 30-amp shore power cord gets hot at the shore power pedestal connector after 30 minutes of use. The most likely cause is:",
+    "choices": [
+      { "id": "a", "text": "The shore power pedestal is providing too much voltage." },
+      { "id": "b", "text": "A loose or corroded connection at the pedestal inlet or the boat's shore power inlet creating resistance and resistive heating under load." },
+      { "id": "c", "text": "The boat is drawing more than 30 amps because the ELCI breaker is faulty." },
+      { "id": "d", "text": "The reverse polarity indicator is activated, causing increased current draw." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Resistive heating at connectors is the signature symptom of a loose or corroded connection. High resistance at a joint causes P=I²R heating — the hotter the connector gets, the more the contacts oxidize, increasing resistance further. Inspect and clean/replace both the pedestal inlet and boat shore power inlet connector.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_002",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A 12V marine battery bank shows 12.6V resting voltage after sitting overnight with no loads. This indicates the bank is at approximately what state of charge?",
+    "choices": [
+      { "id": "a", "text": "25% — the battery is nearly discharged and needs immediate charging." },
+      { "id": "b", "text": "50% — the battery is at half charge." },
+      { "id": "c", "text": "75% — the battery is at three-quarter charge." },
+      { "id": "d", "text": "100% — the battery is fully charged." }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "A 12V lead-acid battery at 12.6–12.7V resting voltage (surface charge dissipated, no loads) is fully charged. 12.4V ≈ 75%, 12.2V ≈ 50%, 12.0V ≈ 25%, and below 11.8V indicates a deeply discharged or failed battery. LiFePO4 resting voltage at 100% is typically 13.3–13.4V, then holds near 13.2V over most of its discharge range.",
+    "category": "Marine Electrical",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "marjr_fresh_003",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A boat's NMEA 2000 chartplotter shows no data from the depth sounder even though the sounder was working last week. The NMEA 2000 backbone has correct 12V power and both 120Ω terminators are in place. The most likely cause is:",
+    "choices": [
+      { "id": "a", "text": "The chartplotter firmware needs updating to recognize the new depth sounder." },
+      { "id": "b", "text": "The T-connector or spur cable connection between the depth sounder and the backbone has failed or loosened." },
+      { "id": "c", "text": "The NMEA 2000 backbone voltage has dropped below the 9V minimum, disabling the sounder." },
+      { "id": "d", "text": "A missing terminator is causing signal reflections that block depth sounder data." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "NMEA 2000 uses T-connectors and spur cables to connect devices to the backbone. A failed T-connector, loose Micro-C push-lock connector, or damaged spur cable is the most common cause of a single device dropping off an otherwise functional backbone. With correct backbone voltage and both terminators confirmed, the issue is almost always the local connection to that specific device.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_004",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A marina technician is asked to install a 2,000W inverter on a 12V boat. The installation requires an appropriately sized fuse within 7 inches of the battery positive terminal. The minimum fuse size for the 2,000W inverter at 12V (assuming 88% inverter efficiency) is approximately:",
+    "choices": [
+      { "id": "a", "text": "100A" },
+      { "id": "b", "text": "150A" },
+      { "id": "c", "text": "200A" },
+      { "id": "d", "text": "250A" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "DC current = Watts ÷ (Volts × efficiency) = 2,000 ÷ (12 × 0.88) = 2,000 ÷ 10.56 ≈ 189A. A 200A MRBF or ANL fuse is the appropriate next standard size above 189A. ABYC requires the fuse within 7 inches of the positive battery terminal to protect the entire inverter cable run.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_005",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A boat owner installs solar panels to charge a 200Ah LiFePO4 house bank. The LiFePO4 BMS has load-dump protection that disconnects the battery instantly when a cell reaches the protection threshold. Which additional component is required to protect the alternator from the BMS-induced load-dump spike?",
+    "choices": [
+      { "id": "a", "text": "An ELCI breaker on the alternator output circuit" },
+      { "id": "b", "text": "A DC-DC charger or a smart external alternator regulator with over-voltage protection" },
+      { "id": "c", "text": "A galvanic isolator between the alternator and the battery" },
+      { "id": "d", "text": "An ACR (automatic charging relay) between the alternator and the LiFePO4 bank" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "When a LiFePO4 BMS disconnects the battery suddenly (load-dump), the alternator loses its load with the field still energized — voltage spikes instantly to potentially 80–150V, destroying the alternator's diode bridge. A DC-DC charger isolates the alternator from the BMS protection event, and a smart alternator regulator with over-voltage protection detects the voltage spike and collapses the field. An ACR alone does not protect against load-dump.",
+    "category": "Marine Electrical",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "marjr_fresh_006",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A technician is troubleshooting a boat where the galvanic corrosion rate on the aluminum outdrive is very high despite a zinc anode. The boat is plugged into shore power at a marina. What should be checked first?",
+    "choices": [
+      { "id": "a", "text": "Replace the zinc anode with a magnesium anode — magnesium is more suitable for fresh water." },
+      { "id": "b", "text": "Verify that a galvanic isolator or isolation transformer is present on the shore power circuit — marina shore power ground creates a galvanic cell pathway." },
+      { "id": "c", "text": "Check if the shore power cord is 30A or 50A — 50A shore power creates more galvanic current." },
+      { "id": "d", "text": "Test the AC shore power voltage — low voltage causes higher DC offset that drives galvanic corrosion." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Marina shore power shore ground cables connect all boats at the marina through the ground conductor. Dissimilar metals between boats (bronze, aluminum, stainless, zinc) form galvanic cells through this common ground path. A galvanic isolator (blocking diode pair) or isolation transformer breaks this DC galvanic current path, dramatically reducing accelerated corrosion on metal underwater gear.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_007",
+    "examLevel": "jr_marine_tech",
+    "questionText": "An ABYC E-11 compliant marine DC wiring installation requires which wire type that differs from standard automotive or residential wire?",
+    "choices": [
+      { "id": "a", "text": "Aluminum wire is required because it resists salt air corrosion better than copper." },
+      { "id": "b", "text": "Stranded copper with 60°C insulation minimum, the same as automotive wire." },
+      { "id": "c", "text": "Tinned copper stranded wire with minimum 60°C insulation for bilge locations and 105°C for engine compartment use." },
+      { "id": "d", "text": "Single-conductor solid copper with PVC insulation rated to 300V." }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "ABYC E-11 requires tinned copper conductors (tin plating prevents the green corrosion that destroys bare copper in marine environments), stranded for flexibility, with temperature ratings appropriate to the installation location: minimum 60°C general, 75°C for bilge, and 105°C for engine compartment wiring. Standard automotive wire is bare copper and will corrode in salt air and bilge environments.",
+    "category": "Marine Electrical",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "marjr_fresh_008",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A boat's ACR (automatic charging relay) has a red LED illuminated, which the manufacturer indicates means 'combined' (both battery banks connected). The boat is at the dock with the charger running. Why is this correct operation?",
+    "choices": [
+      { "id": "a", "text": "The ACR has failed — it should never combine banks while plugged in to prevent overcharging." },
+      { "id": "b", "text": "When the charger raises the start battery above 13.0–13.2V, the ACR closes, connecting both banks so the charger charges both banks simultaneously — correct operation." },
+      { "id": "c", "text": "The ACR is stuck in the combined position and will not separate when needed — a replacement is required." },
+      { "id": "d", "text": "The red LED on an ACR always indicates a fault — the installer's manual should be consulted." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "ACRs close (combine banks) when either battery reaches the combine threshold voltage (typically 13.0–13.2V), indicating charging is occurring. At the dock with the charger running, the charger voltage exceeds the threshold, combining the banks so both receive the charge current. When the charging source is removed, the ACR monitors voltage; when it drops below the separate threshold (~12.75V), it opens to isolate the banks — protecting the start battery from house bank discharge.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_009",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A 30A shore power outlet on a marine dock reads 127V hot-to-neutral but 0V neutral-to-ground. The reverse polarity indicator on the boat is lit. What is the actual wiring fault?",
+    "choices": [
+      { "id": "a", "text": "The shore power transformer has failed, reversing the AC phase." },
+      { "id": "b", "text": "The hot and neutral conductors in the shore power cord or pedestal are reversed — neutral reads 0V because it is at 127V and hot is at the neutral position." },
+      { "id": "c", "text": "The boat's ELCI breaker has tripped, causing false polarity readings." },
+      { "id": "d", "text": "The boat's bonding system is connected to the shore power neutral, creating a reverse polarity indication." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Reverse polarity means hot and neutral conductors have been swapped somewhere in the shore power circuit. The neutral is now at line voltage (127V) relative to ground, and the 'hot' terminal reads 0V (because it is now connected to neutral). This is a serious safety hazard — metal cases and fixtures that connect through 'neutral' are now at line voltage. Reverse polarity indicators (neon lights or electronic monitors) detect this condition and alert the owner.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_010",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A marina customer asks why their 1,500W modified sine wave inverter works fine for lights and fans but causes their new refrigerator with a variable speed compressor to run noisily, consume more power, and overheat. The correct explanation is:",
+    "choices": [
+      { "id": "a", "text": "The inverter is too small — a 2,500W inverter would provide a clean enough waveform for the variable speed compressor." },
+      { "id": "b", "text": "Modified sine wave output is incompatible with variable speed drive compressors, which require a pure sine wave to function correctly — the non-sinusoidal waveform causes excess heating and inefficient motor operation." },
+      { "id": "c", "text": "The refrigerator needs a separate 12V DC power feed — variable speed compressors cannot run on AC power from inverters." },
+      { "id": "d", "text": "The modified sine wave inverter needs the frequency (Hz) setting adjusted to match the refrigerator's requirements." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Variable speed compressors (and other VFD-driven equipment) use sophisticated motor control electronics that require a clean sine wave input. Modified sine wave output (actually a stepped square wave) causes the VFD to produce harmonic distortion in the motor windings, generating excess heat, reducing efficiency, and potentially damaging the motor controller. A pure sine wave inverter is required for modern inverter-driven appliances.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_011",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A technician adds a new VHF radio to an existing NMEA 2000 network on a 32-foot boat. After the installation, intermittent data loss occurs on all NMEA 2000 devices. The backbone length is 9 meters, both terminators read 60Ω between the backbone shield pairs. The new radio spur is 7.5 meters long. The most likely cause of the data issues is:",
+    "choices": [
+      { "id": "a", "text": "The VHF radio is drawing too much current and causing the backbone voltage to drop." },
+      { "id": "b", "text": "The radio spur cable at 7.5 meters exceeds the NMEA 2000 maximum spur length of 6 meters, causing signal reflections that corrupt data on the backbone." },
+      { "id": "c", "text": "There are now too many devices on the network — NMEA 2000 supports a maximum of 8 devices per backbone." },
+      { "id": "d", "text": "The 60Ω terminator reading indicates both terminators are missing and should read 120Ω each." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "NMEA 2000 specifications limit spur cables to a maximum of 6 meters. A 7.5-meter spur creates a significant impedance mismatch and reflections that corrupt the CAN bus data on the entire backbone. The 60Ω terminator reading is correct — two 120Ω terminators in parallel measure 60Ω, confirming both are properly installed. The fix is to shorten the spur to 6 meters or less.",
+    "category": "Marine Electrical",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "marjr_fresh_012",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A customer's boat has a HFC-227ea clean agent fire suppression system in the engine compartment. The customer asks if the system should be upgraded with halon for better suppression. The correct response is:",
+    "choices": [
+      { "id": "a", "text": "Halon 1301 systems are available for retrofit and provide superior suppression compared to HFC-227ea." },
+      { "id": "b", "text": "Halon is banned under the Montreal Protocol and is no longer manufactured — HFC-227ea (and FK-5-1-12/Novec 1230) are the approved current alternatives with comparable clean agent properties." },
+      { "id": "c", "text": "Halon systems are only available for commercial vessels — residential boat owners must use CO₂ systems." },
+      { "id": "d", "text": "HFC-227ea and halon are both acceptable under current USCG regulations — the choice is owner preference." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Halon 1301 and 1211 were banned from production under the Montreal Protocol due to their ozone-depleting properties. Existing halon systems cannot be recharged with new production halon. HFC-227ea (FM-200) and FK-5-1-12 (Novec 1230) are the clean agent successors — they suppress fire without leaving residue, do not damage electronics, and are safe for crew if ventilated after discharge.",
+    "category": "Marine Safety",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "marjr_fresh_013",
+    "examLevel": "jr_marine_tech",
+    "questionText": "During a winterization service on a freshwater lake boat, a technician drains the water from the cooling system and disconnects the shore power. The bilge blower is not working. Which safety concern does a non-functional bilge blower create specifically when returning the boat to service in spring?",
+    "choices": [
+      { "id": "a", "text": "Without the blower, the bilge cannot be inspected for water accumulation after winter storage." },
+      { "id": "b", "text": "USCG regulations (33 CFR 175.110) require boats with gasoline engines and enclosed engine compartments to run the bilge blower for at least 4 minutes before starting the engine to purge explosive fuel vapors." },
+      { "id": "c", "text": "Without the blower, the marine batteries will not charge properly during the first spring startup." },
+      { "id": "d", "text": "A non-functional bilge blower triggers the boat's ELCI to trip when shore power is reconnected in spring." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "USCG 33 CFR 175.110 requires gasoline-powered inboard boats with enclosed engine compartments to operate the bilge blower for at least 4 minutes before starting the engine to purge gasoline vapors that may have accumulated. A faulty blower that does not actually move air creates an explosion risk — the engine compartment is not purged but the owner may believe it is safe to start. This is a critical safety repair.",
+    "category": "Marine Safety",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_014",
+    "examLevel": "jr_marine_tech",
+    "questionText": "An ABYC-certified marine technician is sizing wire for a 30A continuous DC load (cabin heating) on a 12V system. The one-way run is 12 feet. For safety critical circuits, ABYC allows maximum 3% voltage drop. The minimum wire gauge is approximately:",
+    "choices": [
+      { "id": "a", "text": "#10 AWG" },
+      { "id": "b", "text": "#8 AWG" },
+      { "id": "c", "text": "#6 AWG" },
+      { "id": "d", "text": "#4 AWG" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Voltage drop formula: VD = 2 × L × I × R/1000. Allowed VD = 12V × 3% = 0.36V. Solving for R: R = (0.36 × 1000) ÷ (2 × 12 × 30) = 360 ÷ 720 = 0.5 Ω/1000ft. #6 AWG copper has resistance of ~0.395 Ω/1000ft (within limit); #8 AWG at ~0.628 Ω/1000ft would exceed the 3% limit. Select #6 AWG for this safety-critical circuit.",
+    "category": "Marine Electrical",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "marjr_fresh_015",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A boat's AGM battery bank is consistently at 12.8V after charging (overcharged above normal float) and is venting gas from the pressure relief valves. What is the most likely cause?",
+    "choices": [
+      { "id": "a", "text": "The battery bank is too large for the installed charger — the charger is overloaded and producing excess voltage." },
+      { "id": "b", "text": "The charger's bulk/absorption voltage is set to the flooded battery profile (15.0V) rather than the lower AGM profile (14.4–14.7V absorption, 13.5–13.8V float), causing overcharging and gassing." },
+      { "id": "c", "text": "AGM batteries always vent during the first 10 charge cycles — this is normal break-in behavior." },
+      { "id": "d", "text": "The AGM batteries have been over-discharged below 10.5V, triggering the AGM venting protection circuit." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "AGM batteries have a lower charge voltage profile than flooded lead-acid batteries. If a charger is set to the flooded profile (absorption 14.8–15.0V, float 13.8V), it over-charges AGM batteries — electrolysis of the water in the absorbed glass mat releases hydrogen and oxygen gas through the pressure relief valves. Repeated overvoltage dries out the mat and destroys the battery. The charger must be set to the AGM profile.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "marjr_fresh_016",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A Victron MultiPlus 24/3000 inverter/charger has a transfer relay with a 20ms transfer time. A boat owner is concerned that his NAS (network attached storage) drive will crash during generator start when the inverter switches from generator passthrough to inverter output. The correct explanation is:",
+    "choices": [
+      { "id": "a", "text": "The 20ms transfer time is instantaneous — no device will notice the transition." },
+      { "id": "b", "text": "The 20ms transfer is fast enough for computers and NAS drives that have internal power supply hold-up capacitors typically rated for 20–30ms. If the NAS has a battery backup module, it provides seamless transfer." },
+      { "id": "c", "text": "The transfer relay in inverter/chargers always causes a reboot of connected computer equipment — a separate UPS is required for the NAS." },
+      { "id": "d", "text": "A 20ms transfer means the NAS will lose power for 20 full seconds — long enough to crash the drive." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "ATX power supplies and many NAS power supplies have hold-up capacitors that sustain output for 20–30ms through power interruptions. A 20ms transfer time is within this hold-up window, so most computer equipment sees no interruption. NAS units with battery backup modules provide true UPS functionality and complete seamless transfer regardless. However, some low-cost NAS power bricks have shorter hold-up times and may be affected — the NAS documentation should be checked.",
+    "category": "Marine Electrical",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "marjr_fresh_017",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A boat's bonding system connects the engine block to the keel bolts via #8 AWG green wire. The primary purpose of bonding the engine to the keel is to:",
+    "choices": [
+      { "id": "a", "text": "Provide an emergency path for shore power fault current to trip the ELCI breaker." },
+      { "id": "b", "text": "Create a path for DC fault current to return to the battery for overcurrent protection." },
+      { "id": "c", "text": "Equalize the potential of all metal underwater to prevent galvanic corrosion and provide a path for the sacrificial zinc anode to protect all bonded metal." },
+      { "id": "d", "text": "Provide an RF ground reference for the marine SSB radio." }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Marine bonding (ABYC E-11) connects all metal in and around the vessel to an equipotential reference, typically the engine negative and the keel or bonding strap. This equalizes potential so no galvanic cell forms between the engine, shaft, propeller, and underwater fittings. Sacrificial zinc anodes on the shaft, trim tabs, and hull are also bonded — the zinc corrodes sacrificially instead of the more expensive bronze and aluminum components.",
+    "category": "Marine Electrical",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "marjr_fresh_018",
+    "examLevel": "jr_marine_tech",
+    "questionText": "An ABYC MMT (Master Marine Technician) candidate needs to document which of the following for certification eligibility?",
+    "choices": [
+      { "id": "a", "text": "Completion of a 4-year marine technology degree at an accredited university." },
+      { "id": "b", "text": "Holding multiple ABYC specialty certifications, documented service hours in a marine environment, and a 3-year recertification cycle." },
+      { "id": "c", "text": "NMEA Installer certification and 2 years of NMEA 2000 network installation experience." },
+      { "id": "d", "text": "A U.S. Coast Guard third mate license and documented offshore watch experience." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "ABYC Master Marine Technician designation requires holding multiple ABYC specialty certifications (such as Marine Electrical E-11, Systems, Engines), documented hours of professional marine service work, and completion of the recertification process every 3 years to maintain current knowledge. It is not a degree program or affiliated with USCG licensing.",
+    "category": "Marine Career",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "marjr_fresh_019",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A boat's CO detector activates in the cabin while the engine is running and the boat is stationary. The first action should be:",
+    "choices": [
+      { "id": "a", "text": "Open windows and increase ventilation while inspecting the exhaust manifold for leaks." },
+      { "id": "b", "text": "Test the CO detector with a calibration gas to confirm it is not a false alarm before taking action." },
+      { "id": "c", "text": "Immediately evacuate all persons to fresh air and shut off the engine — treat every CO alarm as a real emergency until proven otherwise." },
+      { "id": "d", "text": "Switch off the cabin's 12V power supply to stop the CO source, which is electrical in origin." }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "CO is odorless and colorless, and incapacitation occurs rapidly at concentrations above 70 ppm. The correct response to any CO alarm is immediate evacuation to fresh air — every second of continued exposure can worsen poisoning. Shutting off the engine removes the primary CO source on a boat. Never delay evacuation to investigate or test the detector — treat every alarm as life-safety.",
+    "category": "Marine Safety",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "marjr_fresh_020",
+    "examLevel": "jr_marine_tech",
+    "questionText": "A customer wants to add a 400W MPPT solar charge controller to their existing Victron Cerbo GX network (with a MultiPlus and SmartShunt). The solar charge controller should communicate with the Cerbo GX via:",
+    "choices": [
+      { "id": "a", "text": "NMEA 2000 using a VE.Bus to NMEA 2000 converter" },
+      { "id": "b", "text": "Victron VE.Direct cable connecting the MPPT controller directly to the Cerbo GX VE.Direct port" },
+      { "id": "c", "text": "RS-485 Modbus connection to the Cerbo GX relay terminal" },
+      { "id": "d", "text": "Bluetooth only — Cerbo GX does not accept wired input from solar controllers" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Victron MPPT solar charge controllers connect to the Cerbo GX using the VE.Direct serial cable, plugging into one of the Cerbo GX's VE.Direct ports. This gives the Cerbo GX full visibility into solar yield, battery charge state, and MPPT status — all data appears in the VRM Portal and on connected GX displays. Bluetooth is for smartphone monitoring only; Cerbo GX does not use Bluetooth for hardwired controller integration.",
+    "category": "Marine Electrical",
+    "difficulty": "intermediate"
+  }
+]

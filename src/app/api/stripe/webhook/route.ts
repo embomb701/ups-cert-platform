@@ -343,6 +343,68 @@ async function grantJrDcEngineerAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantMarineTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_marine')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_marine_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrMarineTechAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_marine_tech_test_human',
+    examLevel: 'jr_marine_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Marine Tech Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
+async function grantPoolTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_pool')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_pool_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrPoolTechAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_pool_tech_test_human',
+    examLevel: 'jr_pool_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Pool Tech Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantJrFseAccess(
   userId: string,
   purchaseId: string,
@@ -563,6 +625,38 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_dcengineer_testout':
       await grantDcEngineerTrainingAccess(userId, pid);
       await grantJrDcEngineerAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Marine Systems) ───────────────────────────
+    case 'training_marine':
+      await grantMarineTrainingAccess(userId, pid);
+      break;
+
+    // ── Marine Tech Test-Out ──────────────────────────────────────────────────
+    case 'jr_marine_tech_test_human':
+      await grantJrMarineTechAccess(userId, pid);
+      break;
+
+    // ── Package: Marine Tech Training + Test-Out ──────────────────────────────
+    case 'pkg_training_marine_testout':
+      await grantMarineTrainingAccess(userId, pid);
+      await grantJrMarineTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Pool Equipment) ───────────────────────────
+    case 'training_pool':
+      await grantPoolTrainingAccess(userId, pid);
+      break;
+
+    // ── Pool Tech Test-Out ────────────────────────────────────────────────────
+    case 'jr_pool_tech_test_human':
+      await grantJrPoolTechAccess(userId, pid);
+      break;
+
+    // ── Package: Pool Tech Training + Test-Out ────────────────────────────────
+    case 'pkg_training_pool_testout':
+      await grantPoolTrainingAccess(userId, pid);
+      await grantJrPoolTechAccess(userId, pid);
       break;
 
     // ── Practice test ($14.99 — no cert issued, not a test-out) ──────────

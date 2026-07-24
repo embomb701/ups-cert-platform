@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     const collection = adminDb.collection('questionBank');
 
-    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap] = await Promise.all([
+    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap] = await Promise.all([
       collection.where('examLevel', '==', 'jr_fse').count().get(),
       collection.where('examLevel', '==', 'jr_fse').where('active', '==', true).count().get(),
       collection.where('examLevel', 'in', ['fse', 'fse_ai']).count().get(),
@@ -40,6 +40,10 @@ export async function GET(req: NextRequest) {
       collection.where('examLevel', '==', 'jr_battery_tech').where('active', '==', true).count().get(),
       collection.where('examLevel', '==', 'jr_dc_engineer').count().get(),
       collection.where('examLevel', '==', 'jr_dc_engineer').where('active', '==', true).count().get(),
+      collection.where('examLevel', '==', 'jr_marine_tech').count().get(),
+      collection.where('examLevel', '==', 'jr_marine_tech').where('active', '==', true).count().get(),
+      collection.where('examLevel', '==', 'jr_pool_tech').count().get(),
+      collection.where('examLevel', '==', 'jr_pool_tech').where('active', '==', true).count().get(),
     ]);
 
     return NextResponse.json({
@@ -86,6 +90,14 @@ export async function GET(req: NextRequest) {
       jr_dc_engineer: {
         total: dceSnap.data().count,
         active: dceActiveSnap.data().count,
+      },
+      jr_marine_tech: {
+        total: marineSnap.data().count,
+        active: marineActiveSnap.data().count,
+      },
+      jr_pool_tech: {
+        total: poolSnap.data().count,
+        active: poolActiveSnap.data().count,
       },
     });
   } catch (err: any) {

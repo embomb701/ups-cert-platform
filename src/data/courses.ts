@@ -854,6 +854,33 @@ export const COURSE_OUTLINES: Record<string, CourseOutline> = {
     ],
   },
 
+  // ── MARINE SYSTEMS TECHNICIAN ────────────────────────────────────────────
+  marine: {
+    tracks: ['Electrical Foundation', 'Power Systems', 'Safety & Career'],
+    modules: [
+      { id: 'marine-electrical', track: 'Electrical Foundation', title: 'Shore Power & AC Electrical', desc: 'ABYC E-11 shore power standards, ELCI protection, reverse polarity, and galvanic isolators', chapters: ['Shore power 30A/50A, ABYC E-11', 'Reverse polarity and ELCI 30mA protection', 'Galvanic isolators vs isolation transformers', 'Marine bonding system (#8 AWG)', 'The 7-inch fuse rule'] },
+      { id: 'marine-batteries', track: 'Electrical Foundation', title: 'Marine Battery Systems', desc: 'CCA/MCA/RC ratings, battery types, house/start bank isolation, ACR vs diode isolator, multi-stage charging', chapters: ['CCA, MCA, RC ratings', 'Flooded, AGM, LiFePO4, gel types', 'House vs start bank isolation', 'ACR vs diode isolator', 'Multi-stage charging and LiFePO4 BMS load-dump'] },
+      { id: 'marine-inverter', track: 'Power Systems', title: 'Marine Inverters & Inverter/Chargers', desc: 'Pure sine wave requirements, sizing for surge loads, ABYC A-31, and VE.Bus communication', chapters: ['Pure sine vs modified sine wave', 'Sizing: running watts + motor start surge', 'Current draw calculation at 12V', 'ABYC A-31 and transfer relay timing', 'BMS communication via CAN bus'] },
+      { id: 'marine-wiring', track: 'Power Systems', title: 'Marine Wiring & NMEA 2000', desc: 'Tinned copper requirements, voltage drop, color codes, crimp terminals, NMEA 2000 network installation', chapters: ['ABYC E-11 wire specifications (tinned copper, 105°C)', 'Voltage drop: 3% safety, 10% non-critical', 'Marine color coding', 'Crimp terminals only — wire nuts prohibited', 'NMEA 2000: CAN bus, terminators, spur limits'] },
+      { id: 'marine-safety', track: 'Safety & Career', title: 'Marine Safety Systems', desc: 'Bilge pumps, CO detection, 4-minute blower rule, clean agent suppression, and anode selection', chapters: ['Bilge pump sizing and float switch wiring', 'CO and the 4-minute bilge blower rule (33 CFR 175.110)', 'Clean agent fire suppression (HFC-227ea, Novec 1230)', 'Halon ban under Montreal Protocol', 'Sacrificial anode selection by water type'] },
+      { id: 'marine-career', track: 'Safety & Career', title: 'Marine Technician Career Path', desc: 'ABYC E-11 certification, MMT designation, NMEA Installer, manufacturer certs, and compensation', chapters: ['ABYC Marine Electrical Technician (E-11)', 'ABYC MMT requirements and 3-year recert', 'NMEA Installer certification', 'Manufacturer certs (Victron, Raymarine, Garmin)', 'Employment sectors and compensation $42K–$130K+'] },
+    ],
+  },
+
+  // ── POOL EQUIPMENT TECHNICIAN ────────────────────────────────────────────
+  pool: {
+    tracks: ['Hydraulics & Electrical', 'Chemistry & Treatment', 'Automation & Career'],
+    modules: [
+      { id: 'pool-motors', track: 'Hydraulics & Electrical', title: 'Pool Pump Motors & Hydraulics', desc: 'Pump affinity laws, DOE 2021 VSP mandate, TDH, system curves, cavitation diagnosis', chapters: ['Affinity laws (P ∝ N³)', 'DOE 2021 efficiency rule — VSPs above 1 HP', 'Permanent magnet motors + built-in VFD', 'TDH and system curve matching', 'Cavitation: symptoms and root causes'] },
+      { id: 'pool-electrical', track: 'Hydraulics & Electrical', title: 'Pool Electrical Safety — NEC 680', desc: 'Equipotential bonding, GFCI zones, underwater lighting, and panelboard placement', chapters: ['NEC Article 680 scope', 'Equipotential bonding (#8 AWG solid copper)', 'GFCI zones: 6-foot exclusion, 20-foot GFCI zone', '120V underwater lights: GFCI + ground continuity monitor', 'Pool sub-panel placement (5-foot minimum)'] },
+      { id: 'pool-heating', track: 'Hydraulics & Electrical', title: 'Pool & Spa Heating Systems', desc: 'Gas heater sizing, heat pump COP, solar collectors, and evaporative heat loss', chapters: ['Gas heater BTU sizing formula', 'Heat pump COP 4–6 and cold-weather limits', 'Titanium heat exchangers for salt pools', 'Solar collector sizing (50–100% of pool area)', 'Evaporation as dominant heat loss — cover ROI'] },
+      { id: 'pool-filtration', track: 'Hydraulics & Electrical', title: 'Pool Filtration Systems', desc: 'Sand, cartridge, and DE filters; turnover calculation; backwash procedures; winterization', chapters: ['Sand (20–40 µm), Cartridge (10–15 µm), DE (3–5 µm)', 'Turnover: gal ÷ hrs ÷ 60 = GPM required', 'Backwash trigger: 8–10 psi above clean baseline', 'DE recharge after backwash', 'Winterization freeze protection'] },
+      { id: 'pool-chemical', track: 'Chemistry & Treatment', title: 'Salt Chlorine Generators & Water Chemistry', desc: 'SCG electrolysis, ORP/pH relationship, CYA management, and chemical controller calibration', chapters: ['SCG electrolysis: Cl₂ → HOCl', 'Salt range 2,700–3,400 ppm', 'ORP 650–750 mV target', 'pH 7.4–7.6: HOCl activity vs pH chart', 'CYA 30–50 ppm (60–80 SCG); >100 ppm = stabilizer lock'] },
+      { id: 'pool-automation', track: 'Automation & Career', title: 'Pool Automation & Control Systems', desc: 'Load centers, relay boards, VSP integration protocols, flow sensors, and freeze protection', chapters: ['Load center and relay board architecture', 'Pentair IntelliCenter, Hayward OmniLogic, Jandy iAquaLink', 'RS-485 Modbus VSP communication (IntelliFlo)', 'Flow sensor interlock before heater enable', 'Freeze protection: 38–40°F threshold, overrides manual off'] },
+      { id: 'pool-career', track: 'Automation & Career', title: 'Pool Equipment Technician Career Path', desc: 'CPO/AFO credentials, PHTA CST, electrical licensing scope, route economics, and compensation', chapters: ['CPO (PHTA) and AFO (NRPA) credentials', 'PHTA Certified Service Technician (CST)', 'NEC 680 electrical work requires licensed electrician', 'Route economics: 70–90 pools/week at $100–200/month', 'Compensation $55K–$150K+ self-employed specialist'] },
+    ],
+  },
+
   // ── BATTERY TECHNICIAN ──────────────────────────────────────────────────
   battery: {
     tracks: ['Chemistry & Safety Core', 'Testing & Service', 'Applications & Career'],
@@ -1013,6 +1040,32 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 34,
     stripeProductId: 'training_dcengineer',
     testOutProductId: 'jr_dc_engineer_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'marine',
+    title: 'Marine Systems Technician',
+    shortTitle: 'Marine Tech',
+    tagline: 'Service boat electrical systems — ABYC E-11, shore power, battery banks, inverters, NMEA 2000, and the growing marine electrification market.',
+    accessKey: 'training_marine',
+    certTitle: 'Jr. Marine Systems Technician',
+    color: 'blue',
+    totalModules: 16,
+    stripeProductId: 'training_marine',
+    testOutProductId: 'jr_marine_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'pool',
+    title: 'Pool Equipment Technician',
+    shortTitle: 'Pool Equipment Tech',
+    tagline: 'Service residential and commercial pools — VSP pumps, NEC 680 electrical, filtration, heating, salt chlorine generators, and automation controllers.',
+    accessKey: 'training_pool',
+    certTitle: 'Jr. Pool Equipment Technician',
+    color: 'sky',
+    totalModules: 17,
+    stripeProductId: 'training_pool',
+    testOutProductId: 'jr_pool_tech_test_human',
     comingSoon: true,
   },
 ];

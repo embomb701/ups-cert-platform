@@ -1,0 +1,302 @@
+[
+  {
+    "id": "poljr_fresh_001",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool pump is programmed to run at 1,800 RPM for filtration. The pump draws 400W at this speed. If the owner wants to increase filtration speed to 2,400 RPM, approximately how much power will the pump consume at the higher speed?",
+    "choices": [
+      { "id": "a", "text": "533W — power scales linearly with speed" },
+      { "id": "b", "text": "711W — power scales with the square of speed" },
+      { "id": "c", "text": "949W — power scales with the cube of speed" },
+      { "id": "d", "text": "1,200W — power doubles for each 600 RPM increase" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Power scales with the cube of speed ratio (P ∝ N³). Speed ratio: 2,400/1,800 = 1.333. Power ratio: 1.333³ = 2.37. New power: 400W × 2.37 = 948W ≈ 949W. This is why small speed increases result in large power increases — and why reducing speed saves so much energy.",
+    "category": "Pool Hydraulics",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_002",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A customer notices their pool pump basket is full of debris and the pressure gauge reads 6 psi below the normal operating reading. The most likely explanation is:",
+    "choices": [
+      { "id": "a", "text": "The pump is running at lower RPM than programmed due to a VFD fault." },
+      { "id": "b", "text": "A severely clogged pump basket restricts suction flow, reducing the pump's ability to build pressure — lower pressure indicates insufficient flow rather than a pressurized system fault." },
+      { "id": "c", "text": "Low filter pressure means the filter is clean and operating at peak efficiency." },
+      { "id": "d", "text": "The pressure gauge is measuring suction pressure which drops when the basket is full." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "A clogged pump basket starves the impeller of water, reducing flow significantly. With reduced flow through the filter, the filter pressure drops below normal — the 6 psi drop indicates the pump is not moving adequate water to load the filter. Cleaning the basket restores normal flow and returns the pressure gauge to the expected range.",
+    "category": "Pool Hydraulics",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "poljr_fresh_003",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A residential pool technician replaces a 2 HP single-speed pump with a 1.5 HP variable speed pump. The homeowner asks how this smaller-rated pump can maintain the same filtration turnover rate. The correct explanation is:",
+    "choices": [
+      { "id": "a", "text": "The 1.5 HP VSP actually produces less flow than the 2 HP single-speed pump — the owner will need to run it longer each day." },
+      { "id": "b", "text": "The VSP can be programmed to run at optimal RPM to achieve the target GPM with less wasted power — at lower speeds for longer periods or optimized speed for the system TDH, the permanent magnet motor achieves the turnover with significantly less energy." },
+      { "id": "c", "text": "The HP rating on VSPs is irrelevant — only wattage matters, and 1.5 HP VSPs use more watts than 2 HP single-speed pumps." },
+      { "id": "d", "text": "The 1.5 HP VSP produces the same flow because it runs at 5,000 RPM compared to the 3,450 RPM single-speed pump." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "VSP pumps use efficient permanent magnet motors and can be programmed to run at lower speeds for extended periods, achieving the same daily volume turnover with far less peak power. A 1.5 HP VSP running at 1,800 RPM for 12 hours can move the same total gallons as a 2 HP single-speed at 3,450 RPM for 6 hours, while consuming 60–70% less energy due to the cubic power relationship.",
+    "category": "Pool Hydraulics",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_004",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool deck has a 120V GFCI-protected exterior receptacle 14 feet from the pool water edge. Per NEC 680.22, is this installation code-compliant?",
+    "choices": [
+      { "id": "a", "text": "No — no receptacle may be within 20 feet of the pool water edge regardless of GFCI protection." },
+      { "id": "b", "text": "Yes — receptacles between 6 and 20 feet from the pool edge are permitted if GFCI protected." },
+      { "id": "c", "text": "No — receptacles require a minimum 20-foot setback even with GFCI protection." },
+      { "id": "d", "text": "Yes — GFCI protection is only required within 6 feet of the pool edge; beyond 6 feet, standard protection applies." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "NEC 680.22 establishes two zones: no receptacle within 6 feet of the pool water edge (absolute exclusion zone), and GFCI protection required for receptacles between 6 and 20 feet. At 14 feet with GFCI protection, this installation complies with both requirements — it is beyond the 6-foot exclusion and within the GFCI-required zone.",
+    "category": "Pool Electrical",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "poljr_fresh_005",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool technician is called to a service where the homeowner reports a tingling sensation when standing on the pool steps but submerged below the water line. The equipotential bonding system was verified intact last year. What is the most likely cause?",
+    "choices": [
+      { "id": "a", "text": "The pool water's cyanuric acid level is too high, creating an electrochemical reaction with the pool ladder." },
+      { "id": "b", "text": "Stray voltage is entering the pool water — likely from a nearby utility ground current, an AC fault on pool equipment, or a neighboring property's ground current through the common utility ground." },
+      { "id": "c", "text": "The pool heater is running simultaneously with the pump, creating temporary voltage fluctuations." },
+      { "id": "d", "text": "The GFCI breaker for the pool lights is partially tripped, allowing reduced current to flow through the pool water." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Tingling sensations in pool water — especially concentrated at metal entry points like steps or ladders — indicate voltage gradients in the water, which is the precursor to electric shock drowning. Sources include utility neutral-to-ground current, a failing pool light or equipment creating a fault to water, or neighboring property electrical faults. A licensed electrician must immediately trace and eliminate the voltage source — this is a life-safety emergency.",
+    "category": "Pool Electrical",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "poljr_fresh_006",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool owner adds 40 lbs of salt to their 20,000-gallon pool. How much does the salt concentration increase?",
+    "choices": [
+      { "id": "a", "text": "Approximately 240 ppm" },
+      { "id": "b", "text": "Approximately 2,400 ppm" },
+      { "id": "c", "text": "Approximately 24,000 ppm" },
+      { "id": "d", "text": "Approximately 400 ppm" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Salt concentration increase: (lbs × 120) ÷ (gallons ÷ 100). Using the rule of thumb: 1 lb per 10,000 gallons ≈ 12 ppm. For 40 lbs in 20,000 gallons: 40 × (12 ppm per lb per 10,000 gal) × (10,000/20,000) = 40 × 6 ppm = 240 ppm. With a target of 3,200 ppm, this is only a modest adjustment, not the initial fill.",
+    "category": "Water Chemistry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_007",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool tests: Free Chlorine 3.0 ppm, pH 8.2, CYA 40 ppm. The pool has been struggling with algae for two weeks. What water chemistry factor is most likely allowing algae growth despite adequate free chlorine?",
+    "choices": [
+      { "id": "a", "text": "CYA at 40 ppm is too high and is binding all the available chlorine." },
+      { "id": "b", "text": "pH at 8.2 shifts the chlorine equilibrium so that only about 15–20% remains as active HOCl — the effective sanitizer level is far below what the 3.0 ppm reading suggests." },
+      { "id": "c", "text": "Free chlorine at 3.0 ppm is insufficient regardless of pH — minimum 5.0 ppm is required to prevent algae." },
+      { "id": "d", "text": "CYA at 40 ppm is too low to protect chlorine from UV degradation, causing chlorine to dissipate before killing algae." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "At pH 8.2, approximately 15–20% of total chlorine is in the active HOCl form. With 3.0 ppm free chlorine at pH 8.2, only 0.45–0.60 ppm is actually active — far below effective sanitization levels. The fix is to lower pH to 7.4–7.6 where 50–66% of the same 3.0 ppm becomes active HOCl (1.5–2.0 ppm), providing effective algae control without adding more chlorine.",
+    "category": "Water Chemistry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_008",
+    "examLevel": "jr_pool_tech",
+    "questionText": "After backwashing a DE filter, the pool water immediately turns cloudy and the technician notices white powder returning through the return jets. The most likely cause is:",
+    "choices": [
+      { "id": "a", "text": "The filter media is old and has broken down into fine particles that pass through the laterals." },
+      { "id": "b", "text": "The filter was put directly from BACKWASH to FILTER without a RINSE cycle, allowing unsettled DE and debris to return to the pool." },
+      { "id": "c", "text": "The DE powder added after backwash was too fine-grade and is passing through the filter grid fabric." },
+      { "id": "d", "text": "The pump speed is too high, causing DE to bypass the filter grids at high flow velocity." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "After backwashing a DE filter (or sand filter), the filter media bed is loose and unsettled. Switching directly to FILTER mode returns turbid water and loosened DE to the pool. The RINSE cycle (30 seconds after backwash) re-settles the media in the normal filtration direction before opening the path back to the pool. Skipping RINSE is the most common cause of immediately cloudy water after backwash.",
+    "category": "Pool Filtration",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "poljr_fresh_009",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A heat pump pool heater is connected to a salt chlorine generator pool. After 3 years of operation, the heat exchanger has developed pinhole leaks. What was the most likely contributing factor?",
+    "choices": [
+      { "id": "a", "text": "The heat pump was oversized for the pool volume, causing overheating of the heat exchanger." },
+      { "id": "b", "text": "The heat exchanger was copper — copper corrodes in the elevated chloride environment of a salt chlorine generator pool, requiring a titanium heat exchanger for salt water applications." },
+      { "id": "c", "text": "The pool's pH was maintained too low (below 7.2), which corrodes all heat exchanger materials." },
+      { "id": "d", "text": "The heat pump's refrigerant leaked into the heat exchanger, accelerating corrosion from the inside." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Copper heat exchangers corrode in the chloride-rich environment of salt pools — external corrosion from salt-laden air and internal corrosion from the 3,200 ppm salt pool water cause pinhole leaks within 2–5 years. Salt chlorine generator pools (and any pool near the ocean) require titanium heat exchangers, which are highly resistant to chloride corrosion. Replacing the heat exchanger with titanium is the appropriate repair.",
+    "category": "Pool Heating",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_010",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool owner wants to extend their swimming season by 6 weeks in a moderate climate. They have no current heating system. The most cost-effective solution for season extension (not rapid heat-up) would be:",
+    "choices": [
+      { "id": "a", "text": "A 400,000 BTU/hr natural gas heater to quickly heat the pool on swimming days." },
+      { "id": "b", "text": "A combination of solar collectors (50–80% of pool surface area) and a solar or liquid cover to reduce evaporation — provides season extension at minimal operating cost." },
+      { "id": "c", "text": "A heat pump pool heater — best for season extension in a moderate climate because its COP makes it cheaper to operate than gas." },
+      { "id": "d", "text": "An electric resistance inline heater, which is cheaper to install than solar and provides consistent performance." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Solar heating is ideal for season extension — it adds heat during sun hours over an extended daily period and is nearly free to operate (only filtration pump electricity). Adding a solar cover dramatically reduces nightly heat loss from evaporation, compounding the benefit. The combination can extend the season 4–8 weeks in a moderate climate at very low operating cost. A heat pump is a good alternative but has higher operating cost and requires maintenance.",
+    "category": "Pool Heating",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_011",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool automation system is displaying a 'high water temperature' alert at 95°F when the heater setpoint is 84°F. The flow sensor is confirmed working. The most likely cause is:",
+    "choices": [
+      { "id": "a", "text": "The heater is oversized and cannot regulate its output below 95°F." },
+      { "id": "b", "text": "The heater control board has lost communication with the automation system and is running at maximum output without receiving the disable signal when the setpoint is reached." },
+      { "id": "c", "text": "The pool water temperature sensor is faulty — it may be reading incorrectly, or the heater's internal thermostat is stuck in the open position causing continuous heating." },
+      { "id": "d", "text": "The solar heating system is adding heat faster than the automation system can account for." }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "If the pool water temperature is genuinely reaching 95°F with a setpoint of 84°F, either the temperature sensor reporting to the automation system is faulty (reading 84°F when water is actually hotter), or the heater's high-limit thermostat has failed in the open (failed-safe-to-heat) position. Both scenarios result in continuous heating beyond setpoint. Verifying actual water temperature with a calibrated thermometer and checking the heater's internal high-limit thermostat are the first diagnostic steps.",
+    "category": "Pool Automation",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "poljr_fresh_012",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool service technician is asked to install a new Pentair IntelliCenter automation system controlling an EasyTouch-style load center. The existing pool has a Hayward EcoStar VSP pump. Which limitation should the customer be made aware of?",
+    "choices": [
+      { "id": "a", "text": "Pentair IntelliCenter cannot control any VSP pump — the customer must purchase a new single-speed pump." },
+      { "id": "b", "text": "The Hayward EcoStar will only be controllable as an on/off relay from the Pentair system — speed control and status monitoring require a Pentair IntelliFlo pump due to proprietary communication protocols." },
+      { "id": "c", "text": "Hayward and Pentair automation systems are fully interoperable through the shared RS-485 Modbus standard." },
+      { "id": "d", "text": "The Hayward EcoStar requires a third-party VFD interface module available from both Pentair and Hayward." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Pentair and Hayward use proprietary communication protocols for their smart pumps — Pentair IntelliCenter can communicate with IntelliFlo pumps via RS-485 for full speed control and monitoring, but can only switch a Hayward EcoStar on/off through a relay contact. The customer loses programmatic speed control, RPM feedback, and fault monitoring. Replacing the pump with an IntelliFlo provides full integration, but is an additional cost the customer should understand upfront.",
+    "category": "Pool Automation",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_013",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A salt chlorine generator's control panel shows 'Cell Check' or 'Inspect Cell' after 500 hours of operation. The pool owner asks what to do. The correct advice is:",
+    "choices": [
+      { "id": "a", "text": "Replace the cell — 500 hours is the rated end-of-life for residential SCG cells." },
+      { "id": "b", "text": "Inspect the cell for calcium scale buildup and clean with dilute muriatic acid (1:10 ratio) if needed — the 'Cell Check' alarm is a maintenance reminder, not necessarily a failure indicator." },
+      { "id": "c", "text": "Add a cell cleaning chemical (chlorine wash) to the skimmer to clean the cell in place without removal." },
+      { "id": "d", "text": "Reset the control board — the Cell Check timer is a software bug in this SCG model." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Most SCG controllers display a 'Cell Check' or similar message at periodic hour intervals (typically 500 hours) as a preventive maintenance reminder. The technician should remove the cell, inspect for calcium scale on the titanium electrode plates, and acid wash if needed (1 part muriatic acid to 10 parts water, 15–30 minutes). After cleaning and reinstalling, reset the Cell Check timer per manufacturer instructions.",
+    "category": "Water Chemistry",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "poljr_fresh_014",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A freeze protection event triggers at 3 AM and runs the pool pump at 1,200 RPM for 2 hours. The next morning, the pool owner reports the pump was running on its own all night and asks if it is broken. The correct explanation is:",
+    "choices": [
+      { "id": "a", "text": "The pump timer has malfunctioned and needs to be reprogrammed — replace the controller board." },
+      { "id": "b", "text": "Freeze protection is a designed safety feature in pool automation systems that overrides manual off settings when air temperature approaches freezing, preventing ice damage to equipment and plumbing." },
+      { "id": "c", "text": "The automation system has lost its programming and defaulted to running the pump continuously — reprogram the schedule." },
+      { "id": "d", "text": "The pump is running because the solar controller detected cold collector temperatures and activated the pump for freeze protection." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Freeze protection is an intentional, critical safety feature of pool automation systems. When the outdoor air temperature drops to approximately 38–40°F, the system automatically starts the pump at low speed to circulate water through the plumbing, preventing freezing damage to pipes, valves, heater heat exchangers, and pump equipment. This override takes priority over manual off and scheduled downtime — the system is working as designed.",
+    "category": "Pool Automation",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "poljr_fresh_015",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool technician adds 2 lbs of sodium bicarbonate (baking soda) to a 20,000-gallon pool with total alkalinity of 60 ppm. The target is 100 ppm. How much more sodium bicarbonate is needed to reach the target?",
+    "choices": [
+      { "id": "a", "text": "2 more lbs (4 lbs total)" },
+      { "id": "b", "text": "8 more lbs (10 lbs total)" },
+      { "id": "c", "text": "14 more lbs (16 lbs total)" },
+      { "id": "d", "text": "18 more lbs (20 lbs total)" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The rule of thumb: 1.5 lbs of sodium bicarbonate per 10,000 gallons raises TA approximately 10 ppm. To raise TA from 60 to 100 ppm (+40 ppm) in a 20,000-gallon pool: (40 ÷ 10) × 1.5 lbs × (20,000 ÷ 10,000) = 4 × 1.5 × 2 = 12 lbs needed. The first 2 lbs raised TA approximately 13 ppm (to ~73 ppm), so about 14 more lbs are needed to reach 100 ppm. Answer C is closest at 14 more lbs.",
+    "category": "Water Chemistry",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_016",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A cartridge filter on a 15,000-gallon pool shows 22 psi on the pressure gauge (clean baseline was 10 psi). The technician removes and inspects the cartridge element and finds it intact but heavily loaded with calcium scale and sunscreen oils. The correct maintenance procedure is:",
+    "choices": [
+      { "id": "a", "text": "Replace the cartridge immediately — calcium scale cannot be removed from cartridge elements." },
+      { "id": "b", "text": "Hose off with a garden hose under high pressure to dislodge calcium deposits, then reinstall." },
+      { "id": "c", "text": "Soak the cartridge in a dilute muriatic acid solution to dissolve calcium deposits, then rinse thoroughly before reinstalling." },
+      { "id": "d", "text": "Backwash the cartridge using the multiport valve's backwash position for 3 minutes." }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Calcium scale and sunscreen/oil residue cannot be removed by hosing alone — they require chemical cleaning. Dilute muriatic acid (typically 1:20 or per cartridge manufacturer instructions) dissolves calcium deposits from the pleated fabric. Commercial enzyme cleaners dissolve oil and sunscreen residue. After acid soaking, the cartridge must be thoroughly rinsed before reinstallation. Cartridge filters have no backwash valve or capability.",
+    "category": "Pool Filtration",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_017",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool ORP controller reads 580 mV and activates the liquid chlorine peristaltic pump. After 20 minutes of dosing, ORP has only risen to 600 mV despite adding significant chlorine. The pool pH is 8.1. What is the most efficient corrective action?",
+    "choices": [
+      { "id": "a", "text": "Add more liquid chlorine until ORP reaches 700 mV." },
+      { "id": "b", "text": "Lower pool pH to 7.4–7.6 using muriatic acid — high pH causes chlorine to shift to the inactive OCl⁻ form, reducing ORP despite adequate total chlorine." },
+      { "id": "c", "text": "Clean the ORP probe — a 580 mV reading at this chlorine level indicates probe fouling." },
+      { "id": "d", "text": "Shock the pool with calcium hypochlorite — ORP chemical controllers are incompatible with liquid chlorine." }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "At pH 8.1, only about 20% of total chlorine is in the active HOCl form — 80% is inactive OCl⁻. ORP directly measures sanitizing power (HOCl activity), so it remains low despite adding chlorine. Lowering pH to 7.4–7.6 shifts more chlorine to the active HOCl form, raising ORP without adding more chlorine. This is both more effective and more economical than continuing to dose chlorine at high pH.",
+    "category": "Water Chemistry",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "poljr_fresh_018",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A pool service company technician is asked to replace a failed GFCI breaker on the underwater pool light circuit. What credential or license is required in most U.S. states?",
+    "choices": [
+      { "id": "a", "text": "CPO (Certified Pool Operator) certification from PHTA" },
+      { "id": "b", "text": "PHTA Certified Service Technician (CST) credential" },
+      { "id": "c", "text": "A state electrical contractor or journeyman electrician license — replacing circuit breakers is licensed electrical work in most jurisdictions" },
+      { "id": "d", "text": "No license is required for direct replacement of a failed GFCI breaker with the same amperage rating" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Replacing circuit breakers in an electrical panel is classified as licensed electrical work in the vast majority of U.S. states. Pool sub-panel work additionally falls under NEC Article 680 requirements for pool electrical installations. A CPO or CST credential is a pool operations/service credential, not an electrical license — it does not authorize electrical panel work. Pool service technicians without electrical licensing should subcontract panel work to a licensed electrician.",
+    "category": "Pool Career",
+    "difficulty": "foundational"
+  },
+  {
+    "id": "poljr_fresh_019",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A commercial hotel pool has a 150,000-gallon volume and must comply with the local health code requiring 4-hour turnover. The pool has two identical pumps running in parallel. What flow rate must each pump deliver to meet the turnover requirement?",
+    "choices": [
+      { "id": "a", "text": "312.5 GPM per pump (625 GPM total)" },
+      { "id": "b", "text": "156 GPM per pump (312 GPM total)" },
+      { "id": "c", "text": "250 GPM per pump (500 GPM total)" },
+      { "id": "d", "text": "62.5 GPM per pump (125 GPM total)" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Required total flow: 150,000 gal ÷ 4 hrs ÷ 60 min/hr = 625 GPM total. With two pumps in parallel splitting the load equally: 625 ÷ 2 = 312.5 GPM per pump. Each pump must be rated for at least 312.5 GPM at the system's TDH to ensure the required turnover rate is achieved.",
+    "category": "Pool Filtration",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "poljr_fresh_020",
+    "examLevel": "jr_pool_tech",
+    "questionText": "A self-employed pool service technician currently services 60 residential pools at $140/month each and wants to grow to 90 pools. They are considering hiring a helper at $18/hour, 40 hrs/week. What is the additional monthly gross revenue gained from the 30 new pools, and what is the weekly labor cost of the helper?",
+    "choices": [
+      { "id": "a", "text": "Additional revenue: $4,200/month; Helper cost: $720/week" },
+      { "id": "b", "text": "Additional revenue: $2,800/month; Helper cost: $540/week" },
+      { "id": "c", "text": "Additional revenue: $4,200/month; Helper cost: $600/week" },
+      { "id": "d", "text": "Additional revenue: $1,400/month; Helper cost: $720/week" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Additional gross revenue: 30 new pools × $140/month = $4,200/month. Helper weekly labor cost: $18/hr × 40 hrs = $720/week ($3,120/month before payroll taxes). The net economic gain is approximately $4,200 - $3,120 = $1,080/month additional profit plus employer payroll taxes (~15%), making the expansion economically positive while freeing the owner to add premium services or further grow the route.",
+    "category": "Pool Career",
+    "difficulty": "intermediate"
+  }
+]
