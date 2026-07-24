@@ -493,6 +493,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // BIOMEDICAL EQUIPMENT TECHNICIAN (BMET) PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_bmet_tech: {
+    name: 'Biomedical Equipment Technician Training Course + Jr. BMET Certification Exam',
+    shortName: 'BMET Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_BMET_TECH ?? '',
+  },
+
+  jr_bmet_tech_test_human: {
+    name: 'Jr. Biomedical Equipment Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. BMET Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_BMET_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_bmet_tech_testout: {
+    name: 'BMET Training Course + Jr. BMET Test-Out (Human Proctored)',
+    shortName: 'BMET Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_BMET_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

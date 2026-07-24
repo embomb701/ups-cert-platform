@@ -1,0 +1,262 @@
+[
+  {
+    "id": "bmet_fresh_001",
+    "examLevel": "jr_bmet_tech",
+    "question": "Which organization requires hospitals to maintain Equipment Management Programs (EMPs) that document all medical device maintenance?",
+    "choices": [
+      { "id": "a", "text": "FDA (Food and Drug Administration)" },
+      { "id": "b", "text": "TJC (The Joint Commission)" },
+      { "id": "c", "text": "OSHA (Occupational Safety and Health Administration)" },
+      { "id": "d", "text": "CMS (Centers for Medicare and Medicaid Services)" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The Joint Commission (TJC) requires Equipment Management Programs (EMPs) that include device inventories, PM schedules, work order documentation, and records of all inspections and repairs. EMPs are the regulatory framework within which BMET departments operate."
+  },
+  {
+    "id": "bmet_fresh_002",
+    "examLevel": "jr_bmet_tech",
+    "question": "Infusion pumps are classified as which FDA device class?",
+    "choices": [
+      { "id": "a", "text": "Class I — general controls only" },
+      { "id": "b", "text": "Class II — requiring 510(k) premarket notification" },
+      { "id": "c", "text": "Class III — requiring full Premarket Approval (PMA)" },
+      { "id": "d", "text": "Class IV — requiring special labeling only" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Infusion pumps are Class II medical devices requiring 510(k) premarket notification demonstrating substantial equivalence to a predicate device. Class III PMA is reserved for high-risk life-sustaining devices such as implantable pacemakers."
+  },
+  {
+    "id": "bmet_fresh_003",
+    "examLevel": "jr_bmet_tech",
+    "question": "NFPA 99 requires ground continuity from a patient care receptacle to the panel ground bus to be less than:",
+    "choices": [
+      { "id": "a", "text": "0.5 ohms" },
+      { "id": "b", "text": "0.2 ohms" },
+      { "id": "c", "text": "1.0 ohm" },
+      { "id": "d", "text": "5.0 ohms" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "NFPA 99 requires ground continuity of less than 0.2 ohms from the receptacle ground pin to the panel ground bus. Higher resistance indicates corrosion, loose connections, or damaged wiring that compromises the safety ground path."
+  },
+  {
+    "id": "bmet_fresh_004",
+    "examLevel": "jr_bmet_tech",
+    "question": "IEC 60601-1 Type CF applied part classification applies to equipment with applied parts intended for:",
+    "choices": [
+      { "id": "a", "text": "No direct patient contact" },
+      { "id": "b", "text": "Surface-applied floating parts with no cardiac contact" },
+      { "id": "c", "text": "Direct cardiac contact such as intracardiac catheters" },
+      { "id": "d", "text": "External diagnostic sensors only" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Type CF (Cardiac Floating) applied parts are intended for direct cardiac contact. They carry the most stringent leakage limit — 10 µA in normal condition — because even microampere currents applied directly to cardiac tissue can cause ventricular fibrillation."
+  },
+  {
+    "id": "bmet_fresh_005",
+    "examLevel": "jr_bmet_tech",
+    "question": "An Isolated Power System (IPS) in an operating room protects patients by:",
+    "choices": [
+      { "id": "a", "text": "Reducing line voltage to safe patient-contact levels" },
+      { "id": "b", "text": "Creating a floating secondary that is not referenced to ground, preventing a ground-fault return path through the patient" },
+      { "id": "c", "text": "Providing automatic backup power if the main circuit breaker trips" },
+      { "id": "d", "text": "Automatically shutting off power when leakage current exceeds 300 µA" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "An IPS isolation transformer creates a secondary with no reference to ground. If one conductor contacts ground (a single fault), no complete return path exists through the patient. The LIM alarms to alert staff before a second fault creates a complete hazard circuit."
+  },
+  {
+    "id": "bmet_fresh_006",
+    "examLevel": "jr_bmet_tech",
+    "question": "Microshock ventricular fibrillation can be caused by as little as 10-50 µA when current is:",
+    "choices": [
+      { "id": "a", "text": "Applied across the chest externally through intact skin" },
+      { "id": "b", "text": "Delivered directly to or near cardiac tissue via an intracardiac path" },
+      { "id": "c", "text": "Felt as a tingling sensation from hand to hand" },
+      { "id": "d", "text": "Enough to trigger a GFCI device in the patient room" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Microshock occurs when current bypasses skin resistance and reaches cardiac tissue directly via intracardiac catheters, pacemaker leads, or other paths. The ventricular fibrillation threshold drops from the 100-300 mA macroshock level to just 10-50 µA."
+  },
+  {
+    "id": "bmet_fresh_007",
+    "examLevel": "jr_bmet_tech",
+    "question": "During electrical safety testing, a ground continuity measurement of 0.35 ohms requires the BMET to:",
+    "choices": [
+      { "id": "a", "text": "Return the device to service — 0.35 ohms is within acceptable limits" },
+      { "id": "b", "text": "Tag the device out of service and investigate the high ground resistance" },
+      { "id": "c", "text": "Re-test immediately as high readings are often transient" },
+      { "id": "d", "text": "Document the result and schedule repair at the next maintenance window" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "NFPA 99 requires ground continuity of less than 0.2 ohms. A reading of 0.35 ohms fails this requirement. The device must be red-tagged, the wiring inspected for corrosion or loose connections, repaired, and retested before returning to patient care."
+  },
+  {
+    "id": "bmet_fresh_008",
+    "examLevel": "jr_bmet_tech",
+    "question": "An ESU Return Electrode Monitoring (REM) system protects patients from:",
+    "choices": [
+      { "id": "a", "text": "High output power at the active electrode tip" },
+      { "id": "b", "text": "Burns at the dispersive pad site caused by poor contact and concentrated current density" },
+      { "id": "c", "text": "Electromagnetic interference with cardiac pacemakers" },
+      { "id": "d", "text": "Accidental activation of the ESU foot pedal by the circulating nurse" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "REM monitors the impedance of the dispersive (return) electrode pad. Poor pad contact increases resistance and concentrates return current density, generating heat that causes burns. REM alarms and disables the ESU when impedance exceeds the safe threshold."
+  },
+  {
+    "id": "bmet_fresh_009",
+    "examLevel": "jr_bmet_tech",
+    "question": "Diagnostic 12-lead ECGs require a bandwidth down to 0.05 Hz in order to accurately capture:",
+    "choices": [
+      { "id": "a", "text": "High-frequency notches in the QRS complex" },
+      { "id": "b", "text": "ST-segment displacement important for ischemia detection" },
+      { "id": "c", "text": "Heart rate above 200 beats per minute" },
+      { "id": "d", "text": "Respiratory artifact and baseline wander" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "ST-segment changes occupy very low frequencies down to 0.05 Hz. Diagnostic ECGs must preserve this range; monitoring ECGs cut off at 0.5 Hz to reduce motion artifact but can distort ST segments and miss clinically significant ischemic changes."
+  },
+  {
+    "id": "bmet_fresh_010",
+    "examLevel": "jr_bmet_tech",
+    "question": "Pulse oximetry uses two light wavelengths — 660 nm (red) and 940 nm (infrared) — to differentiate:",
+    "choices": [
+      { "id": "a", "text": "Arterial and venous blood flow signals" },
+      { "id": "b", "text": "Oxygenated and deoxygenated hemoglobin" },
+      { "id": "c", "text": "Heart rate and respiratory rate" },
+      { "id": "d", "text": "Blood glucose level and plasma protein concentration" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Oxyhemoglobin and deoxyhemoglobin absorb red (660 nm) and infrared (940 nm) light differently. SpO2 is calculated from the ratio of the pulsatile signals at both wavelengths. Normal SpO2 is 95-100%; common accuracy issues include motion, dark nail polish, and dyshemoglobinemias."
+  },
+  {
+    "id": "bmet_fresh_011",
+    "examLevel": "jr_bmet_tech",
+    "question": "MRI Zone IV refers to which area of the MRI facility?",
+    "choices": [
+      { "id": "a", "text": "The publicly accessible corridor outside the MRI department" },
+      { "id": "b", "text": "The screening and patient transition area" },
+      { "id": "c", "text": "The control room behind leaded glass" },
+      { "id": "d", "text": "The magnet room containing the MRI scanner bore" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "Zone IV is the MRI magnet room itself. The strong static magnetic field (1.5 T or 3.0 T) is always present. Only personnel screened for ferromagnetic implants and MRI-unsafe items may enter. Bringing ferromagnetic objects into Zone IV creates a life-threatening projectile risk."
+  },
+  {
+    "id": "bmet_fresh_012",
+    "examLevel": "jr_bmet_tech",
+    "question": "A CT scan shows lung tissue measuring -900 HU. This value is consistent with:",
+    "choices": [
+      { "id": "a", "text": "Dense cortical bone (+400 to +1000 HU)" },
+      { "id": "b", "text": "Soft tissue (+20 to +80 HU)" },
+      { "id": "c", "text": "Air or gas (-1000 HU)" },
+      { "id": "d", "text": "Water (0 HU)" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The CT Hounsfield Unit scale places air at -1000 HU. Lung parenchyma contains air spaces and typically measures -700 to -900 HU depending on inflation. Dense cortical bone is +400 to +1000 HU; soft tissue is +20 to +80 HU; water is 0 HU."
+  },
+  {
+    "id": "bmet_fresh_013",
+    "examLevel": "jr_bmet_tech",
+    "question": "A ventilator high-pressure alarm during breath delivery most likely indicates:",
+    "choices": [
+      { "id": "a", "text": "A circuit disconnection or large ventilator circuit leak" },
+      { "id": "b", "text": "Increased airway resistance or decreased lung compliance such as bronchospasm or mucus plugging" },
+      { "id": "c", "text": "A depleted oxygen supply cylinder" },
+      { "id": "d", "text": "A failed FiO2 oxygen sensor" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "High-pressure alarms indicate the ventilator is meeting increased resistance when trying to deliver the programmed tidal volume or pressure. Common causes include bronchospasm, mucus plugs, pneumothorax, or the patient biting the endotracheal tube. A disconnection would trigger a low-pressure alarm."
+  },
+  {
+    "id": "bmet_fresh_014",
+    "examLevel": "jr_bmet_tech",
+    "question": "Free-flow protection on an infusion pump prevents:",
+    "choices": [
+      { "id": "a", "text": "Air bubbles from entering the IV tubing set" },
+      { "id": "b", "text": "Uncontrolled gravity-driven fluid flow when IV tubing is removed from the pump mechanism" },
+      { "id": "c", "text": "The pump from exceeding maximum programmed flow rates" },
+      { "id": "d", "text": "Power surges from reaching the pump motor" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Free-flow protection is a mechanical or electronic mechanism that clamps IV tubing when removed from the pump cassette or when the door is opened, preventing gravity from driving an uncontrolled bolus of medication — which could cause serious patient harm with high-alert drugs."
+  },
+  {
+    "id": "bmet_fresh_015",
+    "examLevel": "jr_bmet_tech",
+    "question": "Biphasic defibrillators achieve equivalent or better defibrillation results with lower energy (120-200 J) compared to monophasic (360 J) because:",
+    "choices": [
+      { "id": "a", "text": "The biphasic shock is delivered at higher frequency, which penetrates tissue more efficiently" },
+      { "id": "b", "text": "Biphasic current delivered in two phases more effectively depolarizes the myocardium, reducing the energy needed" },
+      { "id": "c", "text": "Biphasic defibrillators use improved electrode pad materials that reduce impedance" },
+      { "id": "d", "text": "FDA mandated lower energy limits for all defibrillators manufactured after 2010" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Biphasic waveforms deliver current in two directions (positive then negative), more efficiently depolarizing the entire myocardium. Clinical evidence shows 120-200 J biphasic achieves equivalent or superior defibrillation success versus 360 J monophasic, with less post-shock myocardial injury."
+  },
+  {
+    "id": "bmet_fresh_016",
+    "examLevel": "jr_bmet_tech",
+    "question": "The CBET (Certified Biomedical Equipment Technician) credential is administered by:",
+    "choices": [
+      { "id": "a", "text": "FDA (Food and Drug Administration)" },
+      { "id": "b", "text": "TJC (The Joint Commission)" },
+      { "id": "c", "text": "AAMI (Association for the Advancement of Medical Instrumentation)" },
+      { "id": "d", "text": "NICET (National Institute for Certification in Engineering Technologies)" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "AAMI administers the CBET, CLES (laboratory equipment specialist), and CRES (radiology equipment specialist) credentials. AAMI is the primary professional standards and certification organization for biomedical technology in the United States."
+  },
+  {
+    "id": "bmet_fresh_017",
+    "examLevel": "jr_bmet_tech",
+    "question": "CBET certification must be renewed every 5 years by completing:",
+    "choices": [
+      { "id": "a", "text": "A written re-examination" },
+      { "id": "b", "text": "45 continuing education units (CEUs)" },
+      { "id": "c", "text": "A practical skills assessment at an AAMI testing center" },
+      { "id": "d", "text": "30 CEUs plus a supervisor recommendation letter" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "CBET renewal requires 45 CEUs accumulated over the 5-year certification period. CEUs can be earned through AAMI conferences, manufacturer training programs, academic courses, webinars, and professional association activities."
+  },
+  {
+    "id": "bmet_fresh_018",
+    "examLevel": "jr_bmet_tech",
+    "question": "Under the Safe Medical Devices Act (SMDA), a hospital must report a device-related patient death to the FDA within:",
+    "choices": [
+      { "id": "a", "text": "24 hours" },
+      { "id": "b", "text": "10 working days" },
+      { "id": "c", "text": "30 calendar days" },
+      { "id": "d", "text": "90 calendar days" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The SMDA requires user facilities to report device-related deaths to the FDA within 10 working days. Serious injuries must also be reported within 10 working days to the device manufacturer (with FDA copied if the manufacturer is unknown). Reports are filed through FDA MedWatch."
+  },
+  {
+    "id": "bmet_fresh_019",
+    "examLevel": "jr_bmet_tech",
+    "question": "Before returning a patient monitor containing a hard drive to a vendor for warranty repair, a BMET must:",
+    "choices": [
+      { "id": "a", "text": "Perform a standard factory reset to clear patient files" },
+      { "id": "b", "text": "Ensure PHI on the storage media is sanitized using degaussing, cryptographic erase, or physical destruction" },
+      { "id": "c", "text": "Obtain written patient consent for each encounter stored on the device" },
+      { "id": "d", "text": "Label the drive with a HIPAA warning sticker and note it in the shipping manifest" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "HIPAA requires PHI to be properly sanitized before equipment leaves the facility. A standard factory reset or file deletion leaves recoverable data. Proper methods include degaussing, NIST 800-88-compliant overwriting, cryptographic erase (for self-encrypting drives), or physical media destruction, with documentation obtained."
+  },
+  {
+    "id": "bmet_fresh_020",
+    "examLevel": "jr_bmet_tech",
+    "question": "Normal end-tidal CO2 (EtCO2) measured by capnography is:",
+    "choices": [
+      { "id": "a", "text": "10-20 mmHg" },
+      { "id": "b", "text": "35-45 mmHg" },
+      { "id": "c", "text": "60-80 mmHg" },
+      { "id": "d", "text": "95-100 mmHg" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Normal EtCO2 is 35-45 mmHg, closely approximating arterial PaCO2 in patients with intact cardiopulmonary function. Low EtCO2 indicates hyperventilation or reduced perfusion; elevated EtCO2 indicates hypoventilation or increased CO2 production. Capnography calibration uses certified gas mixtures."
+  }
+]

@@ -948,6 +948,19 @@ export const COURSE_OUTLINES: Record<string, CourseOutline> = {
     ],
   },
 
+  // ── BIOMEDICAL EQUIPMENT TECHNICIAN (BMET) ───────────────────────────────
+  'bmet-tech': {
+    tracks: ['Healthcare Environment & Safety', 'Diagnostic & Life Support Equipment', 'PM & Career'],
+    modules: [
+      { id: 'bmet-fundamentals', track: 'Healthcare Environment & Safety', title: 'Biomedical Equipment & the Healthcare Environment', desc: 'BMET role, healthcare facility structure, medical device classes, NFPA 99 risk categories, and regulatory agencies', chapters: ['TJC Equipment Management Programs (EMPs)', 'FDA Class I/II/III device classification and 510(k) vs PMA', 'NFPA 99 risk categories 1-4', 'Ground continuity <0.2 ohms in patient care receptacles', 'Isolated Power Systems (IPS) and Line Isolation Monitors (LIM)'] },
+      { id: 'bmet-electrical', track: 'Healthcare Environment & Safety', title: 'Electrical Safety & Patient Leakage Current Testing', desc: 'Macroshock vs microshock, leakage current limits, electrical safety analyzers, and equipment testing procedures', chapters: ['Macroshock 100-300 mA; microshock 10-50 µA directly to cardiac tissue', 'IEC 60601-1 Type CF limit: 10 µA normal condition', 'ESA test sequence: line voltage, ground, chassis leakage, patient lead leakage', 'Open neutral and open ground single-fault conditions', 'ESU REM monitoring and RF frequency range 400 kHz-5 MHz'] },
+      { id: 'bmet-equipment', track: 'Diagnostic & Life Support Equipment', title: 'Diagnostic & Imaging Equipment', desc: 'ECG, pulse oximetry, blood pressure monitoring, ultrasound, X-ray, CT, and MRI safety fundamentals', chapters: ['ECG bandwidth: diagnostic 0.05-150 Hz vs monitoring 0.5-40 Hz', 'SpO2 wavelengths 660 nm/940 nm; accuracy affected by motion and nail polish', 'NIBP oscillometric method; AAMI accuracy ±5 mmHg', 'X-ray kVp accuracy ±5%; ultrasound 2-15 MHz', 'CT Hounsfield units; MRI zones I-IV and Zone IV projectile risk'] },
+      { id: 'bmet-lifesupport', track: 'Diagnostic & Life Support Equipment', title: 'Life Support & Therapeutic Equipment', desc: 'Ventilators, infusion pumps, defibrillators, physiologic monitoring, and anesthesia machine fundamentals', chapters: ['Ventilator parameters: VT, RR, PIP, PEEP, FiO2; VCV vs PCV vs PSV', 'High-pressure alarm: increased resistance; low-pressure: disconnection', 'Infusion pump: free-flow protection and ±5% flow accuracy', 'Biphasic defibrillator 120-200 J vs monophasic 360 J', 'Capnography EtCO2 normal 35-45 mmHg; IBP zeroed at phlebostatic axis'] },
+      { id: 'bmet-itm', track: 'PM & Career', title: 'Preventive Maintenance & Regulatory Compliance', desc: 'PM programs, work order documentation, equipment recalls, HIPAA for BMETs, and quality management systems', chapters: ['PM intervals: life-support every 6-12 months; AEM for low-risk equipment', 'FDA Class I recall: reasonable probability of death or serious injury', 'HIPAA PHI sanitization: degaussing, cryptographic erase, or physical destruction', 'SMDA: device-related death reported within 10 working days', 'Calibration traceability to NIST-traceable reference standards'] },
+      { id: 'bmet-career', track: 'PM & Career', title: 'CBET Certification & Biomedical Career Paths', desc: 'CBET exam requirements, CLES and CRES credentials, career outlook, and professional development in biomedical technology', chapters: ['CBET by AAMI: 165 questions, 3 hours; 45 CEUs every 5 years', 'CLES: lab equipment specialist; CRES: radiology equipment specialist', 'ISO (Independent Service Organization): multi-OEM service experience', 'BLS median ~$57,000-$60,000; 10% employment growth projected', 'Career path: BMET I/II/III → senior → lead → manager → clinical engineer'] },
+    ],
+  },
+
   // ── WIND TURBINE TECHNICIAN ───────────────────────────────────────────────
   'wind-tech': {
     tracks: ['Wind Resource & Drivetrain', 'Electrical & Controls', 'Safety & Career'],
@@ -1196,6 +1209,19 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_fire_alarm_tech',
     testOutProductId: 'jr_fire_alarm_tech_test_human',
+    comingSoon: true,
+  },
+  {
+    id: 'bmet-tech',
+    title: 'Biomedical Equipment Technician',
+    shortTitle: 'BMET',
+    tagline: 'Maintain and repair hospital medical equipment — electrical safety, patient monitoring, ventilators, imaging, and CBET certification pathways.',
+    accessKey: 'training_bmet_tech',
+    certTitle: 'Jr. Biomedical Equipment Technician',
+    color: 'blue',
+    totalModules: 16,
+    stripeProductId: 'training_bmet_tech',
+    testOutProductId: 'jr_bmet_tech_test_human',
     comingSoon: true,
   },
 ];

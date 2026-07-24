@@ -46,10 +46,12 @@ const SERVER_FILES = [
   'elevator-tech-jr-derived',
   'fire-alarm-tech-jr-fresh.json',
   'fire-alarm-tech-jr-derived',
+  'bmet-tech-jr-fresh.json',
+  'bmet-tech-jr-derived',
 ];
 
 export default function AdminQuestionsPage() {
-  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats; jr_dc_engineer?: BankStats; jr_marine_tech?: BankStats; jr_pool_tech?: BankStats; jr_hvac_tech?: BankStats; jr_solar_inst?: BankStats; jr_wind_tech?: BankStats; jr_elevator_tech?: BankStats; jr_fire_alarm_tech?: BankStats } | null>(null);
+  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats; jr_dc_engineer?: BankStats; jr_marine_tech?: BankStats; jr_pool_tech?: BankStats; jr_hvac_tech?: BankStats; jr_solar_inst?: BankStats; jr_wind_tech?: BankStats; jr_elevator_tech?: BankStats; jr_fire_alarm_tech?: BankStats; jr_bmet_tech?: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
   const [serverImporting, setServerImporting] = useState(false);
@@ -418,6 +420,21 @@ export default function AdminQuestionsPage() {
                 <p className="text-xs text-gray-500">active of {stats.jr_fire_alarm_tech.total.toLocaleString()} total · target 1,000</p>
                 <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
                   <div className="h-full bg-rose-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_fire_alarm_tech.active / 1000) * 100)}%` }} />
+                </div>
+              </>
+            ) : <p className="text-xs text-red-400">Failed to load</p>}
+          </div>
+
+          <div className="card-dark p-5">
+            <h3 className="text-sm font-semibold text-white mb-2">Jr. BMET Tech Bank</h3>
+            {statsLoading ? (
+              <p className="text-xs text-gray-500">Loading…</p>
+            ) : stats?.jr_bmet_tech ? (
+              <>
+                <p className="text-2xl font-bold text-blue-400">{stats.jr_bmet_tech.active.toLocaleString()}</p>
+                <p className="text-xs text-gray-500">active of {stats.jr_bmet_tech.total.toLocaleString()} total · target 1,000</p>
+                <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
+                  <div className="h-full bg-blue-600 rounded-full" style={{ width: `${Math.min(100, (stats.jr_bmet_tech.active / 1000) * 100)}%` }} />
                 </div>
               </>
             ) : <p className="text-xs text-red-400">Failed to load</p>}

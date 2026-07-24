@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     const collection = adminDb.collection('questionBank');
 
-    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap, hvacTechSnap, hvacTechActiveSnap, solarInstSnap, solarInstActiveSnap, windTechSnap, windTechActiveSnap, elevatorTechSnap, elevatorTechActiveSnap, fireAlarmTechSnap, fireAlarmTechActiveSnap] = await Promise.all([
+    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap, hvacTechSnap, hvacTechActiveSnap, solarInstSnap, solarInstActiveSnap, windTechSnap, windTechActiveSnap, elevatorTechSnap, elevatorTechActiveSnap, fireAlarmTechSnap, fireAlarmTechActiveSnap, bmetTechSnap, bmetTechActiveSnap] = await Promise.all([
       collection.where('examLevel', '==', 'jr_fse').count().get(),
       collection.where('examLevel', '==', 'jr_fse').where('active', '==', true).count().get(),
       collection.where('examLevel', 'in', ['fse', 'fse_ai']).count().get(),
@@ -54,6 +54,8 @@ export async function GET(req: NextRequest) {
       collection.where('examLevel', '==', 'jr_elevator_tech').where('active', '==', true).count().get(),
       collection.where('examLevel', '==', 'jr_fire_alarm_tech').count().get(),
       collection.where('examLevel', '==', 'jr_fire_alarm_tech').where('active', '==', true).count().get(),
+      collection.where('examLevel', '==', 'jr_bmet_tech').count().get(),
+      collection.where('examLevel', '==', 'jr_bmet_tech').where('active', '==', true).count().get(),
     ]);
 
     return NextResponse.json({
@@ -128,6 +130,10 @@ export async function GET(req: NextRequest) {
       jr_fire_alarm_tech: {
         total: fireAlarmTechSnap.data().count,
         active: fireAlarmTechActiveSnap.data().count,
+      },
+      jr_bmet_tech: {
+        total: bmetTechSnap.data().count,
+        active: bmetTechActiveSnap.data().count,
       },
     });
   } catch (err: any) {

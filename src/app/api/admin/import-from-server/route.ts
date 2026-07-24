@@ -29,7 +29,8 @@ import solarInstFresh from '../../../../../data/questions/solar-installer-jr-fre
 import windTechFresh from '../../../../../data/questions/wind-turbine-jr-fresh.json';
 import elevatorTechFresh from '../../../../../data/questions/elevator-tech-jr-fresh.json';
 import fireAlarmTechFresh from '../../../../../data/questions/fire-alarm-tech-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions, buildFireAlarmTechBankQuestions } from '@/lib/exam/kitchenBank';
+import bmetTechFresh from '../../../../../data/questions/bmet-tech-jr-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions, buildFireAlarmTechBankQuestions, buildBmetTechBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -72,6 +73,8 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'elevator-tech-jr-derived':  buildElevatorTechBankQuestions() as unknown as QuestionRecord[],
   'fire-alarm-tech-jr-fresh.json': fireAlarmTechFresh as unknown as QuestionRecord[],
   'fire-alarm-tech-jr-derived': buildFireAlarmTechBankQuestions() as unknown as QuestionRecord[],
+  'bmet-tech-jr-fresh.json': bmetTechFresh as unknown as QuestionRecord[],
+  'bmet-tech-jr-derived': buildBmetTechBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -112,6 +115,8 @@ const FILE_ORDER = [
   'elevator-tech-jr-derived',
   'fire-alarm-tech-jr-fresh.json',
   'fire-alarm-tech-jr-derived',
+  'bmet-tech-jr-fresh.json',
+  'bmet-tech-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {
