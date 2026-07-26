@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     const collection = adminDb.collection('questionBank');
 
-    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap, hvacTechSnap, hvacTechActiveSnap, solarInstSnap, solarInstActiveSnap, windTechSnap, windTechActiveSnap, elevatorTechSnap, elevatorTechActiveSnap, fireAlarmTechSnap, fireAlarmTechActiveSnap, bmetTechSnap, bmetTechActiveSnap, basTechSnap, basTechActiveSnap] = await Promise.all([
+    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap, hvacTechSnap, hvacTechActiveSnap, solarInstSnap, solarInstActiveSnap, windTechSnap, windTechActiveSnap, elevatorTechSnap, elevatorTechActiveSnap, fireAlarmTechSnap, fireAlarmTechActiveSnap, bmetTechSnap, bmetTechActiveSnap, basTechSnap, basTechActiveSnap, refTechSnap, refTechActiveSnap] = await Promise.all([
       collection.where('examLevel', '==', 'jr_fse').count().get(),
       collection.where('examLevel', '==', 'jr_fse').where('active', '==', true).count().get(),
       collection.where('examLevel', 'in', ['fse', 'fse_ai']).count().get(),
@@ -58,6 +58,8 @@ export async function GET(req: NextRequest) {
       collection.where('examLevel', '==', 'jr_bmet_tech').where('active', '==', true).count().get(),
       collection.where('examLevel', '==', 'jr_bas_tech').count().get(),
       collection.where('examLevel', '==', 'jr_bas_tech').where('active', '==', true).count().get(),
+      collection.where('examLevel', '==', 'jr_ref_tech').count().get(),
+      collection.where('examLevel', '==', 'jr_ref_tech').where('active', '==', true).count().get(),
     ]);
 
     return NextResponse.json({
@@ -140,6 +142,10 @@ export async function GET(req: NextRequest) {
       jr_bas_tech: {
         total: basTechSnap.data().count,
         active: basTechActiveSnap.data().count,
+      },
+      jr_ref_tech: {
+        total: refTechSnap.data().count,
+        active: refTechActiveSnap.data().count,
       },
     });
   } catch (err: any) {

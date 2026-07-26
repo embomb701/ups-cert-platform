@@ -1,0 +1,262 @@
+[
+  {
+    "id": "ref_fresh_001",
+    "examLevel": "jr_ref_tech",
+    "question": "What is the correct sequence of the vapor compression refrigeration cycle?",
+    "choices": [
+      { "id": "a", "text": "Compressor → Condenser → Metering device → Evaporator" },
+      { "id": "b", "text": "Evaporator → Metering device → Condenser → Compressor" },
+      { "id": "c", "text": "Condenser → Compressor → Evaporator → Metering device" },
+      { "id": "d", "text": "Metering device → Evaporator → Condenser → Compressor" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Refrigerant vapor is compressed, then condensed to liquid (rejecting heat), then throttled through the metering device, then evaporated (absorbing heat) — completing the cycle."
+  },
+  {
+    "id": "ref_fresh_002",
+    "examLevel": "jr_ref_tech",
+    "question": "What target superheat range does a properly adjusted TXV maintain at the evaporator outlet?",
+    "choices": [
+      { "id": "a", "text": "8–12°F" },
+      { "id": "b", "text": "20–30°F" },
+      { "id": "c", "text": "2–4°F" },
+      { "id": "d", "text": "40–50°F" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "TXV superheat is typically set to 8–12°F to ensure full evaporation without allowing liquid refrigerant to reach the compressor."
+  },
+  {
+    "id": "ref_fresh_003",
+    "examLevel": "jr_ref_tech",
+    "question": "The target subcooling at the condenser outlet for a commercial refrigeration system is typically:",
+    "choices": [
+      { "id": "a", "text": "10–15°F" },
+      { "id": "b", "text": "30–40°F" },
+      { "id": "c", "text": "2–5°F" },
+      { "id": "d", "text": "0°F (saturated)" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "10–15°F of subcooling ensures the refrigerant remains liquid through the liquid line, preventing flash gas at the metering device inlet."
+  },
+  {
+    "id": "ref_fresh_004",
+    "examLevel": "jr_ref_tech",
+    "question": "The GWP of R-404A is approximately:",
+    "choices": [
+      { "id": "a", "text": "3922" },
+      { "id": "b", "text": "2088" },
+      { "id": "c", "text": "675" },
+      { "id": "d", "text": "1" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "R-404A has a GWP of 3922 — one of the highest among commercial HFC blends. It is being replaced by lower-GWP alternatives such as R-448A and R-449A."
+  },
+  {
+    "id": "ref_fresh_005",
+    "examLevel": "jr_ref_tech",
+    "question": "R-454B is classified as which refrigerant safety group?",
+    "choices": [
+      { "id": "a", "text": "A2L (mildly flammable)" },
+      { "id": "b", "text": "A1 (non-flammable)" },
+      { "id": "c", "text": "A3 (highly flammable)" },
+      { "id": "d", "text": "B2L (toxic, mildly flammable)" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "R-454B is classified A2L — mildly flammable with a lower flammability limit above 6.5% v/v. It requires A2L-rated equipment and leak detection."
+  },
+  {
+    "id": "ref_fresh_006",
+    "examLevel": "jr_ref_tech",
+    "question": "The critical point temperature and pressure of R-744 (CO2) are approximately:",
+    "choices": [
+      { "id": "a", "text": "31.1°C / 87.8°F and 1071 psia" },
+      { "id": "b", "text": "40.7°C / 105.3°F and 600 psia" },
+      { "id": "c", "text": "-78.5°C / -109.3°F and 75 psia" },
+      { "id": "d", "text": "15.0°C / 59.0°F and 300 psia" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "CO2 has a critical point at 31.1°C (87.8°F) and 1071 psia. Systems operating above this temperature must use transcritical operation with gas coolers rather than condensers."
+  },
+  {
+    "id": "ref_fresh_007",
+    "examLevel": "jr_ref_tech",
+    "question": "Which EPA 608 certification type covers high-pressure commercial refrigeration systems using R-404A and R-448A?",
+    "choices": [
+      { "id": "a", "text": "Type II" },
+      { "id": "b", "text": "Type I" },
+      { "id": "c", "text": "Type III" },
+      { "id": "d", "text": "Universal only" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Type II covers high-pressure refrigerants. R-404A, R-448A, R-449A, and most HFC blends used in commercial refrigeration all fall under this category."
+  },
+  {
+    "id": "ref_fresh_008",
+    "examLevel": "jr_ref_tech",
+    "question": "Standard walk-in freezer temperature target is:",
+    "choices": [
+      { "id": "a", "text": "0°F (-18°C)" },
+      { "id": "b", "text": "35°F (2°C)" },
+      { "id": "c", "text": "-20°F (-29°C)" },
+      { "id": "d", "text": "10°F (-12°C)" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Walk-in freezers are designed to maintain 0°F (-18°C) for safe long-term storage of frozen foods in compliance with food safety standards."
+  },
+  {
+    "id": "ref_fresh_009",
+    "examLevel": "jr_ref_tech",
+    "question": "Which defrost method is most energy efficient in commercial refrigeration?",
+    "choices": [
+      { "id": "a", "text": "Hot gas defrost" },
+      { "id": "b", "text": "Electric resistance defrost" },
+      { "id": "c", "text": "Off-cycle defrost" },
+      { "id": "d", "text": "Reverse-cycle defrost" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Hot gas defrost recycles compressor discharge heat to melt frost, avoiding the electrical energy consumed by resistance heaters. It is the most efficient method."
+  },
+  {
+    "id": "ref_fresh_010",
+    "examLevel": "jr_ref_tech",
+    "question": "In a supermarket parallel compressor rack, multiple compressors share a common:",
+    "choices": [
+      { "id": "a", "text": "Suction manifold" },
+      { "id": "b", "text": "Discharge manifold only" },
+      { "id": "c", "text": "Individual suction and discharge lines" },
+      { "id": "d", "text": "Condenser coil with no manifold" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Parallel rack compressors connect to a common suction header, pulling refrigerant vapor from multiple display cases and walk-in units through a single suction manifold."
+  },
+  {
+    "id": "ref_fresh_011",
+    "examLevel": "jr_ref_tech",
+    "question": "An external equalizer connection on a TXV is required when the evaporator has:",
+    "choices": [
+      { "id": "a", "text": "Significant pressure drop across the coil" },
+      { "id": "b", "text": "A large thermal bulb" },
+      { "id": "c", "text": "Very low refrigerant flow" },
+      { "id": "d", "text": "High inlet subcooling" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "When evaporator pressure drop is high, the internal equalizer would reference inlet pressure instead of outlet pressure. The external equalizer connects to the coil outlet so the TXV responds accurately to true outlet conditions."
+  },
+  {
+    "id": "ref_fresh_012",
+    "examLevel": "jr_ref_tech",
+    "question": "Compared to a TXV, an electronic expansion valve (EEV) can achieve:",
+    "choices": [
+      { "id": "a", "text": "Lower superheat (3–5°F) with faster response" },
+      { "id": "b", "text": "Higher superheat (20–25°F) for safety" },
+      { "id": "c", "text": "Identical performance but with simpler installation" },
+      { "id": "d", "text": "Higher suction pressure" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "EEVs driven by case controllers can precisely target 3–5°F superheat — lower than a TXV — improving evaporator efficiency while reacting faster to load changes."
+  },
+  {
+    "id": "ref_fresh_013",
+    "examLevel": "jr_ref_tech",
+    "question": "Low suction pressure combined with low subcooling most likely indicates:",
+    "choices": [
+      { "id": "a", "text": "Refrigerant undercharge" },
+      { "id": "b", "text": "Liquid line restriction" },
+      { "id": "c", "text": "Refrigerant overcharge" },
+      { "id": "d", "text": "Non-condensable gases" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Low subcooling confirms insufficient refrigerant in the liquid line. Combined with low suction, this is the classic symptom pattern of a low refrigerant charge."
+  },
+  {
+    "id": "ref_fresh_014",
+    "examLevel": "jr_ref_tech",
+    "question": "The most common field cause of high head pressure in commercial refrigeration is:",
+    "choices": [
+      { "id": "a", "text": "Dirty or blocked condenser coil" },
+      { "id": "b", "text": "Refrigerant overcharge" },
+      { "id": "c", "text": "Non-condensable gases" },
+      { "id": "d", "text": "Failed expansion valve" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Dirt and debris blocking the condenser coil reduces airflow, raising condensing temperature and discharge pressure. It is the most common cause of high head pressure found in the field."
+  },
+  {
+    "id": "ref_fresh_015",
+    "examLevel": "jr_ref_tech",
+    "question": "Which leak detection method must be used for A2L and A3 refrigerants?",
+    "choices": [
+      { "id": "a", "text": "Certified combustible gas detector" },
+      { "id": "b", "text": "Heated diode halogen detector" },
+      { "id": "c", "text": "UV dye and UV light only" },
+      { "id": "d", "text": "Open flame leak detector" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Flammable refrigerants (A2L and A3) require a combustible gas detector. Halogen detectors are not suitable, and open flames are strictly prohibited around flammable refrigerants."
+  },
+  {
+    "id": "ref_fresh_016",
+    "examLevel": "jr_ref_tech",
+    "question": "Demand (adaptive) defrost reduces energy use by:",
+    "choices": [
+      { "id": "a", "text": "Initiating defrost only when frost is detected on the coil" },
+      { "id": "b", "text": "Running defrost heaters at lower wattage" },
+      { "id": "c", "text": "Switching from electric to hot gas defrost automatically" },
+      { "id": "d", "text": "Shortening defrost duration to 5 minutes" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Demand defrost skips scheduled defrost cycles when sensors confirm no frost accumulation, cutting heater energy by 30–50% compared to fixed-time schedules."
+  },
+  {
+    "id": "ref_fresh_017",
+    "examLevel": "jr_ref_tech",
+    "question": "The maximum R-290 (propane) charge per circuit in European retail refrigeration equipment is approximately:",
+    "choices": [
+      { "id": "a", "text": "150 g" },
+      { "id": "b", "text": "500 g" },
+      { "id": "c", "text": "1 kg" },
+      { "id": "d", "text": "50 g" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "EN 378 limits R-290 charges in commercial display equipment to 150 g per hermetically sealed circuit to minimize ignition risk from this highly flammable (A3) refrigerant."
+  },
+  {
+    "id": "ref_fresh_018",
+    "examLevel": "jr_ref_tech",
+    "question": "Walk-in freezer floor heaters are installed primarily to prevent:",
+    "choices": [
+      { "id": "a", "text": "Frost heave from ground freezing beneath the slab" },
+      { "id": "b", "text": "Ice buildup on the floor surface" },
+      { "id": "c", "text": "Condensate drain line freezing" },
+      { "id": "d", "text": "Panel delamination from moisture" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "Sub-zero temperatures in a walk-in freezer can propagate into the soil beneath the slab, freezing ground water and causing frost heave that damages the foundation and panels."
+  },
+  {
+    "id": "ref_fresh_019",
+    "examLevel": "jr_ref_tech",
+    "question": "Which ASHRAE standard governs refrigerant safety classifications (A1, A2L, B2L, etc.)?",
+    "choices": [
+      { "id": "a", "text": "ASHRAE Standard 34" },
+      { "id": "b", "text": "ASHRAE Standard 15" },
+      { "id": "c", "text": "ASHRAE Standard 90.1" },
+      { "id": "d", "text": "ASHRAE Standard 62.1" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "ASHRAE Standard 34 provides the refrigerant numbering system (R-numbers) and the safety classification groups based on toxicity and flammability."
+  },
+  {
+    "id": "ref_fresh_020",
+    "examLevel": "jr_ref_tech",
+    "question": "High discharge temperature above 225°F in a commercial refrigeration compressor most commonly results from:",
+    "choices": [
+      { "id": "a", "text": "High compression ratio due to low refrigerant charge or dirty condenser" },
+      { "id": "b", "text": "Normal high-load operating conditions" },
+      { "id": "c", "text": "Refrigerant overcharge" },
+      { "id": "d", "text": "Low ambient temperature" }
+    ],
+    "correctChoiceId": "a",
+    "explanation": "High discharge temperature above 225°F indicates excessive compression ratio — usually caused by low refrigerant charge (low suction), dirty condenser (high head), or high suction superheat, all of which stress compressor oil and valves."
+  }
+]

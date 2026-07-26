@@ -1237,4 +1237,17 @@ export const COURSES: TrainingCourse[] = [
     testOutProductId: 'jr_bas_tech_test_human',
     comingSoon: true,
   },
+  {
+    id: 'ref-tech',
+    title: 'Commercial Refrigeration Technician',
+    shortTitle: 'Ref Tech',
+    tagline: 'Service walk-in coolers, freezers, rack systems, and display cases — vapor compression, refrigerants, EPA 608, TXV/EEV controls, and NATE/RSES certification pathways.',
+    accessKey: 'training_ref_tech',
+    certTitle: 'Jr. Commercial Refrigeration Technician',
+    color: 'cyan',
+    totalModules: 16,
+    stripeProductId: 'training_ref_tech',
+    testOutProductId: 'jr_ref_tech_test_human',
+    comingSoon: true,
+  },
 ];

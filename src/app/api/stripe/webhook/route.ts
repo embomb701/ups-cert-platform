@@ -529,6 +529,37 @@ async function grantJrFireAlarmTechAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantRefTechTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_ref_tech')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_ref_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrRefTechAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_ref_tech_test_human',
+    examLevel: 'jr_ref_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Ref Tech Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantBasTechTrainingAccess(userId: string, purchaseId: string) {
   await adminDb
     .collection('users').doc(userId)
@@ -938,6 +969,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_bmet_tech_testout':
       await grantBmetTechTrainingAccess(userId, pid);
       await grantJrBmetTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Commercial Refrigeration) ────────────────
+    case 'training_ref_tech':
+      await grantRefTechTrainingAccess(userId, pid);
+      break;
+
+    // ── Ref Tech Test-Out ─────────────────────────────────────────────────────
+    case 'jr_ref_tech_test_human':
+      await grantJrRefTechAccess(userId, pid);
+      break;
+
+    // ── Package: Ref Tech Training + Test-Out ─────────────────────────────────
+    case 'pkg_training_ref_tech_testout':
+      await grantRefTechTrainingAccess(userId, pid);
+      await grantJrRefTechAccess(userId, pid);
       break;
 
     // ── Standalone training course (Building Automation Systems) ─────────────

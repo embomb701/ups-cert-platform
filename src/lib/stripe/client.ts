@@ -543,6 +543,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // COMMERCIAL REFRIGERATION TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_ref_tech: {
+    name: 'Commercial Refrigeration Technician Training Course + Jr. Ref Tech Certification Exam',
+    shortName: 'Ref Tech Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_REF_TECH ?? '',
+  },
+
+  jr_ref_tech_test_human: {
+    name: 'Jr. Commercial Refrigeration Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Ref Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_REF_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_ref_tech_testout: {
+    name: 'Ref Tech Training Course + Jr. Ref Tech Test-Out (Human Proctored)',
+    shortName: 'Ref Tech Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_REF_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

@@ -112,6 +112,7 @@ export async function POST(req: NextRequest) {
     const fireAlarmTechComplete = COURSE_SEQUENCES['training_fire_alarm_tech'].every((m) => completedIds.has(m.id));
     const bmetTechComplete = COURSE_SEQUENCES['training_bmet_tech'].every((m) => completedIds.has(m.id));
     const basComplete = COURSE_SEQUENCES['training_bas_tech'].every((m) => completedIds.has(m.id));
+    const refComplete = COURSE_SEQUENCES['training_ref_tech'].every((m) => completedIds.has(m.id));
 
     if (upsComplete) {
       // Grant Jr. FSE exam access (from training path, not test-out)
@@ -354,7 +355,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete || batteryComplete || dcEngineerComplete || marineComplete || poolComplete || hvacTechComplete || solarInstComplete || windTechComplete || elevatorTechComplete || fireAlarmTechComplete || bmetTechComplete || basComplete;
+    if (refComplete) {
+      await grantPractice('practice_jr_ref_tech');
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_ref_tech_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_ref_tech').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
+    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete || batteryComplete || dcEngineerComplete || marineComplete || poolComplete || hvacTechComplete || solarInstComplete || windTechComplete || elevatorTechComplete || fireAlarmTechComplete || bmetTechComplete || basComplete || refComplete;
     return NextResponse.json({ passed: true, results, trainingComplete });
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
