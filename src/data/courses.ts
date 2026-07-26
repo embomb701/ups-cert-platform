@@ -1224,4 +1224,17 @@ export const COURSES: TrainingCourse[] = [
     testOutProductId: 'jr_bmet_tech_test_human',
     comingSoon: true,
   },
+  {
+    id: 'bas-tech',
+    title: 'Building Automation Systems Technician',
+    shortTitle: 'BAS Tech',
+    tagline: 'Program, commission, and maintain BAS/BMS systems — BACnet, Modbus, DDC controllers, HVAC control sequences, and Niagara/NCA certification pathways.',
+    accessKey: 'training_bas_tech',
+    certTitle: 'Jr. Building Automation Systems Technician',
+    color: 'emerald',
+    totalModules: 16,
+    stripeProductId: 'training_bas_tech',
+    testOutProductId: 'jr_bas_tech_test_human',
+    comingSoon: true,
+  },
 ];

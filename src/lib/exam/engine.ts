@@ -135,6 +135,7 @@ export function generateCertNumber(examLevel: ExamLevel): string {
     : examLevel === 'jr_elevator_tech' ? 'ELV'
     : examLevel === 'jr_fire_alarm_tech' ? 'FAT'
     : examLevel === 'jr_bmet_tech' ? 'BMT'
+    : examLevel === 'jr_bas_tech' ? 'BAS'
     : 'FSE';
   const year = new Date().getFullYear();
   const rand = uuidv4().split('-')[0].toUpperCase();

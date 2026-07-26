@@ -518,6 +518,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // BUILDING AUTOMATION SYSTEMS (BAS) TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_bas_tech: {
+    name: 'Building Automation Systems Technician Training Course + Jr. BAS Tech Certification Exam',
+    shortName: 'BAS Tech Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_BAS_TECH ?? '',
+  },
+
+  jr_bas_tech_test_human: {
+    name: 'Jr. Building Automation Systems Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. BAS Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_BAS_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_bas_tech_testout: {
+    name: 'BAS Tech Training Course + Jr. BAS Tech Test-Out (Human Proctored)',
+    shortName: 'BAS Tech Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_BAS_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

@@ -23,10 +23,11 @@ import { WIND_TURBINE_MODULES } from './wind-turbine-modules';
 import { ELEVATOR_TECH_MODULES } from './elevator-tech-modules';
 import { FIRE_ALARM_TECH_MODULES } from './fire-alarm-tech-modules';
 import { BMET_TECH_MODULES } from './bmet-tech-modules';
+import { BAS_TECH_MODULES } from './bas-tech-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES, MARINE_MODULES, POOL_MODULES, HVAC_TECH_MODULES, SOLAR_INSTALLER_MODULES, WIND_TURBINE_MODULES, ELEVATOR_TECH_MODULES, FIRE_ALARM_TECH_MODULES, BMET_TECH_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES, MARINE_MODULES, POOL_MODULES, HVAC_TECH_MODULES, SOLAR_INSTALLER_MODULES, WIND_TURBINE_MODULES, ELEVATOR_TECH_MODULES, FIRE_ALARM_TECH_MODULES, BMET_TECH_MODULES, BAS_TECH_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
 // modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
@@ -64,6 +65,7 @@ export function getModule(id: string): TrainingModule | null {
     ELEVATOR_TECH_MODULES.find((m) => m.id === id) ??
     FIRE_ALARM_TECH_MODULES.find((m) => m.id === id) ??
     BMET_TECH_MODULES.find((m) => m.id === id) ??
+    BAS_TECH_MODULES.find((m) => m.id === id) ??
     null
   );
 }
@@ -125,6 +127,7 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
   training_elevator_tech: [...FOUNDATION, ...[...ELEVATOR_TECH_MODULES].sort(byNum)],
   training_fire_alarm_tech: [...FOUNDATION, ...[...FIRE_ALARM_TECH_MODULES].sort(byNum)],
   training_bmet_tech: [...FOUNDATION, ...[...BMET_TECH_MODULES].sort(byNum)],
+  training_bas_tech: [...FOUNDATION, ...[...BAS_TECH_MODULES].sort(byNum)],
   // Data Center Engineer: foundation + UPS tech core + generator ops + HVAC cooling +
   // the three DC-specific ops modules (cooling, monitoring, operations) + DCE engineering modules
   training_dcengineer: [
@@ -193,6 +196,7 @@ export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.id.startsWith('elev-')) return prevModuleInCourse('training_elevator_tech', mod);
   if (mod.id.startsWith('fire-')) return prevModuleInCourse('training_fire_alarm_tech', mod);
   if (mod.id.startsWith('bmet-')) return prevModuleInCourse('training_bmet_tech', mod);
+  if (mod.id.startsWith('bas-')) return prevModuleInCourse('training_bas_tech', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }

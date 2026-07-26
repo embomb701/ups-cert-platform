@@ -30,7 +30,8 @@ import windTechFresh from '../../../../../data/questions/wind-turbine-jr-fresh.j
 import elevatorTechFresh from '../../../../../data/questions/elevator-tech-jr-fresh.json';
 import fireAlarmTechFresh from '../../../../../data/questions/fire-alarm-tech-jr-fresh.json';
 import bmetTechFresh from '../../../../../data/questions/bmet-tech-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions, buildFireAlarmTechBankQuestions, buildBmetTechBankQuestions } from '@/lib/exam/kitchenBank';
+import basTechFresh from '../../../../../data/questions/bas-tech-jr-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions, buildFireAlarmTechBankQuestions, buildBmetTechBankQuestions, buildBasTechBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -75,6 +76,8 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'fire-alarm-tech-jr-derived': buildFireAlarmTechBankQuestions() as unknown as QuestionRecord[],
   'bmet-tech-jr-fresh.json': bmetTechFresh as unknown as QuestionRecord[],
   'bmet-tech-jr-derived': buildBmetTechBankQuestions() as unknown as QuestionRecord[],
+  'bas-tech-jr-fresh.json': basTechFresh as unknown as QuestionRecord[],
+  'bas-tech-jr-derived': buildBasTechBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -117,6 +120,8 @@ const FILE_ORDER = [
   'fire-alarm-tech-jr-derived',
   'bmet-tech-jr-fresh.json',
   'bmet-tech-jr-derived',
+  'bas-tech-jr-fresh.json',
+  'bas-tech-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

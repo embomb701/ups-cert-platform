@@ -79,6 +79,7 @@ export default function ExamRulesPage() {
     practice_jr_elevator_tech: 'Jr. Elevator Tech Practice Test — Results Only, No Certificate',
     practice_jr_fire_alarm_tech: 'Jr. Fire Alarm Tech Practice Test — Results Only, No Certificate',
     practice_jr_bmet_tech: 'Jr. BMET Tech Practice Test — Results Only, No Certificate',
+    practice_jr_bas_tech: 'Jr. BAS Tech Practice Test — Results Only, No Certificate',
   };
   // Jr-course exam display config: rules token + certification label
   const JR_COURSE_META: Record<string, { token: string; label: string }> = {
@@ -99,6 +100,7 @@ export default function ExamRulesPage() {
     jr_elevator_tech: { token: 'Jr. Elevator Tech Exam', label: 'Junior Elevator Technician Certification' },
     jr_fire_alarm_tech: { token: 'Jr. Fire Alarm Tech Exam', label: 'Junior Fire Alarm Technician Certification' },
     jr_bmet_tech: { token: 'Jr. BMET Tech Exam', label: 'Junior Biomedical Equipment Technician Certification' },
+    jr_bas_tech: { token: 'Jr. BAS Tech Exam', label: 'Junior Building Automation Systems Technician Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];

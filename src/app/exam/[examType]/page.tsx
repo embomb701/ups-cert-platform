@@ -35,6 +35,7 @@ export default function ExamPage() {
     practice_jr_elevator_tech: 'jr_elevator_tech',
     practice_jr_fire_alarm_tech: 'jr_fire_alarm_tech',
     practice_jr_bmet_tech: 'jr_bmet_tech',
+    practice_jr_bas_tech: 'jr_bas_tech',
   };
   const isPractice = examType in PRACTICE_MAP;
   const candidateName = searchParams?.get('name') ?? '';
@@ -192,7 +193,7 @@ export default function ExamPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <span className={session.examLevel.startsWith('jr_') ? 'badge-jr' : 'badge-fse'}>
-              {(session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : session.examLevel === 'jr_hvac_fse' ? 'Jr. HVAC FSE' : session.examLevel === 'jr_gen_fse' ? 'Jr. Generator FSE' : session.examLevel === 'jr_dc_cft' ? 'Jr. Data Center CFT' : session.examLevel === 'jr_solar_fse' ? 'Jr. Solar FSE' : session.examLevel === 'jr_ev_tech' ? 'Jr. EV Tech' : session.examLevel === 'jr_dcp_tech' ? 'Jr. DC Plants Tech' : session.examLevel === 'jr_battery_tech' ? 'Jr. Battery Tech' : session.examLevel === 'jr_dc_engineer' ? 'Jr. DC Engineer' : session.examLevel === 'jr_marine_tech' ? 'Jr. Marine Tech' : session.examLevel === 'jr_pool_tech' ? 'Jr. Pool Tech' : session.examLevel === 'jr_hvac_tech' ? 'Jr. HVAC Tech' : session.examLevel === 'jr_solar_inst' ? 'Jr. Solar Installer' : session.examLevel === 'jr_wind_tech' ? 'Jr. Wind Turbine Tech' : session.examLevel === 'jr_elevator_tech' ? 'Jr. Elevator Tech' : session.examLevel === 'jr_fire_alarm_tech' ? 'Jr. Fire Alarm Tech' : session.examLevel === 'jr_bmet_tech' ? 'Jr. BMET Tech' : 'FSE') + (isPractice ? ' Practice' : '')} Exam
+              {(session.examLevel === 'jr_fse' ? 'Jr. FSE' : session.examLevel === 'jr_kitchen_fse' ? 'Jr. Kitchen FSE' : session.examLevel === 'jr_hvac_fse' ? 'Jr. HVAC FSE' : session.examLevel === 'jr_gen_fse' ? 'Jr. Generator FSE' : session.examLevel === 'jr_dc_cft' ? 'Jr. Data Center CFT' : session.examLevel === 'jr_solar_fse' ? 'Jr. Solar FSE' : session.examLevel === 'jr_ev_tech' ? 'Jr. EV Tech' : session.examLevel === 'jr_dcp_tech' ? 'Jr. DC Plants Tech' : session.examLevel === 'jr_battery_tech' ? 'Jr. Battery Tech' : session.examLevel === 'jr_dc_engineer' ? 'Jr. DC Engineer' : session.examLevel === 'jr_marine_tech' ? 'Jr. Marine Tech' : session.examLevel === 'jr_pool_tech' ? 'Jr. Pool Tech' : session.examLevel === 'jr_hvac_tech' ? 'Jr. HVAC Tech' : session.examLevel === 'jr_solar_inst' ? 'Jr. Solar Installer' : session.examLevel === 'jr_wind_tech' ? 'Jr. Wind Turbine Tech' : session.examLevel === 'jr_elevator_tech' ? 'Jr. Elevator Tech' : session.examLevel === 'jr_fire_alarm_tech' ? 'Jr. Fire Alarm Tech' : session.examLevel === 'jr_bmet_tech' ? 'Jr. BMET Tech' : session.examLevel === 'jr_bas_tech' ? 'Jr. BAS Tech' : 'FSE') + (isPractice ? ' Practice' : '')} Exam
             </span>
           </div>
             <ExamTimer
