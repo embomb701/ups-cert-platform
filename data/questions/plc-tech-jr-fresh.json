@@ -1,0 +1,262 @@
+[
+  {
+    "id": "plc_fresh_001",
+    "examLevel": "jr_plc_tech",
+    "question": "What is the purpose of the CPU scan cycle input scan phase?",
+    "choices": [
+      { "id": "a", "text": "Execute the user program logic from rung 1 to last" },
+      { "id": "b", "text": "Read all physical input states and copy them to the input image table" },
+      { "id": "c", "text": "Transfer output image table values to physical output modules" },
+      { "id": "d", "text": "Communicate with programming terminals and update diagnostics" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "During the input scan phase, the PLC reads all physical input states and copies them into the input image table. The program scan then uses this snapshot to execute logic."
+  },
+  {
+    "id": "plc_fresh_002",
+    "examLevel": "jr_plc_tech",
+    "question": "A 4-20 mA analog signal measuring 0 mA indicates:",
+    "choices": [
+      { "id": "a", "text": "The process variable is at its minimum (zero) value" },
+      { "id": "b", "text": "The transmitter is in calibration mode" },
+      { "id": "c", "text": "A broken wire or loss of power to the field transmitter" },
+      { "id": "d", "text": "The PLC analog input module needs replacement" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "The 4-20 mA live-zero standard uses 4 mA as the process minimum. A 0 mA reading indicates a broken wire or failed transmitter — the key advantage for detecting wiring faults."
+  },
+  {
+    "id": "plc_fresh_003",
+    "examLevel": "jr_plc_tech",
+    "question": "Which PLC output type is required for high-speed pulse outputs such as step motor control?",
+    "choices": [
+      { "id": "a", "text": "Relay output — isolated, handles AC or DC" },
+      { "id": "b", "text": "TRIAC output — fast, handles AC only" },
+      { "id": "c", "text": "Transistor (solid-state) output — switches in approximately 0.1 ms, DC only" },
+      { "id": "d", "text": "Mechanical contactor driven by relay output" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Transistor outputs switch in approximately 0.1 ms versus 10 ms for relay outputs, making them required for step motor pulse trains and other high-speed applications."
+  },
+  {
+    "id": "plc_fresh_004",
+    "examLevel": "jr_plc_tech",
+    "question": "In ladder logic, a normally closed (NC) contact passes power when:",
+    "choices": [
+      { "id": "a", "text": "The referenced bit is 1 (ON)" },
+      { "id": "b", "text": "The referenced bit is 0 (OFF)" },
+      { "id": "c", "text": "The output coil on the same rung is energized" },
+      { "id": "d", "text": "The input scan phase is active" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "NC contacts pass power when the bit they reference is 0 (OFF). They are used for stop buttons, safety interlocks, and conditions that must be inactive for the rung to be true."
+  },
+  {
+    "id": "plc_fresh_005",
+    "examLevel": "jr_plc_tech",
+    "question": "A TON (Timer On-Delay) timer's done (DN) bit turns ON when:",
+    "choices": [
+      { "id": "a", "text": "The rung goes false after timing started" },
+      { "id": "b", "text": "The accumulated time equals or exceeds the preset while the rung is true" },
+      { "id": "c", "text": "The rung goes true for the first scan" },
+      { "id": "d", "text": "A RES (reset) coil is energized on a parallel rung" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "TON starts timing when the rung is true. The DN bit turns ON when ACC >= PT. If the rung goes false before DN, TON resets to zero — it is non-retentive."
+  },
+  {
+    "id": "plc_fresh_006",
+    "examLevel": "jr_plc_tech",
+    "question": "In a motor start/stop seal-in circuit, the output coil's own NO contact is placed:",
+    "choices": [
+      { "id": "a", "text": "In series with the stop button" },
+      { "id": "b", "text": "In parallel with the start button to keep the circuit energized after start is released" },
+      { "id": "c", "text": "In series with the start button" },
+      { "id": "d", "text": "In parallel with the stop button" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "The seal-in contact is placed in parallel with the momentary start button. When the output energizes its own contact closes, providing an alternate power path — sealing in the circuit after start is released."
+  },
+  {
+    "id": "plc_fresh_007",
+    "examLevel": "jr_plc_tech",
+    "question": "Which IEC 61131-3 programming language is most appropriate for sequential batch processes?",
+    "choices": [
+      { "id": "a", "text": "Structured Text (ST)" },
+      { "id": "b", "text": "Ladder Diagram (LD)" },
+      { "id": "c", "text": "Sequential Function Chart (SFC)" },
+      { "id": "d", "text": "Instruction List (IL)" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "SFC is designed for sequential control with defined steps and transitions, mapping directly to fill-and-drain, mixing, and batch cycles."
+  },
+  {
+    "id": "plc_fresh_008",
+    "examLevel": "jr_plc_tech",
+    "question": "EtherNet/IP is the primary industrial Ethernet protocol associated with which PLC manufacturer?",
+    "choices": [
+      { "id": "a", "text": "Siemens" },
+      { "id": "b", "text": "Mitsubishi" },
+      { "id": "c", "text": "Omron" },
+      { "id": "d", "text": "Allen-Bradley (Rockwell Automation)" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "EtherNet/IP was developed by Rockwell Automation and is the native network for all Allen-Bradley ControlLogix, CompactLogix, and Micro800 PLCs."
+  },
+  {
+    "id": "plc_fresh_009",
+    "examLevel": "jr_plc_tech",
+    "question": "Modbus Holding Registers (4x) support what type of access from the master?",
+    "choices": [
+      { "id": "a", "text": "Read-only" },
+      { "id": "b", "text": "Write-only" },
+      { "id": "c", "text": "Read and write" },
+      { "id": "d", "text": "No access — reserved for internal diagnostics" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Holding Registers are 16-bit R/W registers. The master reads them via FC03 and writes via FC06 or FC16. They store setpoints, configuration, and output values."
+  },
+  {
+    "id": "plc_fresh_010",
+    "examLevel": "jr_plc_tech",
+    "question": "Before working inside a PLC control panel, the technician must:",
+    "choices": [
+      { "id": "a", "text": "Place the CPU in Program mode to disable outputs" },
+      { "id": "b", "text": "Apply LOTO and verify zero energy state — Program mode alone does not de-energize field devices" },
+      { "id": "c", "text": "Notify the supervisor and proceed if the job is urgent" },
+      { "id": "d", "text": "Disable only the output modules, leaving input modules powered" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Program mode does not de-energize field devices. Full LOTO of all energy sources feeding the panel is mandatory before working inside."
+  },
+  {
+    "id": "plc_fresh_011",
+    "examLevel": "jr_plc_tech",
+    "question": "ISA 101 HMI design standard recommends which color for a normal, running process state?",
+    "choices": [
+      { "id": "a", "text": "Red" },
+      { "id": "b", "text": "Yellow" },
+      { "id": "c", "text": "Blue" },
+      { "id": "d", "text": "Green" }
+    ],
+    "correctChoiceId": "d",
+    "explanation": "ISA 101 uses green for normal/running, yellow for warning/advisory, and red for alarm/abnormal states."
+  },
+  {
+    "id": "plc_fresh_012",
+    "examLevel": "jr_plc_tech",
+    "question": "An alarm rate exceeding 10 alarms per 10 minutes per ANSI/ISA 18.2 indicates:",
+    "choices": [
+      { "id": "a", "text": "Excellent system performance with thorough monitoring" },
+      { "id": "b", "text": "A network communication failure causing spurious alarms" },
+      { "id": "c", "text": "Alarm flooding — operators are overwhelmed and cannot respond effectively" },
+      { "id": "d", "text": "The alarm system requires a firmware upgrade" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "ISA 18.2 defines alarm flooding as >10 alarms per 10 minutes — operators receive more alarms than they can process, leading to missed critical alarms."
+  },
+  {
+    "id": "plc_fresh_013",
+    "examLevel": "jr_plc_tech",
+    "question": "OPC UA is preferred over OPC DA for modern IIoT integration because OPC UA is:",
+    "choices": [
+      { "id": "a", "text": "Faster — uses direct memory access" },
+      { "id": "b", "text": "Platform-independent with built-in TLS encryption and certificate authentication" },
+      { "id": "c", "text": "Simpler to configure with no security required" },
+      { "id": "d", "text": "Only compatible with Allen-Bradley and Siemens PLCs" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "OPC UA runs on Linux, Windows, and embedded systems; includes certificate-based authentication and TLS encryption; and supports complex hierarchical data models for Industry 4.0."
+  },
+  {
+    "id": "plc_fresh_014",
+    "examLevel": "jr_plc_tech",
+    "question": "The most critical cybersecurity step when commissioning a new PLC on an industrial network is:",
+    "choices": [
+      { "id": "a", "text": "Installing antivirus software on the HMI PC" },
+      { "id": "b", "text": "Connecting the OT network to the internet for firmware updates" },
+      { "id": "c", "text": "Changing all default usernames and passwords immediately" },
+      { "id": "d", "text": "Enabling remote desktop access for vendor support" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Default credentials are the most exploited ICS vulnerability. All default passwords must be changed on every network-connected device before commissioning."
+  },
+  {
+    "id": "plc_fresh_015",
+    "examLevel": "jr_plc_tech",
+    "question": "If a PLC output is forced ON but the actuator does not energize, the fault is most likely:",
+    "choices": [
+      { "id": "a", "text": "In the PLC program logic" },
+      { "id": "b", "text": "In the output wiring, a blown fuse, or the actuator itself" },
+      { "id": "c", "text": "In the PLC power supply" },
+      { "id": "d", "text": "In the input sensor wiring" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "Forcing bypasses the program. If the actuator still does not respond the fault is downstream — check field wiring, blown fuse, or the actuator itself."
+  },
+  {
+    "id": "plc_fresh_016",
+    "examLevel": "jr_plc_tech",
+    "question": "DeviceNet uses which physical layer technology as its basis?",
+    "choices": [
+      { "id": "a", "text": "RS-485 differential serial" },
+      { "id": "b", "text": "IEEE 802.3 standard Ethernet" },
+      { "id": "c", "text": "CAN (Controller Area Network) bus" },
+      { "id": "d", "text": "RS-232 single-ended serial" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "DeviceNet is built on CAN (Controller Area Network) physical and data-link layers, providing robust error detection and deterministic communication for device-level machine control."
+  },
+  {
+    "id": "plc_fresh_017",
+    "examLevel": "jr_plc_tech",
+    "question": "PRP (Parallel Redundancy Protocol) achieves zero network switchover time by:",
+    "choices": [
+      { "id": "a", "text": "Using the fastest processor to recover failures in microseconds" },
+      { "id": "b", "text": "Pre-positioning a warm standby switch" },
+      { "id": "c", "text": "Sending duplicate frames simultaneously on two independent networks" },
+      { "id": "d", "text": "Polling each network segment 1000 times per second" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "PRP sends identical frames on two separate networks simultaneously. If one fails, frames continue arriving on the other — no switchover is needed because both paths are always active."
+  },
+  {
+    "id": "plc_fresh_018",
+    "examLevel": "jr_plc_tech",
+    "question": "The ISA CCST certification is designed for professionals who:",
+    "choices": [
+      { "id": "a", "text": "Design and specify new automation systems" },
+      { "id": "b", "text": "Calibrate, troubleshoot, and maintain instrumentation and control systems in the field" },
+      { "id": "c", "text": "Manage ICS cybersecurity policy" },
+      { "id": "d", "text": "Develop PLC programs from functional specifications" }
+    ],
+    "correctChoiceId": "b",
+    "explanation": "CCST (Certified Control Systems Technician) targets field technicians who calibrate, document, troubleshoot, and repair instrumentation and PLC/DCS/SCADA control systems."
+  },
+  {
+    "id": "plc_fresh_019",
+    "examLevel": "jr_plc_tech",
+    "question": "A Modbus exception code 02 response from a slave device means:",
+    "choices": [
+      { "id": "a", "text": "A CRC checksum error occurred" },
+      { "id": "b", "text": "The device is offline" },
+      { "id": "c", "text": "The requested register address does not exist in the Modbus device" },
+      { "id": "d", "text": "The master sent the wrong function code" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "Exception code 02 = Illegal Data Address. The slave received a valid request but the register number does not exist in its map. Consult device documentation for correct register addresses."
+  },
+  {
+    "id": "plc_fresh_020",
+    "examLevel": "jr_plc_tech",
+    "question": "21 CFR Part 11 compliance in pharmaceutical PLC applications requires:",
+    "choices": [
+      { "id": "a", "text": "SIL-rated redundant PLC architecture" },
+      { "id": "b", "text": "ATEX-rated hardware for hazardous areas" },
+      { "id": "c", "text": "Electronic records with audit trail and GAMP5 validation for all program changes" },
+      { "id": "d", "text": "PROFIBUS DP as the mandated communication protocol" }
+    ],
+    "correctChoiceId": "c",
+    "explanation": "21 CFR Part 11 (FDA) requires electronic records with full audit trail and access controls in pharmaceutical manufacturing — all PLC program changes must be validated per GAMP5 before production use."
+  }
+]

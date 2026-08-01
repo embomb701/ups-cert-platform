@@ -1250,4 +1250,17 @@ export const COURSES: TrainingCourse[] = [
     testOutProductId: 'jr_ref_tech_test_human',
     comingSoon: true,
   },
+  {
+    id: 'plc-tech',
+    title: 'Industrial Controls & PLC Technician',
+    shortTitle: 'PLC Tech',
+    tagline: 'Program, troubleshoot, and maintain PLC systems — ladder logic, HMI/SCADA, industrial networking (EtherNet/IP, Modbus), VFD integration, and ISA CCST certification pathways.',
+    accessKey: 'training_plc_tech',
+    certTitle: 'Jr. Industrial Controls & PLC Technician',
+    color: 'orange',
+    totalModules: 16,
+    stripeProductId: 'training_plc_tech',
+    testOutProductId: 'jr_plc_tech_test_human',
+    comingSoon: true,
+  },
 ];

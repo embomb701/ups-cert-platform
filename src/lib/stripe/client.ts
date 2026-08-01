@@ -567,6 +567,27 @@ export const STRIPE_PRODUCTS = {
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_REF_TECH_TESTOUT ?? '',
   },
 
+  training_plc_tech: {
+    name: 'Industrial Controls & PLC Technician Training Course + Jr. PLC Tech Certification Exam',
+    shortName: 'PLC Tech Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_PLC_TECH ?? '',
+  },
+
+  jr_plc_tech_test_human: {
+    name: 'Jr. Industrial Controls & PLC Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. PLC Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_PLC_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_plc_tech_testout: {
+    name: 'PLC Tech Training Course + Jr. PLC Tech Test-Out (Human Proctored)',
+    shortName: 'PLC Tech Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_PLC_TECH_TESTOUT ?? '',
+  },
+
   // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────

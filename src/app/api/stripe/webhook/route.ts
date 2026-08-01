@@ -529,6 +529,37 @@ async function grantJrFireAlarmTechAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantPlcTechTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_plc_tech')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_plc_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrPlcTechAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_plc_tech_test_human',
+    examLevel: 'jr_plc_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. PLC Tech Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantRefTechTrainingAccess(userId: string, purchaseId: string) {
   await adminDb
     .collection('users').doc(userId)
@@ -985,6 +1016,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_ref_tech_testout':
       await grantRefTechTrainingAccess(userId, pid);
       await grantJrRefTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Industrial Controls & PLC) ───────────────
+    case 'training_plc_tech':
+      await grantPlcTechTrainingAccess(userId, pid);
+      break;
+
+    // ── PLC Tech Test-Out ─────────────────────────────────────────────────────
+    case 'jr_plc_tech_test_human':
+      await grantJrPlcTechAccess(userId, pid);
+      break;
+
+    // ── Package: PLC Tech Training + Test-Out ────────────────────────────────
+    case 'pkg_training_plc_tech_testout':
+      await grantPlcTechTrainingAccess(userId, pid);
+      await grantJrPlcTechAccess(userId, pid);
       break;
 
     // ── Standalone training course (Building Automation Systems) ─────────────
