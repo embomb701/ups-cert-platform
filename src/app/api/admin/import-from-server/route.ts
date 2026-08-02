@@ -33,7 +33,8 @@ import bmetTechFresh from '../../../../../data/questions/bmet-tech-jr-fresh.json
 import basTechFresh from '../../../../../data/questions/bas-tech-jr-fresh.json';
 import refTechFresh from '../../../../../data/questions/ref-tech-jr-fresh.json';
 import plcTechFresh from '../../../../../data/questions/plc-tech-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions, buildFireAlarmTechBankQuestions, buildBmetTechBankQuestions, buildBasTechBankQuestions, buildRefTechBankQuestions, buildPlcTechBankQuestions } from '@/lib/exam/kitchenBank';
+import securityTechFresh from '../../../../../data/questions/security-tech-jr-fresh.json';
+import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions, buildFireAlarmTechBankQuestions, buildBmetTechBankQuestions, buildBasTechBankQuestions, buildRefTechBankQuestions, buildPlcTechBankQuestions, buildSecurityTechBankQuestions } from '@/lib/exam/kitchenBank';
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -84,6 +85,8 @@ const BUNDLED_FILES: Record<string, QuestionRecord[]> = {
   'ref-tech-jr-derived': buildRefTechBankQuestions() as unknown as QuestionRecord[],
   'plc-tech-jr-fresh.json': plcTechFresh as unknown as QuestionRecord[],
   'plc-tech-jr-derived': buildPlcTechBankQuestions() as unknown as QuestionRecord[],
+  'security-tech-jr-fresh.json': securityTechFresh as unknown as QuestionRecord[],
+  'security-tech-jr-derived': buildSecurityTechBankQuestions() as unknown as QuestionRecord[],
 };
 
 const FILE_ORDER = [
@@ -132,6 +135,8 @@ const FILE_ORDER = [
   'ref-tech-jr-derived',
   'plc-tech-jr-fresh.json',
   'plc-tech-jr-derived',
+  'security-tech-jr-fresh.json',
+  'security-tech-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

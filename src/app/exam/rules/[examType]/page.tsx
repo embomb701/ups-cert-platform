@@ -82,6 +82,7 @@ export default function ExamRulesPage() {
     practice_jr_bas_tech: 'Jr. BAS Tech Practice Test — Results Only, No Certificate',
     practice_jr_ref_tech: 'Jr. Ref Tech Practice Test — Results Only, No Certificate',
     practice_jr_plc_tech: 'Jr. PLC Tech Practice Test — Results Only, No Certificate',
+    practice_jr_security_tech: 'Jr. Security Tech Practice Test — Results Only, No Certificate',
   };
   // Jr-course exam display config: rules token + certification label
   const JR_COURSE_META: Record<string, { token: string; label: string }> = {
@@ -105,6 +106,7 @@ export default function ExamRulesPage() {
     jr_bas_tech: { token: 'Jr. BAS Tech Exam', label: 'Junior Building Automation Systems Technician Certification' },
     jr_ref_tech: { token: 'Jr. Ref Tech Exam', label: 'Junior Commercial Refrigeration Technician Certification' },
     jr_plc_tech: { token: 'Jr. PLC Tech Exam', label: 'Junior Industrial Controls & PLC Technician Certification' },
+    jr_security_tech: { token: 'Jr. Security Tech Exam', label: 'Junior Electronic Security Systems Technician Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];

@@ -61,13 +61,14 @@ export async function POST(req: NextRequest) {
       practice_jr_bas_tech: { bank: 'jr_bas_tech', accessDoc: 'practice_jr_bas_tech', label: 'Jr. BAS Tech' },
       practice_jr_ref_tech: { bank: 'jr_ref_tech', accessDoc: 'practice_jr_ref_tech', label: 'Jr. Ref Tech' },
       practice_jr_plc_tech: { bank: 'jr_plc_tech', accessDoc: 'practice_jr_plc_tech', label: 'Jr. PLC Tech' },
+      practice_jr_security_tech: { bank: 'jr_security_tech', accessDoc: 'practice_jr_security_tech', label: 'Jr. Security Tech' },
     };
     const practice = PRACTICE_EXAMS[rawExamLevel];
     const isPractice = !!practice;
     const examLevel = (practice ? practice.bank : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech', 'jr_security_tech'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -186,6 +187,7 @@ export async function POST(req: NextRequest) {
       jr_bas_tech: { label: 'Jr. BAS Tech', productId: 'jr_bas_tech_test_human', courseKey: 'training_bas_tech' },
       jr_ref_tech: { label: 'Jr. Ref Tech', productId: 'jr_ref_tech_test_human', courseKey: 'training_ref_tech' },
       jr_plc_tech: { label: 'Jr. PLC Tech', productId: 'jr_plc_tech_test_human', courseKey: 'training_plc_tech' },
+      jr_security_tech: { label: 'Jr. Security Tech', productId: 'jr_security_tech_test_human', courseKey: 'training_security_tech' },
     };
 
     let kitchenTestOut = false;

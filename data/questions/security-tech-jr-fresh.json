@@ -1,0 +1,222 @@
+[
+  {
+    "id": "sec_fresh_001",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "What voltage level do most commercial security peripherals operate at?",
+    "options": ["5 VDC", "9 VDC", "12 VDC or 24 VDC", "48 VDC"],
+    "correctAnswer": 2,
+    "explanation": "12 VDC and 24 VDC are the two dominant supply voltages for security devices. 12 V is common in residential; 24 V is preferred for commercial because it carries the same power at lower current.",
+    "category": "Security Fundamentals",
+    "difficulty": "easy"
+  },
+  {
+    "id": "sec_fresh_002",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "An EOL (end-of-line) resistor in a security zone loop serves to:",
+    "options": ["Step down 24 VDC to 12 VDC", "Allow the panel to detect both open and short faults", "Limit inrush current to the detector", "Terminate the RS-485 bus"],
+    "correctAnswer": 1,
+    "explanation": "The EOL resistor sits at the far end of the zone loop, giving the panel a reference resistance. A short circuit drops resistance (alarm condition) and an open circuit raises resistance (trouble condition).",
+    "category": "Security Fundamentals",
+    "difficulty": "easy"
+  },
+  {
+    "id": "sec_fresh_003",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Which UL standard governs central station alarm monitoring certification?",
+    "options": ["UL 681", "UL 294", "UL 2050", "UL 1076"],
+    "correctAnswer": 2,
+    "explanation": "UL 2050 certifies central station monitoring facilities and their operational procedures. UL 681 is the burglar alarm installation standard applied to the field installation.",
+    "category": "Security Fundamentals",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_004",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "A door on a required fire egress path must use which type of electric locking hardware?",
+    "options": ["Fail-secure electric strike", "Fail-safe magnetic lock or electric strike", "Double-cylinder deadbolt with key override", "Motor-driven bolt lock"],
+    "correctAnswer": 1,
+    "explanation": "NFPA 101 Life Safety Code requires that egress doors unlock automatically on power failure (fail-safe). Fail-secure hardware remains locked during power loss and is prohibited on required egress paths.",
+    "category": "Access Control",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_005",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "OSDP communicates over which physical interface?",
+    "options": ["Wiegand D0/D1 open-collector lines", "RS-485 multi-drop bus", "RS-232 serial point-to-point", "CAT6 Ethernet with DHCP"],
+    "correctAnswer": 1,
+    "explanation": "OSDP (Open Supervised Device Protocol) runs on an RS-485 multi-drop bus supporting AES-128 encrypted bi-directional communication between readers and controllers.",
+    "category": "Access Control",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_006",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Why are 125 kHz proximity cards considered a security vulnerability?",
+    "options": ["They require a battery that can fail unexpectedly", "They transmit an unencrypted fixed card number susceptible to skimming", "They only work within 1 cm of the reader surface", "They are incompatible with modern OSDP panels"],
+    "correctAnswer": 1,
+    "explanation": "125 kHz prox cards broadcast a fixed, unencrypted card serial number. Inexpensive off-the-shelf skimming devices can capture and clone the credential from several centimeters away without the cardholder's knowledge.",
+    "category": "Access Control",
+    "difficulty": "easy"
+  },
+  {
+    "id": "sec_fresh_007",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "A magnetic lock (maglock) is inherently fail-safe because:",
+    "options": ["It is powered by a dedicated UPS", "It releases immediately when power is removed", "It uses spring tension to remain unlocked", "It has a manual override key cylinder"],
+    "correctAnswer": 1,
+    "explanation": "Maglocks hold by electromagnetic force. When power is removed — intentionally or due to a power failure — the magnetic field collapses instantly and the door is free to open, making them inherently fail-safe.",
+    "category": "Access Control",
+    "difficulty": "easy"
+  },
+  {
+    "id": "sec_fresh_008",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Which IEEE PoE standard delivers up to 90 W per port for high-power PTZ cameras?",
+    "options": ["IEEE 802.3af", "IEEE 802.3at", "IEEE 802.3bt", "IEEE 802.3ab"],
+    "correctAnswer": 2,
+    "explanation": "IEEE 802.3bt (PoE++) delivers up to 90 W per port. 802.3af delivers 15.4 W and 802.3at delivers 30 W — insufficient for high-power PTZ cameras and multi-imager units.",
+    "category": "CCTV",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_009",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "What pixel density (PPM) is required for positive facial identification per IEC 62676-4?",
+    "options": ["12 PPM", "62 PPM", "125 PPM", "250 PPM"],
+    "correctAnswer": 3,
+    "explanation": "IEC 62676-4 defines 250 pixels per meter (PPM) as the minimum pixel density for positive identification (enough detail to identify a specific individual). Lower densities support recognition (62 PPM) or detection (12 PPM) only.",
+    "category": "CCTV",
+    "difficulty": "hard"
+  },
+  {
+    "id": "sec_fresh_010",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "H.265 compression reduces storage requirements compared to H.264 by approximately:",
+    "options": ["10%", "25%", "50%", "80%"],
+    "correctAnswer": 2,
+    "explanation": "H.265 (HEVC) delivers equivalent perceptual image quality at roughly 50% of the H.264 bit rate, cutting storage and network bandwidth requirements approximately in half.",
+    "category": "CCTV",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_011",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "A dual-technology (PIR + microwave) motion detector reduces false alarms because:",
+    "options": ["It uses AI to distinguish humans from pets", "Both sensing technologies must trigger simultaneously", "It has a longer detection range than a single PIR", "It ignores motion below 0.5 m/s"],
+    "correctAnswer": 1,
+    "explanation": "Dual-tech detectors require both PIR and microwave to detect an event at the same time. Environmental triggers like HVAC drafts or sunlight may activate the PIR alone, but not the microwave, preventing false alarms.",
+    "category": "Intrusion",
+    "difficulty": "easy"
+  },
+  {
+    "id": "sec_fresh_012",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Contact ID is best described as:",
+    "options": ["A credential format for 13.56 MHz smart cards", "The industry-standard digital event code format for reporting alarms to central stations", "A two-way authentication protocol between panel and reader", "A cloud API for remote panel access"],
+    "correctAnswer": 1,
+    "explanation": "Contact ID is the industry-standard event reporting format that encodes alarm events (zone number, event type, partition) into a digital transmission sent over PSTN, IP, or cellular to the central monitoring station.",
+    "category": "Intrusion",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_013",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Video verification (ECV) reduces false alarm police dispatches by more than:",
+    "options": ["10%", "50%", "75%", "95%"],
+    "correctAnswer": 3,
+    "explanation": "Video verification allows monitoring operators to view a camera clip or live feed before dispatching, confirming actual intrusions. This reduces false alarm dispatches by over 95% compared to traditional single-sensor activation.",
+    "category": "Intrusion",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_014",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Dual-path communication (IP + cellular) for a commercial intrusion system provides which key benefit?",
+    "options": ["Higher bandwidth for video verification clips", "Alarm reporting survives a cable cut or internet outage", "Eliminates the need for a UL-listed central station", "Reduces the standby battery requirement to 4 hours"],
+    "correctAnswer": 1,
+    "explanation": "Cellular backup operates on the mobile network, completely independent of the internet and telephone lines. Cutting the building's communications cable — a common burglary tactic — cannot disable cellular alarm reporting.",
+    "category": "Intrusion",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_015",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Isolating security cameras on a dedicated VLAN protects against:",
+    "options": ["PoE power surges from the corporate switch", "Unauthorized access to video streams from corporate workstations", "IP address conflicts with access control devices", "PoE voltage drop on long cable runs"],
+    "correctAnswer": 1,
+    "explanation": "A dedicated security VLAN prevents corporate users from accessing camera streams, limits lateral network movement if a camera is compromised, and simplifies bandwidth planning for video traffic.",
+    "category": "Security Networking",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_016",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "The first cybersecurity hardening step for a newly installed IP camera is to:",
+    "options": ["Enable UPnP for remote management", "Change the default username and password", "Disable all encryption for better performance", "Assign a static IP in the 192.168.1.x range"],
+    "correctAnswer": 1,
+    "explanation": "Default credentials are the most exploited vulnerability in IP cameras. Changing the factory username and password before connecting the camera to the network is the single most important first hardening step.",
+    "category": "Security Networking",
+    "difficulty": "easy"
+  },
+  {
+    "id": "sec_fresh_017",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Which remote access method is recommended for managing security systems over the internet?",
+    "options": ["Port forwarding to the NVR's LAN IP address", "UPnP automatic port mapping", "VPN tunnel with strong authentication", "HTTP on port 80 with complex password"],
+    "correctAnswer": 2,
+    "explanation": "VPN encrypts all management traffic and requires authentication before any access to the security network. Port forwarding and UPnP expose devices directly to the internet, where they are attacked continuously.",
+    "category": "Security Networking",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_018",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "The ONVIF standard enables which capability in IP video surveillance?",
+    "options": ["AES-128 encrypted OSDP reader communication", "Interoperability between cameras and NVRs from different manufacturers", "Cloud storage for access control audit logs", "Cellular backup for intrusion panel communicators"],
+    "correctAnswer": 1,
+    "explanation": "ONVIF (Open Network Video Interface Forum) defines protocols for camera discovery, RTSP video streaming, PTZ control, and event notifications, enabling cross-manufacturer interoperability between cameras and recording platforms.",
+    "category": "Security Networking",
+    "difficulty": "medium"
+  },
+  {
+    "id": "sec_fresh_019",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "The ESA CEST (Certified Electronic Security Technician) credential covers:",
+    "options": ["Intrusion and life safety systems only", "Access control, CCTV, and intrusion across all security disciplines", "Corporate security management and personnel protection", "Network design and cybersecurity for IT professionals"],
+    "correctAnswer": 1,
+    "explanation": "The CEST covers all four electronic security disciplines: intrusion, access control, CCTV, and life safety — making it a broader credential than the CAT (intrusion-focused).",
+    "category": "Career",
+    "difficulty": "easy"
+  },
+  {
+    "id": "sec_fresh_020",
+    "examLevel": "jr_security_tech",
+    "active": true,
+    "question": "Anti-passback in an access control system prevents:",
+    "options": ["Tailgating through an open door without badging", "A credential being reused to enter before it has been used to exit (or vice versa)", "Unauthorized cloning of 125 kHz credentials", "Replay attacks intercepted on Wiegand wiring"],
+    "correctAnswer": 1,
+    "explanation": "Anti-passback enforces entry/exit sequencing: a credential used to enter a zone cannot be used to enter again until it has been used to exit. This prevents one badge being passed back through a door to a second person.",
+    "category": "Access Control",
+    "difficulty": "medium"
+  }
+]

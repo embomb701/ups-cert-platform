@@ -588,6 +588,27 @@ export const STRIPE_PRODUCTS = {
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_PLC_TECH_TESTOUT ?? '',
   },
 
+  training_security_tech: {
+    name: 'Electronic Security Systems Technician Training Course + Jr. Security Tech Certification Exam',
+    shortName: 'Security Tech Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_SECURITY_TECH ?? '',
+  },
+
+  jr_security_tech_test_human: {
+    name: 'Jr. Electronic Security Systems Tech Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Security Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_SECURITY_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_security_tech_testout: {
+    name: 'Security Tech Training Course + Jr. Security Tech Test-Out (Human Proctored)',
+    shortName: 'Security Tech Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_SECURITY_TECH_TESTOUT ?? '',
+  },
+
   // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────

@@ -1263,4 +1263,17 @@ export const COURSES: TrainingCourse[] = [
     testOutProductId: 'jr_plc_tech_test_human',
     comingSoon: true,
   },
+  {
+    id: 'security-tech',
+    title: 'Electronic Security Systems Technician',
+    shortTitle: 'Security Tech',
+    tagline: 'Install and service access control, CCTV, and intrusion systems — Wiegand, OSDP, IP cameras, PoE, NVR/VMS design, and ESA CAT/CEST certification pathways.',
+    accessKey: 'training_security_tech',
+    certTitle: 'Jr. Electronic Security Systems Technician',
+    color: 'violet',
+    totalModules: 16,
+    stripeProductId: 'training_security_tech',
+    testOutProductId: 'jr_security_tech_test_human',
+    comingSoon: true,
+  },
 ];

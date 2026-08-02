@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
         await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_fse').update({ testOutFailed: true });
       }
     }
-    const JR_COURSE_LEVELS = ['jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech'];
+    const JR_COURSE_LEVELS = ['jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech', 'jr_security_tech'];
     if (!passed && JR_COURSE_LEVELS.includes(attempt.examLevel) && (attempt as { testOut?: boolean }).testOut) {
       await adminDb.collection('users').doc(uid).collection('examAccess').doc(attempt.examLevel).set(
         { testOut: true, testOutFailed: true },
@@ -176,6 +176,8 @@ export async function POST(req: NextRequest) {
           ? 'Junior Commercial Refrigeration Technician Certification'
           : attempt.examLevel === 'jr_plc_tech'
           ? 'Junior Industrial Controls & PLC Technician Certification'
+          : attempt.examLevel === 'jr_security_tech'
+          ? 'Junior Electronic Security Systems Technician Certification'
           : 'UPS Field Service Certification';
 
       await adminDb.collection('certificates').doc(certificateId).set({

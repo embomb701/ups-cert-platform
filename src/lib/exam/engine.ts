@@ -138,6 +138,7 @@ export function generateCertNumber(examLevel: ExamLevel): string {
     : examLevel === 'jr_bas_tech' ? 'BAS'
     : examLevel === 'jr_ref_tech' ? 'REF'
     : examLevel === 'jr_plc_tech' ? 'PLC'
+    : examLevel === 'jr_security_tech' ? 'SEC'
     : 'FSE';
   const year = new Date().getFullYear();
   const rand = uuidv4().split('-')[0].toUpperCase();
