@@ -69,8 +69,23 @@ const SERVER_FILES = [
 const QUARTERS: string[][] = [
   SERVER_FILES.slice(0, 13),   // Q1: base FSE + Kitchen + HVAC + Generator + DataCenter
   SERVER_FILES.slice(13, 27),  // Q2: Solar → Pool
-  SERVER_FILES.slice(27, 40),  // Q3: HVAC Tech → BMET
-  SERVER_FILES.slice(40),      // Q4: BAS → Pump Tech
+  SERVER_FILES.slice(27, 39),  // Q3: HVAC Tech → BMET (ends at bmet-tech-jr-derived)
+  // Q4: fresh JSON files FIRST so field-pm and pump-tech import immediately,
+  // then derived banks (slow kitchenBank load) come after.
+  [
+    'bas-tech-jr-fresh.json',
+    'ref-tech-jr-fresh.json',
+    'plc-tech-jr-fresh.json',
+    'security-tech-jr-fresh.json',
+    'field-pm-jr-fresh.json',
+    'pump-tech-jr-fresh.json',
+    'bas-tech-jr-derived',
+    'ref-tech-jr-derived',
+    'plc-tech-jr-derived',
+    'security-tech-jr-derived',
+    'field-pm-jr-derived',
+    'pump-tech-jr-derived',
+  ],
 ];
 
 export default function AdminQuestionsPage() {

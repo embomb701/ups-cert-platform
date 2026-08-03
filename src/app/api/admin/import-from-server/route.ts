@@ -167,41 +167,48 @@ export async function POST(req: NextRequest) {
     const filesNotFound: string[] = [];
 
     const BATCH_SIZE = 500;
+    // 50-second per-file deadline covering BOTH module loading and Firestore writes.
+    // Derived banks load kitchenBank dynamically; if that takes too long the server
+    // returns a 500 and the client marks the file as timed-out and moves on.
+    const PER_FILE_MS = 50_000;
 
     for (const file of filesToImport) {
-      const questions = await getFileQuestions(file);
-      if (!questions || questions.length === 0) {
-        filesNotFound.push(file);
-        continue;
+      try {
+        await Promise.race([
+          (async () => {
+            const questions = await getFileQuestions(file);
+            if (!questions || questions.length === 0) {
+              filesNotFound.push(file);
+              return;
+            }
+            const batches: ReturnType<typeof adminDb.batch>[] = [];
+            let count = 0;
+            for (let i = 0; i < questions.length; i += BATCH_SIZE) {
+              const chunk = questions.slice(i, i + BATCH_SIZE);
+              const batch = adminDb.batch();
+              for (const q of chunk) {
+                const id = q.id as string;
+                if (!id) continue;
+                batch.set(
+                  collection.doc(id),
+                  { ...q, updatedAt: FieldValue.serverTimestamp() },
+                  { merge: true }
+                );
+                count++;
+              }
+              batches.push(batch);
+            }
+            await Promise.all(batches.map((b) => b.commit()));
+            totalCreated += count;
+            filesProcessed.push(`${file} (${questions.length})`);
+          })(),
+          new Promise<never>((_, rej) =>
+            setTimeout(() => rej(new Error(`server timeout after 50s`)), PER_FILE_MS)
+          ),
+        ]);
+      } catch (fileErr: any) {
+        filesNotFound.push(`${file} (${fileErr.message})`);
       }
-
-      // Build all batches then commit them in parallel to reduce round-trips.
-      // Wrap commits in a 40-second deadline so a hung gRPC connection never
-      // blocks the response — the client will receive a 500 and move on.
-      const batches: ReturnType<typeof adminDb.batch>[] = [];
-      let count = 0;
-      for (let i = 0; i < questions.length; i += BATCH_SIZE) {
-        const chunk = questions.slice(i, i + BATCH_SIZE);
-        const batch = adminDb.batch();
-        for (const q of chunk) {
-          const id = q.id as string;
-          if (!id) continue;
-          batch.set(
-            collection.doc(id),
-            { ...q, updatedAt: FieldValue.serverTimestamp() },
-            { merge: true }
-          );
-          count++;
-        }
-        batches.push(batch);
-      }
-      const deadline = new Promise<never>((_, rej) =>
-        setTimeout(() => rej(new Error(`Firestore write timed out for ${file}`)), 40_000)
-      );
-      await Promise.race([Promise.all(batches.map((b) => b.commit())), deadline]);
-      totalCreated += count;
-
-      filesProcessed.push(`${file} (${questions.length})`);
     }
 
     await adminDb.collection('auditLogs').add({
