@@ -40,64 +40,71 @@ import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQu
 
 type QuestionRecord = Record<string, unknown>;
 
-// Lazy-init: building derived banks inside the request handler ensures any
-// runtime error surfaces as a proper JSON response instead of crashing the
-// module before the try/catch block can engage.
-function buildBundledFiles(): Record<string, QuestionRecord[]> {
-  return {
-    'jr-fsc-sample.json':        jrFscSample as QuestionRecord[],
-    'jr-fse-all-questions.json': jrFseAll as QuestionRecord[],
-    'book-jr-fse-questions.json': bookJrFse as QuestionRecord[],
-    'fsc-sample.json':           fscSample as QuestionRecord[],
-    'book-fse-questions.json':   bookFse as QuestionRecord[],
-    'kitchen-jr-fse-fresh.json': kitchenFresh as QuestionRecord[],
-    'hvac-jr-fse-fresh.json':    hvacFresh as QuestionRecord[],
-    'generator-jr-fse-fresh.json': generatorFresh as QuestionRecord[],
-    'datacenter-jr-fresh.json':  datacenterFresh as QuestionRecord[],
-    'solar-jr-fresh.json':       solarFresh as QuestionRecord[],
-    'ev-jr-fresh.json':          evFresh as QuestionRecord[],
-    'dcp-jr-fresh.json':         dcpFresh as QuestionRecord[],
-    'battery-jr-fresh.json':     batteryFresh as QuestionRecord[],
-    'dc-engineer-jr-fresh.json': dcEngineerFresh as QuestionRecord[],
-    'marine-jr-fresh.json':      marineFresh as QuestionRecord[],
-    'pool-jr-fresh.json':        poolFresh as QuestionRecord[],
-    'hvac-tech-jr-fresh.json':   hvacTechFresh as QuestionRecord[],
-    'solar-installer-jr-fresh.json': solarInstFresh as QuestionRecord[],
-    'wind-turbine-jr-fresh.json': windTechFresh as QuestionRecord[],
-    'elevator-tech-jr-fresh.json': elevatorTechFresh as QuestionRecord[],
-    // Derived from course content (shared foundation + course-specific modules)
-    'kitchen-jr-fse-derived':    buildKitchenBankQuestions() as unknown as QuestionRecord[],
-    'hvac-jr-fse-derived':       buildHvacBankQuestions() as unknown as QuestionRecord[],
-    'generator-jr-fse-derived':  buildGeneratorBankQuestions() as unknown as QuestionRecord[],
-    'datacenter-jr-derived':     buildDataCenterBankQuestions() as unknown as QuestionRecord[],
-    'solar-jr-derived':          buildSolarBankQuestions() as unknown as QuestionRecord[],
-    'ev-jr-derived':             buildEvChargingBankQuestions() as unknown as QuestionRecord[],
-    'dcp-jr-derived':            buildDcPlantsBankQuestions() as unknown as QuestionRecord[],
-    'battery-jr-derived':        buildBatteryBankQuestions() as unknown as QuestionRecord[],
-    'dc-engineer-jr-derived':    buildDcEngineerBankQuestions() as unknown as QuestionRecord[],
-    'marine-jr-derived':         buildMarineBankQuestions() as unknown as QuestionRecord[],
-    'pool-jr-derived':           buildPoolBankQuestions() as unknown as QuestionRecord[],
-    'hvac-tech-jr-derived':      buildHvacTechBankQuestions() as unknown as QuestionRecord[],
-    'solar-installer-jr-derived': buildSolarInstBankQuestions() as unknown as QuestionRecord[],
-    'wind-turbine-jr-derived':   buildWindTurbineBankQuestions() as unknown as QuestionRecord[],
-    'elevator-tech-jr-derived':  buildElevatorTechBankQuestions() as unknown as QuestionRecord[],
-    'fire-alarm-tech-jr-fresh.json': fireAlarmTechFresh as unknown as QuestionRecord[],
-    'fire-alarm-tech-jr-derived': buildFireAlarmTechBankQuestions() as unknown as QuestionRecord[],
-    'bmet-tech-jr-fresh.json': bmetTechFresh as unknown as QuestionRecord[],
-    'bmet-tech-jr-derived': buildBmetTechBankQuestions() as unknown as QuestionRecord[],
-    'bas-tech-jr-fresh.json': basTechFresh as unknown as QuestionRecord[],
-    'bas-tech-jr-derived': buildBasTechBankQuestions() as unknown as QuestionRecord[],
-    'ref-tech-jr-fresh.json': refTechFresh as unknown as QuestionRecord[],
-    'ref-tech-jr-derived': buildRefTechBankQuestions() as unknown as QuestionRecord[],
-    'plc-tech-jr-fresh.json': plcTechFresh as unknown as QuestionRecord[],
-    'plc-tech-jr-derived': buildPlcTechBankQuestions() as unknown as QuestionRecord[],
-    'security-tech-jr-fresh.json': securityTechFresh as unknown as QuestionRecord[],
-    'security-tech-jr-derived': buildSecurityTechBankQuestions() as unknown as QuestionRecord[],
-    'field-pm-jr-fresh.json': fieldPmFresh as unknown as QuestionRecord[],
-    'field-pm-jr-derived': buildFieldPmBankQuestions() as unknown as QuestionRecord[],
-    'pump-tech-jr-fresh.json': pumpTechFresh as unknown as QuestionRecord[],
-    'pump-tech-jr-derived': buildPumpTechBankQuestions() as unknown as QuestionRecord[],
-  };
+// Static JSON files — already in memory from webpack static imports.
+const STATIC_FILES: Record<string, QuestionRecord[]> = {
+  'jr-fsc-sample.json':             jrFscSample as QuestionRecord[],
+  'jr-fse-all-questions.json':      jrFseAll as QuestionRecord[],
+  'book-jr-fse-questions.json':     bookJrFse as QuestionRecord[],
+  'fsc-sample.json':                fscSample as QuestionRecord[],
+  'book-fse-questions.json':        bookFse as QuestionRecord[],
+  'kitchen-jr-fse-fresh.json':      kitchenFresh as QuestionRecord[],
+  'hvac-jr-fse-fresh.json':         hvacFresh as QuestionRecord[],
+  'generator-jr-fse-fresh.json':    generatorFresh as QuestionRecord[],
+  'datacenter-jr-fresh.json':       datacenterFresh as QuestionRecord[],
+  'solar-jr-fresh.json':            solarFresh as QuestionRecord[],
+  'ev-jr-fresh.json':               evFresh as QuestionRecord[],
+  'dcp-jr-fresh.json':              dcpFresh as QuestionRecord[],
+  'battery-jr-fresh.json':          batteryFresh as QuestionRecord[],
+  'dc-engineer-jr-fresh.json':      dcEngineerFresh as QuestionRecord[],
+  'marine-jr-fresh.json':           marineFresh as QuestionRecord[],
+  'pool-jr-fresh.json':             poolFresh as QuestionRecord[],
+  'hvac-tech-jr-fresh.json':        hvacTechFresh as QuestionRecord[],
+  'solar-installer-jr-fresh.json':  solarInstFresh as QuestionRecord[],
+  'wind-turbine-jr-fresh.json':     windTechFresh as QuestionRecord[],
+  'elevator-tech-jr-fresh.json':    elevatorTechFresh as QuestionRecord[],
+  'fire-alarm-tech-jr-fresh.json':  fireAlarmTechFresh as QuestionRecord[],
+  'bmet-tech-jr-fresh.json':        bmetTechFresh as QuestionRecord[],
+  'bas-tech-jr-fresh.json':         basTechFresh as QuestionRecord[],
+  'ref-tech-jr-fresh.json':         refTechFresh as QuestionRecord[],
+  'plc-tech-jr-fresh.json':         plcTechFresh as QuestionRecord[],
+  'security-tech-jr-fresh.json':    securityTechFresh as QuestionRecord[],
+  'field-pm-jr-fresh.json':         fieldPmFresh as QuestionRecord[],
+  'pump-tech-jr-fresh.json':        pumpTechFresh as QuestionRecord[],
+};
+
+// Derived banks built on demand — each builder is called only when its specific
+// bank is requested. Calling all builders on every request was timing out on
+// Vercel (60 s limit) because 22+ banks × hundreds of questions = too slow.
+const DERIVED_BUILDERS: Record<string, () => QuestionRecord[]> = {
+  'kitchen-jr-fse-derived':     () => buildKitchenBankQuestions() as unknown as QuestionRecord[],
+  'hvac-jr-fse-derived':        () => buildHvacBankQuestions() as unknown as QuestionRecord[],
+  'generator-jr-fse-derived':   () => buildGeneratorBankQuestions() as unknown as QuestionRecord[],
+  'datacenter-jr-derived':      () => buildDataCenterBankQuestions() as unknown as QuestionRecord[],
+  'solar-jr-derived':           () => buildSolarBankQuestions() as unknown as QuestionRecord[],
+  'ev-jr-derived':              () => buildEvChargingBankQuestions() as unknown as QuestionRecord[],
+  'dcp-jr-derived':             () => buildDcPlantsBankQuestions() as unknown as QuestionRecord[],
+  'battery-jr-derived':         () => buildBatteryBankQuestions() as unknown as QuestionRecord[],
+  'dc-engineer-jr-derived':     () => buildDcEngineerBankQuestions() as unknown as QuestionRecord[],
+  'marine-jr-derived':          () => buildMarineBankQuestions() as unknown as QuestionRecord[],
+  'pool-jr-derived':            () => buildPoolBankQuestions() as unknown as QuestionRecord[],
+  'hvac-tech-jr-derived':       () => buildHvacTechBankQuestions() as unknown as QuestionRecord[],
+  'solar-installer-jr-derived': () => buildSolarInstBankQuestions() as unknown as QuestionRecord[],
+  'wind-turbine-jr-derived':    () => buildWindTurbineBankQuestions() as unknown as QuestionRecord[],
+  'elevator-tech-jr-derived':   () => buildElevatorTechBankQuestions() as unknown as QuestionRecord[],
+  'fire-alarm-tech-jr-derived': () => buildFireAlarmTechBankQuestions() as unknown as QuestionRecord[],
+  'bmet-tech-jr-derived':       () => buildBmetTechBankQuestions() as unknown as QuestionRecord[],
+  'bas-tech-jr-derived':        () => buildBasTechBankQuestions() as unknown as QuestionRecord[],
+  'ref-tech-jr-derived':        () => buildRefTechBankQuestions() as unknown as QuestionRecord[],
+  'plc-tech-jr-derived':        () => buildPlcTechBankQuestions() as unknown as QuestionRecord[],
+  'security-tech-jr-derived':   () => buildSecurityTechBankQuestions() as unknown as QuestionRecord[],
+  'field-pm-jr-derived':        () => buildFieldPmBankQuestions() as unknown as QuestionRecord[],
+  'pump-tech-jr-derived':       () => buildPumpTechBankQuestions() as unknown as QuestionRecord[],
+};
+
+function getFileQuestions(name: string): QuestionRecord[] | null {
+  if (name in STATIC_FILES) return STATIC_FILES[name];
+  if (name in DERIVED_BUILDERS) return DERIVED_BUILDERS[name]();
+  return null;
 }
 
 const FILE_ORDER = [
@@ -169,14 +176,13 @@ export async function POST(req: NextRequest) {
     const fileName = body.file as string | undefined;
     const filesToImport = fileName ? [fileName] : FILE_ORDER;
 
-    const BUNDLED_FILES = buildBundledFiles();
     const collection = adminDb.collection('questionBank');
     let totalCreated = 0;
     const filesProcessed: string[] = [];
     const filesNotFound: string[] = [];
 
     for (const file of filesToImport) {
-      const questions = BUNDLED_FILES[file];
+      const questions = getFileQuestions(file);
       if (!questions || questions.length === 0) {
         filesNotFound.push(file);
         continue;

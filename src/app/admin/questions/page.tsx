@@ -56,6 +56,10 @@ const SERVER_FILES = [
   'plc-tech-jr-derived',
   'security-tech-jr-fresh.json',
   'security-tech-jr-derived',
+  'field-pm-jr-fresh.json',
+  'field-pm-jr-derived',
+  'pump-tech-jr-fresh.json',
+  'pump-tech-jr-derived',
 ];
 
 export default function AdminQuestionsPage() {
