@@ -4,7 +4,7 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { FieldValue } from 'firebase-admin/firestore';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 // Static imports — webpack bundles these into the Vercel function at build time.
 // fs.readFileSync CANNOT be used here: data/ is not included in the serverless bundle.
@@ -36,7 +36,9 @@ import plcTechFresh from '../../../../../data/questions/plc-tech-jr-fresh.json';
 import securityTechFresh from '../../../../../data/questions/security-tech-jr-fresh.json';
 import fieldPmFresh from '../../../../../data/questions/field-pm-jr-fresh.json';
 import pumpTechFresh from '../../../../../data/questions/pump-tech-jr-fresh.json';
-import { buildKitchenBankQuestions, buildHvacBankQuestions, buildGeneratorBankQuestions, buildDataCenterBankQuestions, buildSolarBankQuestions, buildEvChargingBankQuestions, buildDcPlantsBankQuestions, buildBatteryBankQuestions, buildDcEngineerBankQuestions, buildMarineBankQuestions, buildPoolBankQuestions, buildHvacTechBankQuestions, buildSolarInstBankQuestions, buildWindTurbineBankQuestions, buildElevatorTechBankQuestions, buildFireAlarmTechBankQuestions, buildBmetTechBankQuestions, buildBasTechBankQuestions, buildRefTechBankQuestions, buildPlcTechBankQuestions, buildSecurityTechBankQuestions, buildFieldPmBankQuestions, buildPumpTechBankQuestions } from '@/lib/exam/kitchenBank';
+// kitchenBank is NOT imported at module level — it pulls in ALL course data which
+// balloons the cold-start bundle. We use a dynamic import inside getFileQuestions
+// instead, so the chunk only loads when a derived bank is actually requested.
 
 type QuestionRecord = Record<string, unknown>;
 
@@ -72,38 +74,42 @@ const STATIC_FILES: Record<string, QuestionRecord[]> = {
   'pump-tech-jr-fresh.json':        pumpTechFresh as QuestionRecord[],
 };
 
-// Derived banks built on demand — each builder is called only when its specific
-// bank is requested. Calling all builders on every request was timing out on
-// Vercel (60 s limit) because 22+ banks × hundreds of questions = too slow.
-const DERIVED_BUILDERS: Record<string, () => QuestionRecord[]> = {
-  'kitchen-jr-fse-derived':     () => buildKitchenBankQuestions() as unknown as QuestionRecord[],
-  'hvac-jr-fse-derived':        () => buildHvacBankQuestions() as unknown as QuestionRecord[],
-  'generator-jr-fse-derived':   () => buildGeneratorBankQuestions() as unknown as QuestionRecord[],
-  'datacenter-jr-derived':      () => buildDataCenterBankQuestions() as unknown as QuestionRecord[],
-  'solar-jr-derived':           () => buildSolarBankQuestions() as unknown as QuestionRecord[],
-  'ev-jr-derived':              () => buildEvChargingBankQuestions() as unknown as QuestionRecord[],
-  'dcp-jr-derived':             () => buildDcPlantsBankQuestions() as unknown as QuestionRecord[],
-  'battery-jr-derived':         () => buildBatteryBankQuestions() as unknown as QuestionRecord[],
-  'dc-engineer-jr-derived':     () => buildDcEngineerBankQuestions() as unknown as QuestionRecord[],
-  'marine-jr-derived':          () => buildMarineBankQuestions() as unknown as QuestionRecord[],
-  'pool-jr-derived':            () => buildPoolBankQuestions() as unknown as QuestionRecord[],
-  'hvac-tech-jr-derived':       () => buildHvacTechBankQuestions() as unknown as QuestionRecord[],
-  'solar-installer-jr-derived': () => buildSolarInstBankQuestions() as unknown as QuestionRecord[],
-  'wind-turbine-jr-derived':    () => buildWindTurbineBankQuestions() as unknown as QuestionRecord[],
-  'elevator-tech-jr-derived':   () => buildElevatorTechBankQuestions() as unknown as QuestionRecord[],
-  'fire-alarm-tech-jr-derived': () => buildFireAlarmTechBankQuestions() as unknown as QuestionRecord[],
-  'bmet-tech-jr-derived':       () => buildBmetTechBankQuestions() as unknown as QuestionRecord[],
-  'bas-tech-jr-derived':        () => buildBasTechBankQuestions() as unknown as QuestionRecord[],
-  'ref-tech-jr-derived':        () => buildRefTechBankQuestions() as unknown as QuestionRecord[],
-  'plc-tech-jr-derived':        () => buildPlcTechBankQuestions() as unknown as QuestionRecord[],
-  'security-tech-jr-derived':   () => buildSecurityTechBankQuestions() as unknown as QuestionRecord[],
-  'field-pm-jr-derived':        () => buildFieldPmBankQuestions() as unknown as QuestionRecord[],
-  'pump-tech-jr-derived':       () => buildPumpTechBankQuestions() as unknown as QuestionRecord[],
+// Maps each derived-bank key to the exact function name exported from kitchenBank.
+// kitchenBank is loaded dynamically only when one of these keys is requested,
+// keeping the cold-start bundle small (no course-module data at init time).
+const DERIVED_KEY_TO_FN: Record<string, string> = {
+  'kitchen-jr-fse-derived':     'buildKitchenBankQuestions',
+  'hvac-jr-fse-derived':        'buildHvacBankQuestions',
+  'generator-jr-fse-derived':   'buildGeneratorBankQuestions',
+  'datacenter-jr-derived':      'buildDataCenterBankQuestions',
+  'solar-jr-derived':           'buildSolarBankQuestions',
+  'ev-jr-derived':              'buildEvChargingBankQuestions',
+  'dcp-jr-derived':             'buildDcPlantsBankQuestions',
+  'battery-jr-derived':         'buildBatteryBankQuestions',
+  'dc-engineer-jr-derived':     'buildDcEngineerBankQuestions',
+  'marine-jr-derived':          'buildMarineBankQuestions',
+  'pool-jr-derived':            'buildPoolBankQuestions',
+  'hvac-tech-jr-derived':       'buildHvacTechBankQuestions',
+  'solar-installer-jr-derived': 'buildSolarInstBankQuestions',
+  'wind-turbine-jr-derived':    'buildWindTurbineBankQuestions',
+  'elevator-tech-jr-derived':   'buildElevatorTechBankQuestions',
+  'fire-alarm-tech-jr-derived': 'buildFireAlarmTechBankQuestions',
+  'bmet-tech-jr-derived':       'buildBmetTechBankQuestions',
+  'bas-tech-jr-derived':        'buildBasTechBankQuestions',
+  'ref-tech-jr-derived':        'buildRefTechBankQuestions',
+  'plc-tech-jr-derived':        'buildPlcTechBankQuestions',
+  'security-tech-jr-derived':   'buildSecurityTechBankQuestions',
+  'field-pm-jr-derived':        'buildFieldPmBankQuestions',
+  'pump-tech-jr-derived':       'buildPumpTechBankQuestions',
 };
 
-function getFileQuestions(name: string): QuestionRecord[] | null {
+async function getFileQuestions(name: string): Promise<QuestionRecord[] | null> {
   if (name in STATIC_FILES) return STATIC_FILES[name];
-  if (name in DERIVED_BUILDERS) return DERIVED_BUILDERS[name]();
+  if (name in DERIVED_KEY_TO_FN) {
+    const kb = await import('@/lib/exam/kitchenBank');
+    const fn = kb[DERIVED_KEY_TO_FN[name] as keyof typeof kb] as unknown as () => QuestionRecord[];
+    return fn();
+  }
   return null;
 }
 
@@ -181,18 +187,21 @@ export async function POST(req: NextRequest) {
     const filesProcessed: string[] = [];
     const filesNotFound: string[] = [];
 
+    const BATCH_SIZE = 400;
+
     for (const file of filesToImport) {
-      const questions = getFileQuestions(file);
+      const questions = await getFileQuestions(file);
       if (!questions || questions.length === 0) {
         filesNotFound.push(file);
         continue;
       }
 
-      const BATCH_SIZE = 400;
+      // Build all batches then commit them in parallel to reduce round-trips.
+      const batches: ReturnType<typeof adminDb.batch>[] = [];
+      let count = 0;
       for (let i = 0; i < questions.length; i += BATCH_SIZE) {
         const chunk = questions.slice(i, i + BATCH_SIZE);
         const batch = adminDb.batch();
-
         for (const q of chunk) {
           const id = q.id as string;
           if (!id) continue;
@@ -201,11 +210,12 @@ export async function POST(req: NextRequest) {
             { ...q, updatedAt: FieldValue.serverTimestamp() },
             { merge: true }
           );
-          totalCreated++;
+          count++;
         }
-
-        await batch.commit();
+        batches.push(batch);
       }
+      await Promise.all(batches.map((b) => b.commit()));
+      totalCreated += count;
 
       filesProcessed.push(`${file} (${questions.length})`);
     }
