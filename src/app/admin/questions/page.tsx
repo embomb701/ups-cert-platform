@@ -82,20 +82,52 @@ export default function AdminQuestionsPage() {
     const filesNotFound: string[] = [];
 
     try {
-      const token = await getIdToken();
-      for (const file of SERVER_FILES) {
-        setServerProgress(`Importing ${file}…`);
-        const res = await fetch('/api/admin/import-from-server', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-          body: JSON.stringify({ file }),
-        });
-        const data: ServerImportResult = await res.json();
-        if (data.error) { filesNotFound.push(file); continue; }
-        totalCreated += data.totalCreated;
-        totalUpdated += data.totalUpdated;
-        filesProcessed.push(...data.filesProcessed);
-        filesNotFound.push(...data.filesNotFound);
+      let token = await getIdToken();
+      let tokenFetchedAt = Date.now();
+
+      for (let idx = 0; idx < SERVER_FILES.length; idx++) {
+        const file = SERVER_FILES[idx];
+        setServerProgress(`[${idx + 1}/${SERVER_FILES.length}] ${file}…`);
+
+        // Refresh token if it is approaching 55 minutes old
+        if (Date.now() - tokenFetchedAt > 55 * 60 * 1000) {
+          token = await getIdToken();
+          tokenFetchedAt = Date.now();
+        }
+
+        // 120-second hard timeout per file so a hanging request never blocks the loop
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 120_000);
+
+        try {
+          const res = await fetch('/api/admin/import-from-server', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            body: JSON.stringify({ file }),
+            signal: controller.signal,
+          });
+          clearTimeout(timer);
+
+          let data: ServerImportResult;
+          try {
+            data = await res.json();
+          } catch {
+            filesNotFound.push(`${file} (bad response)`);
+            continue;
+          }
+          if (data.error) { filesNotFound.push(`${file} (${data.error})`); continue; }
+          totalCreated += data.totalCreated;
+          totalUpdated += data.totalUpdated;
+          filesProcessed.push(...data.filesProcessed);
+          filesNotFound.push(...data.filesNotFound);
+        } catch (fetchErr: any) {
+          clearTimeout(timer);
+          if (fetchErr.name === 'AbortError') {
+            filesNotFound.push(`${file} (timed out)`);
+          } else {
+            filesNotFound.push(`${file} (${fetchErr.message})`);
+          }
+        }
       }
       setServerResult({ ok: true, filesProcessed, filesNotFound, totalCreated, totalUpdated });
       setServerProgress('');
@@ -514,18 +546,18 @@ export default function AdminQuestionsPage() {
         <div className="card-dark p-6 mb-6 border-indigo-900/50">
           <h2 className="text-sm font-semibold text-white mb-1">Import All Questions from Server</h2>
           <p className="text-xs text-gray-500 mb-4">
-            Imports all question bank files directly from the server — no upload needed.
-            Adds ~595 Jr. FSE, ~435 FSE, and ~500 Jr. Kitchen FSE questions (derived from
-            course content plus fresh scenario questions). Safe to run multiple times (skips existing).
+            Imports all {SERVER_FILES.length} question bank files directly from the server — no upload needed.
+            Processes one file at a time; expect 5–10 minutes total. Files that time out are listed below
+            so you can re-run just those. Safe to run multiple times (all writes use merge/upsert).
           </p>
           <button
             onClick={handleServerImport}
             disabled={serverImporting}
             className="px-5 py-2 rounded-lg bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white text-sm font-semibold transition-colors"
           >
-            {serverImporting ? 'Importing…' : 'Import All Questions Now'}
+            {serverImporting ? 'Importing…' : `Import All ${SERVER_FILES.length} Files`}
           </button>
-          {serverProgress && <p className="text-xs text-indigo-400 mt-2">{serverProgress}</p>}
+          {serverProgress && <p className="text-xs text-indigo-400 mt-2 font-mono">{serverProgress}</p>}
           {serverResult && (
             <div className={`rounded-lg p-3 mt-3 text-xs ${serverResult.ok ? 'bg-green-950/40 border border-green-800/40' : 'bg-red-950/40 border border-red-800/40'}`}>
               {serverResult.error ? (
