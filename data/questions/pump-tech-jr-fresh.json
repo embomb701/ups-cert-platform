@@ -1,0 +1,322 @@
+[
+  {
+    "id": "pump_fresh_001",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "What is the primary difference between a centrifugal pump and a positive-displacement pump?",
+    "options": [
+      "Centrifugal pumps impart velocity to fluid via an impeller; PD pumps deliver a fixed volume per revolution",
+      "Centrifugal pumps can only handle gases; PD pumps handle liquids",
+      "PD pumps require higher inlet pressure than centrifugal pumps",
+      "Centrifugal pumps operate at fixed speed; PD pumps use variable speed only"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Centrifugal pumps use rotating impellers to add kinetic energy to the fluid, which a volute converts to pressure. Positive-displacement pumps mechanically displace a fixed volume per revolution regardless of system pressure.",
+    "category": "Pump Fundamentals",
+    "difficulty": "easy"
+  },
+  {
+    "id": "pump_fresh_002",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "The Best Efficiency Point (BEP) on a centrifugal pump curve is the point of:",
+    "options": [
+      "Maximum hydraulic efficiency for the pump",
+      "Maximum head the pump can produce",
+      "Maximum flow the pump can deliver",
+      "Minimum noise level under all conditions"
+    ],
+    "correctAnswer": 0,
+    "explanation": "BEP is where the pump converts shaft power to hydraulic energy most efficiently. Operating significantly off BEP increases vibration, heat, and wear.",
+    "category": "Pump Fundamentals",
+    "difficulty": "easy"
+  },
+  {
+    "id": "pump_fresh_003",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "According to the Affinity Laws, if a centrifugal pump speed is reduced from 1800 RPM to 1440 RPM (80%), the power consumption becomes approximately:",
+    "options": [
+      "51% of original power",
+      "80% of original power",
+      "64% of original power",
+      "90% of original power"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Power scales with the cube of speed ratio: (1440/1800)³ = 0.8³ = 0.512 ≈ 51%. This cubic relationship is why VFDs save so much energy on centrifugal pumps.",
+    "category": "Pump Fundamentals",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_004",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Cavitation in a centrifugal pump is caused by:",
+    "options": [
+      "Local fluid pressure dropping below the fluid vapor pressure at the impeller inlet",
+      "Excessive discharge pressure collapsing bubbles in the volute",
+      "Air entering through the mechanical seal",
+      "Impeller speed exceeding synchronous speed"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When suction-side pressure falls below the fluid's vapor pressure, the fluid flashes to vapor. These vapor bubbles implode violently on the impeller, causing erosion and noise.",
+    "category": "Pump Troubleshooting",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_005",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "A flat-side-up (FSUP) eccentric reducer at the pump suction inlet prevents:",
+    "options": [
+      "Air pockets from collecting at the top of the suction pipe",
+      "Water hammer in the discharge line",
+      "Cavitation at the impeller eye by increasing suction pressure",
+      "Pipe vibration from flow turbulence"
+    ],
+    "correctAnswer": 0,
+    "explanation": "With the flat on top, the pipe ceiling stays level, preventing air from being trapped. If installed flat-side down, an air pocket forms at the top of the eccentric section and causes cavitation.",
+    "category": "Pump Installation",
+    "difficulty": "easy"
+  },
+  {
+    "id": "pump_fresh_006",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Soft foot in rotating equipment is defined as:",
+    "options": [
+      "One or more machine feet that do not make even contact with the baseplate when fasteners are tightened",
+      "Insufficient grout under the baseplate allowing movement during operation",
+      "A flexible mounting pad under the pump for vibration isolation",
+      "Misalignment between the pump shaft and motor shaft"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Soft foot causes the machine frame to distort when fasteners are tightened, creating misalignment and bearing loads. It must be corrected with precision shims before final alignment.",
+    "category": "Pump Installation",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_007",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "The primary advantage of laser shaft alignment over rim-and-face dial indicator alignment is:",
+    "options": [
+      "Laser systems measure angular and parallel misalignment simultaneously in multiple planes with direct digital readout",
+      "Laser alignment requires no correction to thermal growth during operation",
+      "Laser systems are lower cost and require less training",
+      "Laser systems work without removing the coupling guard"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Laser systems measure misalignment in all planes simultaneously and display correction values directly, reducing time and human calculation error compared to dial indicators.",
+    "category": "Pump Installation",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_008",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "A mechanical seal running dry (without fluid in the pump casing) will most immediately damage the:",
+    "options": [
+      "Seal faces, which are lubricated and cooled by the pumped fluid",
+      "Motor windings from overload current",
+      "Impeller from uneven thermal expansion",
+      "Discharge check valve from reverse flow"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Mechanical seal faces rely entirely on the pumped fluid for lubrication and cooling. Dry running destroys the seal faces within seconds due to friction and heat.",
+    "category": "Seals and Bearings",
+    "difficulty": "easy"
+  },
+  {
+    "id": "pump_fresh_009",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Compression packing in a pump stuffing box should have a controlled leak rate of approximately:",
+    "options": [
+      "40–60 drops per minute for lubrication and cooling",
+      "Zero drops per minute — any leakage indicates failure",
+      "1–2 liters per hour to flush abrasive particles",
+      "10–20 drops per minute is the maximum allowable"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Packing requires a controlled drip for lubrication and cooling. Overtightening the gland eliminates this lubrication, causing rapid heat buildup and shaft sleeve wear.",
+    "category": "Seals and Bearings",
+    "difficulty": "easy"
+  },
+  {
+    "id": "pump_fresh_010",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "A double mechanical seal uses a barrier fluid to:",
+    "options": [
+      "Keep hazardous pumped fluid from reaching the atmosphere",
+      "Increase the pressure differential across the seal faces",
+      "Cool the motor bearings through the seal gland",
+      "Eliminate the need for seal flushing plans"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Double seals use a pressurized barrier fluid (typically clean water or oil) between two sets of seal faces to contain hazardous, toxic, or abrasive fluids.",
+    "category": "Seals and Bearings",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_011",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Overgreasing a pump bearing housing causes:",
+    "options": [
+      "Heat buildup from churning, which accelerates bearing failure",
+      "Extended bearing life from continuous lubrication",
+      "Reduced vibration by damping resonant frequencies",
+      "Corrosion protection of the outer bearing race"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Excess grease causes the rolling elements to churn through it, generating heat. This heat degrades the grease and can destroy the bearing much faster than proper greasing would.",
+    "category": "Seals and Bearings",
+    "difficulty": "easy"
+  },
+  {
+    "id": "pump_fresh_012",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "A vibration peak at 1× running speed on a pump most likely indicates:",
+    "options": [
+      "Rotor mass imbalance",
+      "Shaft misalignment between pump and motor",
+      "Bearing inner race defect",
+      "Cavitation at the impeller eye"
+    ],
+    "correctAnswer": 0,
+    "explanation": "1× (once-per-revolution) vibration is the classic signature of mass imbalance in the rotating assembly. Misalignment typically shows as 2× or higher harmonics.",
+    "category": "Troubleshooting",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_013",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "NPSHa (Net Positive Suction Head available) must exceed NPSHr (required) by at least:",
+    "options": [
+      "3 feet (1 meter) as a minimum safety margin",
+      "10 feet (3 meters) in all applications",
+      "0 feet — NPSHa equal to NPSHr is sufficient",
+      "50% more than NPSHr regardless of absolute values"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Industry practice requires a minimum 3 ft (1 m) NPSH margin to prevent cavitation under normal operating conditions, with larger margins recommended for critical or high-temperature services.",
+    "category": "Troubleshooting",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_014",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Before disassembling a pump for overhaul, the required first safety step is:",
+    "options": [
+      "Lockout/Tagout (LOTO) of the pump and its driver",
+      "Draining the casing and flushing with clean water",
+      "Photographing all pipe connections",
+      "Measuring and recording bearing housing temperatures"
+    ],
+    "correctAnswer": 0,
+    "explanation": "LOTO isolates all energy sources (electrical, pneumatic, hydraulic) to prevent accidental startup during maintenance — it is always the first step, no exceptions.",
+    "category": "Preventive Maintenance",
+    "difficulty": "easy"
+  },
+  {
+    "id": "pump_fresh_015",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Carbon face blistering or cracking on a mechanical seal indicates:",
+    "options": [
+      "The seal ran dry or experienced thermal shock from rapid temperature changes",
+      "The seal was installed with incorrect spring compression",
+      "The pumped fluid is incompatible with the carbon grade",
+      "The barrier fluid pressure was set too high"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Carbon graphite ablates when overheated. Dry running eliminates fluid film lubrication causing friction heat; thermal shock from cold liquid injected into a hot running pump cracks the face.",
+    "category": "Troubleshooting",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_016",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Wear ring clearance exceeding manufacturer limits causes:",
+    "options": [
+      "Increased internal recirculation that reduces flow output and efficiency",
+      "Higher discharge pressure from restricted internal flow",
+      "Improved seal life from reduced shaft deflection",
+      "Lower motor current from reduced hydraulic resistance"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Worn wear rings allow high-pressure discharge fluid to leak back to low-pressure suction internally, reducing useful output flow and wasting energy as heat.",
+    "category": "Preventive Maintenance",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_017",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "ANSI/HI standards govern pump:",
+    "options": [
+      "Design, testing, installation, and maintenance in the United States",
+      "Fire protection system pump installation only",
+      "Oil and gas refinery rotating equipment specifications",
+      "Municipal water treatment chemical dosing systems"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The Hydraulic Institute (HI) publishes the primary US standards for all pump types — centrifugal, rotary, and reciprocating — covering design through field maintenance.",
+    "category": "Career and Codes",
+    "difficulty": "easy"
+  },
+  {
+    "id": "pump_fresh_018",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Impeller trimming is performed to:",
+    "options": [
+      "Reduce impeller OD to lower head and flow and move the operating point closer to BEP",
+      "Balance the impeller to correct vibration from casting porosity",
+      "Increase flow for an undersized pump without replacing it",
+      "Remove cavitation damage from the leading edges of impeller vanes"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Trimming reduces the impeller diameter per the Affinity Laws (H ∝ D², Q ∝ D), allowing the operating point to be moved to a more efficient location on the pump curve without replacing the pump.",
+    "category": "Career and Codes",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_019",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "A spacer coupling allows a technician to:",
+    "options": [
+      "Remove the center element and access the mechanical seal without moving the pump or motor",
+      "Operate at higher speeds than standard flexible couplings",
+      "Eliminate the need for shaft alignment procedures",
+      "Connect pumps of different shaft sizes without an adapter hub"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The removable center section of a spacer coupling gives direct access to the seal area — a major labor saving since neither the pump nor motor needs to be moved or realigned.",
+    "category": "Pump Installation",
+    "difficulty": "medium"
+  },
+  {
+    "id": "pump_fresh_020",
+    "examLevel": "jr_pump_tech",
+    "active": true,
+    "question": "Entering a wet well or pump sump for inspection requires, as the primary safety prerequisite:",
+    "options": [
+      "A confined space entry permit with atmospheric testing, trained attendant, and rescue plan",
+      "Hard hat, safety glasses, and fall protection harness only",
+      "Isolation of all pumps in the wet well from electrical power",
+      "Written authorization from the building owner or facility manager"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Wet wells are permit-required confined spaces with risks of oxygen deficiency, toxic H2S gas, and engulfment. Full confined space entry procedures — atmospheric testing, attendant, rescue plan — are mandatory before entry.",
+    "category": "Career and Codes",
+    "difficulty": "easy"
+  }
+]

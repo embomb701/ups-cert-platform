@@ -560,6 +560,68 @@ async function grantJrSecurityTechAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantFieldPmTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_field_pm')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_field_pm_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrFieldPmAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_field_pm_test_human',
+    examLevel: 'jr_field_pm',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Field PM Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
+async function grantPumpTechTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_pump_tech')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_pump_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrPumpTechAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_pump_tech_test_human',
+    examLevel: 'jr_pump_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Pump Tech Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 async function grantPlcTechTrainingAccess(userId: string, purchaseId: string) {
   await adminDb
     .collection('users').doc(userId)
@@ -1200,6 +1262,38 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       });
       break;
     }
+
+    // ── Standalone training course (Field Project Manager) ───────────────────
+    case 'training_field_pm':
+      await grantFieldPmTrainingAccess(userId, pid);
+      break;
+
+    // ── Field PM Test-Out ─────────────────────────────────────────────────────
+    case 'jr_field_pm_test_human':
+      await grantJrFieldPmAccess(userId, pid);
+      break;
+
+    // ── Package: Field PM Training + Test-Out ────────────────────────────────
+    case 'pkg_training_field_pm_testout':
+      await grantFieldPmTrainingAccess(userId, pid);
+      await grantJrFieldPmAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Pump Technician) ─────────────────────────
+    case 'training_pump_tech':
+      await grantPumpTechTrainingAccess(userId, pid);
+      break;
+
+    // ── Pump Tech Test-Out ────────────────────────────────────────────────────
+    case 'jr_pump_tech_test_human':
+      await grantJrPumpTechAccess(userId, pid);
+      break;
+
+    // ── Package: Pump Tech Training + Test-Out ───────────────────────────────
+    case 'pkg_training_pump_tech_testout':
+      await grantPumpTechTrainingAccess(userId, pid);
+      await grantJrPumpTechAccess(userId, pid);
+      break;
 
     default:
       console.warn('Unhandled productId in webhook:', productId);

@@ -1,0 +1,222 @@
+[
+  {
+    "id": "fpm_fresh_001",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "A Field Project Manager is primarily accountable for:",
+    "options": ["On-time, on-budget delivery within the agreed scope", "Performing hands-on installation work", "Purchasing all project materials directly", "Writing the customer's maintenance manual"],
+    "correctAnswer": 0,
+    "explanation": "The Field PM owns the outcome across all three constraints: time, cost, and scope.",
+    "category": "Project Management Fundamentals",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_002",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Which document formally authorizes a field project and names the project manager?",
+    "options": ["Project charter", "Work order", "Risk register", "Punch list"],
+    "correctAnswer": 0,
+    "explanation": "The project charter is issued during initiation to authorize the project and appoint the PM.",
+    "category": "Project Management Fundamentals",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_003",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "In the triple constraint, changing one factor (e.g., compressing schedule) typically:",
+    "options": ["Affects cost and/or scope", "Has no effect on the other two", "Only affects quality", "Requires a new project charter"],
+    "correctAnswer": 0,
+    "explanation": "The triple constraint (scope, cost, schedule) is interdependent — compressing schedule usually increases cost or reduces scope.",
+    "category": "Project Planning",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_004",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "A risk response strategy that eliminates the threat entirely is called:",
+    "options": ["Avoidance", "Transfer", "Mitigation", "Acceptance"],
+    "correctAnswer": 0,
+    "explanation": "Avoidance changes the plan to eliminate the risk cause — the threat no longer exists after avoidance is applied.",
+    "category": "Risk Management",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fpm_fresh_005",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "A WBS work package should ideally represent:",
+    "options": ["8–80 hours of effort", "Exactly one calendar week of work", "A single technician's full-day task", "A line item in the project budget only"],
+    "correctAnswer": 0,
+    "explanation": "The 8/80 rule keeps work packages estimable but not so granular that tracking becomes burdensome.",
+    "category": "Project Planning",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fpm_fresh_006",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "On a project schedule, a task with zero float is:",
+    "options": ["On the critical path", "Non-critical with scheduling flexibility", "Ahead of schedule", "Not yet assigned to a resource"],
+    "correctAnswer": 0,
+    "explanation": "Zero float means the task is on the critical path — any delay directly extends the project end date.",
+    "category": "Project Planning",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fpm_fresh_007",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Earned Value Management (EVM) integrates which three project parameters?",
+    "options": ["Scope, schedule, and cost", "Risk, quality, and schedule", "Labor, materials, and equipment", "Safety, communication, and budget"],
+    "correctAnswer": 0,
+    "explanation": "EVM integrates scope (earned value), schedule (planned value), and cost (actual cost) into one measurement system.",
+    "category": "Project Execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fpm_fresh_008",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Cost Variance (CV) in EVM is calculated as:",
+    "options": ["Earned Value minus Actual Cost", "Actual Cost minus Planned Value", "Planned Value minus Earned Value", "Budget at Completion minus Actual Cost"],
+    "correctAnswer": 0,
+    "explanation": "CV = EV − AC. A negative CV indicates more was spent than the value of work completed — the project is over budget.",
+    "category": "Project Execution",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fpm_fresh_009",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Performing out-of-scope work based on a verbal customer request without a signed change order typically results in:",
+    "options": ["Non-payment for the additional work", "Automatic schedule extension", "Warranty coverage for the added scope", "A credit toward the next project"],
+    "correctAnswer": 0,
+    "explanation": "Verbal agreements for out-of-scope work are rarely honored — always obtain a signed change order before proceeding.",
+    "category": "Change Management",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_010",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "A site readiness checklist should be reviewed before:",
+    "options": ["Crew mobilization to the project site", "Signing the project charter", "Conducting the lessons learned session", "Issuing the first change order"],
+    "correctAnswer": 0,
+    "explanation": "The site readiness checklist confirms permits, utilities, access, and staging are ready before the crew mobilizes.",
+    "category": "Project Planning",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_011",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Proactive customer communication about a potential delay should occur:",
+    "options": ["Before the milestone is missed", "Immediately after the milestone is missed", "Only if the delay exceeds five business days", "At the next scheduled monthly status report"],
+    "correctAnswer": 0,
+    "explanation": "Informing customers of potential delays before they occur preserves trust and allows collaborative recovery planning.",
+    "category": "Customer Communication",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_012",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Meeting minutes should be distributed within what timeframe after a status meeting?",
+    "options": ["24 hours", "72 hours", "One week", "Before the next meeting only"],
+    "correctAnswer": 0,
+    "explanation": "24-hour distribution keeps the discussion fresh and allows action item owners to begin work promptly.",
+    "category": "Customer Communication",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_013",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Liquidated damages in a service contract are:",
+    "options": ["Pre-agreed financial penalties for missing contractual milestones", "Payment for damaged equipment caused by the contractor", "A refund mechanism for project cost overruns", "Insurance premiums for the project"],
+    "correctAnswer": 0,
+    "explanation": "Liquidated damages are contractually specified penalties the contractor pays when defined milestones are missed.",
+    "category": "Customer Communication",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fpm_fresh_014",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "As-built drawings are required because:",
+    "options": ["Field modifications often differ from the original design drawings", "AHJs require them for permit closure on all projects", "They replace functional test reports", "They are mandated by the project charter"],
+    "correctAnswer": 0,
+    "explanation": "As-builts capture field changes so future technicians and owners know exactly how the system was actually installed.",
+    "category": "Documentation",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_015",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "A punch list documents:",
+    "options": ["Outstanding deficiencies to correct before customer acceptance", "All work completed during the project", "Future warranty service items", "Subcontractor invoice disputes"],
+    "correctAnswer": 0,
+    "explanation": "A punch list captures uncompleted or deficient items from agreed scope that must be resolved before final acceptance.",
+    "category": "Project Closeout",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_016",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "A lessons learned session should be conducted:",
+    "options": ["At project closeout with the full project team", "Only when the project fails", "By the PM alone without field crew input", "After the warranty period expires"],
+    "correctAnswer": 0,
+    "explanation": "Lessons learned capture insights for future projects — all team members should participate since field crews see things the PM misses.",
+    "category": "Project Closeout",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_017",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "The PMP® certification is issued by:",
+    "options": ["Project Management Institute (PMI)", "CompTIA", "OSHA", "National Fire Protection Association (NFPA)"],
+    "correctAnswer": 0,
+    "explanation": "The PMP® (Project Management Professional) is PMI's flagship certification and the most recognized PM credential globally.",
+    "category": "Career Development",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fpm_fresh_018",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Psychological safety in a project team means:",
+    "options": ["Team members feel safe raising concerns without fear of blame", "All team members follow physical safety procedures", "The PM pre-approves all safety decisions", "The team is insured against all work-related incidents"],
+    "correctAnswer": 0,
+    "explanation": "Psychological safety enables open communication — teams that feel safe surfacing problems solve them before they escalate.",
+    "category": "Leadership",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fpm_fresh_019",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Interest-based negotiation is more effective than position-based negotiation because:",
+    "options": ["It uncovers underlying needs, enabling solutions that satisfy both parties", "It always results in the PM getting more than the other party", "It requires less preparation time", "It is legally enforceable without a signed agreement"],
+    "correctAnswer": 0,
+    "explanation": "Focusing on interests (what parties actually need) rather than positions (stated demands) opens creative solution space.",
+    "category": "Leadership",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fpm_fresh_020",
+    "examLevel": "jr_field_pm",
+    "active": true,
+    "question": "Tracking the dollar value, team size, and duration of projects managed primarily supports:",
+    "options": ["PMP certification applications and career advancement discussions", "Weekly dispatch reporting", "AHJ permit applications", "Customer invoice verification"],
+    "correctAnswer": 0,
+    "explanation": "PMP eligibility and PM career advancement require documented evidence of project experience by scope, complexity, and scale.",
+    "category": "Career Development",
+    "difficulty": "easy"
+  }
+]

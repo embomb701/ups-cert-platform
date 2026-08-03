@@ -83,6 +83,8 @@ export default function ExamRulesPage() {
     practice_jr_ref_tech: 'Jr. Ref Tech Practice Test — Results Only, No Certificate',
     practice_jr_plc_tech: 'Jr. PLC Tech Practice Test — Results Only, No Certificate',
     practice_jr_security_tech: 'Jr. Security Tech Practice Test — Results Only, No Certificate',
+    practice_jr_field_pm: 'Jr. Field PM Practice Test — Results Only, No Certificate',
+    practice_jr_pump_tech: 'Jr. Pump Tech Practice Test — Results Only, No Certificate',
   };
   // Jr-course exam display config: rules token + certification label
   const JR_COURSE_META: Record<string, { token: string; label: string }> = {
@@ -107,6 +109,8 @@ export default function ExamRulesPage() {
     jr_ref_tech: { token: 'Jr. Ref Tech Exam', label: 'Junior Commercial Refrigeration Technician Certification' },
     jr_plc_tech: { token: 'Jr. PLC Tech Exam', label: 'Junior Industrial Controls & PLC Technician Certification' },
     jr_security_tech: { token: 'Jr. Security Tech Exam', label: 'Junior Electronic Security Systems Technician Certification' },
+    jr_field_pm: { token: 'Jr. Field PM Exam', label: 'Junior Field Project Manager Certification' },
+    jr_pump_tech: { token: 'Jr. Pump Tech Exam', label: 'Junior Pump Technician Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];

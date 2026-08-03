@@ -610,6 +610,56 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // FIELD PROJECT MANAGER PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_field_pm: {
+    name: 'Field Project Manager Training Course + Jr. Field Project Manager Certification Exam',
+    shortName: 'Field PM Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_FIELD_PM ?? '',
+  },
+
+  jr_field_pm_test_human: {
+    name: 'Jr. Field Project Manager Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Field PM Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_FIELD_PM_HUMAN ?? '',
+  },
+
+  pkg_training_field_pm_testout: {
+    name: 'Field PM Training Course + Jr. Field PM Test-Out (Human Proctored)',
+    shortName: 'Field PM Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_FIELD_PM_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PUMP TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_pump_tech: {
+    name: 'Pump Technician Training Course + Jr. Pump Technician Certification Exam',
+    shortName: 'Pump Tech Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_PUMP_TECH ?? '',
+  },
+
+  jr_pump_tech_test_human: {
+    name: 'Jr. Pump Technician Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Pump Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_PUMP_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_pump_tech_testout: {
+    name: 'Pump Tech Training Course + Jr. Pump Tech Test-Out (Human Proctored)',
+    shortName: 'Pump Tech Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_PUMP_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

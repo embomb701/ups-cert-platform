@@ -27,10 +27,12 @@ import { BAS_TECH_MODULES } from './bas-tech-modules';
 import { REF_TECH_MODULES } from './ref-tech-modules';
 import { PLC_TECH_MODULES } from './plc-tech-modules';
 import { SECURITY_TECH_MODULES } from './security-tech-modules';
+import { FIELD_PM_MODULES } from './field-pm-modules';
+import { PUMP_TECH_MODULES } from './pump-tech-modules';
 import type { TrainingModule } from './modules';
 
 export type { QuizQ, Slide, TrainingModule } from './modules';
-export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES, MARINE_MODULES, POOL_MODULES, HVAC_TECH_MODULES, SOLAR_INSTALLER_MODULES, WIND_TURBINE_MODULES, ELEVATOR_TECH_MODULES, FIRE_ALARM_TECH_MODULES, BMET_TECH_MODULES, BAS_TECH_MODULES, REF_TECH_MODULES, PLC_TECH_MODULES, SECURITY_TECH_MODULES };
+export { KITCHEN_MODULES, HVAC_MODULES, GENERATOR_MODULES, DATACENTER_MODULES, SOLAR_MODULES, EV_MODULES, DCPLANTS_MODULES, BATTERY_MODULES, DCENGINEER_MODULES, MARINE_MODULES, POOL_MODULES, HVAC_TECH_MODULES, SOLAR_INSTALLER_MODULES, WIND_TURBINE_MODULES, ELEVATOR_TECH_MODULES, FIRE_ALARM_TECH_MODULES, BMET_TECH_MODULES, BAS_TECH_MODULES, REF_TECH_MODULES, PLC_TECH_MODULES, SECURITY_TECH_MODULES, FIELD_PM_MODULES, PUMP_TECH_MODULES };
 
 // ALL_MODULES is the UPS course sequence (modules 1-28). Kitchen-specific
 // modules live in KITCHEN_MODULES (nums 11-27) and HVAC-specific modules in
@@ -137,6 +139,8 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
   training_ref_tech: [...FOUNDATION, ...[...REF_TECH_MODULES].sort(byNum)],
   training_plc_tech: [...FOUNDATION, ...[...PLC_TECH_MODULES].sort(byNum)],
   training_security_tech: [...FOUNDATION, ...[...SECURITY_TECH_MODULES].sort(byNum)],
+  training_field_pm: [...FOUNDATION, ...[...FIELD_PM_MODULES].sort(byNum)],
+  training_pump_tech: [...FOUNDATION, ...[...PUMP_TECH_MODULES].sort(byNum)],
   // Data Center Engineer: foundation + UPS tech core + generator ops + HVAC cooling +
   // the three DC-specific ops modules (cooling, monitoring, operations) + DCE engineering modules
   training_dcengineer: [
@@ -209,6 +213,8 @@ export function getPrevModule(mod: TrainingModule): TrainingModule | null {
   if (mod.id.startsWith('ref-')) return prevModuleInCourse('training_ref_tech', mod);
   if (mod.id.startsWith('plc-')) return prevModuleInCourse('training_plc_tech', mod);
   if (mod.id.startsWith('sec-')) return prevModuleInCourse('training_security_tech', mod);
+  if (mod.id.startsWith('fpm-')) return prevModuleInCourse('training_field_pm', mod);
+  if (mod.id.startsWith('pump-')) return prevModuleInCourse('training_pump_tech', mod);
   if (isKitchenModule(mod) && mod.num > 11) {
     return KITCHEN_MODULES.find((m) => m.num === mod.num - 1) ?? null;
   }

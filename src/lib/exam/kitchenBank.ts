@@ -14,7 +14,7 @@ import type { TrainingModule, QuizQ } from '@/data/modules';
 
 const CHOICE_IDS = ['A', 'B', 'C', 'D'] as const;
 
-type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech' | 'jr_battery_tech' | 'jr_dc_engineer' | 'jr_marine_tech' | 'jr_pool_tech' | 'jr_hvac_tech' | 'jr_solar_inst' | 'jr_wind_tech' | 'jr_elevator_tech' | 'jr_fire_alarm_tech' | 'jr_bmet_tech' | 'jr_bas_tech' | 'jr_ref_tech' | 'jr_plc_tech' | 'jr_security_tech';
+type DerivedExamLevel = 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech' | 'jr_battery_tech' | 'jr_dc_engineer' | 'jr_marine_tech' | 'jr_pool_tech' | 'jr_hvac_tech' | 'jr_solar_inst' | 'jr_wind_tech' | 'jr_elevator_tech' | 'jr_fire_alarm_tech' | 'jr_bmet_tech' | 'jr_bas_tech' | 'jr_ref_tech' | 'jr_plc_tech' | 'jr_security_tech' | 'jr_field_pm' | 'jr_pump_tech';
 
 interface BankQuestion {
   id: string;
@@ -172,4 +172,12 @@ export function buildPlcTechBankQuestions(): BankQuestion[] {
 
 export function buildSecurityTechBankQuestions(): BankQuestion[] {
   return buildBank(COURSE_SEQUENCES['training_security_tech'], 'jr_security_tech', 'secjr');
+}
+
+export function buildFieldPmBankQuestions(): BankQuestion[] {
+  return buildBank(COURSE_SEQUENCES['training_field_pm'], 'jr_field_pm', 'fpmjr');
+}
+
+export function buildPumpTechBankQuestions(): BankQuestion[] {
+  return buildBank(COURSE_SEQUENCES['training_pump_tech'], 'jr_pump_tech', 'pumjr');
 }
