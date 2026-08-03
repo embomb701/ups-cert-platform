@@ -9,6 +9,7 @@ interface ImportResult { ok: boolean; created: number; updated: number; skipped:
 interface ServerImportResult { ok: boolean; filesProcessed: string[]; filesNotFound: string[]; totalCreated: number; totalUpdated: number; error?: string; }
 
 const SERVER_FILES = [
+  // Q1
   'jr-fsc-sample.json',
   'jr-fse-all-questions.json',
   'book-jr-fse-questions.json',
@@ -22,6 +23,7 @@ const SERVER_FILES = [
   'generator-jr-fse-derived',
   'datacenter-jr-fresh.json',
   'datacenter-jr-derived',
+  // Q2
   'solar-jr-fresh.json',
   'solar-jr-derived',
   'ev-jr-fresh.json',
@@ -36,6 +38,7 @@ const SERVER_FILES = [
   'marine-jr-derived',
   'pool-jr-fresh.json',
   'pool-jr-derived',
+  // Q3
   'hvac-tech-jr-fresh.json',
   'hvac-tech-jr-derived',
   'solar-installer-jr-fresh.json',
@@ -48,6 +51,7 @@ const SERVER_FILES = [
   'fire-alarm-tech-jr-derived',
   'bmet-tech-jr-fresh.json',
   'bmet-tech-jr-derived',
+  // Q4
   'bas-tech-jr-fresh.json',
   'bas-tech-jr-derived',
   'ref-tech-jr-fresh.json',
@@ -62,11 +66,19 @@ const SERVER_FILES = [
   'pump-tech-jr-derived',
 ];
 
+const QUARTERS: string[][] = [
+  SERVER_FILES.slice(0, 13),   // Q1: base FSE + Kitchen + HVAC + Generator + DataCenter
+  SERVER_FILES.slice(13, 27),  // Q2: Solar → Pool
+  SERVER_FILES.slice(27, 40),  // Q3: HVAC Tech → BMET
+  SERVER_FILES.slice(40),      // Q4: BAS → Pump Tech
+];
+
 export default function AdminQuestionsPage() {
   const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats; jr_dc_engineer?: BankStats; jr_marine_tech?: BankStats; jr_pool_tech?: BankStats; jr_hvac_tech?: BankStats; jr_solar_inst?: BankStats; jr_wind_tech?: BankStats; jr_elevator_tech?: BankStats; jr_fire_alarm_tech?: BankStats; jr_bmet_tech?: BankStats; jr_bas_tech?: BankStats; jr_ref_tech?: BankStats; jr_plc_tech?: BankStats; jr_security_tech?: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
   const [serverImporting, setServerImporting] = useState(false);
+  const [activeQuarter, setActiveQuarter] = useState<number | null>(null);
   const [serverProgress, setServerProgress] = useState('');
   const [serverResult, setServerResult] = useState<ServerImportResult | null>(null);
   const [overwrite, setOverwrite] = useState(false);
@@ -74,8 +86,9 @@ export default function AdminQuestionsPage() {
   const [progress, setProgress] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
 
-  async function handleServerImport() {
+  async function handleServerImport(files: string[], quarterIdx: number) {
     setServerImporting(true);
+    setActiveQuarter(quarterIdx);
     setServerResult(null);
     let totalCreated = 0, totalUpdated = 0;
     const filesProcessed: string[] = [];
@@ -85,9 +98,9 @@ export default function AdminQuestionsPage() {
       let token = await getIdToken();
       let tokenFetchedAt = Date.now();
 
-      for (let idx = 0; idx < SERVER_FILES.length; idx++) {
-        const file = SERVER_FILES[idx];
-        setServerProgress(`[${idx + 1}/${SERVER_FILES.length}] ${file}…`);
+      for (let idx = 0; idx < files.length; idx++) {
+        const file = files[idx];
+        setServerProgress(`[${idx + 1}/${files.length}] ${file}…`);
 
         // Refresh token if it is approaching 55 minutes old
         if (Date.now() - tokenFetchedAt > 55 * 60 * 1000) {
@@ -137,6 +150,7 @@ export default function AdminQuestionsPage() {
       setServerProgress('');
     }
     setServerImporting(false);
+    setActiveQuarter(null);
   }
 
   async function loadStats() {
@@ -545,19 +559,28 @@ export default function AdminQuestionsPage() {
         {/* One-click server import */}
         <div className="card-dark p-6 mb-6 border-indigo-900/50">
           <h2 className="text-sm font-semibold text-white mb-1">Import All Questions from Server</h2>
-          <p className="text-xs text-gray-500 mb-4">
-            Imports all {SERVER_FILES.length} question bank files directly from the server — no upload needed.
-            Processes one file at a time; expect 5–10 minutes total. Files that time out are listed below
-            so you can re-run just those. Safe to run multiple times (all writes use merge/upsert).
+          <p className="text-xs text-gray-500 mb-3">
+            Import in quarters (~13 files each). Run them in order. Safe to re-run — all writes are merge/upsert.
+            Timed-out files appear in the result so you can retry that quarter.
           </p>
-          <button
-            onClick={handleServerImport}
-            disabled={serverImporting}
-            className="px-5 py-2 rounded-lg bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white text-sm font-semibold transition-colors"
-          >
-            {serverImporting ? 'Importing…' : `Import All ${SERVER_FILES.length} Files`}
-          </button>
-          {serverProgress && <p className="text-xs text-indigo-400 mt-2 font-mono">{serverProgress}</p>}
+          <div className="flex flex-wrap gap-2 mb-3">
+            {QUARTERS.map((quarter, i) => {
+              const labels = ['Q1 — Base FSE + Kitchen + HVAC + Gen + DC', 'Q2 — Solar → Pool', 'Q3 — HVAC Tech → BMET', 'Q4 — BAS → Pump Tech'];
+              const colors = ['bg-indigo-700 hover:bg-indigo-600', 'bg-teal-700 hover:bg-teal-600', 'bg-amber-700 hover:bg-amber-600', 'bg-rose-700 hover:bg-rose-600'];
+              const isActive = serverImporting && activeQuarter === i;
+              return (
+                <button
+                  key={i}
+                  onClick={() => handleServerImport(quarter, i)}
+                  disabled={serverImporting}
+                  className={`px-4 py-2 rounded-lg ${colors[i]} disabled:opacity-50 text-white text-xs font-semibold transition-colors`}
+                >
+                  {isActive ? `Importing Q${i + 1}…` : `${labels[i]} (${quarter.length} files)`}
+                </button>
+              );
+            })}
+          </div>
+          {serverProgress && <p className="text-xs text-indigo-400 mt-1 font-mono">{serverProgress}</p>}
           {serverResult && (
             <div className={`rounded-lg p-3 mt-3 text-xs ${serverResult.ok ? 'bg-green-950/40 border border-green-800/40' : 'bg-red-950/40 border border-red-800/40'}`}>
               {serverResult.error ? (
