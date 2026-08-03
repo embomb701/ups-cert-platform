@@ -163,7 +163,14 @@ export default function AdminQuestionsPage() {
     setStatsLoading(false);
   }
 
-  useEffect(() => { loadStats(); }, []);
+  useEffect(() => {
+    loadStats();
+    // Retry once after 2 s — on hard reload Firebase auth may not have restored
+    // the session by the time the first fetch fires, causing a silent failure.
+    const retry = setTimeout(() => { if (!stats) loadStats(); }, 2000);
+    return () => clearTimeout(retry);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleImport() {
     const file = fileRef.current?.files?.[0];

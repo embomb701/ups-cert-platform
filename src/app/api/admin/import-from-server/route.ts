@@ -6,72 +6,43 @@ import { FieldValue } from 'firebase-admin/firestore';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
 
-// Static imports — webpack bundles these into the Vercel function at build time.
-// fs.readFileSync CANNOT be used here: data/ is not included in the serverless bundle.
-import jrFscSample from '../../../../../data/questions/jr-fsc-sample.json';
-import jrFseAll from '../../../../../data/questions/jr-fse-all-questions.json';
-import bookJrFse from '../../../../../data/questions/book-jr-fse-questions.json';
-import fscSample from '../../../../../data/questions/fsc-sample.json';
-import bookFse from '../../../../../data/questions/book-fse-questions.json';
-import kitchenFresh from '../../../../../data/questions/kitchen-jr-fse-fresh.json';
-import hvacFresh from '../../../../../data/questions/hvac-jr-fse-fresh.json';
-import generatorFresh from '../../../../../data/questions/generator-jr-fse-fresh.json';
-import datacenterFresh from '../../../../../data/questions/datacenter-jr-fresh.json';
-import solarFresh from '../../../../../data/questions/solar-jr-fresh.json';
-import evFresh from '../../../../../data/questions/ev-jr-fresh.json';
-import dcpFresh from '../../../../../data/questions/dcp-jr-fresh.json';
-import batteryFresh from '../../../../../data/questions/battery-jr-fresh.json';
-import dcEngineerFresh from '../../../../../data/questions/dc-engineer-jr-fresh.json';
-import marineFresh from '../../../../../data/questions/marine-jr-fresh.json';
-import poolFresh from '../../../../../data/questions/pool-jr-fresh.json';
-import hvacTechFresh from '../../../../../data/questions/hvac-tech-jr-fresh.json';
-import solarInstFresh from '../../../../../data/questions/solar-installer-jr-fresh.json';
-import windTechFresh from '../../../../../data/questions/wind-turbine-jr-fresh.json';
-import elevatorTechFresh from '../../../../../data/questions/elevator-tech-jr-fresh.json';
-import fireAlarmTechFresh from '../../../../../data/questions/fire-alarm-tech-jr-fresh.json';
-import bmetTechFresh from '../../../../../data/questions/bmet-tech-jr-fresh.json';
-import basTechFresh from '../../../../../data/questions/bas-tech-jr-fresh.json';
-import refTechFresh from '../../../../../data/questions/ref-tech-jr-fresh.json';
-import plcTechFresh from '../../../../../data/questions/plc-tech-jr-fresh.json';
-import securityTechFresh from '../../../../../data/questions/security-tech-jr-fresh.json';
-import fieldPmFresh from '../../../../../data/questions/field-pm-jr-fresh.json';
-import pumpTechFresh from '../../../../../data/questions/pump-tech-jr-fresh.json';
-// kitchenBank is NOT imported at module level — it pulls in ALL course data which
-// balloons the cold-start bundle. We use a dynamic import inside getFileQuestions
-// instead, so the chunk only loads when a derived bank is actually requested.
+// All JSON files and kitchenBank are dynamically imported so NONE of this data
+// appears in the cold-start bundle. The main chunk is tiny; each file's chunk
+// is loaded from disk only when that specific file is requested.
 
 type QuestionRecord = Record<string, unknown>;
 
-// Static JSON files — already in memory from webpack static imports.
-const STATIC_FILES: Record<string, QuestionRecord[]> = {
-  'jr-fsc-sample.json':             jrFscSample as QuestionRecord[],
-  'jr-fse-all-questions.json':      jrFseAll as QuestionRecord[],
-  'book-jr-fse-questions.json':     bookJrFse as QuestionRecord[],
-  'fsc-sample.json':                fscSample as QuestionRecord[],
-  'book-fse-questions.json':        bookFse as QuestionRecord[],
-  'kitchen-jr-fse-fresh.json':      kitchenFresh as QuestionRecord[],
-  'hvac-jr-fse-fresh.json':         hvacFresh as QuestionRecord[],
-  'generator-jr-fse-fresh.json':    generatorFresh as QuestionRecord[],
-  'datacenter-jr-fresh.json':       datacenterFresh as QuestionRecord[],
-  'solar-jr-fresh.json':            solarFresh as QuestionRecord[],
-  'ev-jr-fresh.json':               evFresh as QuestionRecord[],
-  'dcp-jr-fresh.json':              dcpFresh as QuestionRecord[],
-  'battery-jr-fresh.json':          batteryFresh as QuestionRecord[],
-  'dc-engineer-jr-fresh.json':      dcEngineerFresh as QuestionRecord[],
-  'marine-jr-fresh.json':           marineFresh as QuestionRecord[],
-  'pool-jr-fresh.json':             poolFresh as QuestionRecord[],
-  'hvac-tech-jr-fresh.json':        hvacTechFresh as QuestionRecord[],
-  'solar-installer-jr-fresh.json':  solarInstFresh as QuestionRecord[],
-  'wind-turbine-jr-fresh.json':     windTechFresh as QuestionRecord[],
-  'elevator-tech-jr-fresh.json':    elevatorTechFresh as QuestionRecord[],
-  'fire-alarm-tech-jr-fresh.json':  fireAlarmTechFresh as QuestionRecord[],
-  'bmet-tech-jr-fresh.json':        bmetTechFresh as QuestionRecord[],
-  'bas-tech-jr-fresh.json':         basTechFresh as QuestionRecord[],
-  'ref-tech-jr-fresh.json':         refTechFresh as QuestionRecord[],
-  'plc-tech-jr-fresh.json':         plcTechFresh as QuestionRecord[],
-  'security-tech-jr-fresh.json':    securityTechFresh as QuestionRecord[],
-  'field-pm-jr-fresh.json':         fieldPmFresh as QuestionRecord[],
-  'pump-tech-jr-fresh.json':        pumpTechFresh as QuestionRecord[],
+// Each value is a thunk that dynamic-imports exactly one JSON file.
+// webpack code-splits these into separate chunks at build time.
+const STATIC_FILE_IMPORTERS: Record<string, () => Promise<{ default: QuestionRecord[] }>> = {
+  'jr-fsc-sample.json':            () => import('../../../../../data/questions/jr-fsc-sample.json') as never,
+  'jr-fse-all-questions.json':     () => import('../../../../../data/questions/jr-fse-all-questions.json') as never,
+  'book-jr-fse-questions.json':    () => import('../../../../../data/questions/book-jr-fse-questions.json') as never,
+  'fsc-sample.json':               () => import('../../../../../data/questions/fsc-sample.json') as never,
+  'book-fse-questions.json':       () => import('../../../../../data/questions/book-fse-questions.json') as never,
+  'kitchen-jr-fse-fresh.json':     () => import('../../../../../data/questions/kitchen-jr-fse-fresh.json') as never,
+  'hvac-jr-fse-fresh.json':        () => import('../../../../../data/questions/hvac-jr-fse-fresh.json') as never,
+  'generator-jr-fse-fresh.json':   () => import('../../../../../data/questions/generator-jr-fse-fresh.json') as never,
+  'datacenter-jr-fresh.json':      () => import('../../../../../data/questions/datacenter-jr-fresh.json') as never,
+  'solar-jr-fresh.json':           () => import('../../../../../data/questions/solar-jr-fresh.json') as never,
+  'ev-jr-fresh.json':              () => import('../../../../../data/questions/ev-jr-fresh.json') as never,
+  'dcp-jr-fresh.json':             () => import('../../../../../data/questions/dcp-jr-fresh.json') as never,
+  'battery-jr-fresh.json':         () => import('../../../../../data/questions/battery-jr-fresh.json') as never,
+  'dc-engineer-jr-fresh.json':     () => import('../../../../../data/questions/dc-engineer-jr-fresh.json') as never,
+  'marine-jr-fresh.json':          () => import('../../../../../data/questions/marine-jr-fresh.json') as never,
+  'pool-jr-fresh.json':            () => import('../../../../../data/questions/pool-jr-fresh.json') as never,
+  'hvac-tech-jr-fresh.json':       () => import('../../../../../data/questions/hvac-tech-jr-fresh.json') as never,
+  'solar-installer-jr-fresh.json': () => import('../../../../../data/questions/solar-installer-jr-fresh.json') as never,
+  'wind-turbine-jr-fresh.json':    () => import('../../../../../data/questions/wind-turbine-jr-fresh.json') as never,
+  'elevator-tech-jr-fresh.json':   () => import('../../../../../data/questions/elevator-tech-jr-fresh.json') as never,
+  'fire-alarm-tech-jr-fresh.json': () => import('../../../../../data/questions/fire-alarm-tech-jr-fresh.json') as never,
+  'bmet-tech-jr-fresh.json':       () => import('../../../../../data/questions/bmet-tech-jr-fresh.json') as never,
+  'bas-tech-jr-fresh.json':        () => import('../../../../../data/questions/bas-tech-jr-fresh.json') as never,
+  'ref-tech-jr-fresh.json':        () => import('../../../../../data/questions/ref-tech-jr-fresh.json') as never,
+  'plc-tech-jr-fresh.json':        () => import('../../../../../data/questions/plc-tech-jr-fresh.json') as never,
+  'security-tech-jr-fresh.json':   () => import('../../../../../data/questions/security-tech-jr-fresh.json') as never,
+  'field-pm-jr-fresh.json':        () => import('../../../../../data/questions/field-pm-jr-fresh.json') as never,
+  'pump-tech-jr-fresh.json':       () => import('../../../../../data/questions/pump-tech-jr-fresh.json') as never,
 };
 
 // Maps each derived-bank key to the exact function name exported from kitchenBank.
@@ -104,7 +75,10 @@ const DERIVED_KEY_TO_FN: Record<string, string> = {
 };
 
 async function getFileQuestions(name: string): Promise<QuestionRecord[] | null> {
-  if (name in STATIC_FILES) return STATIC_FILES[name];
+  if (name in STATIC_FILE_IMPORTERS) {
+    const mod = await STATIC_FILE_IMPORTERS[name]();
+    return mod.default;
+  }
   if (name in DERIVED_KEY_TO_FN) {
     const kb = await import('@/lib/exam/kitchenBank');
     const fn = kb[DERIVED_KEY_TO_FN[name] as keyof typeof kb] as unknown as () => QuestionRecord[];
@@ -187,7 +161,7 @@ export async function POST(req: NextRequest) {
     const filesProcessed: string[] = [];
     const filesNotFound: string[] = [];
 
-    const BATCH_SIZE = 400;
+    const BATCH_SIZE = 500;
 
     for (const file of filesToImport) {
       const questions = await getFileQuestions(file);
