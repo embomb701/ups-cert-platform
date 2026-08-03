@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { FieldValue } from 'firebase-admin/firestore';
@@ -6,44 +8,43 @@ import { FieldValue } from 'firebase-admin/firestore';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
 
-// All JSON files and kitchenBank are dynamically imported so NONE of this data
-// appears in the cold-start bundle. The main chunk is tiny; each file's chunk
-// is loaded from disk only when that specific file is requested.
+// JSON files are read from disk at request time via fs.readFileSync.
+// next.config.js outputFileTracingIncludes ensures data/questions/** is
+// deployed alongside the function. Nothing is webpack-bundled — cold start
+// is minimal (just firebase-admin + a few KB of route logic).
 
 type QuestionRecord = Record<string, unknown>;
 
-// Each value is a thunk that dynamic-imports exactly one JSON file.
-// webpack code-splits these into separate chunks at build time.
-const STATIC_FILE_IMPORTERS: Record<string, () => Promise<{ default: QuestionRecord[] }>> = {
-  'jr-fsc-sample.json':            () => import('../../../../../data/questions/jr-fsc-sample.json') as never,
-  'jr-fse-all-questions.json':     () => import('../../../../../data/questions/jr-fse-all-questions.json') as never,
-  'book-jr-fse-questions.json':    () => import('../../../../../data/questions/book-jr-fse-questions.json') as never,
-  'fsc-sample.json':               () => import('../../../../../data/questions/fsc-sample.json') as never,
-  'book-fse-questions.json':       () => import('../../../../../data/questions/book-fse-questions.json') as never,
-  'kitchen-jr-fse-fresh.json':     () => import('../../../../../data/questions/kitchen-jr-fse-fresh.json') as never,
-  'hvac-jr-fse-fresh.json':        () => import('../../../../../data/questions/hvac-jr-fse-fresh.json') as never,
-  'generator-jr-fse-fresh.json':   () => import('../../../../../data/questions/generator-jr-fse-fresh.json') as never,
-  'datacenter-jr-fresh.json':      () => import('../../../../../data/questions/datacenter-jr-fresh.json') as never,
-  'solar-jr-fresh.json':           () => import('../../../../../data/questions/solar-jr-fresh.json') as never,
-  'ev-jr-fresh.json':              () => import('../../../../../data/questions/ev-jr-fresh.json') as never,
-  'dcp-jr-fresh.json':             () => import('../../../../../data/questions/dcp-jr-fresh.json') as never,
-  'battery-jr-fresh.json':         () => import('../../../../../data/questions/battery-jr-fresh.json') as never,
-  'dc-engineer-jr-fresh.json':     () => import('../../../../../data/questions/dc-engineer-jr-fresh.json') as never,
-  'marine-jr-fresh.json':          () => import('../../../../../data/questions/marine-jr-fresh.json') as never,
-  'pool-jr-fresh.json':            () => import('../../../../../data/questions/pool-jr-fresh.json') as never,
-  'hvac-tech-jr-fresh.json':       () => import('../../../../../data/questions/hvac-tech-jr-fresh.json') as never,
-  'solar-installer-jr-fresh.json': () => import('../../../../../data/questions/solar-installer-jr-fresh.json') as never,
-  'wind-turbine-jr-fresh.json':    () => import('../../../../../data/questions/wind-turbine-jr-fresh.json') as never,
-  'elevator-tech-jr-fresh.json':   () => import('../../../../../data/questions/elevator-tech-jr-fresh.json') as never,
-  'fire-alarm-tech-jr-fresh.json': () => import('../../../../../data/questions/fire-alarm-tech-jr-fresh.json') as never,
-  'bmet-tech-jr-fresh.json':       () => import('../../../../../data/questions/bmet-tech-jr-fresh.json') as never,
-  'bas-tech-jr-fresh.json':        () => import('../../../../../data/questions/bas-tech-jr-fresh.json') as never,
-  'ref-tech-jr-fresh.json':        () => import('../../../../../data/questions/ref-tech-jr-fresh.json') as never,
-  'plc-tech-jr-fresh.json':        () => import('../../../../../data/questions/plc-tech-jr-fresh.json') as never,
-  'security-tech-jr-fresh.json':   () => import('../../../../../data/questions/security-tech-jr-fresh.json') as never,
-  'field-pm-jr-fresh.json':        () => import('../../../../../data/questions/field-pm-jr-fresh.json') as never,
-  'pump-tech-jr-fresh.json':       () => import('../../../../../data/questions/pump-tech-jr-fresh.json') as never,
-};
+const STATIC_JSON_FILES = new Set([
+  'jr-fsc-sample.json',
+  'jr-fse-all-questions.json',
+  'book-jr-fse-questions.json',
+  'fsc-sample.json',
+  'book-fse-questions.json',
+  'kitchen-jr-fse-fresh.json',
+  'hvac-jr-fse-fresh.json',
+  'generator-jr-fse-fresh.json',
+  'datacenter-jr-fresh.json',
+  'solar-jr-fresh.json',
+  'ev-jr-fresh.json',
+  'dcp-jr-fresh.json',
+  'battery-jr-fresh.json',
+  'dc-engineer-jr-fresh.json',
+  'marine-jr-fresh.json',
+  'pool-jr-fresh.json',
+  'hvac-tech-jr-fresh.json',
+  'solar-installer-jr-fresh.json',
+  'wind-turbine-jr-fresh.json',
+  'elevator-tech-jr-fresh.json',
+  'fire-alarm-tech-jr-fresh.json',
+  'bmet-tech-jr-fresh.json',
+  'bas-tech-jr-fresh.json',
+  'ref-tech-jr-fresh.json',
+  'plc-tech-jr-fresh.json',
+  'security-tech-jr-fresh.json',
+  'field-pm-jr-fresh.json',
+  'pump-tech-jr-fresh.json',
+]);
 
 // Maps each derived-bank key to the exact function name exported from kitchenBank.
 // kitchenBank is loaded dynamically only when one of these keys is requested,
@@ -75,9 +76,13 @@ const DERIVED_KEY_TO_FN: Record<string, string> = {
 };
 
 async function getFileQuestions(name: string): Promise<QuestionRecord[] | null> {
-  if (name in STATIC_FILE_IMPORTERS) {
-    const mod = await STATIC_FILE_IMPORTERS[name]();
-    return mod.default;
+  if (STATIC_JSON_FILES.has(name)) {
+    try {
+      const raw = readFileSync(join(process.cwd(), 'data', 'questions', name), 'utf-8');
+      return JSON.parse(raw) as QuestionRecord[];
+    } catch {
+      return null;
+    }
   }
   if (name in DERIVED_KEY_TO_FN) {
     const kb = await import('@/lib/exam/kitchenBank');
