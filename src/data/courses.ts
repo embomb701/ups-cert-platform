@@ -984,12 +984,24 @@ export interface TrainingCourse {
   certTitle: string;
   color: 'blue' | 'orange' | 'teal' | 'amber' | 'violet' | 'yellow' | 'green' | 'sky' | 'rose' | 'cyan' | 'emerald';
   totalModules: number;
-  stripeProductId: string;
-  testOutProductId: string;
-  comingSoon: boolean;
+  stripeProductId?: string;
+  testOutProductId?: string;
+  comingSoon?: boolean;
+  free?: boolean;
 }
 
 export const COURSES: TrainingCourse[] = [
+  {
+    id: 'critical-environment',
+    title: 'Critical Environment Fundamentals',
+    shortTitle: 'CE Fundamentals',
+    tagline: 'Essential knowledge for anyone entering mission-critical facilities — data centers, hospitals, electrical rooms, and industrial infrastructure. Covers safety protocols, electrical hazard awareness, environmental controls, access procedures, and emergency response.',
+    accessKey: 'critical_environment',
+    certTitle: 'Critical Environment Fundamentals Certificate',
+    color: 'emerald',
+    totalModules: 8,
+    free: true,
+  },
   {
     id: 'ups',
     title: 'UPS Field Service Engineering',
@@ -1014,7 +1026,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 27,
     stripeProductId: 'training_kitchen',
     testOutProductId: 'jr_kitchen_fse_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'hvac',
@@ -1027,7 +1039,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 25,
     stripeProductId: 'training_hvac',
     testOutProductId: 'jr_hvac_fse_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'generator',
@@ -1040,7 +1052,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 25,
     stripeProductId: 'training_generator',
     testOutProductId: 'jr_gen_fse_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'datacenter',
@@ -1053,7 +1065,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 28,
     stripeProductId: 'training_datacenter',
     testOutProductId: 'jr_dc_cft_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'solar',
@@ -1066,7 +1078,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 21,
     stripeProductId: 'training_solar',
     testOutProductId: 'jr_solar_fse_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'evcharging',
@@ -1079,7 +1091,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 18,
     stripeProductId: 'training_evcharging',
     testOutProductId: 'jr_ev_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'dcplants',
@@ -1092,7 +1104,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 17,
     stripeProductId: 'training_dcplants',
     testOutProductId: 'jr_dcp_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'battery',
@@ -1105,7 +1117,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 18,
     stripeProductId: 'training_battery',
     testOutProductId: 'jr_battery_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'dcengineer',
@@ -1118,7 +1130,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 34,
     stripeProductId: 'training_dcengineer',
     testOutProductId: 'jr_dc_engineer_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'marine',
@@ -1131,7 +1143,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_marine',
     testOutProductId: 'jr_marine_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'pool',
@@ -1144,7 +1156,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 17,
     stripeProductId: 'training_pool',
     testOutProductId: 'jr_pool_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'hvac-tech',
@@ -1157,7 +1169,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_hvac_tech',
     testOutProductId: 'jr_hvac_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'solar-inst',
@@ -1170,7 +1182,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_solar_inst',
     testOutProductId: 'jr_solar_inst_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'wind-tech',
@@ -1183,7 +1195,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_wind_tech',
     testOutProductId: 'jr_wind_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'elevator-tech',
@@ -1196,7 +1208,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_elevator_tech',
     testOutProductId: 'jr_elevator_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'fire-alarm-tech',
@@ -1209,7 +1221,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_fire_alarm_tech',
     testOutProductId: 'jr_fire_alarm_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'bmet-tech',
@@ -1222,7 +1234,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_bmet_tech',
     testOutProductId: 'jr_bmet_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'bas-tech',
@@ -1235,7 +1247,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_bas_tech',
     testOutProductId: 'jr_bas_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'ref-tech',
@@ -1248,7 +1260,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_ref_tech',
     testOutProductId: 'jr_ref_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'plc-tech',
@@ -1261,7 +1273,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_plc_tech',
     testOutProductId: 'jr_plc_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'security-tech',
@@ -1274,7 +1286,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_security_tech',
     testOutProductId: 'jr_security_tech_test_human',
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 'field-pm',

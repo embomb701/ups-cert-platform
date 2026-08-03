@@ -6,6 +6,7 @@ import { ALL_MODULES } from '@/data/index';
 import { COURSES } from '@/data/courses';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { ExternalLinkWarning } from '@/components/ExternalLinkWarning';
 
 export const dynamic = 'force-dynamic';
 
@@ -186,7 +187,6 @@ export default async function TrainingPage() {
                   {courseAccess.kitchen && (
                     <span className="px-2 py-0.5 bg-orange-600/30 border border-orange-600/60 text-orange-300 text-xs rounded">Enrolled</span>
                   )}
-                  <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-300 text-xs rounded">Coming Soon</span>
                 </div>
                 <h2 className="text-xl font-bold text-white mb-1">Commercial Kitchen Field Service Engineering</h2>
                 <p className="text-gray-400 text-sm mb-3">
@@ -223,9 +223,11 @@ export default async function TrainingPage() {
                     {kitchenSharedDone > 0 ? 'Continue Training →' : 'Start Training →'}
                   </Link>
                 ) : (
-                  <div className="text-center py-2 px-4 border border-gray-700 rounded-lg">
-                    <p className="text-gray-500 text-xs">Enrollment opens soon</p>
-                  </div>
+                  <PurchaseButton
+                    productId="training_kitchen"
+                    label="Enroll — $1,499"
+                    className="block w-full py-2.5 px-4 bg-orange-600 hover:bg-orange-500 disabled:opacity-50 text-white font-semibold rounded-lg text-sm text-center transition-colors"
+                  />
                 )}
                 <Link
                   href="/training/kitchen"
@@ -236,42 +238,62 @@ export default async function TrainingPage() {
               </div>
             </div>
           </div>
-          {/* ── Coming-soon courses (data-driven from COURSES) ──────────── */}
-          {COURSES.filter((course) => course.comingSoon && course.id !== 'kitchen').map((course) => {
-            const accent = COMING_SOON_ACCENTS[course.color] ?? 'text-violet-400';
-            return (
-              <div key={course.id} className="rounded-xl border-2 border-gray-700 bg-gray-800/50 p-6">
-                <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className={`font-mono text-xs font-bold uppercase tracking-widest ${accent}`}>{course.shortTitle}</span>
-                      <span className="px-2 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-300 text-xs rounded">Coming Soon</span>
-                    </div>
-                    <h2 className="text-xl font-bold text-white mb-1">{course.title}</h2>
-                    <p className="text-gray-400 text-sm mb-3">{course.tagline}</p>
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-                      <span>{course.totalModules} modules</span>
-                      <span>·</span>
-                      <span>shares the 10-module foundation</span>
-                      <span>·</span>
-                      <span>{course.certTitle} certification</span>
-                    </div>
-                  </div>
-                  <div className="flex-shrink-0 flex flex-col gap-2 min-w-[160px]">
-                    <div className="text-center py-2 px-4 border border-gray-700 rounded-lg">
-                      <p className="text-gray-500 text-xs">Enrollment opens soon</p>
-                    </div>
-                    <Link
-                      href={`/training/${course.id}`}
-                      className="block w-full py-2 px-4 border border-gray-600 hover:border-gray-400 text-gray-400 hover:text-white rounded-lg text-xs text-center transition-colors"
-                    >
-                      Preview outline →
-                    </Link>
-                  </div>
+          {/* ── Free: Critical Environment Fundamentals ─────────────── */}
+          <div className="rounded-xl border-2 border-emerald-700/60 bg-emerald-950/20 p-6">
+            <div className="flex flex-col md:flex-row md:items-start gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-emerald-400 font-mono text-xs font-bold uppercase tracking-widest">CE Fundamentals</span>
+                  <span className="px-2 py-0.5 bg-emerald-800/50 border border-emerald-600/60 text-emerald-300 text-xs rounded font-semibold">Free</span>
+                </div>
+                <h2 className="text-xl font-bold text-white mb-1">Critical Environment Fundamentals</h2>
+                <p className="text-gray-400 text-sm mb-3">
+                  Essential knowledge for anyone entering mission-critical facilities — data centers, hospitals, electrical rooms, and industrial infrastructure.
+                  Covers safety protocols, electrical hazard awareness, environmental controls, access procedures, and emergency response.
+                </p>
+                <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                  <span>8 modules</span>
+                  <span>·</span>
+                  <span>Free with sign-in</span>
+                  <span>·</span>
+                  <span>Critical Environment Fundamentals Certificate</span>
                 </div>
               </div>
-            );
-          })}
+              <div className="flex-shrink-0 flex flex-col gap-2 min-w-[160px]">
+                <Link
+                  href="/training/critical-environment"
+                  className="block w-full py-2.5 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold rounded-lg text-sm text-center transition-colors"
+                >
+                  Start Free Course →
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Safety callout: CPR / First Aid / AED ───────────────────── */}
+          <div className="rounded-xl border-2 border-red-800/60 bg-red-950/20 p-6">
+            <div className="flex flex-col md:flex-row md:items-start gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-red-400 font-mono text-xs font-bold uppercase tracking-widest">Safety Requirement</span>
+                </div>
+                <h2 className="text-lg font-bold text-white mb-1">CPR / First Aid / AED Certification</h2>
+                <p className="text-gray-400 text-sm">
+                  Anyone working in or around electrical equipment is required to hold a current CPR, First Aid, and AED certification.
+                  Electrical shock can cause cardiac arrest within seconds — knowing how to respond is not optional.
+                  The American Red Cross offers in-person and blended courses accepted by most employers.
+                </p>
+              </div>
+              <div className="flex-shrink-0 flex flex-col gap-2 min-w-[180px]">
+                <ExternalLinkWarning
+                  href="https://www.redcross.org/take-a-class"
+                  className="block w-full py-2.5 px-4 bg-red-700 hover:bg-red-600 text-white font-semibold rounded-lg text-sm text-center transition-colors cursor-pointer"
+                >
+                  Get Certified — Red Cross ↗
+                </ExternalLinkWarning>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Shared foundation note */}
