@@ -108,9 +108,9 @@ export default function AdminQuestionsPage() {
           tokenFetchedAt = Date.now();
         }
 
-        // 120-second hard timeout per file so a hanging request never blocks the loop
+        // 90-second hard timeout per file so a hanging request never blocks the loop
         const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 120_000);
+        const timer = setTimeout(() => controller.abort(), 90_000);
 
         try {
           const res = await fetch('/api/admin/import-from-server', {

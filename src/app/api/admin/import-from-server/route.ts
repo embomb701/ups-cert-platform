@@ -176,6 +176,8 @@ export async function POST(req: NextRequest) {
       }
 
       // Build all batches then commit them in parallel to reduce round-trips.
+      // Wrap commits in a 40-second deadline so a hung gRPC connection never
+      // blocks the response — the client will receive a 500 and move on.
       const batches: ReturnType<typeof adminDb.batch>[] = [];
       let count = 0;
       for (let i = 0; i < questions.length; i += BATCH_SIZE) {
@@ -193,7 +195,10 @@ export async function POST(req: NextRequest) {
         }
         batches.push(batch);
       }
-      await Promise.all(batches.map((b) => b.commit()));
+      const deadline = new Promise<never>((_, rej) =>
+        setTimeout(() => rej(new Error(`Firestore write timed out for ${file}`)), 40_000)
+      );
+      await Promise.race([Promise.all(batches.map((b) => b.commit())), deadline]);
       totalCreated += count;
 
       filesProcessed.push(`${file} (${questions.length})`);
