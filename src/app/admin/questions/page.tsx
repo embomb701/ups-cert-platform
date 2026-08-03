@@ -95,6 +95,8 @@ export default function AdminQuestionsPage() {
   const [serverImporting, setServerImporting] = useState(false);
   const [activeQuarter, setActiveQuarter] = useState<number | null>(null);
   const [serverProgress, setServerProgress] = useState('');
+  const [serverElapsed, setServerElapsed] = useState(0);
+  const elapsedRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [serverResult, setServerResult] = useState<ServerImportResult | null>(null);
   const [overwrite, setOverwrite] = useState(false);
   const [result, setResult] = useState<ImportResult | null>(null);
@@ -127,6 +129,13 @@ export default function AdminQuestionsPage() {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), 90_000);
 
+        // live elapsed-second counter so the UI shows activity during long requests
+        setServerElapsed(0);
+        const startTs = Date.now();
+        elapsedRef.current = setInterval(() => {
+          setServerElapsed(Math.floor((Date.now() - startTs) / 1000));
+        }, 1000);
+
         try {
           const res = await fetch('/api/admin/import-from-server', {
             method: 'POST',
@@ -135,6 +144,7 @@ export default function AdminQuestionsPage() {
             signal: controller.signal,
           });
           clearTimeout(timer);
+          if (elapsedRef.current) { clearInterval(elapsedRef.current); elapsedRef.current = null; }
 
           let data: ServerImportResult;
           try {
@@ -150,6 +160,7 @@ export default function AdminQuestionsPage() {
           filesNotFound.push(...data.filesNotFound);
         } catch (fetchErr: any) {
           clearTimeout(timer);
+          if (elapsedRef.current) { clearInterval(elapsedRef.current); elapsedRef.current = null; }
           if (fetchErr.name === 'AbortError') {
             filesNotFound.push(`${file} (timed out)`);
           } else {
@@ -602,7 +613,11 @@ export default function AdminQuestionsPage() {
               );
             })}
           </div>
-          {serverProgress && <p className="text-xs text-indigo-400 mt-1 font-mono">{serverProgress}</p>}
+          {serverProgress && (
+            <p className="text-xs text-indigo-400 mt-1 font-mono">
+              {serverProgress} <span className="text-gray-500">{serverElapsed}s</span>
+            </p>
+          )}
           {serverResult && (
             <div className={`rounded-lg p-3 mt-3 text-xs ${serverResult.ok ? 'bg-green-950/40 border border-green-800/40' : 'bg-red-950/40 border border-red-800/40'}`}>
               {serverResult.error ? (
