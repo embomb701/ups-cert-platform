@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { adminAuth } from '@/lib/firebase/admin';
+import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { CE_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { ExternalLinkWarning } from '@/components/ExternalLinkWarning';
 
@@ -10,59 +11,31 @@ export const metadata = {
   title: 'Critical Environment Fundamentals',
 };
 
-const MODULES = [
-  {
-    num: 1,
-    title: 'What Is a Critical Environment?',
-    description: 'Definition, examples (data centers, hospitals, power plants, telecom), uptime tiers, and why these facilities require special procedures.',
-  },
-  {
-    num: 2,
-    title: 'Electrical Hazard Awareness',
-    description: 'Arc flash, shock, and electrocution risks. NFPA 70E basics, PPE requirements, approach boundaries, and the importance of de-energizing before work.',
-  },
-  {
-    num: 3,
-    title: 'Lockout / Tagout (LOTO)',
-    description: 'OSHA 1910.147 control of hazardous energy. Step-by-step LOTO procedure, group lockout, and verification testing.',
-  },
-  {
-    num: 4,
-    title: 'Environmental Controls',
-    description: 'Temperature and humidity management, hot/cold aisle containment, CRAC/CRAH units, and why environmental stability protects equipment and people.',
-  },
-  {
-    num: 5,
-    title: 'Access Control and Site Protocols',
-    description: 'Visitor procedures, badging, escort requirements, clean-room etiquette, and communication with site leads before starting any work.',
-  },
-  {
-    num: 6,
-    title: 'Emergency Procedures',
-    description: 'Fire suppression systems (clean agent vs. sprinkler), evacuation routes, emergency shutdowns, incident reporting, and who to call.',
-  },
-  {
-    num: 7,
-    title: 'CPR, First Aid, and AED',
-    description: 'Why cardiac response skills are mandatory for anyone working near electrical equipment. Overview of what a current Red Cross certification covers and how to get it.',
-  },
-  {
-    num: 8,
-    title: 'Professionalism in the Field',
-    description: 'Communication with customers and NOC teams, documentation, change management basics, and building a reputation as a trusted technician.',
-  },
-];
-
 export default async function CriticalEnvironmentPage() {
   const cookieStore = await cookies();
   const token = cookieStore.get('firebase-token')?.value;
   if (!token) redirect('/login');
 
+  let uid: string;
   try {
-    await adminAuth.verifyIdToken(token);
+    const decoded = await adminAuth.verifyIdToken(token);
+    uid = decoded.uid;
   } catch {
     redirect('/login');
   }
+
+  const progressSnap = await adminDb
+    .collection('users').doc(uid)
+    .collection('trainingProgress').get();
+  const progress: Record<string, { completedSlides?: number[]; completedAt?: unknown; passed?: boolean }> = {};
+  progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+
+  const modules = [...CE_MODULES].sort((a, b) => a.num - b.num);
+  const completedCount = modules.filter((m) => {
+    const p = progress[m.id] ?? {};
+    return !!(p.completedAt && p.passed);
+  }).length;
+  const allComplete = completedCount === modules.length;
 
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
@@ -77,9 +50,23 @@ export default async function CriticalEnvironmentPage() {
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">Critical Environment Fundamentals</h1>
           <p className="text-gray-400">
-            Essential knowledge for anyone entering mission-critical facilities. Complete all 8 modules to earn your
-            <span className="text-emerald-400 font-semibold"> Critical Environment Fundamentals Certificate</span>.
+            Essential knowledge for anyone entering mission-critical facilities. Complete all {modules.length} modules to earn your{' '}
+            <span className="text-emerald-400 font-semibold">Critical Environment Fundamentals Certificate</span>.
           </p>
+          {completedCount > 0 && (
+            <div className="mt-4">
+              <div className="flex justify-between text-xs text-gray-500 mb-1">
+                <span>{completedCount}/{modules.length} modules complete</span>
+                <span>{Math.round((completedCount / modules.length) * 100)}%</span>
+              </div>
+              <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-emerald-500 rounded-full"
+                  style={{ width: `${(completedCount / modules.length) * 100}%` }}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* CPR Safety callout */}
@@ -102,28 +89,80 @@ export default async function CriticalEnvironmentPage() {
         {/* Module list */}
         <div className="space-y-3">
           <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">Course Modules</h2>
-          {MODULES.map((mod) => (
-            <div key={mod.num} className="rounded-lg bg-gray-800/60 border border-gray-700 p-4 flex gap-4 items-start">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-900/60 border border-emerald-700/60 flex items-center justify-center text-emerald-400 text-xs font-bold">
-                {mod.num}
-              </span>
-              <div>
-                <p className="text-white font-semibold text-sm mb-0.5">{mod.title}</p>
-                <p className="text-gray-500 text-xs">{mod.description}</p>
+          {modules.map((mod, idx) => {
+            const p = progress[mod.id] ?? {};
+            const done = !!(p.completedAt && p.passed);
+            const slidesStarted = (p.completedSlides ?? []).length > 0;
+            const prevDone = idx === 0 || (() => {
+              const prevP = progress[modules[idx - 1].id] ?? {};
+              return !!(prevP.completedAt && prevP.passed);
+            })();
+            const available = idx === 0 || prevDone || slidesStarted;
+
+            return (
+              <div
+                key={mod.id}
+                className={`rounded-lg border p-4 flex gap-4 items-start ${
+                  done
+                    ? 'border-emerald-800 bg-emerald-900/20'
+                    : available
+                    ? 'border-gray-700 bg-gray-800/60'
+                    : 'border-gray-800 bg-gray-800/30 opacity-60'
+                }`}
+              >
+                <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
+                  done
+                    ? 'bg-emerald-600 text-white'
+                    : available
+                    ? 'bg-emerald-900/60 border border-emerald-700/60 text-emerald-400'
+                    : 'bg-gray-700 text-gray-500'
+                }`}>
+                  {done ? '✓' : mod.num}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-semibold text-sm mb-0.5">{mod.title}</p>
+                  <p className="text-gray-500 text-xs">{mod.desc}</p>
+                  <p className="text-gray-600 text-xs mt-1">{mod.slides.length} slides · {mod.test.length} question test</p>
+                </div>
+                {available && (
+                  <Link
+                    href={`/training/${mod.id}`}
+                    className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                      done
+                        ? 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+                        : slidesStarted
+                        ? 'bg-emerald-700 hover:bg-emerald-600 text-white'
+                        : 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                    }`}
+                  >
+                    {done ? 'Review' : slidesStarted ? 'Continue →' : 'Start →'}
+                  </Link>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Certificate section */}
-        <div className="rounded-xl border border-emerald-700/40 bg-emerald-950/20 p-6 text-center">
+        <div className={`rounded-xl border p-6 text-center ${allComplete ? 'border-emerald-500 bg-emerald-950/30' : 'border-emerald-700/40 bg-emerald-950/20'}`}>
           <p className="text-emerald-400 text-sm font-semibold mb-1">Certificate of Completion</p>
           <p className="text-gray-300 font-bold text-lg mb-2">Critical Environment Fundamentals</p>
           <p className="text-gray-500 text-xs mb-4">
-            Awarded upon successful completion of all 8 modules. Demonstrates foundational competency
+            Awarded upon successful completion of all {modules.length} modules. Demonstrates foundational competency
             for entry into data centers, hospitals, and other mission-critical facilities.
           </p>
-          <p className="text-gray-600 text-xs">Course content coming soon — check back for interactive lessons.</p>
+          {allComplete ? (
+            <Link
+              href="/certificate/critical-environment"
+              className="inline-block px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-colors text-sm"
+            >
+              View Certificate →
+            </Link>
+          ) : (
+            <p className="text-gray-600 text-xs">
+              {completedCount}/{modules.length} modules complete — finish all modules to unlock your certificate.
+            </p>
+          )}
         </div>
 
       </div>

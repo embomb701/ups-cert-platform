@@ -33,17 +33,19 @@ export default async function ModulePage({ params }: Props) {
   const mod = getModule(moduleId);
   if (!mod) notFound();
 
+  const isCEModule = mod.id.startsWith('ce-');
+
   const grantedKeys = await getGrantedCourseKeys(uid, mod);
   const hasAccess = isAdmin || grantedKeys.length > 0;
 
   const isFreeTrialModule = mod.num <= 3;
-  if (!hasAccess && !isFreeTrialModule) redirect('/training');
+  if (!hasAccess && !isFreeTrialModule && !isCEModule) redirect('/training');
 
   // Check 3-day rule from the previous module in the user's enrolled course
-  // sequence(s) — bypassed for admins and free trial
+  // sequence(s) — bypassed for admins, free trial, and CE (always free/open)
   let locked = false;
   let unlockDate: Date | null = null;
-  if (hasAccess && !isAdmin && mod.num > 1) {
+  if (hasAccess && !isAdmin && !isCEModule && mod.num > 1) {
     const state = await moduleUnlockState(uid, mod, grantedKeys);
     locked = state.locked;
     unlockDate = state.unlockDate;
@@ -90,7 +92,7 @@ export default async function ModulePage({ params }: Props) {
           </div>
         ) : (
           <div className="space-y-4">
-            {!hasAccess && (
+            {!hasAccess && !isCEModule && (
               <div className="rounded-lg bg-blue-900/30 border border-blue-700 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
                   <p className="text-white font-semibold text-sm">Free Trial — Lesson 1 only</p>
@@ -106,7 +108,7 @@ export default async function ModulePage({ params }: Props) {
             <h2 className="text-xl font-semibold text-white">Slides</h2>
             {mod.slides.map((slide, i) => {
               const done = completedSlides.includes(i);
-              const trialLocked = !hasAccess && i > 0;
+              const trialLocked = !hasAccess && !isCEModule && i > 0;
               return (
                 <div key={i} className={`rounded-lg border p-5 flex items-center justify-between ${done ? 'border-green-800 bg-green-900/20' : trialLocked ? 'border-gray-800 bg-gray-800/40 opacity-50' : 'border-gray-700 bg-gray-800'}`}>
                   <div className="flex items-center gap-4">
@@ -129,7 +131,7 @@ export default async function ModulePage({ params }: Props) {
               );
             })}
 
-            {hasAccess && completedSlides.length === mod.slides.length && (
+            {(hasAccess || isCEModule) && completedSlides.length === mod.slides.length && (
               <div className={`rounded-lg border p-5 flex items-center justify-between ${moduleComplete ? 'border-green-800 bg-green-900/20' : 'border-yellow-800 bg-yellow-900/20'}`}>
                 <div className="flex items-center gap-4">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${moduleComplete ? 'bg-green-600 text-white' : 'bg-yellow-600 text-white'}`}>
