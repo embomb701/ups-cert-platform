@@ -1,24 +1,381 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
-import { COURSES } from '@/data/courses';
-
-// Literal accent classes per course color (Tailwind cannot see dynamic names)
-const PROGRAM_ACCENTS: Record<string, string> = {
-  orange: 'text-orange-400',
-  teal: 'text-teal-400',
-  amber: 'text-amber-400',
-  violet: 'text-violet-400',
-  yellow: 'text-yellow-400',
-  green: 'text-green-400',
-  sky: 'text-sky-400',
-  rose: 'text-rose-400',
-};
 
 export const metadata: Metadata = {
-  title: 'Mastering Field Service Training Portal — Field Service Engineering Career Training',
+  title: 'Mastering Field Service Training Portal — 24 Career Tracks in Critical Infrastructure',
   description:
-    'Start a $55K–$100K field service career in 3–6 months. No college required. UPS, Commercial Kitchen, HVAC, and Power Generation certification tracks by Francis Aiello.',
+    'Start a $45K–$130K+ career in field service in 3–6 months. No college required. 24 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Field PM, and more.',
+};
+
+// ─── Per-course detail data ────────────────────────────────────────────────
+interface CourseDetail {
+  pay: string;
+  senior: string;
+  duration: string;
+  environment: string;
+  highlights: string[];
+}
+
+const DETAILS: Record<string, CourseDetail> = {
+  'critical-environment': {
+    pay: 'Free',
+    senior: 'Foundation for all tracks',
+    duration: '1–2 weeks',
+    environment: 'All mission-critical facilities',
+    highlights: [
+      'Required baseline for anyone entering data centers, hospitals, or electrical rooms',
+      'Covers safety protocols, LOTO basics, environmental controls, and emergency response',
+      'Earn your Critical Environment Fundamentals Certificate at no cost',
+    ],
+  },
+  'ups': {
+    pay: '$55K–$75K',
+    senior: '$95K–$130K',
+    duration: '3–6 months · 28 modules',
+    environment: 'Data centers, hospitals, financial institutions, military',
+    highlights: [
+      'Service and maintain UPS systems keeping life-critical systems online 24/7',
+      'On-call rotation with premium overtime — nights and weekends add significantly to base',
+      'One of the highest-demand roles in critical power with a shrinking technician pool',
+    ],
+  },
+  'kitchen': {
+    pay: '$48K–$72K',
+    senior: '$80K–$110K',
+    duration: '3–6 months · 27 modules',
+    environment: 'Restaurants, hotels, hospitals, institutional kitchens',
+    highlights: [
+      'Service commercial refrigeration, cooking equipment, warewashing, and ice machines',
+      'Fast-dispatch, high-volume work — most techs run 5–8 calls per day',
+      'Huge install base; nearly every commercial kitchen requires contract service',
+    ],
+  },
+  'hvac': {
+    pay: '$55K–$78K',
+    senior: '$90K–$125K',
+    duration: '3–6 months · 26 modules',
+    environment: 'Commercial buildings, data centers, hospitals',
+    highlights: [
+      'Install and maintain HVAC systems controlling environments in critical facilities',
+      'Strong union presence in many markets — apprenticeship paths into IBEW or UA',
+      'Cross-training with refrigeration and BAS opens doors to senior system roles',
+    ],
+  },
+  'generator': {
+    pay: '$58K–$80K',
+    senior: '$95K–$130K',
+    duration: '3–6 months · 26 modules',
+    environment: 'Hospitals, data centers, utilities, government facilities',
+    highlights: [
+      'Service diesel and natural gas standby generators protecting critical infrastructure',
+      'Emergency dispatch during storms and outages — premium pay for emergency response',
+      'Generator techs are in demand everywhere grid reliability is essential',
+    ],
+  },
+  'data-center': {
+    pay: '$65K–$88K',
+    senior: '$100K–$140K',
+    duration: '4–7 months · 32 modules',
+    environment: 'Hyperscale and colocation data centers',
+    highlights: [
+      'Operate, maintain, and troubleshoot all power and cooling systems in a data center',
+      'Highest base pay of any field service track — data center operations never stop',
+      'Covers UPS, generators, PDUs, cooling, BMS, and emergency procedures end-to-end',
+    ],
+  },
+  'solar': {
+    pay: '$52K–$74K',
+    senior: '$85K–$118K',
+    duration: '3–5 months · 24 modules',
+    environment: 'Commercial rooftops, utility-scale solar farms, storage facilities',
+    highlights: [
+      'Commission, service, and troubleshoot solar PV systems and battery energy storage (BESS)',
+      'Fastest-growing sector in energy — installer shortage is creating a service shortage',
+      'Combines electrical fundamentals with inverter, string, and battery systems',
+    ],
+  },
+  'ev-charging': {
+    pay: '$52K–$72K',
+    senior: '$80K–$112K',
+    duration: '3–5 months · 24 modules',
+    environment: 'Fleet depots, commercial parking, highway corridors, dealerships',
+    highlights: [
+      'Install, service, and troubleshoot Level 2 and DC fast-charging stations',
+      'EV charging infrastructure is expanding at every major retail and fleet location',
+      'Combines electrical work with networking, payment systems, and utility coordination',
+    ],
+  },
+  'dc-plants': {
+    pay: '$60K–$82K',
+    senior: '$95K–$128K',
+    duration: '4–6 months · 28 modules',
+    environment: 'Telecom central offices, wireless towers, broadband headends',
+    highlights: [
+      'Maintain 48V DC power plant systems powering the national telecom backbone',
+      'Rectifiers, batteries, PDUs, and remote monitoring in unmanned facilities',
+      'Work for telecom carriers or independent contractors — remote site dispatch',
+    ],
+  },
+  'battery-tech': {
+    pay: '$52K–$74K',
+    senior: '$85K–$115K',
+    duration: '3–5 months · 24 modules',
+    environment: 'UPS systems, telecom sites, utilities, energy storage facilities',
+    highlights: [
+      'Specialize in battery system maintenance, testing, replacement, and safety',
+      'VRLA, lithium-ion, and flooded cell expertise across multiple industries',
+      'Battery replacement contracts are a major revenue stream for service companies',
+    ],
+  },
+  'dc-engineer': {
+    pay: '$70K–$92K',
+    senior: '$110K–$145K',
+    duration: '4–7 months · 34 modules',
+    environment: 'Data centers, utilities, large-scale industrial facilities',
+    highlights: [
+      'Senior-level role covering power distribution, UPS, generators, and system design',
+      'DC engineers often oversee entire power infrastructure for large facilities',
+      'One of the highest-ceiling roles in critical power — path to facility manager',
+    ],
+  },
+  'marine': {
+    pay: '$50K–$70K',
+    senior: '$80K–$108K',
+    duration: '3–5 months · 24 modules',
+    environment: 'Commercial vessels, marinas, shipyards, offshore platforms',
+    highlights: [
+      'Service electrical and mechanical systems on commercial and industrial marine vessels',
+      'Travel and per diem pay typical — many positions include housing allowances',
+      'Specialized knowledge commands a premium in a field with very few trained techs',
+    ],
+  },
+  'pool': {
+    pay: '$45K–$65K',
+    senior: '$75K–$100K',
+    duration: '2–4 months · 20 modules',
+    environment: 'Hotels, resorts, municipalities, HOAs, commercial facilities',
+    highlights: [
+      'Maintain and repair commercial pool equipment — pumps, filtration, chemical systems',
+      'High route density; most techs service 10–15 accounts daily',
+      'Low barrier to entry with fast ramp-up — strong demand in Sun Belt states',
+    ],
+  },
+  'hvac-tech': {
+    pay: '$52K–$74K',
+    senior: '$85K–$118K',
+    duration: '3–5 months · 24 modules',
+    environment: 'Commercial buildings, medical facilities, retail centers',
+    highlights: [
+      'Commercial HVAC installation and service with a focus on hands-on technical skills',
+      'Strong overlap with refrigeration opens second income stream with one license',
+      'High call volume in summer and winter spikes — overtime is consistent',
+    ],
+  },
+  'solar-installer': {
+    pay: '$48K–$70K',
+    senior: '$80K–$108K',
+    duration: '3–5 months · 24 modules',
+    environment: 'Residential rooftops, commercial rooftops, ground-mount arrays',
+    highlights: [
+      'Install, wire, and commission solar PV systems for residential and commercial customers',
+      'NABCEP certification pathway — the industry-recognized credential for solar installers',
+      'Strong install backlog in most US markets; experienced installers are in high demand',
+    ],
+  },
+  'wind-turbine': {
+    pay: '$55K–$78K',
+    senior: '$85K–$118K',
+    duration: '3–5 months · 24 modules',
+    environment: 'Onshore and offshore wind farms, remote rural sites',
+    highlights: [
+      'Climb and service wind turbines — mechanical, electrical, and hydraulic systems',
+      'Per diem and travel pay is standard; remote site premiums add to compensation',
+      'Wind capacity is tripling this decade — technician shortage is severe',
+    ],
+  },
+  'elevator': {
+    pay: '$65K–$95K',
+    senior: '$110K–$145K',
+    duration: '4–7 months · 30 modules',
+    environment: 'High-rises, hospitals, airports, commercial buildings',
+    highlights: [
+      'Service and maintain elevators, escalators, and moving walkways',
+      'IUEC union track offers apprenticeship paths with top-tier benefits packages',
+      'Some of the highest average pay in the trades — experienced mechanics exceed $100K routinely',
+    ],
+  },
+  'fire-alarm': {
+    pay: '$55K–$78K',
+    senior: '$90K–$125K',
+    duration: '3–5 months · 25 modules',
+    environment: 'All commercial buildings — required by code nationwide',
+    highlights: [
+      'Install, inspect, test, and service fire alarm and suppression systems',
+      'Code-required inspections on every commercial building create a permanent maintenance market',
+      'NICET certification pathway — the national credential for fire alarm technicians',
+    ],
+  },
+  'bmet': {
+    pay: '$52K–$75K',
+    senior: '$85K–$118K',
+    duration: '3–5 months · 25 modules',
+    environment: 'Hospitals, surgery centers, medical clinics, imaging facilities',
+    highlights: [
+      'Maintain and repair biomedical equipment — ventilators, patient monitors, infusion pumps',
+      'Healthcare facilities must keep biomedical equipment certified and operational — no exceptions',
+      'Combination of electronics, medical device knowledge, and regulatory compliance skills',
+    ],
+  },
+  'bas-tech': {
+    pay: '$58K–$80K',
+    senior: '$90K–$122K',
+    duration: '3–5 months · 25 modules',
+    environment: 'Large commercial buildings, campuses, hospitals, government facilities',
+    highlights: [
+      'Program and service building automation systems (BAS/BMS) controlling HVAC and power',
+      'BAS techs bridge IT and building systems — a hybrid role with strong upside',
+      'Every modern large building requires ongoing BAS maintenance contracts',
+    ],
+  },
+  'ref-tech': {
+    pay: '$52K–$74K',
+    senior: '$85K–$112K',
+    duration: '3–5 months · 25 modules',
+    environment: 'Grocery stores, restaurants, cold storage facilities, food distribution',
+    highlights: [
+      'Service commercial refrigeration — walk-ins, display cases, condensing units',
+      'EPA Section 608 certification required — included in training',
+      'Food cold chain is non-negotiable; breakdowns get same-day dispatch response',
+    ],
+  },
+  'plc-tech': {
+    pay: '$60K–$85K',
+    senior: '$100K–$138K',
+    duration: '4–6 months · 27 modules',
+    environment: 'Manufacturing plants, utilities, water treatment, automation facilities',
+    highlights: [
+      'Program, troubleshoot, and maintain PLC-controlled industrial automation systems',
+      'PLC techs are among the highest-paid in the trades — programming skills command a premium',
+      'Allen-Bradley, Siemens, and Automation Direct platforms covered',
+    ],
+  },
+  'security-tech': {
+    pay: '$48K–$70K',
+    senior: '$80K–$108K',
+    duration: '3–5 months · 24 modules',
+    environment: 'Commercial buildings, government facilities, data centers, retail',
+    highlights: [
+      'Install and service access control, CCTV, intrusion detection, and intercom systems',
+      'Recurring maintenance contracts provide stable income base for technicians and companies',
+      'Low-voltage license requirements vary by state — training covers national best practices',
+    ],
+  },
+  'field-pm': {
+    pay: '$75K–$98K',
+    senior: '$110K–$145K',
+    duration: '4–6 months · 16 modules',
+    environment: 'Construction sites, facility rollouts, infrastructure projects',
+    highlights: [
+      'Manage field service projects from initiation through closeout — scope, schedule, and budget',
+      'PMP® certification pathway — the global standard for project management credentials',
+      'Field PMs often earn the highest compensation in a service organization outside of ownership',
+    ],
+  },
+  'pump-tech': {
+    pay: '$52K–$74K',
+    senior: '$85K–$112K',
+    duration: '3–5 months · 16 modules',
+    environment: 'Industrial plants, HVAC systems, water treatment, oil and gas facilities',
+    highlights: [
+      'Install, align, and service centrifugal and positive-displacement pump systems',
+      'Mechanical alignment, seal replacement, and cavitation diagnosis are core skills',
+      'Pump technicians are required anywhere fluid systems are mission-critical',
+    ],
+  },
+};
+
+// ─── Course categories ─────────────────────────────────────────────────────
+const CATEGORIES = [
+  {
+    label: 'Critical Power',
+    color: 'text-blue-400',
+    borderColor: 'border-blue-900/40',
+    ids: ['ups', 'generator', 'data-center', 'dc-plants', 'battery-tech', 'dc-engineer'],
+  },
+  {
+    label: 'Building & Facility Systems',
+    color: 'text-teal-400',
+    borderColor: 'border-teal-900/40',
+    ids: ['hvac', 'hvac-tech', 'bas-tech', 'ref-tech'],
+  },
+  {
+    label: 'Clean Energy',
+    color: 'text-yellow-400',
+    borderColor: 'border-yellow-900/40',
+    ids: ['solar', 'ev-charging', 'solar-installer', 'wind-turbine'],
+  },
+  {
+    label: 'Specialized Trades',
+    color: 'text-violet-400',
+    borderColor: 'border-violet-900/40',
+    ids: ['elevator', 'fire-alarm', 'bmet', 'plc-tech', 'security-tech', 'pool', 'marine', 'pump-tech'],
+  },
+  {
+    label: 'Commercial Food Service',
+    color: 'text-orange-400',
+    borderColor: 'border-orange-900/40',
+    ids: ['kitchen'],
+  },
+  {
+    label: 'Management & Operations',
+    color: 'text-emerald-400',
+    borderColor: 'border-emerald-900/40',
+    ids: ['field-pm'],
+  },
+];
+
+// Course shortTitle and tagline — keyed by id
+const COURSE_QUICK: Record<string, { shortTitle: string; tagline: string; totalModules: number; free?: boolean }> = {
+  'critical-environment': { shortTitle: 'CE Fundamentals', tagline: 'Safety and access protocols for anyone entering mission-critical facilities.', totalModules: 8, free: true },
+  'ups':                  { shortTitle: 'UPS FSE',          tagline: 'Service UPS systems in hospitals, data centers, and financial institutions.', totalModules: 28 },
+  'kitchen':              { shortTitle: 'Kitchen FSE',      tagline: 'Service commercial kitchen equipment — refrigeration, cooking, warewashing.', totalModules: 27 },
+  'hvac':                 { shortTitle: 'HVAC FSE',         tagline: 'Service commercial HVAC systems in critical and commercial environments.', totalModules: 26 },
+  'generator':            { shortTitle: 'Generator FSE',    tagline: 'Service standby diesel and gas generators protecting critical facilities.', totalModules: 26 },
+  'data-center':          { shortTitle: 'Data Center CFT',  tagline: 'Operate and maintain all power and cooling systems in data centers.', totalModules: 32 },
+  'solar':                { shortTitle: 'Solar/BESS',       tagline: 'Commission and service solar PV and battery energy storage systems.', totalModules: 24 },
+  'ev-charging':          { shortTitle: 'EV Charging',      tagline: 'Install and service Level 2 and DC fast-charging infrastructure.', totalModules: 24 },
+  'dc-plants':            { shortTitle: 'DC Plants Tech',   tagline: 'Maintain 48V DC power plant systems powering the telecom backbone.', totalModules: 28 },
+  'battery-tech':         { shortTitle: 'Battery Tech',     tagline: 'VRLA, lithium-ion, and flooded cell maintenance across industries.', totalModules: 24 },
+  'dc-engineer':          { shortTitle: 'DC Engineer',      tagline: 'Senior power engineering covering UPS, generators, and full facility power.', totalModules: 34 },
+  'marine':               { shortTitle: 'Marine Tech',      tagline: 'Service electrical and mechanical systems on commercial marine vessels.', totalModules: 24 },
+  'pool':                 { shortTitle: 'Pool Tech',        tagline: 'Maintain commercial pool and aquatic systems — pumps, filtration, chemicals.', totalModules: 20 },
+  'hvac-tech':            { shortTitle: 'HVAC Tech',        tagline: 'Commercial HVAC installation and service with a technical depth focus.', totalModules: 24 },
+  'solar-installer':      { shortTitle: 'Solar Installer',  tagline: 'Install and wire solar PV systems — NABCEP certification pathway.', totalModules: 24 },
+  'wind-turbine':         { shortTitle: 'Wind Turbine',     tagline: 'Climb and service wind turbines — mechanical, electrical, and hydraulic.', totalModules: 24 },
+  'elevator':             { shortTitle: 'Elevator Tech',    tagline: 'Service elevators and escalators — IUEC pathway with top-tier pay.', totalModules: 30 },
+  'fire-alarm':           { shortTitle: 'Fire Alarm Tech',  tagline: 'Install and service fire alarm systems — NICET certification pathway.', totalModules: 25 },
+  'bmet':                 { shortTitle: 'BMET',             tagline: 'Maintain biomedical equipment in hospitals and clinical environments.', totalModules: 25 },
+  'bas-tech':             { shortTitle: 'BAS Tech',         tagline: 'Program and service building automation systems — the IT-trades hybrid.', totalModules: 25 },
+  'ref-tech':             { shortTitle: 'Ref Tech',         tagline: 'Service commercial refrigeration — walk-ins, display cases, condensing units.', totalModules: 25 },
+  'plc-tech':             { shortTitle: 'PLC Tech',         tagline: 'Program and troubleshoot industrial PLC automation systems.', totalModules: 27 },
+  'security-tech':        { shortTitle: 'Security Tech',    tagline: 'Install and service access control, CCTV, and intrusion detection systems.', totalModules: 24 },
+  'field-pm':             { shortTitle: 'Field PM',         tagline: 'Manage field projects from initiation through closeout — PMP® pathway.', totalModules: 16 },
+  'pump-tech':            { shortTitle: 'Pump Tech',        tagline: 'Service centrifugal and positive-displacement pump systems.', totalModules: 16 },
+};
+
+const COLOR_ACCENT: Record<string, string> = {
+  blue:    'text-blue-400',
+  orange:  'text-orange-400',
+  teal:    'text-teal-400',
+  amber:   'text-amber-400',
+  violet:  'text-violet-400',
+  yellow:  'text-yellow-400',
+  green:   'text-green-400',
+  sky:     'text-sky-400',
+  rose:    'text-rose-400',
+  cyan:    'text-cyan-400',
+  emerald: 'text-emerald-400',
 };
 
 export default function HomePage() {
@@ -34,17 +391,17 @@ export default function HomePage() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-900/40 border border-blue-700/60 rounded-full text-blue-300 text-xs font-semibold mb-6">
               <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
-              Industry facing critical technician shortage
+              Industry facing critical technician shortage across all trades
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Start a <span className="text-gradient">$55K–$100K</span> career in 3–6 months.{' '}
+              Start a <span className="text-gradient">$45K–$130K+</span> career in 3–6 months.{' '}
               <span className="text-gray-300">No college. No debt.</span>
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
-              Hospitals, data centers, restaurants, and every commercial building run on equipment
-              that breaks — UPS systems, kitchen equipment, HVAC, and standby generators. There
-              aren&apos;t enough qualified technicians to keep it all running. Mastering Field Service
-              trains you to fill that gap, in the track you choose.
+              Mastering Field Service is a full technical training portal with 24 career tracks —
+              critical power, HVAC, solar, data centers, elevators, biomedical, industrial automation, and more.
+              One shared electrical and safety foundation. Choose the trade. Earn the credential.
+              Get hired.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -54,20 +411,20 @@ export default function HomePage() {
                 Create Free Account
               </Link>
               <Link
-                href="#pricing"
+                href="#courses"
                 className="px-8 py-4 border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white font-semibold rounded-lg text-lg transition-colors text-center"
               >
-                See All Options
+                Browse All 24 Tracks ↓
               </Link>
             </div>
-            <p className="text-gray-600 text-sm mt-4">Free to create an account. Enroll when you&apos;re ready.</p>
+            <p className="text-gray-600 text-sm mt-4">Free to sign up. Enroll when you&apos;re ready.</p>
           </div>
 
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { stat: '80,000+', label: 'Technicians retiring this decade' },
-              { stat: '3–6 months', label: 'To your first job in the field' },
-              { stat: '$1,499', label: 'Total training program cost' },
+              { stat: '24', label: 'Career tracks in one portal' },
+              { stat: '3–6 months', label: 'To your first field job' },
+              { stat: '$130K+', label: 'Management ceiling' },
               { stat: '$0', label: 'Student loan debt' },
             ].map((item, i) => (
               <div key={i} className="border border-gray-800 rounded-lg p-4 bg-gray-800/40">
@@ -79,36 +436,189 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── THE CRISIS ────────────────────────────────────────────────── */}
+      {/* ── FREE CE COURSE CALLOUT ─────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 pt-12">
+        <div className="rounded-xl border-2 border-emerald-700/60 bg-emerald-950/20 p-6 flex flex-col md:flex-row md:items-center gap-6">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-emerald-400 font-mono text-xs font-bold uppercase tracking-widest">Free — No Purchase Required</span>
+            </div>
+            <h2 className="text-xl font-bold text-white mb-1">Critical Environment Fundamentals</h2>
+            <p className="text-gray-400 text-sm">
+              Before you enter any data center, hospital, or electrical room — you need this. 8 modules covering
+              safety protocols, electrical hazard awareness, LOTO basics, environmental controls, and emergency response.
+              Free with a site account. Includes a completion certificate.
+            </p>
+          </div>
+          <div className="flex-shrink-0 flex flex-col gap-2 min-w-[180px]">
+            <Link
+              href="/login"
+              className="block w-full py-2.5 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold rounded-lg text-sm text-center transition-colors"
+            >
+              Start Free →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── COURSE EXPLORER ───────────────────────────────────────────── */}
+      <section id="courses" className="max-w-6xl mx-auto px-4 py-16 border-b border-gray-800">
+        <div className="mb-10">
+          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">All Career Tracks</span>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-3">Choose your path.</h2>
+          <p className="text-gray-400 max-w-2xl">
+            Every paid program shares the same 10-module electrical and safety foundation —
+            so modules you complete in one track count toward every other. Click any course to see pay scale, job overview, and what&apos;s covered.
+          </p>
+        </div>
+
+        <div className="space-y-10">
+          {CATEGORIES.map((cat) => (
+            <div key={cat.label}>
+              <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 ${cat.color}`}>{cat.label}</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                {cat.ids.map((id) => {
+                  const q = COURSE_QUICK[id];
+                  const d = DETAILS[id];
+                  if (!q || !d) return null;
+                  return (
+                    <details key={id} className={`group rounded-xl border ${cat.borderColor} bg-gray-800/50 overflow-hidden`}>
+                      <summary className="flex items-start justify-between gap-4 p-5 cursor-pointer list-none hover:bg-gray-800 transition-colors">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1 flex-wrap">
+                            <span className={`font-mono text-[11px] font-bold uppercase tracking-widest ${cat.color}`}>{q.shortTitle}</span>
+                            {q.free && (
+                              <span className="px-1.5 py-0.5 bg-emerald-800/60 border border-emerald-600/60 text-emerald-300 text-[10px] font-bold rounded">FREE</span>
+                            )}
+                          </div>
+                          <p className="text-white font-semibold text-sm">{COURSE_QUICK[id].tagline}</p>
+                          <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-500">
+                            <span className="text-green-400 font-semibold">{d.pay}</span>
+                            <span>·</span>
+                            <span>{d.duration}</span>
+                          </div>
+                        </div>
+                        <span className="text-gray-500 text-sm flex-shrink-0 mt-1 group-open:rotate-180 transition-transform">▾</span>
+                      </summary>
+
+                      {/* Expanded content */}
+                      <div className="px-5 pb-5 border-t border-gray-700/60 pt-4 space-y-4">
+                        {/* Pay scale */}
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="rounded-lg bg-gray-900/60 p-3">
+                            <p className="text-xs text-gray-500 mb-0.5">Entry-Level Pay</p>
+                            <p className="text-green-400 font-bold text-lg">{d.pay}</p>
+                            <p className="text-gray-600 text-xs">After certification</p>
+                          </div>
+                          <div className="rounded-lg bg-gray-900/60 p-3">
+                            <p className="text-xs text-gray-500 mb-0.5">Senior / Lead Pay</p>
+                            <p className="text-blue-400 font-bold text-lg">{d.senior}</p>
+                            <p className="text-gray-600 text-xs">3–8 years experience</p>
+                          </div>
+                        </div>
+
+                        {/* Environment */}
+                        <div>
+                          <p className="text-xs text-gray-500 mb-1 uppercase tracking-widest">Work Environment</p>
+                          <p className="text-gray-300 text-sm">{d.environment}</p>
+                        </div>
+
+                        {/* Highlights */}
+                        <div>
+                          <p className="text-xs text-gray-500 mb-2 uppercase tracking-widest">What to Expect</p>
+                          <ul className="space-y-1.5">
+                            {d.highlights.map((h, i) => (
+                              <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                                <span className={`flex-shrink-0 mt-0.5 ${cat.color}`}>✓</span>
+                                {h}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* CTA */}
+                        <div className="flex gap-3 pt-1">
+                          <Link
+                            href="/login"
+                            className="flex-1 py-2 px-4 bg-blue-700 hover:bg-blue-600 text-white text-sm font-semibold rounded-lg text-center transition-colors"
+                          >
+                            {q.free ? 'Start Free →' : 'Enroll — $1,499 →'}
+                          </Link>
+                          <Link
+                            href={`/training/${id}`}
+                            className="py-2 px-4 border border-gray-600 hover:border-gray-400 text-gray-400 hover:text-white text-sm rounded-lg text-center transition-colors"
+                          >
+                            Preview →
+                          </Link>
+                        </div>
+                      </div>
+                    </details>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CAREER TRAJECTORY ─────────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
+        <div className="text-center mb-12">
+          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Career Trajectory</span>
+          <h2 className="text-3xl font-bold text-white mt-3">Where this takes you.</h2>
+          <p className="text-gray-400 mt-3 max-w-xl mx-auto">Across all 24 tracks, the same career ladder applies. The trades vary — the ceiling doesn&apos;t.</p>
+        </div>
+        <div className="grid md:grid-cols-4 gap-6">
+          {[
+            { title: 'Jr. Technician', salary: '$45K–$75K', time: 'After certification', color: 'border-blue-800 bg-blue-900/20', tc: 'text-blue-400' },
+            { title: 'Technician / FSE', salary: '$75K–$100K', time: '2–3 years', color: 'border-green-900 bg-green-900/10', tc: 'text-green-400' },
+            { title: 'Senior / Lead', salary: '$95K–$130K', time: '5–8 years', color: 'border-yellow-900 bg-yellow-900/10', tc: 'text-yellow-400' },
+            { title: 'Management', salary: '$130K+', time: '8–12 years', color: 'border-orange-900 bg-orange-900/10', tc: 'text-orange-400' },
+          ].map((item, i) => (
+            <div key={i} className={`rounded-lg border p-6 text-center ${item.color}`}>
+              <p className={`font-bold text-lg ${item.tc}`}>{item.title}</p>
+              <p className="text-white font-semibold text-xl mt-1">{item.salary}</p>
+              <p className="text-gray-500 text-xs mt-2">{item.time}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── SHARED FOUNDATION ─────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">The Problem</span>
+            <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">The Shared Foundation</span>
             <h2 className="text-3xl font-bold text-white mt-3 mb-6">
-              The industry is running out of people to keep the lights on.
+              Complete 10 modules once. They count toward every certification.
             </h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              Every hospital emergency room, every data center, every cell tower depends on UPS systems
-              to survive power outages. These systems fail without skilled engineers to service them.
-              The workforce is aging out faster than it&apos;s being replaced.
+            <p className="text-gray-400 leading-relaxed mb-4">
+              Every track starts with the same 10 foundation modules — electrical theory, AC/DC circuits,
+              reading electrical drawings, NFPA 70E arc flash safety, lockout/tagout (LOTO), and test equipment.
+              After that, each track branches into its own specialized curriculum.
             </p>
             <p className="text-gray-300 leading-relaxed font-medium">
-              Mastering Field Service builds a direct path — no debt, no four-year wait — to a real career in
-              critical power systems.
+              Start with UPS. Add HVAC later. The foundation modules don&apos;t repeat — you build on top of them.
             </p>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {[
-              { icon: '🏥', title: 'Healthcare', body: 'ICUs, operating rooms, and life support run on UPS 24/7. A power failure without backup is catastrophic.' },
-              { icon: '🖥️', title: 'Data Centers', body: 'AI, cloud computing, and every major website requires continuous power. UPS failure costs millions per hour.' },
-              { icon: '🏦', title: 'Financial Systems', body: 'Trading floors and banking systems require zero-interruption power. Engineers are on call around the clock.' },
-              { icon: '📡', title: 'Telecom & Military', body: 'Emergency communications and defense systems depend on power reliability. The need never stops.' },
+              { n: 'Modules 1–6', title: 'Electrical Foundations', sub: "Electricity, circuits, components, AC/DC, Ohm's law, transformers", badge: null },
+              { n: 'Module 7', title: 'Reading Electrical Drawings', sub: 'Schematics, one-lines, wiring diagrams, IEEE/IEC symbol standards', badge: 'ALL TRACKS' },
+              { n: 'Module 8', title: 'NFPA 70E — Arc Flash Safety', sub: 'PPE categories 1–4, approach boundaries, energized work permits', badge: 'FREE CERT' },
+              { n: 'Module 9', title: 'Lockout / Tagout (LOTO)', sub: 'OSHA 29 CFR 1910.147, six-step de-energization, group LOTO', badge: 'FREE CERT' },
+              { n: 'Module 10', title: 'Meters & Test Equipment', sub: 'DMM, clamp meter, megger — interactive simulation labs', badge: 'LAB' },
             ].map((item, i) => (
-              <div key={i} className="flex gap-4 p-4 rounded-lg bg-gray-800 border border-gray-700">
-                <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                <div>
-                  <p className="text-white font-semibold text-sm">{item.title}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed mt-1">{item.body}</p>
+              <div key={i} className="flex gap-4 p-4 rounded-lg bg-gray-800 border border-gray-700 items-start">
+                <span className="text-blue-500 font-mono text-xs font-bold flex-shrink-0 mt-0.5 w-24">{item.n}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="text-white font-semibold text-sm">{item.title}</p>
+                    {item.badge === 'FREE CERT' && <span className="px-1.5 py-0.5 bg-amber-600/30 border border-amber-600/60 text-amber-300 text-[10px] font-bold rounded">FREE CERT</span>}
+                    {item.badge === 'LAB' && <span className="px-1.5 py-0.5 bg-blue-600/30 border border-blue-600/60 text-blue-300 text-[10px] font-bold rounded">LAB</span>}
+                    {item.badge === 'ALL TRACKS' && <span className="px-1.5 py-0.5 bg-gray-600/40 border border-gray-500/60 text-gray-300 text-[10px] font-bold rounded">ALL TRACKS</span>}
+                  </div>
+                  <p className="text-gray-500 text-xs mt-0.5">{item.sub}</p>
                 </div>
               </div>
             ))}
@@ -116,98 +626,56 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── PROGRAMS ──────────────────────────────────────────────────── */}
+      {/* ── HOW TRAINING WORKS ────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
-        <div className="text-center mb-10">
-          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Training Programs</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Nine career tracks. One portal.</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Every program shares the same 10-module electrical and safety foundation — and the trades share
-            specialty cores where they overlap. Complete a module once; it counts toward every certification.
-          </p>
+        <div className="text-center mb-12">
+          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Why It&apos;s Rigorous</span>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">The training is hard. That&apos;s the point.</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">The credential means something because it can&apos;t be rushed or gamed.</p>
         </div>
-
-        {/* Featured: the live UPS program */}
-        <div className="rounded-xl border-2 border-blue-700 bg-blue-950/20 p-7 mb-6">
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <span className="text-blue-400 font-mono text-xs font-bold uppercase tracking-widest">UPS FSE</span>
-                <span className="px-2 py-0.5 bg-green-900/40 border border-green-700/60 text-green-400 text-xs rounded">Enrolling Now</span>
-              </div>
-              <h3 className="text-xl font-bold text-white mt-2 mb-2">UPS Field Service Engineering</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Service uninterruptible power supplies protecting hospitals, data centers, financial systems, and
-                military installations. 28 modules · 3–6 months · Jr. UPS FSE certification exam included · $1,499.
-              </p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { step: '01', title: '5-Minute Minimum Per Slide', body: 'Each slide has a built-in timer. The section quiz only unlocks after 5 full minutes — enforced server-side.' },
+            { step: '02', title: '100% Section Quiz Score', body: 'Every slide has a quiz. You must answer every question correctly before advancing. Retry as needed.' },
+            { step: '03', title: '100% Module Test — Once Per Day', body: 'After all slides, take a 10-question test. 100% required. One attempt per day. Fail, and you redo all slides.' },
+            { step: '04', title: '3 Days Between Modules', body: 'After passing a module, you wait 3 days before the next unlocks. Complete all modules in as little as 3 months.' },
+          ].map((item, i) => (
+            <div key={i} className="p-6 rounded-lg bg-gray-800 border border-gray-700">
+              <span className="text-blue-600 text-xs font-bold font-mono">{item.step}</span>
+              <h3 className="text-white font-semibold mt-2 mb-3">{item.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{item.body}</p>
             </div>
-            <div className="flex-shrink-0">
-              <Link
-                href="#pricing"
-                className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-sm transition-colors"
-              >
-                View pricing →
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Coming-soon tracks, data-driven */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {COURSES.filter((course) => course.comingSoon).map((course) => {
-            const accent = PROGRAM_ACCENTS[course.color] ?? 'text-violet-400';
-            return (
-              <Link
-                key={course.id}
-                href={`/training/${course.id}`}
-                className="rounded-xl border border-gray-800 bg-gray-900/50 p-5 hover:border-gray-600 transition-colors group"
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`font-mono text-[11px] font-bold uppercase tracking-widest ${accent}`}>{course.shortTitle}</span>
-                  <span className="px-1.5 py-0.5 bg-yellow-900/40 border border-yellow-700/60 text-yellow-400 text-[10px] rounded">Soon</span>
-                </div>
-                <p className="text-white font-semibold text-sm mb-1 group-hover:text-gray-100">{course.title}</p>
-                <p className="text-gray-500 text-xs leading-relaxed mb-3">{course.tagline}</p>
-                <span className="text-gray-500 text-xs group-hover:text-gray-300 transition-colors">
-                  {course.totalModules} modules · Preview curriculum →
-                </span>
-              </Link>
-            );
-          })}
+          ))}
         </div>
       </section>
 
-      {/* ── PRICING / ALL OPTIONS ─────────────────────────────────────── */}
+      {/* ── PRICING ───────────────────────────────────────────────────── */}
       <section id="pricing" className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="text-center mb-12">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Pricing</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Choose your path</h2>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Simple pricing. One career-changing investment.</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Train from scratch with the 3-to-6-month course, or test out if you already work in the field.
-            All paths lead to a verifiable, employer-recognized credential.
+            Train from scratch with the full course, or test out if you already work in the field. Same credential either way.
           </p>
         </div>
 
-        {/* Main: Training Course */}
         <div className="rounded-xl border-2 border-blue-600 bg-blue-950/20 p-8 mb-8">
           <div className="flex flex-col md:flex-row md:items-center gap-8">
             <div className="flex-1">
-              <div className="inline-block px-2.5 py-0.5 bg-blue-600 text-white text-xs font-bold rounded-full mb-3">
-                MOST POPULAR
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-1">3-to-6-Month Training Course</h3>
+              <div className="inline-block px-2.5 py-0.5 bg-blue-600 text-white text-xs font-bold rounded-full mb-3">MOST POPULAR</div>
+              <h3 className="text-2xl font-bold text-white mb-1">Full Training Course</h3>
               <p className="text-4xl font-bold text-white mb-1">$1,499</p>
-              <p className="text-blue-300 text-sm mb-5">Jr. FSE Certification Exam included at completion</p>
+              <p className="text-blue-300 text-sm mb-5">Certification exam included at completion — no extra charge</p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                 {[
-                  '28 modules in 3–6 months',
-                  '78+ slides with 5-min timer per slide',
-                  '100% required on every section quiz',
-                  'Fail a section → repeat it, 24-hour retry wait',
-                  '100% required on every module test (once per day)',
-                  '3 day minimum between modules',
-                  'Practice exam unlocked free after all 28 modules',
-                  'Jr. FSE Exam included — no extra charge',
+                  'Full track curriculum — 20–34 modules',
+                  '5-minute enforced slide timers',
+                  '100% required on every quiz and test',
+                  '3-day minimum between modules',
+                  'NFPA 70E certificate — free at Module 8',
+                  'LOTO certificate — free at Module 9',
+                  'Practice exam unlocked after all modules',
+                  'Jr. Certification exam included — no extra charge',
                 ].map((t, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                     <span className="text-blue-400 flex-shrink-0 mt-0.5">✓</span>{t}
@@ -231,86 +699,34 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Jr. FSE Test-Outs */}
-        <div className="mb-8">
-          <h3 className="text-lg font-bold text-white mb-2">Jr. FSE Test-Out — For experienced technicians</h3>
-          <p className="text-gray-500 text-sm mb-5">
-            Skip the training. One attempt only — fail and you must complete the training course before retrying.
-          </p>
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
           <div className="rounded-xl border border-amber-800/60 bg-amber-950/10 p-6">
-            <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="flex-1">
-                <h4 className="text-xl font-bold text-white mb-1">Jr. FSE Test-Out</h4>
-                <p className="text-3xl font-bold text-white mb-3">$299</p>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Live proctor session. One attempt — pass and earn your Jr. FSE certification; fail and the training course is required before retrying.
-                </p>
-              </div>
-              <div className="flex-shrink-0 min-w-[200px]">
-                <PurchaseButton
-                  productId="jr_fse_test_human"
-                  label="Buy Test-Out — $299"
-                  className="block w-full py-2.5 px-4 bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
-                />
-              </div>
-            </div>
+            <h4 className="text-white font-bold text-lg mb-1">Jr. Test-Out — For experienced techs</h4>
+            <p className="text-3xl font-bold text-white mb-2">$299</p>
+            <p className="text-gray-400 text-sm mb-4">Live proctor. One attempt only — fail and the training course is required before retrying.</p>
+            <PurchaseButton
+              productId="jr_fse_test_human"
+              label="Buy Test-Out — $299"
+              className="block w-full py-2.5 px-4 bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+            />
+          </div>
+          <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-6">
+            <h4 className="text-white font-bold text-lg mb-1">FSE Exam — Advanced certification</h4>
+            <p className="text-3xl font-bold text-white mb-2">$649</p>
+            <p className="text-gray-400 text-sm mb-4">The advanced FSE certification for engineers with field experience. Live proctor required.</p>
+            <PurchaseButton
+              productId="fse_proctored_exam"
+              label="Buy FSE Exam — $649"
+              className="block w-full py-2.5 px-4 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+            />
           </div>
         </div>
 
-        {/* FSE Exam */}
-        <div className="mb-8">
-          <h3 className="text-lg font-bold text-white mb-5">FSE Certification — Advanced level</h3>
-          <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-6 flex flex-col md:flex-row md:items-center gap-6">
-            <div className="flex-1">
-              <h4 className="text-xl font-bold text-white mb-1">FSE Exam</h4>
-              <p className="text-3xl font-bold text-white mb-3">$649</p>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                The advanced FSE certification for engineers with field experience. Live proctor required.
-                Session scheduled after purchase.
-              </p>
-            </div>
-            <div className="flex-shrink-0">
-              <PurchaseButton
-                productId="fse_proctored_exam"
-                label="Buy FSE Exam — $649"
-                className="block py-3 px-6 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center transition-colors"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Packages */}
-        <div className="mb-8">
-          <h3 className="text-lg font-bold text-white mb-2">Packages — Save $49</h3>
-          <p className="text-gray-500 text-sm mb-5">Training course bundled with a test-out option.</p>
-          <div className="grid md:grid-cols-2 gap-5">
-            {([
-              { name: 'Training + Jr. FSE Test-Out', price: '$1,749', id: 'pkg_training_jr_human' },
-              { name: 'Training + FSE Exam', price: '$2,099', id: 'pkg_training_fse' },
-            ] as const).map((pkg, i) => (
-              <div key={i} className="rounded-xl border border-blue-900/50 bg-blue-950/10 p-5">
-                <h4 className="text-white font-semibold mb-1">{pkg.name}</h4>
-                <p className="text-2xl font-bold text-white mb-3">{pkg.price}</p>
-                <p className="text-green-400 text-xs font-medium mb-4">Save $49 vs individual</p>
-                <PurchaseButton
-                  productId={pkg.id}
-                  label={`Buy Package — ${pkg.price}`}
-                  className="block w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Book */}
         <div className="rounded-xl border border-amber-900/40 bg-amber-950/10 p-6 flex flex-col sm:flex-row sm:items-center gap-6">
           <div className="flex-1">
             <h4 className="text-white font-semibold mb-1">Add the Book — Signed Copy</h4>
             <p className="text-2xl font-bold text-white mb-2">$69.99</p>
-            <p className="text-gray-400 text-sm">
-              <em>Mastering Uninterruptible Power Supplies</em> — personally signed by Francis Aiello.
-              Ships to US addresses.
-            </p>
+            <p className="text-gray-400 text-sm"><em>Mastering Uninterruptible Power Supplies</em> — personally signed by Francis Aiello. Ships to US addresses.</p>
           </div>
           <div className="flex-shrink-0">
             <PurchaseButton
@@ -322,168 +738,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── HOW TRAINING WORKS ────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
-        <div className="text-center mb-12">
-          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Why It&apos;s Rigorous</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">The training is hard. That&apos;s the point.</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            The credential means something because it can&apos;t be rushed or gamed.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { step: '01', title: '5-Minute Minimum Per Slide', body: 'Each slide has a built-in timer. The section quiz only unlocks after 5 full minutes — enforced server-side.' },
-            { step: '02', title: '100% Section Quiz Score', body: 'Every slide has a 10-question quiz. You must answer every question correctly before advancing. Retry as needed.' },
-            { step: '03', title: '100% Module Test — Once Per Day', body: 'After all slides, take a 10-question test. 100% required. One attempt per day. Fail, and you redo all slides.' },
-            { step: '04', title: '3 Days Between Modules', body: 'After passing a module test, you wait 3 days before the next module unlocks. Complete all 28 modules in as little as 3 months, or take up to 6.' },
-          ].map((item, i) => (
-            <div key={i} className="p-6 rounded-lg bg-gray-800 border border-gray-700">
-              <span className="text-blue-600 text-xs font-bold font-mono">{item.step}</span>
-              <h3 className="text-white font-semibold mt-2 mb-3">{item.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── CAREER TRAJECTORY ─────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
-        <div className="text-center mb-12">
-          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Career Trajectory</span>
-          <h2 className="text-3xl font-bold text-white mt-3">Where this takes you.</h2>
-        </div>
-        <div className="grid md:grid-cols-4 gap-6">
-          {[
-            { title: 'Jr. FSE', salary: '$55K–$65K', time: 'After training', color: 'border-blue-800 bg-blue-900/20', tc: 'text-blue-400' },
-            { title: 'FSE', salary: '$75K–$100K', time: '2–3 years', color: 'border-green-900 bg-green-900/10', tc: 'text-green-400' },
-            { title: 'Senior FSE', salary: '$95K–$130K', time: '5–8 years', color: 'border-yellow-900 bg-yellow-900/10', tc: 'text-yellow-400' },
-            { title: 'Management', salary: '$120K+', time: '8–12 years', color: 'border-orange-900 bg-orange-900/10', tc: 'text-orange-400' },
-          ].map((item, i) => (
-            <div key={i} className={`rounded-lg border p-6 text-center ${item.color}`}>
-              <p className={`font-bold text-lg ${item.tc}`}>{item.title}</p>
-              <p className="text-white font-semibold text-xl mt-1">{item.salary}</p>
-              <p className="text-gray-500 text-xs mt-2">{item.time}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── WHY SAFETY COMES BEFORE TECHNICAL CONTENT ─────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Our Curriculum Philosophy</span>
-            <h2 className="text-3xl font-bold text-white mt-3 mb-6">
-              Safety training without electrical knowledge is just memorizing rules.
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-4">
-              Most programs teach NFPA 70E on day one — before students understand voltage, current, or
-              fault current. They can recite PPE categories, but they don&apos;t understand <em>why</em> arc
-              flash incident energy increases with lower circuit impedance. They can identify approach
-              boundaries on a diagram, but they can&apos;t reason about which energy sources remain live
-              when a UPS is in bypass mode.
-            </p>
-            <p className="text-gray-300 leading-relaxed mb-4 font-medium">
-              At Mastering Field Service, Modules 1–6 build the electrical foundation first. Module 7 teaches reading
-              electrical drawings — schematics, one-lines, and wiring diagrams. Module 8 delivers
-              NFPA 70E — every arc flash concept lands with full context. Module 9 delivers LOTO —
-              and students understand exactly why each step matters on multi-source UPS equipment.
-              They don&apos;t memorize the standards. They understand them.
-            </p>
-            <p className="text-gray-400 leading-relaxed text-sm">
-              The result is a technician who can adapt when the field situation doesn&apos;t match a
-              textbook scenario — because they understand the physics behind the rules, not just the
-              rules themselves.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {[
-              {
-                label: 'Before: rules without context',
-                body: '"PPE Category 2 is required at 480V motor control centers." The student passes the quiz and moves on.',
-                color: 'border-red-900/60 bg-red-950/20',
-                tc: 'text-red-400',
-              },
-              {
-                label: 'After: principles with understanding',
-                body: '"Low bus impedance drives high fault current. High fault current × slow-clearing breakers = high incident energy. Category 2 may not be enough on an MCC with a 65 kA fault rating and upstream breaker coordination issues." The student can reason about a situation they\'ve never seen.',
-                color: 'border-green-900/60 bg-green-950/20',
-                tc: 'text-green-400',
-              },
-              {
-                label: 'NFPA 70E Certificate included free',
-                body: 'Completing Module 8 earns a standalone NFPA 70E certificate — verifiable by employers. No additional purchase required.',
-                color: 'border-blue-900/60 bg-blue-950/20',
-                tc: 'text-blue-400',
-              },
-            ].map((item, i) => (
-              <div key={i} className={`p-5 rounded-lg border ${item.color}`}>
-                <p className={`text-sm font-semibold mb-2 ${item.tc}`}>{item.label}</p>
-                <p className="text-gray-400 text-sm leading-relaxed">{item.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CURRICULUM ────────────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
-        <div className="text-center mb-12">
-          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Curriculum</span>
-          <h2 className="text-3xl font-bold text-white mt-3 mb-4">28 modules. 3–6 months. One career.</h2>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            { n: '01–06', title: 'Electrical Foundations', topics: "Electricity, circuits, components, AC/DC, Ohm's law, scientific notation", badge: null },
-            { n: '07', title: 'Reading Electrical Drawings', topics: 'Schematic symbols (IEEE/ANSI & IEC), semiconductor symbols, transformer symbols, wiring diagrams, one-line diagrams, logic schematics', badge: 'NEW' },
-            { n: '08', title: 'NFPA 70E — Electrical Safety', topics: 'Arc flash hazards, PPE categories 1–4, approach boundaries, energized work permits, safe work practices on UPS equipment', badge: 'FREE CERT' },
-            { n: '09', title: 'Lockout/Tagout (LOTO)', topics: 'OSHA 29 CFR 1910.147, six-step de-energization, lockout hardware, UPS multi-source isolation, group LOTO, re-energization sequence', badge: 'FREE CERT' },
-            { n: '10', title: 'Meters & Test Equipment', topics: 'DMM, clamp meter, megger — interactive hands-on simulations, dial selection, lead placement, troubleshooting with all three meters', badge: 'LAB' },
-            { n: '11–16', title: 'UPS Core Systems', topics: 'UPS overview, PDUs, rectifiers, inverters, transformers, battery types', badge: null },
-            { n: '17', title: 'Battery Safety', topics: 'PPE, installation, testing, disposal, hazard identification', badge: null },
-            { n: '18–19', title: 'Power Electronics', topics: 'PWM, duty cycle, digital logic, truth tables, control systems', badge: null },
-            { n: '20–21', title: 'Control Systems', topics: 'Relay logic, ladder diagrams, AVR, voltage regulation, feedback loops', badge: null },
-            { n: '22', title: 'Rotating Machines', topics: 'AC/DC motors, generators, synchronization, bearing maintenance', badge: null },
-            { n: '23–25', title: 'Configurations, Procedures & Troubleshooting', topics: 'N+1 redundancy, startup, shutdown, systematic diagnosis, fault codes, PM procedures', badge: null },
-            { n: '26–28', title: 'Repair & Career', topics: 'Component replacement, post-repair commissioning, incident response, career development', badge: null },
-          ].map((item, i) => (
-            <div key={i} className={`p-5 rounded-lg border relative ${item.badge === 'FREE CERT' ? 'border-amber-700/60 bg-amber-950/10' : item.badge === 'LAB' ? 'border-blue-700/60 bg-blue-950/10' : item.badge === 'NEW' ? 'border-purple-700/60 bg-purple-950/10' : 'border-gray-700 bg-gray-800'}`}>
-              <div className="flex items-center gap-2 mb-1">
-                <span className={`text-xs font-mono font-bold ${item.badge === 'FREE CERT' ? 'text-amber-400' : item.badge === 'LAB' ? 'text-blue-400' : item.badge === 'NEW' ? 'text-purple-400' : 'text-blue-500'}`}>Module {item.n}</span>
-                {item.badge === 'FREE CERT' && (
-                  <span className="px-1.5 py-0.5 bg-amber-600/30 border border-amber-600/60 text-amber-300 text-xs font-bold rounded">
-                    FREE CERT
-                  </span>
-                )}
-                {item.badge === 'LAB' && (
-                  <span className="px-1.5 py-0.5 bg-blue-600/30 border border-blue-600/60 text-blue-300 text-xs font-bold rounded">
-                    INTERACTIVE LAB
-                  </span>
-                )}
-                {item.badge === 'NEW' && (
-                  <span className="px-1.5 py-0.5 bg-purple-600/30 border border-purple-600/60 text-purple-300 text-xs font-bold rounded">
-                    NEW
-                  </span>
-                )}
-              </div>
-              <p className="text-white font-semibold mb-2">{item.title}</p>
-              <p className="text-gray-400 text-xs leading-relaxed">{item.topics}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── EMPLOYER SECTION ──────────────────────────────────────────── */}
+      {/* ── EMPLOYER ──────────────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">For Employers</span>
             <h2 className="text-3xl font-bold text-white mt-3 mb-6">Train your entire service team.</h2>
             <p className="text-gray-400 leading-relaxed mb-8">
-              Stop paying premium staffing rates for technicians who don&apos;t know your equipment.
-              Mastering Field Service trains and certifies your team with the same rigor — 100% test scores required,
-              structured progression, employer-verifiable credentials.
+              Stop paying premium rates for technicians who don&apos;t know your equipment.
+              Mastering Field Service trains and certifies your team with 100% test scores required,
+              structured progression, and employer-verifiable credentials across every track.
             </p>
             <div className="space-y-3">
               {([
@@ -533,15 +797,13 @@ export default function HomePage() {
         </div>
         <div className="space-y-4">
           {[
-            { q: 'Do I need any experience to start?', a: 'No. The training course starts with electrical fundamentals and builds from there. No prior knowledge required.' },
-            { q: 'What is the NFPA 70E certificate and is it included?', a: 'Yes — the NFPA 70E Electrical Safety certificate is earned by completing Module 8 and is included free with the training course. It covers arc flash hazards, PPE categories 1–4, approach boundaries, energized work permits, and safe work practices specific to UPS and critical power equipment. It is a standalone, employer-verifiable credential in addition to your Jr. FSE certification.' },
-            { q: 'Why do NFPA 70E and LOTO come after the electrical fundamentals instead of first?', a: 'Safety training without electrical knowledge is just memorizing rules. Once you understand fault current, circuit impedance, and how UPS bypass paths work, the arc flash and LOTO standards make complete sense — you can reason about hazards rather than recite procedures. NFPA 70E arc flash categories mean something when you know why high fault current increases incident energy. LOTO multi-source isolation makes sense when you understand that a static bypass can energize the output bus even with the main breaker open.' },
-            { q: 'What is the LOTO certificate and is it included?', a: 'Yes — the Lockout/Tagout (LOTO) certificate is earned by completing Module 9 and is included free with the training course. It covers OSHA 29 CFR 1910.147 requirements, the six-step de-energization procedure, lockout hardware, UPS-specific multi-source isolation, group lockout, and re-energization sequences. It is a standalone, employer-verifiable credential.' },
-            { q: 'What happens if I fail the Jr. FSE test-out?', a: 'You must complete the full training course before you can attempt the exam again. The test-out is for people already working in the field who know the material.' },
-            { q: "What is the Jr. FSE Practice Test?", a: 'The practice test ($14.99) uses the same 50-question format and question pool as the real exam so you can gauge your readiness. No certificate is issued — it\'s for practice only. The real test-out ($299) is human proctored, one attempt, and issues a certification if you pass.' },
-            { q: 'How long does the training take?', a: 'The 3-day minimum between modules is enforced server-side. At that pace, all 28 modules can be completed in as little as 3 months. Most people finish in 3–6 months depending on how quickly they pass each module test. The timeline is verifiable — it cannot be bypassed.' },
-            { q: 'Is the Jr. FSE exam included in the training course?', a: 'Yes. Completing all 28 modules automatically unlocks your Jr. FSE certification exam at no additional cost. The $1,499 covers everything — including the NFPA 70E and LOTO certificates earned along the way.' },
-            { q: 'What is the FSE exam?', a: "The advanced certification for experienced engineers. Human proctored, live session, $649. Separate from Jr. FSE — you don't need Jr. FSE first, though the training course prepares you well for it." },
+            { q: 'Do I need any experience to start?', a: 'No. The training starts with electrical fundamentals and builds from there. Every track begins with the same 10-module foundation — no prior knowledge required.' },
+            { q: 'Can I train in more than one track?', a: 'Yes. Modules 1–10 are shared across every program. Complete them once and they count toward all certifications. After the foundation you branch into whichever specialty tracks you choose — there is no limit.' },
+            { q: 'Which track should I start with?', a: 'If you are not sure, start with UPS Field Service Engineering — it is the broadest critical power track and the most transferable foundation. Or take the free Critical Environment Fundamentals course first to get a feel for the material and the platform.' },
+            { q: 'What is included in the $1,499 training course?', a: 'Everything: all modules, section quizzes, module tests, the NFPA 70E certificate (Module 8), the LOTO certificate (Module 9), the practice exam, and your Jr. Certification exam at completion. No hidden fees.' },
+            { q: 'How long does training take?', a: 'The 3-day minimum between modules is enforced server-side. At that pace a 28-module track takes at least 3 months. Most students finish in 3–6 months. Shorter tracks (16–24 modules) can be completed in 2–4 months.' },
+            { q: 'What is the NFPA 70E certificate?', a: 'A standalone, employer-verifiable credential earned by completing Module 8. Covers arc flash hazards, PPE categories 1–4, approach boundaries, and energized work permits. Included free with the training course.' },
+            { q: 'What is the test-out option?', a: 'If you already work in the field and know the material, you can skip training and attempt the certification exam directly for $299. Live proctor. One attempt — fail and the full training course is required before retrying.' },
           ].map((item, i) => (
             <div key={i} className="border border-gray-700 rounded-lg p-6 bg-gray-800/40">
               <p className="text-white font-semibold mb-3">{item.q}</p>
@@ -554,12 +816,12 @@ export default function HomePage() {
       {/* ── FINAL CTA ─────────────────────────────────────────────────── */}
       <section className="max-w-4xl mx-auto px-4 py-24 text-center">
         <h2 className="text-4xl font-bold text-white mb-6">
-          The industry needs you.{' '}
+          24 career tracks. One decision.{' '}
           <span className="text-blue-400">Start your free account.</span>
         </h2>
         <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-          Create your account and explore the training portal. Decide on your path —
-          training course, test-out, or both. Your career in critical power starts here.
+          Create your account, take the free Critical Environment Fundamentals course, and explore every track.
+          Enroll when you&apos;re ready. Your career in the trades starts here.
         </p>
         <Link
           href="/login"
