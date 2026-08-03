@@ -1287,7 +1287,6 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_field_pm',
     testOutProductId: 'jr_field_pm_test_human',
-    comingSoon: true,
   },
   {
     id: 'pump-tech',
@@ -1300,6 +1299,5 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_pump_tech',
     testOutProductId: 'jr_pump_tech_test_human',
-    comingSoon: true,
   },
 ];
