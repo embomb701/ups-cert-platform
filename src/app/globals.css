@@ -79,3 +79,18 @@
 .exam-active ::selection {
   background: transparent;
 }
+
+/* Certificate print — hide site chrome, show only the certificate */
+@media print {
+  header,
+  footer,
+  nav,
+  .print-hidden {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
