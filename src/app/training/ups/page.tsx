@@ -8,6 +8,10 @@ import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const dynamic = 'force-dynamic';
 
+export const metadata = {
+  title: 'UPS FSE — Course Overview',
+};
+
 export default async function UpsPortalPage() {
   const cookieStore = await cookies();
   const token = cookieStore.get('firebase-token')?.value;

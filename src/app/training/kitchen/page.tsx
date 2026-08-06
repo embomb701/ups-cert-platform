@@ -5,8 +5,13 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { ALL_MODULES, KITCHEN_MODULES } from '@/data/index';
 import { KITCHEN_MODULE_PLACEHOLDERS } from '@/data/courses';
 import Link from 'next/link';
+import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata = {
+  title: 'Commercial Kitchen FSE — Course Overview',
+};
 
 export default async function KitchenPortalPage() {
   const cookieStore = await cookies();
@@ -129,14 +134,24 @@ export default async function KitchenPortalPage() {
           </p>
         </div>
 
-        {/* Coming soon banner for unenrolled */}
+        {/* Enroll CTA — unenrolled users */}
         {!hasAccess && (
-          <div className="rounded-xl border border-orange-800/60 bg-orange-950/10 p-5">
-            <p className="text-orange-300 font-semibold mb-1">Coming Soon — Enrollment Opening Soon</p>
-            <p className="text-gray-400 text-sm">
-              Modules 1–3 Lesson 1 are free to preview. {kitchenBuiltCount} of 17 kitchen-specific modules are ready; the rest are in development.
-              <Link href="/training" className="ml-2 text-orange-400 hover:text-orange-300 underline">← Back to Training Hub</Link>
-            </p>
+          <div className="rounded-xl border-2 border-orange-700 bg-orange-950/20 p-6">
+            <div className="flex flex-col md:flex-row md:items-center gap-4">
+              <div className="flex-1">
+                <p className="text-white font-semibold mb-1">Free trial active — Modules 1–3, Lesson 1</p>
+                <p className="text-gray-400 text-sm">
+                  Enroll to unlock all {10 + kitchenBuiltCount} built modules, section quizzes, module tests, and the Jr. Kitchen FSE certification exam.
+                </p>
+              </div>
+              <div className="flex-shrink-0">
+                <PurchaseButton
+                  productId="training_kitchen"
+                  label="Enroll — $1,499"
+                  className="block w-full py-2.5 px-5 bg-orange-600 hover:bg-orange-500 disabled:opacity-50 text-white font-semibold rounded-lg text-sm text-center transition-colors"
+                />
+              </div>
+            </div>
           </div>
         )}
 
