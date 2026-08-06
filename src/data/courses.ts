@@ -1312,4 +1312,17 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_pump_tech',
     testOutProductId: 'jr_pump_tech_test_human',
   },
+  {
+    id: 'telecom',
+    title: 'Telecom OSP Technician',
+    shortTitle: 'Telecom OSP',
+    tagline: 'Fiber splicing, OTDR testing, copper plant, DMARC extensions, cell site power, and structured cabling certification — the full outside plant skill set.',
+    accessKey: 'training_telecom',
+    certTitle: 'Jr. Telecom OSP Technician',
+    color: 'violet',
+    totalModules: 6,
+    stripeProductId: 'training_telecom',
+    testOutProductId: 'jr_telecom_tech_test_human',
+    comingSoon: false,
+  },
 ];

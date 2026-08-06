@@ -660,6 +660,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // TELECOM OSP TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_telecom: {
+    name: 'Telecom OSP Technician Training Course + Jr. Telecom OSP Certification Exam',
+    shortName: 'Telecom OSP Training Course',
+    priceInCents: 129900,   // $1,299
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_TELECOM ?? '',
+  },
+
+  jr_telecom_tech_test_human: {
+    name: 'Jr. Telecom OSP Technician Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Telecom OSP Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_TELECOM_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_telecom_testout: {
+    name: 'Telecom OSP Training Course + Jr. Telecom OSP Test-Out (Human Proctored)',
+    shortName: 'Telecom OSP Training + Test-Out Package',
+    priceInCents: 154900,   // $1,549
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_TELECOM_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

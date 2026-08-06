@@ -140,6 +140,9 @@ export const PRODUCTS = {
   TRAINING_PUMP_TECH: 'training_pump_tech',
   JR_PUMP_TECH_TEST_HUMAN: 'jr_pump_tech_test_human',
   PKG_TRAINING_PUMP_TECH_TESTOUT: 'pkg_training_pump_tech_testout',
+  TRAINING_TELECOM: 'training_telecom',
+  JR_TELECOM_TECH_TEST_HUMAN: 'jr_telecom_tech_test_human',
+  PKG_TRAINING_TELECOM_TESTOUT: 'pkg_training_telecom_testout',
 } as const;
 
 // Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts
