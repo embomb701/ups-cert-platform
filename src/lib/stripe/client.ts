@@ -710,6 +710,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // BUILDING COMMISSIONING AGENT PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_building_cx: {
+    name: 'Building Commissioning Agent Training Course + Jr. Building Cx Agent Certification Exam',
+    shortName: 'Building Cx Training Course',
+    priceInCents: 129900,   // $1,299
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_BUILDING_CX ?? '',
+  },
+
+  jr_building_cx_test_human: {
+    name: 'Jr. Building Commissioning Agent Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Building Cx Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_BUILDING_CX_HUMAN ?? '',
+  },
+
+  pkg_training_building_cx_testout: {
+    name: 'Building Cx Training Course + Jr. Building Cx Test-Out (Human Proctored)',
+    shortName: 'Building Cx Training + Test-Out Package',
+    priceInCents: 154900,   // $1,549
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_BUILDING_CX_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

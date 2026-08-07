@@ -146,6 +146,9 @@ export const PRODUCTS = {
   TRAINING_INDUSTRIAL_REF: 'training_industrial_ref',
   JR_INDUSTRIAL_REF_TEST_HUMAN: 'jr_industrial_ref_test_human',
   PKG_TRAINING_INDUSTRIAL_REF_TESTOUT: 'pkg_training_industrial_ref_testout',
+  TRAINING_BUILDING_CX: 'training_building_cx',
+  JR_BUILDING_CX_TEST_HUMAN: 'jr_building_cx_test_human',
+  PKG_TRAINING_BUILDING_CX_TESTOUT: 'pkg_training_building_cx_testout',
 } as const;
 
 // Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts
