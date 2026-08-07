@@ -685,6 +685,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // INDUSTRIAL REFRIGERATION OPERATOR PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_industrial_ref: {
+    name: 'Industrial Refrigeration Operator Training Course + Jr. Industrial Ref Certification Exam',
+    shortName: 'Industrial Ref Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_INDUSTRIAL_REF ?? '',
+  },
+
+  jr_industrial_ref_test_human: {
+    name: 'Jr. Industrial Refrigeration Operator Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Industrial Ref Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_INDUSTRIAL_REF_HUMAN ?? '',
+  },
+
+  pkg_training_industrial_ref_testout: {
+    name: 'Industrial Ref Training Course + Jr. Industrial Ref Test-Out (Human Proctored)',
+    shortName: 'Industrial Ref Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_INDUSTRIAL_REF_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 
