@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { sendCertEarnedEmail } from '@/lib/email';
 
 export const dynamic = 'force-dynamic';
 import { scoreAttempt, generateCertNumber } from '@/lib/exam/engine';
@@ -208,6 +209,23 @@ export async function POST(req: NextRequest) {
         createdAt: FieldValue.serverTimestamp(),
         severity: 'info',
       });
+
+      // Cert earned email — best-effort
+      try {
+        const userRecord = await adminAuth.getUser(uid);
+        if (userRecord.email && certificateNumber) {
+          const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+          sendCertEarnedEmail(
+            userRecord.email,
+            userRecord.displayName || userRecord.email,
+            certTitle,
+            certificateNumber,
+            `${siteUrl}/verify/${certificateNumber}`,
+          ).catch(() => {});
+        }
+      } catch {
+        // email failure is non-fatal
+      }
     }
 
     return NextResponse.json({
