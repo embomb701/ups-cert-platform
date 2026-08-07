@@ -830,6 +830,130 @@ async function grantFseAccess(userId: string, email: string, purchaseId: string)
   });
 }
 
+async function grantIndustrialRefTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_industrial_ref')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_industrial_ref_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrIndustrialRefAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_industrial_ref_test_human',
+    examLevel: 'jr_industrial_ref',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Industrial Ref Operator Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
+async function grantDcOpsTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_dc_ops')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_dc_ops_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrDcOpsAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_dc_ops_test_human',
+    examLevel: 'jr_dc_ops',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Data Center Operations Manager Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
+async function grantBuildingCxTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_building_cx')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_building_cx_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrBuildingCxAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_building_cx_test_human',
+    examLevel: 'jr_building_cx',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Building Commissioning Agent Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
+async function grantTelecomTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_telecom')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_telecom_tech_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrTelecomAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_telecom_tech_test_human',
+    examLevel: 'jr_telecom_tech',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Telecom OSP Technician Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 // ── Main handler ───────────────────────────────────────────────────────────
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
@@ -1293,6 +1417,70 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     case 'pkg_training_pump_tech_testout':
       await grantPumpTechTrainingAccess(userId, pid);
       await grantJrPumpTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Industrial Refrigeration Operator) ───────
+    case 'training_industrial_ref':
+      await grantIndustrialRefTrainingAccess(userId, pid);
+      break;
+
+    // ── Industrial Ref Test-Out ───────────────────────────────────────────────
+    case 'jr_industrial_ref_test_human':
+      await grantJrIndustrialRefAccess(userId, pid);
+      break;
+
+    // ── Package: Industrial Ref Training + Test-Out ───────────────────────────
+    case 'pkg_training_industrial_ref_testout':
+      await grantIndustrialRefTrainingAccess(userId, pid);
+      await grantJrIndustrialRefAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Data Center Operations Manager) ───────────
+    case 'training_dc_ops':
+      await grantDcOpsTrainingAccess(userId, pid);
+      break;
+
+    // ── DC Ops Test-Out ───────────────────────────────────────────────────────
+    case 'jr_dc_ops_test_human':
+      await grantJrDcOpsAccess(userId, pid);
+      break;
+
+    // ── Package: DC Ops Training + Test-Out ──────────────────────────────────
+    case 'pkg_training_dc_ops_testout':
+      await grantDcOpsTrainingAccess(userId, pid);
+      await grantJrDcOpsAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Building Commissioning Agent) ─────────────
+    case 'training_building_cx':
+      await grantBuildingCxTrainingAccess(userId, pid);
+      break;
+
+    // ── Building Cx Test-Out ──────────────────────────────────────────────────
+    case 'jr_building_cx_test_human':
+      await grantJrBuildingCxAccess(userId, pid);
+      break;
+
+    // ── Package: Building Cx Training + Test-Out ──────────────────────────────
+    case 'pkg_training_building_cx_testout':
+      await grantBuildingCxTrainingAccess(userId, pid);
+      await grantJrBuildingCxAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Telecom OSP Technician) ───────────────────
+    case 'training_telecom':
+      await grantTelecomTrainingAccess(userId, pid);
+      break;
+
+    // ── Telecom Test-Out ──────────────────────────────────────────────────────
+    case 'jr_telecom_tech_test_human':
+      await grantJrTelecomAccess(userId, pid);
+      break;
+
+    // ── Package: Telecom Training + Test-Out ──────────────────────────────────
+    case 'pkg_training_telecom_testout':
+      await grantTelecomTrainingAccess(userId, pid);
+      await grantJrTelecomAccess(userId, pid);
       break;
 
     default:
