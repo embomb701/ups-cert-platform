@@ -710,6 +710,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // DATA CENTER OPERATIONS MANAGER PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_dc_ops: {
+    name: 'Data Center Operations Manager Training Course + Jr. DC Ops Manager Certification Exam',
+    shortName: 'DC Ops Manager Training Course',
+    priceInCents: 149900,   // $1,499
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_DC_OPS ?? '',
+  },
+
+  jr_dc_ops_test_human: {
+    name: 'Jr. Data Center Operations Manager Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. DC Ops Manager Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_DC_OPS_HUMAN ?? '',
+  },
+
+  pkg_training_dc_ops_testout: {
+    name: 'DC Ops Manager Training Course + Jr. DC Ops Manager Test-Out (Human Proctored)',
+    shortName: 'DC Ops Manager Training + Test-Out Package',
+    priceInCents: 174900,   // $1,749
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_DC_OPS_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // BUILDING COMMISSIONING AGENT PROGRAM
   // ─────────────────────────────────────────────────────────────────────────
 
