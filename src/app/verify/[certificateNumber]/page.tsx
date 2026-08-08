@@ -97,7 +97,37 @@ export default async function CertificateVerifyPage({ params }: Props) {
             <div className="flex justify-between border-b border-gray-800 pb-3">
               <span className="text-sm text-gray-500">Level</span>
               <span className="text-sm text-white">
-                {cert.examLevel === 'jr_fse' ? 'Junior FSE' : cert.examLevel === 'jr_kitchen_fse' ? 'Junior Kitchen FSE' : cert.examLevel === 'jr_hvac_fse' ? 'Junior HVAC FSE' : cert.examLevel === 'jr_gen_fse' ? 'Junior Generator FSE' : cert.examLevel === 'jr_dc_cft' ? 'Junior Data Center CFT' : cert.examLevel === 'jr_solar_fse' ? 'Junior Solar FSE' : cert.examLevel === 'jr_ev_tech' ? 'Junior EV Tech' : cert.examLevel === 'jr_dcp_tech' ? 'Junior DC Plants Tech' : cert.examLevel === 'jr_battery_tech' ? 'Junior Battery Tech' : cert.examLevel === 'jr_dc_engineer' ? 'Junior DC Engineer' : cert.examLevel === 'jr_marine_tech' ? 'Junior Marine Tech' : cert.examLevel === 'jr_pool_tech' ? 'Junior Pool Tech' : cert.examLevel === 'jr_hvac_tech' ? 'Junior HVAC Tech' : cert.examLevel === 'jr_solar_inst' ? 'Junior Solar Installer' : cert.examLevel === 'jr_wind_tech' ? 'Junior Wind Turbine Tech' : cert.examLevel === 'jr_elevator_tech' ? 'Junior Elevator Tech' : cert.examLevel === 'jr_fire_alarm_tech' ? 'Junior Fire Alarm Tech' : cert.examLevel === 'jr_bmet_tech' ? 'Junior BMET Tech' : cert.examLevel === 'jr_bas_tech' ? 'Junior BAS Tech' : cert.examLevel === 'jr_ref_tech' ? 'Junior Ref Tech' : cert.examLevel === 'jr_plc_tech' ? 'Junior PLC Tech' : cert.examLevel === 'jr_security_tech' ? 'Junior Security Tech' : cert.examLevel === 'jr_field_pm' ? 'Junior Field Project Manager' : cert.examLevel === 'jr_pump_tech' ? 'Junior Pump Technician' : 'FSE (Human Proctored)'}
+                {({
+                  jr_fse: 'Junior UPS Field Service Engineer',
+                  jr_kitchen_fse: 'Junior Commercial Kitchen FSE',
+                  jr_hvac_fse: 'Junior HVAC Field Service Engineer',
+                  jr_gen_fse: 'Junior Power Generation FSE',
+                  jr_dc_cft: 'Junior Data Center Critical Facilities Technician',
+                  jr_solar_fse: 'Junior Solar & Storage FSE',
+                  jr_ev_tech: 'Junior EV Charging Infrastructure Technician',
+                  jr_dcp_tech: 'Junior Telecom Power Technician',
+                  jr_battery_tech: 'Junior Battery Systems Technician',
+                  jr_dc_engineer: 'Junior Data Center Engineer',
+                  jr_marine_tech: 'Junior Marine Systems Technician',
+                  jr_pool_tech: 'Junior Pool Equipment Technician',
+                  jr_hvac_tech: 'Junior HVAC Technician',
+                  jr_solar_inst: 'Junior Solar Installer',
+                  jr_wind_tech: 'Junior Wind Turbine Technician',
+                  jr_elevator_tech: 'Junior Elevator Technician',
+                  jr_fire_alarm_tech: 'Junior Fire Alarm Technician',
+                  jr_bmet_tech: 'Junior Biomedical Equipment Technician',
+                  jr_bas_tech: 'Junior Building Automation Systems Technician',
+                  jr_ref_tech: 'Junior Commercial Refrigeration Technician',
+                  jr_plc_tech: 'Junior Industrial Controls & PLC Technician',
+                  jr_security_tech: 'Junior Electronic Security Systems Technician',
+                  jr_field_pm: 'Junior Field Project Manager',
+                  jr_pump_tech: 'Junior Pump Technician',
+                  jr_industrial_ref: 'Junior Industrial Refrigeration Operator',
+                  jr_dc_ops: 'Junior Data Center Operations Manager',
+                  jr_building_cx: 'Junior Building Commissioning Agent',
+                  jr_telecom_tech: 'Junior Telecom OSP Technician',
+                  fse: 'UPS Field Service Engineer (Human Proctored)',
+                } as Record<string, string>)[cert.examLevel] ?? cert.examLevel}
               </span>
             </div>
             <div className="flex justify-between border-b border-gray-800 pb-3">
@@ -135,11 +165,11 @@ export default async function CertificateVerifyPage({ params }: Props) {
           {/* Disclaimer */}
           <div className="mt-8 p-4 bg-gray-900/80 rounded-lg">
             <p className="text-xs text-gray-500 leading-relaxed">
-              This certificate demonstrates knowledge of UPS field service concepts at the stated
-              certification level. It does not authorize unsupervised electrical work, energized work,
-              OEM service work, or work beyond the candidate&apos;s employer-approved scope. Employers
-              should still provide onboarding, safety training, site-specific procedures, OEM training,
-              and supervised field experience.
+              This certificate demonstrates knowledge of the stated technical discipline at the
+              certification level shown. It does not authorize unsupervised electrical work, energized
+              work, OEM service work, or work beyond the candidate&apos;s employer-approved scope.
+              Employers should still provide onboarding, safety training, site-specific procedures,
+              OEM training, and supervised field experience before independent work.
             </p>
           </div>
 
