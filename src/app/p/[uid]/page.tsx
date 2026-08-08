@@ -274,12 +274,24 @@ export default async function PublicProfilePage({ params }: PageProps) {
                       )}
                     </div>
                   </div>
-                  <Link
-                    href={`/verify/${cert.certificateNumber}`}
-                    className="flex-shrink-0 text-xs text-gray-500 hover:text-blue-400 transition-colors px-2 py-1 rounded"
-                  >
-                    Verify →
-                  </Link>
+                  <div className="flex-shrink-0 flex flex-col gap-1 items-end">
+                    <Link
+                      href={`/verify/${cert.certificateNumber}`}
+                      className="text-xs text-gray-500 hover:text-blue-400 transition-colors px-2 py-1 rounded"
+                    >
+                      Verify →
+                    </Link>
+                    {cert.status === 'valid' && (
+                      <a
+                        href={`/certificate/${cert.certificateNumber}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-gray-600 hover:text-gray-400 transition-colors px-2 py-1 rounded"
+                      >
+                        PDF ↓
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

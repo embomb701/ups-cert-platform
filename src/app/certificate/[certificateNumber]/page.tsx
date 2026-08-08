@@ -59,6 +59,12 @@ export default async function CertificatePrintPage({ params }: Props) {
     : cert.examLevel === 'jr_ref_tech' ? 'Junior Commercial Refrigeration Technician'
     : cert.examLevel === 'jr_plc_tech' ? 'Junior Industrial Controls & PLC Technician'
     : cert.examLevel === 'jr_security_tech' ? 'Junior Electronic Security Systems Technician'
+    : cert.examLevel === 'jr_field_pm' ? 'Junior Field Project Manager'
+    : cert.examLevel === 'jr_pump_tech' ? 'Junior Pump Technician'
+    : cert.examLevel === 'jr_industrial_ref' ? 'Junior Industrial Refrigeration Operator'
+    : cert.examLevel === 'jr_dc_ops' ? 'Junior Data Center Operations Manager'
+    : cert.examLevel === 'jr_building_cx' ? 'Junior Building Commissioning Agent'
+    : cert.examLevel === 'jr_telecom_tech' ? 'Junior Telecom OSP Technician'
     : 'Field Service Engineer';
 
   return (
@@ -146,10 +152,12 @@ export default async function CertificatePrintPage({ params }: Props) {
               <p className="cert-label text-xs text-gray-500 mb-1">Date Issued</p>
               <p className="cert-value text-gray-200">{formatDate(issueDate)}</p>
             </div>
+            {cert.publicScoreEnabled && (
             <div>
               <p className="cert-label text-xs text-gray-500 mb-1">Score</p>
               <p className="cert-value text-gray-200">{Math.round(cert.score)}%</p>
             </div>
+            )}
             <div>
               <p className="cert-label text-xs text-gray-500 mb-1">Certificate No.</p>
               <p className="cert-value text-gray-300 font-mono text-xs">{cert.certificateNumber}</p>
