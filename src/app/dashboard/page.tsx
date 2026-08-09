@@ -433,6 +433,12 @@ export default function DashboardPage() {
                   >
                     Job listings →
                   </Link>
+                  <Link
+                    href="/candidates"
+                    className="block text-center text-xs px-3 py-2 rounded-lg border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
+                  >
+                    Browse candidates →
+                  </Link>
                 </div>
               )}
             </div>

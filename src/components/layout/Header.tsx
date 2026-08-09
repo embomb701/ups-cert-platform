@@ -59,6 +59,9 @@ export function Header() {
                   <Link href="/training" className="text-sm text-gray-300 hover:text-white transition-colors">
                     My Training
                   </Link>
+                  <Link href="/candidates" className="text-sm text-gray-400 hover:text-white transition-colors">
+                    Candidates
+                  </Link>
                   <Link href="/dashboard" className="text-sm text-gray-400 hover:text-white transition-colors">
                     Dashboard
                   </Link>
@@ -116,6 +119,9 @@ export function Header() {
                 <>
                   <Link href="/training" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
                     My Training
+                  </Link>
+                  <Link href="/candidates" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
+                    Candidates
                   </Link>
                   <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
                     Dashboard
