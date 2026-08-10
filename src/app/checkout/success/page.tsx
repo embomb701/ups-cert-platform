@@ -9,39 +9,46 @@ interface ProductInfo {
   detail: string;
   nextStep?: { label: string; href: string };
   callout?: { title: string; body: string; color: 'amber' | 'indigo' | 'green' };
+  steps?: { label: string; sub: string }[];
 }
+
+const CERT_PATH = [
+  { label: 'Complete all modules', sub: 'Work through lessons at your own pace — progress is saved' },
+  { label: 'Pass the practice exam', sub: 'Free included — use it to gauge your readiness' },
+  { label: 'Earn your certification', sub: 'Pass the exam and get a verified, employer-searchable credential' },
+];
 
 const PRODUCT_INFO: Record<string, ProductInfo> = {
   // ── Training courses ───────────────────────────────────────────────────
-  training_course:        { heading: 'UPS FSE Training Unlocked', detail: 'Full access to all 28 UPS Field Service Engineering modules is now active.', nextStep: { label: 'Start Training →', href: '/training/ups' } },
-  training_portal:        { heading: 'UPS FSE Training Unlocked', detail: 'Full access to all 28 UPS Field Service Engineering modules is now active.', nextStep: { label: 'Start Training →', href: '/training/ups' } },
-  training_kitchen:       { heading: 'Kitchen FSE Training Unlocked', detail: 'Full access to Commercial Kitchen Field Service Engineering is now active.', nextStep: { label: 'Start Training →', href: '/training/kitchen' } },
-  training_hvac:          { heading: 'HVAC FSE Training Unlocked', detail: 'Full access to HVAC Field Service Engineering is now active.', nextStep: { label: 'Start Training →', href: '/training/hvac' } },
-  training_generator:     { heading: 'Generator FSE Training Unlocked', detail: 'Full access to Power Generation Field Service Engineering is now active.', nextStep: { label: 'Start Training →', href: '/training/generator' } },
-  training_datacenter:    { heading: 'Data Center CFT Training Unlocked', detail: 'Full access to Data Center Critical Facilities is now active.', nextStep: { label: 'Start Training →', href: '/training/datacenter' } },
-  training_solar:         { heading: 'Solar/BESS Training Unlocked', detail: 'Full access to Solar & Battery Energy Storage is now active.', nextStep: { label: 'Start Training →', href: '/training/solar' } },
-  training_evcharging:    { heading: 'EV Charging Training Unlocked', detail: 'Full access to EV Charging Infrastructure is now active.', nextStep: { label: 'Start Training →', href: '/training/evcharging' } },
-  training_dcplants:      { heading: 'DC Plants Training Unlocked', detail: 'Full access to Telecom DC Power Plants is now active.', nextStep: { label: 'Start Training →', href: '/training/dcplants' } },
-  training_battery:       { heading: 'Battery Tech Training Unlocked', detail: 'Full access to Battery Systems Technician is now active.', nextStep: { label: 'Start Training →', href: '/training/battery' } },
-  training_dcengineer:    { heading: 'DC Engineer Training Unlocked', detail: 'Full access to Data Center Engineer is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_marine:        { heading: 'Marine Tech Training Unlocked', detail: 'Full access to Marine Systems Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_pool:          { heading: 'Pool Tech Training Unlocked', detail: 'Full access to Pool Equipment Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_hvac_tech:     { heading: 'HVAC Tech Training Unlocked', detail: 'Full access to HVAC Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_solar_inst:    { heading: 'Solar Installer Training Unlocked', detail: 'Full access to Solar Installer is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_wind_tech:     { heading: 'Wind Tech Training Unlocked', detail: 'Full access to Wind Turbine Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_elevator_tech: { heading: 'Elevator Tech Training Unlocked', detail: 'Full access to Elevator Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_fire_alarm_tech: { heading: 'Fire Alarm Tech Training Unlocked', detail: 'Full access to Fire Alarm & Suppression Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_bmet_tech:     { heading: 'BMET Training Unlocked', detail: 'Full access to Biomedical Equipment Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_bas_tech:      { heading: 'BAS Tech Training Unlocked', detail: 'Full access to Building Automation Systems Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_ref_tech:      { heading: 'Refrigeration Tech Training Unlocked', detail: 'Full access to Commercial Refrigeration Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_plc_tech:      { heading: 'PLC Tech Training Unlocked', detail: 'Full access to Industrial Controls & PLC Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_security_tech: { heading: 'Security Tech Training Unlocked', detail: 'Full access to Electronic Security Systems Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_field_pm:      { heading: 'Field PM Training Unlocked', detail: 'Full access to Field Project Manager is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_pump_tech:     { heading: 'Pump Tech Training Unlocked', detail: 'Full access to Pump Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' } },
-  training_industrial_ref: { heading: 'Industrial Ref Training Unlocked', detail: 'Full access to Industrial Refrigeration Operator is now active.', nextStep: { label: 'Start Training →', href: '/training/industrial-ref' } },
-  training_dc_ops:        { heading: 'DC Ops Training Unlocked', detail: 'Full access to Data Center Operations Manager is now active.', nextStep: { label: 'Start Training →', href: '/training/dc-ops' } },
-  training_building_cx:   { heading: 'Building Cx Training Unlocked', detail: 'Full access to Building Commissioning Agent is now active.', nextStep: { label: 'Start Training →', href: '/training/building-cx' } },
-  training_telecom:       { heading: 'Telecom Training Unlocked', detail: 'Full access to Telecom OSP Technician is now active.', nextStep: { label: 'Start Training →', href: '/training/telecom' } },
+  training_course:        { heading: 'UPS FSE Training Unlocked', detail: 'Full access to all 28 UPS Field Service Engineering modules is now active.', nextStep: { label: 'Start Training →', href: '/training/ups' }, steps: CERT_PATH },
+  training_portal:        { heading: 'UPS FSE Training Unlocked', detail: 'Full access to all 28 UPS Field Service Engineering modules is now active.', nextStep: { label: 'Start Training →', href: '/training/ups' }, steps: CERT_PATH },
+  training_kitchen:       { heading: 'Kitchen FSE Training Unlocked', detail: 'Full access to Commercial Kitchen Field Service Engineering is now active.', nextStep: { label: 'Start Training →', href: '/training/kitchen' }, steps: CERT_PATH },
+  training_hvac:          { heading: 'HVAC FSE Training Unlocked', detail: 'Full access to HVAC Field Service Engineering is now active.', nextStep: { label: 'Start Training →', href: '/training/hvac' }, steps: CERT_PATH },
+  training_generator:     { heading: 'Generator FSE Training Unlocked', detail: 'Full access to Power Generation Field Service Engineering is now active.', nextStep: { label: 'Start Training →', href: '/training/generator' }, steps: CERT_PATH },
+  training_datacenter:    { heading: 'Data Center CFT Training Unlocked', detail: 'Full access to Data Center Critical Facilities is now active.', nextStep: { label: 'Start Training →', href: '/training/datacenter' }, steps: CERT_PATH },
+  training_solar:         { heading: 'Solar/BESS Training Unlocked', detail: 'Full access to Solar & Battery Energy Storage is now active.', nextStep: { label: 'Start Training →', href: '/training/solar' }, steps: CERT_PATH },
+  training_evcharging:    { heading: 'EV Charging Training Unlocked', detail: 'Full access to EV Charging Infrastructure is now active.', nextStep: { label: 'Start Training →', href: '/training/evcharging' }, steps: CERT_PATH },
+  training_dcplants:      { heading: 'DC Plants Training Unlocked', detail: 'Full access to Telecom DC Power Plants is now active.', nextStep: { label: 'Start Training →', href: '/training/dcplants' }, steps: CERT_PATH },
+  training_battery:       { heading: 'Battery Tech Training Unlocked', detail: 'Full access to Battery Systems Technician is now active.', nextStep: { label: 'Start Training →', href: '/training/battery' }, steps: CERT_PATH },
+  training_dcengineer:    { heading: 'DC Engineer Training Unlocked', detail: 'Full access to Data Center Engineer is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_marine:        { heading: 'Marine Tech Training Unlocked', detail: 'Full access to Marine Systems Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_pool:          { heading: 'Pool Tech Training Unlocked', detail: 'Full access to Pool Equipment Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_hvac_tech:     { heading: 'HVAC Tech Training Unlocked', detail: 'Full access to HVAC Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_solar_inst:    { heading: 'Solar Installer Training Unlocked', detail: 'Full access to Solar Installer is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_wind_tech:     { heading: 'Wind Tech Training Unlocked', detail: 'Full access to Wind Turbine Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_elevator_tech: { heading: 'Elevator Tech Training Unlocked', detail: 'Full access to Elevator Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_fire_alarm_tech: { heading: 'Fire Alarm Tech Training Unlocked', detail: 'Full access to Fire Alarm & Suppression Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_bmet_tech:     { heading: 'BMET Training Unlocked', detail: 'Full access to Biomedical Equipment Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_bas_tech:      { heading: 'BAS Tech Training Unlocked', detail: 'Full access to Building Automation Systems Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_ref_tech:      { heading: 'Refrigeration Tech Training Unlocked', detail: 'Full access to Commercial Refrigeration Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_plc_tech:      { heading: 'PLC Tech Training Unlocked', detail: 'Full access to Industrial Controls & PLC Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_security_tech: { heading: 'Security Tech Training Unlocked', detail: 'Full access to Electronic Security Systems Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_field_pm:      { heading: 'Field PM Training Unlocked', detail: 'Full access to Field Project Manager is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_pump_tech:     { heading: 'Pump Tech Training Unlocked', detail: 'Full access to Pump Technician is now active.', nextStep: { label: 'Start Training →', href: '/training' }, steps: CERT_PATH },
+  training_industrial_ref: { heading: 'Industrial Ref Training Unlocked', detail: 'Full access to Industrial Refrigeration Operator is now active.', nextStep: { label: 'Start Training →', href: '/training/industrial-ref' }, steps: CERT_PATH },
+  training_dc_ops:        { heading: 'DC Ops Training Unlocked', detail: 'Full access to Data Center Operations Manager is now active.', nextStep: { label: 'Start Training →', href: '/training/dc-ops' }, steps: CERT_PATH },
+  training_building_cx:   { heading: 'Building Cx Training Unlocked', detail: 'Full access to Building Commissioning Agent is now active.', nextStep: { label: 'Start Training →', href: '/training/building-cx' }, steps: CERT_PATH },
+  training_telecom:       { heading: 'Telecom Training Unlocked', detail: 'Full access to Telecom OSP Technician is now active.', nextStep: { label: 'Start Training →', href: '/training/telecom' }, steps: CERT_PATH },
 
   // ── Test-out exams ────────────────────────────────────────────────────
   jr_fse_test_human:           { heading: 'Jr. FSE Exam Access Unlocked', detail: 'Your Junior UPS Field Service Engineer exam is ready. Review the rules, then start when ready.', nextStep: { label: 'Go to Dashboard →', href: '/dashboard' } },
@@ -86,12 +93,14 @@ const PRODUCT_INFO: Record<string, ProductInfo> = {
     heading: 'Training + Jr. FSE Package Activated',
     detail: 'Training portal access and your Junior FSE exam are both unlocked.',
     nextStep: { label: 'Start Training →', href: '/training/ups' },
+    steps: CERT_PATH,
   },
   pkg_training_fse: {
     heading: 'Training + FSE Package Activated',
     detail: 'Training portal access is unlocked and your FSE Human Proctored Exam is ordered.',
     nextStep: { label: 'Go to Dashboard →', href: '/dashboard' },
     callout: { title: 'Schedule Your FSE Session', body: 'Submit your phone number on the dashboard to get your proctored exam scheduled.', color: 'amber' },
+    steps: CERT_PATH,
   },
 
   // ── Employer packs ────────────────────────────────────────────────────
@@ -168,39 +177,66 @@ function SuccessContent() {
   const info = PRODUCT_INFO[product] ?? GENERIC;
 
   return (
-    <div className="card-dark p-10">
-      <div className="w-14 h-14 rounded-full bg-green-900 border border-green-700 flex items-center justify-center mx-auto mb-6">
-        <svg className="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
+    <div className="card-dark p-10 text-left">
+      {/* Check + confirmation header */}
+      <div className="flex items-center gap-4 mb-6">
+        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-900 border border-green-700 flex items-center justify-center">
+          <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <div>
+          <p className="text-xs text-green-500 font-semibold uppercase tracking-wide">Payment confirmed</p>
+          <h1 className="text-xl font-bold text-white">{info.heading}</h1>
+        </div>
       </div>
 
-      <h1 className="text-2xl font-bold text-white mb-3">{info.heading}</h1>
       <p className="text-gray-400 text-sm leading-relaxed mb-6">{info.detail}</p>
 
+      {/* What happens next — steps */}
+      {info.steps && (
+        <div className="mb-6">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Your path to certification</p>
+          <div className="space-y-3">
+            {info.steps.map((step, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-900/60 border border-indigo-700/60 flex items-center justify-center text-xs font-bold text-indigo-400 mt-0.5">
+                  {i + 1}
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-200">{step.label}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{step.sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {info.callout && (
-        <div className={`rounded-xl border p-5 mb-6 text-left ${CALLOUT_STYLES[info.callout.color]}`}>
+        <div className={`rounded-xl border p-5 mb-6 ${CALLOUT_STYLES[info.callout.color]}`}>
           <h2 className="text-sm font-semibold mb-1">{info.callout.title}</h2>
           <p className="text-sm text-gray-400 leading-relaxed">{info.callout.body}</p>
         </div>
       )}
 
-      <p className="text-xs text-gray-600 mb-8">
-        If your access does not appear within a few minutes, please contact support. Do not refresh or re-submit payment.
+      <p className="text-xs text-gray-600 mb-6">
+        A confirmation email is on its way. If your access does not appear within a few minutes, contact support — do not re-submit payment.
       </p>
 
-      {info.nextStep ? (
-        <Link
-          href={info.nextStep.href}
-          className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors"
-        >
-          {info.nextStep.label}
+      <div className="flex flex-wrap gap-3">
+        {info.nextStep ? (
+          <Link
+            href={info.nextStep.href}
+            className="px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors"
+          >
+            {info.nextStep.label}
+          </Link>
+        ) : null}
+        <Link href="/dashboard" className="px-6 py-2.5 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold text-sm transition-colors">
+          Dashboard
         </Link>
-      ) : (
-        <Link href="/dashboard" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors">
-          Go to Dashboard
-        </Link>
-      )}
+      </div>
     </div>
   );
 }
