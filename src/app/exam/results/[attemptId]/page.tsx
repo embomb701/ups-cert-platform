@@ -31,6 +31,10 @@ const CERT_TITLES: Record<string, string> = {
   jr_security_tech: 'Jr. Electronic Security Systems Technician',
   jr_field_pm: 'Jr. Field Project Manager',
   jr_pump_tech: 'Jr. Pump Technician',
+  jr_industrial_ref: 'Jr. Industrial Refrigeration Technician',
+  jr_dc_ops: 'Jr. Data Center Operations Manager',
+  jr_building_cx: 'Jr. Building Commissioning Technician',
+  jr_telecom_tech: 'Jr. Telecom Outside Plant Technician',
 };
 
 interface ChoiceItem {
