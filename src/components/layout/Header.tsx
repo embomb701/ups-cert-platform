@@ -66,6 +66,9 @@ export function Header() {
                   <Link href="/dashboard" className="text-sm text-gray-400 hover:text-white transition-colors">
                     Dashboard
                   </Link>
+                  <Link href="/settings" className="text-sm text-gray-400 hover:text-white transition-colors">
+                    Settings
+                  </Link>
                   <button onClick={() => signOut()} className="text-sm text-gray-500 hover:text-white transition-colors">
                     Sign Out
                   </button>
@@ -126,6 +129,9 @@ export function Header() {
                   </Link>
                   <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
                     Dashboard
+                  </Link>
+                  <Link href="/settings" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
+                    Settings
                   </Link>
                   <button onClick={() => { signOut(); setMobileOpen(false); }} className="block w-full text-left px-2 py-2 text-sm text-gray-400 hover:text-white">
                     Sign Out
