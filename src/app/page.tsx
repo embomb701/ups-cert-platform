@@ -402,11 +402,6 @@ export default function HomePage() {
         url: SITE_URL,
         name: 'Mastering Field Service Training Portal',
         description: 'Professional field service training and certification. 28 career tracks.',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/courses?q={search_term_string}` },
-          'query-input': 'required name=search_term_string',
-        },
       },
       {
         '@type': 'EducationalOrganization',
