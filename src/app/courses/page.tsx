@@ -201,7 +201,7 @@ export default function CourseCatalogPage() {
         <div className="max-w-xl mx-auto">
           <h2 className="text-xl font-bold text-white mb-3">Ready to start?</h2>
           <p className="text-gray-400 text-sm mb-6">
-            Create a free account and access the first module of every course at no cost.
+            Create a free account and access the first 3 modules of every course at no cost.
             Purchase when you&apos;re ready to unlock the full program and earn your credential.
           </p>
           <Link

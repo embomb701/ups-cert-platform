@@ -400,7 +400,7 @@ const CATEGORIES = [
 ];
 
 // Course shortTitle and tagline — keyed by id
-const COURSE_QUICK: Record<string, { shortTitle: string; tagline: string; totalModules: number; free?: boolean }> = {
+const COURSE_QUICK: Record<string, { shortTitle: string; tagline: string; totalModules: number; free?: boolean; price?: string }> = {
   'critical-environment': { shortTitle: 'CE Fundamentals', tagline: 'Safety and access protocols for anyone entering mission-critical facilities.', totalModules: 8, free: true },
   'ups':                  { shortTitle: 'UPS FSE',          tagline: 'Service UPS systems in hospitals, data centers, and financial institutions.', totalModules: 28 },
   'kitchen':              { shortTitle: 'Kitchen FSE',      tagline: 'Service commercial kitchen equipment — refrigeration, cooking, warewashing.', totalModules: 27 },
@@ -411,7 +411,7 @@ const COURSE_QUICK: Record<string, { shortTitle: string; tagline: string; totalM
   'ev-charging':          { shortTitle: 'EV Charging',      tagline: 'Install and service Level 2 and DC fast-charging infrastructure.', totalModules: 18 },
   'dc-plants':            { shortTitle: 'DC Plants Tech',   tagline: 'Maintain 48V DC power plant systems powering the telecom backbone.', totalModules: 17 },
   'battery-tech':         { shortTitle: 'Battery Tech',     tagline: 'VRLA, lithium-ion, and flooded cell maintenance across industries.', totalModules: 18 },
-  'dc-engineer':          { shortTitle: 'DC Engineer',      tagline: 'Senior power engineering covering UPS, generators, and full facility power.', totalModules: 34 },
+  'dc-engineer':          { shortTitle: 'DC Engineer',      tagline: 'Senior power engineering covering UPS, generators, and full facility power.', totalModules: 34, price: '$1,999' },
   'marine':               { shortTitle: 'Marine Tech',      tagline: 'Service electrical and mechanical systems on commercial marine vessels.', totalModules: 16 },
   'pool':                 { shortTitle: 'Pool Tech',        tagline: 'Maintain commercial pool and aquatic systems — pumps, filtration, chemicals.', totalModules: 17 },
   'hvac-tech':            { shortTitle: 'HVAC Tech',        tagline: 'Commercial HVAC installation and service with a technical depth focus.', totalModules: 16 },
@@ -428,8 +428,8 @@ const COURSE_QUICK: Record<string, { shortTitle: string; tagline: string; totalM
   'pump-tech':            { shortTitle: 'Pump Tech',        tagline: 'Service centrifugal and positive-displacement pump systems.', totalModules: 16 },
   'industrial-ref':       { shortTitle: 'Industrial Ref',   tagline: 'Ammonia refrigeration systems for food processing, cold storage, and breweries.', totalModules: 6 },
   'dc-ops':               { shortTitle: 'DC Ops Manager',   tagline: 'Manage critical infrastructure uptime, efficiency, and compliance in data centers.', totalModules: 5 },
-  'building-cx':          { shortTitle: 'Building Cx',      tagline: 'Commission HVAC and BAS systems — LEED EA prerequisite on every project.', totalModules: 5 },
-  'telecom':              { shortTitle: 'Telecom OSP',      tagline: 'Outside plant fiber splicing, OTDR testing, and copper plant certification.', totalModules: 6 },
+  'building-cx':          { shortTitle: 'Building Cx',      tagline: 'Commission HVAC and BAS systems — LEED EA prerequisite on every project.', totalModules: 5, price: '$1,299' },
+  'telecom':              { shortTitle: 'Telecom OSP',      tagline: 'Outside plant fiber splicing, OTDR testing, and copper plant certification.', totalModules: 6, price: '$1,299' },
 };
 
 const COLOR_ACCENT: Record<string, string> = {
@@ -645,7 +645,7 @@ export default function HomePage() {
                             href="/login"
                             className="flex-1 py-2 px-4 bg-blue-700 hover:bg-blue-600 text-white text-sm font-semibold rounded-lg text-center transition-colors"
                           >
-                            {q.free ? 'Start Free →' : 'Enroll — $1,499 →'}
+                            {q.free ? 'Start Free →' : `Enroll — ${q.price ?? '$1,499'} →`}
                           </Link>
                           <Link
                             href={`/training/${id}`}
