@@ -15,7 +15,7 @@ const navLinks = [
 ];
 
 export function Header() {
-  const { user, loading } = useAuth();
+  const { user, loading, isAdmin } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -66,6 +66,11 @@ export function Header() {
                   <Link href="/dashboard" className="text-sm text-gray-400 hover:text-white transition-colors">
                     Dashboard
                   </Link>
+                  {isAdmin && (
+                    <Link href="/admin" className="text-sm text-amber-400 hover:text-amber-300 transition-colors font-medium">
+                      Admin
+                    </Link>
+                  )}
                   <Link href="/settings" className="text-sm text-gray-400 hover:text-white transition-colors">
                     Settings
                   </Link>
@@ -130,6 +135,11 @@ export function Header() {
                   <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
                     Dashboard
                   </Link>
+                  {isAdmin && (
+                    <Link href="/admin" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-amber-400 hover:text-amber-300 font-medium">
+                      Admin
+                    </Link>
+                  )}
                   <Link href="/settings" onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-sm text-gray-300 hover:text-white">
                     Settings
                   </Link>
