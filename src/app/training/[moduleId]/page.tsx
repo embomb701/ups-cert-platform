@@ -14,50 +14,62 @@ interface Props {
 export default async function ModulePage({ params }: Props) {
   const { moduleId } = await params;
 
-  const cookieStore = await cookies();
-  const token = cookieStore.get('firebase-token')?.value;
-  if (!token) redirect('/login');
-
-  let uid: string;
-  let userEmail = '';
-  try {
-    const decoded = await adminAuth.verifyIdToken(token);
-    uid = decoded.uid;
-    userEmail = decoded.email?.toLowerCase() ?? '';
-  } catch {
-    redirect('/login');
-  }
-
-  const isAdmin = await checkIsAdmin(uid, userEmail);
-
   const mod = getModule(moduleId);
   if (!mod) notFound();
 
   const isCEModule = mod.id.startsWith('ce-');
+  const isFreeTrialModule = mod.num <= 3;
 
-  const grantedKeys = await getGrantedCourseKeys(uid, mod);
+  const cookieStore = await cookies();
+  const token = cookieStore.get('firebase-token')?.value;
+
+  // Unauthenticated: allow free trial modules and CE; redirect everything else
+  if (!token && !isFreeTrialModule && !isCEModule) redirect('/login');
+
+  let uid = '';
+  let userEmail = '';
+  let isAuthenticated = false;
+
+  if (token) {
+    try {
+      const decoded = await adminAuth.verifyIdToken(token);
+      uid = decoded.uid;
+      userEmail = decoded.email?.toLowerCase() ?? '';
+      isAuthenticated = true;
+    } catch {
+      if (!isFreeTrialModule && !isCEModule) redirect('/login');
+    }
+  }
+
+  const isAdmin = isAuthenticated ? await checkIsAdmin(uid, userEmail) : false;
+  const grantedKeys = (isAuthenticated && !isAdmin) ? await getGrantedCourseKeys(uid, mod) : [];
   const hasAccess = isAdmin || grantedKeys.length > 0;
 
-  const isFreeTrialModule = mod.num <= 3;
-  if (!hasAccess && !isFreeTrialModule && !isCEModule) redirect('/training');
+  if (isAuthenticated && !hasAccess && !isFreeTrialModule && !isCEModule) redirect('/training');
 
-  // Check 3-day rule from the previous module in the user's enrolled course
-  // sequence(s) — bypassed for admins, free trial, and CE (always free/open)
+  // Check 3-day rule (only for authenticated enrolled users)
   let locked = false;
   let unlockDate: Date | null = null;
-  if (hasAccess && !isAdmin && !isCEModule && mod.num > 1) {
+  if (isAuthenticated && hasAccess && !isAdmin && !isCEModule && mod.num > 1) {
     const state = await moduleUnlockState(uid, mod, grantedKeys);
     locked = state.locked;
     unlockDate = state.unlockDate;
   }
 
-  const progressDoc = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(moduleId).get();
-  const progressData = progressDoc.data() ?? {};
-  const completedSlides: number[] = progressData.completedSlides ?? [];
-  const moduleComplete = !!progressData.completedAt && progressData.passed;
+  // Fetch progress only for authenticated users
+  let completedSlides: number[] = [];
+  let moduleComplete = false;
+  let startSlide = 0;
+  if (isAuthenticated && uid) {
+    const progressDoc = await adminDb.collection('users').doc(uid).collection('trainingProgress').doc(moduleId).get();
+    const progressData = progressDoc.data() ?? {};
+    completedSlides = progressData.completedSlides ?? [];
+    moduleComplete = !!progressData.completedAt && progressData.passed;
+    const firstIncomplete = mod.slides.findIndex((_, i) => !completedSlides.includes(i));
+    startSlide = firstIncomplete === -1 ? 0 : firstIncomplete;
+  }
 
-  const firstIncomplete = mod.slides.findIndex((_, i) => !completedSlides.includes(i));
-  const startSlide = firstIncomplete === -1 ? 0 : firstIncomplete;
+  const isGuest = !isAuthenticated;
 
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
@@ -92,7 +104,26 @@ export default async function ModulePage({ params }: Props) {
           </div>
         ) : (
           <div className="space-y-4">
-            {!hasAccess && !isCEModule && (
+            {/* Guest preview banner */}
+            {isGuest && !isCEModule && (
+              <div className="rounded-lg bg-indigo-900/30 border border-indigo-700 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div>
+                  <p className="text-white font-semibold text-sm">Free Preview — Lesson 1</p>
+                  <p className="text-gray-400 text-xs mt-0.5">Create a free account to save your progress and unlock all {mod.slides.length} lessons.</p>
+                </div>
+                <div className="flex gap-2 flex-shrink-0">
+                  <Link href="/login?signup=1" className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg transition-colors">
+                    Create account
+                  </Link>
+                  <Link href="/login" className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs font-semibold rounded-lg transition-colors">
+                    Sign in
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Logged-in non-enrolled banner */}
+            {!isGuest && !hasAccess && !isCEModule && (
               <div className="rounded-lg bg-blue-900/30 border border-blue-700 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
                   <p className="text-white font-semibold text-sm">Free Trial — Lesson 1 only</p>
@@ -105,6 +136,7 @@ export default async function ModulePage({ params }: Props) {
                 />
               </div>
             )}
+
             <h2 className="text-xl font-semibold text-white">Slides</h2>
             {mod.slides.map((slide, i) => {
               const done = completedSlides.includes(i);
@@ -122,7 +154,12 @@ export default async function ModulePage({ params }: Props) {
                       </p>
                     </div>
                   </div>
-                  {!trialLocked && (isAdmin || done || i <= startSlide) && (
+                  {!trialLocked && (isAdmin || done || i <= startSlide || isGuest) && i === 0 && (
+                    <Link href={`/training/${moduleId}/slide/${i}`} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${done ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' : 'bg-blue-600 hover:bg-blue-500 text-white'}`}>
+                      {done ? 'Review' : 'Start'}
+                    </Link>
+                  )}
+                  {!trialLocked && !isGuest && (isAdmin || done || i <= startSlide) && i > 0 && (
                     <Link href={`/training/${moduleId}/slide/${i}`} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${done ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' : 'bg-blue-600 hover:bg-blue-500 text-white'}`}>
                       {done ? 'Review' : 'Start'}
                     </Link>

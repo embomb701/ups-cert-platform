@@ -15,34 +15,42 @@ export default async function SlidePage({ params }: Props) {
   const { moduleId, slideIndex: slideIndexStr } = await params;
   const slideIndex = parseInt(slideIndexStr, 10);
 
-  const cookieStore = await cookies();
-  const token = cookieStore.get('firebase-token')?.value;
-  if (!token) redirect('/login');
-
-  let uid: string;
-  let userEmail = '';
-  try {
-    const decoded = await adminAuth.verifyIdToken(token);
-    uid = decoded.uid;
-    userEmail = decoded.email?.toLowerCase() ?? '';
-  } catch {
-    redirect('/login');
-  }
-
-  const isAdmin = await checkIsAdmin(uid, userEmail);
-
   const mod = getModule(moduleId);
   if (!mod) notFound();
-
-  const hasAccess = isAdmin || (await hasTrainingAccess(uid, mod));
   if (isNaN(slideIndex) || slideIndex < 0 || slideIndex >= mod.slides.length) notFound();
 
   const isFreeTrialSlide = mod.num <= 3 && slideIndex === 0;
-  if (!hasAccess && !isFreeTrialSlide) redirect('/training');
+
+  const cookieStore = await cookies();
+  const token = cookieStore.get('firebase-token')?.value;
+
+  // Unauthenticated: allow free trial slide 0 only
+  if (!token && !isFreeTrialSlide) redirect('/login');
+
+  let uid = '';
+  let userEmail = '';
+  let isAuthenticated = false;
+
+  if (token) {
+    try {
+      const decoded = await adminAuth.verifyIdToken(token);
+      uid = decoded.uid;
+      userEmail = decoded.email?.toLowerCase() ?? '';
+      isAuthenticated = true;
+    } catch {
+      if (!isFreeTrialSlide) redirect('/login');
+    }
+  }
+
+  const isGuest = !isAuthenticated;
+  const isAdmin = isAuthenticated ? await checkIsAdmin(uid, userEmail) : false;
+  const hasAccess = !isGuest && (isAdmin || (await hasTrainingAccess(uid, mod)));
+
+  if (!isGuest && !hasAccess && !isFreeTrialSlide) redirect('/training');
 
   const slide = mod.slides[slideIndex];
   const isLast = slideIndex === mod.slides.length - 1;
-  // Free trial users return to module overview after lesson 1 (which shows the upgrade prompt)
+  // After the free slide, return to module overview (which shows the upgrade CTA)
   const nextUrl = (isLast || (!hasAccess && isFreeTrialSlide))
     ? `/training/${moduleId}`
     : `/training/${moduleId}/slide/${slideIndex + 1}`;
@@ -64,12 +72,24 @@ export default async function SlidePage({ params }: Props) {
           ))}
         </div>
 
+        {isGuest && (
+          <div className="rounded-lg bg-indigo-900/20 border border-indigo-800/60 px-4 py-3 flex items-center justify-between gap-4">
+            <p className="text-xs text-gray-400">
+              <span className="text-indigo-400 font-semibold">Free preview</span> · Create a free account to track progress and unlock all lessons
+            </p>
+            <Link href="/login?signup=1" className="flex-shrink-0 text-xs px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg transition-colors">
+              Sign up free
+            </Link>
+          </div>
+        )}
+
         <SlideWithTimer
           moduleId={moduleId}
           slideIndex={slideIndex}
           slide={slide}
           nextUrl={nextUrl}
           skipTimer={isAdmin}
+          isGuest={isGuest}
         />
       </div>
     </div>

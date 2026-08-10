@@ -38,11 +38,12 @@ interface Props {
   slide: Slide;
   nextUrl: string;
   skipTimer?: boolean;
+  isGuest?: boolean;
 }
 
 const REQUIRED_SECONDS = 300;
 
-export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, skipTimer = false }: Props) {
+export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, skipTimer = false, isGuest = false }: Props) {
   const hasMeterSim = !!slide.meterSim;
   const [meterSimDone, setMeterSimDone] = useState(!hasMeterSim);
 
@@ -62,6 +63,11 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
   const [serverError, setServerError] = useState('');
 
   const startSlide = useCallback(async () => {
+    // Guests don't hit the API — just start the local timer
+    if (isGuest) {
+      setTimerStarted(true);
+      return;
+    }
     try {
       const res = await fetch('/api/training/slide/start', {
         method: 'POST',
@@ -77,7 +83,7 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
     } catch {
       setServerError('Network error');
     }
-  }, [moduleId, slideIndex]);
+  }, [moduleId, slideIndex, isGuest]);
 
   useEffect(() => {
     startSlide();
@@ -115,6 +121,20 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
     }
     setError('');
     setLoading(true);
+
+    // Guests: evaluate locally — answers are in the slide data already sent to client
+    if (isGuest) {
+      const localResults = slide.quiz.map((q, i) => ({
+        correct: answers[i] === q.correct,
+        correctAnswer: q.correct,
+        explanation: q.exp,
+      }));
+      setResults(localResults);
+      setSubmitted(true);
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch('/api/training/slide/complete', {
         method: 'POST',
@@ -368,9 +388,30 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
                   }`}
                 >
                   {results.every((r) => r.correct) ? (
-                    <p className="text-green-300 font-bold text-lg">
-                      Perfect score! Proceeding to next section...
-                    </p>
+                    isGuest ? (
+                      <div className="space-y-4">
+                        <p className="text-green-300 font-bold text-lg">Section passed!</p>
+                        <p className="text-gray-300 text-sm">Create a free account to save your progress and continue to the next lesson.</p>
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                          <a
+                            href="/login?signup=1"
+                            className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors text-sm"
+                          >
+                            Create free account →
+                          </a>
+                          <a
+                            href="/login"
+                            className="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold rounded-lg transition-colors text-sm"
+                          >
+                            Sign in
+                          </a>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-green-300 font-bold text-lg">
+                        Perfect score! Proceeding to next section...
+                      </p>
+                    )
                   ) : (
                     <div className="space-y-3">
                       <p className="text-red-300 font-bold text-lg">
