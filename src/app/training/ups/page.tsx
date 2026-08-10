@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
@@ -158,7 +159,7 @@ export default async function UpsPortalPage() {
             const showUpgradeNudge = !hasAccess && trialLocked && idx === 3;
 
             return (
-              <>
+              <Fragment key={mod.id}>
                 {showUpgradeNudge && (
                   <div key="nudge" className="rounded-lg border border-blue-800/50 bg-blue-950/20 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
                     <div className="flex-1">
@@ -241,7 +242,7 @@ export default async function UpsPortalPage() {
                   </div>
                 </div>
               </div>
-              </>
+              </Fragment>
             );
           })}
         </div>

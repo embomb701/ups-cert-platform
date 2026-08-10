@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
@@ -190,7 +191,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
               const showUpgradeNudge = trialLocked && idx === moduleStates.findIndex((s) => s.trialLocked);
 
               return (
-                <>
+                <Fragment key={mod.id}>
                 {showUpgradeNudge && course.stripeProductId && (
                   <div key="nudge" className={`rounded-xl border p-4 flex flex-col sm:flex-row sm:items-center gap-3 ${c.border} bg-gray-800/10`}>
                     <div className="flex-1">
@@ -275,7 +276,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
                     </Link>
                   )}
                 </div>
-                </>
+                </Fragment>
               );
             })}
           </div>

@@ -2,10 +2,23 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { COURSES } from '@/data/courses';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+
 export const metadata: Metadata = {
   title: 'All 28 Career Tracks — Mastering Field Service Training Portal',
   description:
     'Browse all 28 field service career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more. No college required. Start free.',
+  openGraph: {
+    title: 'All 28 Career Tracks — Mastering Field Service Training Portal',
+    description: 'Browse all 28 field service career tracks. No college required. Start free.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Mastering Field Service — 28 Career Tracks' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'All 28 Career Tracks — Mastering Field Service Training Portal',
+    description: 'Browse all 28 field service career tracks. No college required. Start free.',
+    images: [`${SITE_URL}/api/og`],
+  },
 };
 
 const TEXT: Record<string, string> = {

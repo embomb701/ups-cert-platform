@@ -5,12 +5,11 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { INDUSTRIAL_REF_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Industrial Refrigeration Operator — Course Overview',
-};
+export const metadata = generateCourseMetadata('industrial-ref');
 
 export default async function IndustrialRefOverviewPage() {
   const cookieStore = await cookies();

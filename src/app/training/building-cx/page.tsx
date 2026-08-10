@@ -5,12 +5,11 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { BUILDING_CX_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Building Commissioning Agent — Course Overview',
-};
+export const metadata = generateCourseMetadata('building-cx');
 
 export default async function BuildingCxOverviewPage() {
   const cookieStore = await cookies();

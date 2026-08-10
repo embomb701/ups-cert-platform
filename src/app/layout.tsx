@@ -18,6 +18,18 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'Mastering Field Service Training Portal',
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app'}/api/og`,
+        width: 1200,
+        height: 630,
+        alt: 'Mastering Field Service Training Portal',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [`${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app'}/api/og`],
   },
 };
 

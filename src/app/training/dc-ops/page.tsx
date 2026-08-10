@@ -5,12 +5,11 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { DC_OPS_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Data Center Operations Manager — Course Overview',
-};
+export const metadata = generateCourseMetadata('dc-ops');
 
 export default async function DcOpsOverviewPage() {
   const cookieStore = await cookies();

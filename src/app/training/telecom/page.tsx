@@ -5,12 +5,11 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { TELECOM_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Telecom OSP Technician — Course Overview',
-};
+export const metadata = generateCourseMetadata('telecom');
 
 export default async function TelecomOverviewPage() {
   const cookieStore = await cookies();

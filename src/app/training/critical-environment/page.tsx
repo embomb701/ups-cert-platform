@@ -4,12 +4,11 @@ import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { CE_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { ExternalLinkWarning } from '@/components/ExternalLinkWarning';
+import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Critical Environment Fundamentals',
-};
+export const metadata = generateCourseMetadata('critical-environment');
 
 export default async function CriticalEnvironmentPage() {
   const cookieStore = await cookies();

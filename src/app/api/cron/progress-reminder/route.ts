@@ -66,9 +66,10 @@ export async function GET(req: NextRequest) {
       const uid = user.uid;
       const userRef = adminDb.collection('users').doc(uid);
 
-      // Check reminder cooldown
+      // Check opt-out and reminder cooldown
       const profileSnap = await userRef.get();
       const profileData = profileSnap.data() ?? {};
+      if (profileData.emailRemindersEnabled === false) { skipped++; continue; }
       const lastReminder = tsToMs(profileData.lastProgressReminderAt);
       if (lastReminder > cooldownThreshold) { skipped++; continue; }
 
@@ -122,6 +123,7 @@ export async function GET(req: NextRequest) {
         pickedCourse.title,
         courseUrl,
         daysInactive,
+        uid,
       ).catch(() => {});
 
       await userRef.set(

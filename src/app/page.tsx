@@ -2,10 +2,24 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+const OG_IMAGE = `${SITE_URL}/api/og`;
+
 export const metadata: Metadata = {
   title: 'Mastering Field Service Training Portal — 28 Career Tracks in Critical Infrastructure',
   description:
     'Start a $45K–$130K+ career in field service in 3–6 months. No college required. 28 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Field PM, and more.',
+  openGraph: {
+    title: 'Mastering Field Service Training Portal — 28 Career Tracks in Critical Infrastructure',
+    description: 'Start a $45K–$130K+ career in field service in 3–6 months. No college required.',
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Mastering Field Service Training Portal' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mastering Field Service Training Portal — 28 Career Tracks',
+    description: 'Start a $45K–$130K+ career in field service. No college required.',
+    images: [OG_IMAGE],
+  },
 };
 
 // ─── Per-course detail data ────────────────────────────────────────────────
@@ -379,8 +393,36 @@ const COLOR_ACCENT: Record<string, string> = {
 };
 
 export default function HomePage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: 'Mastering Field Service Training Portal',
+        description: 'Professional field service training and certification. 28 career tracks.',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/courses?q={search_term_string}` },
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'EducationalOrganization',
+        '@id': `${SITE_URL}/#org`,
+        name: 'Mastering Field Service Training Portal',
+        url: SITE_URL,
+        description: 'Field service career training and certification by FA Consulting and Recruiting.',
+        founder: { '@type': 'Person', name: 'Francis Aiello' },
+        sameAs: [],
+      },
+    ],
+  };
+
   return (
     <div className="bg-gray-900 text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-gray-800">
