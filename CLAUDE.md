@@ -114,7 +114,7 @@ reuses UPS battery modules (`battery-types`, `battery-safety`).
 1. Admin import click after deploys with new bank content.
 2. `comingSoon: false` per course when ready to sell (+ optional env price IDs).
 3. `QUESTIONS_PER_EXAM` 10 → 50.
-4. Contact page phone is placeholder (555) 555-5555.
+4. Contact page phone has been updated from placeholder — verify real number is correct.
 5. Search indexing is blocked on purpose (robots) until owner's go.
 
 ## Conventions

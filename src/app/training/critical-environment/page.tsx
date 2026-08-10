@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { CE_MODULES } from '@/data/index';
@@ -13,21 +12,24 @@ export const metadata = generateCourseMetadata('critical-environment');
 export default async function CriticalEnvironmentPage() {
   const cookieStore = await cookies();
   const token = cookieStore.get('firebase-token')?.value;
-  if (!token) redirect('/login');
 
-  let uid: string;
-  try {
-    const decoded = await adminAuth.verifyIdToken(token);
-    uid = decoded.uid;
-  } catch {
-    redirect('/login');
+  let uid: string | null = null;
+  if (token) {
+    try {
+      const decoded = await adminAuth.verifyIdToken(token);
+      uid = decoded.uid;
+    } catch {
+      // invalid token — treat as guest
+    }
   }
 
-  const progressSnap = await adminDb
-    .collection('users').doc(uid)
-    .collection('trainingProgress').get();
   const progress: Record<string, { completedSlides?: number[]; completedAt?: unknown; passed?: boolean }> = {};
-  progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+  if (uid) {
+    const progressSnap = await adminDb
+      .collection('users').doc(uid)
+      .collection('trainingProgress').get();
+    progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+  }
 
   const modules = [...CE_MODULES].sort((a, b) => a.num - b.num);
   const completedCount = modules.filter((m) => {
@@ -35,6 +37,8 @@ export default async function CriticalEnvironmentPage() {
     return !!(p.completedAt && p.passed);
   }).length;
   const allComplete = completedCount === modules.length;
+
+  const isGuest = !uid;
 
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
@@ -52,7 +56,7 @@ export default async function CriticalEnvironmentPage() {
             Essential knowledge for anyone entering mission-critical facilities. Complete all {modules.length} modules to earn your{' '}
             <span className="text-emerald-400 font-semibold">Critical Environment Fundamentals Certificate</span>.
           </p>
-          {completedCount > 0 && (
+          {!isGuest && completedCount > 0 && (
             <div className="mt-4">
               <div className="flex justify-between text-xs text-gray-500 mb-1">
                 <span>{completedCount}/{modules.length} modules complete</span>
@@ -67,6 +71,24 @@ export default async function CriticalEnvironmentPage() {
             </div>
           )}
         </div>
+
+        {/* Guest sign-in prompt */}
+        {isGuest && (
+          <div className="rounded-lg bg-emerald-900/20 border border-emerald-700/50 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <p className="text-white font-semibold text-sm">Free — No Purchase Required</p>
+              <p className="text-gray-400 text-xs mt-0.5">Create a free account to save your progress and earn your certificate.</p>
+            </div>
+            <div className="flex gap-2 flex-shrink-0">
+              <Link href="/login?signup=1" className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition-colors">
+                Create account
+              </Link>
+              <Link href="/login" className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs font-semibold rounded-lg transition-colors">
+                Sign in
+              </Link>
+            </div>
+          </div>
+        )}
 
         {/* CPR Safety callout */}
         <div className="rounded-lg bg-red-950/30 border border-red-800/50 p-4 flex flex-col sm:flex-row sm:items-center gap-4">
@@ -96,7 +118,7 @@ export default async function CriticalEnvironmentPage() {
               const prevP = progress[modules[idx - 1].id] ?? {};
               return !!(prevP.completedAt && prevP.passed);
             })();
-            const available = idx === 0 || prevDone || slidesStarted;
+            const available = isGuest || idx === 0 || prevDone || slidesStarted;
 
             return (
               <div
@@ -143,19 +165,26 @@ export default async function CriticalEnvironmentPage() {
         </div>
 
         {/* Certificate section */}
-        <div className={`rounded-xl border p-6 text-center ${allComplete ? 'border-emerald-500 bg-emerald-950/30' : 'border-emerald-700/40 bg-emerald-950/20'}`}>
+        <div className={`rounded-xl border p-6 text-center ${allComplete && !isGuest ? 'border-emerald-500 bg-emerald-950/30' : 'border-emerald-700/40 bg-emerald-950/20'}`}>
           <p className="text-emerald-400 text-sm font-semibold mb-1">Certificate of Completion</p>
           <p className="text-gray-300 font-bold text-lg mb-2">Critical Environment Fundamentals</p>
           <p className="text-gray-500 text-xs mb-4">
             Awarded upon successful completion of all {modules.length} modules. Demonstrates foundational competency
             for entry into data centers, hospitals, and other mission-critical facilities.
           </p>
-          {allComplete ? (
+          {allComplete && !isGuest ? (
             <Link
               href="/certificate/critical-environment"
               className="inline-block px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-colors text-sm"
             >
               View Certificate →
+            </Link>
+          ) : isGuest ? (
+            <Link
+              href="/login?signup=1"
+              className="inline-block px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition-colors text-sm"
+            >
+              Create account to earn certificate →
             </Link>
           ) : (
             <p className="text-gray-600 text-xs">
