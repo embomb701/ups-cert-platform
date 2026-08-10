@@ -4,21 +4,48 @@
 
 Full-stack Next.js 14 TypeScript training and certification platform for field
 service trades, operated by FA Consulting and Recruiting (Francis Aiello).
-Public name: **Mastering Field Service Training Portal** (domain fse-academy.com,
-search indexing deliberately blocked until launch).
+Public name: **Mastering Field Service Training Portal** (domain masteringfse.com).
 
-**Four course tracks**, all sharing one 10-module electrical/safety foundation:
+**29 course tracks** — 1 free foundational course + 28 paid career tracks, all
+sharing a 10-module electrical/safety foundation (modules 1–10: basic electricity,
+circuits, components, AC/DC, Ohm's law, scientific notation, electrical drawings,
+NFPA-70E, LOTO, meter fundamentals).
 
 | Course | id | Modules | Exam level | Cert prefix | Status |
 |---|---|---|---|---|---|
-| UPS FSE | `ups` | 28 | `jr_fse` / `fse` | JR / FSE | Live |
-| Commercial Kitchen FSE | `kitchen` | 27 | `jr_kitchen_fse` | KJR | comingSoon |
-| HVAC FSE | `hvac` | 25 | `jr_hvac_fse` | HJR | comingSoon |
-| Generator (Power Gen) FSE | `generator` | 25 | `jr_gen_fse` | GJR | comingSoon |
+| Critical Env. Fundamentals | `critical-environment` | 8 | — | CE | Free |
+| UPS Field Service Eng. | `ups` | 28 | `jr_fse` / `fse` | JR / FSE | Live |
+| Commercial Kitchen FSE | `kitchen` | 27 | `jr_kitchen_fse` | KJR | Live |
+| HVAC FSE | `hvac` | 25 | `jr_hvac_fse` | HJR | Live |
+| Power Generation FSE | `generator` | 25 | `jr_gen_fse` | GJR | Live |
+| Data Center CFT | `datacenter` | 28 | `jr_dc_cft` | DCJR | Live |
+| Solar & Battery Storage | `solar` | 21 | `jr_solar_fse` | SJR | Live |
+| EV Charging Infrastructure | `evcharging` | 18 | `jr_ev_tech` | EVJR | Live |
+| Telecom DC Power Plants | `dcplants` | 17 | `jr_dcp_tech` | DCPJR | Live |
+| Battery Systems Tech | `battery` | 18 | `jr_battery_tech` | BTJR | Live |
+| Data Center Engineer | `dcengineer` | 34 | `jr_dc_engineer` | DCEJR | Live |
+| Marine Systems Tech | `marine` | 16 | `jr_marine_tech` | MRJR | Live |
+| Pool Equipment Tech | `pool` | 17 | `jr_pool_tech` | PLJR | Live |
+| HVAC Technician | `hvac-tech` | 16 | `jr_hvac_tech` | HVJR | Live |
+| Solar Installer | `solar-inst` | 16 | `jr_solar_inst` | SIJR | Live |
+| Wind Turbine Tech | `wind-tech` | 16 | `jr_wind_tech` | WDJR | Live |
+| Elevator Technician | `elevator-tech` | 16 | `jr_elevator_tech` | ELJR | Live |
+| Fire Alarm Tech | `fire-alarm-tech` | 16 | `jr_fire_alarm_tech` | FAJR | Live |
+| Biomedical Equipment Tech | `bmet-tech` | 16 | `jr_bmet_tech` | BMJR | Live |
+| BAS Technician | `bas-tech` | 16 | `jr_bas_tech` | BAJR | Live |
+| Commercial Refrigeration Tech | `ref-tech` | 16 | `jr_ref_tech` | RFJR | Live |
+| Industrial Controls & PLC Tech | `plc-tech` | 16 | `jr_plc_tech` | PCJR | Live |
+| Electronic Security Tech | `security-tech` | 16 | `jr_security_tech` | SCJR | Live |
+| Field Project Manager | `field-pm` | 16 | `jr_field_pm` | PMJR | comingSoon |
+| Pump Technician | `pump-tech` | 16 | `jr_pump_tech` | PTJR | comingSoon |
+| Industrial Refrigeration Op. | `industrial-ref` | 6 | `jr_industrial_ref` | IRJR | Live |
+| Data Center Ops Manager | `dc-ops` | 5 | `jr_dc_ops` | DOJR | Live |
+| Building Commissioning Agent | `building-cx` | 5 | `jr_building_cx` | CXJR | Live |
+| Telecom OSP Technician | `telecom` | 6 | `jr_telecom_tech` | TLJR | Live |
 
-Cross-course module sharing: HVAC reuses the Kitchen refrigeration modules
+Cross-course module sharing: HVAC reuses Kitchen refrigeration modules
 (`kitchen-refrigeration-cycle`, `kitchen-refrigeration-service`); Generator
-reuses the UPS battery modules (`battery-types`, `battery-safety`).
+reuses UPS battery modules (`battery-types`, `battery-safety`).
 
 **Book:** *Mastering Uninterruptible Power Supplies, Field Service Engineering*
 (source of the UPS question banks; lives at `D:\FA Consulting & Recruiting\My Books\Mastering UPS 2nd`).
@@ -50,6 +77,8 @@ reuses the UPS battery modules (`battery-types`, `battery-safety`).
 - Gating rules: 5-min slide timer, 100% section quizzes, 10-question module
   test (100%, once/day), 3-day wait between modules, free trial = lesson 1 of
   modules 1-3.
+- Free public access: CE (critical-environment) modules start with `ce-`; free
+  trial modules are `num <= 3`. Both bypass auth checks and get search-indexed.
 
 ### Exams
 - Selection/scoring server-side only: `src/lib/exam/engine.ts`.
@@ -93,3 +122,5 @@ reuses the UPS battery modules (`battery-types`, `battery-safety`).
 - Keep the required educational-credential disclaimers (footer, cert pages,
   verify, results, terms/privacy) intact.
 - Long generated content: check for stray non-ASCII (CJK/Cyrillic) characters.
+- `NEXT_PUBLIC_SITE_URL` defaults to `https://masteringfse.com`; use it for all
+  absolute URLs (OG images, JSON-LD, Stripe redirects, email links).
