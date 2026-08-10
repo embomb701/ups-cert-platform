@@ -37,8 +37,21 @@ const chapters = [
 ];
 
 export default function BookPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    name: 'Mastering Uninterruptible Power Supplies, Field Service Engineering',
+    author: { '@type': 'Person', name: 'Francis Aiello' },
+    url: `${SITE_URL}/book`,
+    description: 'A practical, field-focused guide to UPS systems for people entering or advancing in UPS field service engineering.',
+    publisher: { '@type': 'Organization', name: 'FA Consulting and Recruiting' },
+    inLanguage: 'en',
+    genre: 'Technical / Field Service Engineering',
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950">
         <div className="container-site max-w-4xl mx-auto">
           <p className="text-xs font-semibold text-indigo-400 uppercase tracking-wider mb-4">The Book</p>
