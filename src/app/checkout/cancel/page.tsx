@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = { title: 'Checkout Cancelled' };
+export const metadata: Metadata = {
+  title: 'Checkout Cancelled — Mastering Field Service',
+  robots: { index: false },
+};
 
 export default function CheckoutCancelPage() {
   return (

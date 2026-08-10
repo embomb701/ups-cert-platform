@@ -1,13 +1,17 @@
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = { title: 'Privacy Policy' };
+export const metadata: Metadata = {
+  title: 'Privacy Policy — Mastering Field Service',
+  description:
+    'How Mastering Field Service collects, uses, and protects your personal data, including exam records, purchase history, and certificate information.',
+};
 
 export default function PrivacyPage() {
   return (
     <section className="section-pad">
       <div className="container-site max-w-3xl mx-auto">
         <h1 className="text-2xl font-bold text-white mb-2">Privacy Policy</h1>
-        <p className="text-gray-500 text-xs mb-8">Last updated: [DATE]</p>
+        <p className="text-gray-500 text-xs mb-8">Last updated: July 2025</p>
 
         <div className="space-y-8 text-gray-400 text-sm leading-relaxed">
           <div>
@@ -77,7 +81,11 @@ export default function PrivacyPage() {
 
           <div>
             <h2 className="text-base font-semibold text-white mb-2">7. Contact</h2>
-            <p>For privacy questions or data requests, contact us at [SUPPORT EMAIL PLACEHOLDER].</p>
+            <p>
+              For privacy questions or data requests, use our{' '}
+              <a href="/contact" className="text-indigo-400 hover:text-indigo-300">contact form</a>{' '}
+              or email us at careers@aiellorecruiter.com.
+            </p>
           </div>
         </div>
       </div>

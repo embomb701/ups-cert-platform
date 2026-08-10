@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 
 export const dynamic = 'force-dynamic';
 
 export async function PATCH(req: NextRequest) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('firebase-token')?.value;
-  if (!token) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const authHeader = req.headers.get('Authorization');
+  if (!authHeader?.startsWith('Bearer ')) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  const token = authHeader.split('Bearer ')[1];
 
   let uid: string;
   try {

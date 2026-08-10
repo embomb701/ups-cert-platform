@@ -1,13 +1,17 @@
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = { title: 'Terms & Disclaimer' };
+export const metadata: Metadata = {
+  title: 'Terms of Use & Disclaimer — Mastering Field Service',
+  description:
+    'Terms of use, certification disclaimer, exam rules, and refund policy for Mastering Field Service Training Portal.',
+};
 
 export default function TermsPage() {
   return (
     <section className="section-pad">
       <div className="container-site max-w-3xl mx-auto">
         <h1 className="text-2xl font-bold text-white mb-2">Terms of Use &amp; Disclaimer</h1>
-        <p className="text-gray-500 text-xs mb-8">Last updated: [DATE]</p>
+        <p className="text-gray-500 text-xs mb-8">Last updated: July 2025</p>
 
         <div className="space-y-8 text-gray-400 text-sm leading-relaxed">
           <div>
@@ -93,7 +97,11 @@ export default function TermsPage() {
 
           <div>
             <h2 className="text-base font-semibold text-white mb-2">8. Contact</h2>
-            <p>Questions about these terms? Contact us at [SUPPORT EMAIL PLACEHOLDER].</p>
+            <p>
+              Questions about these terms? Use our{' '}
+              <a href="/contact" className="text-indigo-400 hover:text-indigo-300">contact form</a>{' '}
+              or email us at careers@aiellorecruiter.com.
+            </p>
           </div>
         </div>
       </div>

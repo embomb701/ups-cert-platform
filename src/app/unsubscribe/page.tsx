@@ -22,8 +22,12 @@ export default async function UnsubscribePage({ searchParams }: Props) {
     return <ErrorPage message="This unsubscribe link is missing a user ID. Please use the link from your email." />;
   }
 
-  // Validate UID exists in Firestore (prevent arbitrary writes to nonexistent docs)
   const userRef = adminDb.collection('users').doc(uid);
+  const snap = await userRef.get();
+
+  if (!snap.exists) {
+    return <ErrorPage message="This unsubscribe link is no longer valid." />;
+  }
 
   if (action === 'unsubscribe') {
     await userRef.set({ emailRemindersEnabled: false }, { merge: true });
@@ -36,7 +40,6 @@ export default async function UnsubscribePage({ searchParams }: Props) {
   }
 
   // Default: show current status and option to change
-  const snap = await userRef.get();
   const emailRemindersEnabled = snap.data()?.emailRemindersEnabled !== false;
 
   return (
