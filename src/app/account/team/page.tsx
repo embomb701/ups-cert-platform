@@ -3,11 +3,12 @@ import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { InviteForm } from '@/components/team/InviteForm';
 import { RevokeButton } from '@/components/team/RevokeButton';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Team Management',
+export const metadata: Metadata = {
+  title: 'Team Management — Mastering Field Service',
 };
 
 interface EmployerOrder {

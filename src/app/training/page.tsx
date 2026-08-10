@@ -7,8 +7,22 @@ import { COURSE_SEQUENCES } from '@/data';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { ExternalLinkWarning } from '@/components/ExternalLinkWarning';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
+export const metadata: Metadata = {
+  title: 'Training Hub — 28 Career Tracks in Field Service',
+  description: 'Browse all 28 field service training tracks. Start with UPS, HVAC, solar, data center, elevators, and more. Enroll and begin at your own pace.',
+  openGraph: {
+    title: 'Training Hub — 28 Field Service Career Tracks',
+    description: 'Access your enrolled training courses across 28 field service career paths.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Training Hub' }],
+  },
+  twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
+};
 
 // Courses that have a dedicated hub page at /training/[slug]
 const HUB_ROUTES = new Set([

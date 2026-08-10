@@ -3,11 +3,12 @@ import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { CloseListingButton } from '@/components/jobs/CloseListingButton';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'My Job Listings',
+export const metadata: Metadata = {
+  title: 'My Job Listings — Mastering Field Service',
 };
 
 interface Listing {

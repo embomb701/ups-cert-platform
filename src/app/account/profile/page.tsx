@@ -2,11 +2,12 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { ProfileSettingsForm } from '@/components/profile/ProfileSettingsForm';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Public Profile Settings',
+export const metadata: Metadata = {
+  title: 'Public Profile Settings — Mastering Field Service',
 };
 
 export default async function AccountProfilePage() {
