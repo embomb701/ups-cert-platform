@@ -4,6 +4,7 @@ import { getStripe, STRIPE_PRODUCTS } from '@/lib/stripe/client';
 export const dynamic = 'force-dynamic';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { hashIp, getRealIp } from '@/lib/utils/ipHash';
+import { checkRateLimit } from '@/lib/utils/rateLimit';
 import type { ProductId } from '@/types';
 import { FieldValue } from 'firebase-admin/firestore';
 
@@ -24,6 +25,15 @@ export async function POST(req: NextRequest) {
       email = decoded.email ?? '';
     } catch {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+    }
+
+    // Rate limit: 10 checkout attempts per hour per user
+    const rl = await checkRateLimit(uid, 'checkout', 10, 60 * 60 * 1000);
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { error: 'Too many checkout attempts. Please try again later.' },
+        { status: 429, headers: { 'Retry-After': String(Math.ceil((rl.resetAt - Date.now()) / 1000)) } },
+      );
     }
 
     const body = await req.json();

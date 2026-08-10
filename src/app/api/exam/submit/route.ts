@@ -10,6 +10,7 @@ import {
   shouldFlagForReview,
 } from '@/lib/exam/antiCheat';
 import { hashIp, getRealIp } from '@/lib/utils/ipHash';
+import { checkRateLimit } from '@/lib/utils/rateLimit';
 import { FieldValue } from 'firebase-admin/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import type { ExamAnswer, SuspiciousEvent } from '@/types';
@@ -26,6 +27,15 @@ export async function POST(req: NextRequest) {
       uid = decoded.uid;
     } catch {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+    }
+
+    // Rate limit: 5 exam submissions per hour per user
+    const rl = await checkRateLimit(uid, 'exam_submit', 5, 60 * 60 * 1000);
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { error: 'Too many submission attempts. Please wait before retrying.' },
+        { status: 429, headers: { 'Retry-After': String(Math.ceil((rl.resetAt - Date.now()) / 1000)) } },
+      );
     }
 
     const body = await req.json();
