@@ -64,13 +64,17 @@ export async function POST(req: NextRequest) {
       practice_jr_security_tech: { bank: 'jr_security_tech', accessDoc: 'practice_jr_security_tech', label: 'Jr. Security Tech' },
       practice_jr_field_pm: { bank: 'jr_field_pm', accessDoc: 'practice_jr_field_pm', label: 'Jr. Field PM' },
       practice_jr_pump_tech: { bank: 'jr_pump_tech', accessDoc: 'practice_jr_pump_tech', label: 'Jr. Pump Tech' },
+      practice_jr_industrial_ref: { bank: 'jr_industrial_ref', accessDoc: 'practice_jr_industrial_ref', label: 'Jr. Industrial Ref' },
+      practice_jr_dc_ops: { bank: 'jr_dc_ops', accessDoc: 'practice_jr_dc_ops', label: 'Jr. DC Ops' },
+      practice_jr_building_cx: { bank: 'jr_building_cx', accessDoc: 'practice_jr_building_cx', label: 'Jr. Building Cx' },
+      practice_jr_telecom_tech: { bank: 'jr_telecom_tech', accessDoc: 'practice_jr_telecom_tech', label: 'Jr. Telecom OSP' },
     };
     const practice = PRACTICE_EXAMS[rawExamLevel];
     const isPractice = !!practice;
     const examLevel = (practice ? practice.bank : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech', 'jr_security_tech', 'jr_field_pm', 'jr_pump_tech'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech', 'jr_security_tech', 'jr_field_pm', 'jr_pump_tech', 'jr_industrial_ref', 'jr_dc_ops', 'jr_building_cx', 'jr_telecom_tech'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -192,6 +196,10 @@ export async function POST(req: NextRequest) {
       jr_security_tech: { label: 'Jr. Security Tech', productId: 'jr_security_tech_test_human', courseKey: 'training_security_tech' },
       jr_field_pm: { label: 'Jr. Field PM', productId: 'jr_field_pm_test_human', courseKey: 'training_field_pm' },
       jr_pump_tech: { label: 'Jr. Pump Tech', productId: 'jr_pump_tech_test_human', courseKey: 'training_pump_tech' },
+      jr_industrial_ref: { label: 'Jr. Industrial Ref', productId: 'jr_industrial_ref_test_human', courseKey: 'training_industrial_ref' },
+      jr_dc_ops: { label: 'Jr. DC Ops', productId: 'jr_dc_ops_test_human', courseKey: 'training_dc_ops' },
+      jr_building_cx: { label: 'Jr. Building Cx', productId: 'jr_building_cx_test_human', courseKey: 'training_building_cx' },
+      jr_telecom_tech: { label: 'Jr. Telecom OSP', productId: 'jr_telecom_tech_test_human', courseKey: 'training_telecom' },
     };
 
     let kitchenTestOut = false;
