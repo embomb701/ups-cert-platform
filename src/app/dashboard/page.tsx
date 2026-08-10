@@ -313,16 +313,35 @@ export default function DashboardPage() {
                         >
                           Verify
                         </Link>
-                        {cert.status === 'valid' && (
-                          <a
-                            href={`/certificate/${cert.certificateNumber}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-gray-600 hover:text-gray-300 transition-colors"
-                          >
-                            PDF
-                          </a>
-                        )}
+                        {cert.status === 'valid' && (() => {
+                          const issued = cert.issuedAt ? new Date(cert.issuedAt) : null;
+                          const liUrl = issued
+                            ? `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(cert.certificationTitle)}&issueYear=${issued.getFullYear()}&issueMonth=${issued.getMonth() + 1}&certUrl=${encodeURIComponent(`${SITE_URL}/verify/${cert.certificateNumber}`)}&certId=${encodeURIComponent(cert.certificateNumber)}`
+                            : null;
+                          return (
+                            <>
+                              {liUrl && (
+                                <a
+                                  href={liUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  title="Add to LinkedIn"
+                                  className="text-xs text-gray-600 hover:text-[#0A66C2] transition-colors"
+                                >
+                                  LinkedIn
+                                </a>
+                              )}
+                              <a
+                                href={`/certificate/${cert.certificateNumber}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-gray-600 hover:text-gray-300 transition-colors"
+                              >
+                                PDF
+                              </a>
+                            </>
+                          );
+                        })()}
                       </div>
                     </div>
                   );

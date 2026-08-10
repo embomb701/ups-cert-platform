@@ -13,12 +13,24 @@ const ADMIN_EMAILS = [
   'aiellochori@gmail.com',
 ];
 
+function escHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { name, email, message } = await req.json() as { name: string; email: string; message: string };
 
     if (!name?.trim() || !email?.trim() || !message?.trim()) {
       return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
+    }
+
+    if (name.trim().length > 200) {
+      return NextResponse.json({ error: 'Name is too long.' }, { status: 400 });
     }
 
     if (message.trim().length > 5000) {
@@ -60,20 +72,20 @@ export async function POST(req: NextRequest) {
               <table style="width:100%;border-collapse:collapse;margin-top:20px;">
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#374151;font-weight:600;width:80px;">Name</td>
-                  <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;">${name.trim()}</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;">${escHtml(name.trim())}</td>
                 </tr>
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#374151;font-weight:600;">Email</td>
                   <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;">
-                    <a href="mailto:${email.trim()}" style="color:#4f46e5;">${email.trim()}</a>
+                    <a href="mailto:${escHtml(email.trim())}" style="color:#4f46e5;">${escHtml(email.trim())}</a>
                   </td>
                 </tr>
               </table>
               <div style="margin-top:20px;padding:16px;background:#f9fafb;border-radius:8px;">
-                <p style="margin:0;color:#111827;white-space:pre-wrap;">${message.trim().replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+                <p style="margin:0;color:#111827;white-space:pre-wrap;">${escHtml(message.trim())}</p>
               </div>
               <p style="margin-top:16px;font-size:13px;color:#9ca3af;">
-                Reply directly to <a href="mailto:${email.trim()}" style="color:#4f46e5;">${email.trim()}</a>
+                Reply directly to <a href="mailto:${escHtml(email.trim())}" style="color:#4f46e5;">${escHtml(email.trim())}</a>
               </p>
             </div>
           `,

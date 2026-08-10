@@ -417,6 +417,18 @@ export default function HomePage() {
         founder: { '@type': 'Person', name: 'Francis Aiello' },
         sameAs: [],
       },
+      {
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'Do I need any experience to start?', acceptedAnswer: { '@type': 'Answer', text: 'No. The training starts with electrical fundamentals and builds from there. Every track begins with the same 10-module foundation — no prior knowledge required.' } },
+          { '@type': 'Question', name: 'Can I train in more than one track?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Modules 1–10 are shared across every program. Complete them once and they count toward all certifications. After the foundation you branch into whichever specialty tracks you choose — there is no limit.' } },
+          { '@type': 'Question', name: 'Which track should I start with?', acceptedAnswer: { '@type': 'Answer', text: 'If you are not sure, start with UPS Field Service Engineering — it is the broadest critical power track and the most transferable foundation. Or take the free Critical Environment Fundamentals course first to get a feel for the material and the platform.' } },
+          { '@type': 'Question', name: 'What is included in the $1,499 training course?', acceptedAnswer: { '@type': 'Answer', text: 'Everything: all modules, section quizzes, module tests, the NFPA 70E certificate (Module 8), the LOTO certificate (Module 9), the practice exam, and your Jr. Certification exam at completion. No hidden fees.' } },
+          { '@type': 'Question', name: 'How long does training take?', acceptedAnswer: { '@type': 'Answer', text: 'The 3-day minimum between modules is enforced server-side. At that pace a 28-module track takes at least 3 months. Most students finish in 3–6 months. Shorter tracks (16–24 modules) can be completed in 2–4 months.' } },
+          { '@type': 'Question', name: 'What is the NFPA 70E certificate?', acceptedAnswer: { '@type': 'Answer', text: 'A standalone, employer-verifiable credential earned by completing Module 8. Covers arc flash hazards, PPE categories 1–4, approach boundaries, and energized work permits. Included free with the training course.' } },
+          { '@type': 'Question', name: 'What is the test-out option?', acceptedAnswer: { '@type': 'Answer', text: 'If you already work in the field and know the material, you can skip training and attempt the certification exam directly for $299. Live proctor. One attempt — fail and the full training course is required before retrying.' } },
+        ],
+      },
     ],
   };
 
