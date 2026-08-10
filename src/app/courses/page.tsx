@@ -88,8 +88,28 @@ const HUB_ROUTES: Record<string, string> = {
 export default function CourseCatalogPage() {
   const courseMap = Object.fromEntries(COURSES.map((c) => [c.id, c]));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Mastering Field Service — 28 Career Tracks',
+    description: 'Professional field service training courses across 28 career tracks',
+    numberOfItems: COURSES.length,
+    itemListElement: COURSES.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Course',
+        name: c.title,
+        description: c.tagline,
+        url: `${SITE_URL}/training/${c.id}`,
+        provider: { '@type': 'Organization', name: 'Mastering Field Service', url: SITE_URL },
+      },
+    })),
+  };
+
   return (
     <div className="bg-gray-900 min-h-screen text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Header */}
       <section className="border-b border-gray-800 py-14 px-4">
