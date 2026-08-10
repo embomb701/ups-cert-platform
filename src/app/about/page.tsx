@@ -6,11 +6,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 export const metadata: Metadata = {
   title: 'About — FA Consulting and Recruiting',
   description:
-    'Mastering Field Service is a division of FA Consulting and Recruiting, founded by Francis Aiello. We build field service training and certification for the next generation of UPS, HVAC, kitchen, and power generation technicians.',
+    'Mastering Field Service is a division of FA Consulting and Recruiting, founded by Francis Aiello. We build field service training and certification across 28 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.',
   openGraph: {
     title: 'About Mastering Field Service',
     description:
-      'Learn about FA Consulting and Recruiting and the mission behind Mastering Field Service Training Portal.',
+      'Learn about FA Consulting and Recruiting and the mission behind Mastering Field Service — 28 career tracks, industry-backed certifications, no college required.',
     images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'About Mastering Field Service' }],
   },
   twitter: {
@@ -79,7 +79,8 @@ export default function AboutPage() {
               <h3 className="text-base font-semibold text-white mb-2">For the Next Generation</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
                 Give motivated people — regardless of background — a credible, structured path into
-                a rewarding, in-demand career in UPS field service engineering.
+                a rewarding, in-demand career across 28 field service trades: UPS, HVAC, Solar,
+                Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.
               </p>
             </div>
           </div>
@@ -151,10 +152,11 @@ export default function AboutPage() {
               in a real field environment.
             </p>
             <p className="text-sm text-gray-400 leading-relaxed">
-              The certifications are tied directly to{' '}
-              <em>Mastering Uninterruptible Power Supplies, Field Service Engineering</em>.
-              Employer partnerships, additional certification levels, and expanded training content
-              are actively in development.
+              The UPS curriculum is built on{' '}
+              <em>Mastering Uninterruptible Power Supplies, Field Service Engineering</em> —
+              the technical book by Francis Aiello. All 28 tracks share the same electrical and
+              safety foundation and expand into trade-specific content developed from real field experience.
+              Employer partnerships and additional certification levels are actively in development.
             </p>
           </div>
 

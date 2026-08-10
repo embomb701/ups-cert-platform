@@ -36,8 +36,8 @@ NFPA-70E, LOTO, meter fundamentals).
 | Commercial Refrigeration Tech | `ref-tech` | 16 | `jr_ref_tech` | RFJR | Live |
 | Industrial Controls & PLC Tech | `plc-tech` | 16 | `jr_plc_tech` | PCJR | Live |
 | Electronic Security Tech | `security-tech` | 16 | `jr_security_tech` | SCJR | Live |
-| Field Project Manager | `field-pm` | 16 | `jr_field_pm` | PMJR | comingSoon |
-| Pump Technician | `pump-tech` | 16 | `jr_pump_tech` | PTJR | comingSoon |
+| Field Project Manager | `field-pm` | 16 | `jr_field_pm` | PMJR | Live |
+| Pump Technician | `pump-tech` | 16 | `jr_pump_tech` | PTJR | Live |
 | Industrial Refrigeration Op. | `industrial-ref` | 6 | `jr_industrial_ref` | IRJR | Live |
 | Data Center Ops Manager | `dc-ops` | 5 | `jr_dc_ops` | DOJR | Live |
 | Building Commissioning Agent | `building-cx` | 5 | `jr_building_cx` | CXJR | Live |
