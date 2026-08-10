@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 export const dynamic = 'force-dynamic';
-import { getStripe } from '@/lib/stripe/client';
+import { getStripe, STRIPE_PRODUCTS } from '@/lib/stripe/client';
 import { adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
+import { sendOrderConfirmationEmail } from '@/lib/email';
 
 export async function POST(req: NextRequest) {
   const stripe = getStripe();
@@ -1494,4 +1495,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     createdAt: FieldValue.serverTimestamp(),
     severity: 'info',
   });
+
+  // Order confirmation email — best effort
+  if (email) {
+    const customerName = session.customer_details?.name ?? '';
+    const productEntry = (STRIPE_PRODUCTS as Record<string, { name: string; shortName: string }>)[productId];
+    const productName = productEntry?.shortName ?? productEntry?.name ?? productId;
+    const amountCents = session.amount_total ?? 0;
+    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+    sendOrderConfirmationEmail(email, customerName, productName, amountCents, `${SITE_URL}/dashboard`).catch(() => {});
+  }
 }

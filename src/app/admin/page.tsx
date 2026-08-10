@@ -5,6 +5,7 @@ export const metadata: Metadata = { title: 'Admin Dashboard' };
 
 const adminSections = [
   { label: 'Analytics', href: '/admin/analytics', desc: 'Enrollment counts, pass rates by course, revenue by product' },
+  { label: 'Grant Access', href: '/admin/access', desc: 'Manually grant course or exam access — comps, support resolutions, refunds' },
   { label: 'Practice Test Settings', href: '/admin/practice-test', desc: 'Toggle practice test free/paid — make it temporarily free for promotions' },
   { label: 'Users', href: '/admin/users', desc: 'View accounts, roles, blocks' },
   { label: 'Purchases', href: '/admin/purchases', desc: 'View all Stripe purchases' },
