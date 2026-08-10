@@ -85,6 +85,10 @@ export default function ExamRulesPage() {
     practice_jr_security_tech: 'Jr. Security Tech Practice Test — Results Only, No Certificate',
     practice_jr_field_pm: 'Jr. Field PM Practice Test — Results Only, No Certificate',
     practice_jr_pump_tech: 'Jr. Pump Tech Practice Test — Results Only, No Certificate',
+    practice_jr_industrial_ref: 'Jr. Industrial Ref Practice Test — Results Only, No Certificate',
+    practice_jr_dc_ops: 'Jr. DC Ops Practice Test — Results Only, No Certificate',
+    practice_jr_building_cx: 'Jr. Building Cx Practice Test — Results Only, No Certificate',
+    practice_jr_telecom_tech: 'Jr. Telecom OSP Practice Test — Results Only, No Certificate',
   };
   // Jr-course exam display config: rules token + certification label
   const JR_COURSE_META: Record<string, { token: string; label: string }> = {
@@ -111,6 +115,10 @@ export default function ExamRulesPage() {
     jr_security_tech: { token: 'Jr. Security Tech Exam', label: 'Junior Electronic Security Systems Technician Certification' },
     jr_field_pm: { token: 'Jr. Field PM Exam', label: 'Junior Field Project Manager Certification' },
     jr_pump_tech: { token: 'Jr. Pump Tech Exam', label: 'Junior Pump Technician Certification' },
+    jr_industrial_ref: { token: 'Jr. Industrial Ref Exam', label: 'Junior Industrial Refrigeration Operator Certification' },
+    jr_dc_ops: { token: 'Jr. DC Ops Exam', label: 'Junior Data Center Operations Manager Certification' },
+    jr_building_cx: { token: 'Jr. Building Cx Exam', label: 'Junior Building Commissioning Agent Certification' },
+    jr_telecom_tech: { token: 'Jr. Telecom OSP Exam', label: 'Junior Telecom Outside Plant Technician Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];
