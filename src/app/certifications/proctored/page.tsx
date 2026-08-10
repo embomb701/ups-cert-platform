@@ -18,8 +18,27 @@ export const metadata: Metadata = {
 };
 
 export default function ProctoredCertPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOccupationalProgram',
+    name: 'UPS Field Service Engineer Certification (Human Proctored)',
+    url: `${SITE_URL}/certifications/proctored`,
+    description: 'The gold-standard FSE certification with live human proctor. Scheduling required. ID verified. Trusted by employers for highest-credential validation.',
+    provider: { '@type': 'Organization', name: 'Mastering Field Service', url: SITE_URL },
+    educationalCredentialAwarded: 'UPS Field Service Engineer Certificate (Human Proctored)',
+    occupationalCategory: 'Field Service Engineering',
+    offers: {
+      '@type': 'Offer',
+      price: '649',
+      priceCurrency: 'USD',
+      name: 'FSE Human Proctored Exam',
+      url: `${SITE_URL}/certifications/proctored`,
+    },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950">
         <div className="container-site max-w-4xl mx-auto">
           <span className="badge-fse mb-4 inline-block">Advanced — Proctored</span>

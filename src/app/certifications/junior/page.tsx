@@ -19,8 +19,28 @@ export const metadata: Metadata = {
 };
 
 export default function JuniorCertPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOccupationalProgram',
+    name: 'Junior UPS Field Service Engineer Certification',
+    url: `${SITE_URL}/certifications/junior`,
+    description:
+      'The Jr. FSE credential validates foundational UPS field service knowledge. Earn by completing the 3-to-6-month training course or by passing the test-out exam.',
+    provider: { '@type': 'Organization', name: 'Mastering Field Service', url: SITE_URL },
+    educationalCredentialAwarded: 'Jr. UPS Field Service Engineer Certificate',
+    occupationalCategory: 'Field Service Engineering',
+    offers: {
+      '@type': 'Offer',
+      price: '299',
+      priceCurrency: 'USD',
+      name: 'Jr. FSE Test-Out Exam',
+      url: `${SITE_URL}/certifications/junior#test-out`,
+    },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950">
         <div className="container-site max-w-4xl mx-auto">
           <span className="badge-jr mb-4 inline-block">Jr. FSE Certification</span>

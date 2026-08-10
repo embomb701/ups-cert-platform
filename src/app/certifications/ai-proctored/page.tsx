@@ -35,8 +35,27 @@ const rules = [
 ];
 
 export default function AIProctorPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOccupationalProgram',
+    name: 'UPS Field Service Engineer Certification (AI Proctored)',
+    url: `${SITE_URL}/certifications/ai-proctored`,
+    description: 'Advanced FSE certification with AI webcam proctoring. No scheduling required. Pass at 80% and earn a verified FSE Certificate.',
+    provider: { '@type': 'Organization', name: 'Mastering Field Service', url: SITE_URL },
+    educationalCredentialAwarded: 'UPS Field Service Engineer Certificate (AI Proctored)',
+    occupationalCategory: 'Field Service Engineering',
+    offers: {
+      '@type': 'Offer',
+      price: '349',
+      priceCurrency: 'USD',
+      name: 'FSE AI Proctored Exam',
+      url: `${SITE_URL}/certifications/ai-proctored`,
+    },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950">
         <div className="container-site max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-4">
