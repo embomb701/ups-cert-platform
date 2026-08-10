@@ -988,6 +988,7 @@ export interface TrainingCourse {
   testOutProductId?: string;
   comingSoon?: boolean;
   free?: boolean;
+  price?: string;
 }
 
 export const COURSES: TrainingCourse[] = [
@@ -1131,6 +1132,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_dcengineer',
     testOutProductId: 'jr_dc_engineer_test_human',
     comingSoon: false,
+    price: '$1,999',
   },
   {
     id: 'marine',

@@ -199,7 +199,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
             </p>
             <PurchaseButton
               productId={course.stripeProductId as ProductId}
-              label={`Enroll in ${course.shortTitle}`}
+              label={`Enroll — ${course.price ?? '$1,499'}`}
               className={`px-5 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors ${c.btn}`}
             />
           </div>
@@ -227,7 +227,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
                     </div>
                     <PurchaseButton
                       productId={course.stripeProductId as ProductId}
-                      label={`Enroll in ${course.shortTitle}`}
+                      label={`Enroll — ${course.price ?? '$1,499'}`}
                       className={`flex-shrink-0 px-4 py-2 rounded-lg text-white text-sm font-semibold transition-colors ${c.btn}`}
                     />
                   </div>
