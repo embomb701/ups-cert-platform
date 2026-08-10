@@ -1,8 +1,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata: Metadata = {
-  title: 'Basic Electricity — UPS Training',
+  title: 'Basic Electricity for Field Service — Mastering Field Service',
+  description:
+    "Free interactive lessons covering Ohm's Law, power formula, series vs. parallel circuits, and AC/DC fundamentals — the electrical foundation every field service technician needs.",
+  openGraph: {
+    title: 'Basic Electricity for Field Service — Mastering Field Service',
+    description: "Free interactive lessons on Ohm's Law, power formula, and circuit fundamentals for aspiring field service technicians.",
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Basic Electricity for Field Service' }],
+  },
+  twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
 };
 
 const lessons = [
