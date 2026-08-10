@@ -123,6 +123,7 @@ export default async function AdminUsersPage({
                 <th className="text-left px-4 py-3 text-xs text-gray-500 font-semibold">Last Sign-in</th>
                 <th className="text-left px-4 py-3 text-xs text-gray-500 font-semibold">Flags</th>
                 <th className="text-left px-4 py-3 text-xs text-gray-500 font-semibold">UID</th>
+                <th className="px-4 py-3"></th>
               </tr>
             </thead>
             <tbody>
@@ -156,6 +157,14 @@ export default async function AdminUsersPage({
                     </td>
                     <td className="px-4 py-3 font-mono text-xs text-gray-600 max-w-[140px] truncate" title={u.uid}>
                       {u.uid}
+                    </td>
+                    <td className="px-4 py-3">
+                      <Link
+                        href={`/admin/users/${u.uid}`}
+                        className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors whitespace-nowrap"
+                      >
+                        View →
+                      </Link>
                     </td>
                   </tr>
                 ))

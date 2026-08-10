@@ -30,6 +30,38 @@ export async function POST(req: NextRequest) {
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session;
       await handleCheckoutCompleted(event.id, session);
+    } else if (event.type === 'checkout.session.expired') {
+      const session = event.data.object as Stripe.Checkout.Session;
+      if (session.id) {
+        await adminDb.collection('purchases').doc(session.id).set(
+          { status: 'expired', expiredAt: FieldValue.serverTimestamp() },
+          { merge: true },
+        );
+      }
+    } else if (event.type === 'charge.refunded') {
+      const charge = event.data.object as Stripe.Charge;
+      await adminDb.collection('auditLogs').add({
+        eventType: 'charge_refunded',
+        eventDetails: {
+          chargeId: charge.id,
+          amount: charge.amount_refunded,
+          paymentIntent: charge.payment_intent,
+        },
+        createdAt: FieldValue.serverTimestamp(),
+        severity: 'warning',
+      });
+      // Mark any matching purchase as refunded
+      const purchasesSnap = await adminDb
+        .collection('purchases')
+        .where('stripePaymentIntentId', '==', charge.payment_intent ?? '')
+        .limit(1)
+        .get();
+      if (!purchasesSnap.empty) {
+        await purchasesSnap.docs[0].ref.set(
+          { status: 'refunded', refundedAt: FieldValue.serverTimestamp() },
+          { merge: true },
+        );
+      }
     }
     return NextResponse.json({ received: true });
   } catch (err) {
