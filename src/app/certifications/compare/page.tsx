@@ -81,7 +81,7 @@ export default function ComparePage() {
 
         <div className="grid md:grid-cols-3 gap-4 mt-10">
           <Link href="/certifications/junior" className="card-dark p-6 text-center hover:border-indigo-700 transition-colors block">
-            <p className="text-lg font-bold text-indigo-400 mb-1">Jr. FSE Exam — $199</p>
+            <p className="text-lg font-bold text-indigo-400 mb-1">Jr. FSE Exam — $299</p>
             <p className="text-sm text-gray-400">Start here if you are entering the field</p>
           </Link>
           <Link href="/certifications/ai-proctored" className="card-dark p-6 text-center hover:border-purple-700 transition-colors block">

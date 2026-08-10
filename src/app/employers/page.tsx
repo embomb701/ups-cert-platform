@@ -107,7 +107,7 @@ export default function EmployersPage() {
                   <h3 className="text-base font-bold text-white">Junior FSE Certification</h3>
                   <p className="text-sm text-gray-500">Entry-level knowledge credential</p>
                 </div>
-                <p className="text-xl font-mono font-bold text-indigo-400">$199</p>
+                <p className="text-xl font-mono font-bold text-indigo-400">$299</p>
               </div>
               <ul className="space-y-1.5 text-xs text-gray-400 mb-4">
                 <li>✓ 50 randomized questions from 1,000-question bank</li>
