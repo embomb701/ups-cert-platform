@@ -10,6 +10,13 @@ const HUB_ROUTES: Record<string, string> = {
   evcharging: '/training/evcharging', 'industrial-ref': '/training/industrial-ref',
   'building-cx': '/training/building-cx', telecom: '/training/telecom',
   'critical-environment': '/training/critical-environment',
+  dcengineer: '/training/dcengineer', marine: '/training/marine', pool: '/training/pool',
+  'hvac-tech': '/training/hvac-tech', 'solar-inst': '/training/solar-inst',
+  'wind-tech': '/training/wind-tech', 'elevator-tech': '/training/elevator-tech',
+  'fire-alarm-tech': '/training/fire-alarm-tech', 'bmet-tech': '/training/bmet-tech',
+  'bas-tech': '/training/bas-tech', 'ref-tech': '/training/ref-tech',
+  'plc-tech': '/training/plc-tech', 'security-tech': '/training/security-tech',
+  'field-pm': '/training/field-pm', 'pump-tech': '/training/pump-tech',
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
