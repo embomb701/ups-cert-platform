@@ -5,6 +5,34 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
 
+const CERT_TITLES: Record<string, string> = {
+  jr_fse: 'Jr. UPS Field Service Engineer',
+  fse: 'Field Service Engineer',
+  jr_kitchen_fse: 'Jr. Commercial Kitchen Field Service Engineer',
+  jr_hvac_fse: 'Jr. HVAC Field Service Engineer',
+  jr_gen_fse: 'Jr. Power Generation Field Service Engineer',
+  jr_dc_cft: 'Jr. Data Center Critical Facilities Technician',
+  jr_solar_fse: 'Jr. Solar & Storage Field Service Engineer',
+  jr_ev_tech: 'Jr. EV Charging Infrastructure Technician',
+  jr_dcp_tech: 'Jr. Telecom Power Technician',
+  jr_battery_tech: 'Jr. Battery Systems Technician',
+  jr_dc_engineer: 'Jr. Data Center Engineer',
+  jr_marine_tech: 'Jr. Marine Systems Technician',
+  jr_pool_tech: 'Jr. Pool Equipment Technician',
+  jr_hvac_tech: 'Jr. HVAC Technician',
+  jr_solar_inst: 'Jr. Solar Installer',
+  jr_wind_tech: 'Jr. Wind Turbine Technician',
+  jr_elevator_tech: 'Jr. Elevator Technician',
+  jr_fire_alarm_tech: 'Jr. Fire Alarm Technician',
+  jr_bmet_tech: 'Jr. Biomedical Equipment Technician',
+  jr_bas_tech: 'Jr. Building Automation Systems Technician',
+  jr_ref_tech: 'Jr. Commercial Refrigeration Technician',
+  jr_plc_tech: 'Jr. Industrial Controls & PLC Technician',
+  jr_security_tech: 'Jr. Electronic Security Systems Technician',
+  jr_field_pm: 'Jr. Field Project Manager',
+  jr_pump_tech: 'Jr. Pump Technician',
+};
+
 interface ChoiceItem {
   id: string;
   text: string;
@@ -133,7 +161,12 @@ export default function ExamResultsPage() {
                   Download Certificate (PDF)
                 </Link>
                 <a
-                  href={`https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&certUrl=${encodeURIComponent(typeof window !== 'undefined' ? `${window.location.origin}/verify/${result.certificateNumber}` : '')}&certId=${encodeURIComponent(result.certificateNumber)}`}
+                  href={(() => {
+                    const now = new Date();
+                    const certTitle = CERT_TITLES[result.examLevel] ?? 'Field Service Certification';
+                    const verifyUrl = `${window.location.origin}/verify/${result.certificateNumber}`;
+                    return `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(certTitle)}&issueYear=${now.getFullYear()}&issueMonth=${now.getMonth() + 1}&certUrl=${encodeURIComponent(verifyUrl)}&certId=${encodeURIComponent(result.certificateNumber)}`;
+                  })()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
