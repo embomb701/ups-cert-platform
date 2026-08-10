@@ -68,11 +68,12 @@ export default async function AdminAnalyticsPage() {
   if (!isAdmin) redirect('/dashboard');
 
   // Parallel data fetches
-  const [certsSnap, attemptsSnap, enrollSnap, employerOrdersSnap] = await Promise.all([
+  const [certsSnap, attemptsSnap, enrollSnap, employerOrdersSnap, purchasesSnap] = await Promise.all([
     adminDb.collection('certificates').get(),
     adminDb.collection('examAttempts').get(),
     adminDb.collectionGroup('examAccess').where('granted', '==', true).get(),
     adminDb.collection('employerOrders').get(),
+    adminDb.collection('purchases').where('status', '==', 'complete').get(),
   ]);
 
   // ── Certificates ────────────────────────────────────────────────
@@ -120,6 +121,19 @@ export default async function AdminAnalyticsPage() {
   });
   const totalRevenue = Object.values(productRevenue).reduce((s, v) => s + v.revenue, 0);
 
+  // ── Training purchases (from Stripe checkout) ───────────────────
+  const trainingPurchaseRevenue: Record<string, { count: number; revenue: number }> = {};
+  purchasesSnap.forEach((doc) => {
+    const d = doc.data();
+    const product = d.productId as string ?? 'unknown';
+    const amount = typeof d.amount === 'number' ? d.amount : 0;
+    if (!trainingPurchaseRevenue[product]) trainingPurchaseRevenue[product] = { count: 0, revenue: 0 };
+    trainingPurchaseRevenue[product].count++;
+    trainingPurchaseRevenue[product].revenue += amount;
+  });
+  const totalTrainingRevenue = Object.values(trainingPurchaseRevenue).reduce((s, v) => s + v.revenue, 0);
+  const totalPurchases = purchasesSnap.size;
+
   // ── Build combined course rows ──────────────────────────────────
   const allLevels = new Set([
     ...Object.keys(certsByLevel),
@@ -155,12 +169,14 @@ export default async function AdminAnalyticsPage() {
         </div>
 
         {/* Summary stat row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {[
-            { label: 'Valid Certificates', value: validCerts.toLocaleString(), sub: `${totalCerts} total` },
+            { label: 'Valid Certs', value: validCerts.toLocaleString(), sub: `${totalCerts} total` },
             { label: 'Exam Attempts', value: totalAttempts.toLocaleString(), sub: '' },
-            { label: 'Enrolled Seats', value: totalEnrollments.toLocaleString(), sub: 'granted access docs' },
-            { label: 'Employer Revenue', value: totalRevenue > 0 ? `$${(totalRevenue / 100).toLocaleString('en-US', { minimumFractionDigits: 0 })}` : `${employerOrdersSnap.size} orders`, sub: '' },
+            { label: 'Enrolled Seats', value: totalEnrollments.toLocaleString(), sub: 'access docs' },
+            { label: 'Training Revenue', value: totalTrainingRevenue > 0 ? `$${(totalTrainingRevenue / 100).toLocaleString('en-US', { minimumFractionDigits: 0 })}` : '—', sub: `${totalPurchases} purchases` },
+            { label: 'Employer Revenue', value: totalRevenue > 0 ? `$${(totalRevenue / 100).toLocaleString('en-US', { minimumFractionDigits: 0 })}` : '—', sub: `${employerOrdersSnap.size} orders` },
+            { label: 'Total Revenue', value: (totalTrainingRevenue + totalRevenue) > 0 ? `$${((totalTrainingRevenue + totalRevenue) / 100).toLocaleString('en-US', { minimumFractionDigits: 0 })}` : '—', sub: '' },
           ].map((s) => (
             <div key={s.label} className="card-dark p-5 text-center">
               <p className="text-2xl font-bold text-white">{s.value}</p>
@@ -231,6 +247,38 @@ export default async function AdminAnalyticsPage() {
                     <td className="px-5 py-3 text-right text-blue-400 font-semibold">{row.count}</td>
                   </tr>
                 ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Training purchases (Stripe) */}
+        {Object.keys(trainingPurchaseRevenue).length > 0 && (
+          <div className="card-dark overflow-x-auto">
+            <div className="p-5 border-b border-gray-800">
+              <h2 className="text-sm font-semibold text-white">Training Purchases by Product</h2>
+              <p className="text-xs text-gray-500 mt-0.5">Completed Stripe checkout sessions — from the purchases collection.</p>
+            </div>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-800">
+                  <th className="text-left px-5 py-3 text-xs text-gray-500 font-semibold">Product</th>
+                  <th className="text-right px-5 py-3 text-xs text-gray-500 font-semibold">Purchases</th>
+                  <th className="text-right px-5 py-3 text-xs text-gray-500 font-semibold">Revenue</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(trainingPurchaseRevenue)
+                  .sort((a, b) => b[1].revenue - a[1].revenue)
+                  .map(([product, stats]) => (
+                    <tr key={product} className="border-b border-gray-800/50 hover:bg-gray-800/20">
+                      <td className="px-5 py-3 font-mono text-xs text-gray-300">{product}</td>
+                      <td className="px-5 py-3 text-right text-gray-400">{stats.count}</td>
+                      <td className="px-5 py-3 text-right text-emerald-400 font-semibold">
+                        {stats.revenue > 0 ? `$${(stats.revenue / 100).toLocaleString('en-US', { minimumFractionDigits: 2 })}` : '—'}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

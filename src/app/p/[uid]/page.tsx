@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ShareProfileButton } from '@/components/profile/ShareProfileButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -72,14 +73,29 @@ interface PageProps {
   params: Promise<{ uid: string }>;
 }
 
+const SITE_URL_META = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { uid } = await params;
   try {
     const userRecord = await adminAuth.getUser(uid);
     const name = userRecord.displayName || 'Candidate';
+    const profileUrl = `${SITE_URL_META}/p/${uid}`;
+    const ogImage = `${SITE_URL_META}/api/og`;
     return {
       title: `${name} — Mastering Field Service Profile`,
-      description: `View ${name}'s earned certifications and completed training courses.`,
+      description: `View ${name}'s earned certifications and completed training courses on Mastering Field Service.`,
+      openGraph: {
+        title: `${name} — Mastering Field Service Profile`,
+        description: `View ${name}'s field service certifications and training.`,
+        url: profileUrl,
+        images: [{ url: ogImage, width: 1200, height: 630, alt: `${name} — Mastering Field Service Profile` }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${name} — Mastering Field Service Profile`,
+        images: [ogImage],
+      },
     };
   } catch {
     return { title: 'Candidate Profile — Mastering Field Service' };
@@ -336,19 +352,22 @@ export default async function PublicProfilePage({ params }: PageProps) {
         )}
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-          <p className="text-xs text-gray-600">
-            Verified by{' '}
-            <a href={siteUrl} className="text-gray-500 hover:text-gray-400 transition-colors">
-              Mastering Field Service
+        <div className="pt-4 border-t border-gray-800 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-xs text-gray-600">
+              Verified by{' '}
+              <a href={siteUrl} className="text-gray-500 hover:text-gray-400 transition-colors">
+                Mastering Field Service
+              </a>
+            </p>
+            <a
+              href={`${siteUrl}/verify`}
+              className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
+            >
+              Verify a certificate →
             </a>
-          </p>
-          <a
-            href={`${siteUrl}/verify`}
-            className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
-          >
-            Verify a certificate →
-          </a>
+          </div>
+          <ShareProfileButton profileUrl={`${siteUrl}/p/${uid}`} />
         </div>
 
       </div>
