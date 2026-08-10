@@ -224,8 +224,27 @@ export default async function PublicProfilePage({ params }: PageProps) {
     ? displayName.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2)
     : '?';
 
+  const validCerts = certificates.filter((c) => c.status === 'valid');
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: displayName || 'Candidate',
+    url: `${siteUrl}/p/${uid}`,
+    ...(headline ? { jobTitle: headline } : {}),
+    ...(location ? { address: { '@type': 'PostalAddress', addressLocality: location } } : {}),
+    hasCredential: validCerts.map((cert) => ({
+      '@type': 'EducationalOccupationalCredential',
+      name: cert.certificationTitle,
+      credentialCategory: 'Certificate',
+      url: `${siteUrl}/verify/${cert.certificateNumber}`,
+      recognizedBy: { '@type': 'Organization', name: 'Mastering Field Service', url: siteUrl },
+      ...(cert.issuedAt ? { dateCreated: cert.issuedAt.toISOString().slice(0, 10) } : {}),
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-2xl mx-auto space-y-8">
 
         {/* Header */}

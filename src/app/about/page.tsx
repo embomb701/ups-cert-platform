@@ -20,8 +20,30 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        name: 'Mastering Field Service Training Portal',
+        alternateName: 'FA Consulting and Recruiting',
+        url: SITE_URL,
+        description: 'Professional field service training and certification portal for UPS, HVAC, solar, data center, and 28 career tracks.',
+        founder: { '@type': 'Person', name: 'Francis Aiello', jobTitle: 'CEO' },
+      },
+      {
+        '@type': 'Person',
+        name: 'Francis Aiello',
+        jobTitle: 'CEO',
+        worksFor: { '@type': 'Organization', name: 'FA Consulting and Recruiting' },
+        description: 'Author, VP of Field Services, and founder of Mastering Field Service with 25+ years in the UPS and critical power industry.',
+      },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero */}
       <section className="section-pad bg-gradient-to-b from-gray-900 to-gray-950">
         <div className="container-site max-w-3xl mx-auto">
