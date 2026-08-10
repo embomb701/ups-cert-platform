@@ -102,7 +102,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
       }
     }
 
-    const FREE_TRIAL_LIMIT = 1;
+    const FREE_TRIAL_LIMIT = 3;
     const trialLocked = !hasAccess && idx >= FREE_TRIAL_LIMIT;
 
     return { mod, completed, locked, unlockDate, trialLocked, slideProgress };
@@ -150,7 +150,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
         {isGuest && (
           <div className={`rounded-xl border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${c.border} bg-gray-800/20`}>
             <div>
-              <p className="text-white font-semibold text-sm">First module free — no payment needed</p>
+              <p className="text-white font-semibold text-sm">First 3 modules free — no payment needed</p>
               <p className="text-gray-400 text-xs mt-0.5">Create a free account to save progress. Enroll to unlock all {totalCount} modules and earn your {course.certTitle}.</p>
             </div>
             <div className="flex gap-2 flex-shrink-0">
@@ -195,7 +195,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
           <div className={`rounded-xl border p-5 ${c.border} bg-gray-800/20`}>
             <p className="text-white font-semibold mb-1">Unlock Full Access</p>
             <p className="text-gray-400 text-sm mb-4">
-              The first module is free. Purchase to unlock all {totalCount} modules and earn your {course.certTitle}.
+              The first 3 modules are free. Enroll to unlock all {totalCount} modules and earn your {course.certTitle}.
             </p>
             <PurchaseButton
               productId={course.stripeProductId as ProductId}
