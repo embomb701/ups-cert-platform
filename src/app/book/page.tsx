@@ -3,10 +3,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata: Metadata = {
   title: 'The Book — Mastering Uninterruptible Power Supplies',
   description:
     'A practical, field-focused guide to UPS systems written for people entering or advancing in UPS field service engineering.',
+  openGraph: {
+    title: 'Mastering Uninterruptible Power Supplies — The Book',
+    description:
+      'Written by Francis Aiello. The field-service-focused guide to UPS systems — theory, troubleshooting, and hands-on practice.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Mastering Uninterruptible Power Supplies' }],
+  },
+  twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
 };
 
 const chapters = [
