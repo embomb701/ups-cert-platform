@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
     // Send welcome email best-effort
     if (email) {
-      sendWelcomeEmail(email, name).catch(() => {});
+      sendWelcomeEmail(email, name, uid).catch(() => {});
     }
 
     return NextResponse.json({ isNew: true });

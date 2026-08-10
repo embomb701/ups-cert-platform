@@ -203,8 +203,9 @@ export async function sendCertEarnedEmail(
   );
 }
 
-export async function sendWelcomeEmail(to: string, name: string): Promise<void> {
+export async function sendWelcomeEmail(to: string, name: string, uid: string): Promise<void> {
   const displayName = name.split(' ')[0] || 'there';
+  const unsubUrl = `${SITE_URL}/unsubscribe?uid=${encodeURIComponent(uid)}`;
   await send(
     to,
     'Welcome to Mastering Field Service',
@@ -219,7 +220,7 @@ export async function sendWelcomeEmail(to: string, name: string): Promise<void> 
       </ul>
       <a href="${SITE_URL}/training" style="display:inline-block;padding:12px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Start training →</a>
       <p style="margin:32px 0 0;font-size:12px;color:#4b5563;">Mastering Field Service · <a href="${SITE_URL}" style="color:#6b7280;">${SITE_URL}</a></p>
-      <p style="margin:8px 0 0;font-size:11px;color:#374151;">You received this because you just created an account. To stop receiving emails, visit your <a href="${SITE_URL}/account" style="color:#4b5563;">account settings</a>.</p>
+      <p style="margin:8px 0 0;font-size:11px;color:#374151;">You received this because you created an account. <a href="${unsubUrl}" style="color:#6b7280;">Unsubscribe →</a></p>
     </div>`,
   );
 }
