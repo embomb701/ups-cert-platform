@@ -6,9 +6,20 @@ import { getModule } from '@/data/index';
 import { getGrantedCourseKeys, moduleUnlockState } from '@/lib/utils/trainingAccess';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import type { Metadata } from 'next';
 
 interface Props {
   params: Promise<{ moduleId: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { moduleId } = await params;
+  const mod = getModule(moduleId);
+  if (!mod) return { title: 'Training Module — Mastering Field Service' };
+  return {
+    title: `${mod.title} — Mastering Field Service`,
+    robots: { index: false },
+  };
 }
 
 export default async function ModulePage({ params }: Props) {
