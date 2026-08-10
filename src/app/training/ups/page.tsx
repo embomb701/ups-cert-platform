@@ -5,12 +5,11 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { ALL_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'UPS FSE — Course Overview',
-};
+export const metadata = generateCourseMetadata('ups');
 
 export default async function UpsPortalPage() {
   const cookieStore = await cookies();

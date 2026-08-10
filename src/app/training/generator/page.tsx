@@ -5,8 +5,11 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { ALL_MODULES, COURSE_SEQUENCES } from '@/data/index';
 import { GENERATOR_MODULE_PLACEHOLDERS } from '@/data/courses';
 import Link from 'next/link';
+import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata = generateCourseMetadata('generator');
 
 export default async function GeneratorPortalPage() {
   const cookieStore = await cookies();

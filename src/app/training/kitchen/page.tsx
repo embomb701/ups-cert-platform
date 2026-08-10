@@ -6,12 +6,11 @@ import { ALL_MODULES, KITCHEN_MODULES } from '@/data/index';
 import { KITCHEN_MODULE_PLACEHOLDERS } from '@/data/courses';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Commercial Kitchen FSE — Course Overview',
-};
+export const metadata = generateCourseMetadata('kitchen');
 
 export default async function KitchenPortalPage() {
   const cookieStore = await cookies();
