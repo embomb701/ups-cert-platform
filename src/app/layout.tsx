@@ -42,9 +42,11 @@ export default function RootLayout({
     <html lang="en" className={`h-full ${inter.variable}`}>
       <body className="h-full flex flex-col font-sans">
         <AuthProvider>
-          <div className="w-full bg-amber-500 text-black text-center text-xs font-semibold py-2 px-4">
-            ⚠ This site is currently in beta and not yet open to the public. Features and content are still being developed.
-          </div>
+          {process.env.NEXT_PUBLIC_BETA_MODE === 'true' && (
+            <div className="w-full bg-amber-500 text-black text-center text-xs font-semibold py-2 px-4">
+              ⚠ This site is currently in beta and not yet open to the public. Features and content are still being developed.
+            </div>
+          )}
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
