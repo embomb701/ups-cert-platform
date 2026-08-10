@@ -179,6 +179,44 @@ export default function DashboardPage() {
   const profile = data?.profile;
   const profileUrl = data ? `${SITE_URL}/p/${data.uid}` : '';
 
+  // Suggested next course — shown when at least one course is complete
+  const NEXT_COURSE_MAP: Record<string, Array<{ key: string; name: string; path: string; reason: string }>> = {
+    training_portal:       [{ key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'UPS + data center skills open critical facilities roles' }, { key: 'training_battery', name: 'Battery Systems Technician', path: '/training/battery', reason: 'Battery storage pairs naturally with UPS expertise' }],
+    training_kitchen:      [{ key: 'training_hvac', name: 'HVAC FSE', path: '/training/hvac', reason: 'HVAC knowledge expands your commercial kitchen scope' }, { key: 'training_ref_tech', name: 'Commercial Refrigeration Tech', path: '/training/ref-tech', reason: 'Natural follow-on from kitchen equipment expertise' }],
+    training_hvac:         [{ key: 'training_generator', name: 'Power Generation FSE', path: '/training/generator', reason: 'HVAC + generator skills cover most critical facilities work' }, { key: 'training_ref_tech', name: 'Commercial Refrigeration Tech', path: '/training/ref-tech', reason: 'Refrigeration tech rounds out your cooling expertise' }],
+    training_generator:    [{ key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'Generator skills are core to data center critical power' }, { key: 'training_portal', name: 'UPS Field Service Engineering', path: '/training/ups', reason: 'UPS + generator coverage unlocks critical power roles' }],
+    training_datacenter:   [{ key: 'training_dcengineer', name: 'Data Center Engineer', path: '/training/dcengineer', reason: 'Advance from ops to engineering with DC Engineer training' }, { key: 'training_dc_ops', name: 'Data Center Operations Manager', path: '/training/dc-ops', reason: 'Move into operations leadership with DC Ops training' }],
+    training_solar:        [{ key: 'training_battery', name: 'Battery Systems Technician', path: '/training/battery', reason: 'Solar + storage is the most in-demand combination in renewables' }, { key: 'training_evcharging', name: 'EV Charging Infrastructure', path: '/training/evcharging', reason: 'Expand into EV infrastructure alongside solar' }],
+    training_evcharging:   [{ key: 'training_solar', name: 'Solar & Storage FSE', path: '/training/solar', reason: 'Solar + EV covers the full clean energy tech stack' }, { key: 'training_battery', name: 'Battery Systems Technician', path: '/training/battery', reason: 'Battery storage is essential to EV infrastructure' }],
+    training_battery:      [{ key: 'training_solar', name: 'Solar & Storage FSE', path: '/training/solar', reason: 'Battery + solar is the core renewable tech combination' }, { key: 'training_evcharging', name: 'EV Charging Infrastructure', path: '/training/evcharging', reason: 'Pair battery expertise with EV charging infrastructure' }],
+    training_dcplants:     [{ key: 'training_dcengineer', name: 'Data Center Engineer', path: '/training/dcengineer', reason: 'DC Plants experience pairs well with DC Engineering' }, { key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'Expand from power plants into full critical facilities' }],
+    training_dcengineer:   [{ key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'Critical facilities training complements DC Engineering' }, { key: 'training_dc_ops', name: 'Data Center Operations Manager', path: '/training/dc-ops', reason: 'Operations management is a natural career step for engineers' }],
+    training_marine:       [{ key: 'training_pool', name: 'Pool Equipment Technician', path: '/training/pool', reason: 'Pool and marine systems share water treatment skills' }, { key: 'training_field_pm', name: 'Field Project Manager', path: '/training/field-pm', reason: 'PM skills help you lead marine systems projects' }],
+    training_pool:         [{ key: 'training_marine', name: 'Marine Systems Technician', path: '/training/marine', reason: 'Marine and pool systems training complement each other' }, { key: 'training_pump_tech', name: 'Pump Technician', path: '/training/pump-tech', reason: 'Pump systems are central to pool and aquatic work' }],
+    training_hvac_tech:    [{ key: 'training_ref_tech', name: 'Commercial Refrigeration Tech', path: '/training/ref-tech', reason: 'Refrigeration expertise naturally extends HVAC skills' }, { key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS controls are how modern HVAC systems are managed' }],
+    training_solar_inst:   [{ key: 'training_wind_tech', name: 'Wind Turbine Technician', path: '/training/wind-tech', reason: 'Wind + solar covers the full renewables field' }, { key: 'training_battery', name: 'Battery Systems Technician', path: '/training/battery', reason: 'Storage is essential to any solar installation role' }],
+    training_wind_tech:    [{ key: 'training_solar_inst', name: 'Solar Installer', path: '/training/solar-inst', reason: 'Solar + wind is the most versatile renewables combination' }, { key: 'training_evcharging', name: 'EV Charging Infrastructure', path: '/training/evcharging', reason: 'EV infrastructure pairs well with wind energy expertise' }],
+    training_elevator_tech:[{ key: 'training_field_pm', name: 'Field Project Manager', path: '/training/field-pm', reason: 'PM skills accelerate your elevator tech career' }, { key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS training covers building systems alongside elevators' }],
+    training_fire_alarm_tech:[{ key: 'training_security_tech', name: 'Electronic Security Systems', path: '/training/security-tech', reason: 'Fire + security coverage is common in life safety roles' }, { key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS systems integrate with fire alarm infrastructure' }],
+    training_bmet_tech:    [{ key: 'training_field_pm', name: 'Field Project Manager', path: '/training/field-pm', reason: 'PM skills are essential for senior BMET roles' }, { key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS controls appear in modern healthcare facilities' }],
+    training_bas_tech:     [{ key: 'training_plc_tech', name: 'Industrial Controls & PLC', path: '/training/plc-tech', reason: 'PLC knowledge expands your automation depth' }, { key: 'training_security_tech', name: 'Electronic Security Systems', path: '/training/security-tech', reason: 'Security systems often integrate with BAS platforms' }],
+    training_ref_tech:     [{ key: 'training_hvac_tech', name: 'HVAC Technician', path: '/training/hvac-tech', reason: 'HVAC + refrigeration is a highly employable combination' }, { key: 'training_industrial_ref', name: 'Industrial Refrigeration Operator', path: '/training/industrial-ref', reason: 'Scale up from commercial to industrial refrigeration' }],
+    training_plc_tech:     [{ key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS and PLC skills together cover industrial automation' }, { key: 'training_security_tech', name: 'Electronic Security Systems', path: '/training/security-tech', reason: 'Security systems increasingly use PLC-like controllers' }],
+    training_security_tech:[{ key: 'training_fire_alarm_tech', name: 'Fire Alarm Technician', path: '/training/fire-alarm-tech', reason: 'Security + fire alarm is the standard life safety package' }, { key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS integrates with security systems in most buildings' }],
+    training_field_pm:     [{ key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'Data center PM is one of the highest-paying field PM specialties' }, { key: 'training_portal', name: 'UPS Field Service Engineering', path: '/training/ups', reason: 'Technical depth alongside PM skills maximizes your value' }],
+    training_pump_tech:    [{ key: 'training_industrial_ref', name: 'Industrial Refrigeration Operator', path: '/training/industrial-ref', reason: 'Industrial refrigeration uses many of the same pump systems' }, { key: 'training_marine', name: 'Marine Systems Technician', path: '/training/marine', reason: 'Marine systems rely heavily on pump expertise' }],
+    training_industrial_ref:[{ key: 'training_ref_tech', name: 'Commercial Refrigeration Tech', path: '/training/ref-tech', reason: 'Commercial + industrial refrigeration covers the full spectrum' }, { key: 'training_dcplants', name: 'Telecom DC Power Plants', path: '/training/dcplants', reason: 'Industrial refrigeration skills transfer to telecom cooling' }],
+    training_dc_ops:       [{ key: 'training_dcengineer', name: 'Data Center Engineer', path: '/training/dcengineer', reason: 'Move from operations management into engineering leadership' }, { key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'CFT training complements your operations management expertise' }],
+    training_building_cx:  [{ key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS expertise is essential in commissioning work' }, { key: 'training_field_pm', name: 'Field Project Manager', path: '/training/field-pm', reason: 'PM skills pair naturally with commissioning agent work' }],
+    training_telecom:      [{ key: 'training_dcplants', name: 'Telecom DC Power Plants', path: '/training/dcplants', reason: 'DC power plants are the backbone of telecom infrastructure' }, { key: 'training_security_tech', name: 'Electronic Security Systems', path: '/training/security-tech', reason: 'Security systems appear alongside telecom infrastructure' }],
+  };
+
+  const enrolledKeys = new Set(courses.map((c) => c.key));
+  const suggestedCourse = completedCourses.length > 0
+    ? completedCourses.flatMap((c) => (NEXT_COURSE_MAP[c.key] ?? []).map((s) => ({ ...s, fromCourse: c.name })))
+        .find((s) => !enrolledKeys.has(s.key))
+    : null;
+
   return (
     <section className="section-pad">
       <div className="container-site max-w-5xl mx-auto space-y-8">
@@ -334,6 +372,24 @@ export default function DashboardPage() {
             )}
           </div>
         </div>
+
+        {/* Suggested next course */}
+        {!dataLoading && suggestedCourse && (
+          <div className="card-dark p-5 border-indigo-800/40 bg-indigo-950/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-0.5">
+              <p className="text-xs text-indigo-400 font-semibold uppercase tracking-wide">Suggested next</p>
+              <p className="text-base font-bold text-white">{suggestedCourse.name}</p>
+              <p className="text-sm text-gray-400">{suggestedCourse.reason}</p>
+              <p className="text-xs text-gray-600">Based on completing {suggestedCourse.fromCourse}</p>
+            </div>
+            <Link
+              href={suggestedCourse.path}
+              className="flex-shrink-0 px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-colors"
+            >
+              Explore course →
+            </Link>
+          </div>
+        )}
 
         {/* Profile + Team + Jobs row */}
         <div className="grid md:grid-cols-3 gap-6">
