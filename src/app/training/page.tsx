@@ -23,6 +23,12 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
 };
 
+const ENROLL_PRICE_LABELS: Record<string, string> = {
+  training_building_cx: 'Enroll — $1,299',
+  training_telecom: 'Enroll — $1,299',
+  training_dcengineer: 'Enroll — $1,999',
+};
+
 // Courses that have a dedicated hub page at /training/[slug]
 const HUB_ROUTES = new Set([
   'ups', 'kitchen', 'hvac', 'generator', 'solar', 'battery',
@@ -293,7 +299,7 @@ export default async function TrainingPage() {
                     {course.stripeProductId && (
                       <PurchaseButton
                         productId={course.stripeProductId as any}
-                        label="Enroll — $1,499"
+                        label={ENROLL_PRICE_LABELS[course.stripeProductId] ?? 'Enroll — $1,499'}
                         className="block w-full py-2 px-3 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white text-xs font-medium rounded-lg text-center transition-colors"
                       />
                     )}
