@@ -68,7 +68,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'hvac': {
     pay: '$55K–$78K',
     senior: '$90K–$125K',
-    duration: '3–6 months · 26 modules',
+    duration: '3–5 months · 25 modules',
     environment: 'Commercial buildings, data centers, hospitals',
     highlights: [
       'Install and maintain HVAC systems controlling environments in critical facilities',
@@ -79,7 +79,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'generator': {
     pay: '$58K–$80K',
     senior: '$95K–$130K',
-    duration: '3–6 months · 26 modules',
+    duration: '3–5 months · 25 modules',
     environment: 'Hospitals, data centers, utilities, government facilities',
     highlights: [
       'Service diesel and natural gas standby generators protecting critical infrastructure',
@@ -90,7 +90,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'data-center': {
     pay: '$65K–$88K',
     senior: '$100K–$140K',
-    duration: '4–7 months · 32 modules',
+    duration: '4–6 months · 28 modules',
     environment: 'Hyperscale and colocation data centers',
     highlights: [
       'Operate, maintain, and troubleshoot all power and cooling systems in a data center',
@@ -101,7 +101,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'solar': {
     pay: '$52K–$74K',
     senior: '$85K–$118K',
-    duration: '3–5 months · 24 modules',
+    duration: '3–4 months · 21 modules',
     environment: 'Commercial rooftops, utility-scale solar farms, storage facilities',
     highlights: [
       'Commission, service, and troubleshoot solar PV systems and battery energy storage (BESS)',
@@ -112,7 +112,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'ev-charging': {
     pay: '$52K–$72K',
     senior: '$80K–$112K',
-    duration: '3–5 months · 24 modules',
+    duration: '2–4 months · 18 modules',
     environment: 'Fleet depots, commercial parking, highway corridors, dealerships',
     highlights: [
       'Install, service, and troubleshoot Level 2 and DC fast-charging stations',
@@ -123,7 +123,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'dc-plants': {
     pay: '$60K–$82K',
     senior: '$95K–$128K',
-    duration: '4–6 months · 28 modules',
+    duration: '2–4 months · 17 modules',
     environment: 'Telecom central offices, wireless towers, broadband headends',
     highlights: [
       'Maintain 48V DC power plant systems powering the national telecom backbone',
@@ -134,7 +134,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'battery-tech': {
     pay: '$52K–$74K',
     senior: '$85K–$115K',
-    duration: '3–5 months · 24 modules',
+    duration: '2–4 months · 18 modules',
     environment: 'UPS systems, telecom sites, utilities, energy storage facilities',
     highlights: [
       'Specialize in battery system maintenance, testing, replacement, and safety',
@@ -156,7 +156,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'marine': {
     pay: '$50K–$70K',
     senior: '$80K–$108K',
-    duration: '3–5 months · 24 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Commercial vessels, marinas, shipyards, offshore platforms',
     highlights: [
       'Service electrical and mechanical systems on commercial and industrial marine vessels',
@@ -167,7 +167,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'pool': {
     pay: '$45K–$65K',
     senior: '$75K–$100K',
-    duration: '2–4 months · 20 modules',
+    duration: '2–3 months · 17 modules',
     environment: 'Hotels, resorts, municipalities, HOAs, commercial facilities',
     highlights: [
       'Maintain and repair commercial pool equipment — pumps, filtration, chemical systems',
@@ -178,7 +178,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'hvac-tech': {
     pay: '$52K–$74K',
     senior: '$85K–$118K',
-    duration: '3–5 months · 24 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Commercial buildings, medical facilities, retail centers',
     highlights: [
       'Commercial HVAC installation and service with a focus on hands-on technical skills',
@@ -189,7 +189,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'solar-installer': {
     pay: '$48K–$70K',
     senior: '$80K–$108K',
-    duration: '3–5 months · 24 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Residential rooftops, commercial rooftops, ground-mount arrays',
     highlights: [
       'Install, wire, and commission solar PV systems for residential and commercial customers',
@@ -200,7 +200,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'wind-turbine': {
     pay: '$55K–$78K',
     senior: '$85K–$118K',
-    duration: '3–5 months · 24 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Onshore and offshore wind farms, remote rural sites',
     highlights: [
       'Climb and service wind turbines — mechanical, electrical, and hydraulic systems',
@@ -211,7 +211,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'elevator': {
     pay: '$65K–$95K',
     senior: '$110K–$145K',
-    duration: '4–7 months · 30 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'High-rises, hospitals, airports, commercial buildings',
     highlights: [
       'Service and maintain elevators, escalators, and moving walkways',
@@ -222,7 +222,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'fire-alarm': {
     pay: '$55K–$78K',
     senior: '$90K–$125K',
-    duration: '3–5 months · 25 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'All commercial buildings — required by code nationwide',
     highlights: [
       'Install, inspect, test, and service fire alarm and suppression systems',
@@ -233,7 +233,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'bmet': {
     pay: '$52K–$75K',
     senior: '$85K–$118K',
-    duration: '3–5 months · 25 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Hospitals, surgery centers, medical clinics, imaging facilities',
     highlights: [
       'Maintain and repair biomedical equipment — ventilators, patient monitors, infusion pumps',
@@ -244,7 +244,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'bas-tech': {
     pay: '$58K–$80K',
     senior: '$90K–$122K',
-    duration: '3–5 months · 25 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Large commercial buildings, campuses, hospitals, government facilities',
     highlights: [
       'Program and service building automation systems (BAS/BMS) controlling HVAC and power',
@@ -255,7 +255,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'ref-tech': {
     pay: '$52K–$74K',
     senior: '$85K–$112K',
-    duration: '3–5 months · 25 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Grocery stores, restaurants, cold storage facilities, food distribution',
     highlights: [
       'Service commercial refrigeration — walk-ins, display cases, condensing units',
@@ -266,7 +266,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'plc-tech': {
     pay: '$60K–$85K',
     senior: '$100K–$138K',
-    duration: '4–6 months · 27 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Manufacturing plants, utilities, water treatment, automation facilities',
     highlights: [
       'Program, troubleshoot, and maintain PLC-controlled industrial automation systems',
@@ -277,7 +277,7 @@ const DETAILS: Record<string, CourseDetail> = {
   'security-tech': {
     pay: '$48K–$70K',
     senior: '$80K–$108K',
-    duration: '3–5 months · 24 modules',
+    duration: '2–4 months · 16 modules',
     environment: 'Commercial buildings, government facilities, data centers, retail',
     highlights: [
       'Install and service access control, CCTV, intrusion detection, and intercom systems',
@@ -615,7 +615,7 @@ export default function HomePage() {
         <div className="text-center mb-12">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Career Trajectory</span>
           <h2 className="text-3xl font-bold text-white mt-3">Where this takes you.</h2>
-          <p className="text-gray-400 mt-3 max-w-xl mx-auto">Across all 24 tracks, the same career ladder applies. The trades vary — the ceiling doesn&apos;t.</p>
+          <p className="text-gray-400 mt-3 max-w-xl mx-auto">Across all 28 tracks, the same career ladder applies. The trades vary — the ceiling doesn&apos;t.</p>
         </div>
         <div className="grid md:grid-cols-4 gap-6">
           {[
