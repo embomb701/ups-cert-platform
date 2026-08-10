@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
   try {
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session;
-      await handleCheckoutCompleted(session);
+      await handleCheckoutCompleted(event.id, session);
     }
     return NextResponse.json({ received: true });
   } catch (err) {
@@ -957,7 +957,20 @@ async function grantJrTelecomAccess(userId: string, purchaseId: string) {
 
 // ── Main handler ───────────────────────────────────────────────────────────
 
-async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+async function handleCheckoutCompleted(eventId: string, session: Stripe.Checkout.Session) {
+  // Idempotency guard: skip if this Stripe event was already processed
+  const eventRef = adminDb.collection('processedWebhookEvents').doc(eventId);
+  const alreadyProcessed = await adminDb.runTransaction(async (tx) => {
+    const doc = await tx.get(eventRef);
+    if (doc.exists) return true;
+    tx.set(eventRef, { processedAt: FieldValue.serverTimestamp(), sessionId: session.id });
+    return false;
+  });
+  if (alreadyProcessed) {
+    console.log('Duplicate webhook event skipped:', eventId);
+    return;
+  }
+
   const { userId, productId, email } = session.metadata ?? {};
   if (!userId || !productId) {
     console.error('Missing metadata on session', session.id);
