@@ -1,8 +1,11 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { ApplyButton } from '@/components/jobs/ApplyButton';
 import Link from 'next/link';
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,6 +51,23 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const snap = await adminDb.collection('jobListings').doc(id).get();
+  if (!snap.exists) return { title: 'Job Not Found' };
+  const d = snap.data()!;
+  return {
+    title: `${d.title} at ${d.company} — Mastering Field Service Jobs`,
+    description: `${d.type} position in ${d.location}. ${(d.description as string)?.slice(0, 150)}...`,
+    openGraph: {
+      title: `${d.title} — ${d.company}`,
+      description: `${d.type} · ${d.location}`,
+      images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: d.title }],
+    },
+    twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
+  };
+}
+
 export default async function JobDetailPage({ params }: PageProps) {
   const { id } = await params;
 
@@ -85,8 +105,21 @@ export default async function JobDetailPage({ params }: PageProps) {
 
   const postedDate: Date | null = listing.createdAt?.toDate?.() ?? null;
 
+  const jobPosting = {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    title: listing.title,
+    description: listing.description ?? '',
+    hiringOrganization: { '@type': 'Organization', name: listing.company },
+    jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: listing.location } },
+    employmentType: (listing.type as string)?.toUpperCase().replace('-', '_') ?? 'FULL_TIME',
+    datePosted: postedDate ? postedDate.toISOString().slice(0, 10) : undefined,
+    url: `${SITE_URL}/jobs/${id}`,
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPosting) }} />
       <div className="max-w-2xl mx-auto space-y-6">
 
         <Link href="/jobs" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
