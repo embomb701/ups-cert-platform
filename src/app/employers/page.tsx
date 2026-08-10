@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata: Metadata = {
   title: 'Employer Solutions — Mastering Field Service',
   description:
     'Stop absorbing training costs internally. Mastering Field Service certifies your candidates and new hires before they cost you a day of trainer time.',
+  openGraph: {
+    title: 'Employer Solutions — Mastering Field Service',
+    description:
+      'Pre-certify your field service hires before day one. Bulk seat licensing, team dashboards, and verified certifications built for employers.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Employer Solutions' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [`${SITE_URL}/api/og`],
+  },
 };
 
 export default function EmployersPage() {

@@ -1,8 +1,22 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata: Metadata = {
-  title: 'Compare Certifications',
+  title: 'Compare Certifications — Jr. FSE vs FSE AI vs FSE Human Proctored',
+  description:
+    'Side-by-side comparison of all three UPS Field Service certification levels: Junior FSE ($199), AI Proctored FSE ($349), and Human Proctored FSE ($649). Compare proctoring, difficulty, anti-cheat, and more.',
+  openGraph: {
+    title: 'Compare FSE Certifications — Mastering Field Service',
+    description:
+      'Choose the right certification level. Compare Jr. FSE, AI Proctored FSE, and Human Proctored FSE side by side.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Compare Certifications' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [`${SITE_URL}/api/og`],
+  },
 };
 
 const rows: { label: string; jr: string; ai: string; human: string }[] = [

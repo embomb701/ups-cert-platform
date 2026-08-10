@@ -2,10 +2,19 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata: Metadata = {
-  title: 'FSE AI Proctored Exam',
+  title: 'FSE AI Proctored Exam — $349 | Mastering Field Service',
   description:
     'Take the FSE certification exam with AI-powered proctoring. Webcam-based eye and face tracking monitors exam integrity automatically — no scheduling required.',
+  openGraph: {
+    title: 'FSE AI Proctored Exam — $349',
+    description:
+      'Advanced FSE certification with AI webcam proctoring. Start anytime, no scheduling required. Pass and receive your verified FSE certificate.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'FSE AI Proctored Exam' }],
+  },
+  twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
 };
 
 const features = [

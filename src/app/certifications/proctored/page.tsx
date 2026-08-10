@@ -2,10 +2,19 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata: Metadata = {
-  title: 'UPS Field Service Certification Exam (Proctored) — $649',
+  title: 'UPS Field Service Certification Exam (Human Proctored) — $649',
   description:
-    'The FSE Exam is a proctored, advanced UPS field service knowledge credential. $649, scheduling required.',
+    'The FSE Exam is a human-proctored, advanced UPS field service knowledge credential. $649, live proctor session required. Highest-trust certification for employer submissions.',
+  openGraph: {
+    title: 'FSE Human Proctored Exam — $649',
+    description:
+      'The gold-standard FSE certification with live human proctor. Scheduling required. ID verified. Trusted by employers for highest-credential validation.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'FSE Human Proctored Exam' }],
+  },
+  twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
 };
 
 export default function ProctoredCertPage() {

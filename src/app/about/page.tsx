@@ -1,8 +1,22 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata: Metadata = {
-  title: 'About',
+  title: 'About — FA Consulting and Recruiting',
+  description:
+    'Mastering Field Service is a division of FA Consulting and Recruiting, founded by Francis Aiello. We build field service training and certification for the next generation of UPS, HVAC, kitchen, and power generation technicians.',
+  openGraph: {
+    title: 'About Mastering Field Service',
+    description:
+      'Learn about FA Consulting and Recruiting and the mission behind Mastering Field Service Training Portal.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'About Mastering Field Service' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [`${SITE_URL}/api/og`],
+  },
 };
 
 export default function AboutPage() {

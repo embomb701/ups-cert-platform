@@ -3,10 +3,19 @@ import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata: Metadata = {
   title: 'Jr. FSE Certification — Test-Out Exam $299',
   description:
-    'Already working in the field? Test out of the 3-to-6-Month Training Course for $299. One attempt — pass and you\'re certified. Fail and you must complete the training to try again.',
+    "Already working in the field? Test out of the 3-to-6-Month Training Course for $299. One attempt — pass and you're certified. Fail and you must complete the training to try again.",
+  openGraph: {
+    title: 'Jr. FSE Certification — Test-Out Exam $299',
+    description:
+      "Skip the course if you already have field experience. Pass the 50-question Jr. FSE exam and earn your certificate instantly.",
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Jr. FSE Certification' }],
+  },
+  twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
 };
 
 export default function JuniorCertPage() {

@@ -3,8 +3,19 @@ import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
 export const metadata = {
   title: 'Job Board — Find Technical Field Service Positions',
+  description:
+    'Browse open field service positions posted by employers across UPS, HVAC, data center, kitchen, and power generation sectors. Certify first — get hired faster.',
+  openGraph: {
+    title: 'Field Service Job Board — Mastering Field Service',
+    description:
+      'Employers post open field service roles here. Get certified on Mastering Field Service and apply directly.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Field Service Job Board' }],
+  },
+  twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
 };
 
 const COURSE_LABELS: Record<string, string> = {
