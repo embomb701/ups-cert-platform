@@ -2,11 +2,13 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { PostJobForm } from '@/components/jobs/PostJobForm';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'Post a Job — Job Board',
+export const metadata: Metadata = {
+  title: 'Post a Job — Mastering Field Service',
+  robots: { index: false },
 };
 
 export default async function PostJobPage() {
