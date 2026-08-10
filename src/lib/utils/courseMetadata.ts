@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { COURSES } from '@/data/courses';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 
 export function generateCourseMetadata(courseId: string): Metadata {
   const course = COURSES.find((c) => c.id === courseId);

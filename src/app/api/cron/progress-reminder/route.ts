@@ -11,7 +11,7 @@ const STALE_MS = 7 * 24 * 60 * 60 * 1000;       // 7 days inactive = eligible fo
 const COOLDOWN_MS = 6 * 24 * 60 * 60 * 1000;      // min 6 days between reminders per user
 const MAX_EMAILS_PER_RUN = 200;
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 
 const HUB_ROUTES: Record<string, string> = {
   ups: '/training/ups', kitchen: '/training/kitchen', hvac: '/training/hvac',

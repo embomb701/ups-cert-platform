@@ -83,7 +83,7 @@ export default async function UpsPortalPage() {
   const completedCount = moduleStates.filter((s) => s.completed).length;
   const totalModules = ALL_MODULES.length;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Course',

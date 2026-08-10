@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { COURSES } from '@/data/courses';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 
 export const metadata: Metadata = {
   title: 'All 28 Career Tracks — Mastering Field Service Training Portal',

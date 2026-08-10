@@ -106,7 +106,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
   const firstIncomplete = moduleStates.find((s) => !s.completed && !s.locked && !s.trialLocked);
   const continueHref = firstIncomplete ? `/training/${firstIncomplete.mod.id}` : `/training/${seq[0].id}`;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Course',

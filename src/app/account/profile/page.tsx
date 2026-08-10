@@ -32,7 +32,7 @@ export default async function AccountProfilePage() {
     location: userData.location ?? '',
   };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
   const profileUrl = `${siteUrl}/p/${uid}`;
 
   return (

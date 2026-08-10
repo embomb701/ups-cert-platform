@@ -73,7 +73,7 @@ interface PageProps {
   params: Promise<{ uid: string }>;
 }
 
-const SITE_URL_META = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+const SITE_URL_META = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { uid } = await params;
@@ -218,7 +218,7 @@ export default async function PublicProfilePage({ params }: PageProps) {
       .filter(Boolean)
   );
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 
   const initials = displayName
     ? displayName.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2)
