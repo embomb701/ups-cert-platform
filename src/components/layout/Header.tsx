@@ -6,7 +6,7 @@ import { useAuth } from '@/components/auth/AuthProvider';
 import { signOut } from '@/lib/firebase/auth';
 
 const navLinks = [
-  { label: 'Training', href: '/training' },
+  { label: 'Courses', href: '/courses' },
   { label: 'Certifications', href: '/certifications/junior' },
   { label: 'Jobs', href: '/jobs' },
   { label: 'Employers', href: '/employers' },

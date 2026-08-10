@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
 export const metadata: Metadata = {
-  title: 'Mastering Field Service Training Portal — 24 Career Tracks in Critical Infrastructure',
+  title: 'Mastering Field Service Training Portal — 28 Career Tracks in Critical Infrastructure',
   description:
-    'Start a $45K–$130K+ career in field service in 3–6 months. No college required. 24 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Field PM, and more.',
+    'Start a $45K–$130K+ career in field service in 3–6 months. No college required. 28 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Field PM, and more.',
 };
 
 // ─── Per-course detail data ────────────────────────────────────────────────
@@ -398,7 +398,7 @@ export default function HomePage() {
               <span className="text-gray-300">No college. No debt.</span>
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
-              Mastering Field Service is a full technical training portal with 24 career tracks —
+              Mastering Field Service is a full technical training portal with 28 career tracks —
               critical power, HVAC, solar, data centers, elevators, biomedical, industrial automation, and more.
               One shared electrical and safety foundation. Choose the trade. Earn the credential.
               Get hired.
@@ -414,7 +414,7 @@ export default function HomePage() {
                 href="#courses"
                 className="px-8 py-4 border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white font-semibold rounded-lg text-lg transition-colors text-center"
               >
-                Browse All 24 Tracks ↓
+                Browse All 28 Tracks ↓
               </Link>
             </div>
             <p className="text-gray-600 text-sm mt-4">Free to sign up. Enroll when you&apos;re ready.</p>
@@ -422,7 +422,7 @@ export default function HomePage() {
 
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { stat: '24', label: 'Career tracks in one portal' },
+              { stat: '28', label: 'Career tracks in one portal' },
               { stat: '3–6 months', label: 'To your first field job' },
               { stat: '$130K+', label: 'Management ceiling' },
               { stat: '$0', label: 'Student loan debt' },
@@ -816,7 +816,7 @@ export default function HomePage() {
       {/* ── FINAL CTA ─────────────────────────────────────────────────── */}
       <section className="max-w-4xl mx-auto px-4 py-24 text-center">
         <h2 className="text-4xl font-bold text-white mb-6">
-          24 career tracks. One decision.{' '}
+          28 career tracks. One decision.{' '}
           <span className="text-blue-400">Start your free account.</span>
         </h2>
         <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
