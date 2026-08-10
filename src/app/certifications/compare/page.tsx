@@ -6,11 +6,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 export const metadata: Metadata = {
   title: 'Compare Certifications — Jr. FSE vs FSE AI vs FSE Human Proctored',
   description:
-    'Side-by-side comparison of all three UPS Field Service certification levels: Junior FSE ($199), AI Proctored FSE ($349), and Human Proctored FSE ($649). Compare proctoring, difficulty, anti-cheat, and more.',
+    'Side-by-side comparison of all three UPS Field Service certification levels: Junior FSE ($299), AI Proctored FSE ($349), and Human Proctored FSE ($649). Compare proctoring, difficulty, anti-cheat, and more.',
   openGraph: {
     title: 'Compare FSE Certifications — Mastering Field Service',
     description:
-      'Choose the right certification level. Compare Jr. FSE, AI Proctored FSE, and Human Proctored FSE side by side.',
+      'Choose the right certification level. Compare Jr. FSE ($299), AI Proctored FSE ($349), and Human Proctored FSE ($649) side by side.',
     images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Compare Certifications' }],
   },
   twitter: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const rows: { label: string; jr: string; ai: string; human: string }[] = [
-  { label: 'Price', jr: '$199', ai: '$349', human: '$649' },
+  { label: 'Price', jr: '$299', ai: '$349', human: '$649' },
   { label: 'Proctoring', jr: 'None — browser controls only', ai: 'AI webcam (face + eye tracking)', human: 'Live human proctor' },
   { label: 'Scheduling required', jr: 'No', ai: 'No — start anytime after purchase', human: 'Yes — admin must schedule & unlock' },
   { label: 'Questions per attempt', jr: '50 randomized', ai: '50 randomized', human: '50 randomized' },
