@@ -105,6 +105,81 @@ export async function sendOrderConfirmationEmail(
   );
 }
 
+export async function sendTrialDripEmail(
+  to: string,
+  name: string,
+  step: 1 | 2 | 3,
+  uid: string,
+): Promise<void> {
+  const displayName = name.split(' ')[0] || 'there';
+  const unsubUrl = `${SITE_URL}/unsubscribe?uid=${encodeURIComponent(uid)}`;
+  const upsUrl = `${SITE_URL}/training/ups`;
+  const coursesUrl = `${SITE_URL}/courses`;
+
+  const footer = `
+    <p style="margin:24px 0 0;font-size:12px;color:#374151;">Mastering Field Service · <a href="${SITE_URL}" style="color:#6b7280;">${SITE_URL}</a></p>
+    <p style="margin:6px 0 0;font-size:11px;color:#4b5563;">You received this because you created a free account. <a href="${unsubUrl}" style="color:#6b7280;">Unsubscribe →</a></p>
+  `;
+
+  if (step === 1) {
+    await send(
+      to,
+      'Your 3 free training modules are ready',
+      `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;background:#111827;color:#f9fafb;border-radius:12px;">
+        <p style="color:#6b7280;font-size:12px;margin:0 0 16px;text-transform:uppercase;letter-spacing:.08em;">Mastering Field Service</p>
+        <h2 style="color:#f9fafb;margin:0 0 8px;font-size:20px;">Hey ${displayName} — your free preview is waiting</h2>
+        <p style="color:#9ca3af;margin:0 0 16px;">You signed up but haven't started yet. The first 3 modules of our UPS Field Service Engineering course are completely free — no credit card required.</p>
+        <div style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:16px;margin:0 0 20px;">
+          <p style="color:#60a5fa;font-size:12px;font-weight:600;margin:0 0 8px;text-transform:uppercase;letter-spacing:.06em;">FREE — No purchase needed</p>
+          <p style="color:#f9fafb;margin:0 0 4px;font-size:14px;">✓ Module 1: UPS Fundamentals & System Overview</p>
+          <p style="color:#f9fafb;margin:0 0 4px;font-size:14px;">✓ Module 2: Single-Phase UPS Architecture</p>
+          <p style="color:#f9fafb;margin:0;font-size:14px;">✓ Module 3: Three-Phase UPS Systems</p>
+        </div>
+        <a href="${upsUrl}" style="display:inline-block;padding:12px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Start free modules →</a>
+        ${footer}
+      </div>`,
+    );
+  } else if (step === 2) {
+    await send(
+      to,
+      'What you unlock when you enroll — 25 more modules',
+      `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;background:#111827;color:#f9fafb;border-radius:12px;">
+        <p style="color:#6b7280;font-size:12px;margin:0 0 16px;text-transform:uppercase;letter-spacing:.08em;">Mastering Field Service</p>
+        <h2 style="color:#f9fafb;margin:0 0 8px;font-size:20px;">Here's what full access unlocks</h2>
+        <p style="color:#9ca3af;margin:0 0 16px;">The free preview covers the first 3 modules. Full enrollment opens all 28 — and the Jr. UPS FSE certification exam that employers verify.</p>
+        <div style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:16px;margin:0 0 20px;">
+          <p style="color:#60a5fa;font-size:12px;font-weight:600;margin:0 0 10px;text-transform:uppercase;letter-spacing:.06em;">Locked modules include</p>
+          <p style="color:#9ca3af;margin:0 0 4px;font-size:13px;">· Battery Systems & State of Charge</p>
+          <p style="color:#9ca3af;margin:0 0 4px;font-size:13px;">· Transfer Switch Operation & Bypass Procedures</p>
+          <p style="color:#9ca3af;margin:0 0 4px;font-size:13px;">· Commissioning & Site Startup</p>
+          <p style="color:#9ca3af;margin:0 0 4px;font-size:13px;">· Troubleshooting Faults & Alarms</p>
+          <p style="color:#9ca3af;margin:0 0 4px;font-size:13px;">· Preventive Maintenance Schedules</p>
+          <p style="color:#9ca3af;margin:0;font-size:13px;">· …and 20 more modules</p>
+        </div>
+        <a href="${coursesUrl}" style="display:inline-block;padding:12px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">View all courses & enroll →</a>
+        ${footer}
+      </div>`,
+    );
+  } else {
+    await send(
+      to,
+      'Your free preview is as far as it goes — ready to certify?',
+      `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;background:#111827;color:#f9fafb;border-radius:12px;">
+        <p style="color:#6b7280;font-size:12px;margin:0 0 16px;text-transform:uppercase;letter-spacing:.08em;">Mastering Field Service</p>
+        <h2 style="color:#f9fafb;margin:0 0 8px;font-size:20px;">The free preview ends at module 3</h2>
+        <p style="color:#9ca3af;margin:0 0 16px;">Hey ${displayName} — you created your account a week ago. The free content shows you the style and quality of the material. The other 25 modules — and the Jr. FSE certification exam — are only available with full enrollment.</p>
+        <div style="background:#1e3a5f;border:1px solid #1d4ed8;border-radius:8px;padding:16px;margin:0 0 20px;">
+          <p style="color:#93c5fd;font-weight:600;margin:0 0 4px;font-size:15px;">Jr. UPS Field Service Engineer</p>
+          <p style="color:#60a5fa;font-size:13px;margin:0 0 8px;">28 modules · Verified certification · Employer-searchable</p>
+          <p style="color:#bfdbfe;font-size:13px;margin:0;">Employers on the platform search by certification level when posting jobs. This is how candidates get found.</p>
+        </div>
+        <a href="${coursesUrl}" style="display:inline-block;padding:12px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Enroll now →</a>
+        ${footer}
+      </div>`,
+    );
+  }
+}
+
 export async function sendCertEarnedEmail(
   to: string,
   name: string,
