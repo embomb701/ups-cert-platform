@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import sgMail from '@sendgrid/mail';
+import { createHash } from 'crypto';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 30;
@@ -19,6 +20,22 @@ export async function POST(req: NextRequest) {
     if (!name?.trim() || !email?.trim() || !message?.trim()) {
       return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
     }
+
+    if (message.trim().length > 5000) {
+      return NextResponse.json({ error: 'Message is too long (max 5000 characters).' }, { status: 400 });
+    }
+
+    // Simple IP-based rate limit: 3 submissions per hour per IP
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+    const ipKey = createHash('sha256').update(ip + (process.env.IP_HASH_SECRET ?? '')).digest('hex').slice(0, 16);
+    const hourBucket = Math.floor(Date.now() / (60 * 60 * 1000));
+    const rateLimitRef = adminDb.collection('contactRateLimit').doc(`${ipKey}-${hourBucket}`);
+    const rlDoc = await rateLimitRef.get();
+    const count = (rlDoc.data()?.count ?? 0) as number;
+    if (count >= 3) {
+      return NextResponse.json({ error: 'Too many messages. Please wait before sending another.' }, { status: 429 });
+    }
+    await rateLimitRef.set({ count: count + 1, updatedAt: FieldValue.serverTimestamp() }, { merge: true });
 
     // Always save to Firestore first
     await adminDb.collection('contactSubmissions').add({
