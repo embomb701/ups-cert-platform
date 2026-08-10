@@ -8,6 +8,7 @@ import { signOut } from '@/lib/firebase/auth';
 const navLinks = [
   { label: 'Training', href: '/training' },
   { label: 'Certifications', href: '/certifications/junior' },
+  { label: 'Jobs', href: '/jobs' },
   { label: 'Employers', href: '/employers' },
   { label: 'Book', href: '/book' },
   { label: 'About', href: '/about' },

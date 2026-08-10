@@ -2,16 +2,45 @@ import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
-import { ALL_MODULES } from '@/data/index';
 import { COURSES } from '@/data/courses';
+import { COURSE_SEQUENCES } from '@/data';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { ExternalLinkWarning } from '@/components/ExternalLinkWarning';
 
 export const dynamic = 'force-dynamic';
 
-// Literal accent classes per course color (Tailwind cannot see dynamic names)
-const COMING_SOON_ACCENTS: Record<string, string> = {
+// Courses that have a dedicated hub page at /training/[slug]
+const HUB_ROUTES = new Set([
+  'ups', 'kitchen', 'hvac', 'generator', 'solar', 'battery',
+  'datacenter', 'dc-ops', 'dcplants', 'evcharging', 'industrial-ref',
+  'building-cx', 'telecom', 'critical-environment',
+]);
+
+function courseHref(courseId: string, accessKey: string, hasAccess: boolean): string {
+  if (HUB_ROUTES.has(courseId)) return `/training/${courseId}`;
+  // Fall back to first module in the sequence
+  const firstModule = COURSE_SEQUENCES[accessKey]?.[0];
+  return firstModule ? `/training/${firstModule.id}` : '/training';
+}
+
+// Static border accent classes per color (must be complete strings for Tailwind JIT)
+const BORDER_CLASSES: Record<string, string> = {
+  blue: 'border-blue-700/70',
+  orange: 'border-orange-700/70',
+  teal: 'border-teal-700/70',
+  amber: 'border-amber-700/70',
+  violet: 'border-violet-700/70',
+  yellow: 'border-yellow-700/70',
+  green: 'border-green-700/70',
+  sky: 'border-sky-700/70',
+  rose: 'border-rose-700/70',
+  cyan: 'border-cyan-700/70',
+  emerald: 'border-emerald-700/70',
+};
+
+const TEXT_CLASSES: Record<string, string> = {
+  blue: 'text-blue-400',
   orange: 'text-orange-400',
   teal: 'text-teal-400',
   amber: 'text-amber-400',
@@ -20,6 +49,22 @@ const COMING_SOON_ACCENTS: Record<string, string> = {
   green: 'text-green-400',
   sky: 'text-sky-400',
   rose: 'text-rose-400',
+  cyan: 'text-cyan-400',
+  emerald: 'text-emerald-400',
+};
+
+const BAR_CLASSES: Record<string, string> = {
+  blue: 'bg-blue-500',
+  orange: 'bg-orange-500',
+  teal: 'bg-teal-500',
+  amber: 'bg-amber-500',
+  violet: 'bg-violet-500',
+  yellow: 'bg-yellow-500',
+  green: 'bg-green-500',
+  sky: 'bg-sky-500',
+  rose: 'bg-rose-500',
+  cyan: 'bg-cyan-500',
+  emerald: 'bg-emerald-500',
 };
 
 export default async function TrainingPage() {
@@ -39,7 +84,7 @@ export default async function TrainingPage() {
 
   const isAdmin = await checkIsAdmin(uid, userEmail);
 
-  // Fetch all course access in parallel
+  // Fetch access for all courses in one batch
   const accessDocs = await Promise.all(
     COURSES.map((course) =>
       adminDb.collection('users').doc(uid).collection('examAccess').doc(course.accessKey).get()
@@ -48,250 +93,202 @@ export default async function TrainingPage() {
   const courseAccess = Object.fromEntries(
     COURSES.map((course, i) => [
       course.id,
-      isAdmin || (accessDocs[i].exists && accessDocs[i].data()?.granted === true),
+      isAdmin || course.free || (accessDocs[i].exists && accessDocs[i].data()?.granted === true),
     ])
   );
 
-  const hasAnyAccess = Object.values(courseAccess).some(Boolean);
-
-  // Fetch progress for all modules
+  // Fetch all module progress
   const progressSnap = await adminDb
     .collection('users').doc(uid)
     .collection('trainingProgress').get();
-  const progress: Record<string, { completedSlides?: number[]; completedAt?: unknown; passed?: boolean }> = {};
-  progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+  const completedIds = new Set<string>();
+  progressSnap.forEach((doc) => {
+    if (doc.data().passed) completedIds.add(doc.id);
+  });
 
-  // Compute per-course progress for display
-  const upsModules = ALL_MODULES;
-  const upsDone = upsModules.filter((m) => {
-    const p = progress[m.id] ?? {};
-    return !!(p.completedAt && p.passed);
-  }).length;
+  // Compute per-course progress
+  const courseProgress = Object.fromEntries(
+    COURSES.map((course) => {
+      const modules = COURSE_SEQUENCES[course.accessKey] ?? [];
+      const done = modules.filter((m) => completedIds.has(m.id)).length;
+      return [course.id, { done, total: modules.length }];
+    })
+  );
 
-  const sharedModules = ALL_MODULES.filter((m) => m.num <= 10);
-  const kitchenSharedDone = sharedModules.filter((m) => {
-    const p = progress[m.id] ?? {};
-    return !!(p.completedAt && p.passed);
-  }).length;
-
-  const freeTrialModules = ALL_MODULES.filter((m) => m.num <= 3);
+  const enrolledCourses = COURSES.filter((c) => !c.free && courseAccess[c.id]);
+  const availableCourses = COURSES.filter((c) => !c.free && !courseAccess[c.id]);
+  const freeCourses = COURSES.filter((c) => c.free);
 
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
-      <div className="max-w-4xl mx-auto space-y-10">
+      <div className="max-w-5xl mx-auto space-y-10">
 
         <div>
-          <h1 className="text-3xl font-bold text-white">Mastering Field Service <span className="text-gradient">Training Portal</span></h1>
-          <p className="text-gray-400 mt-1">Choose your training program</p>
+          <h1 className="text-3xl font-bold text-white">
+            Mastering Field Service <span className="text-gradient">Training Portal</span>
+          </h1>
+          <p className="text-gray-400 mt-1">
+            {enrolledCourses.length > 0
+              ? `${enrolledCourses.length} course${enrolledCourses.length !== 1 ? 's' : ''} enrolled`
+              : 'Choose your training program'}
+          </p>
         </div>
 
-        {/* Free trial banner — shown when user has no paid access */}
-        {!hasAnyAccess && (
-          <div className="rounded-lg bg-blue-900/20 border border-blue-800 p-5">
-            <p className="text-white font-semibold mb-1">Free Trial Active</p>
-            <p className="text-gray-400 text-sm mb-3">
-              Lesson 1 of Modules 1, 2 &amp; 3 is unlocked across both programs — same foundational content, no purchase required.
-            </p>
-            <div className="flex gap-3 flex-wrap">
-              {freeTrialModules.map((mod) => {
-                const done = (progress[mod.id]?.completedSlides ?? []).includes(0);
+        {/* Enrolled courses */}
+        {enrolledCourses.length > 0 && (
+          <div className="space-y-4">
+            <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-widest">My Courses</h2>
+            <div className="space-y-3">
+              {enrolledCourses.map((course) => {
+                const { done, total } = courseProgress[course.id];
+                const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+                const href = courseHref(course.id, course.accessKey, true);
+                const border = BORDER_CLASSES[course.color] ?? 'border-gray-700';
+                const text = TEXT_CLASSES[course.color] ?? 'text-gray-400';
+                const bar = BAR_CLASSES[course.color] ?? 'bg-indigo-500';
                 return (
-                  <Link
-                    key={mod.id}
-                    href={`/training/${mod.id}`}
-                    className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-                      done
-                        ? 'bg-green-900/50 border border-green-700 text-green-300'
-                        : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
-                    }`}
+                  <div
+                    key={course.id}
+                    className={`rounded-xl border-2 p-5 bg-gray-800/30 ${border} flex flex-col sm:flex-row sm:items-center gap-4`}
                   >
-                    {done ? '✓ ' : ''}Module {mod.num}: {mod.title}
-                  </Link>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <span className={`text-xs font-bold uppercase tracking-widest font-mono ${text}`}>
+                          {course.shortTitle}
+                        </span>
+                        {done === total && total > 0 && (
+                          <span className="text-xs px-1.5 py-0.5 rounded border border-green-700/60 bg-green-900/20 text-green-400">
+                            Complete
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-white font-semibold text-sm mb-2">{course.title}</p>
+                      <div className="flex items-center gap-3">
+                        <div className="flex-1 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                          <div className={`h-full rounded-full ${bar}`} style={{ width: `${pct}%` }} />
+                        </div>
+                        <span className="text-xs text-gray-500 flex-shrink-0">{done}/{total} modules</span>
+                      </div>
+                    </div>
+                    <div className="flex-shrink-0">
+                      <Link
+                        href={href}
+                        className="block px-5 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium transition-colors text-center min-w-[130px]"
+                      >
+                        {done > 0 ? 'Continue →' : 'Start →'}
+                      </Link>
+                    </div>
+                  </div>
                 );
               })}
             </div>
           </div>
         )}
 
-        {/* Course cards */}
-        <div className="space-y-6">
-          {/* ── UPS Course ─────────────────────────────────────────────── */}
-          <div className={`rounded-xl border-2 p-6 ${courseAccess.ups ? 'border-blue-700 bg-blue-950/20' : 'border-gray-700 bg-gray-800/50'}`}>
-            <div className="flex flex-col md:flex-row md:items-start gap-6">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-blue-400 font-mono text-xs font-bold uppercase tracking-widest">UPS FSE</span>
-                  {courseAccess.ups && (
-                    <span className="px-2 py-0.5 bg-blue-600/30 border border-blue-600/60 text-blue-300 text-xs rounded">Enrolled</span>
+        {/* Free courses */}
+        {freeCourses.map((course) => {
+          const { done, total } = courseProgress[course.id];
+          const href = courseHref(course.id, course.accessKey, true);
+          return (
+            <div key={course.id} className="rounded-xl border-2 border-emerald-700/60 bg-emerald-950/20 p-5">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-xs font-bold uppercase tracking-widest font-mono text-emerald-400">
+                      {course.shortTitle}
+                    </span>
+                    <span className="text-xs px-1.5 py-0.5 rounded border border-emerald-700/60 bg-emerald-900/30 text-emerald-300 font-semibold">
+                      Free
+                    </span>
+                  </div>
+                  <p className="text-white font-semibold text-sm mb-1">{course.title}</p>
+                  <p className="text-gray-400 text-xs">{course.tagline}</p>
+                  {done > 0 && (
+                    <p className="text-xs text-emerald-400 mt-1">{done}/{total} modules complete</p>
                   )}
                 </div>
-                <h2 className="text-xl font-bold text-white mb-1">UPS Field Service Engineering</h2>
-                <p className="text-gray-400 text-sm mb-3">
-                  Service uninterruptible power supplies in data centers, hospitals, and critical infrastructure.
-                </p>
-                <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
-                  <span>28 modules</span>
-                  <span>·</span>
-                  <span>3–6 months</span>
-                  <span>·</span>
-                  <span>Jr. UPS FSE certification included</span>
-                </div>
-                {courseAccess.ups && (
-                  <div className="mb-3">
-                    <div className="flex justify-between text-xs text-gray-500 mb-1">
-                      <span>{upsDone}/{upsModules.length} modules complete</span>
-                      <span>{Math.round((upsDone / upsModules.length) * 100)}%</span>
-                    </div>
-                    <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-blue-500 rounded-full"
-                        style={{ width: `${(upsDone / upsModules.length) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className="flex-shrink-0 flex flex-col gap-2 min-w-[160px]">
-                {courseAccess.ups ? (
+                <div className="flex-shrink-0">
                   <Link
-                    href="/training/ups"
-                    className="block w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg text-sm text-center transition-colors"
+                    href={href}
+                    className="block px-5 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-sm font-medium transition-colors text-center min-w-[130px]"
                   >
-                    {upsDone > 0 ? 'Continue Training →' : 'Start Training →'}
+                    {done > 0 ? 'Continue →' : 'Start Free →'}
                   </Link>
-                ) : (
-                  <>
-                    <PurchaseButton
-                      productId="training_course"
-                      label="Enroll — $1,499"
-                      className="block w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold rounded-lg text-sm text-center transition-colors"
-                    />
-                    <Link
-                      href="/training/ups"
-                      className="block w-full py-2 px-4 border border-gray-600 hover:border-gray-400 text-gray-400 hover:text-white rounded-lg text-xs text-center transition-colors"
-                    >
-                      Preview course →
-                    </Link>
-                  </>
-                )}
+                </div>
               </div>
             </div>
-          </div>
+          );
+        })}
 
-          {/* ── Kitchen Course ─────────────────────────────────────────── */}
-          <div className={`rounded-xl border-2 p-6 ${courseAccess.kitchen ? 'border-orange-700 bg-orange-950/20' : 'border-gray-700 bg-gray-800/50'}`}>
-            <div className="flex flex-col md:flex-row md:items-start gap-6">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-orange-400 font-mono text-xs font-bold uppercase tracking-widest">Kitchen FSE</span>
-                  {courseAccess.kitchen && (
-                    <span className="px-2 py-0.5 bg-orange-600/30 border border-orange-600/60 text-orange-300 text-xs rounded">Enrolled</span>
-                  )}
-                </div>
-                <h2 className="text-xl font-bold text-white mb-1">Commercial Kitchen Field Service Engineering</h2>
-                <p className="text-gray-400 text-sm mb-3">
-                  Service commercial kitchen equipment — refrigeration systems, cooking equipment, warewashing, ice machines, and more.
-                </p>
-                <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
-                  <span>27 modules</span>
-                  <span>·</span>
-                  <span>10 shared with UPS program</span>
-                  <span>·</span>
-                  <span>Jr. Kitchen FSE certification</span>
-                </div>
-                {courseAccess.kitchen && (
-                  <div className="mb-3">
-                    <div className="flex justify-between text-xs text-gray-500 mb-1">
-                      <span>{kitchenSharedDone}/10 foundation modules complete</span>
-                      <span>{Math.round((kitchenSharedDone / 10) * 100)}%</span>
+        {/* Available courses to purchase */}
+        {availableCourses.length > 0 && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+                {enrolledCourses.length > 0 ? 'More Courses' : 'Available Courses'}
+              </h2>
+              <span className="text-xs text-gray-600">{availableCourses.length} programs</span>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {availableCourses.map((course) => {
+                const text = TEXT_CLASSES[course.color] ?? 'text-gray-400';
+                const border = BORDER_CLASSES[course.color] ?? 'border-gray-700/40';
+                const previewHref = courseHref(course.id, course.accessKey, false);
+                return (
+                  <div
+                    key={course.id}
+                    className={`rounded-xl border p-4 bg-gray-800/20 flex flex-col gap-3 ${border}`}
+                  >
+                    <div>
+                      <span className={`text-xs font-bold uppercase tracking-widest font-mono ${text} block mb-1`}>
+                        {course.shortTitle}
+                      </span>
+                      <p className="text-white text-sm font-semibold leading-snug">{course.title}</p>
+                      <p className="text-gray-500 text-xs mt-1 leading-relaxed line-clamp-2">{course.tagline}</p>
                     </div>
-                    <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-orange-500 rounded-full"
-                        style={{ width: `${(kitchenSharedDone / 10) * 100}%` }}
+                    <div className="flex items-center justify-between text-xs text-gray-600 mt-auto">
+                      <span>{course.totalModules} modules</span>
+                      <Link href={previewHref} className="text-gray-500 hover:text-gray-300 transition-colors">
+                        Preview →
+                      </Link>
+                    </div>
+                    {course.stripeProductId && (
+                      <PurchaseButton
+                        productId={course.stripeProductId as any}
+                        label="Enroll — $1,499"
+                        className="block w-full py-2 px-3 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white text-xs font-medium rounded-lg text-center transition-colors"
                       />
-                    </div>
+                    )}
                   </div>
-                )}
-              </div>
-              <div className="flex-shrink-0 flex flex-col gap-2 min-w-[160px]">
-                {courseAccess.kitchen ? (
-                  <Link
-                    href="/training/kitchen"
-                    className="block w-full py-2.5 px-4 bg-orange-600 hover:bg-orange-500 text-white font-semibold rounded-lg text-sm text-center transition-colors"
-                  >
-                    {kitchenSharedDone > 0 ? 'Continue Training →' : 'Start Training →'}
-                  </Link>
-                ) : (
-                  <PurchaseButton
-                    productId="training_kitchen"
-                    label="Enroll — $1,499"
-                    className="block w-full py-2.5 px-4 bg-orange-600 hover:bg-orange-500 disabled:opacity-50 text-white font-semibold rounded-lg text-sm text-center transition-colors"
-                  />
-                )}
-                <Link
-                  href="/training/kitchen"
-                  className="block w-full py-2 px-4 border border-gray-600 hover:border-gray-400 text-gray-400 hover:text-white rounded-lg text-xs text-center transition-colors"
-                >
-                  Preview outline →
-                </Link>
-              </div>
+                );
+              })}
             </div>
           </div>
-          {/* ── Free: Critical Environment Fundamentals ─────────────── */}
-          <div className="rounded-xl border-2 border-emerald-700/60 bg-emerald-950/20 p-6">
-            <div className="flex flex-col md:flex-row md:items-start gap-6">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-emerald-400 font-mono text-xs font-bold uppercase tracking-widest">CE Fundamentals</span>
-                  <span className="px-2 py-0.5 bg-emerald-800/50 border border-emerald-600/60 text-emerald-300 text-xs rounded font-semibold">Free</span>
-                </div>
-                <h2 className="text-xl font-bold text-white mb-1">Critical Environment Fundamentals</h2>
-                <p className="text-gray-400 text-sm mb-3">
-                  Essential knowledge for anyone entering mission-critical facilities — data centers, hospitals, electrical rooms, and industrial infrastructure.
-                  Covers safety protocols, electrical hazard awareness, environmental controls, access procedures, and emergency response.
-                </p>
-                <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-                  <span>8 modules</span>
-                  <span>·</span>
-                  <span>Free with sign-in</span>
-                  <span>·</span>
-                  <span>Critical Environment Fundamentals Certificate</span>
-                </div>
-              </div>
-              <div className="flex-shrink-0 flex flex-col gap-2 min-w-[160px]">
-                <Link
-                  href="/training/critical-environment"
-                  className="block w-full py-2.5 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold rounded-lg text-sm text-center transition-colors"
-                >
-                  Start Free Course →
-                </Link>
-              </div>
-            </div>
-          </div>
+        )}
 
-          {/* ── Safety callout: CPR / First Aid / AED ───────────────────── */}
-          <div className="rounded-xl border-2 border-red-800/60 bg-red-950/20 p-6">
-            <div className="flex flex-col md:flex-row md:items-start gap-6">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-red-400 font-mono text-xs font-bold uppercase tracking-widest">Safety Requirement</span>
-                </div>
-                <h2 className="text-lg font-bold text-white mb-1">CPR / First Aid / AED Certification</h2>
-                <p className="text-gray-400 text-sm">
-                  Anyone working in or around electrical equipment is required to hold a current CPR, First Aid, and AED certification.
-                  Electrical shock can cause cardiac arrest within seconds — knowing how to respond is not optional.
-                  The American Red Cross offers in-person and blended courses accepted by most employers.
-                </p>
+        {/* CPR / First Aid callout */}
+        <div className="rounded-xl border-2 border-red-800/60 bg-red-950/20 p-5">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-xs font-bold uppercase tracking-widest font-mono text-red-400">
+                  Safety Requirement
+                </span>
               </div>
-              <div className="flex-shrink-0 flex flex-col gap-2 min-w-[180px]">
-                <ExternalLinkWarning
-                  href="https://www.redcross.org/take-a-class"
-                  className="block w-full py-2.5 px-4 bg-red-700 hover:bg-red-600 text-white font-semibold rounded-lg text-sm text-center transition-colors cursor-pointer"
-                >
-                  Get Certified — Red Cross ↗
-                </ExternalLinkWarning>
-              </div>
+              <p className="text-white font-semibold text-sm mb-1">CPR / First Aid / AED Certification</p>
+              <p className="text-gray-400 text-xs leading-relaxed">
+                Anyone working in or around electrical equipment is required to hold a current CPR, First Aid, and AED certification.
+                The American Red Cross offers in-person and blended courses accepted by most employers.
+              </p>
+            </div>
+            <div className="flex-shrink-0">
+              <ExternalLinkWarning
+                href="https://www.redcross.org/take-a-class"
+                className="block px-5 py-2 rounded-lg bg-red-700 hover:bg-red-600 text-white text-sm font-medium transition-colors text-center cursor-pointer"
+              >
+                Get Certified ↗
+              </ExternalLinkWarning>
             </div>
           </div>
         </div>
@@ -299,11 +296,10 @@ export default async function TrainingPage() {
         {/* Shared foundation note */}
         <div className="rounded-lg bg-gray-800/50 border border-gray-700 p-5">
           <p className="text-gray-300 font-medium text-sm mb-1">10 shared foundation modules</p>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-sm leading-relaxed">
             Modules 1–10 — electrical theory, safety (NFPA 70E + LOTO), and test equipment — are identical across all programs.
             Complete them once and they count toward every certification. Programs also share specialty cores where the
-            trades overlap: refrigeration (Kitchen ↔ HVAC), batteries (UPS ↔ Generator, Solar, Telecom, Battery Tech),
-            and the Data Center program is assembled largely from the UPS, Generator, and HVAC curricula.
+            trades overlap: refrigeration, batteries, and data center systems are assembled from overlapping module sets.
           </p>
         </div>
 
