@@ -1,7 +1,20 @@
-'use client';
-
-import { useState } from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { PackagesForm } from './PackagesForm';
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+
+export const metadata: Metadata = {
+  title: 'Employer & Team Packages — Mastering Field Service',
+  description:
+    'Bulk exam seats and training packages for employers. Certify your field service candidates before day one — 5, 10, or 25 seat packs, or a custom training arrangement.',
+  openGraph: {
+    title: 'Employer Team Packages — Mastering Field Service',
+    description: 'Bulk seat packages for UPS FSE, HVAC, Data Center, and more. Contact us for pricing.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Employer Packages' }],
+  },
+  twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
+};
 
 const packages = [
   { label: '5 Jr. FSE Exam Seats', desc: 'Best for small hiring cohorts or pilot programs.' },
@@ -12,13 +25,6 @@ const packages = [
 ];
 
 export default function PackagesPage() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
   return (
     <section className="section-pad">
       <div className="container-site max-w-4xl mx-auto">
@@ -47,45 +53,13 @@ export default function PackagesPage() {
           <p className="text-sm text-gray-400 mb-6">
             Interested in employer packages or bulk exam seats? Reach out to discuss options.
           </p>
+          <PackagesForm />
+        </div>
 
-          {submitted ? (
-            <div className="max-w-sm mx-auto py-6">
-              <p className="text-green-400 font-semibold mb-2">Inquiry received!</p>
-              <p className="text-sm text-gray-400">
-                We&apos;ll follow up at the email you provided. You can also return to the{' '}
-                <Link href="/employers" className="text-indigo-400 hover:text-indigo-300">employers page</Link>.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="max-w-sm mx-auto space-y-3">
-              <input
-                type="text"
-                name="name"
-                required
-                placeholder="Your name"
-                className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500"
-              />
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="Work email"
-                className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500"
-              />
-              <textarea
-                name="message"
-                rows={3}
-                placeholder="Tell us about your team and needs"
-                className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-indigo-500 resize-none"
-              />
-              <button
-                type="submit"
-                className="w-full px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors"
-              >
-                Submit Inquiry
-              </button>
-            </form>
-          )}
+        <div className="mt-8 text-center">
+          <Link href="/employers" className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors">
+            ← Back to Employer Solutions
+          </Link>
         </div>
       </div>
     </section>
