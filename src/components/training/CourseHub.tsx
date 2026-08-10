@@ -41,29 +41,38 @@ export async function CourseHub({ courseId }: { courseId: string }) {
 
   const cookieStore = await cookies();
   const token = cookieStore.get('firebase-token')?.value;
-  if (!token) redirect('/login');
 
-  let uid: string;
+  let uid: string | null = null;
   let userEmail = '';
-  try {
-    const decoded = await adminAuth.verifyIdToken(token);
-    uid = decoded.uid;
-    userEmail = decoded.email?.toLowerCase() ?? '';
-  } catch {
-    redirect('/login');
+  let isAdmin = false;
+
+  if (token) {
+    try {
+      const decoded = await adminAuth.verifyIdToken(token);
+      uid = decoded.uid;
+      userEmail = decoded.email?.toLowerCase() ?? '';
+      isAdmin = await checkIsAdmin(uid, userEmail);
+    } catch {
+      // invalid token — treat as guest
+    }
   }
 
-  const isAdmin = await checkIsAdmin(uid, userEmail);
+  const isGuest = !uid;
 
-  const [accessDoc, progressSnap] = await Promise.all([
-    adminDb.collection('users').doc(uid).collection('examAccess').doc(course.accessKey).get(),
-    adminDb.collection('users').doc(uid).collection('trainingProgress').get(),
-  ]);
-
-  const hasAccess = isAdmin || (accessDoc.exists && accessDoc.data()?.granted === true);
-
+  let hasAccess = isAdmin;
   const progress: Record<string, { completedSlides?: number[]; completedAt?: unknown; passed?: boolean }> = {};
-  progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+
+  if (uid && !isAdmin) {
+    const [accessDoc, progressSnap] = await Promise.all([
+      adminDb.collection('users').doc(uid).collection('examAccess').doc(course.accessKey).get(),
+      adminDb.collection('users').doc(uid).collection('trainingProgress').get(),
+    ]);
+    hasAccess = accessDoc.exists && accessDoc.data()?.granted === true;
+    progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+  } else if (uid && isAdmin) {
+    const progressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
+    progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+  }
 
   function getUnlockDate(completedAt: unknown): Date {
     const c = completedAt as { toDate?: () => Date } | string;
@@ -136,6 +145,24 @@ export async function CourseHub({ courseId }: { courseId: string }) {
           <h1 className="text-2xl font-bold text-white">{course.title}</h1>
           <p className="text-gray-400 mt-1 text-sm leading-relaxed max-w-xl">{course.tagline}</p>
         </div>
+
+        {/* Guest sign-in prompt */}
+        {isGuest && (
+          <div className={`rounded-xl border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${c.border} bg-gray-800/20`}>
+            <div>
+              <p className="text-white font-semibold text-sm">First module free — no payment needed</p>
+              <p className="text-gray-400 text-xs mt-0.5">Create a free account to save progress. Enroll to unlock all {totalCount} modules and earn your {course.certTitle}.</p>
+            </div>
+            <div className="flex gap-2 flex-shrink-0">
+              <Link href="/login?signup=1" className={`px-4 py-2 rounded-lg text-white text-xs font-semibold transition-colors ${c.btn}`}>
+                Create account →
+              </Link>
+              <Link href="/login" className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs font-semibold transition-colors">
+                Sign in
+              </Link>
+            </div>
+          </div>
+        )}
 
         {/* Progress bar */}
         {hasAccess && (

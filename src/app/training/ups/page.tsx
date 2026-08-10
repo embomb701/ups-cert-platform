@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
@@ -15,31 +14,36 @@ export const metadata = generateCourseMetadata('ups');
 export default async function UpsPortalPage() {
   const cookieStore = await cookies();
   const token = cookieStore.get('firebase-token')?.value;
-  if (!token) redirect('/login');
 
-  let uid: string;
+  let uid: string | null = null;
   let userEmail = '';
-  try {
-    const decoded = await adminAuth.verifyIdToken(token);
-    uid = decoded.uid;
-    userEmail = decoded.email?.toLowerCase() ?? '';
-  } catch {
-    redirect('/login');
+  let isAdmin = false;
+  if (token) {
+    try {
+      const decoded = await adminAuth.verifyIdToken(token);
+      uid = decoded.uid;
+      userEmail = decoded.email?.toLowerCase() ?? '';
+      isAdmin = await checkIsAdmin(uid, userEmail);
+    } catch {
+      // invalid token — treat as guest
+    }
   }
 
-  const isAdmin = await checkIsAdmin(uid, userEmail);
-
-  const accessDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get();
-  const hasAccess = isAdmin || (accessDoc.exists && accessDoc.data()?.granted === true);
-
-  // Fetch all progress
-  const progressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
   const progress: Record<string, {
     completedSlides?: number[];
     completedAt?: { toDate?: () => Date } | string;
     passed?: boolean;
   }> = {};
-  progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+  let hasAccess = isAdmin;
+
+  if (uid) {
+    const [accessDoc, progressSnap] = await Promise.all([
+      adminDb.collection('users').doc(uid).collection('examAccess').doc('training_portal').get(),
+      adminDb.collection('users').doc(uid).collection('trainingProgress').get(),
+    ]);
+    if (!isAdmin) hasAccess = accessDoc.exists && accessDoc.data()?.granted === true;
+    progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
+  }
 
   const threeDaysMs = 3 * 24 * 60 * 60 * 1000;
 

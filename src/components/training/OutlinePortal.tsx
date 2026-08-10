@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
-import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { ALL_MODULES, getModule } from '@/data/index';
 import { COURSES, COURSE_OUTLINES } from '@/data/courses';
 import Link from 'next/link';
@@ -27,26 +26,25 @@ export async function OutlinePortal({ courseId }: { courseId: string }) {
 
   const cookieStore = await cookies();
   const token = cookieStore.get('firebase-token')?.value;
-  if (!token) redirect('/login');
 
-  let uid: string;
-  let userEmail = '';
-  try {
-    const decoded = await adminAuth.verifyIdToken(token);
-    uid = decoded.uid;
-    userEmail = decoded.email?.toLowerCase() ?? '';
-  } catch {
-    redirect('/login');
+  let uid: string | null = null;
+  if (token) {
+    try {
+      const decoded = await adminAuth.verifyIdToken(token);
+      uid = decoded.uid;
+    } catch {
+      // invalid token — treat as guest
+    }
   }
-  await checkIsAdmin(uid, userEmail); // auth check parity with other portals
 
-  // Foundation progress carries over from every program
-  const progressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
   const done = new Set<string>();
-  progressSnap.forEach((doc) => {
-    const d = doc.data();
-    if (d.passed && d.completedAt) done.add(doc.id);
-  });
+  if (uid) {
+    const progressSnap = await adminDb.collection('users').doc(uid).collection('trainingProgress').get();
+    progressSnap.forEach((doc) => {
+      const d = doc.data();
+      if (d.passed && d.completedAt) done.add(doc.id);
+    });
+  }
   const sharedComplete = ALL_MODULES.filter((m) => m.num <= 10 && done.has(m.id)).length;
   const sharedReady = outline.modules.filter((m) => m.sharedFrom || getModule(m.id)).length;
 
