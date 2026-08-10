@@ -112,6 +112,14 @@ export async function GET(req: NextRequest) {
       if (doc.data().granted && COURSE_NAMES[doc.id]) enrolledCourseKeys.add(doc.id);
     });
 
+    // If the user has no enrolled courses but has made progress on trial modules,
+    // show the UPS FSE course as a trial entry so they can see their progress
+    if (!enrolledCourseKeys.has('training_portal') && !enrolledCourseKeys.has('training_course') && completedIds.size > 0) {
+      const upsModules = COURSE_SEQUENCES['training_portal'] ?? [];
+      const hasUpsProgress = upsModules.some((m) => completedIds.has(m.id));
+      if (hasUpsProgress) enrolledCourseKeys.add('training_portal');
+    }
+
     const enrolledCourses = Array.from(enrolledCourseKeys).map((key) => {
       const modules = COURSE_SEQUENCES[key] ?? [];
       const completedCount = modules.filter((m) => completedIds.has(m.id)).length;
