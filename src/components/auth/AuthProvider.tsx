@@ -102,8 +102,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const isAdmin = profile?.role === 'admin';
-  const isProctor = profile?.role === 'proctor' || profile?.role === 'admin';
+  const isAdmin = profile?.role === 'admin' || (profile as (typeof profile & { isAdmin?: boolean }) | null)?.isAdmin === true;
+  const isProctor = profile?.role === 'proctor' || profile?.role === 'admin' || isAdmin;
 
   return (
     <AuthContext.Provider value={{ user, profile, loading, isAdmin, isProctor }}>
