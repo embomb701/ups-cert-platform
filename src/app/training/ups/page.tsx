@@ -153,36 +153,56 @@ export default async function UpsPortalPage() {
 
         {/* Module list */}
         <div className="space-y-2">
-          {moduleStates.map(({ mod, completed, locked, unlockDate, trialOnly, trialLocked, slideProgress, completedSlides }) => {
+          {moduleStates.map(({ mod, completed, locked, unlockDate, trialOnly, trialLocked, slideProgress, completedSlides }, idx) => {
             const isAccessible = hasAccess ? !locked : trialOnly;
+            const showUpgradeNudge = !hasAccess && trialLocked && idx === 3;
 
             return (
-              <div
-                key={mod.id}
-                className={`rounded-lg border p-4 transition-colors ${
-                  completed
-                    ? 'border-green-800/60 bg-green-950/10'
-                    : trialLocked
-                    ? 'border-gray-800 bg-gray-900/50 opacity-60'
-                    : locked
-                    ? 'border-gray-700 bg-gray-800/30'
-                    : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
-                }`}
-              >
+              <>
+                {showUpgradeNudge && (
+                  <div key="nudge" className="rounded-lg border border-blue-800/50 bg-blue-950/20 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-blue-300">25 modules locked</p>
+                      <p className="text-xs text-gray-400 mt-0.5">Enroll to unlock all 25 remaining modules, section quizzes, and the Jr. FSE certification exam.</p>
+                    </div>
+                    <PurchaseButton
+                      productId="training_course"
+                      label="Enroll — $1,499"
+                      className="flex-shrink-0 px-4 py-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold rounded-lg text-sm text-center transition-colors"
+                    />
+                  </div>
+                )}
+                <div
+                  key={mod.id}
+                  className={`rounded-lg border p-4 transition-colors ${
+                    completed
+                      ? 'border-green-800/60 bg-green-950/10'
+                      : trialLocked
+                      ? 'border-gray-800/60 bg-gray-900/30'
+                      : locked
+                      ? 'border-gray-700 bg-gray-800/30'
+                      : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
+                  }`}
+                >
                 <div className="flex items-center gap-4">
                   {/* Status icon */}
                   <div className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold ${
                     completed ? 'bg-green-700 text-white' :
-                    locked || trialLocked ? 'bg-gray-700 text-gray-500' :
+                    trialLocked ? 'bg-gray-800 border border-gray-700 text-gray-600' :
+                    locked ? 'bg-gray-700 text-gray-500' :
                     'bg-blue-900/60 border border-blue-700/60 text-blue-300'
                   }`}>
-                    {completed ? '✓' : trialLocked ? '🔒' : locked ? '⏳' : mod.num}
+                    {completed ? '✓' : trialLocked ? (
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                      </svg>
+                    ) : locked ? '⏳' : mod.num}
                   </div>
 
                   {/* Module info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-white font-medium text-sm">{mod.title}</span>
+                      <span className={`font-medium text-sm ${trialLocked ? 'text-gray-400' : 'text-white'}`}>{mod.title}</span>
                       {trialOnly && (
                         <span className="px-1.5 py-0.5 bg-blue-700/30 border border-blue-600/50 text-blue-300 text-xs rounded">FREE TRIAL</span>
                       )}
@@ -206,9 +226,6 @@ export default async function UpsPortalPage() {
                     {locked && !unlockDate && (
                       <p className="text-xs text-gray-500 mt-1">Complete the previous module first</p>
                     )}
-                    {trialLocked && (
-                      <p className="text-xs text-gray-600 mt-1">Enroll to unlock</p>
-                    )}
                   </div>
 
                   {/* Action */}
@@ -224,6 +241,7 @@ export default async function UpsPortalPage() {
                   </div>
                 </div>
               </div>
+              </>
             );
           })}
         </div>

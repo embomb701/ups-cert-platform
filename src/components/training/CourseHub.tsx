@@ -186,14 +186,32 @@ export async function CourseHub({ courseId }: { courseId: string }) {
             {moduleStates.map(({ mod, completed, locked, unlockDate, trialLocked, slideProgress }, idx) => {
               const href = `/training/${mod.id}`;
               const isAccessible = !locked && !trialLocked;
+              const lockedCount = moduleStates.filter((s) => s.trialLocked).length;
+              const showUpgradeNudge = trialLocked && idx === moduleStates.findIndex((s) => s.trialLocked);
 
               return (
+                <>
+                {showUpgradeNudge && course.stripeProductId && (
+                  <div key="nudge" className={`rounded-xl border p-4 flex flex-col sm:flex-row sm:items-center gap-3 ${c.border} bg-gray-800/10`}>
+                    <div className="flex-1">
+                      <p className={`text-sm font-semibold ${c.accent}`}>{lockedCount} modules locked</p>
+                      <p className="text-xs text-gray-400 mt-0.5">Enroll to access all {totalCount} modules and earn your {course.certTitle}.</p>
+                    </div>
+                    <PurchaseButton
+                      productId={course.stripeProductId as ProductId}
+                      label={`Enroll in ${course.shortTitle}`}
+                      className={`flex-shrink-0 px-4 py-2 rounded-lg text-white text-sm font-semibold transition-colors ${c.btn}`}
+                    />
+                  </div>
+                )}
                 <div
                   key={mod.id}
                   className={`rounded-xl border bg-gray-900/30 p-4 flex items-center gap-4 ${
                     completed
                       ? 'border-emerald-800/40 bg-emerald-950/10'
-                      : locked || trialLocked
+                      : trialLocked
+                      ? 'border-gray-800/40'
+                      : locked
                       ? 'border-gray-800/50 opacity-60'
                       : `border-gray-800 hover:bg-gray-800/30 transition-colors`
                   }`}
@@ -202,17 +220,23 @@ export async function CourseHub({ courseId }: { courseId: string }) {
                   <div className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold ${
                     completed
                       ? 'bg-emerald-900/50 text-emerald-400'
-                      : locked || trialLocked
+                      : trialLocked
+                      ? 'bg-gray-800 border border-gray-700/60 text-gray-600'
+                      : locked
                       ? 'bg-gray-800 text-gray-600'
                       : `bg-gray-800 ${c.accent}`
                   }`}>
-                    {completed ? '✓' : idx + 1}
+                    {completed ? '✓' : trialLocked ? (
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                      </svg>
+                    ) : idx + 1}
                   </div>
 
                   {/* Module info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className={`text-sm font-medium ${completed ? 'text-gray-400' : trialLocked || locked ? 'text-gray-600' : 'text-gray-200'}`}>
+                      <span className={`text-sm font-medium ${completed ? 'text-gray-400' : trialLocked ? 'text-gray-400' : locked ? 'text-gray-600' : 'text-gray-200'}`}>
                         {mod.title}
                       </span>
                       {completed && (
@@ -220,9 +244,6 @@ export async function CourseHub({ courseId }: { courseId: string }) {
                       )}
                       {!completed && slideProgress > 0 && !locked && !trialLocked && (
                         <span className={`text-xs px-1.5 py-0.5 rounded border ${c.badge}`}>In Progress</span>
-                      )}
-                      {trialLocked && (
-                        <span className="text-xs px-1.5 py-0.5 rounded bg-gray-800 border border-gray-700 text-gray-500">Purchase to unlock</span>
                       )}
                       {locked && unlockDate && (
                         <span className="text-xs text-gray-600">
@@ -233,7 +254,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
                         <span className="text-xs text-gray-600">Complete previous module first</span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-600 mt-0.5 line-clamp-1">{mod.desc}</p>
+                    <p className={`text-xs mt-0.5 line-clamp-1 ${trialLocked ? 'text-gray-600' : 'text-gray-600'}`}>{mod.desc}</p>
                     {/* Slide progress bar */}
                     {!completed && slideProgress > 0 && !locked && !trialLocked && mod.slides.length > 0 && (
                       <div className="mt-2 h-1 bg-gray-800 rounded-full overflow-hidden w-32">
@@ -254,6 +275,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
                     </Link>
                   )}
                 </div>
+                </>
               );
             })}
           </div>
