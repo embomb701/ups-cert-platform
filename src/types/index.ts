@@ -39,6 +39,7 @@ export interface UserProfile {
   createdAt: Date;
   accountCreationIpHash?: string;
   role: UserRole;
+  isAdmin?: boolean;
   blockedReason?: string;
   adminNotes?: string;
 }
