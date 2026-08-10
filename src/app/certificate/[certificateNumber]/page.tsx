@@ -71,8 +71,21 @@ export default async function CertificatePrintPage({ params }: Props) {
     : cert.examLevel === 'jr_telecom_tech' ? 'Junior Telecom OSP Technician'
     : 'Field Service Engineer';
 
+  const certJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOccupationalCredential',
+    name: cert.certificationTitle,
+    credentialCategory: 'Certificate',
+    recognizedBy: { '@type': 'Organization', name: 'Mastering Field Service', url: siteUrl },
+    holder: { '@type': 'Person', name: cert.candidateName || 'Candidate' },
+    dateCreated: issueDate instanceof Date ? issueDate.toISOString() : new Date(issueDate as string).toISOString(),
+    identifier: cert.certificateNumber,
+    url: verifyUrl,
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(certJsonLd) }} />
       {/* Print CSS — hides site chrome, forces white background */}
       <style dangerouslySetInnerHTML={{ __html: `
         @media print {

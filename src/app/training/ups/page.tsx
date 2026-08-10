@@ -83,8 +83,21 @@ export default async function UpsPortalPage() {
   const completedCount = moduleStates.filter((s) => s.completed).length;
   const totalModules = ALL_MODULES.length;
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: 'UPS Field Service Engineering',
+    description: '28-module professional training program covering UPS systems fundamentals, installation, maintenance, and troubleshooting. Prepares candidates for the Jr. UPS Field Service Engineer certification.',
+    url: `${siteUrl}/training/ups`,
+    provider: { '@type': 'Organization', name: 'Mastering Field Service', url: siteUrl },
+    educationalCredentialAwarded: 'Jr. UPS Field Service Engineer',
+    numberOfCredits: 28,
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-3xl mx-auto space-y-6">
 
         {/* Breadcrumb */}

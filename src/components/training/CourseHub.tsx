@@ -105,8 +105,21 @@ export async function CourseHub({ courseId }: { courseId: string }) {
   const firstIncomplete = moduleStates.find((s) => !s.completed && !s.locked && !s.trialLocked);
   const continueHref = firstIncomplete ? `/training/${firstIncomplete.mod.id}` : `/training/${seq[0].id}`;
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ups-cert-platform.vercel.app';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: course.title,
+    description: course.tagline,
+    url: `${siteUrl}/training/${course.id}`,
+    provider: { '@type': 'Organization', name: 'Mastering Field Service', url: siteUrl },
+    educationalCredentialAwarded: course.certTitle,
+    numberOfCredits: course.totalModules,
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-3xl mx-auto space-y-6">
 
         {/* Breadcrumb */}
