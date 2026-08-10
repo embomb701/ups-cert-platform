@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
@@ -87,41 +86,47 @@ const BAR_CLASSES: Record<string, string> = {
 export default async function TrainingPage() {
   const cookieStore = await cookies();
   const token = cookieStore.get('firebase-token')?.value;
-  if (!token) redirect('/login');
 
-  let uid: string;
+  let uid: string | null = null;
   let userEmail = '';
-  try {
-    const decoded = await adminAuth.verifyIdToken(token);
-    uid = decoded.uid;
-    userEmail = decoded.email?.toLowerCase() ?? '';
-  } catch {
-    redirect('/login');
+  let isAdmin = false;
+  if (token) {
+    try {
+      const decoded = await adminAuth.verifyIdToken(token);
+      uid = decoded.uid;
+      userEmail = decoded.email?.toLowerCase() ?? '';
+      isAdmin = await checkIsAdmin(uid, userEmail);
+    } catch {
+      // invalid token — treat as guest
+    }
+  }
+  const isGuest = !uid;
+
+  // Fetch access for all courses in one batch (skip for guests)
+  const courseAccess: Record<string, boolean> = {};
+  if (uid) {
+    const accessDocs = await Promise.all(
+      COURSES.map((course) =>
+        adminDb.collection('users').doc(uid!).collection('examAccess').doc(course.accessKey).get()
+      )
+    );
+    COURSES.forEach((course, i) => {
+      courseAccess[course.id] = isAdmin || !!course.free || (accessDocs[i].exists && accessDocs[i].data()?.granted === true);
+    });
+  } else {
+    COURSES.forEach((course) => { courseAccess[course.id] = !!course.free; });
   }
 
-  const isAdmin = await checkIsAdmin(uid, userEmail);
-
-  // Fetch access for all courses in one batch
-  const accessDocs = await Promise.all(
-    COURSES.map((course) =>
-      adminDb.collection('users').doc(uid).collection('examAccess').doc(course.accessKey).get()
-    )
-  );
-  const courseAccess = Object.fromEntries(
-    COURSES.map((course, i) => [
-      course.id,
-      isAdmin || course.free || (accessDocs[i].exists && accessDocs[i].data()?.granted === true),
-    ])
-  );
-
-  // Fetch all module progress
-  const progressSnap = await adminDb
-    .collection('users').doc(uid)
-    .collection('trainingProgress').get();
+  // Fetch all module progress (skip for guests)
   const completedIds = new Set<string>();
-  progressSnap.forEach((doc) => {
-    if (doc.data().passed) completedIds.add(doc.id);
-  });
+  if (uid) {
+    const progressSnap = await adminDb
+      .collection('users').doc(uid)
+      .collection('trainingProgress').get();
+    progressSnap.forEach((doc) => {
+      if (doc.data().passed) completedIds.add(doc.id);
+    });
+  }
 
   // Compute per-course progress
   const courseProgress = Object.fromEntries(
@@ -145,11 +150,26 @@ export default async function TrainingPage() {
             Mastering Field Service <span className="text-gradient">Training Portal</span>
           </h1>
           <p className="text-gray-400 mt-1">
-            {enrolledCourses.length > 0
+            {isGuest
+              ? '28 career tracks — enroll to start'
+              : enrolledCourses.length > 0
               ? `${enrolledCourses.length} course${enrolledCourses.length !== 1 ? 's' : ''} enrolled`
               : 'Choose your training program'}
           </p>
         </div>
+
+        {isGuest && (
+          <div className="rounded-xl border border-indigo-700/50 bg-indigo-950/20 p-5 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1">
+              <p className="text-white font-semibold text-sm">Sign in to access your training</p>
+              <p className="text-gray-400 text-xs mt-0.5">Create a free account to save progress and earn certificates. Browse all 28 tracks below.</p>
+            </div>
+            <div className="flex gap-2 flex-shrink-0">
+              <Link href="/login?signup=1" className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-colors">Create account →</Link>
+              <Link href="/login" className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs font-semibold transition-colors">Sign in</Link>
+            </div>
+          </div>
+        )}
 
         {/* Enrolled courses */}
         {enrolledCourses.length > 0 && (
