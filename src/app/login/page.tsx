@@ -31,10 +31,16 @@ export default function LoginPage() {
     if (!loading && user) router.replace('/training');
   }, [user, loading, router]);
 
-  const finishLogin = async (u: User) => {
-    // Get the token and set the cookie synchronously before navigating
+  const finishLogin = async (u: User, isNewSignup = false) => {
     const token = await u.getIdToken();
     document.cookie = `firebase-token=${token}; path=/; max-age=3500; SameSite=Lax`;
+    if (isNewSignup) {
+      // Fire-and-forget: create Firestore profile and send welcome email
+      fetch('/api/user/register', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      }).catch(() => {});
+    }
     router.replace('/training');
   };
 
@@ -43,7 +49,9 @@ export default function LoginPage() {
     setError(null);
     setNotice(null);
     try {
-      await finishLogin(await signInWithGoogle());
+      const u = await signInWithGoogle();
+      const isNew = u.metadata.creationTime === u.metadata.lastSignInTime;
+      await finishLogin(u, isNew);
     } catch (err) {
       setError(authErrorMessage(err));
       setBusy(false);
@@ -66,7 +74,7 @@ export default function LoginPage() {
         mode === 'signup'
           ? await signUpWithEmail(name, email, password)
           : await signInWithEmail(email, password);
-      await finishLogin(u);
+      await finishLogin(u, mode === 'signup');
     } catch (err) {
       setError(authErrorMessage(err));
       setBusy(false);

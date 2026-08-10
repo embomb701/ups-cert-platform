@@ -202,3 +202,24 @@ export async function sendCertEarnedEmail(
     </div>`,
   );
 }
+
+export async function sendWelcomeEmail(to: string, name: string): Promise<void> {
+  const displayName = name.split(' ')[0] || 'there';
+  await send(
+    to,
+    'Welcome to Mastering Field Service',
+    `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;background:#111827;color:#f9fafb;border-radius:12px;">
+      <p style="color:#6b7280;font-size:12px;margin:0 0 16px;text-transform:uppercase;letter-spacing:.08em;">Training Portal</p>
+      <h2 style="color:#f9fafb;margin:0 0 8px;font-size:22px;">Welcome, ${displayName} 👋</h2>
+      <p style="color:#9ca3af;margin:0 0 16px;">You're in. Here's how to make the most of your free access:</p>
+      <ul style="color:#9ca3af;margin:0 0 20px;padding-left:20px;line-height:1.8;">
+        <li><strong style="color:#f9fafb;">Free modules</strong> — Start with the first 3 UPS FSE modules, no purchase required.</li>
+        <li><strong style="color:#f9fafb;">28 career tracks</strong> — UPS, HVAC, Kitchen, Data Center, Solar, and more.</li>
+        <li><strong style="color:#f9fafb;">Certifications</strong> — Complete a course and unlock your Jr. FSE exam.</li>
+      </ul>
+      <a href="${SITE_URL}/training" style="display:inline-block;padding:12px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Start training →</a>
+      <p style="margin:32px 0 0;font-size:12px;color:#4b5563;">Mastering Field Service · <a href="${SITE_URL}" style="color:#6b7280;">${SITE_URL}</a></p>
+      <p style="margin:8px 0 0;font-size:11px;color:#374151;">You received this because you just created an account. To stop receiving emails, visit your <a href="${SITE_URL}/account" style="color:#4b5563;">account settings</a>.</p>
+    </div>`,
+  );
+}
