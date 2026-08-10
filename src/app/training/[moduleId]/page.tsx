@@ -16,9 +16,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { moduleId } = await params;
   const mod = getModule(moduleId);
   if (!mod) return { title: 'Training Module — Mastering Field Service' };
+  const isPublic = mod.num <= 3 || mod.id.startsWith('ce-');
   return {
     title: `${mod.title} — Mastering Field Service`,
-    robots: { index: false },
+    ...(isPublic ? {} : { robots: { index: false } }),
   };
 }
 
