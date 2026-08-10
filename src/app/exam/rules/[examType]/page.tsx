@@ -123,10 +123,13 @@ export default function ExamRulesPage() {
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];
   const isJr = examType === 'jr_fse' || isPractice || !!jrCourse;
+  const isFseAi = examType === 'fse_ai';
   const rules = jrCourse
     ? RULES_JR.map((r) => r.replace('Jr. FSE Exam', jrCourse.token))
     : isJr
     ? RULES_JR
+    : isFseAi
+    ? RULES_FSE_AI
     : RULES_FSE;
   const examLabel = isPractice
     ? PRACTICE_LABELS[examType]
@@ -134,6 +137,8 @@ export default function ExamRulesPage() {
     ? jrCourse.label
     : isJr
     ? 'Junior UPS Field Service Certification'
+    : isFseAi
+    ? 'UPS Field Service Certification (AI Proctored)'
     : 'UPS Field Service Certification';
 
   const handleStart = () => {
