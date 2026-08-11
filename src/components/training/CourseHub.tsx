@@ -185,7 +185,17 @@ export async function CourseHub({ courseId }: { courseId: string }) {
               </div>
             )}
             {completedCount === totalCount && (
-              <p className="text-emerald-400 font-semibold text-sm mt-3">Course complete — check your Dashboard for your certificate.</p>
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                <p className="text-emerald-400 font-semibold text-sm">Course complete!</p>
+                {course.examLevel && (
+                  <Link href={`/exam/rules/practice_${course.examLevel}`} className={`text-xs font-semibold px-3 py-1.5 rounded-lg border ${c.border} ${c.accent} hover:text-white transition-colors`}>
+                    Practice Exam →
+                  </Link>
+                )}
+                <Link href="/dashboard" className="text-xs text-gray-400 hover:text-gray-200 transition-colors">
+                  Dashboard →
+                </Link>
+              </div>
             )}
           </div>
         )}

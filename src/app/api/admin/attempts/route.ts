@@ -19,12 +19,23 @@ export async function GET(req: NextRequest) {
     const level = req.nextUrl.searchParams.get('level');
     const status = req.nextUrl.searchParams.get('status');
 
+    const JR_TRADE_LEVELS = [
+      'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse',
+      'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech',
+      'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech',
+      'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech',
+      'jr_security_tech', 'jr_field_pm', 'jr_pump_tech', 'jr_industrial_ref', 'jr_dc_ops',
+      'jr_building_cx', 'jr_telecom_tech',
+    ];
+
     const baseRef = adminDb.collection('examAttempts');
     const queryRef =
-      level && status ? baseRef.where('examLevel', '==', level).where('status', '==', status)
-      : level        ? baseRef.where('examLevel', '==', level)
-      : status       ? baseRef.where('status', '==', status)
-      :                baseRef;
+      level === 'jr' && status ? baseRef.where('examLevel', 'in', JR_TRADE_LEVELS).where('status', '==', status)
+      : level === 'jr'         ? baseRef.where('examLevel', 'in', JR_TRADE_LEVELS)
+      : level && status        ? baseRef.where('examLevel', '==', level).where('status', '==', status)
+      : level                  ? baseRef.where('examLevel', '==', level)
+      : status                 ? baseRef.where('status', '==', status)
+      :                          baseRef;
 
     const snap = await queryRef.get();
 

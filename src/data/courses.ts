@@ -989,6 +989,7 @@ export interface TrainingCourse {
   comingSoon?: boolean;
   free?: boolean;
   price?: string;
+  examLevel?: string;
 }
 
 export const COURSES: TrainingCourse[] = [
@@ -1015,6 +1016,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_course',
     testOutProductId: 'jr_fse_test_human',
     comingSoon: false,
+    examLevel: 'jr_fse',
   },
   {
     id: 'kitchen',
@@ -1028,6 +1030,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_kitchen',
     testOutProductId: 'jr_kitchen_fse_test_human',
     comingSoon: false,
+    examLevel: 'jr_kitchen_fse',
   },
   {
     id: 'hvac',
@@ -1041,6 +1044,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_hvac',
     testOutProductId: 'jr_hvac_fse_test_human',
     comingSoon: false,
+    examLevel: 'jr_hvac_fse',
   },
   {
     id: 'generator',
@@ -1054,6 +1058,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_generator',
     testOutProductId: 'jr_gen_fse_test_human',
     comingSoon: false,
+    examLevel: 'jr_gen_fse',
   },
   {
     id: 'datacenter',
@@ -1067,6 +1072,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_datacenter',
     testOutProductId: 'jr_dc_cft_test_human',
     comingSoon: false,
+    examLevel: 'jr_dc_cft',
   },
   {
     id: 'solar',
@@ -1080,6 +1086,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_solar',
     testOutProductId: 'jr_solar_fse_test_human',
     comingSoon: false,
+    examLevel: 'jr_solar_fse',
   },
   {
     id: 'evcharging',
@@ -1093,6 +1100,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_evcharging',
     testOutProductId: 'jr_ev_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_ev_tech',
   },
   {
     id: 'dcplants',
@@ -1106,6 +1114,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_dcplants',
     testOutProductId: 'jr_dcp_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_dcp_tech',
   },
   {
     id: 'battery',
@@ -1119,6 +1128,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_battery',
     testOutProductId: 'jr_battery_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_battery_tech',
   },
   {
     id: 'dcengineer',
@@ -1133,6 +1143,7 @@ export const COURSES: TrainingCourse[] = [
     testOutProductId: 'jr_dc_engineer_test_human',
     comingSoon: false,
     price: '$1,999',
+    examLevel: 'jr_dc_engineer',
   },
   {
     id: 'marine',
@@ -1146,6 +1157,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_marine',
     testOutProductId: 'jr_marine_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_marine_tech',
   },
   {
     id: 'pool',
@@ -1159,6 +1171,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_pool',
     testOutProductId: 'jr_pool_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_pool_tech',
   },
   {
     id: 'hvac-tech',
@@ -1172,6 +1185,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_hvac_tech',
     testOutProductId: 'jr_hvac_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_hvac_tech',
   },
   {
     id: 'solar-inst',
@@ -1185,6 +1199,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_solar_inst',
     testOutProductId: 'jr_solar_inst_test_human',
     comingSoon: false,
+    examLevel: 'jr_solar_inst',
   },
   {
     id: 'wind-tech',
@@ -1198,6 +1213,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_wind_tech',
     testOutProductId: 'jr_wind_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_wind_tech',
   },
   {
     id: 'elevator-tech',
@@ -1211,6 +1227,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_elevator_tech',
     testOutProductId: 'jr_elevator_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_elevator_tech',
   },
   {
     id: 'fire-alarm-tech',
@@ -1224,6 +1241,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_fire_alarm_tech',
     testOutProductId: 'jr_fire_alarm_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_fire_alarm_tech',
   },
   {
     id: 'bmet-tech',
@@ -1237,6 +1255,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_bmet_tech',
     testOutProductId: 'jr_bmet_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_bmet_tech',
   },
   {
     id: 'bas-tech',
@@ -1250,6 +1269,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_bas_tech',
     testOutProductId: 'jr_bas_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_bas_tech',
   },
   {
     id: 'ref-tech',
@@ -1263,6 +1283,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_ref_tech',
     testOutProductId: 'jr_ref_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_ref_tech',
   },
   {
     id: 'plc-tech',
@@ -1276,6 +1297,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_plc_tech',
     testOutProductId: 'jr_plc_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_plc_tech',
   },
   {
     id: 'security-tech',
@@ -1289,6 +1311,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_security_tech',
     testOutProductId: 'jr_security_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_security_tech',
   },
   {
     id: 'field-pm',
@@ -1301,6 +1324,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_field_pm',
     testOutProductId: 'jr_field_pm_test_human',
+    examLevel: 'jr_field_pm',
   },
   {
     id: 'pump-tech',
@@ -1313,6 +1337,7 @@ export const COURSES: TrainingCourse[] = [
     totalModules: 16,
     stripeProductId: 'training_pump_tech',
     testOutProductId: 'jr_pump_tech_test_human',
+    examLevel: 'jr_pump_tech',
   },
   {
     id: 'industrial-ref',

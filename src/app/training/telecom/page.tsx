@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { TELECOM_MODULES } from '@/data/index';
+import { COURSES } from '@/data/courses';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
@@ -40,6 +41,7 @@ export default async function TelecomOverviewPage() {
     progressSnap.forEach((doc) => { progress[doc.id] = doc.data() as typeof progress[string]; });
   }
 
+  const course = COURSES.find((c) => c.id === 'telecom');
   const modules = [...TELECOM_MODULES].sort((a, b) => a.num - b.num);
   const completedCount = modules.filter((m) => {
     const p = progress[m.id] ?? {};
@@ -196,9 +198,17 @@ export default async function TelecomOverviewPage() {
           </p>
           {hasAccess ? (
             completedCount === modules.length ? (
-              <p className="text-violet-400 font-semibold text-sm">
-                All modules complete — certificate available upon full course implementation.
-              </p>
+              course?.examLevel ? (
+                <div className="flex flex-wrap justify-center gap-3">
+                  <p className="text-violet-400 font-semibold text-sm w-full">All modules complete!</p>
+                  <Link href={`/exam/rules/practice_${course.examLevel}`} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-violet-700/60 text-violet-400 hover:text-white transition-colors">Practice Exam →</Link>
+                  <Link href="/dashboard" className="text-xs text-gray-400 hover:text-gray-200 transition-colors">Dashboard →</Link>
+                </div>
+              ) : (
+                <p className="text-violet-400 font-semibold text-sm">
+                  All modules complete — exam coming soon.
+                </p>
+              )
             ) : (
               <p className="text-gray-600 text-xs">
                 {completedCount}/{modules.length} modules complete — finish all modules to unlock your certificate.

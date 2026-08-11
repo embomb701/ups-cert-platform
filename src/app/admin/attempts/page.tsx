@@ -34,8 +34,36 @@ interface SuspiciousEventDetail {
 
 const LEVEL_LABELS: Record<string, string> = {
   jr_fse: 'Jr. FSE',
+  jr: 'Jr.',
   fse_ai: 'FSE AI',
   fse: 'FSE',
+  jr_kitchen_fse: 'Jr. Kitchen FSE',
+  jr_hvac_fse: 'Jr. HVAC FSE',
+  jr_gen_fse: 'Jr. Generator FSE',
+  jr_dc_cft: 'Jr. Data Center CFT',
+  jr_solar_fse: 'Jr. Solar FSE',
+  jr_ev_tech: 'Jr. EV Tech',
+  jr_dcp_tech: 'Jr. DC Plants Tech',
+  jr_battery_tech: 'Jr. Battery Tech',
+  jr_dc_engineer: 'Jr. DC Engineer',
+  jr_marine_tech: 'Jr. Marine Tech',
+  jr_pool_tech: 'Jr. Pool Tech',
+  jr_hvac_tech: 'Jr. HVAC Tech',
+  jr_solar_inst: 'Jr. Solar Installer',
+  jr_wind_tech: 'Jr. Wind Turbine Tech',
+  jr_elevator_tech: 'Jr. Elevator Tech',
+  jr_fire_alarm_tech: 'Jr. Fire Alarm Tech',
+  jr_bmet_tech: 'Jr. BMET Tech',
+  jr_bas_tech: 'Jr. BAS Tech',
+  jr_ref_tech: 'Jr. Ref Tech',
+  jr_plc_tech: 'Jr. PLC Tech',
+  jr_security_tech: 'Jr. Security Tech',
+  jr_field_pm: 'Jr. Field PM',
+  jr_pump_tech: 'Jr. Pump Tech',
+  jr_industrial_ref: 'Jr. Industrial Ref',
+  jr_dc_ops: 'Jr. DC Ops',
+  jr_building_cx: 'Jr. Building Cx',
+  jr_telecom_tech: 'Jr. Telecom OSP',
 };
 
 const STATUS_COLORS: Record<string, string> = {
@@ -134,7 +162,7 @@ function AdminAttemptsContent() {
             <h1 className="text-xl font-bold text-white">Exam Attempts</h1>
           </div>
           <div className="flex gap-2">
-            {['jr_fse', 'fse_ai', 'fse'].map((l) => (
+            {['jr_fse', 'jr', 'fse_ai', 'fse'].map((l) => (
               <Link
                 key={l}
                 href={`/admin/attempts?level=${l}`}
@@ -162,6 +190,7 @@ function AdminAttemptsContent() {
             <thead>
               <tr className="border-b border-gray-800 text-xs text-gray-500 uppercase">
                 <th className="text-left py-3 px-4">User</th>
+                {level === 'jr' && <th className="text-left py-3 px-4">Exam</th>}
                 <th className="text-left py-3 px-4">Status</th>
                 <th className="text-left py-3 px-4">Score</th>
                 <th className="text-left py-3 px-4">Risk</th>
@@ -173,11 +202,11 @@ function AdminAttemptsContent() {
             <tbody>
               {fetching ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-gray-500 text-sm">Loading…</td>
+                  <td colSpan={level === 'jr' ? 8 : 7} className="py-8 text-center text-gray-500 text-sm">Loading…</td>
                 </tr>
               ) : attempts.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-gray-500 text-sm">No attempts found.</td>
+                  <td colSpan={level === 'jr' ? 8 : 7} className="py-8 text-center text-gray-500 text-sm">No attempts found.</td>
                 </tr>
               ) : (
                 attempts.map((a) => (
@@ -191,6 +220,11 @@ function AdminAttemptsContent() {
                         <p className="text-white text-xs font-medium">{a.email}</p>
                         {a.displayName && <p className="text-gray-500 text-xs">{a.displayName}</p>}
                       </td>
+                      {level === 'jr' && (
+                        <td className="py-3 px-4 text-xs text-gray-400">
+                          {LEVEL_LABELS[a.examLevel] ?? a.examLevel}
+                        </td>
+                      )}
                       <td className="py-3 px-4">
                         <span className={`text-xs font-medium ${STATUS_COLORS[a.status] ?? 'text-gray-400'}`}>
                           {a.status.replace('_', ' ')}
@@ -248,7 +282,7 @@ function AdminAttemptsContent() {
                     </tr>
                     {expandedId === a.id && (
                       <tr key={`${a.id}-detail`} className="bg-gray-900/60">
-                        <td colSpan={7} className="px-6 py-4">
+                        <td colSpan={level === 'jr' ? 8 : 7} className="px-6 py-4">
                           {!eventDetails[a.id] ? (
                             <p className="text-xs text-gray-500">Loading…</p>
                           ) : eventDetails[a.id].events.length === 0 ? (
