@@ -14,7 +14,10 @@ interface Profile {
   profileVisible: boolean;
   openToOpportunities: boolean;
   emailRemindersEnabled: boolean;
+  referralCount: number;
 }
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error';
 
@@ -31,6 +34,8 @@ export default function SettingsPage() {
   const [profileVisible, setProfileVisible] = useState(true);
   const [openToOpportunities, setOpenToOpportunities] = useState(false);
   const [emailRemindersEnabled, setEmailRemindersEnabled] = useState(true);
+  const [referralCount, setReferralCount] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   const [profileSave, setProfileSave] = useState<SaveState>('idle');
   const [prefsSave, setPrefsSave] = useState<SaveState>('idle');
@@ -58,6 +63,7 @@ export default function SettingsPage() {
           profileVisible: data.profile?.profileVisible !== false,
           openToOpportunities: !!data.profile?.openToOpportunities,
           emailRemindersEnabled: data.profile?.emailRemindersEnabled !== false,
+          referralCount: data.profile?.referralCount ?? 0,
         };
         setProfile(p);
         setDisplayName(p.displayName);
@@ -66,6 +72,7 @@ export default function SettingsPage() {
         setProfileVisible(p.profileVisible);
         setOpenToOpportunities(p.openToOpportunities);
         setEmailRemindersEnabled(p.emailRemindersEnabled);
+        setReferralCount(p.referralCount);
       } catch {
         setErrorMsg('Could not load profile. Please refresh.');
       } finally {
@@ -97,6 +104,17 @@ export default function SettingsPage() {
     } catch (e) {
       setErrorMsg((e as Error).message);
       setProfileSave('error');
+    }
+  }
+
+  async function copyReferralLink() {
+    if (!user) return;
+    try {
+      await navigator.clipboard.writeText(`${SITE_URL}?ref=${user.uid}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard API unavailable — user can still select the text manually
     }
   }
 
@@ -227,6 +245,42 @@ export default function SettingsPage() {
           >
             {prefsSave === 'saving' ? 'Saving…' : prefsSave === 'saved' ? 'Saved ✓' : 'Save Preferences'}
           </button>
+        </div>
+
+        {/* Referrals */}
+        <div className="card-dark p-6 space-y-4">
+          <div>
+            <h2 className="text-base font-semibold text-white">Refer a Friend</h2>
+            <p className="text-xs text-gray-500 mt-1">
+              Share your link. When someone signs up through it, it's credited to you.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="text"
+              readOnly
+              value={user ? `${SITE_URL}?ref=${user.uid}` : ''}
+              onFocus={(e) => e.currentTarget.select()}
+              className="flex-1 px-3 py-2 text-sm bg-gray-800 border border-gray-700 rounded-lg text-gray-300 focus:outline-none focus:border-indigo-600"
+            />
+            <button
+              onClick={copyReferralLink}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap ${
+                copied
+                  ? 'bg-emerald-700 text-white'
+                  : 'bg-indigo-600 hover:bg-indigo-500 text-white'
+              }`}
+            >
+              {copied ? 'Copied ✓' : 'Copy Link'}
+            </button>
+          </div>
+
+          <p className="text-xs text-gray-500">
+            {referralCount === 0
+              ? 'No referrals yet.'
+              : `${referralCount} ${referralCount === 1 ? 'person has' : 'people have'} signed up through your link.`}
+          </p>
         </div>
 
         {/* Danger zone */}

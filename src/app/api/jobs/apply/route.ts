@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
+import { checkRateLimit } from '@/lib/utils/rateLimit';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +21,15 @@ export async function POST(req: NextRequest) {
     applicantName = decoded.name ?? '';
   } catch {
     return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+  }
+
+  // Rate limit: 20 job applications per hour per user
+  const rl = await checkRateLimit(uid, 'jobApply', 20, 60 * 60 * 1000);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: 'Too many applications submitted. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(Math.ceil((rl.resetAt - Date.now()) / 1000)) } },
+    );
   }
 
   const { listingId, message } = await req.json() as { listingId?: string; message?: string };

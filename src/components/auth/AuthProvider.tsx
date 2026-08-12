@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase/client';
+import { captureReferralCode } from '@/lib/utils/referral';
 import type { UserProfile } from '@/types';
 
 interface AuthContextValue {
@@ -45,6 +46,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Capture ?ref=<uid> from the URL (if present) on every page load, so it
+  // survives navigation up to the point of signup. First-touch, 30-day shelf life.
+  useEffect(() => {
+    captureReferralCode();
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => setLoading(false), 4000);

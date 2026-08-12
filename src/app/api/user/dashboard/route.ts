@@ -226,6 +226,7 @@ export async function GET(req: NextRequest) {
       profileVisible: userData.profileVisible ?? true,
       headline: userData.headline ?? '',
       location: userData.location ?? '',
+      referralCount: userData.referralCount ?? 0,
     };
 
     return NextResponse.json({

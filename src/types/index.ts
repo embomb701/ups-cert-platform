@@ -42,6 +42,8 @@ export interface UserProfile {
   isAdmin?: boolean;
   blockedReason?: string;
   adminNotes?: string;
+  referredBy?: string;
+  referralCount?: number;
 }
 
 // ---------------------------------------------------------------

@@ -13,9 +13,11 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db, googleProvider } from './client';
+import { getStoredReferralCode, clearReferralCode } from '@/lib/utils/referral';
 
-// Ensure user document exists in Firestore — non-blocking; login still succeeds if it fails
-async function ensureUserDoc(user: User): Promise<void> {
+// Ensure user document exists in Firestore — non-blocking; login still succeeds if it fails.
+// Returns true if a new doc was created (i.e. this is a first-time signup).
+async function ensureUserDoc(user: User): Promise<boolean> {
   try {
     const userRef = doc(db, 'users', user.uid);
     const snap = await getDoc(userRef);
@@ -27,15 +29,38 @@ async function ensureUserDoc(user: User): Promise<void> {
         createdAt: serverTimestamp(),
         role: 'user',
       });
+      return true;
     }
+    return false;
   } catch {
     // Firestore write failed — login still succeeds
+    return false;
+  }
+}
+
+// Credits whoever referred this new user, if a ?ref= code was captured earlier.
+// Best-effort — never blocks or fails the signup flow.
+async function trackReferral(user: User): Promise<void> {
+  const code = getStoredReferralCode();
+  if (!code) return;
+  try {
+    const token = await user.getIdToken();
+    await fetch('/api/referral/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ refCode: code }),
+    });
+  } catch {
+    // Referral credit failed — not worth surfacing to the user
+  } finally {
+    clearReferralCode();
   }
 }
 
 export async function signInWithGoogle(): Promise<User> {
   const result = await signInWithPopup(auth, googleProvider);
-  await ensureUserDoc(result.user);
+  const isNewUser = await ensureUserDoc(result.user);
+  if (isNewUser) await trackReferral(result.user);
   // Return the full User so callers can call getIdToken() to set the server cookie
   return result.user;
 }
@@ -49,13 +74,15 @@ export async function signUpWithEmail(
   if (name.trim()) {
     await updateProfile(result.user, { displayName: name.trim() });
   }
-  await ensureUserDoc(result.user);
+  const isNewUser = await ensureUserDoc(result.user);
+  if (isNewUser) await trackReferral(result.user);
   return result.user;
 }
 
 export async function signInWithEmail(email: string, password: string): Promise<User> {
   const result = await signInWithEmailAndPassword(auth, email, password);
-  await ensureUserDoc(result.user);
+  const isNewUser = await ensureUserDoc(result.user);
+  if (isNewUser) await trackReferral(result.user);
   return result.user;
 }
 
