@@ -42,7 +42,7 @@ export default function RootLayout({
     <html lang="en" className={`h-full ${inter.variable}`}>
       <body className="h-full flex flex-col font-sans">
         <AuthProvider>
-          {process.env.NEXT_PUBLIC_BETA_MODE === 'true' && (
+          {process.env.NEXT_PUBLIC_BETA_MODE !== 'false' && (
             <div className="w-full bg-amber-500 text-black text-center text-xs font-semibold py-2 px-4">
               ⚠ This site is currently in beta and not yet open to the public. Features and content are still being developed.
             </div>

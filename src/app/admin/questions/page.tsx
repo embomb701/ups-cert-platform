@@ -705,8 +705,8 @@ export default function AdminQuestionsPage() {
           </p>
           <div className="flex flex-wrap gap-2 mb-3">
             {QUARTERS.map((quarter, i) => {
-              const labels = ['Q1 — Base FSE + Kitchen + HVAC + Gen + DC', 'Q2 — Solar → Pool', 'Q3 — HVAC Tech → BMET', 'Q4 — BAS → Pump Tech'];
-              const colors = ['bg-indigo-700 hover:bg-indigo-600', 'bg-teal-700 hover:bg-teal-600', 'bg-amber-700 hover:bg-amber-600', 'bg-rose-700 hover:bg-rose-600'];
+              const labels = ['Q1 — Base FSE + Kitchen + HVAC + Gen + DC', 'Q2 — Solar → Pool', 'Q3 — HVAC Tech → BMET', 'Q4 — BAS → Pump Tech', 'Q5 — Telecom OSP', 'Q6 — Industrial Ref + DC Ops + Building Cx'];
+              const colors = ['bg-indigo-700 hover:bg-indigo-600', 'bg-teal-700 hover:bg-teal-600', 'bg-amber-700 hover:bg-amber-600', 'bg-rose-700 hover:bg-rose-600', 'bg-cyan-700 hover:bg-cyan-600', 'bg-emerald-700 hover:bg-emerald-600'];
               const isActive = serverImporting && activeQuarter === i;
               return (
                 <button
