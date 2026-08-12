@@ -43,7 +43,7 @@ interface DashData {
   isAdmin: boolean;
   uid: string;
   access: { jr_fse: boolean; fse_ai: boolean; fse_proctored: string | null };
-  enrolledCourses: { key: string; name: string; completed: number; total: number }[];
+  enrolledCourses: { key: string; name: string; completed: number; total: number; practiceExamLevel: string | null }[];
   certificates: { id: string; certificateNumber: string; certificationTitle: string; examLevel: string; issuedAt: string | null; status: string; score: number | null }[];
   attempts: { id: string; examLevel: string; score?: number; passed?: boolean; completedAt: string | null }[];
   jobApplications: { id: string; listingId: string; listingTitle: string; company: string; status: string; createdAt: string | null }[];
@@ -384,6 +384,14 @@ export default function DashboardPage() {
                         <span className="text-xs text-gray-500 flex-shrink-0 ml-2">{pct}%</span>
                       </div>
                       <ProgressBar value={course.completed} max={course.total} />
+                      {done && course.practiceExamLevel && (
+                        <Link
+                          href={`/exam/rules/practice_${course.practiceExamLevel}`}
+                          className="mt-1.5 inline-block text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+                        >
+                          Practice Exam →
+                        </Link>
+                      )}
                     </div>
                   );
                 })}

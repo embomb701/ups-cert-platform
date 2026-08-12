@@ -481,42 +481,42 @@ export async function POST(req: NextRequest) {
     if (userEmail) {
       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
 
-      const courseCompletions: Array<{ name: string; certTitle: string }> = [];
+      const courseCompletions: Array<{ name: string; certTitle: string; practiceExamLevel?: string }> = [];
       const justCompleted = (modules: Array<{ id: string }>) =>
         !modules.every((m) => completedIdsBefore.has(m.id)) && modules.every((m) => completedIds.has(m.id));
 
       if (justCompleted(ALL_MODULES)) courseCompletions.push({ name: 'UPS Field Service Engineering', certTitle: 'Jr. UPS Field Service Engineer' });
-      if (justCompleted([...ALL_MODULES.filter((m) => m.num <= 10), ...KITCHEN_MODULES])) courseCompletions.push({ name: 'Commercial Kitchen FSE', certTitle: 'Jr. Commercial Kitchen Field Service Engineer' });
-      if (justCompleted(COURSE_SEQUENCES['training_hvac'])) courseCompletions.push({ name: 'HVAC Field Service Engineering', certTitle: 'Jr. HVAC Field Service Engineer' });
-      if (justCompleted(COURSE_SEQUENCES['training_generator'])) courseCompletions.push({ name: 'Power Generation Field Service Engineering', certTitle: 'Jr. Power Generation Field Service Engineer' });
-      if (justCompleted(COURSE_SEQUENCES['training_datacenter'])) courseCompletions.push({ name: 'Data Center Critical Facilities', certTitle: 'Jr. Data Center Critical Facilities Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_solar'])) courseCompletions.push({ name: 'Solar & Battery Energy Storage', certTitle: 'Jr. Solar & Storage Field Service Engineer' });
-      if (justCompleted(COURSE_SEQUENCES['training_evcharging'])) courseCompletions.push({ name: 'EV Charging Infrastructure', certTitle: 'Jr. EV Charging Infrastructure Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_dcplants'])) courseCompletions.push({ name: 'Telecom DC Power Plants', certTitle: 'Jr. Telecom Power Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_battery'])) courseCompletions.push({ name: 'Battery Systems Technician', certTitle: 'Jr. Battery Systems Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_dcengineer'])) courseCompletions.push({ name: 'Data Center Engineer', certTitle: 'Jr. Data Center Engineer' });
-      if (justCompleted(COURSE_SEQUENCES['training_marine'])) courseCompletions.push({ name: 'Marine Systems Technician', certTitle: 'Jr. Marine Systems Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_pool'])) courseCompletions.push({ name: 'Pool Equipment Technician', certTitle: 'Jr. Pool Equipment Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_hvac_tech'])) courseCompletions.push({ name: 'HVAC Technician', certTitle: 'Jr. HVAC Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_solar_inst'])) courseCompletions.push({ name: 'Solar Installer', certTitle: 'Jr. Solar Installer' });
-      if (justCompleted(COURSE_SEQUENCES['training_wind_tech'])) courseCompletions.push({ name: 'Wind Turbine Technician', certTitle: 'Jr. Wind Turbine Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_elevator_tech'])) courseCompletions.push({ name: 'Elevator Technician', certTitle: 'Jr. Elevator Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_fire_alarm_tech'])) courseCompletions.push({ name: 'Fire Alarm & Suppression Technician', certTitle: 'Jr. Fire Alarm Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_bmet_tech'])) courseCompletions.push({ name: 'Biomedical Equipment Technician', certTitle: 'Jr. Biomedical Equipment Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_bas_tech'])) courseCompletions.push({ name: 'Building Automation Systems Technician', certTitle: 'Jr. Building Automation Systems Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_ref_tech'])) courseCompletions.push({ name: 'Commercial Refrigeration Technician', certTitle: 'Jr. Commercial Refrigeration Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_plc_tech'])) courseCompletions.push({ name: 'Industrial Controls & PLC Technician', certTitle: 'Jr. Industrial Controls & PLC Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_security_tech'])) courseCompletions.push({ name: 'Electronic Security Systems Technician', certTitle: 'Jr. Electronic Security Systems Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_field_pm'])) courseCompletions.push({ name: 'Field Project Manager', certTitle: 'Jr. Field Project Manager' });
-      if (justCompleted(COURSE_SEQUENCES['training_pump_tech'])) courseCompletions.push({ name: 'Pump Technician', certTitle: 'Jr. Pump Technician' });
-      if (justCompleted(COURSE_SEQUENCES['training_industrial_ref'])) courseCompletions.push({ name: 'Industrial Refrigeration Operator', certTitle: 'Jr. Industrial Refrigeration Operator' });
-      if (justCompleted(COURSE_SEQUENCES['training_dc_ops'])) courseCompletions.push({ name: 'Data Center Operations Manager', certTitle: 'Jr. Data Center Operations Manager' });
-      if (justCompleted(COURSE_SEQUENCES['training_building_cx'])) courseCompletions.push({ name: 'Building Commissioning (Cx) Agent', certTitle: 'Jr. Building Commissioning Agent' });
-      if (justCompleted(COURSE_SEQUENCES['training_telecom'])) courseCompletions.push({ name: 'Telecom OSP Technician', certTitle: 'Jr. Telecom OSP Technician' });
+      if (justCompleted([...ALL_MODULES.filter((m) => m.num <= 10), ...KITCHEN_MODULES])) courseCompletions.push({ name: 'Commercial Kitchen FSE', certTitle: 'Jr. Commercial Kitchen Field Service Engineer', practiceExamLevel: 'jr_kitchen_fse' });
+      if (justCompleted(COURSE_SEQUENCES['training_hvac'])) courseCompletions.push({ name: 'HVAC Field Service Engineering', certTitle: 'Jr. HVAC Field Service Engineer', practiceExamLevel: 'jr_hvac_fse' });
+      if (justCompleted(COURSE_SEQUENCES['training_generator'])) courseCompletions.push({ name: 'Power Generation Field Service Engineering', certTitle: 'Jr. Power Generation Field Service Engineer', practiceExamLevel: 'jr_gen_fse' });
+      if (justCompleted(COURSE_SEQUENCES['training_datacenter'])) courseCompletions.push({ name: 'Data Center Critical Facilities', certTitle: 'Jr. Data Center Critical Facilities Technician', practiceExamLevel: 'jr_dc_cft' });
+      if (justCompleted(COURSE_SEQUENCES['training_solar'])) courseCompletions.push({ name: 'Solar & Battery Energy Storage', certTitle: 'Jr. Solar & Storage Field Service Engineer', practiceExamLevel: 'jr_solar_fse' });
+      if (justCompleted(COURSE_SEQUENCES['training_evcharging'])) courseCompletions.push({ name: 'EV Charging Infrastructure', certTitle: 'Jr. EV Charging Infrastructure Technician', practiceExamLevel: 'jr_ev_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_dcplants'])) courseCompletions.push({ name: 'Telecom DC Power Plants', certTitle: 'Jr. Telecom Power Technician', practiceExamLevel: 'jr_dcp_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_battery'])) courseCompletions.push({ name: 'Battery Systems Technician', certTitle: 'Jr. Battery Systems Technician', practiceExamLevel: 'jr_battery_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_dcengineer'])) courseCompletions.push({ name: 'Data Center Engineer', certTitle: 'Jr. Data Center Engineer', practiceExamLevel: 'jr_dc_engineer' });
+      if (justCompleted(COURSE_SEQUENCES['training_marine'])) courseCompletions.push({ name: 'Marine Systems Technician', certTitle: 'Jr. Marine Systems Technician', practiceExamLevel: 'jr_marine_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_pool'])) courseCompletions.push({ name: 'Pool Equipment Technician', certTitle: 'Jr. Pool Equipment Technician', practiceExamLevel: 'jr_pool_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_hvac_tech'])) courseCompletions.push({ name: 'HVAC Technician', certTitle: 'Jr. HVAC Technician', practiceExamLevel: 'jr_hvac_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_solar_inst'])) courseCompletions.push({ name: 'Solar Installer', certTitle: 'Jr. Solar Installer', practiceExamLevel: 'jr_solar_inst' });
+      if (justCompleted(COURSE_SEQUENCES['training_wind_tech'])) courseCompletions.push({ name: 'Wind Turbine Technician', certTitle: 'Jr. Wind Turbine Technician', practiceExamLevel: 'jr_wind_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_elevator_tech'])) courseCompletions.push({ name: 'Elevator Technician', certTitle: 'Jr. Elevator Technician', practiceExamLevel: 'jr_elevator_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_fire_alarm_tech'])) courseCompletions.push({ name: 'Fire Alarm & Suppression Technician', certTitle: 'Jr. Fire Alarm Technician', practiceExamLevel: 'jr_fire_alarm_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_bmet_tech'])) courseCompletions.push({ name: 'Biomedical Equipment Technician', certTitle: 'Jr. Biomedical Equipment Technician', practiceExamLevel: 'jr_bmet_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_bas_tech'])) courseCompletions.push({ name: 'Building Automation Systems Technician', certTitle: 'Jr. Building Automation Systems Technician', practiceExamLevel: 'jr_bas_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_ref_tech'])) courseCompletions.push({ name: 'Commercial Refrigeration Technician', certTitle: 'Jr. Commercial Refrigeration Technician', practiceExamLevel: 'jr_ref_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_plc_tech'])) courseCompletions.push({ name: 'Industrial Controls & PLC Technician', certTitle: 'Jr. Industrial Controls & PLC Technician', practiceExamLevel: 'jr_plc_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_security_tech'])) courseCompletions.push({ name: 'Electronic Security Systems Technician', certTitle: 'Jr. Electronic Security Systems Technician', practiceExamLevel: 'jr_security_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_field_pm'])) courseCompletions.push({ name: 'Field Project Manager', certTitle: 'Jr. Field Project Manager', practiceExamLevel: 'jr_field_pm' });
+      if (justCompleted(COURSE_SEQUENCES['training_pump_tech'])) courseCompletions.push({ name: 'Pump Technician', certTitle: 'Jr. Pump Technician', practiceExamLevel: 'jr_pump_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_industrial_ref'])) courseCompletions.push({ name: 'Industrial Refrigeration Operator', certTitle: 'Jr. Industrial Refrigeration Operator', practiceExamLevel: 'jr_industrial_ref' });
+      if (justCompleted(COURSE_SEQUENCES['training_dc_ops'])) courseCompletions.push({ name: 'Data Center Operations Manager', certTitle: 'Jr. Data Center Operations Manager', practiceExamLevel: 'jr_dc_ops' });
+      if (justCompleted(COURSE_SEQUENCES['training_building_cx'])) courseCompletions.push({ name: 'Building Commissioning (Cx) Agent', certTitle: 'Jr. Building Commissioning Agent', practiceExamLevel: 'jr_building_cx' });
+      if (justCompleted(COURSE_SEQUENCES['training_telecom'])) courseCompletions.push({ name: 'Telecom OSP Technician', certTitle: 'Jr. Telecom OSP Technician', practiceExamLevel: 'jr_telecom_tech' });
 
       Promise.allSettled([
         ...(wasPreviouslyPassed ? [] : [sendModuleCompleteEmail(userEmail, userName, mod.title, `${siteUrl}/training`)]),
-        ...courseCompletions.map((c) => sendCourseCompleteEmail(userEmail, userName, c.name, c.certTitle, `${siteUrl}/dashboard`)),
+        ...courseCompletions.map((c) => sendCourseCompleteEmail(userEmail, userName, c.name, c.certTitle, `${siteUrl}/dashboard`, c.practiceExamLevel ? `${siteUrl}/exam/rules/practice_${c.practiceExamLevel}` : undefined)),
       ]).catch(() => {});
     }
 

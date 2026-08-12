@@ -36,8 +36,14 @@ export async function sendCourseCompleteEmail(
   courseName: string,
   certTitle: string,
   dashboardUrl: string,
+  examUrl?: string,
 ): Promise<void> {
   const displayName = name.split(' ')[0] || 'there';
+  const ctaUrl = examUrl ?? dashboardUrl;
+  const ctaLabel = examUrl ? 'Start Practice Exam →' : 'Go to dashboard →';
+  const secondaryLink = examUrl
+    ? `<p style="margin:16px 0 0;font-size:13px;"><a href="${dashboardUrl}" style="color:#6b7280;">Go to dashboard →</a></p>`
+    : '';
   await send(
     to,
     `Course complete: ${courseName}`,
@@ -46,7 +52,8 @@ export async function sendCourseCompleteEmail(
       <h2 style="color:#f9fafb;margin:0 0 8px;font-size:22px;">Course complete 🎓</h2>
       <p style="color:#9ca3af;margin:0 0 8px;">Congratulations, ${displayName}!</p>
       <p style="color:#9ca3af;margin:0 0 20px;">You've finished every module in <strong style="color:#f9fafb;">${courseName}</strong>. Your <strong style="color:#60a5fa;">${certTitle}</strong> practice exam is now unlocked.</p>
-      <a href="${dashboardUrl}" style="display:inline-block;padding:12px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Go to dashboard →</a>
+      <a href="${ctaUrl}" style="display:inline-block;padding:12px 24px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">${ctaLabel}</a>
+      ${secondaryLink}
       <p style="margin:32px 0 0;font-size:12px;color:#4b5563;">Mastering Field Service · <a href="${SITE_URL}" style="color:#6b7280;">${SITE_URL}</a></p>
     </div>`,
   );

@@ -5,6 +5,36 @@ import { COURSE_SEQUENCES } from '@/data';
 
 export const dynamic = 'force-dynamic';
 
+const COURSE_TO_PRACTICE_EXAM_LEVEL: Record<string, string> = {
+  training_kitchen: 'jr_kitchen_fse',
+  training_hvac: 'jr_hvac_fse',
+  training_generator: 'jr_gen_fse',
+  training_datacenter: 'jr_dc_cft',
+  training_solar: 'jr_solar_fse',
+  training_evcharging: 'jr_ev_tech',
+  training_dcplants: 'jr_dcp_tech',
+  training_battery: 'jr_battery_tech',
+  training_dcengineer: 'jr_dc_engineer',
+  training_marine: 'jr_marine_tech',
+  training_pool: 'jr_pool_tech',
+  training_hvac_tech: 'jr_hvac_tech',
+  training_solar_inst: 'jr_solar_inst',
+  training_wind_tech: 'jr_wind_tech',
+  training_elevator_tech: 'jr_elevator_tech',
+  training_fire_alarm_tech: 'jr_fire_alarm_tech',
+  training_bmet_tech: 'jr_bmet_tech',
+  training_bas_tech: 'jr_bas_tech',
+  training_ref_tech: 'jr_ref_tech',
+  training_plc_tech: 'jr_plc_tech',
+  training_security_tech: 'jr_security_tech',
+  training_field_pm: 'jr_field_pm',
+  training_pump_tech: 'jr_pump_tech',
+  training_industrial_ref: 'jr_industrial_ref',
+  training_dc_ops: 'jr_dc_ops',
+  training_building_cx: 'jr_building_cx',
+  training_telecom: 'jr_telecom_tech',
+};
+
 const COURSE_NAMES: Record<string, string> = {
   training_portal: 'UPS Field Service Engineering',
   training_kitchen: 'Commercial Kitchen FSE',
@@ -108,8 +138,12 @@ export async function GET(req: NextRequest) {
 
     // Enrolled courses with progress
     const enrolledCourseKeys = new Set<string>();
+    const grantedPractice = new Set<string>();
     accessSnap.forEach((doc) => {
       if (doc.data().granted && COURSE_NAMES[doc.id]) enrolledCourseKeys.add(doc.id);
+      if (doc.id.startsWith('practice_') && doc.data().granted === true) {
+        grantedPractice.add(doc.id.slice('practice_'.length));
+      }
     });
 
     // If the user has no enrolled courses but has made progress on trial modules,
@@ -123,11 +157,14 @@ export async function GET(req: NextRequest) {
     const enrolledCourses = Array.from(enrolledCourseKeys).map((key) => {
       const modules = COURSE_SEQUENCES[key] ?? [];
       const completedCount = modules.filter((m) => completedIds.has(m.id)).length;
+      const examLevel = COURSE_TO_PRACTICE_EXAM_LEVEL[key] ?? null;
+      const practiceExamLevel = examLevel && grantedPractice.has(examLevel) ? examLevel : null;
       return {
         key,
         name: COURSE_NAMES[key] ?? key,
         completed: completedCount,
         total: modules.length,
+        practiceExamLevel,
       };
     }).sort((a, b) => b.completed / (b.total || 1) - a.completed / (a.total || 1));
 
