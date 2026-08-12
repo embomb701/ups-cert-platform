@@ -50,6 +50,7 @@ const FRESH_FILES = new Set([
   'security-tech-jr-fresh.json',
   'field-pm-jr-fresh.json',
   'pump-tech-jr-fresh.json',
+  'telecom-jr-fresh.json',
 ]);
 
 const DERIVED_BANKS = new Set([
@@ -76,6 +77,7 @@ const DERIVED_BANKS = new Set([
   'security-tech-jr-derived',
   'field-pm-jr-derived',
   'pump-tech-jr-derived',
+  'telecom-jr-derived',
 ]);
 
 function getFileQuestions(name: string): QuestionRecord[] | null {
@@ -145,6 +147,8 @@ const FILE_ORDER = [
   'field-pm-jr-derived',
   'pump-tech-jr-fresh.json',
   'pump-tech-jr-derived',
+  'telecom-jr-fresh.json',
+  'telecom-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

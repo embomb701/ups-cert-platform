@@ -1,0 +1,227 @@
+[
+  {
+    "id": "teljr_fresh_001",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "An OTDR trace shows a step loss of 0.4 dB at a splice location with no accompanying reflection, and a nearby splice tray was recently reworked. What is the most likely cause?",
+    "choices": [
+      { "id": "A", "text": "A poor-quality fusion splice or a macrobend from tight fiber coiling in the reworked tray" },
+      { "id": "B", "text": "A connector that was left unmated" },
+      { "id": "C", "text": "Normal cable attenuation for that distance" },
+      { "id": "D", "text": "An OTDR wavelength mismatch" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Fusion Splicing",
+    "explanation": "0.4 dB is well above the acceptable splice loss target (~0.10 dB) and shows no Fresnel reflection, pointing to either a marginal splice or a macrobend introduced when the tray was reworked."
+  },
+  {
+    "id": "teljr_fresh_002",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A tech arrives at a manhole and the four-gas meter reads 18.2% oxygen. What should happen next?",
+    "choices": [
+      { "id": "A", "text": "Do not enter — the atmosphere is oxygen-deficient; ventilate and retest before considering entry" },
+      { "id": "B", "text": "Enter quickly since 18.2% is close to the 19.5% threshold" },
+      { "id": "C", "text": "Enter with a self-contained breathing apparatus and proceed as normal" },
+      { "id": "D", "text": "Retest only if a strange odor is present" }
+    ],
+    "correctAnswerId": "A",
+    "category": "The Telecom Industry and OSP Career",
+    "explanation": "18.2% is below the 19.5% oxygen-deficient threshold. No entry is permitted until the space is ventilated and retests within the safe 19.5–23.5% range."
+  },
+  {
+    "id": "teljr_fresh_003",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A structured cabling certification report shows a NEXT failure at the patch panel end of a Cat 6 link, with insertion loss and return loss both passing comfortably. What should the tech check first?",
+    "choices": [
+      { "id": "A", "text": "Whether the pairs were untwisted more than 6mm during termination at the patch panel" },
+      { "id": "B", "text": "Whether the cable run exceeds 90 meters" },
+      { "id": "C", "text": "Whether the wrong category cable was pulled" },
+      { "id": "D", "text": "Whether the certification tester needs recalibration" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Testing, Certification, and Documentation",
+    "explanation": "A NEXT-only failure with passing IL and RL points to a termination issue, not a cable or length problem. Excessive untwisting at the patch panel (beyond 6mm for Cat 6) is the classic cause."
+  },
+  {
+    "id": "teljr_fresh_004",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A cell site loses utility power. The tech observes the site never went dark and baseband equipment shows no interruption. Six hours later, an LVD event drops non-critical lighting loads. What does this sequence indicate?",
+    "choices": [
+      { "id": "A", "text": "The system worked exactly as designed — batteries floated seamlessly through the outage and LVD correctly shed non-critical load as the battery approached its discharge limit" },
+      { "id": "B", "text": "A rectifier failure caused the delayed LVD event" },
+      { "id": "C", "text": "The generator failed to start, which is why LVD activated" },
+      { "id": "D", "text": "This sequence indicates a wiring fault requiring immediate site shutdown" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Cell Site Power Systems",
+    "explanation": "No interruption at utility loss confirms the batteries floated seamlessly onto the bus. The LVD event six hours later is the expected load-shedding behavior as the battery approaches its low-voltage threshold — not a fault."
+  },
+  {
+    "id": "teljr_fresh_005",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A splicer measures a completed splice at 0.03 dB from one end but 0.28 dB from the opposite end on a bidirectional OTDR test. What is the correct accepted splice loss?",
+    "choices": [
+      { "id": "A", "text": "The average of both directions: approximately 0.155 dB" },
+      { "id": "B", "text": "Always the lower of the two readings" },
+      { "id": "C", "text": "Always the higher of the two readings, to be conservative" },
+      { "id": "D", "text": "Whichever reading was taken first" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Fusion Splicing",
+    "explanation": "TIA-526-7 requires the accepted splice loss to be the average of both directional measurements, since fiber geometry at the interface makes single-direction readings directionally biased."
+  },
+  {
+    "id": "teljr_fresh_006",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A DSL loop qualification test shows excessive noise and an unexpected impedance change partway down a copper pair. What tool would a tech use next to locate the physical cause?",
+    "choices": [
+      { "id": "A", "text": "A TDR, to locate the distance to the impedance change" },
+      { "id": "B", "text": "An OTDR, since copper and fiber use the same test equipment" },
+      { "id": "C", "text": "A fiber inspection probe" },
+      { "id": "D", "text": "A four-gas meter" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Copper Plant and DMARC Extensions",
+    "explanation": "A TDR is the copper-plant equivalent of an OTDR — it sends a pulse down the conductor and calculates the distance to any impedance change such as a bridged tap, water intrusion, or splice fault."
+  },
+  {
+    "id": "teljr_fresh_007",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A fiber link's OLTS measurement shows 9.5 dB of loss against a calculated budget of 22 dB. Certification should be marked as:",
+    "choices": [
+      { "id": "A", "text": "Passing, with a healthy 12.5 dB margin" },
+      { "id": "B", "text": "Failing, since any measured loss above zero is unacceptable" },
+      { "id": "C", "text": "Inconclusive without an OTDR trace" },
+      { "id": "D", "text": "Failing, since 9.5 dB exceeds the connector loss limit alone" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Fiber Optic Fundamentals",
+    "explanation": "Margin = 22 dB budget − 9.5 dB measured loss = 12.5 dB positive margin. A link with positive margin passes; an OTDR trace is useful for locating problems, not required to declare pass/fail on an OLTS reading."
+  },
+  {
+    "id": "teljr_fresh_008",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A tech is asked to terminate pairs onto an existing 66-block in a central office that also has newer 110-blocks nearby. Which tool should be used on the 66-block?",
+    "choices": [
+      { "id": "A", "text": "A 66-type punchdown tool, matched to that block's IDC geometry" },
+      { "id": "B", "text": "Whichever tool is closest at hand, since both blocks accept the same tool" },
+      { "id": "C", "text": "A 110-type tool, since it is the newer standard" },
+      { "id": "D", "text": "No tool is needed — 66-blocks use screw terminals" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Copper Plant and DMARC Extensions",
+    "explanation": "Tool selection must match the specific block type present, not the newest available tool. A 110-type tool used on a 66-block damages the terminals."
+  },
+  {
+    "id": "teljr_fresh_009",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A closeout package for a completed 48-strand fiber build is missing OTDR traces for 6 of the splices. What should happen before the job is considered complete?",
+    "choices": [
+      { "id": "A", "text": "The missing splices should be re-tested and their traces added before submitting the closeout package" },
+      { "id": "B", "text": "The job can close out with a note explaining the gap" },
+      { "id": "C", "text": "Missing traces only matter if the customer specifically requests them" },
+      { "id": "D", "text": "OTDR traces are optional for splices under 0.10 dB" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Testing, Certification, and Documentation",
+    "explanation": "Every splice needs a verifying trace as part of the permanent record. An incomplete package risks warranty issues and leaves future techs without a baseline for those specific splices."
+  },
+  {
+    "id": "teljr_fresh_010",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "While climbing a shared utility pole, a tech notices a power line closer than the minimum approach distance allows. The correct action is to:",
+    "choices": [
+      { "id": "A", "text": "Descend and call the utility before proceeding — do not attempt the work" },
+      { "id": "B", "text": "Continue climbing but avoid touching anything metal" },
+      { "id": "C", "text": "Proceed if wearing insulated gloves rated for low voltage" },
+      { "id": "D", "text": "Reroute the telecom cable path without utility involvement" }
+    ],
+    "correctAnswerId": "A",
+    "category": "The Telecom Industry and OSP Career",
+    "explanation": "Telecom techs do not work on or near energized power lines when minimum approach distance can't be maintained. The utility must be contacted to de-energize or provide safety coverage."
+  },
+  {
+    "id": "teljr_fresh_011",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A cell site's battery string passed its monthly float voltage check but failed the quarterly impedance test with a rising trend over the last three quarters. What does this indicate?",
+    "choices": [
+      { "id": "A", "text": "The battery string is weakening internally even though it still floats normally — it should be scheduled for replacement before it fails during an outage" },
+      { "id": "B", "text": "Nothing — impedance testing is not a meaningful indicator of battery health" },
+      { "id": "C", "text": "The rectifiers are undersized" },
+      { "id": "D", "text": "The LVD threshold needs to be lowered" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Cell Site Power Systems",
+    "explanation": "Float voltage can look normal while internal impedance rises, an early warning sign of cell degradation. Trending impedance data catches weakening batteries before they fail silently during a real outage."
+  },
+  {
+    "id": "teljr_fresh_012",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A fiber inspection probe shows contamination confined entirely to Zone D (the ferrule) with a perfectly clean Zone A. What is the practical impact on the connection?",
+    "choices": [
+      { "id": "A", "text": "Minimal — Zone D contamination outside the optical path is far less critical than contamination in Zone A" },
+      { "id": "B", "text": "The connector cannot be used under any circumstances" },
+      { "id": "C", "text": "It causes the same insertion loss as Zone A contamination" },
+      { "id": "D", "text": "It requires replacing the entire cable" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Testing, Certification, and Documentation",
+    "explanation": "IEC 61300-3-35 allows more contamination tolerance in Zone D since it's outside the direct optical path, unlike Zone A (the core) where even tiny defects cause significant loss."
+  },
+  {
+    "id": "teljr_fresh_013",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A DMARC extension is being run from an exterior NID to an MDF two floors up, passing through an air-handling plenum space on one floor. What cable rating is required in the plenum section?",
+    "choices": [
+      { "id": "A", "text": "CMP (plenum-rated) for that section, even if CMR is used elsewhere in the run" },
+      { "id": "B", "text": "CMR is acceptable everywhere, including plenum spaces" },
+      { "id": "C", "text": "Standard CM cable is fine as long as the run is short" },
+      { "id": "D", "text": "No specific rating applies to DMARC extensions" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Copper Plant and DMARC Extensions",
+    "explanation": "Fire code rating requirements apply per space, not per whole run — any segment passing through an air-handling plenum must use CMP-rated cable regardless of what's used elsewhere."
+  },
+  {
+    "id": "teljr_fresh_014",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "An OTDR trace of a newly spliced 12 km link shows a consistent, linear slope with a step loss at 6 km and a large reflective spike at the very end. How should this trace be read?",
+    "choices": [
+      { "id": "A", "text": "Normal cable attenuation, a mid-span splice at 6 km, and a connector or open end-face at the far end" },
+      { "id": "B", "text": "A break at 6 km and a splice at the far end" },
+      { "id": "C", "text": "The entire trace indicates a failed link requiring immediate re-splice" },
+      { "id": "D", "text": "A macrobend at 6 km and a fusion splice at the far end" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Fusion Splicing",
+    "explanation": "A step loss without reflection at 6 km is consistent with a fusion splice; the large reflective spike at the end is the signature of a connector or unterminated fiber end-face — a normal, healthy trace."
+  },
+  {
+    "id": "teljr_fresh_015",
+    "examLevel": "jr_telecom_tech",
+    "active": true,
+    "question": "A generator exerciser log shows the cell site generator has not run its scheduled weekly cycle in five weeks due to a controller fault. What is the primary operational risk?",
+    "choices": [
+      { "id": "A", "text": "An undetected mechanical or fuel-system failure could go unnoticed until a real utility outage demands the generator" },
+      { "id": "B", "text": "No risk — exercising is a purely cosmetic maintenance task" },
+      { "id": "C", "text": "The battery string automatically compensates for a non-exercised generator indefinitely" },
+      { "id": "D", "text": "The ATS will refuse to transfer load if the generator hasn't exercised recently" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Cell Site Power Systems",
+    "explanation": "Regular exercising is what surfaces fuel, starting, and mechanical problems before they matter. A five-week gap means any developing fault has gone undetected — exactly the scenario exercising is meant to prevent."
+  }
+]
