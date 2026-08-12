@@ -1138,7 +1138,7 @@ export const COURSES: TrainingCourse[] = [
     accessKey: 'training_dcengineer',
     certTitle: 'Jr. Data Center Engineer',
     color: 'cyan',
-    totalModules: 34,
+    totalModules: 33,
     stripeProductId: 'training_dcengineer',
     testOutProductId: 'jr_dc_engineer_test_human',
     comingSoon: false,
