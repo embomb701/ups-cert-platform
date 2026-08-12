@@ -1,0 +1,227 @@
+[
+  {
+    "id": "bcxjr_fresh_001",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "During functional testing, an AHU's economizer opens correctly when the CxA manually forces the test condition, but trend data from the following week shows it never actually enabled during three separate days when outdoor conditions were favorable. What does this indicate?",
+    "choices": [
+      { "id": "A", "text": "A likely enthalpy/temperature sensor calibration or high-limit setpoint issue preventing the sequence from enabling under real conditions, even though the hardware itself functions when forced" },
+      { "id": "B", "text": "The economizer is working correctly, since the functional test passed" },
+      { "id": "C", "text": "The trend data is unreliable and should be disregarded in favor of the functional test result" },
+      { "id": "D", "text": "No further investigation is needed, since forced testing is sufficient verification" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Building Automation Systems and Controls Commissioning",
+    "explanation": "A forced test only proves the hardware can move; it doesn't prove the enabling logic actually triggers under real conditions. This is exactly the kind of deficiency (miscalibrated enthalpy sensor or wrong high-limit setpoint) that only trend data over real conditions reveals."
+  },
+  {
+    "id": "bcxjr_fresh_002",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A design review finds that the mechanical specification describes a morning warm-up sequence, but the controls contractor's submitted points list has no corresponding programming for it. What should the CxA do?",
+    "choices": [
+      { "id": "A", "text": "Log this as a design/construction phase deficiency requiring the controls contractor to add the missing sequence before functional testing" },
+      { "id": "B", "text": "Assume the sequence was implemented correctly and proceed directly to functional testing" },
+      { "id": "C", "text": "Wait until occupancy to raise the issue, since morning warm-up only matters in winter" },
+      { "id": "D", "text": "Remove the requirement from the OPR to match what was actually built" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Building Automation Systems and Controls Commissioning",
+    "explanation": "This is a textbook missing-sequence deficiency caught by SOO verification before field testing — flagging it now, while it's a programming fix, is far cheaper than discovering the gap during winter occupancy."
+  },
+  {
+    "id": "bcxjr_fresh_003",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A LEED project's CxA is also employed by the mechanical contractor performing the installation, and the project is pursuing EA Credit — Enhanced Commissioning. Is this arrangement acceptable?",
+    "choices": [
+      { "id": "A", "text": "No — Enhanced Commissioning requires the CxA to be independent of the design and construction team, so this arrangement does not qualify" },
+      { "id": "B", "text": "Yes — any qualified individual can serve as CxA regardless of employer for any LEED credit level" },
+      { "id": "C", "text": "Yes, as long as the mechanical contractor discloses the relationship in the final report" },
+      { "id": "D", "text": "This only matters for the EA Prerequisite, not for Enhanced Commissioning" }
+    ],
+    "correctAnswerId": "A",
+    "category": "LEED Commissioning Credits and Final Documentation",
+    "explanation": "This exact arrangement might satisfy the EA Prerequisite (which allows project-team CxAs) but fails the independence requirement specific to Enhanced Commissioning — a conflict of interest the credit is specifically designed to prevent."
+  },
+  {
+    "id": "bcxjr_fresh_004",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A blower door test performed at 90% enclosure completion (before final sealant work) shows 6.2 ACH50, above the 5.0 ACH50 target in the OPR. What is the appropriate next step?",
+    "choices": [
+      { "id": "A", "text": "Use thermal imaging with the blower door running to locate the leakage sources, then have them corrected before the enclosure closes out" },
+      { "id": "B", "text": "Accept the result as final, since blower door tests are only meaningful at 100% completion" },
+      { "id": "C", "text": "Adjust the OPR target to 6.2 ACH50 to match the as-built condition" },
+      { "id": "D", "text": "Wait until post-occupancy to retest, since pre-close-out results don't matter" }
+    ],
+    "correctAnswerId": "A",
+    "category": "LEED Commissioning Credits and Final Documentation",
+    "explanation": "Testing before full close-out is specifically valuable because remediation is still feasible — pairing the failing blower door result with thermal imaging locates exactly where the leakage is so it can be corrected while access remains practical."
+  },
+  {
+    "id": "bcxjr_fresh_005",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "Six months after occupancy, a facility manager mentions they disabled the DCV system because 'it kept letting in cold air.' What does this reveal about the commissioning process?",
+    "choices": [
+      { "id": "A", "text": "A likely gap in operations staff training — the facility manager didn't understand the intended DCV behavior well enough to trust it rather than disable it" },
+      { "id": "B", "text": "The DCV system was defective from installation and should have failed functional testing" },
+      { "id": "C", "text": "Disabling DCV after occupancy has no bearing on commissioning quality" },
+      { "id": "D", "text": "This is expected behavior and requires no follow-up" }
+    ],
+    "correctAnswerId": "A",
+    "category": "The Commissioning Process — Four Phases and Key Documents",
+    "explanation": "This is exactly the pattern described as commissioning's most common failure mode after turnover — untrained operators overriding systems they don't understand, undoing carefully verified commissioning work within months."
+  },
+  {
+    "id": "bcxjr_fresh_006",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A trend log shows a chilled water differential pressure sensor reading consistently 8 psi higher than a reference gauge placed at the same physical location. The pump has been running at what the BAS believes is a moderate speed, but remote coils are reporting insufficient flow. What is the most likely explanation?",
+    "choices": [
+      { "id": "A", "text": "The differential pressure sensor is miscalibrated, causing the pump controller to under-drive the pump relative to what the system actually needs" },
+      { "id": "B", "text": "The pump is oversized and should be replaced with a smaller unit" },
+      { "id": "C", "text": "The remote coils have failed and require replacement" },
+      { "id": "D", "text": "This is normal behavior for a variable flow system and requires no investigation" }
+    ],
+    "correctAnswerId": "A",
+    "category": "HVAC Commissioning — Verification and Functional Testing",
+    "explanation": "If the sensor reads high compared to a verified reference, the controller believes there's more pressure (and thus flow) in the system than actually exists, so it holds the pump back below what's actually needed — starving remote coils exactly as described."
+  },
+  {
+    "id": "bcxjr_fresh_007",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A commissioning issues log shows 40 open items two weeks before scheduled substantial completion, with 15 items assigned to a subcontractor who has not responded to the last three requests. What should the CxA do?",
+    "choices": [
+      { "id": "A", "text": "Escalate the unresponsive items to the general contractor and owner, since substantial completion cannot proceed with a large volume of unresolved deficiencies" },
+      { "id": "B", "text": "Close the 15 items as resolved without verification to keep the schedule on track" },
+      { "id": "C", "text": "Remove the unresponsive subcontractor's items from the issues log entirely" },
+      { "id": "D", "text": "Wait silently until the subcontractor responds on their own timeline" }
+    ],
+    "correctAnswerId": "A",
+    "category": "The Commissioning Process — Four Phases and Key Documents",
+    "explanation": "A clean issues log (resolved or owner-accepted) is a prerequisite to substantial completion — an unresponsive party with a significant open-item count needs to be escalated, not quietly worked around or ignored."
+  },
+  {
+    "id": "bcxjr_fresh_008",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A CxA reviewing FDD-flagged trend data finds a 'simultaneous heating and cooling' fault has been active on an AHU for 4 months, undetected because the AHU's overall energy performance still fell within the expected range due to mild weather. What does this suggest about relying only on aggregate energy metrics?",
+    "choices": [
+      { "id": "A", "text": "Aggregate energy performance can mask specific controls faults, especially during periods when overall demand happens to be low — component-level FDD catches problems that summary metrics miss" },
+      { "id": "B", "text": "Aggregate energy metrics are always sufficient to detect any controls fault" },
+      { "id": "C", "text": "This fault has no real energy cost, since overall metrics looked normal" },
+      { "id": "D", "text": "FDD software produced a false positive, since aggregate metrics showed no issue" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Building Automation Systems and Controls Commissioning",
+    "explanation": "A wasteful fault can hide within a building's overall energy profile, especially in mild conditions where the waste is a smaller fraction of total load — this is precisely why point-level FDD algorithms exist alongside whole-building metrics."
+  },
+  {
+    "id": "bcxjr_fresh_009",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A retro-commissioning project on a 10-year-old building finds that the original commissioning report exists but the recorded as-left setpoints don't match current BAS settings for 60% of the points reviewed. What does this most likely indicate?",
+    "choices": [
+      { "id": "A", "text": "Significant setpoint drift has occurred over time — exactly the kind of degradation a 5–7 year recommissioning cycle is intended to catch before it accumulates this far" },
+      { "id": "B", "text": "The original commissioning report was fraudulent and should be disregarded entirely" },
+      { "id": "C", "text": "Current settings are always correct and the original report should be updated to match" },
+      { "id": "D", "text": "This level of drift is expected and does not warrant investigation" }
+    ],
+    "correctAnswerId": "A",
+    "category": "LEED Commissioning Credits and Final Documentation",
+    "explanation": "A 60% deviation rate after 10 years without recommissioning illustrates exactly why the 5–7 year cycle is recommended — left unchecked for a full decade, drift compounds to this degree."
+  },
+  {
+    "id": "bcxjr_fresh_010",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A prospective client asks a CxA to skip the pre-design OPR development step and jump straight to construction-phase functional testing to save time and cost. What is the risk of agreeing to this?",
+    "choices": [
+      { "id": "A", "text": "Without an OPR, there is no documented benchmark to measure success against — functional testing alone can confirm equipment operates per the drawings, but not that it meets the owner's actual needs" },
+      { "id": "B", "text": "There is no meaningful risk, since functional testing alone fully satisfies the commissioning process" },
+      { "id": "C", "text": "This is standard, recommended practice for cost-sensitive projects" },
+      { "id": "D", "text": "The OPR only matters for LEED projects, so skipping it is fine for non-LEED work" }
+    ],
+    "correctAnswerId": "A",
+    "category": "The Commissioning Process — Four Phases and Key Documents",
+    "explanation": "The OPR is the benchmark against which everything else is measured. Skipping it means later verification can only check equipment against the drawings, not against what the owner actually needed the building to do — undermining commissioning's core purpose."
+  },
+  {
+    "id": "bcxjr_fresh_011",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "During PCL review, a technician finds that filters are installed but belt tension has not been set on a new AHU. Should functional testing proceed?",
+    "choices": [
+      { "id": "A", "text": "No — the PCL should be completed and signed off first, since testing equipment that isn't fully ready produces meaningless results" },
+      { "id": "B", "text": "Yes — belt tension has no bearing on functional performance testing results" },
+      { "id": "C", "text": "Yes, but only test the cooling mode until belt tension is corrected" },
+      { "id": "D", "text": "This decision is outside the CxA's scope and should be made by the general contractor" }
+    ],
+    "correctAnswerId": "A",
+    "category": "The Commissioning Process — Four Phases and Key Documents",
+    "explanation": "PCLs exist precisely to catch installation gaps like this before functional testing begins — incorrect belt tension affects fan performance and airflow, which would corrupt any test results gathered before it's corrected."
+  },
+  {
+    "id": "bcxjr_fresh_012",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A newly commissioned building's DCV system was verified working correctly at substantial completion, but the CO2 sensors were factory-calibrated for intermittent occupancy. The owner later converts the building to 24-hour operations. What commissioning consideration applies?",
+    "choices": [
+      { "id": "A", "text": "The background calibration strategy that worked for intermittent occupancy will likely fail under 24-hour occupancy, requiring re-verification with reference gas calibration" },
+      { "id": "B", "text": "No reconsideration is needed, since the sensors were already verified once at substantial completion" },
+      { "id": "C", "text": "24-hour occupancy always improves CO2 sensor accuracy" },
+      { "id": "D", "text": "DCV systems are unaffected by occupancy pattern changes" }
+    ],
+    "correctAnswerId": "A",
+    "category": "HVAC Commissioning — Verification and Functional Testing",
+    "explanation": "A change in occupancy pattern (from intermittent to 24-hour) changes whether background calibration can function at all — since it relies on the space reaching ambient CO2 periodically, which won't happen anymore, this warrants a fresh calibration verification approach."
+  },
+  {
+    "id": "bcxjr_fresh_013",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A chiller plant trend log shows the lead chiller staging on and off every 12 minutes overnight when building load is at its lowest point of the day. What commissioning issue does this most likely reflect?",
+    "choices": [
+      { "id": "A", "text": "The chiller may be oversized relative to the very low overnight load, or the minimum runtime setting is not configured — both causing short-cycling" },
+      { "id": "B", "text": "This is expected, healthy behavior for any chiller plant at any load condition" },
+      { "id": "C", "text": "The building automation system's trend logging interval is too short to be meaningful" },
+      { "id": "D", "text": "Overnight cycling only matters if it also occurs during peak daytime load" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Building Automation Systems and Controls Commissioning",
+    "explanation": "Short-cycling is especially likely to surface at the lowest load point of the day, when even the smallest available chiller may satisfy demand faster than a proper minimum runtime setting would allow — a classic trend-log-only finding."
+  },
+  {
+    "id": "bcxjr_fresh_014",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "A CxA is asked to write the final report's executive summary using the same technical language and structure as the detailed functional test appendices, to 'save time.' What is the concern with this approach?",
+    "choices": [
+      { "id": "A", "text": "A technically dense executive summary is unlikely to be read by the building owner, undermining the report's practical value regardless of the underlying work's quality" },
+      { "id": "B", "text": "There is no concern — technical accuracy always outweighs readability" },
+      { "id": "C", "text": "GBCI requires identical language throughout the entire report" },
+      { "id": "D", "text": "This approach is standard industry practice with no downside" }
+    ],
+    "correctAnswerId": "A",
+    "category": "LEED Commissioning Credits and Final Documentation",
+    "explanation": "The executive summary's purpose is to actually be read and understood by the owner — reusing dense technical language undermines that purpose even if it saves the CxA some drafting time."
+  },
+  {
+    "id": "bcxjr_fresh_015",
+    "examLevel": "jr_building_cx",
+    "active": true,
+    "question": "During enclosure commissioning, a thermographer photographs what appears to be a thermal anomaly at a wall-to-roof transition, but the outdoor-to-indoor temperature differential was only 4°F at the time of imaging. What is the concern?",
+    "choices": [
+      { "id": "A", "text": "A 4°F differential is likely too small to produce reliable thermal contrast — the finding should be re-verified under better conditions (≥10°F differential) before being logged as a confirmed deficiency" },
+      { "id": "B", "text": "Temperature differential has no bearing on thermal imaging reliability" },
+      { "id": "C", "text": "The finding should be immediately logged as confirmed regardless of conditions" },
+      { "id": "D", "text": "4°F is well above the minimum needed for reliable thermal imaging" }
+    ],
+    "correctAnswerId": "A",
+    "category": "LEED Commissioning Credits and Final Documentation",
+    "explanation": "Effective thermography requires at least a 10°F differential to produce reliable contrast — a finding captured under marginal conditions like 4°F should be treated as inconclusive and re-verified before being logged as a confirmed enclosure deficiency."
+  }
+]

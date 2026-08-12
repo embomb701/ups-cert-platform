@@ -1,0 +1,227 @@
+[
+  {
+    "id": "irjr_fresh_001",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A machine room ammonia detector reads 28 ppm as an operator approaches for a routine round. The system appears to be operating normally with no alarms. What is the correct action?",
+    "choices": [
+      { "id": "A", "text": "Do not enter without SCBA — 28 ppm exceeds the 25 ppm PEL-TWA threshold for unprotected entry" },
+      { "id": "B", "text": "Enter with chemical splash goggles only, since the system is not alarming" },
+      { "id": "C", "text": "Enter normally — 28 ppm is well below the IDLH of 300 ppm" },
+      { "id": "D", "text": "Wait 10 minutes and re-check before deciding" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Ammonia Safety — PPE, Emergency Response, and Process Safety",
+    "explanation": "Any reading above 25 ppm (the PEL-TWA) requires SCBA for entry, regardless of whether other alarms are active. The absence of an alarm on other systems doesn't change this threshold."
+  },
+  {
+    "id": "irjr_fresh_002",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "An operator notices the compressor discharge temperature has climbed from 210°F to 245°F over several days, with suction and discharge pressures unchanged. What is the most likely first thing to check?",
+    "choices": [
+      { "id": "A", "text": "Oil cooling performance — a degrading oil cooler raises discharge temperature without necessarily changing pressures" },
+      { "id": "B", "text": "The ammonia detector calibration" },
+      { "id": "C", "text": "The condenser water treatment program" },
+      { "id": "D", "text": "The EPA RMP documentation" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Industrial Compressors — Types, Operation, and Maintenance",
+    "explanation": "With pressures stable, a climbing discharge temperature points toward the oil cooling system rather than a compression ratio problem, since compression ratio depends on the pressure differential, which hasn't changed."
+  },
+  {
+    "id": "irjr_fresh_003",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A vibration trend on the weekly log shows a compressor's overall RMS velocity rising steadily from 0.15 to 0.55 in/s over six weeks, still below the 0.7 in/s 'plan maintenance' threshold. Should this be acted on now?",
+    "choices": [
+      { "id": "A", "text": "Yes — the rate of change matters as much as the absolute value; this trend should trigger investigation even under the threshold" },
+      { "id": "B", "text": "No — wait until the absolute value crosses 0.7 in/s before doing anything" },
+      { "id": "C", "text": "No — vibration readings under 1.1 in/s never require action" },
+      { "id": "D", "text": "Yes, but only because the compressor is due for its annual overhaul" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Industrial Compressors — Types, Operation, and Maintenance",
+    "explanation": "A steadily rising trend indicates a developing fault regardless of whether the absolute value has crossed a fixed threshold. Waiting for the threshold ignores the diagnostic value of the trend itself."
+  },
+  {
+    "id": "irjr_fresh_004",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A facility's condensing pressure has been rising by about 3-4 psi every week for the past month, with condenser fans confirmed running and water flow verified normal. What is the most likely explanation?",
+    "choices": [
+      { "id": "A", "text": "Scale or biological fouling accumulating on the condenser coil, gradually reducing heat transfer" },
+      { "id": "B", "text": "A sudden refrigerant leak on the low side" },
+      { "id": "C", "text": "The compressor's slide valve failing intermittently" },
+      { "id": "D", "text": "Normal seasonal variation with no underlying cause" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Heat Rejection, Evaporators, and System Controls",
+    "explanation": "With fans and water flow already ruled out, a gradual weekly rise in condensing pressure is the classic signature of coil fouling — scale or biological growth reducing heat transfer surface effectiveness."
+  },
+  {
+    "id": "irjr_fresh_005",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "During a hot gas defrost, an operator skips the pump-down step to save time, going straight to hot gas admission on a coil still full of liquid refrigerant. What is the immediate risk?",
+    "choices": [
+      { "id": "A", "text": "Hydraulic shock from hot gas meeting cold liquid, which can damage coil tubes and solenoid valves" },
+      { "id": "B", "text": "No risk — pump-down is an optional efficiency step, not a safety step" },
+      { "id": "C", "text": "Only a minor increase in defrost energy consumption" },
+      { "id": "D", "text": "The evaporator will simply take longer to defrost, with no other consequence" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Heat Rejection, Evaporators, and System Controls",
+    "explanation": "Hot gas admitted directly into a liquid-full coil can cause hydraulic shock and pressure spikes, risking physical damage to the coil and associated solenoid valves — pump-down exists specifically to prevent this."
+  },
+  {
+    "id": "irjr_fresh_006",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "An operator hears an unusual knocking sound from a compressor and notices frost has formed on the suction line right at the compressor flange. What should happen immediately?",
+    "choices": [
+      { "id": "A", "text": "Treat this as a likely liquid slugging event — investigate and shut down if necessary before mechanical damage occurs" },
+      { "id": "B", "text": "Increase the slide valve loading to compensate for the noise" },
+      { "id": "C", "text": "Ignore it if the discharge temperature reading appears normal" },
+      { "id": "D", "text": "Log it for review at the next scheduled maintenance window" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Troubleshooting and Systematic Fault Diagnosis",
+    "explanation": "Knocking plus frost at the suction flange is the classic liquid slugging signature — this requires immediate investigation, not a wait-and-log approach, since continued operation risks catastrophic mechanical damage."
+  },
+  {
+    "id": "irjr_fresh_007",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A facility is evaluating whether a proposed change — swapping a failed float valve for the exact same make and model — requires a written MOC review. What is the correct determination?",
+    "choices": [
+      { "id": "A", "text": "No MOC is required — this is a like-for-like replacement within the original design parameters" },
+      { "id": "B", "text": "MOC is always required for any component replacement" },
+      { "id": "C", "text": "MOC is required only if the float valve is on the high-pressure side" },
+      { "id": "D", "text": "MOC is required only for compressor-related replacements" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Troubleshooting and Systematic Fault Diagnosis",
+    "explanation": "A true like-for-like replacement using the identical make and model within the original design does not introduce new hazards and doesn't require MOC — unlike a design change or different component."
+  },
+  {
+    "id": "irjr_fresh_008",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "An oil analysis report shows rising acid number over three consecutive quarterly samples, while viscosity and particulate count remain normal. What does this pattern most likely indicate?",
+    "choices": [
+      { "id": "A", "text": "Refrigerant breakdown products or moisture contamination in the oil, warranting investigation into overheating or moisture ingress" },
+      { "id": "B", "text": "Normal oil aging requiring no action" },
+      { "id": "C", "text": "A mechanical wear problem, since particulate count is the primary wear indicator" },
+      { "id": "D", "text": "An error in the lab's testing procedure, since only one parameter changed" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Industrial Compressors — Types, Operation, and Maintenance",
+    "explanation": "Rising acid number specifically points toward refrigerant decomposition, typically from overheating or moisture — a distinct signal from particulate count (mechanical wear) or viscosity change."
+  },
+  {
+    "id": "irjr_fresh_009",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A new hire on their first day is told to enter the machine room for a routine round without checking the ammonia detector display first. What should they do?",
+    "choices": [
+      { "id": "A", "text": "Check the detector display before entering, regardless of what they were told — this is a non-negotiable safety step" },
+      { "id": "B", "text": "Follow the instruction as given, since a supervisor gave it" },
+      { "id": "C", "text": "Enter but hold their breath near the door as a precaution" },
+      { "id": "D", "text": "Only check the detector if they smell ammonia first" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Ammonia Safety — PPE, Emergency Response, and Process Safety",
+    "explanation": "Checking the detector before entry is a mandatory safety procedure, not a discretionary step — even a direct instruction from a supervisor doesn't override this baseline safety requirement."
+  },
+  {
+    "id": "irjr_fresh_010",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A cold storage facility's kW/ton has crept from 0.85 to 1.05 over six months, while the vibration and oil analysis data on the compressors both remain within normal ranges. What is the most likely remaining explanation?",
+    "choices": [
+      { "id": "A", "text": "Condenser fouling or evaporator oil accumulation — issues that wouldn't necessarily show up in compressor-specific vibration or oil data" },
+      { "id": "B", "text": "The kW/ton metric must be measured incorrectly, since compressor data is clean" },
+      { "id": "C", "text": "Compressor wear is the only possible cause of rising kW/ton" },
+      { "id": "D", "text": "This is normal and requires no further investigation" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Troubleshooting and Systematic Fault Diagnosis",
+    "explanation": "Since compressor-specific indicators (vibration, oil analysis) are clean, the efficiency loss likely lies elsewhere in the system — condenser fouling or evaporator oil accumulation are common causes that these compressor-focused checks wouldn't catch."
+  },
+  {
+    "id": "irjr_fresh_011",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A facility with 12,000 lbs of ammonia onsite has not yet developed a written Risk Management Plan. What regulatory exposure does this create?",
+    "choices": [
+      { "id": "A", "text": "The facility exceeds the 10,000 lb EPA RMP threshold and is out of compliance without a written plan" },
+      { "id": "B", "text": "No exposure — the RMP threshold is 50,000 lbs" },
+      { "id": "C", "text": "No exposure, since RMP only applies to facilities using CO2, not ammonia" },
+      { "id": "D", "text": "The facility is compliant as long as OSHA PSM documentation exists separately" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Industrial Refrigeration — Industry and Careers",
+    "explanation": "At 12,000 lbs, the facility is above the 10,000 lb EPA RMP threshold and is required to have a written Risk Management Plan with an off-site consequence analysis — PSM and RMP are separate, complementary requirements."
+  },
+  {
+    "id": "irjr_fresh_012",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "An operator sizing a new CO2/ammonia cascade system needs to decide which refrigerant serves the low-temperature freezer side. What is the correct configuration?",
+    "choices": [
+      { "id": "A", "text": "CO2 on the low side, with ammonia condensing it in the cascade heat exchanger on the high side" },
+      { "id": "B", "text": "Ammonia on the low side, with CO2 condensing it on the high side" },
+      { "id": "C", "text": "Either refrigerant can serve either side with no functional difference" },
+      { "id": "D", "text": "Both refrigerants must operate on the same side simultaneously" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Industrial Refrigeration Cycle — Principles and Refrigerants",
+    "explanation": "CO2 belongs on the low-temperature side, where its higher operating pressures are more manageable given the smaller pressure differential to atmosphere; ammonia condenses it on the high side."
+  },
+  {
+    "id": "irjr_fresh_013",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A technician preparing to don SCBA for an IDLH entry has a two-day beard growth in the seal area. What is the correct course of action?",
+    "choices": [
+      { "id": "A", "text": "The technician cannot safely don SCBA with facial hair in the seal area and must not attempt entry until clean-shaven" },
+      { "id": "B", "text": "Facial hair is fine as long as the fit check passes visually" },
+      { "id": "C", "text": "A tighter strap adjustment compensates for facial hair" },
+      { "id": "D", "text": "Facial hair only matters for SAR, not SCBA" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Ammonia Safety — PPE, Emergency Response, and Process Safety",
+    "explanation": "Facial hair in the seal area breaks the mask-to-face seal regardless of strap tension, invalidating protection. OSHA requires clean-shaven seal areas for respirator wearers — this cannot be worked around."
+  },
+  {
+    "id": "irjr_fresh_014",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A facility's evaporative condenser water shows elevated bacterial counts on a routine Legionella test, though the facility has no documented water management plan. What is the appropriate response?",
+    "choices": [
+      { "id": "A", "text": "Implement biocide treatment immediately and establish a documented water management plan, which the facility should have had regardless" },
+      { "id": "B", "text": "No action is needed unless an employee becomes ill" },
+      { "id": "C", "text": "Only the EPA RMP applies here, not water management" },
+      { "id": "D", "text": "Switch to an air-cooled condenser as the only viable fix" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Heat Rejection, Evaporators, and System Controls",
+    "explanation": "Elevated Legionella counts require immediate biocide treatment, and the absence of a water management plan is itself a gap many jurisdictions require to be corrected regardless of test results."
+  },
+  {
+    "id": "irjr_fresh_015",
+    "examLevel": "jr_industrial_ref",
+    "active": true,
+    "question": "A screw compressor's slide valve is stuck at 100% and cannot modulate down as refrigeration load drops in the evening. What operational problem is most likely to result?",
+    "choices": [
+      { "id": "A", "text": "Overcooling of the space and excessive short-cycling or hunting as the compressor cannot match the reduced load" },
+      { "id": "B", "text": "No effect, since slide valve position doesn't affect capacity" },
+      { "id": "C", "text": "A guaranteed liquid slugging event within minutes" },
+      { "id": "D", "text": "Automatic conversion to two-stage compression" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Industrial Compressors — Types, Operation, and Maintenance",
+    "explanation": "A slide valve stuck at full capacity can't reduce output to match falling evening load, leading to overcooling, pressure swings, and excessive cycling as the control system tries to compensate."
+  }
+]

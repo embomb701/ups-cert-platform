@@ -1,0 +1,227 @@
+[
+  {
+    "id": "dcopjr_fresh_001",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A facility's capacity report shows 5 MW of 'available' UPS capacity in a 2N system with 10 MW installed. A sales team wants to commit 4 MW of new deployments on top of an existing 3 MW committed load. What is the correct response?",
+    "choices": [
+      { "id": "A", "text": "Reject the full request — 3 MW committed + 4 MW new = 7 MW, which exceeds the 5 MW truly available on a single path without losing redundancy" },
+      { "id": "B", "text": "Approve the full 4 MW since total installed capacity is 10 MW" },
+      { "id": "C", "text": "Approve it since 5 MW of 'available' capacity was already reported" },
+      { "id": "D", "text": "Split the difference and approve exactly 2 MW with no further analysis" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Power Chain Management and Capacity Planning",
+    "explanation": "In 2N, available capacity is one path's worth (5 MW here). With 3 MW already committed, only 2 MW of uncommitted available capacity remains — approving 4 MW new would exceed available capacity and strand redundancy."
+  },
+  {
+    "id": "dcopjr_fresh_002",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A technician notices static bypass has been active on a UPS for 6 hours due to a firmware update that ran longer than planned. What is the operational concern?",
+    "choices": [
+      { "id": "A", "text": "IT equipment on that UPS has had zero battery/inverter protection for 6 hours — any utility disturbance during that window would go straight through" },
+      { "id": "B", "text": "No concern — static bypass provides identical protection to normal UPS operation" },
+      { "id": "C", "text": "The only risk is a minor efficiency loss during the bypass period" },
+      { "id": "D", "text": "Static bypass automatically reverts after 4 hours, so this is a self-resolving non-issue" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Power Chain Management and Capacity Planning",
+    "explanation": "Extended bypass duration is a real exposure window — the operations manager should be tracking and minimizing time spent on bypass, since it removes UPS protection entirely for that period."
+  },
+  {
+    "id": "dcopjr_fresh_003",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "PUE has risen from 1.35 to 1.52 over four months while IT load has stayed flat. Vibration and oil analysis on the chillers are normal. What should the operations manager investigate next?",
+    "choices": [
+      { "id": "A", "text": "Condenser/cooling tower fouling, control setpoint drift, or containment gaps causing the cooling system to run less efficiently despite the chillers themselves being mechanically healthy" },
+      { "id": "B", "text": "Nothing — a rising PUE with normal chiller data means the trend is not real" },
+      { "id": "C", "text": "Only the UPS, since PUE issues are always electrical in nature" },
+      { "id": "D", "text": "The IT team's server utilization reports, since PUE is purely an IT metric" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Cooling Systems, Environmental Management, and ASHRAE Thermal Guidelines",
+    "explanation": "Since the chillers themselves test clean, the efficiency loss likely lies elsewhere in the cooling chain — fouling, setpoint drift, or containment issues that increase cooling overhead without showing up in chiller-specific diagnostics."
+  },
+  {
+    "id": "dcopjr_fresh_004",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A colocation customer disputes an SLA credit claim, presenting their own server ping logs showing 45 minutes of downtime. The operations team's only record is a verbal note in the shift handoff log. What is the exposure?",
+    "choices": [
+      { "id": "A", "text": "Significant — without timestamped BMS/DCIM records, the operator cannot counter the customer's data with defensible evidence of their own" },
+      { "id": "B", "text": "None — verbal shift handoff notes are considered equally authoritative as BMS timestamps in SLA disputes" },
+      { "id": "C", "text": "The customer's claim is automatically invalid without a formal written complaint filed within 24 hours" },
+      { "id": "D", "text": "This scenario has no bearing on the facility's SLA compliance reporting" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Change Management, DCIM, and Vendor Management",
+    "explanation": "SLA disputes are won or lost on the quality of evidence. A verbal log entry cannot compete with a customer's own timestamped monitoring data — this is exactly why SLA reporting must be based on system-of-record timestamps."
+  },
+  {
+    "id": "dcopjr_fresh_005",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A generator has logged 85 hours of non-emergency demand response participation this year, with 3 more demand response events (approximately 6 hours each) scheduled before year-end. What should the operations manager do?",
+    "choices": [
+      { "id": "A", "text": "Track the cumulative hours carefully — 85 + 18 = 103 hours would exceed the 100-hour EPA non-emergency threshold, risking a Tier 4 compliance violation" },
+      { "id": "B", "text": "Nothing — demand response hours don't count toward the EPA threshold" },
+      { "id": "C", "text": "Cancel all future demand response participation permanently regardless of the math" },
+      { "id": "D", "text": "The 100-hour threshold only applies to generators over 2 MW in output" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Compliance, Safety, Financial Management, and Career Path",
+    "explanation": "Careful hour tracking here reveals a looming compliance issue — participating in all three remaining events would push the generator past the 100-hour non-emergency threshold, requiring either declining an event or confirming Tier 4 compliance."
+  },
+  {
+    "id": "dcopjr_fresh_006",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A proposed change would replace a failed cooling unit control board with a newer model from the same manufacturer that has slightly different firmware behavior. Does this require a normal MOC review or can it proceed as a standard change?",
+    "choices": [
+      { "id": "A", "text": "Normal change requiring CAB review — different firmware behavior is not a true like-for-like replacement" },
+      { "id": "B", "text": "Standard change — any replacement from the same manufacturer is automatically pre-approved" },
+      { "id": "C", "text": "No review needed at all, since it's a routine maintenance item" },
+      { "id": "D", "text": "Emergency change, since the original unit already failed" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Change Management, DCIM, and Vendor Management",
+    "explanation": "Because the firmware behavior differs from the original, this isn't a strict like-for-like swap — it introduces a variable that warrants CAB review rather than pre-approved standard-change treatment."
+  },
+  {
+    "id": "dcopjr_fresh_007",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "Thermal mapping data shows a cold aisle reading 22°C at floor level but 28°C at the top of the racks in that row. What does this indicate?",
+    "choices": [
+      { "id": "A", "text": "A hot spot at the top of the row, likely from hot exhaust air mixing in due to imperfect containment — even though the floor-level reading looks fine" },
+      { "id": "B", "text": "A sensor malfunction, since temperature cannot vary with height in a cold aisle" },
+      { "id": "C", "text": "Normal operation, since ASHRAE A1 only specifies floor-level readings" },
+      { "id": "D", "text": "No action needed, since the average of the two readings is within spec" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Cooling Systems, Environmental Management, and ASHRAE Thermal Guidelines",
+    "explanation": "A single floor-level reading would have completely missed this hot spot — the top-of-rack reading at 28°C exceeds the ASHRAE A1 upper limit, exactly the scenario thermal mapping at multiple heights is designed to catch."
+  },
+  {
+    "id": "dcopjr_fresh_008",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "During an RCA for a cooling unit failure, the investigation reveals: compressor failed → low refrigerant charge → slow leak → PM inspection missed it → PM checklist doesn't include refrigerant charge verification. What is the actionable corrective action from this '5 whys' chain?",
+    "choices": [
+      { "id": "A", "text": "Update the PM checklist to include refrigerant charge verification — addressing the root cause rather than just replacing the failed compressor" },
+      { "id": "B", "text": "Replace the compressor and close the incident with no further action" },
+      { "id": "C", "text": "Discipline the technician who performed the most recent PM" },
+      { "id": "D", "text": "Increase the PM frequency for all equipment facility-wide without further analysis" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Change Management, DCIM, and Vendor Management",
+    "explanation": "The 5 whys chain traces past the immediate failure (compressor) to the systemic gap (a checklist that never checked for refrigerant charge) — fixing the checklist prevents recurrence across all similar equipment, not just this one unit."
+  },
+  {
+    "id": "dcopjr_fresh_009",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "An operations manager is evaluating a vendor renewal. Over the past year, the vendor met their 4-hour response SLA 95% of the time but had a first-time fix rate of only 60%. What should this data inform?",
+    "choices": [
+      { "id": "A", "text": "Despite good response times, the low first-time fix rate means incidents are taking multiple visits to resolve, extending actual downtime — this is worth addressing in renewal negotiations" },
+      { "id": "B", "text": "The vendor is performing excellently overall since response time is the only metric that matters" },
+      { "id": "C", "text": "First-time fix rate is irrelevant as long as the technician arrives on time" },
+      { "id": "D", "text": "This data has no bearing on contract renewal decisions" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Change Management, DCIM, and Vendor Management",
+    "explanation": "Response time alone doesn't capture the full picture — a vendor who shows up fast but frequently needs a second visit still leaves equipment down longer than the response SLA alone would suggest."
+  },
+  {
+    "id": "dcopjr_fresh_010",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A facility's Tier III TCCF certification is up for renewal, and a recent capacity expansion added a new PDU path that was never independently verified against the original Tier III design. What is the risk?",
+    "choices": [
+      { "id": "A", "text": "The facility's actual Tier III status may no longer be verifiable as claimed if the new path wasn't built and verified to the same concurrent-maintainability standard" },
+      { "id": "B", "text": "No risk — TCCF certification, once granted, never requires re-verification regardless of subsequent changes" },
+      { "id": "C", "text": "The new PDU path automatically inherits Tier III status from the original certification" },
+      { "id": "D", "text": "This only matters if the facility is also seeking Tier IV certification" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Data Center Operations — Industry, Tiers, and the Ops Manager Role",
+    "explanation": "TCCF verifies the constructed facility as it exists — a later change that wasn't reviewed against the Tier III standard (exactly the kind of thing MOC review should catch) can undermine the validity of the original certification claim."
+  },
+  {
+    "id": "dcopjr_fresh_011",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A newly hired COT is told by a senior technician to skip the fit-check step and just eyeball whether a cooling unit's LOTO is properly applied before touching it. What is the correct response?",
+    "choices": [
+      { "id": "A", "text": "Perform the full verification procedure regardless of the senior technician's suggestion — safety procedures aren't optional shortcuts" },
+      { "id": "B", "text": "Follow the senior technician's instruction, since seniority implies authority to waive procedure" },
+      { "id": "C", "text": "Only skip the step if the technician has worked there for over 5 years" },
+      { "id": "D", "text": "Split the difference by performing a partial verification" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Compliance, Safety, Financial Management, and Career Path",
+    "explanation": "Safety verification procedures like LOTO confirmation are non-negotiable regardless of who suggests skipping them — a senior technician's informal shortcut doesn't override the documented safety requirement."
+  },
+  {
+    "id": "dcopjr_fresh_012",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A facility considering an AI GPU deployment currently has 8 kW/rack cooling and power capacity throughout the white space. The proposed deployment requires 70 kW/rack. What is the primary planning implication?",
+    "choices": [
+      { "id": "A", "text": "The existing infrastructure cannot support this density — a dedicated high-density zone with liquid cooling and upgraded power distribution is likely required" },
+      { "id": "B", "text": "No planning implication — any rack can support any load as long as the UPS has enough total capacity" },
+      { "id": "C", "text": "The deployment can proceed immediately since 8 kW × 9 racks roughly equals 70 kW" },
+      { "id": "D", "text": "Only the cooling system needs review; power distribution is unaffected by density increases" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Data Center Operations — Industry, Tiers, and the Ops Manager Role",
+    "explanation": "AI GPU racks at 60-100 kW vastly exceed standard 5-10 kW rack design — this isn't just a total-capacity question but a density question requiring dedicated infrastructure (liquid cooling, higher-capacity circuits) that standard racks and cooling weren't designed for."
+  },
+  {
+    "id": "dcopjr_fresh_013",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A cooling tower's Legionella risk assessment is overdue by 8 months, and the facility recently had a water treatment vendor change with a gap in service coverage. What should the operations manager prioritize?",
+    "choices": [
+      { "id": "A", "text": "Immediately schedule the overdue risk assessment and verify current water treatment status, given the compounding risk from the coverage gap" },
+      { "id": "B", "text": "Wait until the next scheduled annual review cycle, since 8 months is not a significant delay" },
+      { "id": "C", "text": "Address this only if a Legionella-related illness is reported" },
+      { "id": "D", "text": "Delegate this entirely to the new vendor with no operations team follow-up" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Cooling Systems, Environmental Management, and ASHRAE Thermal Guidelines",
+    "explanation": "An overdue risk assessment combined with a treatment coverage gap compounds real risk — this isn't a scenario to wait out, given both the public health stakes and the existential business risk a traced outbreak represents."
+  },
+  {
+    "id": "dcopjr_fresh_014",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "A CAB is reviewing a proposed normal change to replace a PDU during a scheduled maintenance window. The change request lacks a documented rollback plan. What should happen?",
+    "choices": [
+      { "id": "A", "text": "The request should be returned for completion — a rollback plan is a required element of a proper change request" },
+      { "id": "B", "text": "The CAB should approve it anyway, since rollback plans are optional for routine PDU work" },
+      { "id": "C", "text": "The rollback plan can be added retroactively after the change is executed" },
+      { "id": "D", "text": "Only emergency changes require a rollback plan" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Change Management, DCIM, and Vendor Management",
+    "explanation": "A complete change request includes a rollback plan as a core element — approving a normal change without one leaves the team without a plan if the change goes wrong mid-execution."
+  },
+  {
+    "id": "dcopjr_fresh_015",
+    "examLevel": "jr_dc_ops",
+    "active": true,
+    "question": "An operations manager is asked to justify why the facility should invest in floating suction/condensing setpoint automation, a $150,000 project. Which framing is most likely to secure approval?",
+    "choices": [
+      { "id": "A", "text": "Quantify the expected annual energy savings (e.g., 10-20% of cooling energy cost) against the project cost to show payback period" },
+      { "id": "B", "text": "State that 'other data centers have this feature too' with no cost-benefit analysis" },
+      { "id": "C", "text": "Frame it purely as a compliance requirement with no financial justification" },
+      { "id": "D", "text": "Avoid providing any specific numbers to keep the proposal simple" }
+    ],
+    "correctAnswerId": "A",
+    "category": "Compliance, Safety, Financial Management, and Career Path",
+    "explanation": "Finance teams respond to quantified ROI — translating the technical efficiency benefit into a dollar figure and payback period gives decision-makers what they need to approve the investment."
+  }
+]

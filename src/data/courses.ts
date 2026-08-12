@@ -1351,6 +1351,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_industrial_ref',
     testOutProductId: 'jr_industrial_ref_test_human',
     comingSoon: false,
+    examLevel: 'jr_industrial_ref',
   },
   {
     id: 'dc-ops',
@@ -1364,6 +1365,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_dc_ops',
     testOutProductId: 'jr_dc_ops_test_human',
     comingSoon: false,
+    examLevel: 'jr_dc_ops',
   },
   {
     id: 'building-cx',
@@ -1377,6 +1379,7 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_building_cx',
     testOutProductId: 'jr_building_cx_test_human',
     comingSoon: false,
+    examLevel: 'jr_building_cx',
   },
   {
     id: 'telecom',
