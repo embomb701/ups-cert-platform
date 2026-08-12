@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { PracticeTestButton } from '@/components/exam/PracticeTestButton';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 export const metadata: Metadata = {
   title: 'Jr. FSE Certification — Test-Out Exam $299',

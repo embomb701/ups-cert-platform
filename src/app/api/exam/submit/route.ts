@@ -236,7 +236,7 @@ export async function POST(req: NextRequest) {
       try {
         const userRecord = await adminAuth.getUser(uid);
         if (userRecord.email && certificateNumber) {
-          const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+          const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
           sendCertEarnedEmail(
             userRecord.email,
             userRecord.displayName || userRecord.email,

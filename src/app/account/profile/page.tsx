@@ -33,7 +33,7 @@ export default async function AccountProfilePage() {
     location: userData.location ?? '',
   };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
   const profileUrl = `${siteUrl}/p/${uid}`;
 
   return (

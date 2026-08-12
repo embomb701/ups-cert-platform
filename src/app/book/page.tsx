@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 export const metadata: Metadata = {
   title: 'The Book — Mastering Uninterruptible Power Supplies',

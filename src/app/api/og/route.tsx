@@ -67,7 +67,7 @@ export async function GET(req: NextRequest) {
             )}
             <span style={{ color: '#4b5563', fontSize: '14px' }}>Verified by employers · Self-paced</span>
           </div>
-          <div style={{ color: '#374151', fontSize: '14px' }}>masteringfse.com</div>
+          <div style={{ color: '#374151', fontSize: '14px' }}>fse-academy.com</div>
         </div>
       </div>
     ),

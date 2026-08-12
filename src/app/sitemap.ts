@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { COURSES } from '@/data/courses';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 const HUB_ROUTES: Record<string, string> = {
   ups: '/training/ups', kitchen: '/training/kitchen', hvac: '/training/hvac',

@@ -479,7 +479,7 @@ export async function POST(req: NextRequest) {
 
     // ── Emails (best-effort — never block the response) ─────────────────────
     if (userEmail) {
-      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
       const courseCompletions: Array<{ name: string; certTitle: string; practiceExamLevel?: string }> = [];
       const justCompleted = (modules: Array<{ id: string }>) =>

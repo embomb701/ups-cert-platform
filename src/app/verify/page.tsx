@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import VerifyForm from './VerifyForm';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 export const metadata: Metadata = {
   title: 'Verify a Certificate — Mastering Field Service',

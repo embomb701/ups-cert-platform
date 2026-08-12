@@ -5,7 +5,7 @@ import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { ApplyButton } from '@/components/jobs/ApplyButton';
 import Link from 'next/link';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 export const dynamic = 'force-dynamic';
 

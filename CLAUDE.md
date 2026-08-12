@@ -4,7 +4,7 @@
 
 Full-stack Next.js 14 TypeScript training and certification platform for field
 service trades, operated by FA Consulting and Recruiting (Francis Aiello).
-Public name: **Mastering Field Service Training Portal** (domain masteringfse.com).
+Public name: **Mastering Field Service Training Portal** (domain fse-academy.com).
 
 **29 course tracks** — 1 free foundational course + 28 paid career tracks, all
 sharing a 10-module electrical/safety foundation (modules 1–10: basic electricity,
@@ -122,5 +122,5 @@ reuses UPS battery modules (`battery-types`, `battery-safety`).
 - Keep the required educational-credential disclaimers (footer, cert pages,
   verify, results, terms/privacy) intact.
 - Long generated content: check for stray non-ASCII (CJK/Cyrillic) characters.
-- `NEXT_PUBLIC_SITE_URL` defaults to `https://masteringfse.com`; use it for all
+- `NEXT_PUBLIC_SITE_URL` defaults to `https://fse-academy.com`; use it for all
   absolute URLs (OG images, JSON-LD, Stripe redirects, email links).

@@ -17,7 +17,7 @@ interface Profile {
   referralCount: number;
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error';
 

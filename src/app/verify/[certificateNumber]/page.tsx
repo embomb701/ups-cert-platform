@@ -65,7 +65,7 @@ export default async function CertificateVerifyPage({ params }: Props) {
     ? cert.issuedAt
     : (cert.issuedAt as any)?.toDate?.() ?? new Date();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
   const verifyUrl = `${siteUrl}/verify/${cert.certificateNumber}`;
   const linkedInUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(cert.certificationTitle)}&issueYear=${issueDate.getFullYear()}&issueMonth=${issueDate.getMonth() + 1}&certUrl=${encodeURIComponent(verifyUrl)}&certId=${encodeURIComponent(cert.certificateNumber)}`;
 

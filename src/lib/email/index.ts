@@ -1,7 +1,7 @@
 import sgMail from '@sendgrid/mail';
 
 const FROM = { name: 'Mastering Field Service Training Portal', email: 'careers@aiellorecruiter.com' };
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 async function send(to: string, subject: string, html: string): Promise<void> {
   const apiKey = process.env.SENDGRID_API_KEY;

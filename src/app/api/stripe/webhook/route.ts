@@ -1547,7 +1547,7 @@ async function handleCheckoutCompleted(eventId: string, session: Stripe.Checkout
     const productEntry = (STRIPE_PRODUCTS as Record<string, { name: string; shortName: string }>)[productId];
     const productName = productEntry?.shortName ?? productEntry?.name ?? productId;
     const amountCents = session.amount_total ?? 0;
-    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masteringfse.com';
+    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
     sendOrderConfirmationEmail(email, customerName, productName, amountCents, `${SITE_URL}/dashboard`).catch(() => {});
   }
 }
