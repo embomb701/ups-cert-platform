@@ -1390,5 +1390,6 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_telecom',
     testOutProductId: 'jr_telecom_tech_test_human',
     comingSoon: false,
+    examLevel: 'jr_telecom_tech',
   },
 ];
