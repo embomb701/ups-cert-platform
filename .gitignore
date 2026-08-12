@@ -25,6 +25,7 @@ stripe-webhook.log
 
 # Build artifacts
 build/
+*.tsbuildinfo
 
 # Debug
 npm-debug.log*
