@@ -149,5 +149,17 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // ---------------------------------------------------------------
+    // Module Q&A comments
+    // ---------------------------------------------------------------
+    match /moduleComments/{commentId} {
+      // Public read — a thread of real trade questions is valuable
+      // content on course pages, not just app state.
+      allow read: if true;
+      // Created/deleted only through the backend API route (auth
+      // check, rate limiting, and length validation happen there).
+      allow write: if isAdmin();
+    }
+
   }
 }

@@ -68,6 +68,9 @@ export default async function CertificateVerifyPage({ params }: Props) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
   const verifyUrl = `${siteUrl}/verify/${cert.certificateNumber}`;
   const linkedInUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(cert.certificationTitle)}&issueYear=${issueDate.getFullYear()}&issueMonth=${issueDate.getMonth() + 1}&certUrl=${encodeURIComponent(verifyUrl)}&certId=${encodeURIComponent(cert.certificateNumber)}`;
+  const assertionUrl = `${siteUrl}/api/badges/assertion/${cert.certificateNumber}`;
+  const badgeImageUrl = `${siteUrl}/api/badges/image/${cert.examLevel}`;
+  const badgeCheckUrl = `https://badgecheck.io/?url=${encodeURIComponent(assertionUrl)}`;
 
   return (
     <section className="section-pad">
@@ -191,6 +194,29 @@ export default async function CertificateVerifyPage({ params }: Props) {
                 </svg>
                 Add to LinkedIn
               </a>
+            </div>
+          )}
+
+          {/* Verifiable digital badge */}
+          {cert.status === 'valid' && (
+            <div className="mt-8 rounded-lg border border-gray-800 bg-gray-900/50 p-5 flex flex-col sm:flex-row items-center gap-5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={badgeImageUrl} alt={`${cert.certificationTitle} digital badge`} className="w-20 h-20 rounded-full flex-shrink-0" />
+              <div className="text-center sm:text-left">
+                <p className="text-sm font-semibold text-white">Verifiable digital badge</p>
+                <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+                  Open Badges 2.0-compliant credential. Independently verifiable — no account or trust in this
+                  site required, the badge data is fetched directly from its hosted assertion URL.
+                </p>
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-3">
+                  <a href={badgeCheckUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-indigo-400 hover:text-indigo-300 font-medium">
+                    Verify independently →
+                  </a>
+                  <a href={assertionUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-gray-500 hover:text-gray-300 font-mono">
+                    View assertion (JSON)
+                  </a>
+                </div>
+              </div>
             </div>
           )}
 

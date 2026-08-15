@@ -6,6 +6,7 @@ import { getModule } from '@/data/index';
 import { getGrantedCourseKeys, moduleUnlockState } from '@/lib/utils/trainingAccess';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { ModuleComments } from '@/components/training/ModuleComments';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -198,6 +199,8 @@ export default async function ModulePage({ params }: Props) {
                 )}
               </div>
             )}
+
+            <ModuleComments moduleId={moduleId} />
           </div>
         )}
       </div>
