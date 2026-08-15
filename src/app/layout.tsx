@@ -6,6 +6,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AuthProvider } from '@/components/auth/AuthProvider';
+import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister';
 
 export const metadata: Metadata = {
   title: {
@@ -41,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`h-full ${inter.variable}`}>
       <body className="h-full flex flex-col font-sans">
+        <ServiceWorkerRegister />
         <AuthProvider>
           {process.env.NEXT_PUBLIC_BETA_MODE !== 'false' && (
             <div className="w-full bg-amber-500 text-black text-center text-xs font-semibold py-2 px-4">

@@ -117,6 +117,11 @@ export function authErrorMessage(err: unknown): string {
 
 export async function signOut(): Promise<void> {
   await firebaseSignOut(auth);
+  // Clear cached pages so a shared/public device doesn't keep serving
+  // this account's offline-cached content to the next person who logs in.
+  if (typeof navigator !== 'undefined' && navigator.serviceWorker?.controller) {
+    navigator.serviceWorker.controller.postMessage('CLEAR_RUNTIME_CACHE');
+  }
 }
 
 export async function getIdToken(): Promise<string | null> {
