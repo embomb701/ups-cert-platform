@@ -5,6 +5,7 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { ALL_MODULES } from '@/data/index';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { CourseVideo } from '@/components/CourseVideo';
 import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
@@ -117,6 +118,16 @@ export default async function UpsPortalPage() {
           <p className="text-gray-400 mt-1 text-sm">
             28 modules · 3–6 months · Jr. UPS FSE certification included
           </p>
+        </div>
+
+        {/* Course overview video */}
+        <div>
+          <CourseVideo
+            src="/videos/ups-explainer.mp4"
+            poster="/videos/ups-explainer-poster.jpg"
+            title="How a UPS Actually Works — course overview"
+          />
+          <p className="text-gray-500 text-xs mt-2">How a UPS Actually Works — a quick overview before you dive into the modules.</p>
         </div>
 
         {/* Interactive labs callout */}

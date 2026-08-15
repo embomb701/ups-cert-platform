@@ -26,6 +26,12 @@ const NEVER_CACHE_PREFIXES = [
   // Personalized/sensitive pages — never worth the shared-device risk
   // of a stale cached copy outliving a sign-out on the same browser.
   '/dashboard', '/account', '/settings', '/admin', '/candidates', '/p/',
+  // Video files: <video> issues byte-range requests for seeking, and
+  // the Cache API rejects storing 206 Partial Content responses (it
+  // would throw on every seek). Large media isn't what "offline
+  // module caching" is for anyway — let the browser's own HTTP cache
+  // handle these instead.
+  '/videos/',
 ];
 
 self.addEventListener('install', (event) => {
