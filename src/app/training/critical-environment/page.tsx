@@ -107,6 +107,21 @@ export default async function CriticalEnvironmentPage() {
           </ExternalLinkWarning>
         </div>
 
+        {/* Interactive labs callout */}
+        <Link
+          href="/training/critical-environment/labs"
+          className="block rounded-xl border border-emerald-700/50 bg-emerald-950/10 hover:bg-emerald-950/20 p-5 transition-colors"
+        >
+          <div className="flex items-center gap-4">
+            <span className="text-3xl flex-shrink-0">🧪</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-white font-semibold text-sm">Interactive Labs</p>
+              <p className="text-gray-500 text-xs mt-0.5">Step through LOTO, PPE selection, and a hot/cold aisle walkthrough — hands-on practice, not just slides.</p>
+            </div>
+            <span className="flex-shrink-0 text-xs font-semibold text-emerald-400">Try it →</span>
+          </div>
+        </Link>
+
         {/* Module list */}
         <div className="space-y-3">
           <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">Course Modules</h2>
