@@ -119,6 +119,21 @@ export default async function UpsPortalPage() {
           </p>
         </div>
 
+        {/* Interactive labs callout */}
+        <Link
+          href="/training/ups/labs"
+          className="block rounded-xl border border-blue-700/50 bg-blue-950/10 hover:bg-blue-950/20 p-5 transition-colors"
+        >
+          <div className="flex items-center gap-4">
+            <span className="text-3xl flex-shrink-0">⚡</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-white font-semibold text-sm">Interactive Labs</p>
+              <p className="text-gray-500 text-xs mt-0.5">Step through a live UPS one-line diagram — Online, Bypass, Mains Fail, and Maintenance Bypass.</p>
+            </div>
+            <span className="flex-shrink-0 text-xs font-semibold text-blue-400">Try it →</span>
+          </div>
+        </Link>
+
         {/* Purchase CTA — shown when no access */}
         {!hasAccess && (
           <div className="rounded-xl border-2 border-blue-700 bg-blue-950/20 p-6">
