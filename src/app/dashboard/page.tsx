@@ -49,6 +49,18 @@ interface DashData {
   jobApplications: { id: string; listingId: string; listingTitle: string; company: string; status: string; createdAt: string | null }[];
   employerOrders: { id: string; seats: number; seatsUsed: number; courseKey: string }[];
   profile: { openToOpportunities: boolean; profileVisible: boolean; headline: string; location: string };
+  streak: number;
+}
+
+// Milestone badges — derived purely from completed/total counts already
+// returned by the dashboard API, no extra data needed per course.
+function courseMilestones(completed: number, total: number): { label: string; icon: string }[] {
+  if (total === 0) return [];
+  const badges: { label: string; icon: string }[] = [];
+  if (completed >= 1) badges.push({ label: 'Started', icon: '🥉' });
+  if (completed >= Math.ceil(total / 2)) badges.push({ label: 'Halfway', icon: '🥈' });
+  if (completed === total) badges.push({ label: 'Complete', icon: '🥇' });
+  return badges;
 }
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
@@ -238,7 +250,13 @@ export default function DashboardPage() {
 
         {/* Quick stats */}
         {!dataLoading && data && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <div className={`card-dark px-4 py-3 text-center ${data.streak > 0 ? 'border-orange-800/50 bg-orange-950/10' : ''}`}>
+              <p className={`text-2xl font-bold ${data.streak > 0 ? 'text-orange-400' : 'text-gray-600'}`}>
+                {data.streak > 0 && '🔥 '}{data.streak}
+              </p>
+              <p className="text-xs text-gray-500 mt-0.5">Day streak</p>
+            </div>
             <div className="card-dark px-4 py-3 text-center">
               <p className="text-2xl font-bold text-indigo-400">{validCerts.length}</p>
               <p className="text-xs text-gray-500 mt-0.5">Certificate{validCerts.length !== 1 ? 's' : ''}</p>
@@ -256,6 +274,9 @@ export default function DashboardPage() {
               <p className="text-xs text-gray-500 mt-0.5">Exam{attempts.filter((a) => a.passed).length !== 1 ? 's' : ''} passed</p>
             </div>
           </div>
+        )}
+        {!dataLoading && data && data.streak === 0 && courses.length > 0 && (
+          <p className="text-xs text-gray-600 -mt-4">Complete a module today to start a new streak.</p>
         )}
 
         {/* Main grid: certs + training */}
@@ -372,6 +393,7 @@ export default function DashboardPage() {
                 {courses.map((course) => {
                   const pct = course.total === 0 ? 0 : Math.round((course.completed / course.total) * 100);
                   const done = course.completed === course.total && course.total > 0;
+                  const milestones = courseMilestones(course.completed, course.total);
                   return (
                     <div key={course.key}>
                       <div className="flex items-center justify-between mb-1">
@@ -384,6 +406,15 @@ export default function DashboardPage() {
                         <span className="text-xs text-gray-500 flex-shrink-0 ml-2">{pct}%</span>
                       </div>
                       <ProgressBar value={course.completed} max={course.total} />
+                      {milestones.length > 0 && (
+                        <div className="flex items-center gap-1.5 mt-1.5">
+                          {milestones.map((m) => (
+                            <span key={m.label} title={m.label} className="text-xs px-1.5 py-0.5 rounded border border-gray-700 bg-gray-800/40 text-gray-400">
+                              {m.icon} {m.label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                       {done && course.practiceExamLevel && (
                         <Link
                           href={`/exam/rules/practice_${course.practiceExamLevel}`}

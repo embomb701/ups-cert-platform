@@ -5,6 +5,7 @@ import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { COURSE_SEQUENCES } from '@/data/index';
 import { COURSES } from '@/data/courses';
+import { getCourseStats } from '@/lib/utils/courseStats';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import type { ProductId } from '@/types';
@@ -144,6 +145,14 @@ export async function CourseHub({ courseId }: { courseId: string }) {
           <p className={`text-xs font-bold uppercase tracking-widest font-mono mb-1 ${c.accent}`}>{course.shortTitle}</p>
           <h1 className="text-2xl font-bold text-white">{course.title}</h1>
           <p className="text-gray-400 mt-1 text-sm leading-relaxed max-w-xl">{course.tagline}</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs text-gray-500">
+            <span>{totalCount} modules</span>
+            {(() => {
+              const stats = getCourseStats(course.accessKey);
+              return stats.estimatedHours > 0 ? <span>~{stats.estimatedHours} hrs of content</span> : null;
+            })()}
+            {course.examLevel && <span>Certification exam included</span>}
+          </div>
         </div>
 
         {/* Guest sign-in prompt */}
@@ -169,7 +178,12 @@ export async function CourseHub({ courseId }: { courseId: string }) {
           <div className="rounded-xl border border-gray-800 bg-gray-800/30 p-5">
             <div className="flex items-center justify-between mb-2">
               <span className="text-white font-medium text-sm">{completedCount} / {totalCount} modules complete</span>
-              <span className="text-gray-400 text-sm font-semibold">{pct}%</span>
+              <div className="flex items-center gap-3">
+                <Link href={`/cheat-sheets/${course.id}`} className={`text-xs font-medium ${c.accent} hover:text-white transition-colors`}>
+                  Field Cheat Sheet →
+                </Link>
+                <span className="text-gray-400 text-sm font-semibold">{pct}%</span>
+              </div>
             </div>
             <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
               <div className={`h-full rounded-full transition-all ${c.bar}`} style={{ width: `${pct}%` }} />

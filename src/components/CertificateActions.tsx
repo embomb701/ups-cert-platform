@@ -14,7 +14,8 @@ export function CertificateActions({ name, courseTitle, issuedDate }: Props) {
   const liText = encodeURIComponent(
     `I just earned my ${courseTitle} certificate from Mastering Field Service Training Portal. ${issuedDate}.`
   );
-  const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://masteringfieldservice.com/training/critical-environment')}`;
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
+  const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${SITE_URL}/training/critical-environment`)}`;
 
   return (
     <div className="flex flex-wrap gap-3 justify-center print:hidden">

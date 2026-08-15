@@ -5,6 +5,29 @@ import { COURSE_SEQUENCES } from '@/data';
 
 export const dynamic = 'force-dynamic';
 
+// Current day-streak: consecutive UTC calendar days with at least one
+// module completion, anchored at today (or yesterday, so the streak
+// doesn't drop to 0 the moment the clock rolls over before today's
+// first module is done).
+function computeStreak(days: Set<string>): number {
+  const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+  let cursor = new Date();
+  cursor.setUTCHours(0, 0, 0, 0);
+  let cursorKey = cursor.toISOString().slice(0, 10);
+  if (!days.has(cursorKey)) {
+    cursor = new Date(cursor.getTime() - ONE_DAY_MS);
+    cursorKey = cursor.toISOString().slice(0, 10);
+    if (!days.has(cursorKey)) return 0;
+  }
+  let streak = 0;
+  while (days.has(cursorKey)) {
+    streak++;
+    cursor = new Date(cursor.getTime() - ONE_DAY_MS);
+    cursorKey = cursor.toISOString().slice(0, 10);
+  }
+  return streak;
+}
+
 const COURSE_TO_PRACTICE_EXAM_LEVEL: Record<string, string> = {
   training_kitchen: 'jr_kitchen_fse',
   training_hvac: 'jr_hvac_fse',
@@ -132,9 +155,16 @@ export async function GET(req: NextRequest) {
 
     // Completed module ids
     const completedIds = new Set<string>();
+    const completionDays = new Set<string>(); // 'YYYY-MM-DD' (UTC) for streak calc
     progressSnap.forEach((doc) => {
-      if (doc.data().passed) completedIds.add(doc.id);
+      const d = doc.data();
+      if (d.passed) {
+        completedIds.add(doc.id);
+        const completedAt = d.completedAt?.toDate?.() as Date | undefined;
+        if (completedAt) completionDays.add(completedAt.toISOString().slice(0, 10));
+      }
     });
+    const streak = computeStreak(completionDays);
 
     // Enrolled courses with progress
     const enrolledCourseKeys = new Set<string>();
@@ -239,6 +269,7 @@ export async function GET(req: NextRequest) {
       jobApplications,
       employerOrders,
       profile,
+      streak,
     });
   } catch (err) {
     console.error('Dashboard API error:', err);

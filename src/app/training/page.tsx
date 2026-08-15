@@ -3,6 +3,7 @@ import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { COURSES } from '@/data/courses';
 import { COURSE_SEQUENCES } from '@/data';
+import { getCourseStats } from '@/lib/utils/courseStats';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { ExternalLinkWarning } from '@/components/ExternalLinkWarning';
@@ -189,6 +190,7 @@ export default async function TrainingPage() {
                 const border = BORDER_CLASSES[course.color] ?? 'border-gray-700';
                 const text = TEXT_CLASSES[course.color] ?? 'text-gray-400';
                 const bar = BAR_CLASSES[course.color] ?? 'bg-indigo-500';
+                const stats = getCourseStats(course.accessKey);
                 return (
                   <div
                     key={course.id}
@@ -203,6 +205,9 @@ export default async function TrainingPage() {
                           <span className="text-xs px-1.5 py-0.5 rounded border border-green-700/60 bg-green-900/20 text-green-400">
                             Complete
                           </span>
+                        )}
+                        {stats.estimatedHours > 0 && (
+                          <span className="text-xs text-gray-500">~{stats.estimatedHours} hrs</span>
                         )}
                       </div>
                       <p className="text-white font-semibold text-sm mb-2">{course.title}</p>
@@ -232,6 +237,7 @@ export default async function TrainingPage() {
         {freeCourses.map((course) => {
           const { done, total } = courseProgress[course.id];
           const href = courseHref(course.id, course.accessKey, true);
+          const stats = getCourseStats(course.accessKey);
           return (
             <div key={course.id} className="rounded-xl border-2 border-emerald-700/60 bg-emerald-950/20 p-5">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -243,6 +249,9 @@ export default async function TrainingPage() {
                     <span className="text-xs px-1.5 py-0.5 rounded border border-emerald-700/60 bg-emerald-900/30 text-emerald-300 font-semibold">
                       Free
                     </span>
+                    {stats.estimatedHours > 0 && (
+                      <span className="text-xs text-emerald-500/80">~{stats.estimatedHours} hrs · {stats.totalModules} modules</span>
+                    )}
                   </div>
                   <p className="text-white font-semibold text-sm mb-1">{course.title}</p>
                   <p className="text-gray-400 text-xs">{course.tagline}</p>
@@ -278,6 +287,7 @@ export default async function TrainingPage() {
                 const text = TEXT_CLASSES[course.color] ?? 'text-gray-400';
                 const border = BORDER_CLASSES[course.color] ?? 'border-gray-700/40';
                 const previewHref = courseHref(course.id, course.accessKey, false);
+                const stats = getCourseStats(course.accessKey);
                 return (
                   <div
                     key={course.id}
@@ -290,8 +300,13 @@ export default async function TrainingPage() {
                       <p className="text-white text-sm font-semibold leading-snug">{course.title}</p>
                       <p className="text-gray-500 text-xs mt-1 leading-relaxed line-clamp-2">{course.tagline}</p>
                     </div>
+                    <div className="flex items-center gap-3 text-xs text-gray-600">
+                      <span>{stats.totalModules} modules</span>
+                      {stats.estimatedHours > 0 && <span>~{stats.estimatedHours} hrs</span>}
+                      {course.examLevel && <span>Certificate exam</span>}
+                    </div>
                     <div className="flex items-center justify-between text-xs text-gray-600 mt-auto">
-                      <span>{course.totalModules} modules</span>
+                      <span>{course.price ?? '$1,499'}</span>
                       <Link href={previewHref} className="text-gray-500 hover:text-gray-300 transition-colors">
                         Preview →
                       </Link>

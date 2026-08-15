@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { PlacementQuiz } from '@/components/PlacementQuiz';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 const OG_IMAGE = `${SITE_URL}/api/og`;
@@ -520,7 +521,10 @@ export default function HomePage() {
                 Browse All 28 Tracks ↓
               </Link>
             </div>
-            <p className="text-gray-600 text-sm mt-4">Free to sign up. Enroll when you&apos;re ready.</p>
+            <p className="text-gray-600 text-sm mt-4">
+              Free to sign up. Enroll when you&apos;re ready. Not sure which track?{' '}
+              <Link href="#quiz" className="text-blue-400 hover:text-blue-300 underline">Take the 90-second quiz ↓</Link>
+            </p>
           </div>
 
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -537,6 +541,11 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── PLACEMENT QUIZ ────────────────────────────────────────────── */}
+      <section id="quiz" className="max-w-3xl mx-auto px-4 pt-12">
+        <PlacementQuiz />
       </section>
 
       {/* ── FREE CE COURSE CALLOUT ─────────────────────────────────────── */}
