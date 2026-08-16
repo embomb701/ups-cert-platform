@@ -11,6 +11,14 @@ const LABS = [
     color: 'border-blue-800/50 hover:border-blue-600 bg-blue-950/10',
     accent: 'text-blue-400',
   },
+  {
+    id: 'sts',
+    title: 'Static Transfer Switch (STS): Auto-Transfer & Sync Faults',
+    desc: 'Watch a <4ms transfer between two AC sources — and see exactly why an out-of-sync source gets refused instead of connected.',
+    icon: '🔀',
+    color: 'border-cyan-800/50 hover:border-cyan-600 bg-cyan-950/10',
+    accent: 'text-cyan-400',
+  },
 ];
 
 export default function UpsLabsHubPage() {
