@@ -117,6 +117,9 @@ export const KITCHEN_MODULES: TrainingModule[] = [
           'Contactor failures are predictable: burned or pitted contacts (voltage drop across closed contacts — measure millivolts across each pole under load), a failed coil (no pull-in; check for coil voltage first — if voltage is present and it does not pull in, the coil is bad; if voltage is absent, the control circuit is interrupted upstream), and chattering (low control voltage or a failing safety switch cycling rapidly).',
           'Kitchen equipment service manuals give you the same drawings you learned in Module 7: a schematic (how the circuit works logically) and often a wiring/connection diagram (where the physical wires run). The fastest diagnostic path is almost always: get the schematic, identify the control chain — L1 through fuse, power switch, timer, thermostat, high-limit, door switch, to the contactor coil — and hunt the open point with your meter. Every switch and safety in that chain is a suspect; the schematic tells you the order to check them.',
         ],
+        images: [
+          { src: '/diagrams/kitchen-control-chain.svg', alt: 'Kitchen equipment control circuit and load circuit diagram showing L1 through fuse, power switch, timer, thermostat, high-limit, door switch, contactor coil, and the separate load circuit through contactor contacts to the element or motor', caption: 'Control circuit decides, load circuit does — the split that organizes every kitchen electrical fault' },
+        ],
         keyPoints: [
           'A humming, non-spinning single-phase motor usually has failed start components (capacitor/relay), not bad windings',
           'Control circuit decides, load circuit does — split every fault into one side or the other',
@@ -175,6 +178,9 @@ export const KITCHEN_MODULES: TrainingModule[] = [
           'Fryer service calls cluster around a few complaints. "No heat": trace the control chain — power, switches, thermostat, high-limit (check its reset button first; a tripped high-limit is both a quick fix and a mandatory investigation), contactor coil, contactor contacts, elements. "Slow recovery": verify supply voltage against the data plate (the 208/240 trap), test each element — on multi-element fryers one open element leaves the others carrying the load slowly. "Overheating / high-limit trips": thermostat calibration, a fallen or oil-crusted probe reading the wrong thing, or welded contactor contacts that never open — the most dangerous failure in the fryer world.',
           'Oil condition affects diagnosis. Old, broken-down oil smokes at lower temperatures, leading to "fryer runs hot" complaints when the actual temperature is fine. Always verify with a calibrated thermometer probe in the oil next to the thermostat probe before adjusting or condemning anything. Melt cycles matter too: solid shortening fryers use a low-power pulsing melt mode so elements do not scorch through a solid block; a fryer stuck in melt cycle heats agonizingly slowly and mimics element failure.',
           'Safety around fryers is unforgiving: 350°F oil causes instant deep burns, and water in hot oil erupts. Never lean over an open fryer while diagnosing, never let condensation or your drink near the tank, and treat every welded-contactor report as an emergency — that fryer must not be left in service.',
+        ],
+        images: [
+          { src: '/diagrams/electric-fryer-cutaway.svg', alt: 'Electric fryer tank cutaway showing immersion elements, thermostat probe, and high-limit probe, alongside a control chain diagram from thermostat through contactor coil and contacts to the elements', caption: 'Fryer tank anatomy and the control chain that governs it' },
         ],
         keyPoints: [
           'Fryer no-heat = walk the control chain; always check the high-limit reset first, then find out why it tripped',
@@ -455,6 +461,9 @@ export const KITCHEN_MODULES: TrainingModule[] = [
           'Reach-ins, undercounters, and refrigerated prep tables are self-contained versions of the same system, typically with capillary-tube metering and the condensing unit in the base or top. Their special enemy is placement: shoved against a wall, next to the fryer bank, with a condenser fed 100°F air through a grille packed with grease dust. Verify clearance and coil condition before deeper diagnosis — many "failing" reach-ins are simply suffocating.',
           'Prep tables add a design quirk: the food pans over the rail are cooled indirectly, and lids left open or overfilled pans defeat it. Prep rails failing food-safety temperature checks with a healthy system are usually an operations problem — document it and educate the customer rather than chasing phantom refrigerant faults.',
         ],
+        images: [
+          { src: '/diagrams/walk-in-cooler-cutaway.svg', alt: 'Walk-in cooler cutaway showing insulated panel walls, door gasket, evaporator coil unit inside, refrigerant line set through the wall, and the condensing unit outside, with cooler and freezer temperature ranges labeled', caption: 'Walk-in cooler/freezer anatomy — the box is part of the refrigeration system' },
+        ],
         keyPoints: [
           'Freezers need door-frame heaters and heated relief ports — coolers usually do not',
           '"Cannot hold temp" with a healthy circuit = load problem: doors, gaskets, hot product',
@@ -724,6 +733,9 @@ export const KITCHEN_MODULES: TrainingModule[] = [
           'Flake and nugget machines freeze continuously instead: water enters a cylindrical evaporator where a rotating auger scrapes ice off the wall and extrudes it — soft flake for display and healthcare, compressed nugget ("chewable ice") for beverages. No harvest cycle, but a gearmotor and auger bearing that live under constant load: rumbling, squealing, or metal flakes in the ice mean auger or bearing wear, and a seized auger takes the gearbox with it.',
           'Bin control shuts the machine down when ice backs up to a sensor — a thermostat bulb, mechanical flap, or photo-eye. A machine that never shuts off overflows the bin; one that never starts may just have a blocked or dirty bin sensor. Photo-eyes fouled with scale dust are a thirty-second fix that looks like a dead machine.',
           'Know the cycle to diagnose the cycle. Watch a full freeze-harvest sequence before touching anything: How long is freeze? Does the slab release cleanly or hang? Does water flow evenly over the plate? A ten-minute observation usually localizes the fault to water, refrigeration, or harvest — the three subsystems every ice complaint lives in.',
+        ],
+        images: [
+          { src: '/diagrams/ice-machine-harvest-cycle.svg', alt: 'Cube ice machine freeze and harvest cycle diagram alongside a flake/nugget machine continuous auger diagram, with bin control and common auger wear symptoms labeled', caption: 'Two ways to freeze: cube freeze/harvest cycle vs. flake/nugget continuous auger' },
         ],
         keyPoints: [
           'Cube machines alternate freeze and hot-gas harvest; flake/nugget machines freeze continuously via auger',
@@ -1005,6 +1017,9 @@ export const KITCHEN_MODULES: TrainingModule[] = [
           'Standing-pilot appliances prove flame with a thermocouple: the pilot flame heats a bimetal junction generating ~25-30 millivolts, which holds open a magnetic safety valve. Pilot goes out → millivolts die → valve snaps shut. A pilot that lights but will not stay lit when you release the button is the classic weak thermocouple (measure it: under ~20mV under flame means replace) — or a pilot flame too small or misaimed to bathe the thermocouple. Thermopiles (stacks of thermocouples, 250-750mV) power entire millivolt control systems on some fryers: same physics, more voltage.',
           'Electronic systems prove flame by flame rectification: a small AC voltage on the flame sensor rod passes through the ionized flame to ground, and because the flame conducts asymmetrically, a small DC current (measured in microamps) results. The control demands its minimum microamp signal within the trial-for-ignition window or it locks out. The signature failure is a sensor rod coated in oxide or kitchen grime: flame present, current too low, appliance locks out after "lighting perfectly for ten seconds." The fix is famous: gently clean the rod with fine abrasive, verify its porcelain is uncracked, verify a solid burner ground path — because the flame current returns through the burner and appliance chassis.',
           'Respect the lockout logic. Controls allow limited ignition trials then lock out for a reason: repeated trials pump unburned gas into the appliance and flue. Never bypass a flame sensor, never hold a gas valve open manually, and after any lockout, find out why before resetting a third time. The control is not being difficult — it is refusing to fill the kitchen with gas.',
+        ],
+        images: [
+          { src: '/diagrams/gas-ignition-systems.svg', alt: 'Two diagrams comparing standing pilot ignition with a thermocouple holding a magnetic safety valve open, and electronic flame rectification with a sensor rod producing a microamp signal through the ionized flame to ground', caption: 'Proving flame two ways: thermocouple millivolts vs. flame rectification microamps' },
         ],
         keyPoints: [
           'Thermocouple: ~25-30mV holds the pilot safety valve; weak output = pilot will not stay lit',
@@ -1333,6 +1348,9 @@ export const KITCHEN_MODULES: TrainingModule[] = [
           'The formats scale with volume: undercounter machines (bars, cafés), door/hood machines (the workhorse — rack slides in, hood pulls down), conveyor machines (racks ride a chain through wash/rinse zones), and flight machines (a continuous belt, no racks, institutional scale). All share the same anatomy: a wash tank with heater holding recirculated detergent water, a wash pump driving spray arms, a timed cycle, and the final sanitizing rinse from fresh water.',
           'Health codes verify results, and so do you: temperature gauges must work, and the proof standard for high-temp machines is a surface-temperature check (irreversible thermolabel on a plate through a cycle, or a max-registering thermometer) — 160°F at the dish. For low-temp, chlorine test strips on the final rinse. Leave every dish machine call with the sanitizing proof done and written on the ticket: this machine is the health inspector\'s first stop.',
           'The failure taxonomy to carry in: results problems (dirty, spotted, filmed, or unsanitized ware), cycle problems (will not start, will not fill, will not drain, stuck in cycle), and leak/mechanical problems (doors, pumps, arms, racks). Every complaint sorts into one of the three, and each has its own short list.',
+        ],
+        images: [
+          { src: '/diagrams/dish-machine-cycle.svg', alt: 'Commercial dish machine anatomy showing spray arms, rack, wash tank, and wash pump, alongside a comparison of high-temp sanitizing (180 degree final rinse via booster heater) and low-temp chemical sanitizing (chlorine dosing pump)', caption: 'High-temp problems are heat problems. Low-temp problems are chemistry problems.' },
         ],
         tables: [
           {

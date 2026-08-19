@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="500" fill="#fbf9f4"/>
+
+  <!-- Title -->
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Walk-In Cooler / Freezer — Cutaway</text>
+
+  <!-- Box interior -->
+  <rect x="60" y="100" width="380" height="300" fill="#ffffff" stroke="#1e1b14" stroke-width="4"/>
+  <!-- insulation hatching on left wall -->
+  <g stroke="#c9c2ab" stroke-width="2">
+    <line x1="60" y1="110" x2="80" y2="100"/><line x1="60" y1="130" x2="100" y2="100"/><line x1="60" y1="150" x2="120" y2="100"/>
+    <line x1="60" y1="170" x2="140" y2="100"/><line x1="60" y1="190" x2="160" y2="100"/><line x1="60" y1="210" x2="180" y2="100"/>
+  </g>
+  <text x="70" y="220" font-size="11" fill="#7a7256">Insulated panel</text>
+  <text x="70" y="234" font-size="11" fill="#7a7256">walls, locked together</text>
+
+  <!-- Door + gasket -->
+  <rect x="60" y="270" width="14" height="130" fill="#e8e2d0" stroke="#1e1b14" stroke-width="3"/>
+  <rect x="74" y="268" width="6" height="134" fill="#d4802a"/>
+  <text x="95" y="290" font-size="12" font-weight="700" fill="#d4802a">Door gasket</text>
+  <line x1="93" y1="285" x2="80" y2="290" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="95" y="308" font-size="10.5" fill="#5c5748">Freezers: heated door</text>
+  <text x="95" y="321" font-size="10.5" fill="#5c5748">frame keeps it from</text>
+  <text x="95" y="334" font-size="10.5" fill="#5c5748">freezing shut</text>
+
+  <!-- evaporator coil unit (inside, near ceiling) -->
+  <rect x="150" y="120" width="130" height="45" rx="4" fill="#eef3f7" stroke="#1e1b14" stroke-width="2.5"/>
+  <circle cx="175" cy="142" r="13" fill="none" stroke="#1e1b14" stroke-width="2"/>
+  <circle cx="215" cy="142" r="13" fill="none" stroke="#1e1b14" stroke-width="2"/>
+  <path d="M 175 135 L 178 149 M 168 142 L 182 142" stroke="#1e1b14" stroke-width="1.5"/>
+  <path d="M 215 135 L 218 149 M 208 142 L 222 142" stroke="#1e1b14" stroke-width="1.5"/>
+  <text x="150" y="183" font-size="12" font-weight="700" fill="#1e1b14">Evaporator coil unit</text>
+
+  <!-- pressure relief port -->
+  <circle cx="410" cy="130" r="6" fill="#fff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="330" y="60" font-size="11" fill="#5c5748">Pressure-relief port</text>
+  <text x="330" y="74" font-size="11" fill="#5c5748">(heated on freezers)</text>
+  <line x1="380" y1="78" x2="410" y2="125" stroke="#7a7256" stroke-width="1.2" stroke-dasharray="3 3"/>
+
+  <!-- line set through wall -->
+  <line x1="280" y1="135" x2="500" y2="135" stroke="#d4802a" stroke-width="4"/>
+  <line x1="280" y1="152" x2="500" y2="152" stroke="#2a5f8f" stroke-width="4"/>
+  <text x="505" y="131" font-size="11" font-weight="700" fill="#d4802a">Hot gas / liquid line</text>
+  <text x="505" y="157" font-size="11" font-weight="700" fill="#2a5f8f">Suction line</text>
+
+  <!-- roof line -->
+  <line x1="440" y1="100" x2="480" y2="205" stroke="#fbf9f4" stroke-width="0"/>
+  <line x1="440" y1="100" x2="470" y2="70" stroke="#1e1b14" stroke-width="3"/>
+  <line x1="470" y1="70" x2="860" y2="70" stroke="#1e1b14" stroke-width="3"/>
+
+  <!-- condensing unit outside -->
+  <rect x="560" y="185" width="220" height="100" rx="4" fill="#fff4e8" stroke="#1e1b14" stroke-width="3"/>
+  <circle cx="605" cy="235" r="20" fill="none" stroke="#1e1b14" stroke-width="2.5"/>
+  <path d="M 605 215 L 610 235 M 593 235 L 617 235 M 605 255 L 600 235" stroke="#1e1b14" stroke-width="1.5"/>
+  <rect x="645" y="213" width="110" height="44" fill="none" stroke="#1e1b14" stroke-width="2"/>
+  <line x1="660" y1="213" x2="660" y2="257" stroke="#1e1b14" stroke-width="1"/>
+  <line x1="675" y1="213" x2="675" y2="257" stroke="#1e1b14" stroke-width="1"/>
+  <line x1="690" y1="213" x2="690" y2="257" stroke="#1e1b14" stroke-width="1"/>
+  <line x1="705" y1="213" x2="705" y2="257" stroke="#1e1b14" stroke-width="1"/>
+  <text x="560" y="303" font-size="12.5" font-weight="700" fill="#1e1b14">Condensing unit</text>
+  <text x="560" y="318" font-size="11" fill="#1e1b14">(compressor + condenser)</text>
+  <text x="560" y="333" font-size="10.5" fill="#7a7256">roof, ground, or top-mounted</text>
+
+  <!-- temp range callout -->
+  <rect x="60" y="420" width="380" height="60" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="75" y="443" font-size="12.5" font-weight="700" fill="#7a3f14">Cooler: 35–38°F</text>
+  <text x="220" y="443" font-size="12.5" font-weight="700" fill="#7a3f14">Freezer: −10 to 0°F</text>
+  <text x="75" y="461" font-size="10.5" fill="#7a3f14">The gap drives real design differences:</text>
+  <text x="75" y="474" font-size="10.5" fill="#7a3f14">active defrost, heated ports, frame heaters</text>
+</svg>

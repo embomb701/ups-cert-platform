@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Control Circuit Decides. Load Circuit Does.</text>
+  <text x="24" y="52" font-size="12" fill="#5c5748">The single most useful diagnostic split in kitchen equipment.</text>
+
+  <!-- CONTROL CIRCUIT ROW -->
+  <text x="24" y="90" font-size="13" font-weight="700" fill="#2a5f8f">CONTROL CIRCUIT — low voltage, decides</text>
+  <g font-size="10" font-weight="700" fill="#2a5f8f">
+    <rect x="24" y="100" width="70" height="34" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="45" y="121">L1</text>
+    <rect x="110" y="100" width="70" height="34" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="122" y="121">Fuse</text>
+    <rect x="196" y="100" width="90" height="34" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="203" y="121">Power switch</text>
+    <rect x="302" y="100" width="70" height="34" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="317" y="121">Timer</text>
+    <rect x="388" y="100" width="90" height="34" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="396" y="121">Thermostat</text>
+    <rect x="494" y="100" width="95" height="34" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="500" y="121">High-limit</text>
+    <rect x="605" y="100" width="100" height="34" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="615" y="121">Door switch</text>
+    <rect x="721" y="100" width="130" height="34" rx="4" fill="#fff4e8" stroke="#7a3f14" stroke-width="2.5"/><text x="730" y="121" fill="#7a3f14">Contactor coil</text>
+  </g>
+  <!-- connecting arrows -->
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#a2)">
+    <line x1="94" y1="117" x2="108" y2="117"/>
+    <line x1="180" y1="117" x2="194" y2="117"/>
+    <line x1="286" y1="117" x2="300" y2="117"/>
+    <line x1="372" y1="117" x2="386" y2="117"/>
+    <line x1="478" y1="117" x2="492" y2="117"/>
+    <line x1="589" y1="117" x2="603" y2="117"/>
+    <line x1="705" y1="117" x2="719" y2="117"/>
+  </g>
+  <text x="24" y="160" font-size="10.5" fill="#5c5748">Every switch and safety in this chain is a suspect. The schematic tells you the order to check them —</text>
+  <text x="24" y="174" font-size="10.5" fill="#5c5748">hunt the open point with your meter, chain link by chain link.</text>
+
+  <!-- LOAD CIRCUIT ROW -->
+  <text x="24" y="215" font-size="13" font-weight="700" fill="#7a3f14">LOAD CIRCUIT — heavy current, does</text>
+  <g font-size="10.5" font-weight="700">
+    <rect x="24" y="225" width="70" height="34" rx="4" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/><text x="45" y="246" fill="#7a3f14">L1</text>
+    <rect x="130" y="225" width="180" height="34" rx="4" fill="#fdeec9" stroke="#7a3f14" stroke-width="2.5"/><text x="145" y="246" fill="#7a3f14">Contactor contacts</text>
+    <rect x="345" y="225" width="180" height="34" rx="4" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/><text x="370" y="246" fill="#7a3f14">Element or motor</text>
+    <rect x="560" y="225" width="70" height="34" rx="4" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/><text x="581" y="246" fill="#7a3f14">L2</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#a2)">
+    <line x1="94" y1="242" x2="128" y2="242"/>
+    <line x1="310" y1="242" x2="343" y2="242"/>
+    <line x1="525" y1="242" x2="558" y2="242"/>
+  </g>
+
+  <!-- coil to contacts link -->
+  <path d="M 786 134 L 786 190 L 220 190 L 220 223" fill="none" stroke="#7a7256" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="240" y="200" font-size="10" fill="#7a7256">energized coil pulls the contacts closed</text>
+
+  <!-- Diagnostic callout -->
+  <rect x="24" y="285" width="420" height="90" rx="6" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="38" y="308" font-size="12" font-weight="700" fill="#2a5f8f">Contactor diagnostic</text>
+  <text x="38" y="328" font-size="10.5" fill="#1e1b14">Coil voltage present, no pull-in →</text>
+  <text x="38" y="342" font-size="10.5" font-weight="700" fill="#1e1b14">bad coil, replace it</text>
+  <text x="38" y="360" font-size="10.5" fill="#1e1b14">No coil voltage → open point upstream</text>
+
+  <!-- Motor callout -->
+  <rect x="465" y="285" width="410" height="90" rx="6" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+  <text x="480" y="308" font-size="12" font-weight="700" fill="#7a3f14">Single-phase motor hums, won't spin</text>
+  <text x="480" y="328" font-size="10.5" fill="#1e1b14">Suspect the start components first —</text>
+  <text x="480" y="342" font-size="10.5" font-weight="700" fill="#1e1b14">start capacitor or start relay</text>
+  <text x="480" y="360" font-size="10.5" fill="#1e1b14">— not necessarily the windings</text>
+
+  <rect x="24" y="392" width="852" height="46" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="413" font-size="11" font-weight="700" fill="#7a3f14">Chattering contactor = low control voltage or a failing safety switch cycling rapidly.</text>
+  <text x="38" y="429" font-size="11" font-weight="700" fill="#7a3f14">Burned/pitted contacts = voltage drop across closed contacts — measure millivolts under load.</text>
+
+  <defs>
+    <marker id="a2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

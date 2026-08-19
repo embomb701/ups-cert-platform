@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Electric Fryer — Tank &amp; Control Chain</text>
+
+  <!-- Tank cutaway -->
+  <path d="M 60 90 L 460 90 L 430 400 L 90 400 Z" fill="#ffffff" stroke="#1e1b14" stroke-width="4"/>
+
+  <!-- oil fill -->
+  <path d="M 100 190 L 420 190 L 400 390 L 120 390 Z" fill="#fdeec9" stroke="#c9a227" stroke-width="2"/>
+  <line x1="90" y1="190" x2="430" y2="190" stroke="#c9a227" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="440" y="186" font-size="10.5" fill="#8a6d10">oil level</text>
+
+  <!-- immersion elements (zigzag) -->
+  <g stroke="#7a3f14" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M 150 220 L 170 240 L 150 260 L 170 280 L 150 300 L 170 320 L 150 340"/>
+    <path d="M 340 220 L 360 240 L 340 260 L 360 280 L 340 300 L 360 320 L 340 340"/>
+  </g>
+  <text x="185" y="360" font-size="11" font-weight="700" fill="#7a3f14">Immersion</text>
+  <text x="185" y="373" font-size="11" font-weight="700" fill="#7a3f14">elements</text>
+
+  <!-- thermostat probe -->
+  <line x1="250" y1="200" x2="250" y2="300" stroke="#2a5f8f" stroke-width="3"/>
+  <circle cx="250" cy="300" r="6" fill="#2a5f8f"/>
+  <text x="220" y="415" font-size="11.5" font-weight="700" fill="#2a5f8f">Thermostat probe</text>
+  <text x="220" y="428" font-size="10" fill="#5c5748">senses oil temperature</text>
+  <line x1="250" y1="300" x2="250" y2="405" stroke="#2a5f8f" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- high-limit probe -->
+  <line x1="290" y1="205" x2="290" y2="235" stroke="#a4231e" stroke-width="3"/>
+  <circle cx="290" cy="235" r="6" fill="#a4231e"/>
+  <text x="310" y="130" font-size="11.5" font-weight="700" fill="#a4231e">High-limit probe</text>
+  <text x="310" y="143" font-size="10" fill="#5c5748">last line of defense</text>
+  <text x="310" y="156" font-size="10" fill="#5c5748">against an oil fire</text>
+  <line x1="330" y1="160" x2="292" y2="230" stroke="#a4231e" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- warning callout -->
+  <rect x="60" y="430" width="370" height="42" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/>
+  <text x="72" y="448" font-size="11" font-weight="700" fill="#8f1f1a">350°F oil = instant deep burns. Water in hot oil erupts.</text>
+  <text x="72" y="463" font-size="11" font-weight="700" fill="#8f1f1a">Never lean over an open fryer.</text>
+
+  <!-- Control chain -->
+  <text x="520" y="70" font-size="13" font-weight="700" fill="#1e1b14">Control chain — decides vs. does</text>
+
+  <g font-size="12.5" font-weight="700">
+    <rect x="520" y="90" width="180" height="38" rx="5" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+    <text x="530" y="114" fill="#2a5f8f">Thermostat</text>
+
+    <line x1="610" y1="128" x2="610" y2="155" stroke="#1e1b14" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="520" y="155" width="180" height="38" rx="5" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+    <text x="547" y="179" fill="#2a5f8f">High-limit (reset)</text>
+
+    <line x1="610" y1="193" x2="610" y2="220" stroke="#1e1b14" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="520" y="220" width="180" height="38" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="2"/>
+    <text x="555" y="244" fill="#7a3f14">Contactor coil</text>
+
+    <line x1="610" y1="258" x2="610" y2="285" stroke="#1e1b14" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="520" y="285" width="180" height="38" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+    <text x="530" y="309" fill="#7a3f14">Contactor contacts</text>
+
+    <line x1="610" y1="323" x2="610" y2="350" stroke="#1e1b14" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="520" y="350" width="180" height="38" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2.5"/>
+    <text x="565" y="374" fill="#7a3f14">Elements (L1/L2)</text>
+  </g>
+
+  <text x="720" y="105" font-size="10.5" fill="#2a5f8f">control circuit</text>
+  <text x="720" y="118" font-size="10.5" fill="#2a5f8f">(low voltage)</text>
+  <text x="720" y="245" font-size="10.5" fill="#7a3f14">load circuit</text>
+  <text x="720" y="258" font-size="10.5" fill="#7a3f14">(heavy current)</text>
+
+  <rect x="520" y="415" width="330" height="52" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="532" y="435" font-size="11" fill="#7a3f14">Welded contacts = uncontrolled heating —</text>
+  <text x="532" y="450" font-size="11" fill="#7a3f14">the most dangerous fryer failure. Pull it</text>
+  <text x="532" y="463" font-size="11" fill="#7a3f14">from service immediately.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>
