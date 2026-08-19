@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The Fuel Path — Main Tank to Cylinder</text>
+
+  <!-- fuel path chain -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="60" width="100" height="46" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="34" y="80" fill="#b45309">Main tank</text><text x="34" y="94" fill="#b45309" font-weight="400" font-size="8.5">sub-base/above/UG</text>
+
+    <rect x="134" y="60" width="90" height="46" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="144" y="80" fill="#2a5f8f">Transfer</text><text x="144" y="94" fill="#2a5f8f" font-weight="400" font-size="8.5">pump (remote)</text>
+
+    <rect x="234" y="60" width="90" height="46" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="244" y="80" fill="#b45309">Day tank</text><text x="244" y="94" fill="#b45309" font-weight="400" font-size="8.5">engine-ready fuel</text>
+
+    <rect x="334" y="60" width="110" height="46" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="344" y="80" fill="#a4231e">Filter / water</text><text x="344" y="94" fill="#a4231e" font-weight="400" font-size="8.5">separator</text>
+
+    <rect x="454" y="60" width="90" height="46" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="464" y="80" fill="#2a5f8f">Lift pump</text>
+
+    <rect x="554" y="60" width="100" height="46" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="564" y="80" fill="#a4231e">Secondary</text><text x="564" y="94" fill="#a4231e" font-weight="400" font-size="8.5">filters</text>
+
+    <rect x="664" y="60" width="110" height="46" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="674" y="80" fill="#b45309">Injection</text><text x="674" y="94" fill="#b45309" font-weight="400" font-size="8.5">common rail / unit</text>
+
+    <rect x="784" y="60" width="95" height="46" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="794" y="80" fill="#0e7490">Return</text><text x="794" y="94" fill="#0e7490" font-weight="400" font-size="8.5">hot excess fuel</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#af2)">
+    <line x1="124" y1="83" x2="132" y2="83"/><line x1="224" y1="83" x2="232" y2="83"/>
+    <line x1="324" y1="83" x2="332" y2="83"/><line x1="444" y1="83" x2="452" y2="83"/>
+    <line x1="544" y1="83" x2="552" y2="83"/><line x1="654" y1="83" x2="662" y2="83"/>
+    <line x1="774" y1="83" x2="782" y2="83"/>
+  </g>
+  <!-- return loop back to tank -->
+  <path d="M 830 106 L 830 140 L 74 140 L 74 106" fill="none" stroke="#0e7490" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#af2)"/>
+  <text x="350" y="135" font-size="9.5" fill="#0e7490">return fuel warms and stirs the tank</text>
+
+  <!-- common rail warning -->
+  <rect x="24" y="165" width="425" height="90" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="188" font-size="12" font-weight="700" fill="#8f1f1a">Common rail = extreme pressure</text>
+  <text x="38" y="208" font-size="10" fill="#5c5748">Tens of thousands of psi — precise, quiet, and</text>
+  <text x="38" y="223" font-size="10" fill="#5c5748">utterly intolerant of dirty fuel or amateur</text>
+  <text x="38" y="238" font-size="10" font-weight="700" fill="#8f1f1a">line-opening. Rail pressures maim — follow the book.</text>
+
+  <!-- air leak callout -->
+  <rect x="459" y="165" width="420" height="90" rx="6" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="473" y="188" font-size="12" font-weight="700" fill="#2a5f8f">The classic saboteur: suction-side air</text>
+  <text x="473" y="208" font-size="10" fill="#5c5748">Hard starting, hunting, stumbling under load,</text>
+  <text x="473" y="223" font-size="10" fill="#5c5748">dying after running — with NO visible fuel leak,</text>
+  <text x="473" y="238" font-size="10" font-weight="700" fill="#1f5a8f">because the leak is on the vacuum side.</text>
+
+  <rect x="24" y="270" width="855" height="150" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="293" font-size="12.5" font-weight="700" fill="#1e1b14">Filters and separators earn their keep</text>
+  <text x="38" y="316" font-size="10.5" fill="#5c5748">Primary separators spin/settle water out — drain the bowl on the walkaround; water there is a</text>
+  <text x="38" y="332" font-size="10.5" fill="#5c5748">message about the tank. Secondaries protect injection at fine microns. Restriction gauges tell</text>
+  <text x="38" y="348" font-size="10.5" fill="#5c5748">you when a filter is loading before the engine ever stumbles.</text>
+  <text x="38" y="374" font-size="10.5" font-weight="700" fill="#b45309">Runs clean at idle, starves at load, tank is healthy? Loaded filters flow enough for idle,</text>
+  <text x="38" y="390" font-size="10.5" font-weight="700" fill="#b45309">not for demand.</text>
+  <text x="38" y="411" font-size="9.5" fill="#5c5748">Bleeding/priming per the engine's procedure is the difference between a start and an hour of cranking after any filter change.</text>
+
+  <defs>
+    <marker id="af2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="context-stroke"/>
+    </marker>
+  </defs>
+</svg>

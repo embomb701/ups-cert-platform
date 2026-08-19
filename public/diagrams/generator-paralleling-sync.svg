@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Paralleling — Sync Before the Breaker Closes</text>
+
+  <!-- sync requirements -->
+  <text x="24" y="65" font-size="13" font-weight="700" fill="#1e1b14">Three conditions must match before closure</text>
+
+  <rect x="24" y="80" width="270" height="90" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="38" y="105" font-size="12.5" font-weight="700" fill="#0e7490">Voltage</text>
+  <text x="38" y="125" font-size="10" fill="#5c5748">Within a few percent</text>
+  <text x="38" y="140" font-size="10" fill="#5c5748">of the bus</text>
+
+  <rect x="315" y="80" width="270" height="90" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2.5"/>
+  <text x="329" y="105" font-size="12.5" font-weight="700" fill="#b45309">Frequency</text>
+  <text x="329" y="125" font-size="10" fill="#5c5748">Nearly equal — slight positive</text>
+  <text x="329" y="140" font-size="10" fill="#5c5748">slip so the incoming set picks up load</text>
+
+  <rect x="606" y="80" width="270" height="90" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="620" y="105" font-size="12.5" font-weight="700" fill="#a4231e">Phase angle</text>
+  <text x="620" y="125" font-size="10" fill="#5c5748">Waveforms aligned at the</text>
+  <text x="620" y="140" font-size="10" fill="#5c5748">moment of closure</text>
+
+  <rect x="24" y="185" width="852" height="70" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="208" font-size="12" font-weight="700" fill="#8f1f1a">Closing out of sync is the most violent event short of a fault</text>
+  <text x="38" y="228" font-size="10.5" fill="#5c5748">The bus instantly drags the incoming machine into step — torque transients that can shear</text>
+  <text x="38" y="243" font-size="10.5" fill="#5c5748">couplings, damage windings, and trip everything. Sync-check relays block closure outside the window.</text>
+
+  <!-- shared bus division -->
+  <text x="24" y="288" font-size="13" font-weight="700" fill="#1e1b14">Once paralleled: division of labor</text>
+
+  <rect x="24" y="303" width="410" height="100" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="326" font-size="12" font-weight="700" fill="#b45309">Governor → kW share (real power)</text>
+  <text x="38" y="348" font-size="10" fill="#5c5748">Fuel setting controls that machine's</text>
+  <text x="38" y="363" font-size="10" fill="#5c5748">portion of real power — droop or</text>
+  <text x="38" y="378" font-size="10" fill="#5c5748">isochronous load-sharing lines coordinate it.</text>
+
+  <rect x="459" y="303" width="415" height="100" rx="6" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="473" y="326" font-size="12" font-weight="700" fill="#2a5f8f">AVR / excitation → kVAR share (reactive)</text>
+  <text x="473" y="348" font-size="10" fill="#5c5748">A machine hogging or shedding kW has a</text>
+  <text x="473" y="363" font-size="10" fill="#5c5748">governor/load-share problem; one circulating</text>
+  <text x="473" y="378" font-size="10" fill="#5c5748">vars has an excitation/compensation problem.</text>
+
+  <rect x="24" y="415" width="850" height="35" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="437" font-size="10.5" font-weight="700" fill="#7a3f14">Dead-bus start (first set, no sync) · subsequent sets synchronize on · reverse-power protection trips a motoring generator</text>
+</svg>

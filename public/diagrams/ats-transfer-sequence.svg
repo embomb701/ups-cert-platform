@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">ATS — the Decision-Maker of Standby Power</text>
+
+  <!-- timer chain -->
+  <g font-size="9" font-weight="700">
+    <rect x="24" y="55" width="95" height="46" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="32" y="74" fill="#a4231e">1. Utility</text><text x="32" y="88" fill="#a4231e" font-weight="400" font-size="8">fails/degrades</text>
+
+    <rect x="129" y="55" width="100" height="46" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="137" y="70" fill="#b45309">2. Start delay</text><text x="137" y="83" fill="#b45309" font-weight="400" font-size="8">1–3s ride-thru</text><text x="137" y="94" fill="#b45309" font-weight="400" font-size="8">(skip blinks)</text>
+
+    <rect x="239" y="55" width="95" height="46" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="247" y="74" fill="#b45309">3. Generator</text><text x="247" y="88" fill="#b45309" font-weight="400" font-size="8">starts</text>
+
+    <rect x="344" y="55" width="95" height="46" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="352" y="70" fill="#0e7490">4. ATS watches</text><text x="352" y="83" fill="#0e7490" font-weight="400" font-size="8">V &amp; Hz OK?</text>
+
+    <rect x="449" y="55" width="90" height="46" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="457" y="74" fill="#0e7490">5. TRANSFER</text><text x="457" y="88" fill="#0e7490" font-weight="400" font-size="8">to emergency</text>
+
+    <rect x="549" y="55" width="105" height="46" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="557" y="70" fill="#a4231e">6. Utility back</text><text x="557" y="83" fill="#a4231e" font-weight="400" font-size="8">retransfer delay</text><text x="557" y="94" fill="#a4231e" font-weight="400" font-size="8">(many minutes)</text>
+
+    <rect x="664" y="55" width="90" height="46" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="672" y="74" fill="#2a5f8f">7. Retransfer</text>
+
+    <rect x="764" y="55" width="105" height="46" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="772" y="70" fill="#2a5f8f">8. Cooldown</text><text x="772" y="83" fill="#2a5f8f" font-weight="400" font-size="8">unloaded, stop</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.3" marker-end="url(#at)">
+    <line x1="119" y1="78" x2="127" y2="78"/><line x1="229" y1="78" x2="237" y2="78"/>
+    <line x1="334" y1="78" x2="342" y2="78"/><line x1="439" y1="78" x2="447" y2="78"/>
+    <line x1="539" y1="78" x2="547" y2="78"/><line x1="654" y1="78" x2="662" y2="78"/>
+    <line x1="754" y1="78" x2="762" y2="78"/>
+  </g>
+
+  <rect x="24" y="115" width="845" height="40" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="139" font-size="10.5" font-weight="700" fill="#7a3f14">Every timer exists for a reason — knowing the reasons lets you read a site's behavior.</text>
+
+  <!-- transition types -->
+  <text x="24" y="185" font-size="13" font-weight="700" fill="#1e1b14">Transfer types — what happens to the load mid-move</text>
+
+  <rect x="24" y="200" width="270" height="110" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="223" font-size="11.5" font-weight="700" fill="#0e7490">OPEN transition</text>
+  <text x="38" y="243" font-size="10" fill="#5c5748">Break-before-make — standard.</text>
+  <text x="38" y="258" font-size="10" fill="#5c5748">Load blinks momentarily on</text>
+  <text x="38" y="273" font-size="10" fill="#5c5748">every transfer.</text>
+
+  <rect x="308" y="200" width="285" height="110" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="322" y="223" font-size="11.5" font-weight="700" fill="#b45309">DELAYED transition</text>
+  <text x="322" y="243" font-size="10" fill="#5c5748">Open, pause in neutral, then close.</text>
+  <text x="322" y="258" font-size="10" fill="#5c5748">Motor fields decay first — protects</text>
+  <text x="322" y="273" font-size="10" fill="#5c5748">elevators/pumps from slamming.</text>
+
+  <rect x="607" y="200" width="262" height="110" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="621" y="223" font-size="11.5" font-weight="700" fill="#a4231e">CLOSED transition</text>
+  <text x="621" y="243" font-size="10" fill="#5c5748">Make-before-break — momentary</text>
+  <text x="621" y="258" font-size="10" fill="#5c5748">sub-cycle parallel. Load never</text>
+  <text x="621" y="273" font-size="10" fill="#5c5748">blinks; needs sync-check + utility OK.</text>
+
+  <!-- critical wires callout -->
+  <rect x="24" y="330" width="845" height="130" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="353" font-size="12.5" font-weight="700" fill="#1e1b14">The engine-start wire pair is the site's most critical circuit</text>
+  <text x="38" y="375" font-size="10.5" fill="#5c5748">Many "generator failed to start" outages were actually these two wires — or their connections —</text>
+  <text x="38" y="390" font-size="10.5" fill="#5c5748">failing to deliver the command. Check them before condemning the generator.</text>
+  <text x="38" y="412" font-size="10.5" font-weight="700" fill="#7a3f14">Service rhythm: exercise clocks, contact inspection (transfer contacts carry full building current</text>
+  <text x="38" y="427" font-size="10.5" font-weight="700" fill="#7a3f14">and erode), mechanism lubrication, sensing calibration, control-wiring integrity.</text>
+  <text x="38" y="448" font-size="9.5" fill="#5c5748">Two live sources — mechanically interlocked so they must never connect to each other.</text>
+
+  <defs>
+    <marker id="at" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

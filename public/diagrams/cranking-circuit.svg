@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The Cranking Circuit — Test It UNDER CRANK</text>
+
+  <!-- circuit chain -->
+  <rect x="40" y="60" width="120" height="60" rx="5" fill="#fdeec9" stroke="#b45309" stroke-width="2.5"/>
+  <text x="55" y="86" font-size="11" font-weight="700" fill="#b45309">Battery</text>
+  <text x="55" y="102" font-size="9.5" fill="#5c5748">12V or 24V</text>
+
+  <path d="M 160 90 L 195 90" stroke="#1e1b14" stroke-width="3" marker-end="url(#ac)"/>
+  <text x="150" y="52" font-size="9" fill="#a4231e">heavy + cable</text>
+
+  <rect x="200" y="60" width="140" height="60" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="215" y="86" font-size="11" font-weight="700" fill="#a4231e">Starter solenoid</text>
+  <text x="215" y="102" font-size="9.5" fill="#5c5748">engages pinion</text>
+
+  <path d="M 340 90 L 375 90" stroke="#1e1b14" stroke-width="3" marker-end="url(#ac)"/>
+
+  <rect x="380" y="60" width="140" height="60" rx="5" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="395" y="86" font-size="11" font-weight="700" fill="#0e7490">Starter motor</text>
+  <text x="395" y="102" font-size="9.5" fill="#5c5748">100s–1000+ amps</text>
+
+  <!-- ground return -->
+  <path d="M 450 120 L 450 155 L 100 155 L 100 120" fill="none" stroke="#7a7256" stroke-width="3" marker-end="url(#ac)"/>
+  <text x="200" y="148" font-size="9" fill="#7a7256">return through frame / ground cable</text>
+
+  <!-- voltage drop test points -->
+  <rect x="40" y="180" width="480" height="80" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="55" y="203" font-size="12" font-weight="700" fill="#1e1b14">Voltage drop under crank — hunt each segment</text>
+  <text x="55" y="223" font-size="10" fill="#5c5748">12V system should hold ≈9.5–10V cranking</text>
+  <text x="55" y="238" font-size="10" fill="#5c5748">24V system should hold ≈19–20V cranking</text>
+  <text x="55" y="253" font-size="10" font-weight="700" fill="#a4231e">More than a few tenths across any cable/connection = failure point</text>
+
+  <!-- symptom table -->
+  <text x="560" y="75" font-size="13" font-weight="700" fill="#1e1b14">Symptom → decisive measurement</text>
+
+  <g font-size="10">
+    <rect x="560" y="85" width="300" height="34" fill="#ffffff" stroke="#1e1b14" stroke-width="1"/>
+    <text x="570" y="104" font-weight="700" fill="#1e1b14">Click, no crank</text>
+    <text x="570" y="117" fill="#5c5748">Volts under crank: collapse = battery</text>
+
+    <rect x="560" y="119" width="300" height="34" fill="#fdf7ea" stroke="#1e1b14" stroke-width="1"/>
+    <text x="570" y="138" font-weight="700" fill="#1e1b14">Slow crank</text>
+    <text x="570" y="151" fill="#5c5748">Drops per cable segment; oil temp/viscosity</text>
+
+    <rect x="560" y="153" width="300" height="34" fill="#ffffff" stroke="#1e1b14" stroke-width="1"/>
+    <text x="570" y="172" font-weight="700" fill="#1e1b14">No click at all</text>
+    <text x="570" y="185" fill="#5c5748">Relay/controller output; interlocks, E-stop</text>
+
+    <rect x="560" y="187" width="300" height="34" fill="#fdf7ea" stroke="#1e1b14" stroke-width="1"/>
+    <text x="570" y="206" font-weight="700" fill="#1e1b14">Spin, no engagement</text>
+    <text x="570" y="219" fill="#5c5748">Pinion / flywheel ring gear inspection</text>
+  </g>
+
+  <rect x="40" y="290" width="820" height="150" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="55" y="315" font-size="13" font-weight="700" fill="#b45309">Why test under load, not at rest</text>
+  <text x="55" y="338" font-size="11" fill="#1e1b14">V = I × R: at 500+ amps, a few milliohms of corrosion becomes volts of loss.</text>
+  <text x="55" y="356" font-size="11" fill="#1e1b14">At rest (near-zero current), that same corrosion reads as a perfectly healthy circuit —</text>
+  <text x="55" y="374" font-size="11" fill="#1e1b14">a corroded lug or loose ground strap that "reads fine" at rest can eat 2–3 volts under</text>
+  <text x="55" y="392" font-size="11" fill="#1e1b14">crank and leave the starter too weak to roll the engine.</text>
+  <text x="55" y="418" font-size="10.5" font-weight="700" fill="#8a5010">Most failed generator starts trace to the starting system — most of those to batteries.</text>
+
+  <defs>
+    <marker id="ac" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

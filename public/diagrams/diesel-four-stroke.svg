@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Compression Ignition — No Spark Plug Anywhere</text>
+
+  <!-- 4 strokes -->
+  <g>
+    <!-- Intake -->
+    <rect x="30" y="60" width="200" height="170" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/>
+    <text x="45" y="85" font-size="12.5" font-weight="700" fill="#0e7490">1. INTAKE</text>
+    <rect x="90" y="100" width="60" height="90" fill="none" stroke="#1e1b14" stroke-width="2"/>
+    <rect x="95" y="150" width="50" height="38" fill="#7a7256"/>
+    <path d="M 120 100 L 120 70" stroke="#0e7490" stroke-width="2" marker-end="url(#ad)"/>
+    <text x="45" y="215" font-size="9.5" fill="#5c5748">Piston down — air only</text>
+
+    <!-- Compression -->
+    <rect x="245" y="60" width="200" height="170" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2.5"/>
+    <text x="260" y="85" font-size="12.5" font-weight="700" fill="#b45309">2. COMPRESSION</text>
+    <rect x="305" y="100" width="60" height="90" fill="none" stroke="#1e1b14" stroke-width="2"/>
+    <rect x="310" y="105" width="50" height="20" fill="#7a7256"/>
+    <path d="M 335 150 L 335 115" stroke="#b45309" stroke-width="2" marker-end="url(#ad)"/>
+    <text x="260" y="215" font-size="9.5" fill="#5c5748">15–20:1, air hits ≈1000°F</text>
+
+    <!-- Power -->
+    <rect x="460" y="60" width="200" height="170" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+    <text x="475" y="85" font-size="12.5" font-weight="700" fill="#a4231e">3. POWER</text>
+    <rect x="520" y="100" width="60" height="90" fill="none" stroke="#1e1b14" stroke-width="2"/>
+    <rect x="525" y="105" width="50" height="20" fill="#7a7256"/>
+    <path d="M 550 90 L 555 100 L 545 100 Z" fill="#e0562a"/>
+    <path d="M 550 150 L 550 190" stroke="#a4231e" stroke-width="2" marker-end="url(#ad)"/>
+    <text x="475" y="215" font-size="9.5" fill="#5c5748">Fuel injected — ignites itself</text>
+
+    <!-- Exhaust -->
+    <rect x="675" y="60" width="200" height="170" rx="6" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2.5"/>
+    <text x="690" y="85" font-size="12.5" font-weight="700" fill="#2a5f8f">4. EXHAUST</text>
+    <rect x="735" y="100" width="60" height="90" fill="none" stroke="#1e1b14" stroke-width="2"/>
+    <rect x="740" y="150" width="50" height="38" fill="#7a7256"/>
+    <path d="M 765 100 L 765 70" stroke="#2a5f8f" stroke-width="2" marker-end="url(#ad)"/>
+    <text x="690" y="215" font-size="9.5" fill="#5c5748">Piston up — gases pushed out</text>
+  </g>
+
+  <rect x="30" y="245" width="845" height="30" rx="4" fill="#fff4e8" stroke="#d4802a" stroke-width="1.2"/>
+  <text x="45" y="265" font-size="10.5" font-weight="700" fill="#7a3f14">Two revolutions per power stroke — cylinders phased so the crankshaft gets continuous power</text>
+
+  <!-- 3 things diesel needs -->
+  <rect x="30" y="290" width="410" height="150" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="45" y="313" font-size="13" font-weight="700" fill="#1e1b14">Cranks but won't fire — 3 things diesel needs</text>
+  <text x="45" y="336" font-size="11" font-weight="700" fill="#a4231e">1. FUEL — clean, timed, atomized (check first)</text>
+  <text x="45" y="356" font-size="11" font-weight="700" fill="#0e7490">2. AIR — clean, abundant (filters, turbo)</text>
+  <text x="45" y="376" font-size="11" font-weight="700" fill="#b45309">3. COMPRESSION — rings, valves (leak-down test)</text>
+  <text x="45" y="400" font-size="9.5" fill="#5c5748">Interrogation order: fuel (most common), then air,</text>
+  <text x="45" y="414" font-size="9.5" fill="#5c5748">then compression — hinted at by white smoke/blow-by.</text>
+
+  <!-- turbo callout -->
+  <rect x="460" y="290" width="415" height="150" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="475" y="313" font-size="13" font-weight="700" fill="#8f1f1a">Turbocharger discipline</text>
+  <text x="475" y="334" font-size="10.5" fill="#5c5748">Exhaust-driven compressor force-feeding the</text>
+  <text x="475" y="349" font-size="10.5" fill="#5c5748">cylinders — listen for the healthy whistle,</text>
+  <text x="475" y="364" font-size="10.5" fill="#5c5748">watch for oil leaks at the shaft.</text>
+  <text x="475" y="386" font-size="10.5" font-weight="700" fill="#8f1f1a">Never shut down a worked turbo without a</text>
+  <text x="475" y="401" font-size="10.5" font-weight="700" fill="#8f1f1a">cooldown idle — its bearings cook in stagnant oil.</text>
+  <text x="475" y="422" font-size="9.5" fill="#5c5748">Oil pressure right after start is vital sign #1.</text>
+
+  <defs>
+    <marker id="ad" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="context-stroke"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Alternator — Two Knobs: Speed Sets Hz, Field Sets Volts</text>
+
+  <!-- brushless chain -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="60" width="130" height="60" rx="5" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2.5"/><text x="34" y="83" fill="#2a5f8f">PMG pilot</text><text x="34" y="98" fill="#2a5f8f" font-weight="400" font-size="9">clean supply power</text>
+
+    <rect x="184" y="60" width="130" height="60" rx="5" fill="#fdeec9" stroke="#b45309" stroke-width="2.5"/><text x="194" y="83" fill="#b45309">AVR</text><text x="194" y="98" fill="#b45309" font-weight="400" font-size="9">regulator</text>
+
+    <rect x="344" y="60" width="130" height="60" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="354" y="83" fill="#a4231e">Exciter</text><text x="354" y="98" fill="#a4231e" font-weight="400" font-size="9">stator: DC / rotor: AC</text>
+
+    <rect x="504" y="60" width="150" height="60" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="514" y="83" fill="#a4231e">Rotating rectifier</text><text x="514" y="98" fill="#a4231e" font-weight="400" font-size="9">diodes, spins at 1800rpm</text>
+
+    <rect x="684" y="60" width="150" height="60" rx="5" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/><text x="694" y="83" fill="#0e7490">Main field</text><text x="694" y="98" fill="#0e7490" font-weight="400" font-size="9">rotor windings</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#ae)">
+    <line x1="154" y1="90" x2="182" y2="90"/><line x1="314" y1="90" x2="342" y2="90"/>
+    <line x1="474" y1="90" x2="502" y2="90"/><line x1="654" y1="90" x2="682" y2="90"/>
+  </g>
+
+  <rect x="24" y="140" width="810" height="55" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/>
+  <text x="38" y="160" font-size="10.5" font-weight="700" fill="#8f1f1a">Classic low-voltage fault: spinning diode set fails — output voltage low and</text>
+  <text x="38" y="176" font-size="10.5" font-weight="700" fill="#8f1f1a">unresponsive to AVR adjustment. Diode testing is a standard alternator procedure.</text>
+
+  <!-- rotor/stator -->
+  <text x="24" y="228" font-size="13" font-weight="700" fill="#1e1b14">Rotor sweeps past the Stator</text>
+  <circle cx="100" cy="280" r="42" fill="none" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="72" y="285" font-size="10" font-weight="700" fill="#a4231e">ROTOR</text>
+  <text x="60" y="335" font-size="9" fill="#5c5748">DC field winding</text>
+  <rect x="175" y="255" width="230" height="50" rx="5" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="190" y="277" font-size="10" font-weight="700" fill="#2a5f8f">STATOR — output windings</text>
+  <text x="190" y="292" font-size="9" fill="#5c5748">3-phase AC induced here</text>
+
+  <rect x="24" y="355" width="410" height="95" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="378" font-size="11.5" font-weight="700" fill="#0e7490">Under-frequency roll-off</text>
+  <text x="38" y="398" font-size="10" fill="#5c5748">Below ≈57–58 Hz, the AVR deliberately</text>
+  <text x="38" y="413" font-size="10" fill="#5c5748">reduces voltage (V/Hz protection) so the</text>
+  <text x="38" y="428" font-size="10" font-weight="700" fill="#1f5a8f">lugging engine can recover — protection,</text>
+  <text x="38" y="443" font-size="10" font-weight="700" fill="#1f5a8f">not failure.</text>
+
+  <!-- no voltage short list -->
+  <rect x="459" y="220" width="415" height="230" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="243" font-size="12.5" font-weight="700" fill="#b45309">No voltage at all — short list</text>
+  <text x="473" y="266" font-size="10.5" fill="#5c5748">Healthy engine spinning a dead stator:</text>
+  <text x="473" y="288" font-size="10.5" fill="#1e1b14">• AVR failure</text>
+  <text x="473" y="306" font-size="10.5" fill="#1e1b14">• Loss of residual magnetism</text>
+  <text x="473" y="321" font-size="9.5" fill="#5c5748">  (older self-excited sets — field flashing)</text>
+  <text x="473" y="339" font-size="10.5" fill="#1e1b14">• Rotating diodes</text>
+  <text x="473" y="357" font-size="10.5" fill="#1e1b14">• Open in the excitation chain</text>
+  <text x="473" y="382" font-size="10" font-weight="700" fill="#8a5010">Field flashing: controlled momentary DC</text>
+  <text x="473" y="397" font-size="10" font-weight="700" fill="#8a5010">to the field per the manufacturer procedure.</text>
+  <text x="473" y="418" font-size="9.5" fill="#5c5748">Wrong/unstable voltage at correct frequency: AVR,</text>
+  <text x="473" y="432" font-size="9.5" fill="#5c5748">sensing, exciter, rotating diodes, or the windings.</text>
+
+  <defs>
+    <marker id="ae" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>
