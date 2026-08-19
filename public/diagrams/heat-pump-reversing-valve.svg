@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Heat Pump — Same Four Parts, One Valve Reverses the Cycle</text>
+
+  <!-- COOLING mode -->
+  <rect x="40" y="60" width="400" height="240" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="55" y="88" font-size="14" font-weight="700" fill="#0e7490">SUMMER — Cooling Mode</text>
+
+  <rect x="65" y="105" width="150" height="50" rx="5" fill="#ffffff" stroke="#0e7490" stroke-width="2"/>
+  <text x="75" y="127" font-size="11" font-weight="700" fill="#0e7490">Indoor coil</text>
+  <text x="75" y="143" font-size="10" fill="#5c5748">= EVAPORATOR</text>
+
+  <path d="M 220 130 L 255 130" stroke="#1e1b14" stroke-width="2" marker-end="url(#ah1)"/>
+
+  <rect x="260" y="105" width="150" height="50" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+  <text x="270" y="127" font-size="11" font-weight="700" fill="#7a3f14">Outdoor coil</text>
+  <text x="270" y="143" font-size="10" fill="#5c5748">= CONDENSER</text>
+
+  <text x="65" y="185" font-size="10.5" fill="#1e1b14">House gives up heat indoors,</text>
+  <text x="65" y="200" font-size="10.5" fill="#1e1b14">rejects it outdoors.</text>
+
+  <rect x="65" y="215" width="345" height="70" rx="5" fill="#ffffff" stroke="#0e7490" stroke-width="1.5"/>
+  <text x="78" y="235" font-size="10.5" font-weight="700" fill="#0e7490">Solenoid: O terminal energized</text>
+  <text x="78" y="251" font-size="10" fill="#5c5748">(most brands — a few use B for heating instead)</text>
+  <text x="78" y="267" font-size="10" fill="#5c5748">Reversing valve holds this position</text>
+
+  <!-- HEATING mode -->
+  <rect x="460" y="60" width="400" height="240" rx="6" fill="#fdeec9" stroke="#7a3f14" stroke-width="2.5"/>
+  <text x="475" y="88" font-size="14" font-weight="700" fill="#7a3f14">WINTER — Heating Mode</text>
+
+  <rect x="485" y="105" width="150" height="50" rx="5" fill="#ffffff" stroke="#7a3f14" stroke-width="2"/>
+  <text x="495" y="127" font-size="11" font-weight="700" fill="#7a3f14">Outdoor coil</text>
+  <text x="495" y="143" font-size="10" fill="#5c5748">= EVAPORATOR</text>
+
+  <path d="M 640 130 L 675 130" stroke="#1e1b14" stroke-width="2" marker-end="url(#ah1)"/>
+
+  <rect x="680" y="105" width="150" height="50" rx="5" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="690" y="127" font-size="11" font-weight="700" fill="#0e7490">Indoor coil</text>
+  <text x="690" y="143" font-size="10" fill="#5c5748">= CONDENSER</text>
+
+  <text x="485" y="185" font-size="10.5" fill="#1e1b14">Refrigerant boils colder than</text>
+  <text x="485" y="200" font-size="10.5" fill="#1e1b14">20°F outdoor air — there's still heat in it.</text>
+
+  <rect x="485" y="215" width="345" height="70" rx="5" fill="#ffffff" stroke="#7a3f14" stroke-width="1.5"/>
+  <text x="498" y="235" font-size="10.5" font-weight="700" fill="#7a3f14">Valve failures:</text>
+  <text x="498" y="251" font-size="10" fill="#5c5748">stuck mid-position (both lines lukewarm),</text>
+  <text x="498" y="267" font-size="10" fill="#5c5748">internal leakage (mimics a weak compressor)</text>
+
+  <!-- defrost callout -->
+  <rect x="40" y="315" width="400" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="55" y="338" font-size="12.5" font-weight="700" fill="#8f1f1a">Defrost — briefly reverses to cooling</text>
+  <text x="55" y="358" font-size="10.5" fill="#5c5748">Hot gas through the frosted outdoor coil</text>
+  <text x="55" y="372" font-size="10.5" fill="#5c5748">while aux heat covers the cold supply air.</text>
+  <text x="55" y="393" font-size="10.5" font-weight="700" fill="#8f1f1a">Steam off the unit for a couple minutes</text>
+  <text x="55" y="407" font-size="10.5" font-weight="700" fill="#8f1f1a">= NORMAL. Ice-encased unit = failed defrost.</text>
+  <text x="55" y="428" font-size="9.5" fill="#5c5748">Failed defrost destroys capacity, breaks fan blades.</text>
+
+  <!-- aux heat callout -->
+  <rect x="460" y="315" width="400" height="130" rx="6" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="475" y="338" font-size="12.5" font-weight="700" fill="#2a5f8f">Auxiliary / emergency heat</text>
+  <text x="475" y="358" font-size="10.5" fill="#5c5748">Electric strips (or a furnace in dual-fuel)</text>
+  <text x="475" y="372" font-size="10.5" fill="#5c5748">cover defrost, deep cold, and compressor loss.</text>
+  <text x="475" y="393" font-size="10.5" font-weight="700" fill="#1f5a8f">High winter bills + good comfort =</text>
+  <text x="475" y="407" font-size="10.5" font-weight="700" fill="#1f5a8f">suspect strips silently carrying a dead compressor.</text>
+
+  <defs>
+    <marker id="ah1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

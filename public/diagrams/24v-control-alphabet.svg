@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The 24V Alphabet — the Thermostat Just Switches</text>
+
+  <!-- transformer -->
+  <rect x="40" y="70" width="130" height="80" rx="5" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2.5"/>
+  <text x="55" y="98" font-size="11" font-weight="700" fill="#2a5f8f">Transformer</text>
+  <text x="55" y="114" font-size="10" fill="#5c5748">in the equipment</text>
+  <text x="55" y="132" font-size="10" fill="#5c5748">R–C ≈ 24–28VAC</text>
+
+  <!-- thermostat -->
+  <rect x="220" y="70" width="140" height="220" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="235" y="95" font-size="12" font-weight="700" fill="#1e1b14">Thermostat</text>
+  <text x="235" y="112" font-size="9.5" fill="#7a7256">a set of switches</text>
+  <text x="235" y="125" font-size="9.5" fill="#7a7256">connecting R to</text>
+  <text x="235" y="138" font-size="9.5" fill="#7a7256">command wires</text>
+
+  <!-- wires from transformer to stat -->
+  <line x1="170" y1="90" x2="220" y2="90" stroke="#a4231e" stroke-width="3"/>
+  <text x="175" y="82" font-size="9.5" font-weight="700" fill="#a4231e">R</text>
+  <line x1="170" y1="130" x2="220" y2="130" stroke="#1e1b14" stroke-width="3"/>
+  <text x="175" y="122" font-size="9.5" font-weight="700" fill="#1e1b14">C</text>
+
+  <!-- terminal table -->
+  <g font-size="10.5">
+    <rect x="400" y="70" width="460" height="30" fill="#fdeaea" stroke="#a4231e" stroke-width="1"/>
+    <text x="410" y="90" font-weight="700" fill="#8f1f1a">R (Rc/Rh)</text>
+    <text x="530" y="90" fill="#5c5748">24V hot from transformer(s)</text>
+
+    <rect x="400" y="100" width="460" height="30" fill="#ffffff" stroke="#1e1b14" stroke-width="1"/>
+    <text x="410" y="120" font-weight="700" fill="#1e1b14">C</text>
+    <text x="530" y="120" fill="#5c5748">Common — return path (smart stats need it)</text>
+
+    <rect x="400" y="130" width="460" height="30" fill="#e9f2fb" stroke="#0e7490" stroke-width="1"/>
+    <text x="410" y="150" font-weight="700" fill="#0e7490">Y / Y2</text>
+    <text x="530" y="150" fill="#5c5748">Cooling stage 1/2 — condenser contactor</text>
+
+    <rect x="400" y="160" width="460" height="30" fill="#fdeec9" stroke="#7a3f14" stroke-width="1"/>
+    <text x="410" y="180" font-weight="700" fill="#7a3f14">W / W2</text>
+    <text x="530" y="180" fill="#5c5748">Heating stage 1/2</text>
+
+    <rect x="400" y="190" width="460" height="30" fill="#ffffff" stroke="#1e1b14" stroke-width="1"/>
+    <text x="410" y="210" font-weight="700" fill="#1e1b14">G</text>
+    <text x="530" y="210" fill="#5c5748">Indoor blower fan</text>
+
+    <rect x="400" y="220" width="460" height="30" fill="#eef3f7" stroke="#2a5f8f" stroke-width="1"/>
+    <text x="410" y="240" font-weight="700" fill="#2a5f8f">O / B</text>
+    <text x="530" y="240" fill="#5c5748">Reversing valve — O energized cooling (most)</text>
+  </g>
+
+  <!-- meter technique -->
+  <rect x="40" y="300" width="400" height="150" rx="6" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="55" y="323" font-size="12.5" font-weight="700" fill="#2a5f8f">Meter technique</text>
+  <text x="55" y="344" font-size="10" fill="#5c5748">R to C — transformer health (~24–28VAC)</text>
+  <text x="55" y="360" font-size="10" fill="#5c5748">Each terminal to C — what's being called</text>
+  <text x="55" y="376" font-size="10" fill="#5c5748">Across a closed switch/safety — 24V there</text>
+  <text x="55" y="392" font-size="10" fill="#5c5748">means it's actually OPEN (voltage-drop hunt)</text>
+  <text x="55" y="416" font-size="10.5" font-weight="700" fill="#1f5a8f">Blown 3A/5A board fuse = find the short</text>
+  <text x="55" y="432" font-size="10.5" font-weight="700" fill="#1f5a8f">before installing the next fuse.</text>
+
+  <!-- thermostat placement -->
+  <rect x="460" y="300" width="400" height="150" rx="6" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+  <text x="475" y="323" font-size="12.5" font-weight="700" fill="#7a3f14">Placement still matters</text>
+  <text x="475" y="344" font-size="10" fill="#5c5748">Afternoon sun, above a lamp, over a supply</text>
+  <text x="475" y="360" font-size="10" fill="#5c5748">draft — the stat lies to the whole system.</text>
+  <text x="475" y="376" font-size="10" fill="#5c5748">Loose wall anchors change thermal contact.</text>
+  <text x="475" y="400" font-size="10.5" font-weight="700" fill="#8a5010">When comfort complaints defy equipment</text>
+  <text x="475" y="416" font-size="10.5" font-weight="700" fill="#8a5010">diagnosis: stand where the stat stands and</text>
+  <text x="475" y="432" font-size="10.5" font-weight="700" fill="#8a5010">feel what it feels.</text>
+</svg>

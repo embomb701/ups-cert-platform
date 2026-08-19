@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="520" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Gas Furnace Sequence — the Board Halts at the Failed Step</text>
+
+  <!-- sequence chain -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="100" height="42" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="34" y="72" fill="#0e7490">1. Thermostat</text><text x="34" y="86" fill="#0e7490">calls W</text>
+
+    <rect x="134" y="55" width="100" height="42" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="144" y="72" fill="#0e7490">2. INDUCER</text><text x="144" y="86" fill="#0e7490">starts</text>
+
+    <rect x="244" y="55" width="110" height="42" rx="4" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/><text x="254" y="72" fill="#7a3f14">3. PRESSURE</text><text x="254" y="86" fill="#7a3f14">SWITCH proves it</text>
+
+    <rect x="364" y="55" width="100" height="42" rx="4" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/><text x="374" y="72" fill="#7a3f14">4. Igniter</text><text x="374" y="86" fill="#7a3f14">energizes</text>
+
+    <rect x="474" y="55" width="100" height="42" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="484" y="72" fill="#a4231e">5. GAS VALVE</text><text x="484" y="86" fill="#a4231e">opens, lights</text>
+
+    <rect x="584" y="55" width="110" height="42" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="594" y="72" fill="#a4231e">6. FLAME</text><text x="594" y="86" fill="#a4231e">SENSOR proves it</text>
+
+    <rect x="704" y="55" width="100" height="42" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="714" y="72" fill="#0e7490">7. Heat exch.</text><text x="714" y="86" fill="#0e7490">then BLOWER</text>
+
+    <rect x="814" y="55" width="65" height="42" rx="4" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/><text x="822" y="72" fill="#2a5f8f">8. Call</text><text x="822" y="86" fill="#2a5f8f">ends</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#af3)">
+    <line x1="124" y1="76" x2="132" y2="76"/><line x1="234" y1="76" x2="242" y2="76"/>
+    <line x1="354" y1="76" x2="362" y2="76"/><line x1="464" y1="76" x2="472" y2="76"/>
+    <line x1="574" y1="76" x2="582" y2="76"/><line x1="694" y1="76" x2="702" y2="76"/>
+    <line x1="804" y1="76" x2="812" y2="76"/>
+  </g>
+
+  <!-- stall table -->
+  <text x="24" y="130" font-size="13" font-weight="700" fill="#1e1b14">Where it stalls → what to suspect</text>
+
+  <g font-size="10.5">
+    <rect x="24" y="145" width="850" height="34" fill="#ffffff" stroke="#1e1b14" stroke-width="1"/>
+    <text x="34" y="167" font-weight="700" fill="#1e1b14">No inducer</text>
+    <text x="220" y="167" fill="#5c5748">Power, board, inducer motor</text>
+
+    <rect x="24" y="179" width="850" height="34" fill="#fdf7ea" stroke="#1e1b14" stroke-width="1"/>
+    <text x="34" y="201" font-weight="700" fill="#1e1b14">Inducer runs, no ignition</text>
+    <text x="220" y="201" fill="#5c5748">Pressure switch chain: flue/intake blockage, weak inducer, condensate, hose, switch</text>
+
+    <rect x="24" y="213" width="850" height="34" fill="#ffffff" stroke="#1e1b14" stroke-width="1"/>
+    <text x="34" y="235" font-weight="700" fill="#1e1b14">Lights, then drops out</text>
+    <text x="220" y="235" fill="#5c5748">Flame sensor rod / burner ground — microamps (the kitchen lesson, verbatim)</text>
+
+    <rect x="24" y="247" width="850" height="34" fill="#fdf7ea" stroke="#1e1b14" stroke-width="1"/>
+    <text x="34" y="269" font-weight="700" fill="#1e1b14">Heats, blower never starts</text>
+    <text x="220" y="269" fill="#5c5748">Board delay/relay, blower motor/capacitor</text>
+
+    <rect x="24" y="281" width="850" height="34" fill="#ffffff" stroke="#1e1b14" stroke-width="1"/>
+    <text x="34" y="303" font-weight="700" fill="#1e1b14">Cycles on high-limit</text>
+    <text x="220" y="303" fill="#5c5748">AIRFLOW — filter, blower wheel, ducts — before condemning the limit itself</text>
+  </g>
+
+  <rect x="24" y="335" width="415" height="80" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="358" font-size="11.5" font-weight="700" fill="#8f1f1a">Never leave a bypassed pressure switch</text>
+  <text x="38" y="376" font-size="10" fill="#5c5748">A "pressure switch stuck open" code indicts the</text>
+  <text x="38" y="390" font-size="10" fill="#5c5748">whole draft chain, not just the switch. Jumping</text>
+  <text x="38" y="404" font-size="10" fill="#5c5748">it out is the dangerous move, not the fix.</text>
+
+  <rect x="459" y="335" width="415" height="80" rx="6" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="473" y="358" font-size="11.5" font-weight="700" fill="#2a5f8f">Condensing furnaces (90%+)</text>
+  <text x="473" y="376" font-size="10" fill="#5c5748">Second heat exchanger + PVC venting +</text>
+  <text x="473" y="390" font-size="10" fill="#5c5748">condensate drain/trap. Walk the venting on</text>
+  <text x="473" y="404" font-size="10" fill="#5c5748">every call — snow, ice, and wasp nests block it.</text>
+
+  <rect x="24" y="430" width="850" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="452" font-size="10.5" font-weight="700" fill="#7a3f14">Verify, don't just read the code: does the inducer draw right amps? Does the switch see</text>
+  <text x="38" y="468" font-size="10.5" font-weight="700" fill="#7a3f14">its designed negative pressure (in. w.c., manometer) at its hose? Is the flue clear?</text>
+
+  <defs>
+    <marker id="af3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

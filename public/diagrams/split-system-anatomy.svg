@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Split System — Two Boxes, One Circuit</text>
+
+  <!-- INDOOR -->
+  <rect x="40" y="60" width="330" height="330" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="55" y="85" font-size="13" font-weight="700" fill="#1e1b14">Indoor Section</text>
+
+  <rect x="65" y="105" width="270" height="70" rx="5" fill="#e9f2fb" stroke="#0f766e" stroke-width="2.5"/>
+  <text x="80" y="128" font-size="11" font-weight="700" fill="#0f766e">Evaporator coil</text>
+  <text x="80" y="144" font-size="10" fill="#4a6d8a">on furnace or in air handler</text>
+  <text x="80" y="160" font-size="9.5" fill="#7a7256">dusty A-coil = starved return</text>
+
+  <!-- condensate system -->
+  <rect x="65" y="195" width="270" height="90" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+  <text x="80" y="217" font-size="11" font-weight="700" fill="#7a3f14">Condensate system</text>
+  <text x="80" y="235" font-size="10" fill="#5c5748">Primary drain with trap</text>
+  <text x="80" y="250" font-size="10" fill="#5c5748">+ secondary drain, overflow pan,</text>
+  <text x="80" y="264" font-size="10" fill="#5c5748">or float switch</text>
+  <text x="80" y="279" font-size="9.5" fill="#a4231e" font-weight="700">tripped float = "dead" system,</text>
+
+  <rect x="65" y="300" width="270" height="60" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/>
+  <text x="80" y="320" font-size="10" font-weight="700" fill="#8f1f1a">Clogged condensate drain is among</text>
+  <text x="80" y="334" font-size="10" font-weight="700" fill="#8f1f1a">the most common summer calls —</text>
+  <text x="80" y="348" font-size="10" font-weight="700" fill="#8f1f1a">a float switch is a 2-minute fix.</text>
+
+  <!-- OUTDOOR -->
+  <rect x="530" y="60" width="330" height="330" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="545" y="85" font-size="13" font-weight="700" fill="#1e1b14">Outdoor Unit</text>
+
+  <circle cx="620" cy="150" r="35" fill="none" stroke="#1e1b14" stroke-width="2.5"/>
+  <path d="M 620 150 L 645 138 M 620 150 L 648 152 M 620 150 L 632 175" stroke="#1e1b14" stroke-width="1.5"/>
+  <text x="670" y="140" font-size="10.5" font-weight="700" fill="#1e1b14">Condenser fan</text>
+  <text x="670" y="154" font-size="9.5" fill="#5c5748">+ condenser coil</text>
+  <text x="670" y="168" font-size="9.5" fill="#7a7256">cottonwood, grass clippings,</text>
+  <text x="670" y="181" font-size="9.5" fill="#7a7256">dog-run dust foul the coil</text>
+
+  <rect x="560" y="205" width="270" height="70" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2.5"/>
+  <text x="575" y="227" font-size="11" font-weight="700" fill="#7a3f14">Dual run capacitor</text>
+  <text x="575" y="244" font-size="10" fill="#5c5748">fan + compressor in one can —</text>
+  <text x="575" y="259" font-size="10" font-weight="700" fill="#a4231e">the single most-replaced part</text>
+  <text x="575" y="272" font-size="10" font-weight="700" fill="#a4231e">in residential AC. Test, don't guess.</text>
+
+  <rect x="560" y="290" width="270" height="70" rx="5" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="575" y="312" font-size="11" font-weight="700" fill="#2a5f8f">Two service valves</text>
+  <text x="575" y="329" font-size="10" fill="#5c5748">your gauge connections and</text>
+  <text x="575" y="343" font-size="10" fill="#5c5748">system isolation points</text>
+
+  <!-- line set connecting the two -->
+  <line x1="370" y1="140" x2="530" y2="140" stroke="#2a5f8f" stroke-width="4"/>
+  <line x1="370" y1="160" x2="530" y2="160" stroke="#a4231e" stroke-width="4"/>
+  <text x="380" y="120" font-size="10.5" font-weight="700" fill="#2a5f8f">Suction line — insulated end to end</text>
+  <text x="380" y="185" font-size="10.5" font-weight="700" fill="#a4231e">Liquid line</text>
+  <text x="380" y="200" font-size="9.5" fill="#5c5748">flare/brazed joints = leak sites</text>
+
+  <rect x="40" y="405" width="820" height="45" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="55" y="424" font-size="10.5" font-weight="700" fill="#7a3f14">Bare suction line through a hot attic = capacity loss and sweating, not liquid slugging.</text>
+  <text x="55" y="440" font-size="10.5" font-weight="700" fill="#7a3f14">Length/elevation limits and oil return come from the manufacturer, not guesswork.</text>
+</svg>

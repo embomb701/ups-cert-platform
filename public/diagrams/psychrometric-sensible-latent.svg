@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Cooling Is Two Jobs — Sensible and Latent</text>
+
+  <!-- chart axes -->
+  <line x1="80" y1="380" x2="80" y2="70" stroke="#1e1b14" stroke-width="2.5"/>
+  <line x1="80" y1="380" x2="440" y2="380" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="220" y="410" font-size="11" font-weight="700" fill="#1e1b14">Dry bulb temperature →</text>
+  <text x="30" y="230" font-size="11" font-weight="700" fill="#1e1b14" transform="rotate(-90 30 230)">Moisture content →</text>
+
+  <!-- RH curve (suggestion) -->
+  <path d="M 100 90 Q 250 130 420 340" fill="none" stroke="#0f766e" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="340" y="300" font-size="9" fill="#0f766e">100% RH</text>
+
+  <!-- starting point -->
+  <circle cx="320" cy="180" r="6" fill="#1e1b14"/>
+  <text x="330" y="175" font-size="10" font-weight="700" fill="#1e1b14">start</text>
+
+  <!-- sensible move (left, horizontal) -->
+  <path d="M 320 180 L 220 180" stroke="#a4231e" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="225" y="172" font-size="10" font-weight="700" fill="#a4231e">sensible only</text>
+  <text x="225" y="196" font-size="9.5" fill="#5c5748">(temperature drops)</text>
+
+  <!-- latent move (down) -->
+  <path d="M 320 180 L 320 280" stroke="#2a5f8f" stroke-width="2.5" marker-end="url(#ah)"/>
+  <text x="328" y="230" font-size="10" font-weight="700" fill="#2a5f8f">latent only</text>
+  <text x="328" y="245" font-size="9.5" fill="#5c5748">(moisture drops)</text>
+
+  <!-- real coil path (down-left) -->
+  <path d="M 320 180 Q 260 220 210 270" fill="none" stroke="#0f766e" stroke-width="3" marker-end="url(#ah)"/>
+  <text x="235" y="215" font-size="10.5" font-weight="700" fill="#0f766e">real coil: both,</text>
+  <text x="235" y="229" font-size="9.5" fill="#5c5748">down-and-left</text>
+
+  <!-- comfort zone box -->
+  <rect x="120" y="255" width="90" height="45" fill="none" stroke="#7a3f14" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="60" y="330" font-size="10" font-weight="700" fill="#7a3f14">Comfort zone: ≈68–78°F,</text>
+  <text x="60" y="344" font-size="10" font-weight="700" fill="#7a3f14">30–60% RH (ASHRAE 55)</text>
+
+  <!-- right side callouts -->
+  <rect x="480" y="70" width="380" height="110" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="495" y="93" font-size="12.5" font-weight="700" fill="#8f1f1a">No condensate in humid weather</text>
+  <text x="495" y="112" font-size="10.5" fill="#5c5748">Red flag: system is oversized (short-</text>
+  <text x="495" y="126" font-size="10.5" fill="#5c5748">cycling — satisfies the thermostat before</text>
+  <text x="495" y="140" font-size="10.5" fill="#5c5748">dehumidifying) or the coil isn't running</text>
+  <text x="495" y="154" font-size="10.5" fill="#5c5748">cold enough to cross the dew point.</text>
+  <text x="495" y="172" font-size="10" font-weight="700" fill="#8f1f1a">Bigger is not better — comfort needs runtime.</text>
+
+  <rect x="480" y="200" width="380" height="110" rx="6" fill="#eef3f7" stroke="#2a5f8f" stroke-width="2"/>
+  <text x="495" y="223" font-size="12.5" font-weight="700" fill="#2a5f8f">"It never gets cool" at 74°F / 65% RH</text>
+  <text x="495" y="242" font-size="10.5" fill="#5c5748">This is a latent problem, not a sensible</text>
+  <text x="495" y="256" font-size="10.5" fill="#5c5748">one — dehumidification is failing even</text>
+  <text x="495" y="270" font-size="10.5" fill="#5c5748">though the thermometer looks reasonable.</text>
+  <text x="495" y="288" font-size="10" font-weight="700" fill="#2a5f8f">Measure both temperature and humidity</text>
+  <text x="495" y="302" font-size="10" font-weight="700" fill="#2a5f8f">before believing either complaint.</text>
+
+  <rect x="480" y="330" width="380" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="495" y="352" font-size="10.5" font-weight="700" fill="#7a3f14">Winter "too cold" complaints in offices are</text>
+  <text x="495" y="368" font-size="10.5" font-weight="700" fill="#7a3f14">often dry air, drafts, or radiant effects.</text>
+
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="context-fill"/>
+    </marker>
+  </defs>
+</svg>
