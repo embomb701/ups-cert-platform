@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Variable Speed Pump — Why Slower Is So Much Cheaper</text>
+
+  <!-- pump cutaway -->
+  <rect x="50" y="70" width="330" height="230" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="65" y="95" font-size="13" font-weight="700" fill="#1e1b14">Pump Anatomy</text>
+
+  <rect x="70" y="115" width="90" height="90" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="80" y="145" font-size="10" font-weight="700" fill="#0e7490">Permanent</text>
+  <text x="80" y="158" font-size="10" font-weight="700" fill="#0e7490">magnet motor</text>
+  <text x="80" y="174" font-size="9.5" fill="#5c5748">+ built-in VFD</text>
+  <text x="80" y="187" font-size="9.5" fill="#5c5748">(no capacitor</text>
+  <text x="80" y="198" font-size="9.5" fill="#5c5748">failure mode)</text>
+
+  <circle cx="230" cy="160" r="42" fill="none" stroke="#1e1b14" stroke-width="2.5"/>
+  <circle cx="230" cy="160" r="10" fill="#0e7490"/>
+  <path d="M 230 160 L 265 145 M 230 160 L 268 165 M 230 160 L 255 190" stroke="#1e1b14" stroke-width="1.5"/>
+  <text x="192" y="217" font-size="10" font-weight="700" fill="#1e1b14">Impeller / volute</text>
+
+  <rect x="305" y="130" width="55" height="60" rx="4" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+  <text x="310" y="152" font-size="9" font-weight="700" fill="#7a3f14">Strainer</text>
+  <text x="310" y="164" font-size="9" font-weight="700" fill="#7a3f14">basket</text>
+
+  <rect x="65" y="230" width="295" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="78" y="250" font-size="10" font-weight="700" fill="#7a3f14">DOE 2021: pool pumps &gt;1 HP for residential</text>
+  <text x="78" y="264" font-size="10" font-weight="700" fill="#7a3f14">use must be variable speed — single-speed</text>
+  <text x="78" y="278" font-size="10" font-weight="700" fill="#7a3f14">pumps above 1 HP can no longer be sold.</text>
+
+  <!-- affinity laws -->
+  <text x="410" y="90" font-size="13" font-weight="700" fill="#1e1b14">Pump Affinity Laws</text>
+
+  <rect x="410" y="105" width="440" height="90" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="430" y="132" font-size="13" font-weight="700" fill="#0e7490">Flow ∝ Speed</text>
+  <text x="430" y="158" font-size="13" font-weight="700" fill="#0e7490">Head ∝ Speed²</text>
+  <text x="430" y="184" font-size="13" font-weight="700" fill="#0e7490">Power ∝ Speed³</text>
+  <text x="650" y="140" font-size="10" fill="#4a6d8a">Power is the one that</text>
+  <text x="650" y="154" font-size="10" fill="#4a6d8a">matters for your bill —</text>
+  <text x="650" y="168" font-size="10" fill="#4a6d8a">it scales with the cube</text>
+  <text x="650" y="182" font-size="10" fill="#4a6d8a">of the speed ratio.</text>
+
+  <rect x="410" y="210" width="440" height="55" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+  <text x="425" y="232" font-size="11" font-weight="700" fill="#7a3f14">Worked example: half speed = 1/8 power</text>
+  <text x="425" y="250" font-size="11" fill="#5c5748">2,000 W at 3,450 RPM  →  250 W at 1,725 RPM</text>
+
+  <!-- operating range chart -->
+  <text x="410" y="295" font-size="12.5" font-weight="700" fill="#1e1b14">Typical VSP Operating Ranges (RPM)</text>
+
+  <g font-size="10.5">
+    <rect x="410" y="310" width="440" height="26" fill="#e9f2fb" stroke="#0e7490" stroke-width="1"/>
+    <text x="420" y="327" fill="#0e7490" font-weight="700">Filtration</text>
+    <text x="600" y="327" fill="#1e1b14">1,500–2,000 RPM — low flow, high efficiency</text>
+
+    <rect x="410" y="338" width="440" height="26" fill="#fdeec9" stroke="#7a3f14" stroke-width="1"/>
+    <text x="420" y="355" fill="#7a3f14" font-weight="700">Feature ops</text>
+    <text x="600" y="355" fill="#1e1b14">2,500–3,000 RPM — jets, waterfalls</text>
+
+    <rect x="410" y="366" width="440" height="26" fill="#fdeaea" stroke="#a4231e" stroke-width="1"/>
+    <text x="420" y="383" fill="#8f1f1a" font-weight="700">Priming</text>
+    <text x="600" y="383" fill="#1e1b14">3,450 RPM — full speed / vacuum</text>
+  </g>
+
+  <rect x="50" y="405" width="800" height="55" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="1.5"/>
+  <text x="65" y="426" font-size="10.5" fill="#5c5748">Cavitation (gravel-like noise, low flow, impeller erosion): air leak on suction, partially closed valve, clogged basket.</text>
+  <text x="65" y="443" font-size="10.5" fill="#5c5748">Runs but zero flow, motor normal: air-bound — check priming, suction-side leaks, and stuck-open check valves.</text>
+</svg>

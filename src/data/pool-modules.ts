@@ -21,6 +21,9 @@ export const POOL_MODULES: TrainingModule[] = [
           'VSPs use permanent magnet motors rather than standard induction motors — permanent magnet motors are more efficient at partial speed, have no capacitor failure mode, and provide electronically-adjustable speed via the built-in VFD.',
           'Energy savings from a VSP replacing a single-speed pump are typically 70–80% reduction in pump energy cost — most residential VSPs pay for themselves in 1–3 years through electricity savings alone.',
         ],
+        images: [
+          { src: '/diagrams/pool-pump-affinity-laws.svg', alt: 'Variable speed pool pump anatomy with permanent magnet motor and impeller, alongside the pump affinity laws (flow proportional to speed, head to speed squared, power to speed cubed) and typical operating RPM ranges', caption: 'Why slower is so much cheaper — the cubic power law' },
+        ],
         keyPoints: [
           'P ∝ N³: half speed = 1/8 power — the cubic law makes variable speed economically transformative',
           'DOE 2021 mandate: pool pumps >1 HP must be variable speed — single-speed pumps above 1 HP cannot be sold for residential use',
@@ -107,6 +110,9 @@ export const POOL_MODULES: TrainingModule[] = [
           'Bonding is NOT grounding — the bonding conductor does not connect to the electrical service grounding electrode system; it creates an equipotential island that prevents voltage differences, not a path to earth ground.',
           'Stray voltage from nearby utilities, corroded connections, or failing pool equipment can appear in pool water even with no wiring errors — the bonding grid absorbs the voltage difference, but a licensed electrician must trace and eliminate the source.',
           'Pool shell bonding in concrete pools requires #8 AWG copper conductor connected to rebar at not more than 12-inch intervals and at all rebar crossings at the pool perimeter.',
+        ],
+        images: [
+          { src: '/diagrams/pool-bonding-grid.svg', alt: 'Top-down pool diagram showing the equipotential bonding grid connecting the pool shell, ladder, handrail, deck anchor, light niche, and equipment housings with number 8 AWG solid copper conductor, clarifying bonding is not grounding', caption: 'Equipotential bonding grid — every piece of metal within 5 feet of the water' },
         ],
         keyPoints: [
           'Equipotential bonding creates zero voltage gradient in the pool environment — prevents electric shock drowning',
@@ -280,6 +286,9 @@ export const POOL_MODULES: TrainingModule[] = [
           'Filter selection factors: initial cost (sand lowest, DE highest), water clarity (DE best), maintenance frequency (cartridge: clean every 4–6 weeks; sand: backwash every 2–6 weeks; DE: backwash monthly + recharge), and chemical compatibility.',
           'Alternative sand filter media: ZeoSand (zeolite) filters to 5–10 microns and has cation exchange capacity that removes ammonia — a meaningful upgrade over standard silica sand in pool with high bather load.',
         ],
+        images: [
+          { src: '/diagrams/pool-filter-types.svg', alt: 'Three pool filter types compared side by side: sand filter at 20 to 40 microns, cartridge filter at 10 to 15 microns, and DE filter at 3 to 5 microns, with maintenance schedules for each', caption: 'Finer filtration, more maintenance — sand vs. cartridge vs. DE' },
+        ],
         keyPoints: [
           'Sand: 20–40 microns; Cartridge: 10–15 microns; DE: 3–5 microns — finer filtration = clearer water',
           'Do not exceed the filter\'s rated maximum GPM — overpressure damages filter and allows bypass',
@@ -365,6 +374,9 @@ export const POOL_MODULES: TrainingModule[] = [
           'Manual cell cleaning: when scale buildup exceeds what self-cleaning can manage, remove the cell and soak in dilute muriatic acid (1 part acid to 10 parts water) for 15–30 minutes — do not use abrasives which damage the titanium coating.',
           'Cell life is typically 7,000–15,000 operating hours or 3–7 years of residential use — cells degrade as the titanium ruthenium oxide coating wears off the electrode plates, reducing chlorine output per amp hour.',
           'Low chlorine output despite adequate salt level indicates aging cell, low water temperature (<60°F), high CYA stabilizer level, or high demand from bather load or algae — check all four before replacing the cell.',
+        ],
+        images: [
+          { src: '/diagrams/salt-chlorine-generator.svg', alt: 'Salt chlorine generator cell cross-section showing titanium electrode plates and the electrolysis reaction converting sodium chloride to hypochlorous acid, plus a diagram of the self-cleaning polarity reversal cycle', caption: 'Electrolysis cell anatomy and self-cleaning polarity reversal' },
         ],
         keyPoints: [
           'Salt range 2,700–3,400 ppm typical — low-salt lockout prevents cell damage; too high increases corrosion risk',
