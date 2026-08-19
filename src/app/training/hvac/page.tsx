@@ -4,6 +4,7 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { ALL_MODULES, COURSE_SEQUENCES } from '@/data/index';
 import { HVAC_MODULE_PLACEHOLDERS } from '@/data/courses';
 import Link from 'next/link';
+import { CourseVideo } from '@/components/CourseVideo';
 import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
@@ -105,6 +106,16 @@ export default async function HvacPortalPage() {
           <p className="text-gray-400 mt-1 text-sm">
             25 modules · 10 shared foundation + 2 shared refrigeration + 13 HVAC-specific · Jr. HVAC FSE certification
           </p>
+        </div>
+
+        {/* Refrigeration cycle video */}
+        <div>
+          <CourseVideo
+            src="/videos/refrigeration-cycle.mp4"
+            poster="/videos/refrigeration-cycle-poster.jpg"
+            title="The Refrigeration Cycle — overview"
+          />
+          <p className="text-gray-500 text-xs mt-2">The Refrigeration Cycle — compress, condense, meter, evaporate. Shared with Kitchen FSE — the same physics runs both a walk-in cooler and a split system.</p>
         </div>
 
         {/* Coming soon banner */}

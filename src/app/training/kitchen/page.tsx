@@ -5,6 +5,7 @@ import { ALL_MODULES, KITCHEN_MODULES } from '@/data/index';
 import { KITCHEN_MODULE_PLACEHOLDERS } from '@/data/courses';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import { CourseVideo } from '@/components/CourseVideo';
 import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
 
 export const dynamic = 'force-dynamic';
@@ -135,6 +136,16 @@ export default async function KitchenPortalPage() {
           <p className="text-gray-400 mt-1 text-sm">
             27 modules · 10 shared foundation + 17 kitchen-specific · Jr. Kitchen FSE certification
           </p>
+        </div>
+
+        {/* Refrigeration cycle video */}
+        <div>
+          <CourseVideo
+            src="/videos/refrigeration-cycle.mp4"
+            poster="/videos/refrigeration-cycle-poster.jpg"
+            title="The Refrigeration Cycle — overview"
+          />
+          <p className="text-gray-500 text-xs mt-2">The Refrigeration Cycle — compress, condense, meter, evaporate. Core to the refrigeration modules in this course.</p>
         </div>
 
         {/* Enroll CTA — unenrolled users */}
