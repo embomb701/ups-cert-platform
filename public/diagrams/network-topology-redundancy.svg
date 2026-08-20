@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Star vs. Ring — and the Recovery Speed That Decides Which Redundancy You Need</text>
+
+  <!-- star -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#1e1b14">Star topology</text>
+  <text x="38" y="100" font-size="9.5" fill="#5c5748">All devices connect to a central switch.</text>
+  <text x="38" y="114" font-size="9.5" fill="#5c5748">Simple, easy to troubleshoot.</text>
+  <text x="38" y="136" font-size="9.5" font-weight="700" fill="#8f1f1a">Single switch failure takes down every</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#8f1f1a">connected device — no path redundancy.</text>
+
+  <!-- ring -->
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#0e7490">Ring topology</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Devices form a loop — a single cable break</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">doesn't disrupt comms, traffic re-routes.</text>
+  <text x="473" y="136" font-size="9.5" font-weight="700" fill="#1f5a8f">Recovery speed depends entirely on the</text>
+  <text x="473" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">ring protocol running on top.</text>
+
+  <!-- recovery speed ladder -->
+  <rect x="24" y="200" width="852" height="125" rx="6" fill="#fdf0e6" stroke="#ea580c" stroke-width="2"/>
+  <text x="38" y="223" font-size="12.5" font-weight="700" fill="#9a3412">Recovery speed — pick the protocol that matches the application</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="235" width="260" height="42" rx="4" fill="#ffffff" stroke="#7a7256"/><text x="168" y="253" text-anchor="middle" fill="#1e1b14">RSTP: 1–30 sec</text><text x="168" y="267" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">too slow for motion control</text>
+
+    <rect x="308" y="235" width="260" height="42" rx="4" fill="#fdeec9" stroke="#b45309"/><text x="438" y="253" text-anchor="middle" fill="#b45309">MRP: sub-200 ms</text><text x="438" y="267" font-weight="400" font-size="8" text-anchor="middle" fill="#8a5010">production-line grade</text>
+
+    <rect x="578" y="235" width="260" height="42" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="708" y="253" text-anchor="middle" fill="#8f1f1a">PRP/HSR: zero</text><text x="708" y="267" font-weight="400" font-size="8" text-anchor="middle" fill="#8f1f1a">duplicate frames, both paths at once</text>
+  </g>
+  <text x="38" y="300" font-size="9.5" fill="#5c5748">Process control (seconds tolerance) → RSTP. Production line (sub-second) → MRP. Safety/critical (zero) → PRP/HSR.</text>
+
+  <!-- HA systems -->
+  <rect x="24" y="340" width="852" height="80" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="363" font-size="12" font-weight="700" fill="#065f46">High-availability systems stack redundancy at every layer</text>
+  <text x="38" y="385" font-size="10" fill="#3f3a2c">Redundant PLCs (primary + hot standby), redundant networks (dual Ethernet rings), redundant power</text>
+  <text x="38" y="399" font-size="10" fill="#3f3a2c">supplies (dual 24VDC feeds), and UPS for the control panel — no single point of failure anywhere.</text>
+
+  <rect x="24" y="430" width="852" height="36" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="453" font-size="10" font-weight="700" fill="#7a3f14">Always document the network topology as-built — it's essential for troubleshooting later.</text>
+</svg>

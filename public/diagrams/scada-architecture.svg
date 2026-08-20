@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">SCADA — Supervising Distributed PLCs From One Room</text>
+
+  <!-- chain -->
+  <g font-size="9" font-weight="700">
+    <rect x="24" y="55" width="150" height="55" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="99" y="76" text-anchor="middle" fill="#0e7490">Field devices</text><text x="99" y="90" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">PLCs, RTUs, sensors</text>
+
+    <rect x="199" y="55" width="150" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="274" y="76" text-anchor="middle" fill="#b45309">Comms network</text><text x="274" y="90" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">Ethernet, fiber, radio</text>
+
+    <rect x="374" y="55" width="150" height="55" rx="4" fill="#fdf0e6" stroke="#ea580c" stroke-width="2.5"/><text x="449" y="76" text-anchor="middle" fill="#9a3412">SCADA server</text><text x="449" y="90" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">collection, alarms</text>
+
+    <rect x="549" y="55" width="150" height="55" rx="4" fill="#e9f4ef" stroke="#059669" stroke-width="2"/><text x="624" y="76" text-anchor="middle" fill="#065f46">HMI workstations</text><text x="624" y="90" font-weight="400" font-size="8" text-anchor="middle" fill="#3f3a2c">operator displays</text>
+
+    <rect x="724" y="55" width="152" height="55" rx="4" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/><text x="800" y="76" text-anchor="middle" fill="#1e1b14">Data historian</text><text x="800" y="90" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">time-series database</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#sc)">
+    <line x1="174" y1="82" x2="197" y2="82"/><line x1="349" y1="82" x2="372" y2="82"/>
+    <line x1="524" y1="82" x2="547" y2="82"/><line x1="699" y1="82" x2="722" y2="82"/>
+  </g>
+
+  <!-- RTU -->
+  <rect x="24" y="135" width="410" height="140" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="158" font-size="12.5" font-weight="700" fill="#0e7490">RTU — Remote Terminal Unit</text>
+  <text x="38" y="180" font-size="9.5" fill="#3f3a2c">PLC-like, optimized for remote standalone</text>
+  <text x="38" y="194" font-size="9.5" fill="#3f3a2c">operation over wide-area networks (WAN).</text>
+  <text x="38" y="216" font-size="9.5" font-weight="700" fill="#1f5a8f">Common in oil/gas pipelines, water</text>
+  <text x="38" y="230" font-size="9.5" font-weight="700" fill="#1f5a8f">distribution, electric utilities — field sites</text>
+  <text x="38" y="244" font-size="9.5" font-weight="700" fill="#1f5a8f">that may be miles from the control center.</text>
+
+  <!-- protocols -->
+  <rect x="459" y="135" width="417" height="140" rx="6" fill="#fdf0e6" stroke="#ea580c" stroke-width="2"/>
+  <text x="473" y="158" font-size="12.5" font-weight="700" fill="#9a3412">Three protocols, three use cases</text>
+  <g font-size="9.5" font-weight="700">
+    <text x="485" y="182">DNP3</text><text x="530" y="182" font-weight="400" fill="#5c5748">utility SCADA — substations, distribution</text>
+    <text x="485" y="202">Modbus</text><text x="545" y="202" font-weight="400" fill="#5c5748">legacy industrial systems</text>
+    <text x="485" y="222">OPC-UA</text><text x="545" y="222" font-weight="400" fill="#5c5748">modern interoperable systems</text>
+  </g>
+  <text x="473" y="242" font-size="9" fill="#5c5748">DNP3 handles time-stamping and data integrity</text>
+  <text x="473" y="254" font-size="9" fill="#5c5748">over slow WAN links common in utility comms.</text>
+
+  <!-- historian purpose -->
+  <rect x="24" y="290" width="852" height="90" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="313" font-size="12" font-weight="700" fill="#065f46">The historian's job</text>
+  <text x="38" y="335" font-size="10" fill="#3f3a2c">Stores time-stamped process values at configurable intervals — enables trend analysis, compliance</text>
+  <text x="38" y="349" font-size="10" fill="#3f3a2c">reporting, incident investigation, and process optimization long after the moment has passed.</text>
+
+  <rect x="24" y="395" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="418" font-size="10.5" font-weight="700" fill="#7a3f14">SCADA supervises; it doesn't replace local PLC control logic — the PLC still runs the process</text>
+  <text x="38" y="434" font-size="10.5" font-weight="700" fill="#7a3f14">autonomously even if the SCADA link drops.</text>
+
+  <defs>
+    <marker id="sc" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/></marker>
+  </defs>
+</svg>

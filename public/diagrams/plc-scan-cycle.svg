@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The PLC Scan Cycle — Four Phases, Repeated Forever</text>
+
+  <!-- 4 phases -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="55" width="195" height="90" rx="4" fill="#fdf0e6" stroke="#ea580c" stroke-width="2"/><text x="121" y="80" text-anchor="middle" fill="#9a3412">1. Input scan</text><text x="121" y="102" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">Reads sensors/switches,</text><text x="121" y="115" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">copies to input image table</text>
+
+    <rect x="239" y="55" width="195" height="90" rx="4" fill="#fdf0e6" stroke="#ea580c" stroke-width="2"/><text x="336" y="80" text-anchor="middle" fill="#9a3412">2. Program scan</text><text x="336" y="102" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">Executes rungs top to bottom</text><text x="336" y="115" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">using the input image</text>
+
+    <rect x="454" y="55" width="195" height="90" rx="4" fill="#fdf0e6" stroke="#ea580c" stroke-width="2"/><text x="551" y="80" text-anchor="middle" fill="#9a3412">3. Output scan</text><text x="551" y="102" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">Transfers output image to</text><text x="551" y="115" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">physical output modules</text>
+
+    <rect x="669" y="55" width="207" height="90" rx="4" fill="#f3efe2" stroke="#7a7256" stroke-width="1.5"/><text x="772" y="80" text-anchor="middle" fill="#1e1b14">4. Housekeeping</text><text x="772" y="102" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">Programming terminal comms,</text><text x="772" y="115" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">diagnostics update</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#pc)">
+    <line x1="219" y1="100" x2="237" y2="100"/><line x1="434" y1="100" x2="452" y2="100"/><line x1="649" y1="100" x2="667" y2="100"/>
+  </g>
+  <path d="M772,145 L772,170 L121,170 L121,147" fill="none" stroke="#5c5748" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#pc2)"/>
+  <text x="440" y="165" font-size="8.5" fill="#5c5748" text-anchor="middle">repeats continuously — the "scan"</text>
+
+  <!-- scan time -->
+  <rect x="24" y="195" width="410" height="115" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="218" font-size="12.5" font-weight="700" fill="#0e7490">Scan time</text>
+  <rect x="38" y="230" width="200" height="26" rx="4" fill="#0e7490"/>
+  <text x="138" y="248" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Typical: 1–20 ms</text>
+  <text x="38" y="276" font-size="9.5" fill="#3f3a2c">Grows with program size and I/O count.</text>
+  <text x="38" y="292" font-size="9.5" font-weight="700" fill="#1f5a8f">Time-critical work (servos, high-speed</text>
+  <text x="38" y="306" font-size="9.5" font-weight="700" fill="#1f5a8f">counting) uses interrupts outside the scan.</text>
+
+  <!-- the trap -->
+  <rect x="459" y="195" width="417" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="218" font-size="12.5" font-weight="700" fill="#8f1f1a">The troubleshooting trap</text>
+  <text x="473" y="240" font-size="9.5" fill="#5c5748">Outputs reflect input states from the</text>
+  <text x="473" y="254" font-size="9.5" fill="#5c5748">PREVIOUS scan, not the current instant.</text>
+  <text x="473" y="276" font-size="9.5" font-weight="700" fill="#8f1f1a">A 5ms pulse on a 10ms scan may be</text>
+  <text x="473" y="290" font-size="9.5" font-weight="700" fill="#8f1f1a">missed entirely, depending on timing.</text>
+
+  <rect x="24" y="330" width="852" height="90" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="353" font-size="12" font-weight="700" fill="#7a3f14">Why this matters on the floor</text>
+  <text x="38" y="375" font-size="10" fill="#5c5748">The input image table updates once per scan, not continuously — a physical input can change state</text>
+  <text x="38" y="389" font-size="10" fill="#5c5748">mid-scan and the program simply won't see it until the next input scan phase begins. Short, fast</text>
+  <text x="38" y="403" font-size="10" fill="#5c5748">pulses need dedicated high-speed input hardware or interrupt routines, not the normal scan cycle.</text>
+
+  <defs>
+    <marker id="pc" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/></marker>
+    <marker id="pc2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#5c5748"/></marker>
+  </defs>
+</svg>

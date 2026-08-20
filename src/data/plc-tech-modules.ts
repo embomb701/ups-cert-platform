@@ -30,6 +30,9 @@ export const PLC_TECH_MODULES: TrainingModule[] = [
           'The PLC executes its program repeatedly in a continuous loop called the scan cycle. Four phases: (1) Input scan — reads all field inputs (sensors, switches) and copies their status to the input image table in memory. (2) Program scan — executes the user program from the first rung to the last using the current input image, writing outputs to the output image table. (3) Output scan — transfers the output image table values to the physical output modules, energizing or de-energizing field devices. (4) Housekeeping — communicates with programming terminals, updates diagnostics.',
           'Scan time is the time to complete one full scan cycle. Typical scan times: 1–20 ms for most industrial PLCs. Scan time increases with program size and I/O count. For time-critical applications (servo drives, high-speed counting), special interrupt routines execute outside the normal scan cycle. Understanding the scan cycle is essential for troubleshooting timing-related problems — outputs reflect input states from the PREVIOUS scan, not the current moment.',
         ],
+        images: [
+          { src: '/diagrams/plc-scan-cycle.svg', alt: 'Diagram of the PLC scan cycle showing the four phases input scan, program scan, output scan, and housekeeping, plus panels on typical scan time and the previous-scan troubleshooting trap', caption: 'Four phases, repeated forever — outputs always reflect input states from the PREVIOUS scan, not the current instant.' },
+        ],
         keyPoints: [
           'Scan cycle: Input scan → Program scan → Output scan → Housekeeping, repeated continuously',
           'Input image table updated once per scan — not in real time during program execution',
@@ -135,6 +138,9 @@ export const PLC_TECH_MODULES: TrainingModule[] = [
           'Timer instructions delay or measure time. In Allen-Bradley RSLogix 500: TON (Timer On-Delay): starts timing when the rung is true; DN (done) bit turns ON after the preset time elapses. TOF (Timer Off-Delay): starts timing when the rung goes false; DN bit turns OFF after the preset time elapses. RTO (Retentive Timer On-Delay): accumulates time each time the rung is true, retains the accumulated value even when the rung goes false — useful for measuring total motor run time. Timer preset (PT) and accumulator (ACC) are in milliseconds in most platforms.',
           'Counter instructions count events. CTU (Count Up): increments the accumulated value on each positive transition (0→1) of the rung. CTD (Count Down): decrements on each positive transition. CU done (CU.DN) bit sets when ACC reaches preset (PR). Reset (RES) instruction resets the accumulated value to zero. Counters are used to count product pieces, track batch quantities, and trigger maintenance intervals. The CTU/CTD pair allows bidirectional counting (parts in / parts out for inventory control).',
         ],
+        images: [
+          { src: '/diagrams/plc-timers-counters.svg', alt: 'Diagram comparing TON, TOF, and RTO timer instructions by when their DN bit activates, plus CTU/CTD counter behavior and reset instructions', caption: 'TON and TOF self-reset; RTO does not — that single distinction explains most timer-related troubleshooting calls.' },
+        ],
         keyPoints: [
           'TON: starts timing when rung true; DN bit ON after preset elapses',
           'TOF: starts timing when rung goes false; DN bit OFF after preset elapses',
@@ -239,6 +245,9 @@ export const PLC_TECH_MODULES: TrainingModule[] = [
         body: [
           'SCADA (Supervisory Control and Data Acquisition) systems collect data from PLCs and field instruments distributed across a large geographic area or plant, display it in a centralized control room, and allow supervisory control actions. SCADA components: field devices (PLCs, RTUs, sensors), communications network (industrial Ethernet, fiber, cellular, radio), SCADA server (data collection, alarm processing), HMI workstations (operator displays), data historian (time-series database for trend analysis).',
           'RTUs (Remote Terminal Units) are similar to PLCs but optimized for remote, standalone operation over wide-area networks (WAN). RTUs are common in oil/gas pipelines, water distribution, and electric utilities where field sites may be miles from the control center. Protocol: SCADA systems use DNP3 (Distributed Network Protocol 3) for utility applications, Modbus for legacy industrial, and OPC-UA for modern interoperable systems. The SCADA server communicates with all field devices and stores data in a historian.',
+        ],
+        images: [
+          { src: '/diagrams/scada-architecture.svg', alt: 'Diagram of the SCADA data flow from field devices through the communications network, SCADA server, HMI workstations, to the data historian, plus panels on RTUs and the DNP3/Modbus/OPC-UA protocols', caption: 'SCADA supervises distributed PLCs and RTUs from one room — but the PLC still runs the process on its own if the link drops.' },
         ],
         keyPoints: [
           'SCADA: centralized supervision of distributed PLCs/RTUs across a large area',
@@ -379,6 +388,9 @@ export const PLC_TECH_MODULES: TrainingModule[] = [
           'Industrial networks use several topology options: Star: all devices connect to a central switch — simple, easy to troubleshoot, single switch failure can take down all devices. Ring: devices connected in a loop — a single cable break does not disrupt communication because traffic re-routes in the opposite direction. Ring recovery depends on the protocol: STP/RSTP convergence: 1–30 seconds (too slow for motion control); Media Redundancy Protocol (MRP): sub-200 ms; PRP/HSR: zero-switchover time (duplicate frames sent on both paths simultaneously).',
           'High-availability (HA) systems use redundant PLCs (primary + secondary in hot standby), redundant networks (dual Ethernet rings), redundant power supplies (dual 24 VDC feeds), and uninterruptible power for the PLC panel. The switchover time specification determines which redundancy technology is needed: process control (seconds tolerance) → RSTP; production line (sub-second) → MRP; safety/critical (zero) → PRP/HSR or proprietary redundancy. Always document the network topology as-built — it is essential for troubleshooting.',
         ],
+        images: [
+          { src: '/diagrams/network-topology-redundancy.svg', alt: 'Diagram comparing star and ring network topologies, the RSTP/MRP/PRP-HSR recovery speed ladder, and the components stacked in a high-availability control system', caption: 'Star topology has no path redundancy; ring topology\'s recovery speed depends entirely on the protocol running on top of it.' },
+        ],
         keyPoints: [
           'Star topology: simple, easy troubleshoot; single switch failure impacts all devices',
           'Ring topology: tolerates single cable break; recovery speed depends on protocol',
@@ -500,6 +512,9 @@ export const PLC_TECH_MODULES: TrainingModule[] = [
         body: [
           'Variable Frequency Drives (VFDs) are the most common actuator integrated with PLCs. VFDs control motor speed by varying output frequency (0–120 Hz typical) and voltage. PLC-VFD integration methods: discrete control (Run/Stop, Forward/Reverse via hardwired outputs), analog speed reference (0–10 VDC or 4–20 mA for speed setpoint), fieldbus (EtherNet/IP, PROFIBUS, DeviceNet — speed, direction, torque, diagnostics via network). Fieldbus integration provides full VFD diagnostics: actual speed, current draw, fault codes, temperature — all available as PLC tags.',
           'VFD fault conditions commonly returned to PLC via network: over-voltage (line transient), under-voltage (power dip), overcurrent (motor overload or short circuit), ground fault (insulation failure), overtemperature (blocked ventilation). The PLC program should read the VFD fault code on a fault output discrete signal or via network word, display it on the HMI, and log it to the historian. Never reset a VFD fault without identifying the cause — repetitive resets without investigation can cause motor winding failure.',
+        ],
+        images: [
+          { src: '/diagrams/vfd-plc-integration.svg', alt: 'Diagram comparing discrete, analog, and fieldbus VFD-PLC integration methods, the five common VFD fault types returned over the network, and the never-reset-blind rule', caption: 'Fieldbus is the only integration method that turns a VFD into a rich diagnostic source instead of a black box.' },
         ],
         keyPoints: [
           'VFD-PLC integration: discrete (Run/Stop/Direction), analog (speed reference), or fieldbus (full diagnostics)',

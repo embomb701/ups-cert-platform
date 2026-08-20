@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">VFD Integration — Three Ways to Talk to a Drive</text>
+
+  <!-- three methods -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="55" width="272" height="135" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+    <text x="38" y="78" fill="#1e1b14">Discrete</text>
+    <text x="38" y="100" font-weight="400" font-size="9.5" fill="#5c5748">Hardwired outputs: Run/Stop,</text>
+    <text x="38" y="114" font-weight="400" font-size="9.5" fill="#5c5748">Forward/Reverse.</text>
+    <text x="38" y="136" font-weight="700" font-size="9.5" fill="#5c5748">No speed control, no diagnostics.</text>
+
+    <rect x="314" y="55" width="272" height="135" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="328" y="78" fill="#0e7490">Analog</text>
+    <text x="328" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">0–10 VDC or 4–20 mA speed</text>
+    <text x="328" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">reference signal.</text>
+    <text x="328" y="136" font-weight="700" font-size="9.5" fill="#1f5a8f">Speed setpoint only — one direction,</text>
+    <text x="328" y="150" font-weight="700" font-size="9.5" fill="#1f5a8f">no feedback from the drive.</text>
+
+    <rect x="604" y="55" width="272" height="135" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2.5"/>
+    <text x="618" y="78" fill="#065f46">Fieldbus</text>
+    <text x="618" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">EtherNet/IP, PROFIBUS, DeviceNet</text>
+    <text x="618" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">— speed, direction, torque, diagnostics.</text>
+    <rect x="618" y="126" width="230" height="26" rx="4" fill="#059669"/>
+    <text x="733" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Bidirectional — full diagnostics as tags</text>
+  </g>
+
+  <!-- fault types -->
+  <rect x="24" y="205" width="852" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="228" font-size="12.5" font-weight="700" fill="#8f1f1a">VFD faults returned to the PLC over the network</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="240" width="158" height="34" rx="4" fill="#ffffff" stroke="#a4231e"/><text x="117" y="261" text-anchor="middle" fill="#8f1f1a">Over-voltage</text>
+    <rect x="204" y="240" width="158" height="34" rx="4" fill="#ffffff" stroke="#a4231e"/><text x="283" y="261" text-anchor="middle" fill="#8f1f1a">Under-voltage</text>
+    <rect x="370" y="240" width="158" height="34" rx="4" fill="#ffffff" stroke="#a4231e"/><text x="449" y="261" text-anchor="middle" fill="#8f1f1a">Overcurrent</text>
+    <rect x="536" y="240" width="158" height="34" rx="4" fill="#ffffff" stroke="#a4231e"/><text x="615" y="261" text-anchor="middle" fill="#8f1f1a">Ground fault</text>
+    <rect x="702" y="240" width="150" height="34" rx="4" fill="#ffffff" stroke="#a4231e"/><text x="777" y="261" text-anchor="middle" fill="#8f1f1a">Overtemp</text>
+  </g>
+  <text x="38" y="298" font-size="9.5" fill="#5c5748">PLC reads the fault code, displays it on the HMI, and logs it to the historian — the fault code IS the diagnosis.</text>
+
+  <rect x="24" y="335" width="852" height="80" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="358" font-size="12" font-weight="700" fill="#7a3f14">Never reset a VFD fault without identifying the cause</text>
+  <text x="38" y="380" font-size="10" fill="#5c5748">Repetitive resets without investigation can cause motor winding failure. A ground fault especially</text>
+  <text x="38" y="394" font-size="10" fill="#5c5748">means insulation breakdown allowing current to ground — restarting blind risks fire or total motor loss.</text>
+
+  <rect x="24" y="425" width="852" height="42" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="450" font-size="10.5" font-weight="700" fill="#1e1b14">Fieldbus is the only method that turns the VFD into a rich diagnostic source instead of a black box.</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Three Timers, One Question Each: When Does DN Turn On?</text>
+
+  <g font-size="10.5" font-weight="700">
+    <rect x="24" y="55" width="272" height="150" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="38" y="78" fill="#0e7490">TON — Timer On-Delay</text>
+    <text x="38" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Starts timing when rung goes true.</text>
+    <rect x="38" y="112" width="230" height="26" rx="4" fill="#0e7490"/>
+    <text x="153" y="130" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">DN turns ON at preset</text>
+    <text x="38" y="158" font-weight="400" font-size="9" fill="#5c5748">Rung goes false before DN →</text>
+    <text x="38" y="172" font-weight="400" font-size="9" fill="#5c5748">timer resets to zero.</text>
+
+    <rect x="314" y="55" width="272" height="150" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="328" y="78" fill="#b45309">TOF — Timer Off-Delay</text>
+    <text x="328" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Starts timing when rung goes false.</text>
+    <rect x="328" y="112" width="230" height="26" rx="4" fill="#b45309"/>
+    <text x="443" y="130" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">DN turns OFF at preset</text>
+    <text x="328" y="158" font-weight="400" font-size="9" fill="#5c5748">Keeps an output energized for a</text>
+    <text x="328" y="172" font-weight="400" font-size="9" fill="#5c5748">delay after the trigger drops.</text>
+
+    <rect x="604" y="55" width="272" height="150" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+    <text x="618" y="78" fill="#8f1f1a">RTO — Retentive</text>
+    <text x="618" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Accumulates time across MULTIPLE</text>
+    <text x="618" y="113" font-weight="400" font-size="9.5" fill="#3f3a2c">true events — never resets on its own.</text>
+    <rect x="618" y="125" width="230" height="26" rx="4" fill="#a4231e"/>
+    <text x="733" y="143" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Needs a separate RES to clear</text>
+    <text x="618" y="171" font-weight="400" font-size="9" fill="#5c5748">Tracks total motor run hours.</text>
+  </g>
+
+  <!-- counters -->
+  <rect x="24" y="225" width="852" height="130" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="248" font-size="12.5" font-weight="700" fill="#065f46">Counters — CTU / CTD</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="260" width="260" height="42" rx="4" fill="#059669"/><text x="168" y="278" text-anchor="middle" fill="#ffffff">CTU — Count Up</text><text x="168" y="292" font-weight="400" font-size="8" text-anchor="middle" fill="#ffffff">increments on each 0→1 transition</text>
+
+    <rect x="308" y="260" width="260" height="42" rx="4" fill="#166534"/><text x="438" y="278" text-anchor="middle" fill="#ffffff">CTD — Count Down</text><text x="438" y="292" font-weight="400" font-size="8" text-anchor="middle" fill="#ffffff">decrements on each 0→1 transition</text>
+
+    <rect x="578" y="260" width="260" height="42" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.5"/><text x="708" y="278" text-anchor="middle" fill="#065f46">RES — Reset</text><text x="708" y="292" font-weight="400" font-size="8" text-anchor="middle" fill="#3f3a2c">clears accumulator to zero</text>
+  </g>
+  <text x="38" y="326" font-size="9.5" fill="#3f3a2c">DN bit sets when ACC reaches preset (PR). CTU/CTD pair = bidirectional counting — parts in / parts</text>
+  <text x="38" y="340" font-size="9.5" fill="#3f3a2c">out for inventory control, batch tracking, maintenance interval triggers.</text>
+
+  <rect x="24" y="368" width="852" height="92" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="391" font-size="12" font-weight="700" fill="#7a3f14">The one distinction that matters most in troubleshooting</text>
+  <text x="38" y="413" font-size="10" fill="#5c5748">TON and TOF both self-reset when their triggering condition reverses. RTO does not — if a machine</text>
+  <text x="38" y="427" font-size="10" fill="#5c5748">seems to "remember" elapsed time across cycles that a normal timer should have cleared, check for an</text>
+  <text x="38" y="441" font-size="10" fill="#5c5748">RTO instruction with a missing or misplaced RES.</text>
+</svg>
