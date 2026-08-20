@@ -349,6 +349,9 @@ export const REF_TECH_MODULES: TrainingModule[] = [
           'Supermarket parallel compressor racks use multiple compressors on a common suction manifold serving multiple display cases and walk-in units. Parallel racks allow staged capacity control — compressors cycle on and off (or unload) as the total load changes. Medium-temperature racks serve produce and dairy at approximately 20–25°F evaporating temperature; low-temperature racks serve frozen food at approximately -25 to -20°F evaporating.',
           'Modern rack systems use electronic rack controllers (from Danfoss, Emerson/Copeland, Hussmann) that optimize compressor staging, implement floating head and suction pressure control, manage defrost scheduling, and provide remote monitoring via Modbus, LonWorks, or Ethernet. Parallel racks offer significantly better part-load efficiency than single-compressor systems because compressors can be staged precisely to match the actual load at any time.',
         ],
+        images: [
+          { src: '/diagrams/rack-refrigeration-system.svg', alt: 'Diagram of a parallel compressor rack showing multiple compressors on a common suction manifold, medium-temp vs. low-temp evaporating ranges, and electronic rack controller functions', caption: 'One suction manifold, many loads — parallel racks stage capacity to match the total store load in real time.' },
+        ],
         keyPoints: [
           'Parallel rack: multiple compressors on a common suction manifold; staged capacity control',
           'Medium-temp rack: ~20–25°F evaporating (dairy, produce); low-temp: ~-25 to -20°F (frozen)',
@@ -403,6 +406,9 @@ export const REF_TECH_MODULES: TrainingModule[] = [
           'Frost accumulates on evaporator coils because the coil surface temperature is below the dew point of the air. Four defrost methods are used in commercial refrigeration. Electric defrost: resistance heaters mounted on or near the evaporator coil melt frost; simplest and most common in reach-in and small walk-in applications. Off-cycle defrost: suitable only for coolers where the coil temperature is above freezing — the refrigeration system stops and ambient air temperature melts frost without heaters.',
           'Hot gas defrost: the most energy-efficient method. Discharge gas from the compressor is diverted through the evaporator coil, using heat already in the system to melt frost instead of consuming additional electrical energy. Demand defrost (also called adaptive defrost): sensors on the coil detect frost and only initiate defrost when needed — skipping unnecessary cycles reduces defrost heater energy by 30–50% and minimizes product temperature excursions. Defrost is terminated by time, temperature (coil termination sensor), or demand (optical/thermal sensors).',
         ],
+        images: [
+          { src: '/diagrams/defrost-methods-comparison.svg', alt: 'Comparison diagram of four defrost methods: electric, off-cycle, hot gas, and demand/adaptive, plus the three ways a defrost cycle can terminate', caption: 'Four ways to melt frost off a coil — hot gas is the most efficient, demand defrost cuts the most unnecessary cycles.' },
+        ],
         keyPoints: [
           'Electric defrost: most common, resistance heaters — simple but consumes extra energy',
           'Off-cycle defrost: only works in coolers where coil temp is above 32°F',
@@ -429,6 +435,9 @@ export const REF_TECH_MODULES: TrainingModule[] = [
         body: [
           'In cold weather, outdoor condensers can over-condense refrigerant, collapsing head pressure. When head pressure drops too low, the expansion valve cannot maintain proper flow, suction pressure collapses, and the system hunts (cycles rapidly) or shuts down on low-pressure safety. Head pressure control maintains a minimum condensing pressure to ensure stable system operation in cold ambient conditions.',
           'Methods of head pressure control: fan cycling (simplest — turns off condenser fans to raise head pressure), VFD-driven condenser fans (smooth speed control), liquid flooding (injecting liquid refrigerant into the condenser to reduce its effective area and raise pressure). Floating head pressure control allows head pressure to vary with ambient temperature — dropping in cool weather to reduce compression ratio and save energy, while ensuring it never falls below the minimum required for stable operation.',
+        ],
+        images: [
+          { src: '/diagrams/head-pressure-control.svg', alt: 'Diagram of head pressure control methods including fan cycling, VFD condenser fans, and liquid flooding, plus the floating head pressure energy-saving strategy and cold-weather collapse problem', caption: 'The cold-weather head pressure collapse and three ways to prevent it — fan cycling, VFD fans, and liquid flooding.' },
         ],
         keyPoints: [
           'Low ambient causes head pressure to collapse, leading to hunting or low-pressure lockout',
@@ -503,6 +512,9 @@ export const REF_TECH_MODULES: TrainingModule[] = [
         body: [
           'The EEV uses a stepper motor (or pulse-width modulated solenoid) driven by a case controller to modulate refrigerant flow with much greater precision and speed than a TXV. The controller receives suction temperature and pressure inputs, calculates superheat in real time, and positions the EEV to maintain a target superheat (typically 3–5°F — lower than a TXV can reliably achieve). EEVs respond faster to load changes and can handle a wider operating range.',
           'EEVs are used extensively in supermarket rack systems where case controllers manage each display case individually. The case controller communicates with the rack controller over LonWorks, Modbus, or a proprietary network, allowing centralized superheat monitoring, alarm management, and defrost scheduling. EEV-based systems enable demand defrost and precise load balancing across multiple cases — capabilities not practical with TXVs.',
+        ],
+        images: [
+          { src: '/diagrams/txv-vs-eev-metering.svg', alt: 'Comparison diagram of a TXV three-pressure mechanical balance versus an EEV stepper motor driven by a case controller, including target superheat ranges for each', caption: 'TXV mechanical balance (8-12°F superheat) vs. EEV electronic control (3-5°F) — why racks are moving to electronic metering.' },
         ],
         keyPoints: [
           'EEV: stepper motor driven by case controller; achieves 3–5°F superheat vs. TXV 8–12°F',
@@ -631,6 +643,9 @@ export const REF_TECH_MODULES: TrainingModule[] = [
         body: [
           'High head pressure forces the compressor to work harder, raises discharge temperature, and risks overloading the compressor motor. Common causes: dirty or blocked condenser coil (most common field cause — reduced airflow raises condensing temperature), failed condenser fan motor or blade, refrigerant overcharge (too much refrigerant increases the condensing pressure), non-condensable gases (air or nitrogen in the system occupy condenser volume without condensing), and restrictions in the discharge line.',
           'Non-condensable gases (NCGs) are identified by comparing the actual head pressure to the saturation pressure corresponding to the measured condenser outlet temperature. If head pressure is significantly above saturation at the condenser outlet temperature, NCGs are present. NCGs are removed by full refrigerant recovery followed by deep evacuation (below 300 microns) before recharging. Never "purge" NCGs by venting — it is illegal and wastes refrigerant.',
+        ],
+        images: [
+          { src: '/diagrams/refrigeration-fault-diagnosis.svg', alt: 'Diagram of two diagnostic trees: high head pressure causes with the non-condensable gas test, and low suction pressure diagnosis by subcooling reading', caption: 'Two gauges, two diagnostic trees — high head pressure causes and the subcooling-based low suction pressure diagnosis.' },
         ],
         keyPoints: [
           'High head pressure: dirty condenser (most common), failed fan, overcharge, or non-condensables',

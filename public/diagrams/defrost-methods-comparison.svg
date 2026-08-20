@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Four Ways to Melt Frost Off a Coil</text>
+
+  <rect x="24" y="55" width="852" height="40" rx="5" fill="#e7f4f7" stroke="#0891b2" stroke-width="1.5"/>
+  <text x="38" y="80" font-size="10.5" font-weight="700" fill="#0e6e85">Frost forms because coil surface temperature is below the dew point of the air passing over it.</text>
+
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="110" width="205" height="150" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+    <text x="38" y="133" fill="#1e1b14">Electric</text>
+    <text x="38" y="155" font-weight="400" font-size="9" fill="#5c5748">Resistance heaters on/near</text>
+    <text x="38" y="168" font-weight="400" font-size="9" fill="#5c5748">the coil melt frost directly.</text>
+    <text x="38" y="190" font-weight="700" font-size="9" fill="#1e1b14">Most common —</text>
+    <text x="38" y="203" font-weight="700" font-size="9" fill="#1e1b14">reach-ins, small walk-ins.</text>
+    <text x="38" y="228" font-weight="400" font-size="8.5" fill="#8a5010">Simple, but costs extra</text>
+    <text x="38" y="240" font-weight="400" font-size="8.5" fill="#8a5010">electrical energy every cycle.</text>
+
+    <rect x="239" y="110" width="205" height="150" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+    <text x="253" y="133" fill="#1e1b14">Off-cycle</text>
+    <text x="253" y="155" font-weight="400" font-size="9" fill="#5c5748">System just stops — ambient</text>
+    <text x="253" y="168" font-weight="400" font-size="9" fill="#5c5748">air melts the frost, no heaters.</text>
+    <text x="253" y="190" font-weight="700" font-size="9" fill="#a4231e">Coolers only —</text>
+    <text x="253" y="203" font-weight="700" font-size="9" fill="#a4231e">coil temp must stay &gt;32°F.</text>
+    <text x="253" y="228" font-weight="400" font-size="8.5" fill="#5c5748">Zero extra energy input.</text>
+
+    <rect x="454" y="110" width="205" height="150" rx="6" fill="#e7f4f7" stroke="#0891b2" stroke-width="2"/>
+    <text x="468" y="133" fill="#0e6e85">Hot gas</text>
+    <text x="468" y="155" font-weight="400" font-size="9" fill="#3f3a2c">Compressor discharge gas</text>
+    <text x="468" y="168" font-weight="400" font-size="9" fill="#3f3a2c">diverted through the coil.</text>
+    <text x="468" y="190" font-weight="700" font-size="9" fill="#0e6e85">Most energy-efficient —</text>
+    <text x="468" y="203" font-weight="700" font-size="9" fill="#0e6e85">reuses heat already in the cycle.</text>
+    <text x="468" y="228" font-weight="400" font-size="8.5" fill="#5c5748">No added electrical draw.</text>
+
+    <rect x="669" y="110" width="207" height="150" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="683" y="133" fill="#b45309">Demand / adaptive</text>
+    <text x="683" y="155" font-weight="400" font-size="9" fill="#3f3a2c">Sensors detect actual frost,</text>
+    <text x="683" y="168" font-weight="400" font-size="9" fill="#3f3a2c">defrost only when needed.</text>
+    <text x="683" y="190" font-weight="700" font-size="9" fill="#8a5010">Cuts defrost energy</text>
+    <text x="683" y="203" font-weight="700" font-size="9" fill="#8a5010">30–50% vs. fixed schedule.</text>
+    <text x="683" y="228" font-weight="400" font-size="8.5" fill="#5c5748">Fewer product temp swings too.</text>
+  </g>
+
+  <rect x="24" y="280" width="852" height="65" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="303" font-size="11.5" font-weight="700" fill="#1e1b14">Defrost termination — three ways to end the cycle</text>
+  <text x="38" y="325" font-size="10" fill="#5c5748">Time (fixed duration) · Temperature (coil termination sensor reaches target) · Demand (optical/thermal frost sensor confirms coil is clear)</text>
+
+  <rect x="24" y="360" width="852" height="70" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="383" font-size="11.5" font-weight="700" fill="#8f1f1a">Match the method to the application, not the other way around</text>
+  <text x="38" y="405" font-size="10" fill="#5c5748">Off-cycle defrost on a freezer application will never fully clear the coil — the frost simply</text>
+  <text x="38" y="419" font-size="10" fill="#5c5748">accumulates until active heat (electric or hot gas) is added.</text>
+</svg>

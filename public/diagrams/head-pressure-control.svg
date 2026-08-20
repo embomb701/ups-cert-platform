@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Head Pressure Control — Winter Is the Enemy of a Simple Condenser</text>
+
+  <!-- the problem -->
+  <rect x="24" y="55" width="852" height="95" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">The cold-weather collapse</text>
+  <text x="38" y="100" font-size="10" fill="#5c5748">Cold outdoor air over-condenses refrigerant, collapsing head pressure. The expansion valve loses its</text>
+  <text x="38" y="114" font-size="10" fill="#5c5748">pressure differential, suction pressure follows it down, and the system hunts (rapid cycling) or trips</text>
+  <text x="38" y="128" font-size="10" fill="#5c5748">on low-pressure safety — the same collapse a technician might mistake for undercharge.</text>
+
+  <!-- methods -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="165" width="272" height="115" rx="6" fill="#e7f4f7" stroke="#0891b2" stroke-width="2"/>
+    <text x="38" y="188" fill="#0e6e85">Fan cycling</text>
+    <text x="38" y="210" font-weight="400" font-size="9.5" fill="#3f3a2c">Simplest method — condenser fans</text>
+    <text x="38" y="224" font-weight="400" font-size="9.5" fill="#3f3a2c">switch off to let head pressure rise</text>
+    <text x="38" y="238" font-weight="400" font-size="9.5" fill="#3f3a2c">back to setpoint.</text>
+    <text x="38" y="260" font-weight="700" font-size="9" fill="#0e6e85">Coarse control, on/off steps only.</text>
+
+    <rect x="314" y="165" width="272" height="115" rx="6" fill="#e7f4f7" stroke="#0891b2" stroke-width="2"/>
+    <text x="328" y="188" fill="#0e6e85">VFD condenser fans</text>
+    <text x="328" y="210" font-weight="400" font-size="9.5" fill="#3f3a2c">Smooth speed modulation holds</text>
+    <text x="328" y="224" font-weight="400" font-size="9.5" fill="#3f3a2c">head pressure precisely at target,</text>
+    <text x="328" y="238" font-weight="400" font-size="9.5" fill="#3f3a2c">no on/off steps.</text>
+    <text x="328" y="260" font-weight="700" font-size="9" fill="#0e6e85">Finer control, higher install cost.</text>
+
+    <rect x="604" y="165" width="272" height="115" rx="6" fill="#e7f4f7" stroke="#0891b2" stroke-width="2"/>
+    <text x="618" y="188" fill="#0e6e85">Liquid flooding</text>
+    <text x="618" y="210" font-weight="400" font-size="9.5" fill="#3f3a2c">Liquid refrigerant injected into the</text>
+    <text x="618" y="224" font-weight="400" font-size="9.5" fill="#3f3a2c">condenser reduces its effective</text>
+    <text x="618" y="238" font-weight="400" font-size="9.5" fill="#3f3a2c">area, raising pressure directly.</text>
+    <text x="618" y="260" font-weight="700" font-size="9" fill="#0e6e85">Needs a receiver sized for the flood.</text>
+  </g>
+
+  <!-- floating head pressure -->
+  <rect x="24" y="298" width="852" height="90" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="321" font-size="12.5" font-weight="700" fill="#065f46">Floating head pressure — the energy-saving strategy</text>
+  <text x="38" y="343" font-size="10" fill="#3f3a2c">Instead of holding head pressure at a fixed year-round value, let it drop with ambient temperature in cool</text>
+  <text x="38" y="357" font-size="10" fill="#3f3a2c">weather — lower compression ratio, less compressor work — while never dropping below the minimum</text>
+  <text x="38" y="371" font-size="10" fill="#3f3a2c">the expansion valve needs for stable flow.</text>
+
+  <rect x="24" y="398" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="418" font-size="10.5" font-weight="700" fill="#7a3f14">Low suction from head pressure collapse in cold ambient can look exactly like undercharge —</text>
+  <text x="38" y="435" font-size="10.5" font-weight="700" fill="#7a3f14">check the outdoor conditions and head pressure control setup before adding refrigerant.</text>
+</svg>

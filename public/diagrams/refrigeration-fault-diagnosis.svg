@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Two Gauges, Two Diagnostic Trees</text>
+
+  <!-- high head pressure -->
+  <rect x="24" y="55" width="410" height="230" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="13" font-weight="700" fill="#8f1f1a">High head pressure</text>
+  <g font-size="9.5" font-weight="700" fill="#5c5748">
+    <text x="38" y="102">1. Dirty/blocked condenser coil</text>
+    <text x="60" y="115" font-weight="400" font-size="8.5">most common field cause</text>
+    <text x="38" y="134">2. Failed condenser fan motor/blade</text>
+    <text x="38" y="153">3. Refrigerant overcharge</text>
+    <text x="38" y="172">4. Non-condensable gases (NCGs)</text>
+    <text x="38" y="191">5. Restriction in the discharge line</text>
+  </g>
+  <rect x="38" y="203" width="358" height="42" rx="4" fill="#8f1f1a"/>
+  <text x="217" y="220" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">NCG test: head pressure &gt; saturation</text>
+  <text x="217" y="235" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">pressure at condenser outlet temp</text>
+  <text x="38" y="264" font-size="9.5" font-weight="700" fill="#8f1f1a">Fix: full recovery + deep vacuum (&lt;300 microns).</text>
+  <text x="38" y="278" font-size="9" fill="#5c5748">Never purge NCGs to atmosphere — illegal under EPA 608.</text>
+
+  <!-- low suction pressure -->
+  <rect x="459" y="55" width="417" height="230" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="78" font-size="13" font-weight="700" fill="#0e7490">Low suction pressure — check subcooling first</text>
+
+  <rect x="473" y="92" width="190" height="80" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="568" y="112" font-size="9.5" font-weight="700" fill="#b45309" text-anchor="middle">Low subcooling</text>
+  <text x="568" y="130" font-size="9.5" font-weight="700" fill="#b45309" text-anchor="middle">+ low suction</text>
+  <text x="568" y="152" font-size="9" fill="#5c5748" text-anchor="middle">= refrigerant</text>
+  <text x="568" y="164" font-size="9" fill="#5c5748" text-anchor="middle">undercharge</text>
+
+  <rect x="683" y="92" width="180" height="80" rx="4" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="773" y="112" font-size="9.5" font-weight="700" fill="#065f46" text-anchor="middle">Normal/high</text>
+  <text x="773" y="130" font-size="9.5" font-weight="700" fill="#065f46" text-anchor="middle">subcool. + low suction</text>
+  <text x="773" y="152" font-size="9" fill="#5c5748" text-anchor="middle">= restriction downstream</text>
+  <text x="773" y="164" font-size="9" fill="#5c5748" text-anchor="middle">(drier, TXV, distributor)</text>
+
+  <text x="473" y="196" font-size="9.5" fill="#5c5748">Verify filter-drier: temp/pressure drop across it</text>
+  <text x="473" y="210" font-size="9.5" fill="#5c5748">&gt;2 psig = replace the drier.</text>
+  <text x="473" y="234" font-size="9.5" font-weight="700" fill="#1f5a8f">Low suction in cold ambient (no head</text>
+  <text x="473" y="248" font-size="9.5" font-weight="700" fill="#1f5a8f">pressure control) can be NORMAL, not a fault —</text>
+  <text x="473" y="262" font-size="9.5" font-weight="700" fill="#1f5a8f">evaluate the full operating context first.</text>
+
+  <rect x="24" y="305" width="852" height="66" rx="5" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="326" font-size="11.5" font-weight="700" fill="#1e1b14">The gauges never lie, but they need context</text>
+  <text x="38" y="346" font-size="10" fill="#5c5748">Head and suction readings mean nothing in isolation — always cross-check subcooling, superheat,</text>
+  <text x="38" y="360" font-size="10" fill="#5c5748">ambient temperature, and condenser condition together before condemning a part.</text>
+
+  <rect x="24" y="380" width="852" height="82" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="403" font-size="12" font-weight="700" fill="#7a3f14">Field sequence: read both gauges, then confirm with subcooling/superheat</text>
+  <text x="38" y="425" font-size="10" fill="#5c5748">High head + normal suction → start at the condenser. Low suction + low subcooling → start at the</text>
+  <text x="38" y="439" font-size="10" fill="#5c5748">charge. Low suction + normal subcooling → start at the metering device and filter-drier, not the charge.</text>
+</svg>
