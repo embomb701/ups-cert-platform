@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Clean Agent &amp; Kitchen Suppression — No Residue, No Damage, Right Chemistry</text>
+
+  <!-- halon banned -->
+  <rect x="24" y="55" width="852" height="42" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/>
+  <text x="38" y="80" font-size="10.5" font-weight="700" fill="#8f1f1a">Halon 1301 was the original clean agent — banned by the Montreal Protocol for ozone depletion. Modern replacements are governed by NFPA 2001.</text>
+
+  <!-- FM-200 -->
+  <rect x="24" y="112" width="410" height="140" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="135" font-size="12.5" font-weight="700" fill="#0e7490">FM-200 (HFC-227ea)</text>
+  <text x="38" y="157" font-size="9.5" fill="#3f3a2c">Suppresses fire by absorbing heat from</text>
+  <text x="38" y="171" font-size="9.5" fill="#3f3a2c">combustion. Class A, B, C hazards.</text>
+  <rect x="38" y="183" width="230" height="24" rx="4" fill="#0e7490"/>
+  <text x="153" y="199" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Design concentration: ~7-8%</text>
+  <text x="38" y="228" font-size="9.5" font-weight="700" fill="#1f5a8f">Zero ozone depletion — significant global</text>
+  <text x="38" y="242" font-size="9.5" font-weight="700" fill="#1f5a8f">warming potential.</text>
+
+  <!-- Novec -->
+  <rect x="459" y="112" width="417" height="140" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="135" font-size="12.5" font-weight="700" fill="#065f46">Novec 1230 (FK-5-1-12)</text>
+  <text x="473" y="157" font-size="9.5" fill="#3f3a2c">Fluorinated ketone, suppresses by</text>
+  <text x="473" y="171" font-size="9.5" fill="#3f3a2c">absorbing heat — similar design concentration.</text>
+  <rect x="473" y="183" width="230" height="24" rx="4" fill="#059669"/>
+  <text x="588" y="199" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Zero ODP, very low GWP</text>
+  <text x="473" y="228" font-size="9.5" font-weight="700" fill="#065f46">Both agents safe for occupied spaces at</text>
+  <text x="473" y="242" font-size="9.5" font-weight="700" fill="#065f46">design concentration when properly engineered.</text>
+
+  <!-- kitchen -->
+  <rect x="24" y="270" width="852" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="293" font-size="12.5" font-weight="700" fill="#b45309">Wet chemical kitchen hood suppression — NFPA 17A</text>
+  <text x="38" y="315" font-size="10" fill="#5c5748">Potassium-based agent saponifies hot cooking oils into a soapy foam — the reaction cools the oil and</text>
+  <text x="38" y="329" font-size="10" fill="#5c5748">seals the surface against oxygen, preventing re-ignition after knockdown.</text>
+  <rect x="38" y="341" width="500" height="28" rx="4" fill="#b45309"/>
+  <text x="288" y="360" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">K-class portable extinguishers required nearby</text>
+  <text x="38" y="388" font-size="9" fill="#5c5748">Commercial cooking equipment only — a different chemistry problem than total-flooding clean agents.</text>
+
+  <rect x="24" y="410" width="852" height="55" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="431" font-size="10.5" font-weight="700" fill="#1e1b14">NFPA 2001 governs clean agent total-flooding systems; NFPA 17A governs wet chemical kitchen</text>
+  <text x="38" y="448" font-size="10.5" font-weight="700" fill="#1e1b14">suppression — two different standards, two different agents.</text>
+</svg>

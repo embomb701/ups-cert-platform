@@ -73,6 +73,9 @@ export const FIRE_ALARM_TECH_MODULES: TrainingModule[] = [
           'Class A wiring uses a redundant return path — the circuit loops back to the panel on a separate pair of conductors. If any single point opens, devices remain supervised through the return path. Class A is required in high-rise buildings and other critical occupancies per NFPA 72 and local codes.',
           'Signaling Line Circuits (SLC) for addressable systems can also be wired Class A or Class B. Class A SLC wiring ensures that a single wire fault does not take devices offline. The FACP continuously polls each address and reports trouble if a device fails to respond.',
         ],
+        images: [
+          { src: '/diagrams/wiring-classes-a-vs-b.svg', alt: 'Diagram comparing Class B single-path wiring with an end-of-line resistor against Class A redundant return-path wiring, plus a note on SLC wiring classes and pull station requirements', caption: 'Class B loses downstream devices on a single break; Class A\'s return path keeps every device supervised through the same fault.' },
+        ],
         keyPoints: [
           'Manual pull stations required at each means of egress',
           'Class B: single path with EOL resistor — open-circuit causes trouble and loss of downstream devices',
@@ -216,6 +219,9 @@ export const FIRE_ALARM_TECH_MODULES: TrainingModule[] = [
           'Audible appliances must produce sound levels at least 15 dB above the average ambient sound level, or 5 dB above the maximum ambient sound level, or at least 70 dBA at the pillow level in sleeping areas, whichever is greater per NFPA 72. Sound levels are measured at 10 feet from the device.',
           'Visual notification appliances (strobes) flash at 1 to 2 Hz to alert the hearing-impaired. Strobe intensity must meet the candela (cd) rating required by NFPA 72 for the coverage area. All strobes in a corridor must synchronize within 200 milliseconds of each other.',
           'Combination horn/strobe units simplify installation. Temporal-3 is the standard audible evacuation signal per NFPA 72: three short pulses, a pause, repeated continuously. Addressable notification appliances receive commands directly from the FACP via the SLC.',
+        ],
+        images: [
+          { src: '/diagrams/nac-notification-appliances.svg', alt: 'Diagram of NAC audible appliance sound level requirements, strobe candela and 200-millisecond synchronization rules, and the Temporal-3 evacuation signal pattern', caption: 'NAC powers every horn and strobe — audible minimums, strobe sync within 200ms, and the universal Temporal-3 evacuation pattern.' },
         ],
         keyPoints: [
           'NAC delivers power to horns, strobes, and speakers; supervised for faults',
@@ -385,6 +391,9 @@ export const FIRE_ALARM_TECH_MODULES: TrainingModule[] = [
           'Deluge sprinkler systems have open heads (no fusible element) and a deluge valve that keeps water out of the piping until the valve is tripped by a detection system. When the valve opens, water flows from all heads in the zone simultaneously. Deluge is used for aircraft hangars, transformer vaults, and other high-hazard applications.',
           'Water spray fixed systems are similar to deluge but use directional nozzles aimed at specific hazards such as cable trays or oil-filled transformers rather than providing area coverage. Both are governed by NFPA 15.',
         ],
+        images: [
+          { src: '/diagrams/preaction-deluge-sprinkler-systems.svg', alt: 'Diagram comparing single-interlock pre-action, double-interlock pre-action, deluge, and water spray fixed sprinkler systems by trigger logic and typical application', caption: 'Single-interlock needs one trigger; double-interlock needs two; deluge floods every open head on a single valve trip.' },
+        ],
         keyPoints: [
           'Single-interlock pre-action: detection opens valve; head activation allows flow',
           'Double-interlock pre-action: requires BOTH detection AND head — maximum accidental-discharge protection',
@@ -418,6 +427,9 @@ export const FIRE_ALARM_TECH_MODULES: TrainingModule[] = [
           'FM-200 (HFC-227ea) suppresses fire primarily by absorbing heat from the combustion process. A design concentration of approximately 7 to 8 percent by volume is typically used for Class A, B, and C hazards. FM-200 has zero ozone depletion potential but has a significant global warming potential.',
           'Novec 1230 (FK-5-1-12) is a fluorinated ketone with zero ozone depletion potential and an extremely low global warming potential. It suppresses fire by absorbing heat and has a design concentration similar to FM-200. Both agents are safe for occupied spaces at design concentrations when properly engineered.',
           'Wet chemical kitchen hood suppression systems are required by NFPA 17A for commercial cooking equipment. The wet chemical agent (a potassium-based solution) saponifies hot cooking oils into a soapy foam, cooling the oil and preventing re-ignition. K-class portable fire extinguishers are required near commercial cooking equipment.',
+        ],
+        images: [
+          { src: '/diagrams/clean-agent-kitchen-suppression.svg', alt: 'Diagram comparing FM-200 and Novec 1230 clean agent chemistry and design concentrations, plus wet chemical kitchen hood suppression saponification and K-class extinguisher requirements', caption: 'FM-200 and Novec 1230 replaced banned Halon 1301; wet chemical kitchen suppression saponifies hot oil into a re-ignition-blocking foam.' },
         ],
         keyPoints: [
           'FM-200 (HFC-227ea) and Novec 1230 are primary Halon replacements; governed by NFPA 2001',
@@ -686,6 +698,9 @@ export const FIRE_ALARM_TECH_MODULES: TrainingModule[] = [
           'Ground faults occur when a current-carrying conductor makes unintended contact with a grounded surface or equipment housing. On SLC circuits, a ground fault can cause erratic communication with devices near the fault. NFPA 72 requires that a single ground fault not cause an inadvertent alarm or prevent alarm signaling.',
           'Isolation modules are used on Class A SLC loops to isolate sections in the event of a wire-to-wire short circuit. Without isolation, a short on a Class A SLC would defeat both the primary and return paths and disable all devices beyond the fault. Isolation modules automatically disconnect the shorted section while keeping the rest of the loop operational.',
           'Systematic fault isolation involves dividing the circuit at its midpoint and using a multimeter or insulation resistance tester to determine which half contains the fault. For SLC troubles, the FACP event log often identifies the last known good address before the fault, indicating fault proximity.',
+        ],
+        images: [
+          { src: '/diagrams/fault-isolation-ground-faults.svg', alt: 'Diagram of the four common fire alarm trouble conditions, the NFPA 72 ground fault requirement, Class A SLC isolation modules, and the systematic midpoint-splitting fault isolation method', caption: 'Four trouble types, one systematic hunt — split the circuit at its midpoint and let the FACP event log narrow the search.' },
         ],
         keyPoints: [
           'Common troubles: open circuit, short circuit, ground fault, device communication failure',

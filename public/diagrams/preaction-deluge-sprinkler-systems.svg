@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Pre-Action, Deluge &amp; Water Spray — Matching the System to the Hazard</text>
+
+  <!-- single interlock -->
+  <rect x="24" y="55" width="272" height="170" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="78" font-size="12" font-weight="700" fill="#0e7490">Single-interlock pre-action</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Detection opens the valve;</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">head activation then allows flow.</text>
+  <text x="38" y="136" font-size="9.5" font-weight="700" fill="#1f5a8f">One trigger (detection)</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">pressurizes the pipe.</text>
+
+  <!-- double interlock -->
+  <rect x="314" y="55" width="272" height="170" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="328" y="78" font-size="12" font-weight="700" fill="#065f46">Double-interlock pre-action</text>
+  <text x="328" y="100" font-size="9.5" fill="#3f3a2c">Requires BOTH detection AND</text>
+  <text x="328" y="114" font-size="9.5" fill="#3f3a2c">head activation before water flows.</text>
+  <rect x="328" y="126" width="230" height="26" rx="4" fill="#065f46"/>
+  <text x="443" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Maximum accidental-discharge</text>
+  <text x="328" y="172" font-size="9.5" font-weight="700" fill="#065f46">protection — used in data centers,</text>
+  <text x="328" y="186" font-size="9.5" font-weight="700" fill="#065f46">museums, archival spaces.</text>
+
+  <!-- deluge -->
+  <rect x="604" y="55" width="272" height="170" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="618" y="78" font-size="12" font-weight="700" fill="#8f1f1a">Deluge</text>
+  <text x="618" y="100" font-size="9.5" fill="#5c5748">Open heads (no fusible element) —</text>
+  <text x="618" y="114" font-size="9.5" fill="#5c5748">a single valve trip floods every head.</text>
+  <rect x="618" y="126" width="230" height="26" rx="4" fill="#8f1f1a"/>
+  <text x="733" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Instant, total-zone discharge</text>
+  <text x="618" y="172" font-size="9.5" font-weight="700" fill="#8f1f1a">Aircraft hangars, transformer</text>
+  <text x="618" y="186" font-size="9.5" font-weight="700" fill="#8f1f1a">vaults, high-hazard applications.</text>
+
+  <!-- water spray -->
+  <rect x="24" y="245" width="852" height="90" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="268" font-size="12" font-weight="700" fill="#1e1b14">Water spray fixed systems — deluge's targeted cousin</text>
+  <text x="38" y="290" font-size="10" fill="#5c5748">Same open-head, single-valve-trip logic as deluge, but directional nozzles aim at a specific hazard —</text>
+  <text x="38" y="304" font-size="10" fill="#5c5748">cable trays, oil-filled transformers — rather than flooding the whole zone. Both governed by NFPA 15.</text>
+
+  <rect x="24" y="350" width="852" height="105" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="373" font-size="12" font-weight="700" fill="#7a3f14">Reading the two-action requirement correctly</text>
+  <text x="38" y="395" font-size="10" fill="#5c5748">Double-interlock needs detection activation AND a sprinkler head opening — not two smoke detectors,</text>
+  <text x="38" y="409" font-size="10" fill="#5c5748">not a pull station plus a detector. Either failure alone (a false detection signal, or a mechanically</text>
+  <text x="38" y="423" font-size="10" fill="#5c5748">damaged head) still keeps the pipe dry — that's the whole point of the interlock.</text>
+  <text x="38" y="443" font-size="9.5" font-weight="700" fill="#7a3f14">Pick pre-action where accidental discharge is expensive; pick deluge where speed matters more.</text>
+</svg>

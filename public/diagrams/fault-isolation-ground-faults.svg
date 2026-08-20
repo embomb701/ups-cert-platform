@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Trouble Conditions — Four Fault Types, One Systematic Hunt</text>
+
+  <!-- four trouble types -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="205" height="60" rx="4" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/><text x="126" y="80" text-anchor="middle" fill="#1e1b14">Open circuit</text><text x="126" y="98" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">broken/disconnected wire</text>
+
+    <rect x="239" y="55" width="205" height="60" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="341" y="80" text-anchor="middle" fill="#b45309">Short circuit</text><text x="341" y="98" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">two conductors touching</text>
+
+    <rect x="454" y="55" width="205" height="60" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="556" y="80" text-anchor="middle" fill="#8f1f1a">Ground fault</text><text x="556" y="98" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">conductor touches ground</text>
+
+    <rect x="669" y="55" width="207" height="60" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="772" y="80" text-anchor="middle" fill="#0e7490">Comm failure</text><text x="772" y="98" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">device not answering SLC poll</text>
+  </g>
+
+  <!-- ground fault detail -->
+  <rect x="24" y="135" width="410" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="158" font-size="12" font-weight="700" fill="#8f1f1a">Ground faults — the NFPA 72 requirement</text>
+  <text x="38" y="180" font-size="9.5" fill="#5c5748">Conductor contacts a grounded surface —</text>
+  <text x="38" y="194" font-size="9.5" fill="#5c5748">can cause erratic SLC communication near the fault.</text>
+  <text x="38" y="216" font-size="9.5" font-weight="700" fill="#8f1f1a">A single ground fault must NOT cause an</text>
+  <text x="38" y="230" font-size="9.5" font-weight="700" fill="#8f1f1a">inadvertent alarm or block alarm signaling.</text>
+
+  <!-- isolation modules -->
+  <rect x="459" y="135" width="417" height="115" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="158" font-size="12" font-weight="700" fill="#065f46">Isolation modules — Class A SLC only</text>
+  <text x="473" y="180" font-size="9.5" fill="#3f3a2c">Without one, a short on Class A defeats BOTH</text>
+  <text x="473" y="194" font-size="9.5" fill="#3f3a2c">primary and return paths — the loop's whole point.</text>
+  <text x="473" y="216" font-size="9.5" font-weight="700" fill="#065f46">Auto-disconnects the shorted section,</text>
+  <text x="473" y="230" font-size="9.5" font-weight="700" fill="#065f46">keeps the rest of the loop operational.</text>
+
+  <!-- systematic isolation -->
+  <rect x="24" y="265" width="852" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="288" font-size="12" font-weight="700" fill="#1e1b14">Systematic fault isolation</text>
+  <text x="38" y="310" font-size="10" fill="#5c5748">Split the circuit at its midpoint, measure with a multimeter or insulation resistance tester to find</text>
+  <text x="38" y="324" font-size="10" fill="#5c5748">which half holds the fault — then split that half again.</text>
+  <text x="38" y="346" font-size="9.5" font-weight="700" fill="#1e1b14">On SLC troubles, the FACP event log's last-known-good address narrows the search before you touch a meter.</text>
+
+  <rect x="24" y="385" width="852" height="75" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="406" font-size="11.5" font-weight="700" fill="#7a3f14">Read the trouble type before you go to the field</text>
+  <text x="38" y="426" font-size="10" fill="#5c5748">Ground fault, open circuit, short circuit, and comm failure each point at a different physical cause —</text>
+  <text x="38" y="440" font-size="10" fill="#5c5748">the panel's trouble log tells you which hunt to start.</text>
+</svg>

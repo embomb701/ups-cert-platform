@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">NAC — the Circuit That Powers Every Horn and Strobe</text>
+
+  <rect x="24" y="52" width="852" height="40" rx="5" fill="#eef3f7" stroke="#0e7490" stroke-width="1.5"/>
+  <text x="38" y="77" font-size="10.5" font-weight="700" fill="#0e7490">Notification Appliance Circuit — powers horns, strobes, speakers. Supervised for open- and short-circuit faults, wired Class A or B.</text>
+
+  <!-- audible -->
+  <rect x="24" y="105" width="410" height="150" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="128" font-size="12.5" font-weight="700" fill="#b45309">Audible appliances — NFPA 72 minimums</text>
+  <text x="38" y="150" font-size="9.5" fill="#3f3a2c">Whichever is GREATER:</text>
+  <g font-size="9.5" font-weight="700" fill="#8a5010">
+    <text x="50" y="172">• 15 dB above average ambient</text>
+    <text x="50" y="190">• 5 dB above maximum ambient</text>
+    <text x="50" y="208">• 70 dBA at pillow level (sleeping areas)</text>
+  </g>
+  <text x="38" y="232" font-size="9" fill="#5c5748">Measured at 10 feet from the device.</text>
+
+  <!-- visual -->
+  <rect x="459" y="105" width="417" height="150" rx="6" fill="#e6f4f2" stroke="#0f766e" stroke-width="2"/>
+  <text x="473" y="128" font-size="12.5" font-weight="700" fill="#134e4a">Visual appliances — strobes</text>
+  <text x="473" y="150" font-size="9.5" fill="#3f3a2c">Flash 1–2 Hz to alert the hearing-impaired.</text>
+  <text x="473" y="164" font-size="9.5" fill="#3f3a2c">Intensity rated in candela (cd) for coverage area.</text>
+  <rect x="473" y="176" width="380" height="28" rx="4" fill="#0f766e"/>
+  <text x="663" y="195" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">All strobes in a corridor sync within 200 ms</text>
+  <text x="473" y="224" font-size="9" fill="#5c5748">Un-synced flicker can trigger photosensitive seizures.</text>
+
+  <!-- temporal 3 -->
+  <rect x="24" y="270" width="852" height="90" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="293" font-size="12.5" font-weight="700" fill="#8f1f1a">Temporal-3 — the standard evacuation signal</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="305" width="40" height="24" rx="3" fill="#8f1f1a"/><text x="58" y="321" text-anchor="middle" fill="#ffffff">▮</text>
+    <rect x="86" y="305" width="40" height="24" rx="3" fill="#8f1f1a"/><text x="106" y="321" text-anchor="middle" fill="#ffffff">▮</text>
+    <rect x="134" y="305" width="40" height="24" rx="3" fill="#8f1f1a"/><text x="154" y="321" text-anchor="middle" fill="#ffffff">▮</text>
+    <text x="190" y="322" fill="#5c5748" font-weight="400">pause</text>
+    <text x="250" y="322" fill="#5c5748" font-weight="400">→ repeats continuously</text>
+  </g>
+  <text x="38" y="348" font-size="9.5" fill="#5c5748">Three short pulses, a pause, repeated — universally recognizable as the command to evacuate.</text>
+
+  <rect x="24" y="378" width="852" height="80" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="401" font-size="11.5" font-weight="700" fill="#1e1b14">Combination horn/strobe units and addressable appliances</text>
+  <text x="38" y="423" font-size="10" fill="#5c5748">Combo units simplify installation over separate devices. Addressable notification appliances receive</text>
+  <text x="38" y="437" font-size="10" fill="#5c5748">commands directly from the FACP via the SLC — no separate NAC wiring required for that appliance.</text>
+</svg>

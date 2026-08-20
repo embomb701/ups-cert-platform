@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Class B vs. Class A Wiring — What Survives One Broken Wire</text>
+
+  <!-- Class B -->
+  <rect x="24" y="55" width="410" height="185" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Class B — single path, EOL resistor</text>
+  <g font-size="9" font-weight="700">
+    <rect x="38" y="90" width="70" height="26" rx="4" fill="#8f1f1a"/><text x="73" y="107" text-anchor="middle" fill="#ffffff">Panel</text>
+    <rect x="128" y="90" width="70" height="26" rx="4" fill="#ffffff" stroke="#8f1f1a"/><text x="163" y="107" text-anchor="middle" fill="#8f1f1a">Dev 1</text>
+    <rect x="218" y="90" width="70" height="26" rx="4" fill="#ffffff" stroke="#8f1f1a"/><text x="253" y="107" text-anchor="middle" fill="#8f1f1a">Dev 2</text>
+    <rect x="308" y="90" width="88" height="26" rx="4" fill="#8f1f1a"/><text x="352" y="107" text-anchor="middle" fill="#ffffff">EOL</text>
+  </g>
+  <line x1="108" y1="103" x2="126" y2="103" stroke="#8f1f1a" stroke-width="2"/>
+  <line x1="198" y1="103" x2="216" y2="103" stroke="#8f1f1a" stroke-width="2"/>
+  <line x1="288" y1="103" x2="306" y2="103" stroke="#8f1f1a" stroke-width="2"/>
+  <text x="38" y="140" font-size="9.5" fill="#5c5748">One path only. Break anywhere between two</text>
+  <text x="38" y="154" font-size="9.5" fill="#5c5748">devices → panel loses the EOL resistor signal →</text>
+  <text x="38" y="168" font-size="9.5" fill="#5c5748">trouble condition, downstream devices unsupervised.</text>
+  <text x="38" y="192" font-size="9.5" font-weight="700" fill="#8f1f1a">Simple to install, no fault tolerance for an</text>
+  <text x="38" y="206" font-size="9.5" font-weight="700" fill="#8f1f1a">open circuit.</text>
+
+  <!-- Class A -->
+  <rect x="459" y="55" width="417" height="185" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#065f46">Class A — redundant return path</text>
+  <g font-size="9" font-weight="700">
+    <rect x="473" y="90" width="75" height="26" rx="4" fill="#065f46"/><text x="510" y="107" text-anchor="middle" fill="#ffffff">Panel</text>
+    <rect x="568" y="90" width="70" height="26" rx="4" fill="#ffffff" stroke="#059669"/><text x="603" y="107" text-anchor="middle" fill="#065f46">Dev 1</text>
+    <rect x="658" y="90" width="70" height="26" rx="4" fill="#ffffff" stroke="#059669"/><text x="693" y="107" text-anchor="middle" fill="#065f46">Dev 2</text>
+  </g>
+  <line x1="548" y1="103" x2="566" y2="103" stroke="#059669" stroke-width="2"/>
+  <line x1="638" y1="103" x2="656" y2="103" stroke="#059669" stroke-width="2"/>
+  <path d="M728,103 L750,103 L750,140 L510,140 L510,116" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="750" y="135" font-size="7.5" fill="#065f46">return path</text>
+  <text x="473" y="160" font-size="9.5" fill="#3f3a2c">Circuit loops back to the panel on a separate</text>
+  <text x="473" y="174" font-size="9.5" fill="#3f3a2c">conductor pair — a single open point still leaves</text>
+  <text x="473" y="188" font-size="9.5" fill="#3f3a2c">every device supervised through the return leg.</text>
+  <text x="473" y="212" font-size="9.5" font-weight="700" fill="#065f46">Required in high-rise buildings and other</text>
+  <text x="473" y="226" font-size="9.5" font-weight="700" fill="#065f46">critical occupancies.</text>
+
+  <!-- SLC note -->
+  <rect x="24" y="260" width="852" height="80" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="283" font-size="12" font-weight="700" fill="#0e7490">Signaling Line Circuits (SLC) follow the same A/B split</text>
+  <text x="38" y="305" font-size="10" fill="#5c5748">Addressable-system SLC loops can be Class A or Class B too — the FACP continuously polls each</text>
+  <text x="38" y="319" font-size="10" fill="#5c5748">address and reports trouble if a device fails to respond, regardless of which class is wired.</text>
+
+  <rect x="24" y="352" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="375" font-size="10.5" font-weight="700" fill="#7a3f14">EOL resistor = the known-resistance signature the panel monitors on Class B. Lose it, lose supervision —</text>
+  <text x="38" y="391" font-size="10.5" font-weight="700" fill="#7a3f14">that's why Class A exists: a second path the fault can't also break.</text>
+
+  <rect x="24" y="418" width="852" height="42" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="443" font-size="10.5" font-weight="700" fill="#1e1b14">Double-action pull stations (lift + pull) are required at every means of egress in most occupancies.</text>
+</svg>
