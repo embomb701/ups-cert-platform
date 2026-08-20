@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">NVR vs. VMS, and the Formula That Sizes Every Storage Array</text>
+
+  <!-- NVR vs VMS -->
+  <rect x="24" y="55" width="410" height="115" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#1e1b14">NVR — dedicated appliance</text>
+  <text x="38" y="100" font-size="9.5" fill="#5c5748">Records IP camera streams to internal</text>
+  <text x="38" y="114" font-size="9.5" fill="#5c5748">or attached storage.</text>
+  <text x="38" y="136" font-size="9.5" font-weight="700" fill="#5c5748">Fixed capacity, simpler to deploy.</text>
+
+  <rect x="459" y="55" width="417" height="115" rx="6" fill="#7c3aed" fill-opacity="0.1" stroke="#7c3aed" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#5b21b6">VMS — server-based software</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Runs on general server hardware —</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">scalable, integrates analytics.</text>
+  <text x="473" y="136" font-size="9.5" font-weight="700" fill="#5b21b6">Multi-site management, greater growth headroom.</text>
+
+  <!-- formula -->
+  <rect x="24" y="190" width="852" height="90" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="213" font-size="12.5" font-weight="700" fill="#065f46">Storage sizing formula</text>
+  <rect x="38" y="225" width="640" height="30" rx="4" fill="#059669"/>
+  <text x="358" y="245" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle">Storage (TB) = bit rate (Mbps) × 0.0075 × cameras × retention days</text>
+  <text x="38" y="270" font-size="9" fill="#5c5748">The 0.0075 factor converts Mbps-days directly to terabytes.</text>
+
+  <!-- worked example -->
+  <rect x="24" y="295" width="410" height="80" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="318" font-size="11.5" font-weight="700" fill="#7a3f14">Worked example</text>
+  <text x="38" y="340" font-size="10" fill="#5c5748">2 MP H.265 camera, 2 Mbps, 30-day retention:</text>
+  <text x="38" y="358" font-size="10" font-weight="700" fill="#7a3f14">2 × 0.0075 × 1 × 30 = 0.45 TB</text>
+
+  <!-- RAID -->
+  <rect x="459" y="295" width="417" height="80" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="318" font-size="11.5" font-weight="700" fill="#b45309">RAID redundancy</text>
+  <text x="473" y="340" font-size="9.5" fill="#5c5748">RAID 5: tolerates 1 drive failure.</text>
+  <text x="473" y="356" font-size="9.5" fill="#5c5748">RAID 6: tolerates 2 simultaneous failures. Hot spares add another layer.</text>
+
+  <rect x="24" y="390" width="852" height="46" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="418" font-size="10.5" font-weight="700" fill="#1e1b14">Retention standard: 30 days most sites, 90 days for high-security areas — set the retention days input before you size anything else.</text>
+</svg>

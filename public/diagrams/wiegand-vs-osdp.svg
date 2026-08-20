@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Wiegand vs. OSDP — Reader Protocols, Decades Apart</text>
+
+  <!-- Wiegand -->
+  <rect x="24" y="55" width="410" height="220" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Wiegand — legacy, unencrypted</text>
+  <text x="38" y="100" font-size="9.5" fill="#5c5748">One-way, no encryption. Card data</text>
+  <text x="38" y="114" font-size="9.5" fill="#5c5748">transmits in the clear.</text>
+  <rect x="38" y="126" width="358" height="46" rx="4" fill="#8f1f1a"/>
+  <text x="217" y="145" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Vulnerable to interception</text>
+  <text x="217" y="161" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">and replay attacks</text>
+  <text x="38" y="192" font-size="9.5" fill="#5c5748">26-bit standard, up to 256-bit proprietary.</text>
+  <text x="38" y="214" font-size="9.5" font-weight="700" fill="#8f1f1a">Max run: 50 ft</text>
+  <text x="38" y="236" font-size="9" fill="#5c5748">No tamper detection, no remote diagnostics from the controller.</text>
+
+  <!-- OSDP -->
+  <rect x="459" y="55" width="417" height="220" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#065f46">OSDP — modern, encrypted</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Bi-directional RS-485 bus.</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">IEC 60839-11-5.</text>
+  <rect x="473" y="126" width="380" height="46" rx="4" fill="#059669"/>
+  <text x="663" y="145" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">AES-128 encrypted, tamper-</text>
+  <text x="663" y="161" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">supervised communication</text>
+  <text x="473" y="192" font-size="9.5" fill="#3f3a2c">Remote diagnostics, firmware updates,</text>
+  <text x="473" y="206" font-size="9.5" fill="#3f3a2c">reader LED/buzzer control from the panel.</text>
+  <text x="473" y="228" font-size="9.5" font-weight="700" fill="#065f46">Max run: up to 4,000 ft</text>
+  <text x="473" y="250" font-size="9" fill="#5c5748">PSIA and SIA mandate OSDP for new federal government installations.</text>
+
+  <rect x="24" y="295" width="852" height="80" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="318" font-size="12" font-weight="700" fill="#7a3f14">The security gap in one sentence</text>
+  <text x="38" y="340" font-size="10" fill="#5c5748">Wiegand's cleartext transmission means a card can be intercepted and replayed by anyone with</text>
+  <text x="38" y="354" font-size="10" fill="#5c5748">physical access to the wire — OSDP's encryption and supervision close that gap entirely.</text>
+
+  <rect x="24" y="390" width="852" height="46" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="418" font-size="10.5" font-weight="700" fill="#1e1b14">OSDP's 4,000 ft bus length vs. Wiegand's 50 ft also changes controller placement strategy on larger sites.</text>
+</svg>

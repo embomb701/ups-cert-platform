@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">PoE — Three Standards, One Power Budget to Plan</text>
+
+  <!-- 3 standards -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="55" width="272" height="115" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+    <text x="38" y="78" fill="#1e1b14">802.3af (PoE)</text>
+    <rect x="38" y="90" width="230" height="26" rx="4" fill="#7a7256"/>
+    <text x="153" y="108" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Up to 15.4 W per port</text>
+    <text x="38" y="134" font-weight="400" font-size="9" fill="#5c5748">Basic fixed cameras, sensors.</text>
+
+    <rect x="314" y="55" width="272" height="115" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="328" y="78" fill="#0e7490">802.3at (PoE+)</text>
+    <rect x="328" y="90" width="230" height="26" rx="4" fill="#0e7490"/>
+    <text x="443" y="108" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Up to 30 W per port</text>
+    <text x="328" y="134" font-weight="400" font-size="9" fill="#3f3a2c">Higher-draw fixed cameras.</text>
+
+    <rect x="604" y="55" width="272" height="115" rx="6" fill="#7c3aed" fill-opacity="0.12" stroke="#7c3aed" stroke-width="2.5"/>
+    <text x="618" y="78" fill="#5b21b6">802.3bt (PoE++)</text>
+    <rect x="618" y="90" width="230" height="26" rx="4" fill="#7c3aed"/>
+    <text x="733" y="108" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Up to 90 W per port</text>
+    <text x="618" y="134" font-weight="400" font-size="9" fill="#3f3a2c">PTZ cameras, multi-imager units.</text>
+  </g>
+
+  <!-- PSE/PD -->
+  <rect x="24" y="185" width="410" height="105" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="208" font-size="12" font-weight="700" fill="#b45309">The handshake</text>
+  <text x="38" y="230" font-size="9.5" fill="#3f3a2c">PSE (switch, Power Sourcing Equipment)</text>
+  <text x="38" y="244" font-size="9.5" fill="#3f3a2c">negotiates power with the PD (camera,</text>
+  <text x="38" y="258" font-size="9.5" fill="#3f3a2c">Powered Device) before energizing the port.</text>
+  <text x="38" y="278" font-size="9" fill="#5c5748">Prevents overpowering a device that never asked for 90 W.</text>
+
+  <!-- budget calc -->
+  <rect x="459" y="185" width="417" height="105" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="208" font-size="12" font-weight="700" fill="#065f46">Switch budget planning</text>
+  <rect x="473" y="220" width="380" height="28" rx="4" fill="#059669"/>
+  <text x="663" y="239" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Sum all camera wattages + 20% margin</text>
+  <text x="473" y="270" font-size="9" fill="#5c5748">Undersizing the switch budget derates or drops ports under full load.</text>
+
+  <rect x="24" y="305" width="852" height="80" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="328" font-size="12" font-weight="700" fill="#8f1f1a">Long runs steal power before it arrives</text>
+  <text x="38" y="350" font-size="10" fill="#5c5748">Cable runs over 200 ft on 23 AWG CAT6 cause voltage drop that reduces the actual power delivered —</text>
+  <text x="38" y="364" font-size="10" fill="#5c5748">a camera rated within its PoE class can still brown out at the far end of a long run.</text>
+
+  <rect x="24" y="400" width="852" height="46" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="428" font-size="10.5" font-weight="700" fill="#7a3f14">A 45W PTZ needs 802.3bt — 802.3af (15.4W) and 802.3at (30W) both fall short before you even account for cable loss.</text>
+</svg>

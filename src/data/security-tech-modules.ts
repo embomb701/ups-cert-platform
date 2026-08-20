@@ -240,6 +240,9 @@ export const SECURITY_TECH_MODULES: TrainingModule[] = [
           'Wiegand (26-bit standard, up to 256-bit proprietary) is a one-way, unencrypted protocol that has connected readers to controllers for decades. It transmits card data in the clear with no tamper detection, making it vulnerable to data interception and replay attacks.',
           'OSDP (Open Supervised Device Protocol, IEC 60839-11-5) is a bi-directional RS-485 bus that supports AES-128 encrypted communication, tamper supervision, remote diagnostics, and LED/buzzer control from the controller. PSIA and SIA mandate OSDP for new federal government installations.',
         ],
+        images: [
+          { src: '/diagrams/wiegand-vs-osdp.svg', alt: 'Diagram comparing Wiegand and OSDP reader protocols by encryption, cable run length, and tamper detection capability', caption: 'Wiegand transmits in the clear over 50 ft; OSDP encrypts with AES-128 and supervises over up to 4,000 ft.' },
+        ],
         keyPoints: [
           'Wiegand — one-way, unencrypted; standard for legacy systems; 50 ft max run',
           'OSDP — bi-directional RS-485; AES-128 encrypted; up to 4,000 ft bus length',
@@ -409,6 +412,9 @@ export const SECURITY_TECH_MODULES: TrainingModule[] = [
           'PoE delivers DC power over CAT5e/CAT6 cable, eliminating separate power runs to each camera. IEEE 802.3af (PoE) provides up to 15.4 W per port; IEEE 802.3at (PoE+) provides up to 30 W; IEEE 802.3bt (PoE++) provides up to 90 W for PTZ cameras and multi-imager units.',
           'The PoE switch (PSE — Power Sourcing Equipment) negotiates power with the camera (PD — Powered Device) using a handshake protocol. Total switch budget must account for all connected PDs plus a 20% safety margin. Long cable runs (> 200 ft on 23 AWG CAT6) cause voltage drop that may reduce actual available power.',
         ],
+        images: [
+          { src: '/diagrams/poe-power-budget.svg', alt: 'Diagram of the 802.3af, 802.3at, and 802.3bt PoE power standards, the PSE-to-PD negotiation handshake, switch budget planning with a 20% margin, and voltage drop on long cable runs', caption: 'Three PoE classes top out at 15.4W, 30W, and 90W — plan the switch budget with a 20% margin before cable loss eats into it further.' },
+        ],
         keyPoints: [
           '802.3af — 15.4 W; 802.3at — 30 W; 802.3bt — up to 90 W per port',
           'PSE (switch) sources power; PD (camera) receives power',
@@ -450,6 +456,9 @@ export const SECURITY_TECH_MODULES: TrainingModule[] = [
         body: [
           'A Network Video Recorder (NVR) is a dedicated appliance that records IP camera streams to internal or attached storage. A Video Management System (VMS) is software-based and runs on server hardware, offering greater scalability, analytics integration, and multi-site management.',
           'Storage sizing uses the formula: Storage (TB) = (bit rate in Mbps × 0.0075) × number of cameras × retention days. A 2 MP H.265 camera at 2 Mbps recording 30 days requires approximately 0.45 TB. RAID 5 or RAID 6 provides redundancy; hot spares protect against multiple drive failures.',
+        ],
+        images: [
+          { src: '/diagrams/nvr-vms-storage-sizing.svg', alt: 'Diagram comparing NVR appliances and VMS software, the storage sizing formula with a worked example, and RAID 5 versus RAID 6 redundancy', caption: 'Storage (TB) = bit rate x 0.0075 x cameras x retention days — the formula behind every video storage quote.' },
         ],
         keyPoints: [
           'NVR = dedicated appliance; VMS = scalable software on server hardware',
@@ -588,6 +597,9 @@ export const SECURITY_TECH_MODULES: TrainingModule[] = [
         body: [
           'Passive infrared (PIR) detectors sense body heat movement across the detection pattern. Dual-technology (dual-tech) detectors combine PIR and microwave or ultrasonic sensing, requiring both technologies to trigger simultaneously — dramatically reducing false alarms in challenging environments (HVAC vents, moving curtains).',
           'Glass break detectors use acoustic analysis to identify the specific sound signature of breaking glass (< 10 kHz thud + > 10 kHz tinkle). Door/window contacts are the simplest detector: a normally closed (NC) magnetic contact opens when the door opens, triggering the alarm.',
+        ],
+        images: [
+          { src: '/diagrams/intrusion-detector-technologies.svg', alt: 'Diagram comparing PIR, dual-technology, glass break, and door/window contact intrusion detectors by sensing method and false-alarm resistance', caption: 'Four detector types trade simplicity for false-alarm resistance — dual-tech requires both PIR and microwave to fire together.' },
         ],
         keyPoints: [
           'PIR — detects body heat movement; susceptible to HVAC drafts and sunlight',
@@ -830,6 +842,9 @@ export const SECURITY_TECH_MODULES: TrainingModule[] = [
         body: [
           'Unified platforms integrate access control events with camera triggers and intrusion panel alerts. Common integrations include: access denied event → nearest camera pops up on monitoring workstation; door forced open → camera starts recording at high bit rate; intrusion alarm → NVR tags the timestamp for rapid forensic search.',
           'Integration is achieved through direct API connections (REST or SDK), hardware I/O (relay output from access controller to NVR alarm input), or middleware platforms that act as brokers between disparate systems. Open standards such as ONVIF (cameras) and OSDP (readers) facilitate interoperability.',
+        ],
+        images: [
+          { src: '/diagrams/security-system-integration.svg', alt: 'Diagram of access control, CCTV, and intrusion system trigger chains, the three integration methods API/SDK, hardware I/O, and middleware broker, and the ONVIF and OSDP open standards', caption: 'One event, three systems react — access denial pops a camera, a forced door bumps recording quality, an intrusion alarm timestamps the footage.' },
         ],
         keyPoints: [
           'Access denied event → camera popup; forced door → high-quality recording',

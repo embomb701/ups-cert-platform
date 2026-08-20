@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">One Event, Three Systems React — Access + CCTV + Intrusion</text>
+
+  <!-- trigger chains -->
+  <g font-size="9" font-weight="700">
+    <rect x="24" y="55" width="270" height="60" rx="4" fill="#7c3aed" fill-opacity="0.1" stroke="#7c3aed" stroke-width="2"/><text x="38" y="76" fill="#5b21b6">Access denied event</text><text x="38" y="94" font-weight="400" font-size="8.5" fill="#3f3a2c">→ nearest camera pops up on</text><text x="38" y="106" font-weight="400" font-size="8.5" fill="#3f3a2c">monitoring workstation</text>
+
+    <rect x="315" y="55" width="270" height="60" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="329" y="76" fill="#b45309">Door forced open</text><text x="329" y="94" font-weight="400" font-size="8.5" fill="#8a5010">→ camera starts recording at</text><text x="329" y="106" font-weight="400" font-size="8.5" fill="#8a5010">high bit rate</text>
+
+    <rect x="606" y="55" width="270" height="60" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="620" y="76" fill="#8f1f1a">Intrusion alarm</text><text x="620" y="94" font-weight="400" font-size="8.5" fill="#8f1f1a">→ NVR tags the timestamp for</text><text x="620" y="106" font-weight="400" font-size="8.5" fill="#8f1f1a">rapid forensic search</text>
+  </g>
+
+  <!-- integration methods -->
+  <rect x="24" y="135" width="852" height="115" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="158" font-size="12.5" font-weight="700" fill="#1e1b14">Three ways systems talk to each other</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="170" width="260" height="60" rx="4" fill="#eef3f7" stroke="#0e7490"/><text x="168" y="192" text-anchor="middle" fill="#0e7490">API / SDK</text><text x="168" y="208" font-weight="400" font-size="8.5" text-anchor="middle" fill="#3f3a2c">Direct REST or vendor</text><text x="168" y="220" font-weight="400" font-size="8.5" text-anchor="middle" fill="#3f3a2c">SDK connection</text>
+
+    <rect x="308" y="170" width="260" height="60" rx="4" fill="#fdeec9" stroke="#b45309"/><text x="438" y="192" text-anchor="middle" fill="#b45309">Hardware I/O</text><text x="438" y="208" font-weight="400" font-size="8.5" text-anchor="middle" fill="#8a5010">Relay output from access</text><text x="438" y="220" font-weight="400" font-size="8.5" text-anchor="middle" fill="#8a5010">controller to NVR alarm input</text>
+
+    <rect x="578" y="170" width="260" height="60" rx="4" fill="#e9f4ef" stroke="#059669"/><text x="708" y="192" text-anchor="middle" fill="#065f46">Middleware broker</text><text x="708" y="208" font-weight="400" font-size="8.5" text-anchor="middle" fill="#3f3a2c">Platform that bridges</text><text x="708" y="220" font-weight="400" font-size="8.5" text-anchor="middle" fill="#3f3a2c">disparate systems</text>
+  </g>
+
+  <!-- open standards -->
+  <rect x="24" y="270" width="852" height="90" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="293" font-size="12.5" font-weight="700" fill="#065f46">Open standards make cross-vendor integration possible</text>
+  <rect x="38" y="305" width="230" height="28" rx="4" fill="#059669"/>
+  <text x="153" y="324" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">ONVIF Profile S/T — cameras</text>
+  <rect x="284" y="305" width="230" height="28" rx="4" fill="#166534"/>
+  <text x="399" y="324" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">OSDP — reader to controller</text>
+
+  <rect x="24" y="375" width="852" height="75" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="396" font-size="12" font-weight="700" fill="#7a3f14">Why forensic search speed matters</text>
+  <text x="38" y="416" font-size="10" fill="#5c5748">Tagging the exact timestamp at the moment of an intrusion alarm means an investigator jumps</text>
+  <text x="38" y="430" font-size="10" fill="#5c5748">straight to the relevant footage instead of scrubbing hours of recording.</text>
+</svg>
