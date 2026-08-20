@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Shore Power — Check Polarity First, Then Break the Galvanic Path</text>
+
+  <!-- 30A vs 50A -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="55" width="272" height="80" rx="6" fill="#eef3f7" stroke="#2563eb" stroke-width="2"/>
+    <text x="38" y="78" fill="#1e40af">30A shore power</text>
+    <text x="38" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Single 120V hot leg.</text>
+    <text x="38" y="118" font-weight="400" font-size="9" fill="#5c5748">Common on smaller vessels.</text>
+
+    <rect x="314" y="55" width="272" height="80" rx="6" fill="#e6f4f2" stroke="#0f766e" stroke-width="2"/>
+    <text x="328" y="78" fill="#134e4a">50A shore power</text>
+    <text x="328" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Split-phase, two 120V legs.</text>
+    <text x="328" y="118" font-weight="400" font-size="9" fill="#3f3a2c">240V leg-to-leg — bigger AC loads.</text>
+
+    <rect x="604" y="55" width="272" height="80" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+    <text x="618" y="78" fill="#8f1f1a">Reverse polarity</text>
+    <text x="618" y="100" font-weight="400" font-size="9.5" fill="#5c5748">Common at marina pedestals.</text>
+    <text x="618" y="118" font-weight="700" font-size="9" fill="#8f1f1a">Check the indicator BEFORE energizing.</text>
+  </g>
+
+  <!-- galvanic isolator -->
+  <rect x="24" y="150" width="410" height="150" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="173" font-size="12.5" font-weight="700" fill="#b45309">Galvanic isolator</text>
+  <text x="38" y="195" font-size="9.5" fill="#3f3a2c">Diode pairs in series with the shore ground</text>
+  <text x="38" y="209" font-size="9.5" fill="#3f3a2c">wire — blocks low-level DC galvanic current.</text>
+  <rect x="38" y="221" width="358" height="26" rx="4" fill="#b45309"/>
+  <text x="217" y="239" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Min. 1.0V DC blocking (ABYC)</text>
+  <text x="38" y="264" font-size="9.5" font-weight="700" fill="#8a5010">Still passes 60Hz AC fault current —</text>
+  <text x="38" y="278" font-size="9.5" font-weight="700" fill="#8a5010">shore ground wire remains connected.</text>
+
+  <!-- isolation transformer -->
+  <rect x="459" y="150" width="417" height="150" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="173" font-size="12.5" font-weight="700" fill="#065f46">Isolation transformer</text>
+  <text x="473" y="195" font-size="9.5" fill="#3f3a2c">Magnetically couples shore AC to the boat —</text>
+  <text x="473" y="209" font-size="9.5" fill="#3f3a2c">no physical ground connection at all.</text>
+  <rect x="473" y="221" width="380" height="26" rx="4" fill="#059669"/>
+  <text x="663" y="239" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Completely severs the shore ground path</text>
+  <text x="473" y="264" font-size="9.5" font-weight="700" fill="#065f46">Gold standard for metal-hull vessels</text>
+  <text x="473" y="278" font-size="9.5" font-weight="700" fill="#065f46">and long-term liveaboards.</text>
+
+  <!-- ELCI -->
+  <rect x="24" y="315" width="852" height="80" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="338" font-size="12" font-weight="700" fill="#8f1f1a">ELCI — the swimmer-protection breaker</text>
+  <text x="38" y="360" font-size="10" fill="#5c5748">Trips at ~30 mA ground fault current at the shore inlet — protects swimmers from electric shock</text>
+  <text x="38" y="374" font-size="10" fill="#5c5748">drowning caused by AC leakage into marina water. Required on new ABYC-compliant installations.</text>
+
+  <rect x="24" y="405" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="428" font-size="10.5" font-weight="700" fill="#7a3f14">Galvanic isolator blocks DC only; isolation transformer severs the ground entirely. On a metal hull, only</text>
+  <text x="38" y="444" font-size="10.5" font-weight="700" fill="#7a3f14">the transformer eliminates the stray-current path completely.</text>
+</svg>

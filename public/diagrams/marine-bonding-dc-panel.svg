@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Bonding ≠ Grounding — Two Separate Systems on Every Boat</text>
+
+  <!-- bonding vs grounding -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#065f46">Bonding system</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Connects underwater metal (through-hulls,</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">props, shafts) to the zinc anode system.</text>
+  <rect x="38" y="126" width="358" height="26" rx="4" fill="#059669"/>
+  <text x="217" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Purpose: corrosion protection</text>
+  <text x="38" y="168" font-size="9" fill="#5c5748">Min. #8 AWG, green-insulated or bare copper — not a safety ground.</text>
+
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#eef3f7" stroke="#2563eb" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#1e40af">DC negative bus</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Common negative return for all DC circuits.</text>
+  <rect x="473" y="112" width="380" height="26" rx="4" fill="#2563eb"/>
+  <text x="663" y="130" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">NOT earth ground — returns to the battery</text>
+  <text x="473" y="156" font-size="9.5" font-weight="700" fill="#1e40af">Current never returns through bilge water —</text>
+  <text x="473" y="170" font-size="9.5" font-weight="700" fill="#1e40af">it returns to the battery negative terminal.</text>
+
+  <!-- 7 inch rule -->
+  <rect x="24" y="200" width="410" height="110" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="223" font-size="12" font-weight="700" fill="#8f1f1a">ABYC 7-inch rule</text>
+  <text x="38" y="245" font-size="9.5" fill="#5c5748">Fuse or breaker required on every</text>
+  <text x="38" y="259" font-size="9.5" fill="#5c5748">unprotected positive conductor within 7"</text>
+  <text x="38" y="273" font-size="9.5" fill="#5c5748">of the battery terminal.</text>
+  <text x="38" y="293" font-size="9" font-weight="700" fill="#8f1f1a">Switches/breakers: positive conductor only. Negative runs unbroken to the bus.</text>
+
+  <!-- load dump -->
+  <rect x="459" y="200" width="417" height="110" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="223" font-size="12" font-weight="700" fill="#b45309">Never switch battery selectors under load</text>
+  <text x="473" y="245" font-size="9.5" fill="#5c5748">Breaking an alternator circuit under heavy</text>
+  <text x="473" y="259" font-size="9.5" fill="#5c5748">load collapses the magnetic field instantly.</text>
+  <rect x="473" y="271" width="290" height="26" rx="4" fill="#b45309"/>
+  <text x="618" y="289" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Load-dump spike: 80-150V</text>
+
+  <rect x="24" y="325" width="852" height="80" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="348" font-size="12" font-weight="700" fill="#1e1b14">Marine wire requirements</text>
+  <text x="38" y="370" font-size="10" fill="#5c5748">Tinned copper strongly preferred — bare copper oxidizes rapidly in salt air, raising terminal resistance</text>
+  <text x="38" y="384" font-size="10" fill="#5c5748">and creating hot connections. Standard automotive wire is not acceptable in marine installations.</text>
+
+  <rect x="24" y="415" width="852" height="46" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="443" font-size="10.5" font-weight="700" fill="#7a3f14">A 100-150V load-dump spike from a mis-timed switch throw destroys alternator diodes and can fry a chart plotter or VHF radio in the same instant.</text>
+</svg>

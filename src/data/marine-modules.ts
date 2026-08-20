@@ -21,6 +21,9 @@ export const MARINE_MODULES: TrainingModule[] = [
           'An isolation transformer magnetically couples shore AC to the boat without a physical ground connection, completely eliminating the shore ground path — gold standard for metal-hull vessels and long-term liveaboards.',
           'ELCI (Equipment Leakage Circuit Interrupter) breakers at the shore inlet trip at ~30 mA ground fault current, protecting swimmers from electric shock drowning caused by AC leakage into marina water.',
         ],
+        images: [
+          { src: '/diagrams/shore-power-galvanic-protection.svg', alt: 'Diagram comparing 30A and 50A shore power, the reverse-polarity check, galvanic isolators versus isolation transformers, and the ELCI shock-protection breaker', caption: 'Check polarity before energizing, then choose the right galvanic protection — an isolator blocks DC only, a transformer severs the ground entirely.' },
+        ],
         keyPoints: [
           '30A = single 120V; 50A = split-phase 120V/240V — always verify before connecting high-voltage loads',
           'Galvanic isolator blocks DC leakage only; isolation transformer severs shore ground entirely — the superior solution for metal boats',
@@ -51,6 +54,9 @@ export const MARINE_MODULES: TrainingModule[] = [
           'Switches and overcurrent devices are installed on the ungrounded (positive) conductor only; the negative conductor runs unbroken to the bus.',
           'Tinned copper conductors are strongly preferred in marine environments — bare copper oxidizes rapidly in salt air, increasing resistance at terminals and causing heat; standard automotive wire is not acceptable.',
           'Battery selector switches (1-2-BOTH-OFF) must never be switched under heavy load — breaking an alternator circuit under load causes a load-dump voltage spike that destroys alternator diodes and sensitive electronics.',
+        ],
+        images: [
+          { src: '/diagrams/marine-bonding-dc-panel.svg', alt: 'Diagram distinguishing the marine bonding system for corrosion protection from the DC negative bus, the ABYC 7-inch fuse rule, and the battery selector load-dump warning', caption: 'Bonding protects underwater metal from corrosion; the DC negative bus is a completely separate electrical return path — never confuse the two.' },
         ],
         keyPoints: [
           'Bonding = corrosion protection for underwater metals; Grounding = shock protection for AC chassis — two separate systems',
@@ -137,6 +143,9 @@ export const MARINE_MODULES: TrainingModule[] = [
           'Alternators must be derated to 70–80% of rated output for continuous marine duty; automotive-duty alternators run intermittently, but motor-sailing or extended engine charging runs them continuously until thermal failure.',
           'Lithium BMS self-protection can disconnect the battery under high-current charging — with the alternator running, the sudden open circuit creates a load-dump spike that destroys alternator diodes; a DC-DC charger or smart regulator with BMS communication prevents this.',
           'MPPT solar charge controllers continuously track the panel\'s maximum power point across varying irradiance and temperature, extracting 15–30% more energy than PWM controllers — standard on cruising boats for house bank maintenance.',
+        ],
+        images: [
+          { src: '/diagrams/battery-bank-isolation-charging.svg', alt: 'Diagram comparing diode-based battery isolators and ACR relays, the bulk/absorption/float multi-stage charging sequence, and the lithium BMS disconnect load-dump risk', caption: 'ACR delivers full charge voltage with no drop; a lithium BMS disconnect under alternator load creates the same load-dump risk as a mis-timed selector switch.' },
         ],
         keyPoints: [
           'ACR preferred over diode isolator — no voltage drop means full charge voltage reaches both banks',
@@ -279,6 +288,9 @@ export const MARINE_MODULES: TrainingModule[] = [
           'Terminations must use crimp ring terminals or fork terminals with heat-shrink; wire nuts, push-in connectors, and twist-and-tape splices are expressly prohibited in marine DC wiring.',
           'MRBF (Master Fuse) terminal fuse holders are used for large conductors (#4 AWG and larger) where standard ANL or MIDI fuses do not physically fit — installed within 7 inches of the battery positive terminal.',
         ],
+        images: [
+          { src: '/diagrams/abyc-voltage-drop-wiring.svg', alt: 'Diagram of the ABYC voltage drop formula, the 3 percent safety-critical and 10 percent non-critical drop limits with a worked example, conductor rating requirements, and termination rules', caption: 'Safety circuits get a 3% voltage-drop ceiling — tighter than the NEC because a slow bilge pump in a flooding emergency has real consequences.' },
+        ],
         keyPoints: [
           'Marine wire: 105°C insulation, 600 V rated, tinned copper — automotive wire prohibited',
           '3% voltage drop for safety circuits; 10% for non-critical — tighter than NEC to account for marine duty',
@@ -364,6 +376,9 @@ export const MARINE_MODULES: TrainingModule[] = [
           'Carbon monoxide (CO) detectors are required aboard vessels with gasoline engines, generators, or any enclosed cooking appliances — CO is odorless, colorless, and can incapacitate at 200 ppm; death occurs rapidly above 1,600 ppm.',
           'CO detectors must be installed at breathing height in each sleeping space and adjacent to any enclosed engine or generator space — not at ceiling height (CO disperses throughout the cabin, unlike propane which sinks).',
           'Bilge blower systems on gasoline-powered vessels must ventilate the engine space for 4 minutes before starting — USCG 33 CFR 175.110.',
+        ],
+        images: [
+          { src: '/diagrams/bilge-pump-co-safety.svg', alt: 'Diagram of parallel float switch wiring so the bilge pump runs regardless of panel switch position, CO detector breathing-height placement requirements, and the 4-minute gasoline engine blower rule', caption: 'Float switch and panel switch wire in parallel — the pump runs on either one, protecting the boat even with the panel switched off.' },
         ],
         keyPoints: [
           'Float switch in parallel with panel switch — pump runs automatically on bilge water rise',

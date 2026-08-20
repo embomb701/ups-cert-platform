@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">ABYC E-11 Wiring — Tighter Limits Than the NEC, for Good Reasons</text>
+
+  <!-- voltage drop formula -->
+  <rect x="24" y="55" width="852" height="90" rx="6" fill="#eef3f7" stroke="#2563eb" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#1e40af">Voltage drop formula</text>
+  <rect x="38" y="90" width="380" height="30" rx="4" fill="#2563eb"/>
+  <text x="228" y="110" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">V_drop = 2 × L × I × R</text>
+  <text x="440" y="110" font-size="9.5" fill="#3f3a2c">L = one-way run (ft) · I = load (A) · R = Ω/ft (ABYC Table XI)</text>
+
+  <!-- limits -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="160" width="272" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+    <text x="38" y="183" fill="#8f1f1a">Safety-critical circuits</text>
+    <rect x="38" y="195" width="230" height="26" rx="4" fill="#a4231e"/>
+    <text x="153" y="213" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Max 3% drop</text>
+    <text x="38" y="240" font-weight="400" font-size="9" fill="#5c5748">Bilge pumps, nav lights, fire suppression</text>
+
+    <rect x="314" y="160" width="272" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+    <text x="328" y="183" fill="#1e1b14">Non-critical circuits</text>
+    <rect x="328" y="195" width="230" height="26" rx="4" fill="#7a7256"/>
+    <text x="443" y="213" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Max 10% drop</text>
+    <text x="328" y="240" font-weight="400" font-size="9" fill="#5c5748">Cabin lighting, fans</text>
+
+    <rect x="604" y="160" width="272" height="105" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="2"/>
+    <text x="618" y="183" fill="#7a3f14">Worked example</text>
+    <text x="618" y="205" font-weight="400" font-size="9" fill="#5c5748">Bilge pump, 12V system, 3% limit:</text>
+    <text x="618" y="222" font-weight="700" font-size="9.5" fill="#7a3f14">3% × 12V = 0.36V max drop</text>
+  </g>
+
+  <!-- wire requirements -->
+  <rect x="24" y="280" width="410" height="90" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="303" font-size="12" font-weight="700" fill="#065f46">Conductor requirements</text>
+  <text x="38" y="325" font-size="9.5" fill="#3f3a2c">105°C insulation, 600V rated minimum —</text>
+  <text x="38" y="339" font-size="9.5" fill="#3f3a2c">even on a 12V system. 80°C automotive</text>
+  <text x="38" y="353" font-size="9.5" fill="#3f3a2c">wire is prohibited.</text>
+
+  <!-- termination rules -->
+  <rect x="459" y="280" width="417" height="90" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="303" font-size="12" font-weight="700" fill="#b45309">Terminations</text>
+  <text x="473" y="325" font-size="9.5" fill="#5c5748">Crimp ring/fork terminals with heat-shrink</text>
+  <text x="473" y="339" font-size="9.5" fill="#5c5748">only — wire nuts and twist-and-tape splices</text>
+  <text x="473" y="353" font-size="9.5" font-weight="700" fill="#8a5010">are expressly prohibited.</text>
+
+  <rect x="24" y="385" width="852" height="80" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="408" font-size="12" font-weight="700" fill="#1e1b14">Why the safety-circuit limit is tighter than the NEC</text>
+  <text x="38" y="430" font-size="10" fill="#5c5748">Excess voltage drop reduces bilge pump flow rate — in a flooding emergency, a pump running slow on a</text>
+  <text x="38" y="444" font-size="10" fill="#5c5748">sagging circuit can be the difference between staying afloat and not. MRBF terminal fuses (#4 AWG+) install within 7" of the battery.</text>
+</svg>

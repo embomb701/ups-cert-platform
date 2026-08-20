@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Bilge Pumps &amp; CO Detection — the Two Systems That Save Lives Unattended</text>
+
+  <!-- float switch wiring -->
+  <rect x="24" y="55" width="410" height="175" rx="6" fill="#eef3f7" stroke="#2563eb" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#1e40af">Float switch — parallel wiring</text>
+  <g font-size="9" font-weight="700">
+    <rect x="38" y="90" width="150" height="30" rx="4" fill="#2563eb"/><text x="113" y="109" text-anchor="middle" fill="#ffffff">Panel switch</text>
+    <text x="205" y="109" font-weight="700" font-size="14" fill="#1e40af">OR</text>
+    <rect x="246" y="90" width="150" height="30" rx="4" fill="#2563eb"/><text x="321" y="109" text-anchor="middle" fill="#ffffff">Float switch</text>
+  </g>
+  <text x="38" y="140" font-size="9.5" fill="#3f3a2c">Either one energized runs the pump —</text>
+  <text x="38" y="154" font-size="9.5" fill="#3f3a2c">wired in parallel, not series.</text>
+  <rect x="38" y="166" width="358" height="26" rx="4" fill="#1e40af"/>
+  <text x="217" y="184" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Pump runs even with panel switch OFF</text>
+  <text x="38" y="206" font-size="9" fill="#5c5748">Sizing: 1,500-3,500 GPH typical coastal.</text>
+  <text x="38" y="218" font-size="9" fill="#5c5748">Manual backup pump required per USCG on Class 2+.</text>
+
+  <!-- CO detection -->
+  <rect x="459" y="55" width="417" height="175" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Carbon monoxide detection</text>
+  <text x="473" y="100" font-size="9.5" fill="#5c5748">Odorless, colorless — incapacitates at</text>
+  <text x="473" y="114" font-size="9.5" fill="#5c5748">200 ppm, lethal rapidly above 1,600 ppm.</text>
+  <rect x="473" y="126" width="380" height="26" rx="4" fill="#8f1f1a"/>
+  <text x="663" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Mount at BREATHING height, not ceiling</text>
+  <text x="473" y="168" font-size="9.5" fill="#5c5748">CO disperses through the cabin, unlike</text>
+  <text x="473" y="182" font-size="9.5" fill="#5c5748">propane (sinks) or smoke (rises).</text>
+  <text x="473" y="204" font-size="9" font-weight="700" fill="#8f1f1a">Required in every sleeping space + adjacent to enclosed engine/genset spaces.</text>
+
+  <!-- 4 minute rule -->
+  <rect x="24" y="250" width="852" height="90" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="273" font-size="12.5" font-weight="700" fill="#b45309">The 4-minute blower rule — USCG 33 CFR 175.110</text>
+  <text x="38" y="295" font-size="10" fill="#5c5748">Gasoline-powered vessels must run the bilge blower for 4 minutes before starting the engine —</text>
+  <text x="38" y="309" font-size="10" fill="#5c5748">clearing accumulated fuel vapor from the engine space before the ignition source arrives.</text>
+  <text x="38" y="326" font-size="9.5" font-weight="700" fill="#8a5010">No shortcut here — this rule exists because gasoline vapor explosions in engine compartments are real and fast.</text>
+
+  <rect x="24" y="355" width="852" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="378" font-size="12" font-weight="700" fill="#1e1b14">Wiring for the worst day, not the average day</text>
+  <text x="38" y="400" font-size="10" fill="#5c5748">A dedicated "auto" circuit selection with both manual and auto options is the cleaner, safer install</text>
+  <text x="38" y="414" font-size="10" fill="#5c5748">pattern versus a bare parallel tap — but the underlying logic is the same: the pump must run when the</text>
+  <text x="38" y="428" font-size="10" fill="#5c5748">boat needs it, regardless of what position the operator left the switch in.</text>
+</svg>

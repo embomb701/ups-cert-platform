@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">ACR vs. Diode Isolator, and the Lithium Load-Dump Trap</text>
+
+  <!-- diode isolator -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Diode-based isolator</text>
+  <text x="38" y="100" font-size="9.5" fill="#5c5748">Splits charge current to multiple banks</text>
+  <text x="38" y="114" font-size="9.5" fill="#5c5748">simultaneously.</text>
+  <rect x="38" y="126" width="358" height="26" rx="4" fill="#8f1f1a"/>
+  <text x="217" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">0.6-0.7V voltage drop — chronic undercharge</text>
+  <text x="38" y="168" font-size="9" fill="#5c5748">Sulfation on lead-acid, shortened battery life.</text>
+
+  <!-- ACR -->
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#065f46">ACR — Automatic Charging Relay</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Senses charging voltage (~13.0-13.2V),</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">closes a relay to combine banks.</text>
+  <rect x="473" y="126" width="380" height="26" rx="4" fill="#059669"/>
+  <text x="663" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">No voltage penalty — full charge voltage to both</text>
+  <text x="473" y="168" font-size="9" fill="#5c5748">Opens automatically when charging stops.</text>
+
+  <!-- multi-stage charging -->
+  <rect x="24" y="200" width="852" height="90" rx="6" fill="#eef3f7" stroke="#2563eb" stroke-width="2"/>
+  <text x="38" y="223" font-size="12.5" font-weight="700" fill="#1e40af">Multi-stage charging — mandatory for AGM and lithium</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="235" width="260" height="34" rx="4" fill="#2563eb"/><text x="168" y="256" text-anchor="middle" fill="#ffffff">Bulk — max current</text>
+    <rect x="308" y="235" width="260" height="34" rx="4" fill="#1e40af"/><text x="438" y="256" text-anchor="middle" fill="#ffffff">Absorption — constant V, tapering I</text>
+    <rect x="578" y="235" width="260" height="34" rx="4" fill="#7a7256"/><text x="708" y="256" text-anchor="middle" fill="#ffffff">Float — maintenance</text>
+  </g>
+
+  <!-- lithium risk -->
+  <rect x="24" y="305" width="852" height="105" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="328" font-size="12.5" font-weight="700" fill="#b45309">The lithium BMS load-dump trap</text>
+  <text x="38" y="350" font-size="10" fill="#5c5748">A lithium BMS can self-protect by disconnecting the battery under high-current charging. If the</text>
+  <text x="38" y="364" font-size="10" fill="#5c5748">alternator is still running, that sudden open circuit collapses the field instantly — a load-dump spike</text>
+  <text x="38" y="378" font-size="10" fill="#5c5748">that destroys alternator diodes, same physics as switching the battery selector under load.</text>
+  <text x="38" y="398" font-size="9.5" font-weight="700" fill="#8a5010">Fix: DC-DC charger, or a smart regulator with BMS communication that ramps down before disconnect.</text>
+
+  <rect x="24" y="425" width="852" height="42" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="450" font-size="10.5" font-weight="700" fill="#1e1b14">MPPT solar controllers extract 15-30% more energy than PWM by tracking the panel's maximum power point continuously.</text>
+</svg>
