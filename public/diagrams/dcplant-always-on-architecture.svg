@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">-48V Always-On — the Battery IS the Bus</text>
+
+  <!-- architecture diagram -->
+  <rect x="40" y="60" width="500" height="160" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="55" y="83" font-size="12" font-weight="700" fill="#1e1b14">Parallel-Redundant Float Architecture</text>
+
+  <rect x="60" y="105" width="120" height="55" rx="5" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="70" y="128" font-size="10" font-weight="700" fill="#0e7490">Rectifiers</text>
+  <text x="70" y="143" font-size="8.5" fill="#5c5748">AC → -48V DC</text>
+
+  <rect x="60" y="175" width="120" height="30" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
+  <text x="70" y="194" font-size="9" fill="#7a3f14">float the bus</text>
+
+  <path d="M 180 132 L 220 132" stroke="#0e7490" stroke-width="3"/>
+  <path d="M 200 132 L 200 175 L 220 175" stroke="#0e7490" stroke-width="3" fill="none"/>
+
+  <rect x="225" y="105" width="120" height="100" rx="5" fill="#eef3f7" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="235" y="128" font-size="10" font-weight="700" fill="#6d28d9">-48V BUS</text>
+  <text x="235" y="150" font-size="8.5" fill="#5c5748">no transfer switch,</text>
+  <text x="235" y="163" font-size="8.5" fill="#5c5748">no static switch,</text>
+  <text x="235" y="176" font-size="8.5" fill="#5c5748">no switching event</text>
+
+  <path d="M 345 132 L 385 132" stroke="#a4231e" stroke-width="3"/>
+  <rect x="390" y="105" width="120" height="55" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="400" y="128" font-size="10" font-weight="700" fill="#a4231e">Batteries</text>
+  <text x="400" y="143" font-size="8.5" fill="#5c5748">ride in parallel</text>
+
+  <path d="M 345 175 L 510 175" stroke="#7a3f14" stroke-width="3"/>
+  <rect x="390" y="160" width="120" height="45" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+  <text x="400" y="182" font-size="10" font-weight="700" fill="#7a3f14">Load</text>
+  <text x="400" y="196" font-size="8.5" fill="#5c5748">radios, switches</text>
+
+  <!-- negative ground callout -->
+  <rect x="560" y="60" width="315" height="160" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="574" y="83" font-size="12" font-weight="700" fill="#b45309">Why negative ground?</text>
+  <text x="574" y="104" font-size="9.5" fill="#5c5748">Galvanic corrosion attacks the</text>
+  <text x="574" y="118" font-size="9.5" fill="#5c5748">POSITIVE conductor in DC with</text>
+  <text x="574" y="132" font-size="9.5" fill="#5c5748">moisture present.</text>
+  <text x="574" y="155" font-size="9.5" font-weight="700" fill="#8a5010">Grounding the return (+) directs</text>
+  <text x="574" y="169" font-size="9.5" font-weight="700" fill="#8a5010">corrosion there — not toward the</text>
+  <text x="574" y="183" font-size="9.5" font-weight="700" fill="#8a5010">critical negative feed conductors.</text>
+  <text x="574" y="203" font-size="9" fill="#5c5748">A Bell System decision from the 1800s, inherited globally.</text>
+
+  <!-- voltage table -->
+  <text x="24" y="250" font-size="13" font-weight="700" fill="#1e1b14">DC Plant Voltage Reference (24-cell VRLA string)</text>
+
+  <g font-size="10">
+    <rect x="24" y="263" width="852" height="30" fill="#e9f2fb" stroke="#0e7490" stroke-width="1"/>
+    <text x="34" y="283" font-weight="700" fill="#0e7490">Float</text>
+    <text x="150" y="283" fill="#5c5748">2.23–2.27 V/cell</text>
+    <text x="320" y="283" fill="#1e1b14" font-weight="700">53.5–54.5 V bus</text>
+    <text x="500" y="283" fill="#5c5748">Normal: rectifiers carry load, batteries full</text>
+
+    <rect x="24" y="293" width="852" height="30" fill="#fdf7ea" stroke="#0e7490" stroke-width="1"/>
+    <text x="34" y="313" font-weight="700" fill="#0e7490">Equalize</text>
+    <text x="150" y="313" fill="#5c5748">2.33–2.40 V/cell</text>
+    <text x="320" y="313" fill="#1e1b14" font-weight="700">56–57.6 V bus</text>
+    <text x="500" y="313" fill="#5c5748">Periodic high-charge: corrects sulfation</text>
+
+    <rect x="24" y="323" width="852" height="30" fill="#e9f2fb" stroke="#0e7490" stroke-width="1"/>
+    <text x="34" y="343" font-weight="700" fill="#0e7490">End of discharge</text>
+    <text x="150" y="343" fill="#5c5748">≈1.75 V/cell</text>
+    <text x="320" y="343" fill="#1e1b14" font-weight="700">≈42 V bus</text>
+    <text x="500" y="343" fill="#5c5748">LVD threshold: disconnect non-critical loads</text>
+
+    <rect x="24" y="353" width="852" height="30" fill="#fdeaea" stroke="#a4231e" stroke-width="1"/>
+    <text x="34" y="373" font-weight="700" fill="#a4231e">Emergency cutoff</text>
+    <text x="150" y="373" fill="#5c5748">1.67–1.75 V/cell</text>
+    <text x="320" y="373" fill="#1e1b14" font-weight="700">≈40 V bus</text>
+    <text x="500" y="373" fill="#5c5748">Protect cells from deep damage</text>
+  </g>
+
+  <rect x="24" y="400" width="852" height="50" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="422" font-size="10.5" font-weight="700" fill="#1e1b14">The nominally "-48V" bus runs at 54V during float — this is normal. Equipment must tolerate</text>
+  <text x="38" y="438" font-size="10.5" font-weight="700" fill="#1e1b14">the full 42V–57.6V range across discharge, float, and equalize conditions.</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">LVD Sacrifices Non-Critical Loads to Preserve Runtime</text>
+
+  <!-- LVD diagram -->
+  <rect x="40" y="60" width="410" height="170" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="55" y="85" font-size="12.5" font-weight="700" fill="#8f1f1a">Low-Voltage Disconnect</text>
+  <text x="55" y="106" font-size="10" fill="#5c5748">Bus falls to ≈42–44V (1.75V/cell) →</text>
+  <text x="55" y="120" font-size="10" fill="#5c5748">LVD relay opens, sheds non-critical loads</text>
+
+  <rect x="55" y="135" width="170" height="45" rx="4" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+  <text x="65" y="155" font-size="9.5" font-weight="700" fill="#7a3f14">Critical loads</text>
+  <text x="65" y="169" font-size="9" fill="#5c5748">radios, switches — stay up</text>
+
+  <rect x="245" y="135" width="185" height="45" rx="4" fill="#e9f2fb" stroke="#6d28d9" stroke-width="2"/>
+  <text x="255" y="155" font-size="9.5" font-weight="700" fill="#6d28d9">Non-critical loads</text>
+  <text x="255" y="169" font-size="9" fill="#5c5748">HVAC, lighting — shed</text>
+
+  <text x="55" y="205" font-size="9.5" font-weight="700" fill="#8f1f1a">When LVD operates: investigate WHY —</text>
+  <text x="55" y="219" font-size="9.5" fill="#5c5748">degraded battery, load growth, or ATS/generator failure.</text>
+
+  <!-- setpoint tension -->
+  <rect x="470" y="60" width="405" height="170" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="484" y="85" font-size="12.5" font-weight="700" fill="#1e1b14">Setpoint tension</text>
+  <text x="484" y="107" font-size="10" fill="#5c5748">Set too HIGH: LVD trips during normal</text>
+  <text x="484" y="121" font-size="10" fill="#5c5748">voltage fluctuations — nuisance sheds.</text>
+  <text x="484" y="145" font-size="10" fill="#5c5748">Set too LOW: critical equipment shuts</text>
+  <text x="484" y="159" font-size="10" fill="#5c5748">down before batteries even reach LVD.</text>
+  <text x="484" y="190" font-size="9.5" font-weight="700" fill="#7a3f14">LVD in 90 min on a 4-hour design =</text>
+  <text x="484" y="204" font-size="9.5" font-weight="700" fill="#7a3f14">batteries delivering ~12% of rated capacity.</text>
+
+  <!-- millivolt drop hunt -->
+  <text x="24" y="265" font-size="13" font-weight="700" fill="#1e1b14">The Millivolt-Drop Hunt — resistance is the enemy</text>
+
+  <rect x="24" y="278" width="410" height="150" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="301" font-size="11.5" font-weight="700" fill="#0e7490">The test</text>
+  <text x="38" y="322" font-size="10" fill="#5c5748">Measure DC voltage between two points</text>
+  <text x="38" y="336" font-size="10" fill="#5c5748">at equal potential (same bus, opposite ends</text>
+  <text x="38" y="350" font-size="10" fill="#5c5748">of a cable) with the load carrying current.</text>
+  <text x="38" y="374" font-size="10" font-weight="700" fill="#1f5a8f">Worked example: 45mV at 200A</text>
+  <text x="38" y="391" font-size="10" font-weight="700" fill="#1f5a8f">= 0.225mΩ — elevated, check the lugs.</text>
+  <text x="38" y="411" font-size="9" fill="#5c5748">Causes: loose lugs (most common), oxidized contacts, damaged cable</text>
+
+  <rect x="459" y="278" width="417" height="150" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="301" font-size="11.5" font-weight="700" fill="#b45309">Load and string balance</text>
+  <text x="473" y="322" font-size="10" fill="#5c5748">BDFB: distribute heavy frames across</text>
+  <text x="473" y="336" font-size="10" fill="#5c5748">panels — don't overload one feed cable.</text>
+  <text x="473" y="360" font-size="10" font-weight="700" fill="#8a5010">Parallel strings should carry roughly</text>
+  <text x="473" y="374" font-size="10" font-weight="700" fill="#8a5010">equal current — a string at 30% of its</text>
+  <text x="473" y="388" font-size="10" font-weight="700" fill="#8a5010">peers is an early sign it'll fail its</text>
+  <text x="473" y="402" font-size="10" font-weight="700" fill="#8a5010">next capacity test.</text>
+</svg>

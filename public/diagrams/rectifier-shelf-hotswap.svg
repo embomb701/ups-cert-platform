@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Rectifier Shelf — Hot-Swap Bricks, Live-Bus Replacement</text>
+
+  <!-- shelf diagram -->
+  <rect x="40" y="60" width="500" height="160" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="55" y="83" font-size="12" font-weight="700" fill="#1e1b14">Shelf — 8 rectifier modules on a shared bus bar</text>
+
+  <g>
+    <rect x="55" y="100" width="50" height="70" rx="3" fill="#e9f2fb" stroke="#0e7490" stroke-width="1.5"/>
+    <rect x="112" y="100" width="50" height="70" rx="3" fill="#e9f2fb" stroke="#0e7490" stroke-width="1.5"/>
+    <rect x="169" y="100" width="50" height="70" rx="3" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+    <text x="176" y="140" font-size="8" font-weight="700" fill="#a4231e">FAULT</text>
+    <rect x="226" y="100" width="50" height="70" rx="3" fill="#e9f2fb" stroke="#0e7490" stroke-width="1.5"/>
+    <rect x="283" y="100" width="50" height="70" rx="3" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+    <text x="290" y="140" font-size="8" font-weight="700" fill="#a4231e">FAULT</text>
+    <rect x="340" y="100" width="50" height="70" rx="3" fill="#e9f2fb" stroke="#0e7490" stroke-width="1.5"/>
+    <rect x="397" y="100" width="50" height="70" rx="3" fill="#e9f2fb" stroke="#0e7490" stroke-width="1.5"/>
+    <rect x="454" y="100" width="50" height="70" rx="3" fill="#e9f2fb" stroke="#0e7490" stroke-width="1.5"/>
+  </g>
+  <line x1="55" y1="180" x2="504" y2="180" stroke="#7a3f14" stroke-width="4"/>
+  <text x="55" y="196" font-size="9" fill="#7a3f14">shared output bus bar — OR-ing prevents a failed brick from backfeeding</text>
+
+  <!-- sick brick callout -->
+  <rect x="560" y="60" width="315" height="160" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="574" y="83" font-size="12" font-weight="700" fill="#8f1f1a">Sick-brick diagnosis</text>
+  <text x="574" y="105" font-size="9.5" fill="#5c5748">9 kW delivered instead of 12 kW,</text>
+  <text x="574" y="119" font-size="9.5" fill="#5c5748">other parameters normal = 2 of 8</text>
+  <text x="574" y="133" font-size="9.5" fill="#5c5748">bricks failed (25% derate).</text>
+  <text x="574" y="157" font-size="9.5" font-weight="700" fill="#8f1f1a">Read the shelf display to identify</text>
+  <text x="574" y="171" font-size="9.5" font-weight="700" fill="#8f1f1a">the failed position before touching</text>
+  <text x="574" y="185" font-size="9.5" font-weight="700" fill="#8f1f1a">anything — the other bricks carry on.</text>
+  <text x="574" y="205" font-size="8.5" fill="#5c5748">Pulling a failed brick live is a documented procedure.</text>
+
+  <!-- temp compensation -->
+  <rect x="40" y="245" width="410" height="180" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="55" y="268" font-size="12.5" font-weight="700" fill="#0e7490">Temperature compensation</text>
+  <text x="55" y="292" font-size="10" fill="#5c5748">Coefficient: -3 to -5 mV/cell/°C above 25°C</text>
+  <text x="55" y="316" font-size="10" font-weight="700" fill="#1f5a8f">Hot batteries (&gt;25°C) need LOWER float</text>
+  <text x="55" y="330" font-size="10" font-weight="700" fill="#1f5a8f">voltage — prevents overcharge/thermal runaway</text>
+  <text x="55" y="352" font-size="10" font-weight="700" fill="#1f5a8f">Cold batteries (&lt;10°C) need HIGHER float</text>
+  <text x="55" y="366" font-size="10" font-weight="700" fill="#1f5a8f">voltage — to achieve full charge</text>
+  <text x="55" y="390" font-size="9.5" fill="#5c5748">A 40°C room without compensation runs 15–25 mV/cell</text>
+  <text x="55" y="404" font-size="9.5" fill="#5c5748">too high — accelerating water loss and plate corrosion.</text>
+
+  <!-- alarms/PM -->
+  <rect x="465" y="245" width="410" height="180" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="480" y="268" font-size="12.5" font-weight="700" fill="#b45309">PM + alarm thresholds</text>
+  <text x="480" y="290" font-size="10" font-weight="700" fill="#8a5010">Verify the temperature probe is seated</text>
+  <text x="480" y="304" font-size="10" font-weight="700" fill="#8a5010">in the string — not dangling in air —</text>
+  <text x="480" y="318" font-size="10" font-weight="700" fill="#8a5010">on every PM visit.</text>
+  <text x="480" y="342" font-size="10" fill="#5c5748">Controller-managed alarms: high/low bus</text>
+  <text x="480" y="356" font-size="10" fill="#5c5748">voltage, ground fault detection, individual</text>
+  <text x="480" y="370" font-size="10" fill="#5c5748">rectifier faults.</text>
+  <text x="480" y="394" font-size="9.5" fill="#5c5748">Thresholds are carrier-configurable — know the site spec</text>
+  <text x="480" y="408" font-size="9.5" fill="#5c5748">before assuming an alarm is a malfunction.</text>
+</svg>

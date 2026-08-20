@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Cell Site — Three Power Domains, One Reserve-Time SLA</text>
+
+  <!-- three domains -->
+  <rect x="24" y="55" width="270" height="130" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="38" y="79" font-size="12" font-weight="700" fill="#0e7490">Shelter Power</text>
+  <text x="38" y="99" font-size="9.5" fill="#5c5748">DC plant + AC feed: rectifier</text>
+  <text x="38" y="113" font-size="9.5" fill="#5c5748">shelf, battery strings, plant</text>
+  <text x="38" y="127" font-size="9.5" fill="#5c5748">controller, distribution panels.</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">Shelter, hut, or rooftop —</text>
+  <text x="38" y="164" font-size="9.5" font-weight="700" fill="#1f5a8f">climate-controlled either way.</text>
+
+  <rect x="315" y="55" width="270" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2.5"/>
+  <text x="329" y="79" font-size="12" font-weight="700" fill="#b45309">Tower Loads</text>
+  <text x="329" y="99" font-size="9.5" fill="#5c5748">Radio equipment, antennas —</text>
+  <text x="329" y="113" font-size="9.5" fill="#5c5748">the actual revenue-generating</text>
+  <text x="329" y="127" font-size="9.5" fill="#5c5748">hardware.</text>
+  <text x="329" y="150" font-size="9.5" font-weight="700" fill="#8a5010">DC cable runs of 50–200 ft,</text>
+  <text x="329" y="164" font-size="9.5" font-weight="700" fill="#8a5010">sized for voltage drop.</text>
+
+  <rect x="606" y="55" width="270" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="620" y="79" font-size="12" font-weight="700" fill="#a4231e">Environmental</text>
+  <text x="620" y="99" font-size="9.5" fill="#5c5748">HVAC, lighting, security,</text>
+  <text x="620" y="113" font-size="9.5" fill="#5c5748">cameras.</text>
+  <text x="620" y="137" font-size="9.5" font-weight="700" fill="#8f1f1a">Non-critical from the LVD's</text>
+  <text x="620" y="151" font-size="9.5" font-weight="700" fill="#8f1f1a">perspective — first to shed.</text>
+
+  <!-- reserve time -->
+  <rect x="24" y="205" width="852" height="115" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="228" font-size="12.5" font-weight="700" fill="#1e1b14">Reserve time is a tracked SLA metric — not just a spec</text>
+  <text x="38" y="250" font-size="10" fill="#5c5748">A site going dark before generator transfer is a network event with financial and regulatory</text>
+  <text x="38" y="264" font-size="10" fill="#5c5748">consequences. Maintained by: capacity testing on schedule, load auditing (radios/RRH/5G add load),</text>
+  <text x="38" y="278" font-size="10" fill="#5c5748">generator test runs, and documenting actual reserve time achieved in the last real outage.</text>
+  <text x="38" y="302" font-size="10.5" font-weight="700" fill="#a4231e">A 4-hour site that discharges to LVD in 90 minutes is a critical finding, not a routine service note.</text>
+
+  <!-- genset safety -->
+  <rect x="24" y="335" width="852" height="120" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="38" y="358" font-size="12.5" font-weight="700" fill="#8f1f1a">Portable genset — the most hazard-dense OSP task</text>
+  <text x="38" y="380" font-size="10" fill="#5c5748">A generator MUST connect through a transfer point that disconnects the utility feed FIRST — code</text>
+  <text x="38" y="394" font-size="10" fill="#5c5748">requirement (NEC 702) and life-safety requirement: a backfeeding generator can kill the line crew</text>
+  <text x="38" y="408" font-size="10" fill="#5c5748">restoring the outage. Never parallel a portable genset to utility power.</text>
+  <text x="38" y="432" font-size="10.5" font-weight="700" fill="#8f1f1a">Before connecting: verify the utility disconnect is open — independently, even with an interlock.</text>
+  <text x="38" y="448" font-size="9.5" fill="#5c5748">Then verify stable generator V/Hz, connect, transfer — and reverse the sequence when utility restores.</text>
+</svg>
