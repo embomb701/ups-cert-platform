@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">BACnet — ASHRAE 135, the Open BAS Standard</text>
+
+  <!-- object model -->
+  <rect x="24" y="55" width="852" height="115" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#065f46">Object-oriented data model — every point is an object</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="90" width="100" height="26" rx="4" fill="#059669"/><text x="88" y="107" text-anchor="middle" fill="#ffffff">AI</text>
+    <rect x="146" y="90" width="100" height="26" rx="4" fill="#059669"/><text x="196" y="107" text-anchor="middle" fill="#ffffff">AO</text>
+    <rect x="254" y="90" width="100" height="26" rx="4" fill="#0e7490"/><text x="304" y="107" text-anchor="middle" fill="#ffffff">AV</text>
+    <rect x="362" y="90" width="100" height="26" rx="4" fill="#059669"/><text x="412" y="107" text-anchor="middle" fill="#ffffff">BI</text>
+    <rect x="470" y="90" width="100" height="26" rx="4" fill="#059669"/><text x="520" y="107" text-anchor="middle" fill="#ffffff">BO</text>
+    <rect x="578" y="90" width="100" height="26" rx="4" fill="#0e7490"/><text x="628" y="107" text-anchor="middle" fill="#ffffff">BV</text>
+    <rect x="686" y="90" width="176" height="26" rx="4" fill="#b45309"/><text x="774" y="107" text-anchor="middle" fill="#ffffff">Schedule</text>
+  </g>
+  <text x="38" y="140" font-size="9.5" font-weight="400" fill="#3f3a2c">Each object exposes properties — Present_Value (the reading/command), Out_Of_Service, Description.</text>
+  <text x="38" y="156" font-size="9.5" font-weight="700" fill="#065f46">Device Object = unique Device Instance (0–4,194,302) identifying the controller on the network.</text>
+
+  <!-- physical layers -->
+  <g font-size="10.5" font-weight="700">
+    <rect x="24" y="190" width="272" height="130" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="38" y="213" fill="#0e7490">BACnet/IP</text>
+    <text x="38" y="235" font-weight="400" font-size="9.5" fill="#5c5748">UDP port 47808, over</text>
+    <text x="38" y="249" font-weight="400" font-size="9.5" fill="#5c5748">Ethernet or Wi-Fi.</text>
+    <text x="38" y="271" font-weight="700" font-size="9.5" fill="#1f5a8f">Most common choice for</text>
+    <text x="38" y="285" font-weight="700" font-size="9.5" fill="#1f5a8f">new installations.</text>
+
+    <rect x="314" y="190" width="272" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="328" y="213" fill="#b45309">MS/TP</text>
+    <text x="328" y="235" font-weight="400" font-size="9.5" fill="#5c5748">RS-485, token-passing —</text>
+    <text x="328" y="249" font-weight="400" font-size="9.5" fill="#5c5748">up to 4,000 ft, 9.6–76.8 kbaud.</text>
+    <text x="328" y="271" font-weight="700" font-size="9.5" fill="#8a5010">Lower-cost field devices,</text>
+    <text x="328" y="285" font-weight="700" font-size="9.5" fill="#8a5010">one device transmits at a time.</text>
+
+    <rect x="604" y="190" width="272" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+    <text x="618" y="213" fill="#a4231e">BACnet/SC</text>
+    <text x="618" y="235" font-weight="400" font-size="9.5" fill="#5c5748">WebSocket over TLS —</text>
+    <text x="618" y="249" font-weight="400" font-size="9.5" fill="#5c5748">the newer, encrypted variant.</text>
+    <text x="618" y="271" font-weight="700" font-size="9.5" fill="#8f1f1a">For cloud-connected,</text>
+    <text x="618" y="285" font-weight="700" font-size="9.5" fill="#8f1f1a">security-sensitive BAS.</text>
+  </g>
+
+  <rect x="24" y="335" width="852" height="70" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="358" font-size="12" font-weight="700" fill="#1e1b14">BIBBs + BTL certification</text>
+  <text x="38" y="380" font-size="10" fill="#5c5748">Interoperability Building Blocks define which BACnet services a device supports. BACnet Testing</text>
+  <text x="38" y="394" font-size="10" fill="#5c5748">Laboratories (BTL) certifies compliant products — verify BTL listing on every vendor before integration.</text>
+
+  <rect x="24" y="418" width="852" height="46" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="446" font-size="10.5" font-weight="700" fill="#7a3f14">Object-oriented, vendor-neutral design is why government, university, and large commercial clients specify BACnet to avoid lock-in.</text>
+</svg>

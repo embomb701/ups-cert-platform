@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Alarm Management &amp; FDD — Catching Faults Before Occupants Do</text>
+
+  <!-- alarm rationalization -->
+  <rect x="24" y="55" width="410" height="120" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Alarm rationalization (ANSI/ISA-18.2)</text>
+  <text x="38" y="100" font-size="9.5" fill="#5c5748">Systematically define which conditions</text>
+  <text x="38" y="114" font-size="9.5" fill="#5c5748">warrant an alarm, their priority, and the</text>
+  <text x="38" y="128" font-size="9.5" fill="#5c5748">required response.</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#8f1f1a">Alarm flood → operator desensitization</text>
+  <text x="38" y="164" font-size="9.5" font-weight="700" fill="#8f1f1a">→ missed critical events.</text>
+
+  <!-- FDD -->
+  <rect x="459" y="55" width="417" height="120" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#0e7490">Fault Detection &amp; Diagnostics (FDD)</text>
+  <g font-size="9.5" font-weight="700" fill="#1f5a8f">
+    <text x="485" y="102">• Rule-based</text>
+    <text x="485" y="116">SAT deviation &gt;5°F for 30 min → flag valve fault</text>
+  </g>
+  <g font-size="9.5" font-weight="700" fill="#1f5a8f">
+    <text x="485" y="138">• Statistical process control</text>
+    <text x="485" y="152">points outside normal operating range</text>
+  </g>
+  <text x="473" y="172" font-size="9" fill="#5c5748">Machine-learning anomaly detection is the newest approach</text>
+
+  <!-- alarm priority ladder -->
+  <rect x="24" y="195" width="852" height="115" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="218" font-size="12" font-weight="700" fill="#1e1b14">Common BAS alarms — priority sets the response</text>
+  <g font-size="9" font-weight="700">
+    <rect x="38" y="230" width="195" height="30" rx="4" fill="#f3efe2" stroke="#7a7256"/><text x="46" y="248" fill="#1e1b14">Comm. failure</text><text x="46" y="257" font-weight="400" font-size="7.5" fill="#5c5748">controller offline</text>
+    <rect x="242" y="230" width="195" height="30" rx="4" fill="#fdeec9" stroke="#b45309"/><text x="250" y="248" fill="#b45309">Hi/lo temp limit</text><text x="250" y="257" font-weight="400" font-size="7.5" fill="#5c5748">zone comfort breach</text>
+    <rect x="446" y="230" width="195" height="30" rx="4" fill="#fdeec9" stroke="#b45309"/><text x="454" y="248" fill="#b45309">Filter DP high</text><text x="454" y="257" font-weight="400" font-size="7.5" fill="#5c5748">dirty filter</text>
+    <rect x="650" y="230" width="212" height="30" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="658" y="248" fill="#a4231e">Freeze stat</text><text x="658" y="257" font-weight="400" font-size="7.5" fill="#5c5748">mixed-air &lt;35°F, AHU trips off</text>
+  </g>
+  <text x="38" y="288" font-size="9.5" font-weight="700" fill="#8f1f1a">Low-priority = informational, no paging. High-priority (safety, critical equipment) = page immediately.</text>
+
+  <!-- trending -->
+  <rect x="24" y="325" width="852" height="120" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="348" font-size="12.5" font-weight="700" fill="#065f46">Trending catches the failure that hasn't happened yet</text>
+  <text x="38" y="370" font-size="10" fill="#3f3a2c">SAT drifting from setpoint → valve losing authority or coil fouling.</text>
+  <text x="38" y="384" font-size="10" fill="#3f3a2c">Filter DP creeping upward → approaching change interval.</text>
+  <text x="38" y="398" font-size="10" fill="#3f3a2c">Chiller kW/ton rising at the same load → fouled condenser or refrigerant loss.</text>
+  <text x="38" y="420" font-size="9.5" font-weight="700" fill="#065f46">Regular trend review is a best practice in high-performance BAS operations — it's proactive, not reactive.</text>
+</svg>

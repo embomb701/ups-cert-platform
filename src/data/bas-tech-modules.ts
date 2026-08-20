@@ -44,6 +44,9 @@ export const BAS_TECH_MODULES: TrainingModule[] = [
           'Integral control eliminates the steady-state offset by summing the error over time. As long as any error exists, the integral term continues to drive the output, eventually eliminating offset. However, integral action can cause windup — where the integral accumulates during periods when the output is saturated — leading to overshoot when control is restored. Anti-windup strategies clamp the integral when the output reaches its limits.',
           'Derivative control responds to the rate of change of error, providing a predictive "braking" action that reduces overshoot. Derivative is sensitive to noise in the measured variable, so it is often used with filtering. Most HVAC control loops use PI control (no derivative) because HVAC processes are slow and noisy. PID is more commonly used in fast, precise processes like chilled water temperature control.',
         ],
+        images: [
+          { src: '/diagrams/pid-control-loop.svg', alt: 'Diagram of a PID control loop showing setpoint, error, controller, output, and feedback, with separate panels explaining proportional offset, integral windup, and derivative noise sensitivity', caption: 'Setpoint, error, output, feedback — and why most HVAC loops use PI, not full PID.' },
+        ],
         keyPoints: [
           'P control: output proportional to error; always has steady-state offset',
           'I control: integrates error over time to eliminate offset; can cause windup',
@@ -193,6 +196,9 @@ export const BAS_TECH_MODULES: TrainingModule[] = [
           'BACnet objects represent real-world points and functions. Key object types include Analog Input (AI), Analog Output (AO), Analog Value (AV), Binary Input (BI), Binary Output (BO), Binary Value (BV), and Schedule. Each object has properties: Present_Value (current reading or command), Out_Of_Service, Description, and others. A BACnet device has a unique Device Object with a Device Instance (a number from 0 to 4,194,302) that identifies it on the network.',
           'BACnet supports multiple physical layers. BACnet/IP (Annex J) uses UDP on port 47808 over Ethernet or Wi-Fi and is the most common choice for new installations. BACnet MS/TP (Master-Slave/Token-Passing) uses RS-485 wiring (max 4,000 feet, 9,600-76,800 baud) for lower-cost field devices. BACnet/SC (Secure Connect) is a newer variant using WebSocket over TLS for encrypted cloud-connected BAS.',
           'BACnet Interoperability Building Blocks (BIBBs) define which BACnet services a device supports. The BACnet Testing Laboratories (BTL) certifies products for BACnet compliance. BTL-listed devices are tested for correct BACnet behavior, providing higher confidence of interoperability. When integrating multiple vendors, verifying BTL listing for all devices reduces integration risk.',
+        ],
+        images: [
+          { src: '/diagrams/bacnet-network-architecture.svg', alt: 'Diagram of BACnet architecture showing the object model (AI/AO/AV/BI/BO/BV/Schedule), the three physical layers BACnet/IP, MS/TP, and BACnet/SC, and BIBBs/BTL certification', caption: 'BACnet\'s object model plus three physical layers — IP for new installs, MS/TP for low-cost field devices, SC for encrypted cloud links.' },
         ],
         keyPoints: [
           'BACnet (ASHRAE 135): open BAS protocol; object-oriented model (AI/AO/BI/BO/AV/BV/Schedule)',
@@ -352,6 +358,9 @@ export const BAS_TECH_MODULES: TrainingModule[] = [
           'Economizer control uses outdoor air for free cooling when outdoor conditions are favorable. An air-side economizer opens the outdoor air damper to provide cooling without running the compressor. Enthalpy-based economizer control (comparing outdoor and return air enthalpy, in BTU/lb) is more accurate than dry-bulb temperature comparison alone. ASHRAE 90.1 requires economizers on most commercial AHUs above a minimum size depending on climate zone.',
           'Minimum outdoor air (OA) control ensures adequate ventilation per ASHRAE 62.1. Fixed minimum OA is simple but wasteful. Demand-Controlled Ventilation (DCV) adjusts minimum OA based on CO2 levels or occupancy, reducing the OA fraction in partially occupied spaces and saving heating/cooling energy. The CO2 setpoint for DCV is typically 1,000 ppm.',
         ],
+        images: [
+          { src: '/diagrams/ahu-control-sequence.svg', alt: 'Diagram of the AHU airflow path from outdoor/return/exhaust dampers through filters, cooling coil, heating coil, SAT sensor, and supply fan, with panels explaining SAT reset, economizer control, and demand-controlled ventilation', caption: 'The AHU airflow path and its three energy-saving sequences: SAT reset, economizer, and demand-controlled ventilation.' },
+        ],
         keyPoints: [
           'AHU SAT setpoint: typically 55°F; SAT reset raises setpoint when load is low (saves energy)',
           'Economizer: opens OA damper for free cooling; enthalpy-based more accurate than dry-bulb',
@@ -390,6 +399,9 @@ export const BAS_TECH_MODULES: TrainingModule[] = [
           'Supply fan speed is controlled by duct static pressure (DSP) to maintain a target pressure — typically 0.8 to 1.5 inches WC in the supply ductwork. As VAV boxes close (reducing flow demand), DSP rises above setpoint and the fan slows down. DSP reset per ASHRAE Guideline 36 trims the DSP setpoint downward when all VAV boxes are nearly fully open, reducing fan energy. Variable Frequency Drives (VFDs) on supply and return fans provide significant energy savings (fan power varies as the cube of speed).',
           'Chiller plant optimization aims to minimize total plant energy (chillers + cooling towers + pumps) rather than just chiller efficiency. Key strategies include chilled water supply temperature (CHWS) reset (raising CHWS setpoint when loads are low increases chiller efficiency), condenser water supply temperature reset (raising or lowering setpoint based on chiller and tower loads), staging multiple chillers and towers at their most efficient loading, and variable primary flow (VPF) systems using VFDs on chilled water pumps.',
           'Chiller efficiency is expressed in kW per ton of cooling capacity (kW/ton) — lower is better, or alternatively as COP (Coefficient of Performance) or EER. Modern centrifugal chillers achieve 0.30-0.50 kW/ton at design conditions; efficient staging and part-load optimization can reduce this further. The IPLV (Integrated Part-Load Value) rates chiller efficiency across typical part-load conditions (100%, 75%, 50%, 25% load weighted average).',
+        ],
+        images: [
+          { src: '/diagrams/vav-chiller-plant-optimization.svg', alt: 'Diagram showing VAV box minimum/maximum airflow and reheat, duct static pressure reset and the fan cube law, chilled water supply reset, and chiller efficiency metrics kW/ton and IPLV', caption: 'From the VAV box to the chiller plant — optimizing the whole delivery chain, not just one component.' },
         ],
         keyPoints: [
           'VAV box: damper varies airflow; min airflow = ventilation; reheat at min flow; DSP controls fan speed',
@@ -597,6 +609,9 @@ export const BAS_TECH_MODULES: TrainingModule[] = [
           'Fault Detection and Diagnostics (FDD) software analyzes BAS data to identify equipment faults automatically. Common FDD algorithms include rule-based diagnostics (if SAT deviation > 5°F for 30 minutes, flag cooling valve fault), statistical process control (detecting points outside normal operating ranges), and machine-learning-based anomaly detection. FDD can identify sensor drift, stuck actuators, failed equipment, and inefficient operation before occupants notice problems.',
           'Common BAS alarms include: communication failure (controller offline), high/low temperature limit exceedance (zone too hot or too cold), filter differential pressure high (dirty filters), equipment failure (chiller, boiler, or AHU fault), and freeze stat (mixed-air temperature below 35°F). Low-priority alarms (informational) should not page technicians; high-priority alarms (safety or critical equipment) should page immediately.',
           'Trending supports proactive maintenance by identifying deteriorating trends before failure. Examples: gradual SAT deviation from setpoint indicates a control valve losing authority or a coil fouling. Rising filter DP indicates filter approaching change interval. Increasing chiller kW/ton at the same load indicates fouled condensers or refrigerant issues. Regular trend review is a best practice in high-performance BAS operations.',
+        ],
+        images: [
+          { src: '/diagrams/bas-alarm-fdd.svg', alt: 'Diagram of alarm rationalization, fault detection and diagnostics algorithms, common BAS alarm priority levels including freeze stat, and proactive trending examples', caption: 'Alarm rationalization and FDD catch equipment faults through trend data — before an occupant ever files a comfort complaint.' },
         ],
         keyPoints: [
           'ANSI/ISA-18.2: alarm rationalization standard; alarm flood reduces operator effectiveness',
