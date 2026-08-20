@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Electrical Safety Analyzer — the 8-Step Test Sequence</text>
+
+  <!-- sequence -->
+  <g font-size="8.5" font-weight="700">
+    <rect x="24" y="55" width="103" height="55" rx="4" fill="#eef3f7" stroke="#2563eb" stroke-width="1.5"/><text x="76" y="76" text-anchor="middle" fill="#1e40af">1. Line V/Hz</text>
+
+    <rect x="133" y="55" width="103" height="55" rx="4" fill="#eef3f7" stroke="#2563eb" stroke-width="1.5"/><text x="185" y="76" text-anchor="middle" fill="#1e40af">2. Ground</text><text x="185" y="90" font-weight="400" font-size="7.5" text-anchor="middle" fill="#5c5748">continuity</text>
+
+    <rect x="242" y="55" width="103" height="55" rx="4" fill="#eef3f7" stroke="#2563eb" stroke-width="1.5"/><text x="294" y="76" text-anchor="middle" fill="#1e40af">3. Chassis NC</text>
+
+    <rect x="351" y="55" width="103" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/><text x="403" y="76" text-anchor="middle" fill="#b45309">4. Open</text><text x="403" y="90" font-weight="400" font-size="7.5" text-anchor="middle" fill="#5c5748">neutral</text>
+
+    <rect x="460" y="55" width="103" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/><text x="512" y="76" text-anchor="middle" fill="#b45309">5. Open</text><text x="512" y="90" font-weight="400" font-size="7.5" text-anchor="middle" fill="#5c5748">ground</text>
+
+    <rect x="569" y="55" width="103" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/><text x="621" y="76" text-anchor="middle" fill="#b45309">6. Reversed</text><text x="621" y="90" font-weight="400" font-size="7.5" text-anchor="middle" fill="#5c5748">polarity</text>
+
+    <rect x="678" y="55" width="103" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/><text x="730" y="76" text-anchor="middle" fill="#8f1f1a">7. Patient</text><text x="730" y="90" font-weight="400" font-size="7.5" text-anchor="middle" fill="#5c5748">lead leakage</text>
+
+    <rect x="787" y="55" width="89" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/><text x="831" y="76" text-anchor="middle" fill="#8f1f1a">8. Aux</text><text x="831" y="90" font-weight="400" font-size="7.5" text-anchor="middle" fill="#5c5748">leakage</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.2" marker-end="url(#es)">
+    <line x1="127" y1="82" x2="131" y2="82"/><line x1="236" y1="82" x2="240" y2="82"/><line x1="345" y1="82" x2="349" y2="82"/>
+    <line x1="454" y1="82" x2="458" y2="82"/><line x1="563" y1="82" x2="567" y2="82"/><line x1="672" y1="82" x2="676" y2="82"/><line x1="781" y1="82" x2="785" y2="82"/>
+  </g>
+
+  <!-- ground continuity thresholds -->
+  <rect x="24" y="130" width="410" height="140" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="153" font-size="12.5" font-weight="700" fill="#065f46">Ground continuity — the pass threshold</text>
+  <rect x="38" y="165" width="180" height="26" rx="4" fill="#059669"/>
+  <text x="128" y="183" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">NFPA 99: &lt;0.2 ohms</text>
+  <rect x="228" y="165" width="168" height="26" rx="4" fill="#065f46"/>
+  <text x="312" y="183" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">IEC 60601: &lt;0.1 ohms</text>
+  <text x="38" y="212" font-size="9.5" fill="#3f3a2c">High resistance = loose connection, broken</text>
+  <text x="38" y="226" font-size="9.5" fill="#3f3a2c">ground wire, or corroded terminal — repair</text>
+  <text x="38" y="240" font-size="9.5" fill="#3f3a2c">before returning to service.</text>
+
+  <!-- worked example -->
+  <rect x="459" y="130" width="417" height="140" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="473" y="153" font-size="12" font-weight="700" fill="#7a3f14">Worked example</text>
+  <text x="473" y="175" font-size="9.5" fill="#5c5748">Ground continuity reads 0.35 ohms —</text>
+  <text x="473" y="189" font-size="9.5" fill="#5c5748">above the 0.2 ohm NFPA 99 limit.</text>
+  <text x="473" y="211" font-size="9.5" font-weight="700" fill="#7a3f14">Red-tag, investigate wiring/connectors,</text>
+  <text x="473" y="225" font-size="9.5" font-weight="700" fill="#7a3f14">repair, retest — never round down to "close enough."</text>
+
+  <!-- red tag -->
+  <rect x="24" y="290" width="852" height="90" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="313" font-size="12.5" font-weight="700" fill="#8f1f1a">Any failed step: red-tag, quarantine, no exceptions</text>
+  <text x="38" y="335" font-size="10" fill="#5c5748">A device that fails at any step in the sequence must be tagged out of service and quarantined until</text>
+  <text x="38" y="349" font-size="10" fill="#5c5748">repaired. No device returns to clinical use without a passing test AND documentation of the repair.</text>
+
+  <rect x="24" y="395" width="852" height="65" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="416" font-size="11.5" font-weight="700" fill="#1e1b14">Open ground simulates the real failure — energized but ungrounded</text>
+  <text x="38" y="436" font-size="10" fill="#5c5748">It tests leakage current with the safety ground conductor broken while the device stays plugged in</text>
+  <text x="38" y="450" font-size="10" fill="#5c5748">and running — the exact scenario a patient's safety depends on catching.</text>
+
+  <defs>
+    <marker id="es" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1e1b14"/></marker>
+  </defs>
+</svg>

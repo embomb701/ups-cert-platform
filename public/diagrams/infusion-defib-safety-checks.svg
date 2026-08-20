@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Infusion Pumps &amp; Defibrillators — Different Devices, Same Life-Safety Bar</text>
+
+  <!-- infusion pump types -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#eef3f7" stroke="#2563eb" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#1e40af">Infusion pump types</text>
+  <g font-size="9.5" font-weight="700">
+    <text x="38" y="102">LVP</text><text x="70" y="102" font-weight="400" fill="#5c5748">1-999 mL/hr, general fluids</text>
+    <text x="38" y="122">Syringe</text><text x="100" y="122" font-weight="400" fill="#5c5748">precise low volume, high-concentration meds</text>
+    <text x="38" y="142">PCA</text><text x="80" y="142" font-weight="400" fill="#5c5748">patient-controlled analgesia, locked doses</text>
+  </g>
+  <text x="38" y="168" font-size="9" fill="#5c5748">FDA has recalled units repeatedly for software errors and free-flow failures.</text>
+
+  <!-- pump safety checks -->
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Three mandatory pump safety checks</text>
+  <g font-size="9.5" font-weight="700" fill="#8f1f1a">
+    <text x="485" y="100">• Occlusion alarm — stops and alarms on obstructed tubing</text>
+    <text x="485" y="118">• Free-flow protection — no uncontrolled flow when tubing removed</text>
+    <text x="485" y="136">• Flow rate accuracy — ±5%</text>
+  </g>
+  <text x="473" y="155" font-size="9" fill="#5c5748">Without free-flow protection, a removed line can</text>
+  <text x="473" y="167" font-size="9" fill="#5c5748">gravity-bolus a potent medication.</text>
+
+  <!-- defib energy comparison -->
+  <rect x="24" y="200" width="852" height="115" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="223" font-size="12.5" font-weight="700" fill="#065f46">Monophasic vs. biphasic defibrillation energy</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="235" width="380" height="34" rx="4" fill="#7a7256"/><text x="228" y="256" text-anchor="middle" fill="#ffffff">Monophasic — up to 360 J</text>
+    <rect x="438" y="235" width="400" height="34" rx="4" fill="#059669"/><text x="638" y="256" text-anchor="middle" fill="#ffffff">Biphasic — 120-200 J, more effective</text>
+  </g>
+  <text x="38" y="290" font-size="9.5" fill="#3f3a2c">Two-phase current (positive then negative) depolarizes myocardium more efficiently — equivalent or</text>
+  <text x="38" y="304" font-size="9.5" fill="#3f3a2c">better success at roughly half the energy, reducing myocardial injury from the shock itself.</text>
+
+  <!-- defib PM -->
+  <rect x="24" y="330" width="852" height="80" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="353" font-size="12" font-weight="700" fill="#b45309">Defibrillator PM — tested and ready at all times</text>
+  <text x="38" y="375" font-size="10" fill="#5c5748">Energy delivery accuracy (±15% of set energy via a joule-measuring analyzer), battery capacity test,</text>
+  <text x="38" y="389" font-size="10" fill="#5c5748">synchronization mode verification (cardioversion), internal self-test — life-saving role means zero downtime tolerance.</text>
+
+  <rect x="24" y="422" width="852" height="42" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="447" font-size="10.5" font-weight="700" fill="#1e1b14">AEDs analyze rhythm and guide lay rescuers through the shock sequence — same physics, simplified interface.</text>
+</svg>

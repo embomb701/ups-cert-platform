@@ -178,6 +178,9 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
           'Leakage current is the small unintended current that flows from energized conductors or insulation capacitance to ground or to the patient through normal equipment operation. Three types are measured: chassis leakage (from equipment case to ground), patient lead leakage (from patient-applied leads to ground), and patient lead auxiliary leakage (between leads).',
           'NFPA 99 and IEC 60601 set limits for leakage current based on the applied part type. Normal condition (NC) limits apply when all wiring is intact; single fault condition (SFC) limits apply with a simulated wiring fault (such as an open ground or reversed polarity). Cardiac-applied equipment (Type CF) has the most stringent limits: 10 µA NC, 50 µA SFC.',
         ],
+        images: [
+          { src: '/diagrams/macroshock-microshock-leakage.svg', alt: 'Diagram comparing macroshock and microshock ventricular fibrillation thresholds, the three leakage current types measured by an ESA, and the Type CF cardiac normal and single-fault condition limits', caption: 'Microshock is 10,000x more sensitive than macroshock — a direct path to cardiac tissue changes everything.' },
+        ],
         keyPoints: [
           'Macroshock: VF threshold ~100-300 mA across body; GFCI trips at 5 mA',
           'Microshock: VF threshold ~10-50 µA directly to cardiac tissue — 10,000x more sensitive',
@@ -211,6 +214,9 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
           'The standard test sequence includes: (1) line voltage and frequency check; (2) ground continuity from chassis to ground pin; (3) chassis leakage in normal condition; (4) chassis leakage with open neutral; (5) chassis leakage with open ground; (6) chassis leakage with reversed polarity; (7) patient lead leakage for each applied lead; (8) patient lead auxiliary leakage between leads.',
           'A ground continuity test passes when resistance from the chassis ground lug to the supply cord ground pin is less than 0.2 ohms (NFPA 99) or less than 0.1 ohms (IEC 60601). High ground resistance indicates a loose connection, broken ground wire, or corroded terminal that must be repaired before the device can be returned to service.',
           'When an equipment failure is found during electrical safety testing, the device must be tagged out of service (red-tagged) and quarantined until repaired and retested. No device may be returned to clinical use without a passing electrical safety test and documentation of the repair.',
+        ],
+        images: [
+          { src: '/diagrams/esa-test-sequence.svg', alt: 'Diagram of the eight-step electrical safety analyzer test sequence, the NFPA 99 and IEC 60601 ground continuity pass thresholds, a worked failing example, and the red-tag quarantine procedure', caption: 'Eight steps, one hard threshold: ground continuity under 0.2 ohms — anything higher gets red-tagged and repaired before it touches a patient.' },
         ],
         keyPoints: [
           'ESA automates leakage measurement; tests NC, open neutral, open ground, reversed polarity conditions',
@@ -409,6 +415,9 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
           'MRI-conditional devices are those tested and deemed safe in specific MRI environments under defined conditions. MRI-unsafe devices are strictly prohibited from the MRI suite. BMETs must never bring tools, equipment carts, or oxygen cylinders into Zone IV without verifying they are MRI-safe or MRI-conditional.',
           'CT (Computed Tomography) reconstructs cross-sectional images from X-ray projections acquired at multiple angles. Image quality is measured in Hounsfield Units (HU): water = 0 HU, air = -1000 HU, cortical bone = +400 to +1000 HU, soft tissue = +20 to +80 HU. CT QC testing includes HU accuracy, noise measurement, slice thickness, and CT number uniformity.',
         ],
+        images: [
+          { src: '/diagrams/mri-zones-safety.svg', alt: 'Diagram of MRI Zones I through IV with increasing screening requirements, the three MRI physics hazard types, and the MRI-conditional versus MRI-unsafe device distinction', caption: 'Screening gets stricter at every zone boundary — and the Zone IV magnetic field is always on, scan or no scan.' },
+        ],
         keyPoints: [
           'MRI uses 1.5 T or 3.0 T fields; risks: ferromagnetic projectiles, RF implant heating, nerve stimulation',
           'MRI Zones I-IV: Zone IV is the magnet room; Zones III-IV require personnel screening',
@@ -509,6 +518,9 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
           'Ventilator alarms are critical for patient safety. High-pressure alarms indicate increased airway resistance or reduced compliance (bronchospasm, mucus plug, pneumothorax). Low-pressure alarms indicate circuit disconnection or leak. High and low tidal volume alarms indicate ventilation changes. Alarms must never be silenced without addressing the underlying cause.',
           'BMET PM for ventilators includes flow sensor calibration, pressure transducer verification, FiO2 sensor replacement or calibration, safety valve testing, alarm function testing, and circuit integrity. Ventilators are high-risk devices; PMs must be performed at intervals specified by the manufacturer (typically every 6-12 months).',
         ],
+        images: [
+          { src: '/diagrams/ventilator-modes-alarms.svg', alt: 'Diagram of key ventilator parameters VT, RR, PIP, PEEP, and FiO2, the VCV/PCV/PSV ventilation modes, the high- and low-pressure alarm meanings, and the ventilator PM checklist', caption: 'High-pressure alarm means resistance went up; low-pressure means the circuit came apart — never silence either without finding the cause.' },
+        ],
         keyPoints: [
           'VT: 6-8 mL/kg IBW; key parameters: VT, RR, PIP, PEEP, FiO2',
           'VCV: set volume; PCV: set pressure; PSV: patient-triggered with pressure support',
@@ -547,6 +559,9 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
           'FDA has issued numerous recalls and safety communications about infusion pump software errors, free-flow protection failures, and alarm failures. Key BMET safety checks include occlusion alarm testing (verifying the pump alarms and stops when tubing is obstructed), free-flow protection testing (preventing uncontrolled flow when tubing is removed from the pump), and flow rate accuracy verification (typically ±5%).',
           'Defibrillators deliver a controlled high-voltage electrical shock to terminate ventricular fibrillation (VF) or ventricular tachycardia (VT). Monophasic defibrillators deliver 360 J maximum. Biphasic defibrillators are more effective and use lower energy (typically 120-200 J), reducing myocardial damage. AEDs (automated external defibrillators) analyze rhythm and guide lay rescuers through the shock sequence.',
           'Defibrillator testing uses a specialized energy analyzer (such as a Fluke Biomedical QED-6) that measures delivered energy in joules. PM includes energy delivery accuracy (typically ±15% of set energy), battery capacity test, synchronization mode (for cardioversion), and internal self-test verification. Defibrillators must be tested and ready at all times due to their life-saving role.',
+        ],
+        images: [
+          { src: '/diagrams/infusion-defib-safety-checks.svg', alt: 'Diagram of infusion pump types and the three mandatory pump safety checks, plus a comparison of monophasic versus biphasic defibrillation energy and defibrillator PM requirements', caption: 'Free-flow protection stops a gravity bolus; biphasic defibrillation does more with less energy — both are life-safety, not routine PM.' },
         ],
         keyPoints: [
           'LVP: 1-999 mL/hr; syringe pump: precise low volumes; PCA: patient-controlled analgesia',

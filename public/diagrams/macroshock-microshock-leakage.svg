@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Macroshock vs. Microshock — a 10,000× Difference in Threshold</text>
+
+  <!-- macroshock -->
+  <rect x="24" y="55" width="410" height="150" rx="6" fill="#eef3f7" stroke="#2563eb" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#1e40af">Macroshock — external, skin to skin</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Current flows across the body through</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">intact skin — hand to hand or hand to foot.</text>
+  <rect x="38" y="126" width="358" height="26" rx="4" fill="#2563eb"/>
+  <text x="217" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">VF threshold: ~100–300 mA</text>
+  <text x="38" y="170" font-size="9.5" fill="#5c5748">1–10 mA is painful but not typically lethal.</text>
+  <text x="38" y="186" font-size="9.5" font-weight="700" fill="#1e40af">Household GFCI trips at 5 mA.</text>
+
+  <!-- microshock -->
+  <rect x="459" y="55" width="417" height="150" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Microshock — direct path to cardiac tissue</text>
+  <text x="473" y="100" font-size="9.5" fill="#5c5748">Saline catheters, pacemaker leads, intracardiac</text>
+  <text x="473" y="114" font-size="9.5" fill="#5c5748">monitors bypass skin resistance entirely.</text>
+  <rect x="473" y="126" width="380" height="26" rx="4" fill="#a4231e"/>
+  <text x="663" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">VF threshold: as little as 10–50 µA</text>
+  <text x="473" y="170" font-size="9.5" font-weight="700" fill="#8f1f1a">10,000× more sensitive than the</text>
+  <text x="473" y="186" font-size="9.5" font-weight="700" fill="#8f1f1a">macroshock threshold.</text>
+
+  <!-- leakage types -->
+  <rect x="24" y="225" width="852" height="95" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="248" font-size="12" font-weight="700" fill="#1e1b14">Three leakage currents an ESA measures</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="260" width="260" height="40" rx="4" fill="#f3efe2" stroke="#7a7256"/><text x="168" y="278" text-anchor="middle" fill="#1e1b14">Chassis leakage</text><text x="168" y="292" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">case to ground</text>
+
+    <rect x="308" y="260" width="260" height="40" rx="4" fill="#f3efe2" stroke="#7a7256"/><text x="438" y="278" text-anchor="middle" fill="#1e1b14">Patient lead leakage</text><text x="438" y="292" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">lead to ground</text>
+
+    <rect x="578" y="260" width="260" height="40" rx="4" fill="#f3efe2" stroke="#7a7256"/><text x="708" y="278" text-anchor="middle" fill="#1e1b14">Auxiliary leakage</text><text x="708" y="292" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">between leads</text>
+  </g>
+
+  <!-- Type CF limits -->
+  <rect x="24" y="335" width="852" height="80" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="358" font-size="12" font-weight="700" fill="#b45309">Type CF cardiac limits — the most stringent class</text>
+  <rect x="38" y="370" width="230" height="28" rx="4" fill="#b45309"/>
+  <text x="153" y="389" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Normal condition: 10 µA</text>
+  <rect x="284" y="370" width="260" height="28" rx="4" fill="#8a5010"/>
+  <text x="414" y="389" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Single fault condition: 50 µA</text>
+
+  <rect x="24" y="425" width="852" height="42" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="450" font-size="10.5" font-weight="700" fill="#1e1b14">SFC limits apply with a simulated wiring fault — open ground or reversed polarity — the failure mode the ESA is built to catch.</text>
+</svg>

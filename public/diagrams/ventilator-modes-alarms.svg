@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Ventilator Parameters, Modes &amp; the Two Alarms That Matter Most</text>
+
+  <!-- parameters -->
+  <rect x="24" y="55" width="852" height="90" rx="6" fill="#eef3f7" stroke="#2563eb" stroke-width="2"/>
+  <text x="38" y="78" font-size="12" font-weight="700" fill="#1e40af">Key parameters</text>
+  <g font-size="9.5" font-weight="700">
+    <text x="38" y="100">VT</text><text x="60" y="100" font-weight="400" fill="#5c5748">6-8 mL/kg IBW</text>
+    <text x="230" y="100">RR</text><text x="255" y="100" font-weight="400" fill="#5c5748">12-20 br/min</text>
+    <text x="410" y="100">FiO2</text><text x="450" y="100" font-weight="400" fill="#5c5748">21-100%</text>
+  </g>
+  <text x="38" y="122" font-size="9.5" fill="#3f3a2c">PIP = peak inspiratory pressure — the max airway pressure during a breath.</text>
+  <text x="38" y="136" font-size="9.5" fill="#3f3a2c">PEEP = positive end-expiratory pressure — held pressure that keeps alveoli from collapsing.</text>
+
+  <!-- modes -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="160" width="272" height="90" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+    <text x="38" y="183" fill="#065f46">VCV</text>
+    <text x="38" y="205" font-weight="400" font-size="9" fill="#3f3a2c">Set tidal volume delivered</text>
+    <text x="38" y="219" font-weight="400" font-size="9" fill="#3f3a2c">regardless of pressure.</text>
+
+    <rect x="314" y="160" width="272" height="90" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="328" y="183" fill="#b45309">PCV</text>
+    <text x="328" y="205" font-weight="400" font-size="9" fill="#3f3a2c">Set pressure delivered,</text>
+    <text x="328" y="219" font-weight="400" font-size="9" fill="#3f3a2c">tidal volume varies.</text>
+
+    <rect x="604" y="160" width="272" height="90" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="618" y="183" fill="#0e7490">PSV</text>
+    <text x="618" y="205" font-weight="400" font-size="9" fill="#3f3a2c">Patient-triggered, pressure</text>
+    <text x="618" y="219" font-weight="400" font-size="9" fill="#3f3a2c">support each breath. SIMV allows</text>
+    <text x="618" y="233" font-weight="400" font-size="9" fill="#3f3a2c">patient breaths between mandatory ones.</text>
+  </g>
+
+  <!-- alarms -->
+  <rect x="24" y="265" width="410" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="288" font-size="12" font-weight="700" fill="#8f1f1a">High-pressure alarm</text>
+  <text x="38" y="310" font-size="9.5" fill="#5c5748">Increased resistance or reduced compliance:</text>
+  <text x="38" y="324" font-size="9.5" fill="#5c5748">bronchospasm, mucus plug, pneumothorax,</text>
+  <text x="38" y="338" font-size="9.5" fill="#5c5748">patient biting the tube.</text>
+
+  <rect x="459" y="265" width="417" height="105" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="288" font-size="12" font-weight="700" fill="#0e7490">Low-pressure alarm</text>
+  <text x="473" y="310" font-size="9.5" fill="#3f3a2c">Circuit disconnection or a leak — the</text>
+  <text x="473" y="324" font-size="9.5" fill="#3f3a2c">ventilator can't build the expected pressure.</text>
+  <text x="473" y="346" font-size="9.5" font-weight="700" fill="#1f5a8f">Never silence any alarm without addressing the underlying cause.</text>
+
+  <!-- PM -->
+  <rect x="24" y="385" width="852" height="75" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="406" font-size="11.5" font-weight="700" fill="#7a3f14">BMET PM — high-risk device, every 6-12 months</text>
+  <text x="38" y="426" font-size="10" fill="#5c5748">Flow sensor calibration, pressure transducer verification, FiO2 sensor cal/replacement, safety valve</text>
+  <text x="38" y="440" font-size="10" fill="#5c5748">testing, alarm function testing, circuit integrity check.</text>
+</svg>
