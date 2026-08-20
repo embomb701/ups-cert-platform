@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Site Power — the One-Line and the Bill That Shapes Every Design Decision</text>
+
+  <!-- one-line -->
+  <g font-size="9" font-weight="700">
+    <rect x="24" y="55" width="160" height="55" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="104" y="76" text-anchor="middle" fill="#0e7490">Utility transformer</text><text x="104" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">pad-mount, dedicated</text>
+
+    <rect x="199" y="55" width="160" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="279" y="76" text-anchor="middle" fill="#b45309">Main disconnect</text><text x="279" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">/ switchgear</text>
+
+    <rect x="374" y="55" width="180" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="464" y="76" text-anchor="middle" fill="#b45309">Distribution panel</text><text x="464" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">service entrance section</text>
+
+    <rect x="574" y="55" width="302" height="55" rx="4" fill="#e9f4ef" stroke="#16a34a" stroke-width="2"/><text x="725" y="76" text-anchor="middle" fill="#166534">Branch circuits → each dispenser</text><text x="725" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#3f3a2c">480V 3-phase to each charger</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#sp)">
+    <line x1="184" y1="82" x2="197" y2="82"/><line x1="359" y1="82" x2="372" y2="82"/><line x1="554" y1="82" x2="572" y2="82"/>
+  </g>
+
+  <!-- sizing table -->
+  <rect x="24" y="125" width="852" height="80" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="148" font-size="12" font-weight="700" fill="#1e1b14">Typical site sizing</text>
+  <text x="38" y="172" font-size="9.5" font-family="ui-monospace,Consolas,monospace" fill="#5c5748">2×150kW → 300kW peak → 500–750 kVA</text>
+  <text x="340" y="172" font-size="9.5" fill="#5c5748">4×150kW → 600kW peak → 1000–1500 kVA</text>
+  <text x="38" y="190" font-size="9.5" fill="#5c5748">4×350kW → 1400kW peak → 2000–2500 kVA — all at 480V 3-phase service.</text>
+
+  <!-- demand charges -->
+  <rect x="24" y="220" width="852" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="243" font-size="12.5" font-weight="700" fill="#8f1f1a">Demand charges — the number that shapes site design</text>
+  <text x="38" y="265" font-size="10" fill="#5c5748">Utilities bill on two components: ENERGY (kWh consumed) and DEMAND (highest kW/kVA averaged over</text>
+  <text x="38" y="279" font-size="10" fill="#5c5748">a 15- or 30-minute interval).</text>
+  <rect x="38" y="291" width="500" height="46" rx="4" fill="#8f1f1a"/>
+  <text x="288" y="310" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">8 vehicles × 150 kW simultaneous = 1,200 kW demand</text>
+  <text x="288" y="326" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">at $10–$25/kW/month → $12,000–$30,000 added to the bill</text>
+
+  <!-- load management -->
+  <rect x="24" y="365" width="852" height="55" rx="6" fill="#e9f4ef" stroke="#16a34a" stroke-width="2"/>
+  <text x="38" y="388" font-size="11.5" font-weight="700" fill="#166534">Load management exists to control this peak</text>
+  <text x="38" y="406" font-size="10" fill="#3f3a2c">Limiting simultaneous chargers or throttling output keeps the 15-minute demand peak below the billing threshold.</text>
+
+  <rect x="24" y="430" width="852" height="34" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="452" font-size="10" font-weight="700" fill="#7a3f14">A tripping main breaker at full simultaneous load is usually a design-sizing gap, not a hardware fault.</text>
+
+  <defs>
+    <marker id="sp" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/></marker>
+  </defs>
+</svg>

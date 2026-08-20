@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Four Findings, Read the Logs Before You Roll</text>
+
+  <!-- four findings -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="205" height="50" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="126" y="76" text-anchor="middle" fill="#8f1f1a">Completely dead</text><text x="126" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">no display, no response</text>
+
+    <rect x="239" y="55" width="205" height="50" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="341" y="76" text-anchor="middle" fill="#b45309">Won't start session</text><text x="341" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">available, no charge</text>
+
+    <rect x="454" y="55" width="205" height="50" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="556" y="76" text-anchor="middle" fill="#0e7490">Charges but derated</text><text x="556" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">reduced output</text>
+
+    <rect x="669" y="55" width="207" height="50" rx="4" fill="#f3efe2" stroke="#7a7256" stroke-width="1.5"/><text x="772" y="76" text-anchor="middle" fill="#5c5748">Intermittent</text><text x="772" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">comes and goes</text>
+  </g>
+
+  <!-- dead charger path -->
+  <rect x="24" y="120" width="410" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="143" font-size="12" font-weight="700" fill="#8f1f1a">Completely dead — remote first</text>
+  <text x="38" y="165" font-size="9.5" fill="#5c5748">OCPP Heartbeat present? Yes = hardware</text>
+  <text x="38" y="179" font-size="9.5" fill="#5c5748">alive, connectivity issue. No = power problem.</text>
+  <text x="38" y="201" font-size="9.5" font-weight="700" fill="#8f1f1a">On-site: utility voltage at disconnect (measure,</text>
+  <text x="38" y="215" font-size="9.5" font-weight="700" fill="#8f1f1a">never assume), branch breaker, internal fusing.</text>
+
+  <!-- session-starting cascade -->
+  <rect x="459" y="120" width="417" height="115" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="143" font-size="12" font-weight="700" fill="#b45309">Won't start — work the log in order</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="473" y="153" width="130" height="24" rx="4" fill="#b45309"/><text x="538" y="169" text-anchor="middle" fill="#ffffff">Authorization</text>
+    <rect x="613" y="153" width="120" height="24" rx="4" fill="#b45309"/><text x="673" y="169" text-anchor="middle" fill="#ffffff">Handshake</text>
+    <rect x="743" y="153" width="123" height="24" rx="4" fill="#b45309"/><text x="804" y="169" text-anchor="middle" fill="#ffffff">Power init</text>
+  </g>
+  <text x="473" y="196" font-size="9" fill="#5c5748">Backend whitelist/payment · pilot or comm protocol · contactor/DC voltage</text>
+  <text x="473" y="216" font-size="9.5" font-weight="700" fill="#b45309">Arriving without reading the OCPP log is working blind.</text>
+
+  <!-- termination reasons -->
+  <rect x="24" y="250" width="852" height="145" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="273" font-size="12.5" font-weight="700" fill="#0e7490">Session terminates mid-charge — read the StopTransaction reason code</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="285" width="195" height="60" rx="4" fill="#ffffff" stroke="#7a7256"/><text x="46" y="303" fill="#1e1b14">Timeout at 15:00</text><text x="46" y="318" font-weight="400" font-size="8" fill="#5c5748">OCPP MaxChargingTime</text><text x="46" y="330" font-weight="400" font-size="8" fill="#5c5748">backend config, not a fault</text>
+
+    <rect x="242" y="285" width="195" height="60" rx="4" fill="#ffffff" stroke="#7a7256"/><text x="250" y="303" fill="#1e1b14">Stops at 80% SOC</text><text x="250" y="318" font-weight="400" font-size="8" fill="#5c5748">Normal vehicle BMS</text><text x="250" y="330" font-weight="400" font-size="8" fill="#5c5748">behavior, hot weather</text>
+
+    <rect x="446" y="285" width="195" height="60" rx="4" fill="#ffffff" stroke="#7a7256"/><text x="454" y="303" fill="#1e1b14">DeAuthorized</text><text x="454" y="318" font-weight="400" font-size="8" fill="#5c5748">Backend billing/account</text><text x="454" y="330" font-weight="400" font-size="8" fill="#5c5748">issue, not hardware</text>
+
+    <rect x="650" y="285" width="206" height="60" rx="4" fill="#ffffff" stroke="#7a7256"/><text x="658" y="303" fill="#1e1b14">EVDisconnected</text><text x="658" y="318" font-weight="400" font-size="8" fill="#5c5748">Connector latch or</text><text x="658" y="330" font-weight="400" font-size="8" fill="#5c5748">vehicle-side release</text>
+  </g>
+  <text x="38" y="368" font-size="9.5" font-weight="700" fill="#0e7490">Reading the reason code is 80% of the diagnosis before the truck leaves the yard.</text>
+
+  <rect x="24" y="405" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="428" font-size="10.5" font-weight="700" fill="#7a3f14">Heartbeat resumed after a gap = connectivity was the issue, hardware was fine throughout — a 4-hour</text>
+  <text x="38" y="444" font-size="10.5" font-weight="700" fill="#7a3f14">"offline" flag doesn't always mean the charger needs a truck roll.</text>
+</svg>

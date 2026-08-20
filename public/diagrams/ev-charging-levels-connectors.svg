@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Three Power Levels, Four Connectors</text>
+
+  <!-- levels -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="55" width="272" height="130" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+    <text x="38" y="78" fill="#1e1b14">Level 1</text>
+    <text x="38" y="100" font-weight="400" font-size="9.5" fill="#5c5748">120V, 1.4–1.9 kW</text>
+    <text x="38" y="114" font-weight="400" font-size="9.5" fill="#5c5748">20–40 hr for 200 mi</text>
+    <text x="38" y="136" font-weight="700" font-size="9.5" fill="#5c5748">A cord set on the car —</text>
+    <text x="38" y="150" font-weight="700" font-size="9.5" fill="#5c5748">not infrastructure to service.</text>
+
+    <rect x="314" y="55" width="272" height="130" rx="6" fill="#e9f4ef" stroke="#16a34a" stroke-width="2"/>
+    <text x="328" y="78" fill="#166534">Level 2 — your daily bread</text>
+    <text x="328" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">240V, 3.8–19.2 kW</text>
+    <text x="328" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">3–8 hr for 200 mi</text>
+    <text x="328" y="136" font-weight="700" font-size="9.5" fill="#166534">Real EVSE: contactor, pilot</text>
+    <text x="328" y="150" font-weight="700" font-size="9.5" fill="#166534">board, metering, connector.</text>
+
+    <rect x="604" y="55" width="272" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="618" y="78" fill="#b45309">DCFC</text>
+    <text x="618" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">400–1000V DC, 25–350+ kW</text>
+    <text x="618" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">15–45 min for 200 mi</text>
+    <text x="618" y="136" font-weight="700" font-size="9.5" fill="#8a5010">A power plant in a parking lot —</text>
+    <text x="618" y="150" font-weight="700" font-size="9.5" fill="#8a5010">converts AC to DC on-site.</text>
+  </g>
+
+  <!-- connector zoo -->
+  <rect x="24" y="200" width="852" height="140" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="223" font-size="12.5" font-weight="700" fill="#0e7490">The connector zoo</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="235" width="195" height="80" rx="4" fill="#ffffff" stroke="#7a7256"/><text x="46" y="255" fill="#1e1b14">J1772</text><text x="46" y="270" font-weight="400" font-size="8" fill="#5c5748">SAE standard, L1/L2 AC.</text><text x="46" y="282" font-weight="400" font-size="8" fill="#5c5748">5-pin, dedicated pilot pin.</text><text x="46" y="298" font-weight="400" font-size="8" fill="#5c5748">Universal for a decade.</text>
+
+    <rect x="242" y="235" width="195" height="80" rx="4" fill="#ffffff" stroke="#7a7256"/><text x="250" y="255" fill="#1e1b14">CCS</text><text x="250" y="270" font-weight="400" font-size="8" fill="#5c5748">J1772 + 2 DC pins below.</text><text x="250" y="282" font-weight="400" font-size="8" fill="#5c5748">One inlet, L2 AC or DCFC.</text><text x="250" y="298" font-weight="400" font-size="8" fill="#5c5748">Dominant DCFC 2020s.</text>
+
+    <rect x="446" y="235" width="195" height="80" rx="4" fill="#e9f4ef" stroke="#16a34a" stroke-width="2"/><text x="454" y="255" fill="#166534">NACS</text><text x="454" y="270" font-weight="400" font-size="8" fill="#3f3a2c">Ex-Tesla, now licensed.</text><text x="454" y="282" font-weight="400" font-size="8" fill="#3f3a2c">2-pin, AC or DC, compact.</text><text x="454" y="298" font-weight="400" font-size="8" fill="#166534">US default for new models.</text>
+
+    <rect x="650" y="235" width="206" height="80" rx="4" fill="#f3efe2" stroke="#7a7256"/><text x="658" y="255" fill="#5c5748">CHAdeMO</text><text x="658" y="270" font-weight="400" font-size="8" fill="#5c5748">Legacy Japanese DCFC.</text><text x="658" y="282" font-weight="400" font-size="8" fill="#5c5748">Older Leaf stations, fleets.</text><text x="658" y="298" font-weight="400" font-size="8" fill="#5c5748">Declining fast.</text>
+  </g>
+
+  <rect x="24" y="352" width="852" height="60" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="375" font-size="11.5" font-weight="700" fill="#b45309">Megawatt Charging System (MCS)</text>
+  <text x="38" y="395" font-size="10" fill="#5c5748">1+ MW per session for commercial truck depots — substation-class infrastructure, not yet in most service territories.</text>
+
+  <rect x="24" y="422" width="852" height="46" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="450" font-size="10.5" font-weight="700" fill="#7a3f14">Confirm inlet type and adapter availability before dispatch — mixed-standard fleets are field service vocabulary now.</text>
+</svg>
