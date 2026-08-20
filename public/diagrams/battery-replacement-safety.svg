@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Replacing a String Live — Isolate Before You Touch Anything</text>
+
+  <!-- bus diagram -->
+  <rect x="40" y="60" width="420" height="150" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="55" y="83" font-size="12" font-weight="700" fill="#8f1f1a">Live DC bus — cannot be de-energized</text>
+  <text x="55" y="103" font-size="10" fill="#5c5748">without dropping the protected load</text>
+
+  <rect x="55" y="120" width="120" height="60" rx="4" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="65" y="142" font-size="9.5" font-weight="700" fill="#1e1b14">Remaining</text>
+  <text x="65" y="155" font-size="9.5" font-weight="700" fill="#1e1b14">strings</text>
+  <text x="65" y="170" font-size="8.5" fill="#5c5748">still energized</text>
+
+  <rect x="190" y="120" width="120" height="60" rx="4" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="200" y="142" font-size="9.5" font-weight="700" fill="#1e1b14">Charger /</text>
+  <text x="200" y="155" font-size="9.5" font-weight="700" fill="#1e1b14">rectifiers</text>
+
+  <rect x="325" y="120" width="120" height="60" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2.5"/>
+  <text x="335" y="142" font-size="9.5" font-weight="700" fill="#b45309">String being</text>
+  <text x="335" y="155" font-size="9.5" font-weight="700" fill="#b45309">replaced</text>
+  <text x="335" y="170" font-size="8.5" fill="#5c5748">needs disconnect</text>
+
+  <!-- voltages -->
+  <rect x="480" y="60" width="395" height="150" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="494" y="83" font-size="12" font-weight="700" fill="#1e1b14">Not a 12V car battery</text>
+  <text x="494" y="106" font-size="11" fill="#5c5748">48V DC (telecom) · 96V · 192V · 480V DC</text>
+  <text x="494" y="122" font-size="11" fill="#5c5748">(UPS and BESS)</text>
+  <text x="494" y="148" font-size="10" font-weight="700" fill="#8f1f1a">A tool bridging + and − at these</text>
+  <text x="494" y="162" font-size="10" font-weight="700" fill="#8f1f1a">voltages/energies creates a welding-</text>
+  <text x="494" y="176" font-size="10" font-weight="700" fill="#8f1f1a">level arc — no protective interruption.</text>
+  <text x="494" y="198" font-size="9.5" fill="#5c5748">The bus has the full energy of ALL remaining strings behind it.</text>
+
+  <!-- isolation strategy -->
+  <rect x="40" y="230" width="410" height="105" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="55" y="253" font-size="12.5" font-weight="700" fill="#0e7490">Isolation strategy</text>
+  <text x="55" y="275" font-size="10" fill="#5c5748">A disconnect switch in series with EACH</text>
+  <text x="55" y="289" font-size="10" fill="#5c5748">string is a code/safety requirement, not</text>
+  <text x="55" y="303" font-size="10" fill="#5c5748">an option — isolate one string without</text>
+  <text x="55" y="317" font-size="10" fill="#5c5748">de-energizing the bus.</text>
+
+  <!-- verify -->
+  <rect x="465" y="230" width="410" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="480" y="253" font-size="12.5" font-weight="700" fill="#8f1f1a">Verify before touching</text>
+  <text x="480" y="275" font-size="10" fill="#5c5748">Open the disconnect, then verify zero</text>
+  <text x="480" y="289" font-size="10" fill="#5c5748">voltage at the string terminals with a</text>
+  <text x="480" y="303" font-size="10" fill="#5c5748">meter — before touching any connector.</text>
+  <text x="480" y="317" font-size="9.5" font-weight="700" fill="#8f1f1a">Never trust the disconnect without confirming.</text>
+
+  <!-- room + PPE -->
+  <rect x="40" y="355" width="835" height="100" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="55" y="378" font-size="12" font-weight="700" fill="#b45309">Room + PPE</text>
+  <text x="55" y="400" font-size="10" fill="#5c5748">Ventilation to keep H₂ below 25% of LEL · seismic restraint · spill containment · signage (NFPA 1, NEC 480)</text>
+  <text x="55" y="418" font-size="10" fill="#5c5748">Face shield (not glasses) · nitrile gloves · insulated tools · rubber mat · eyewash within 10 seconds</text>
+  <text x="55" y="440" font-size="9.5" font-weight="700" fill="#8a5010">Lithium work: add an ABC or Class D extinguisher — know the thermal runaway response plan first.</text>
+</svg>

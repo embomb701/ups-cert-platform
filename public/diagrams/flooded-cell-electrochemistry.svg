@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Flooded Lead-Acid — Specific Gravity Is the Charge State</text>
+
+  <!-- cell diagram -->
+  <rect x="40" y="60" width="260" height="200" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="55" y="85" font-size="12" font-weight="700" fill="#1e1b14">Flooded Cell</text>
+
+  <rect x="70" y="105" width="30" height="120" fill="#7a7256"/>
+  <text x="55" y="240" font-size="9" fill="#7a7256">PbO₂ (+)</text>
+  <rect x="200" y="105" width="30" height="120" fill="#4a4438"/>
+  <text x="195" y="240" font-size="9" fill="#4a4438">Pb (−)</text>
+  <rect x="100" y="105" width="100" height="120" fill="#e9f2fb" opacity="0.7"/>
+  <text x="110" y="170" font-size="9" fill="#1f5a8f">H₂SO₄</text>
+  <text x="105" y="184" font-size="8" fill="#1f5a8f">electrolyte</text>
+
+  <!-- SG scale -->
+  <rect x="330" y="60" width="230" height="200" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="344" y="83" font-size="12" font-weight="700" fill="#0e7490">Specific Gravity Scale</text>
+  <text x="344" y="110" font-size="13" font-weight="700" fill="#1e1b14">1.265–1.285 g/mL</text>
+  <text x="344" y="126" font-size="10" fill="#5c5748">fully charged</text>
+  <text x="344" y="155" font-size="13" font-weight="700" fill="#a4231e">below 1.150 g/mL</text>
+  <text x="344" y="171" font-size="10" fill="#5c5748">discharged</text>
+  <text x="344" y="200" font-size="9.5" fill="#5c5748">Discharge consumes H₂SO₄ →</text>
+  <text x="344" y="214" font-size="9.5" fill="#5c5748">electrolyte less dense</text>
+  <text x="344" y="234" font-size="9.5" font-weight="700" fill="#1f5a8f">Hydrometer reading = the most</text>
+  <text x="344" y="248" font-size="9.5" font-weight="700" fill="#1f5a8f">direct capacity indicator.</text>
+
+  <!-- watering discipline -->
+  <rect x="590" y="60" width="285" height="200" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="604" y="83" font-size="12" font-weight="700" fill="#8f1f1a">Watering Discipline</text>
+  <text x="604" y="105" font-size="10" fill="#5c5748">Distilled/deionized water ONLY —</text>
+  <text x="604" y="119" font-size="10" fill="#5c5748">never acid unless restoring a spill.</text>
+  <text x="604" y="145" font-size="10.5" font-weight="700" fill="#8f1f1a">Water AFTER full charge, never</text>
+  <text x="604" y="159" font-size="10.5" font-weight="700" fill="#8f1f1a">before — electrolyte rises on</text>
+  <text x="604" y="173" font-size="10.5" font-weight="700" fill="#8f1f1a">charge; a discharged cell filled</text>
+  <text x="604" y="187" font-size="10.5" font-weight="700" fill="#8f1f1a">to level will overflow when charged.</text>
+  <text x="604" y="210" font-size="9.5" fill="#5c5748">Level: 1/8–1/4 in above plates,</text>
+  <text x="604" y="224" font-size="9.5" fill="#5c5748">checked quarterly and documented.</text>
+  <text x="604" y="244" font-size="9.5" fill="#5c5748">Auto watering systems (float valves)</text>
+  <text x="604" y="258" font-size="9.5" fill="#5c5748">standard on large installations.</text>
+
+  <!-- stratification -->
+  <rect x="40" y="285" width="410" height="150" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="55" y="308" font-size="12.5" font-weight="700" fill="#b45309">Stratification</text>
+  <text x="55" y="330" font-size="10" fill="#5c5748">Heavy acid settles to the bottom after</text>
+  <text x="55" y="344" font-size="10" fill="#5c5748">extended float without equalization —</text>
+  <text x="55" y="358" font-size="10" fill="#5c5748">lower plates suffer incomplete recharge.</text>
+  <text x="55" y="382" font-size="10" font-weight="700" fill="#8a5010">Fix: EQUALIZATION — a controlled</text>
+  <text x="55" y="396" font-size="10" font-weight="700" fill="#8a5010">high-voltage charge that gasses and</text>
+  <text x="55" y="410" font-size="10" font-weight="700" fill="#8a5010">stirs the electrolyte uniform again.</text>
+
+  <!-- weak cell -->
+  <rect x="470" y="285" width="405" height="150" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="485" y="308" font-size="12.5" font-weight="700" fill="#8f1f1a">Cell-to-Cell Gravity Imbalance</text>
+  <text x="485" y="330" font-size="10" fill="#5c5748">One cell reading 1.200 when the rest</text>
+  <text x="485" y="344" font-size="10" fill="#5c5748">read 1.265 is NOT a watering problem —</text>
+  <text x="485" y="358" font-size="10" fill="#5c5748">it's accepting less charge than its</text>
+  <text x="485" y="372" font-size="10" fill="#5c5748">neighbors.</text>
+  <text x="485" y="396" font-size="10" font-weight="700" fill="#8f1f1a">Sulfated plates, a shorted separator,</text>
+  <text x="485" y="410" font-size="10" font-weight="700" fill="#8f1f1a">or a cracked plate group — pull it</text>
+  <text x="485" y="424" font-size="10" font-weight="700" fill="#8f1f1a">before it pulls down the string.</text>
+</svg>
