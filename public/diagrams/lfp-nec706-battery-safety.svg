@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">LiFePO4 vs. NMC — Why LFP Became the Residential Standard</text>
+
+  <!-- LFP -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#065f46">LiFePO4 (LFP)</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Thermally stable — no thermal runaway under</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">normal abuse conditions.</text>
+  <text x="38" y="136" font-size="9.5" font-weight="700" fill="#065f46">3,000–6,000+ cycles at 80% DoD, 10+ year</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#065f46">design life. Sonnen, BYD Battery-Box, Powerwall 3.</text>
+
+  <!-- NMC -->
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Lithium NMC</text>
+  <text x="473" y="100" font-size="9.5" fill="#5c5748">Higher energy density, smaller enclosures —</text>
+  <text x="473" y="114" font-size="9.5" fill="#5c5748">Tesla Powerwall 2, older LG RESU.</text>
+  <text x="473" y="136" font-size="9.5" font-weight="700" fill="#8f1f1a">Cathode releases oxygen in runaway — self-</text>
+  <text x="473" y="150" font-size="9.5" font-weight="700" fill="#8f1f1a">sustaining fire, robust BMS is essential.</text>
+
+  <!-- BMS -->
+  <rect x="24" y="200" width="852" height="90" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="223" font-size="12.5" font-weight="700" fill="#0e7490">The BMS — mandatory on every chemistry</text>
+  <g font-size="9.5" font-weight="700" fill="#1f5a8f">
+    <text x="50" y="247">• Monitors per-cell voltage + temperature</text>
+    <text x="330" y="247">• Balances cells</text>
+    <text x="530" y="247">• Blocks overcharge (&gt;~3.65V/cell LFP)</text>
+  </g>
+  <text x="50" y="267" font-size="9.5" font-weight="700" fill="#1f5a8f">• Blocks over-discharge (&lt;~2.5V/cell)  •  Regulates charge/discharge rate via inverter comms</text>
+
+  <!-- NEC 706 -->
+  <rect x="24" y="305" width="852" height="115" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="328" font-size="12.5" font-weight="700" fill="#b45309">NEC Article 706 — Energy Storage Systems</text>
+  <g font-size="9.5" font-weight="700" fill="#8a5010">
+    <text x="50" y="352">• Accessible disconnecting means for emergency responders (706.15)</text>
+    <text x="50" y="370">• UL 9540 system listing + UL 9540A cell/module fire safety testing</text>
+  </g>
+  <text x="50" y="391" font-size="9.5" fill="#5c5748">Ventilation, working clearances, and labeling requirements per 706.10 — plus active/passive thermal</text>
+  <text x="50" y="405" font-size="9.5" fill="#5c5748">management to hold cells in the 60–95°F (15–35°C) optimal range.</text>
+
+  <rect x="24" y="432" width="852" height="34" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="454" font-size="10" font-weight="700" fill="#7a3f14">NMC fires: water cools and prevents propagation — it does not extinguish the self-oxidizing chemistry.</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Commissioning Sequence — Verify Before You Energize</text>
+
+  <!-- pre-commissioning -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="205" height="90" rx="4" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/><text x="38" y="78" fill="#1e1b14">1. Visual inspection</text><text x="38" y="98" font-weight="400" font-size="8.5" fill="#5c5748">Connections tight, polarity</text><text x="38" y="110" font-weight="400" font-size="8.5" fill="#5c5748">marked, no visible damage,</text><text x="38" y="122" font-weight="400" font-size="8.5" fill="#5c5748">grounding/bonding installed.</text>
+
+    <rect x="239" y="55" width="205" height="90" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="253" y="78" fill="#0e7490">2. Measure Voc</text><text x="253" y="98" font-weight="400" font-size="8.5" fill="#5c5748">Before landing wires —</text><text x="253" y="110" font-weight="400" font-size="8.5" fill="#5c5748">within ±5% of calculated</text><text x="253" y="122" font-weight="400" font-size="8.5" fill="#5c5748">string Voc at temp/irradiance.</text>
+
+    <rect x="454" y="55" width="205" height="90" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="468" y="78" fill="#0e7490">3. Measure Isc</text><text x="468" y="98" font-weight="400" font-size="8.5" fill="#5c5748">Clamp meter or PV analyzer —</text><text x="468" y="110" font-weight="400" font-size="8.5" fill="#5c5748">module Isc × irradiance</text><text x="468" y="122" font-weight="400" font-size="8.5" fill="#5c5748">correction factor.</text>
+
+    <rect x="669" y="55" width="207" height="90" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="683" y="78" fill="#8f1f1a">4. Polarity check</text><text x="683" y="98" font-weight="400" font-size="8.5" fill="#5c5748">Verify at combiner input —</text><text x="683" y="110" font-weight="400" font-size="8.5" fill="#5c5748">reverse polarity shorts</text><text x="683" y="122" font-weight="400" font-size="8.5" fill="#5c5748">through bypass diodes.</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#cm)">
+    <line x1="229" y1="100" x2="237" y2="100"/><line x1="444" y1="100" x2="452" y2="100"/><line x1="659" y1="100" x2="667" y2="100"/>
+  </g>
+
+  <!-- inverter commissioning -->
+  <rect x="24" y="165" width="410" height="110" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="188" font-size="12" font-weight="700" fill="#b45309">Inverter commissioning sequence</text>
+  <text x="38" y="210" font-size="9.5" fill="#5c5748">DC disconnect ON first → verify DC input</text>
+  <text x="38" y="224" font-size="9.5" fill="#5c5748">voltage in range → close AC disconnect →</text>
+  <text x="38" y="238" font-size="9.5" fill="#5c5748">confirm grid sync.</text>
+  <text x="38" y="260" font-size="9.5" font-weight="700" fill="#8a5010">Verify MPPT voltage, AC output, and frequency in the monitoring portal.</text>
+
+  <!-- AHJ + PTO -->
+  <rect x="459" y="165" width="417" height="110" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="188" font-size="12" font-weight="700" fill="#065f46">AHJ inspection → utility PTO</text>
+  <text x="473" y="210" font-size="9.5" fill="#3f3a2c">Green tag from the local building/electrical</text>
+  <text x="473" y="224" font-size="9.5" fill="#3f3a2c">department required before the utility sets the</text>
+  <text x="473" y="238" font-size="9.5" fill="#3f3a2c">interconnection meter.</text>
+  <text x="473" y="257" font-size="9.5" font-weight="700" fill="#065f46">Operating before Permission to Operate (PTO) is</text>
+  <text x="473" y="271" font-size="9.5" font-weight="700" fill="#065f46">a code violation — forced disconnection risk.</text>
+
+  <!-- monitoring -->
+  <rect x="24" y="295" width="852" height="65" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="316" font-size="11.5" font-weight="700" fill="#1e1b14">Monitoring activation</text>
+  <text x="38" y="336" font-size="10" fill="#5c5748">Register with the manufacturer platform (Enphase Enlighten, SolarEdge portal), confirm every string</text>
+  <text x="38" y="350" font-size="10" fill="#5c5748">or module-level device is online, hand the homeowner dashboard access.</text>
+
+  <rect x="24" y="370" width="852" height="90" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="393" font-size="12" font-weight="700" fill="#8f1f1a">Read the anomaly correctly</text>
+  <text x="38" y="415" font-size="10" fill="#5c5748">0V on a string that should read ~240V = a broken series connection (failed MC4), not shading — clouds</text>
+  <text x="38" y="429" font-size="10" fill="#5c5748">lower Voc, they never zero it. Specific non-adjacent modules underperforming = shading/soiling at that</text>
+  <text x="38" y="443" font-size="10" fill="#5c5748">exact location, not random variation or manufacturing batch — go inspect those modules directly.</text>
+
+  <defs>
+    <marker id="cm" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/></marker>
+  </defs>
+</svg>

@@ -52,6 +52,9 @@ export const SOLAR_INSTALLER_MODULES: TrainingModule[] = [
           'Tilt and azimuth optimization: in the Northern Hemisphere, south-facing arrays at a tilt angle equal to the local latitude produce maximum annual energy — east and west faces lose roughly 15–20% of annual energy vs. optimal south orientation.',
           'Derate factors account for all system losses: soiling (2–5%), wiring losses (2%), inverter efficiency (96–98%), module mismatch (1–2%), availability losses (1%), and aging (0.5%/year) — a typical system-level derate factor is 0.77–0.85.',
         ],
+        images: [
+          { src: '/diagrams/system-sizing-derate-factors.svg', alt: 'Diagram of peak sun hours, shading and MLPE, tilt and azimuth optimization, and the derate factor stack, with a worked Phoenix AZ production example', caption: 'From nameplate watts to delivered kWh — peak sun hours, tilt, shading, and the full derate factor stack.' },
+        ],
         keyPoints: [
           'Peak sun hours (PSH) = equivalent hours at 1000 W/m² — use PVWatts with TMY data for accurate production estimates',
           'Even partial shading is highly destructive on unoptimized string systems — bypass diodes limit but don\'t eliminate losses',
@@ -106,6 +109,9 @@ export const SOLAR_INSTALLER_MODULES: TrainingModule[] = [
           'Combiner boxes aggregate multiple source circuits (strings) into a single output circuit using fused or non-fused inputs — source circuit fusing protects the wiring from backfeed current from parallel strings.',
           'The PV system disconnecting means must be in a location accessible to emergency responders, labeled "PV System Disconnect," and capable of interrupting the maximum circuit current — NEC 690.13.',
           'NEC 690.35 allows ungrounded PV systems (transformerless inverters) with isolation monitoring — the system continuously checks for ground faults without requiring a grounded conductor; this design is standard in modern string inverters.',
+        ],
+        images: [
+          { src: '/diagrams/nec690-voltage-conductor-sizing.svg', alt: 'Diagram of NEC 690 maximum string voltage at record-low temperature, the 690.8 conductor ampacity rule at 125% of Isc, and disconnect and grounding requirements, with a worked voltage example', caption: 'Sizing the DC side to survive its coldest morning — the cold-morning Voc ceiling and the 125% Isc conductor rule.' },
         ],
         keyPoints: [
           'Max string Voc calculated at record low temperature — check against inverter\'s maximum DC input voltage rating',
@@ -310,6 +316,9 @@ export const SOLAR_INSTALLER_MODULES: TrainingModule[] = [
           'Energy Storage System (ESS) enclosures must include a disconnecting means accessible to emergency responders, and the system must be listed to UL 9540 (standard for energy storage systems); individual battery modules should be listed to UL 9540A (fire safety testing).',
           'Thermal management is critical for lithium batteries: most residential systems include active or passive cooling to maintain cells in the 60–95°F (15–35°C) optimal operating range — operation outside this range reduces capacity and cycle life.',
         ],
+        images: [
+          { src: '/diagrams/lfp-nec706-battery-safety.svg', alt: 'Comparison diagram of LiFePO4 versus NMC battery chemistry safety, BMS protective functions, and NEC Article 706 energy storage system requirements including UL 9540 listing', caption: 'Why LFP became the residential standard, what the BMS protects against, and what NEC 706 requires of the installation.' },
+        ],
         keyPoints: [
           'LiFePO4 (LFP): thermally stable, 3,000–6,000+ cycle life, industry standard for residential storage safety',
           'BMS is mandatory — protects cells from overcharge, over-discharge, over-temperature, and manages state-of-charge reporting',
@@ -365,6 +374,9 @@ export const SOLAR_INSTALLER_MODULES: TrainingModule[] = [
           'Flat roofs (commercial) use ballasted racking (no penetrations, weighted with concrete blocks) or mechanically attached systems — ballasted systems must be assessed for roof membrane loading and wind requirements using aerodynamic models.',
           'The electrical conduit runs from the roof array down to the inverter location: rooftop conduit must be EMT or rigid metal conduit (RMC) exposed on the roof surface in most jurisdictions; PVC conduit is acceptable only where specifically allowed by the AHJ.',
         ],
+        images: [
+          { src: '/diagrams/roof-attachment-structural-loading.svg', alt: 'Diagram comparing asphalt shingle, tile, and flat-roof attachment methods, the three structural loads racking must survive, pre-engineered load tables, and the two most common field mistakes', caption: 'Every roof penetration is a structural and waterproofing decision — attachment method, load, and the callbacks they prevent.' },
+        ],
         keyPoints: [
           'Lag bolts must penetrate 2.5" into solid rafter wood — OSB sheathing alone is insufficient for wind uplift resistance',
           'Flash every roof penetration correctly — improper flashing is the leading cause of post-installation roof leaks and homeowner disputes',
@@ -394,6 +406,9 @@ export const SOLAR_INSTALLER_MODULES: TrainingModule[] = [
           'String polarity check: before connecting to the combiner box, verify string polarity at the combiner input — connecting a string in reverse polarity will cause a short circuit through the bypass diodes and can damage modules or combiner components.',
           'The AHJ (Authority Having Jurisdiction) inspection must occur and receive a green tag before the utility interconnection meter is set — operating a solar system prior to AHJ inspection and utility permission is a code violation and can result in forced disconnection.',
           'Monitoring system activation: register the system with the manufacturer monitoring platform (Enphase Enlighten, SolarEdge monitoring portal, or inverter-native monitoring), verify all strings or module-level devices appear online, and provide the homeowner with dashboard access.',
+        ],
+        images: [
+          { src: '/diagrams/pv-commissioning-checklist.svg', alt: 'Diagram of the four-step pre-commissioning verification sequence, the inverter commissioning order, the AHJ inspection to utility PTO sequence, monitoring activation, and how to read post-install anomalies', caption: 'Verify before you energize — the four-step check sequence and the AHJ-to-PTO gate before grid connection.' },
         ],
         keyPoints: [
           'Measure open-circuit Voc and short-circuit Isc for each string before energizing — verify against calculated values',

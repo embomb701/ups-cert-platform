@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">NEC Article 690 — Sizing the DC Side to Survive Its Coldest Morning</text>
+
+  <!-- max voltage at cold -->
+  <rect x="24" y="55" width="410" height="150" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Maximum string voltage — the cold-morning ceiling</text>
+  <text x="38" y="100" font-size="9.5" fill="#5c5748">Voc RISES as cell temperature falls. Calculate</text>
+  <text x="38" y="114" font-size="9.5" fill="#5c5748">string Voc at the record LOW temperature for</text>
+  <text x="38" y="128" font-size="9.5" fill="#5c5748">the site, using the module's Voc temp coefficient.</text>
+  <rect x="38" y="140" width="358" height="46" rx="4" fill="#8f1f1a"/>
+  <text x="217" y="159" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">690.7: 600V max residential,</text>
+  <text x="217" y="175" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">1000V max commercial</text>
+
+  <!-- conductor sizing -->
+  <rect x="459" y="55" width="417" height="150" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#0e7490">Conductor ampacity — 690.8</text>
+  <text x="473" y="100" font-size="9.5" fill="#5c5748">Source and output circuit conductors sized at</text>
+  <rect x="473" y="110" width="220" height="26" rx="4" fill="#0e7490"/>
+  <text x="583" y="127" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">125% of Isc (continuous duty)</text>
+  <text x="473" y="152" font-size="9.5" fill="#5c5748">USE-2 or PV Wire required — rated for direct</text>
+  <text x="473" y="166" font-size="9.5" fill="#5c5748">sunlight exposure on outdoor runs.</text>
+  <text x="473" y="188" font-size="9" font-weight="700" fill="#1f5a8f">Combiner box fusing protects wiring from parallel-string backfeed.</text>
+
+  <!-- worked example -->
+  <rect x="24" y="220" width="410" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="243" font-size="12" font-weight="700" fill="#1e1b14">Worked example</text>
+  <text x="38" y="265" font-size="9.5" fill="#5c5748">Module Voc 40.0V, temp coeff. –0.28%/°C,</text>
+  <text x="38" y="279" font-size="9.5" fill="#5c5748">record low –15°C (40°C below STC's 25°C).</text>
+  <text x="38" y="300" font-size="9.5" font-weight="700" fill="#1e1b14">40°C × 0.28% = 11.2% rise → 40.0V × 1.112 ≈ 44.5V</text>
+  <text x="38" y="316" font-size="9" fill="#5c5748">Must not exceed inverter's max DC input × string length.</text>
+
+  <!-- disconnect + grounding -->
+  <rect x="459" y="220" width="417" height="105" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="243" font-size="12" font-weight="700" fill="#b45309">Disconnect &amp; grounding</text>
+  <text x="473" y="265" font-size="9.5" fill="#5c5748">690.13: disconnecting means accessible to</text>
+  <text x="473" y="279" font-size="9.5" fill="#5c5748">emergency responders, labeled "PV System Disconnect."</text>
+  <text x="473" y="301" font-size="9.5" font-weight="700" fill="#8a5010">690.35: ungrounded (transformerless) inverters</text>
+  <text x="473" y="315" font-size="9.5" font-weight="700" fill="#8a5010">use continuous isolation monitoring instead.</text>
+
+  <rect x="24" y="345" width="852" height="70" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="368" font-size="12" font-weight="700" fill="#065f46">The design check that matters most</text>
+  <text x="38" y="390" font-size="10" fill="#3f3a2c">String length is set by two boundaries: the cold-morning Voc ceiling (never exceed inverter max DC</text>
+  <text x="38" y="404" font-size="10" fill="#3f3a2c">input) and the hot-afternoon Vmp floor (stay above the inverter's minimum MPPT voltage).</text>
+
+  <rect x="24" y="420" width="852" height="50" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="440" font-size="10.5" font-weight="700" fill="#7a3f14">Article 690 covers sizing, ampacity, overcurrent protection, disconnects, grounding, and rapid</text>
+  <text x="38" y="456" font-size="10.5" font-weight="700" fill="#7a3f14">shutdown — one article, the whole DC-side legal picture.</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Roof Attachment — Every Penetration Is a Structural and Waterproofing Decision</text>
+
+  <!-- attachment types -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="55" width="272" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="38" y="78" fill="#b45309">Asphalt shingle</text>
+    <text x="38" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Lag bolt standoffs — flashed</text>
+    <text x="38" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">base plate under shingle course.</text>
+    <text x="38" y="136" font-weight="700" font-size="9.5" fill="#8a5010">≥2.5" penetration into solid</text>
+    <text x="38" y="150" font-weight="700" font-size="9.5" fill="#8a5010">rafter — OSB alone is not enough.</text>
+
+    <rect x="314" y="55" width="272" height="130" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="328" y="78" fill="#0e7490">Tile roofs</text>
+    <text x="328" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Dedicated tile-replacement</text>
+    <text x="328" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">flashings or hook-mounts.</text>
+    <text x="328" y="136" font-weight="700" font-size="9.5" fill="#1f5a8f">Drilling through tile risks</text>
+    <text x="328" y="150" font-weight="700" font-size="9.5" fill="#1f5a8f">cracking and water infiltration.</text>
+
+    <rect x="604" y="55" width="272" height="130" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+    <text x="618" y="78" fill="#065f46">Flat commercial roofs</text>
+    <text x="618" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Ballasted racking — no</text>
+    <text x="618" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">penetrations, concrete block weight.</text>
+    <text x="618" y="136" font-weight="700" font-size="9.5" fill="#065f46">Needs aerodynamic wind model +</text>
+    <text x="618" y="150" font-weight="700" font-size="9.5" fill="#065f46">membrane load assessment.</text>
+  </g>
+
+  <!-- structural loads -->
+  <rect x="24" y="200" width="410" height="100" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="223" font-size="12" font-weight="700" fill="#1e1b14">Three loads racking must survive</text>
+  <text x="38" y="245" font-size="9.5" fill="#5c5748">Dead load: module + racking, 3–5 psf</text>
+  <text x="38" y="261" font-size="9.5" fill="#5c5748">Snow load: 0–50+ psf by climate zone</text>
+  <text x="38" y="277" font-size="9.5" font-weight="700" fill="#1e1b14">Wind uplift: often the GOVERNING load in high-wind areas</text>
+
+  <!-- load tables -->
+  <rect x="459" y="200" width="417" height="100" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="223" font-size="12" font-weight="700" fill="#0e7490">Pre-engineered load tables</text>
+  <text x="473" y="245" font-size="9.5" fill="#5c5748">Manufacturer tables set span, attachment</text>
+  <text x="473" y="259" font-size="9.5" fill="#5c5748">hardware, and standoff spacing.</text>
+  <text x="473" y="281" font-size="9.5" font-weight="700" fill="#1f5a8f">Stay within the rated envelope — no site-specific engineering stamp required.</text>
+
+  <!-- flashing + conduit -->
+  <rect x="24" y="320" width="852" height="95" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="343" font-size="12" font-weight="700" fill="#8f1f1a">The two field mistakes that cause callbacks</text>
+  <text x="38" y="365" font-size="10" fill="#5c5748">Improper flashing (base plate must slide UNDER the shingle course above, not caulked on top) is the</text>
+  <text x="38" y="379" font-size="10" fill="#5c5748">leading cause of post-install roof leaks. Rooftop conduit must be EMT or RMC in most jurisdictions —</text>
+  <text x="38" y="393" font-size="10" fill="#5c5748">PVC only where the AHJ specifically allows it (dark-roof summer heat exceeds PVC's thermal rating).</text>
+
+  <rect x="24" y="428" width="852" height="38" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="452" font-size="10.5" font-weight="700" fill="#7a3f14">Short rafter penetration? Relocate the standoff to a rafter where full depth is achievable — never compensate with adhesive or foam.</text>
+</svg>
