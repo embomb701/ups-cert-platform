@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The Source You Cannot Turn Off</text>
+
+  <rect x="24" y="52" width="852" height="55" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="76" font-size="12" font-weight="700" fill="#8f1f1a">Whenever light hits the array, the DC side is energized.</text>
+  <text x="38" y="94" font-size="10" fill="#5c5748">Opening the DC disconnect stops current flow only — full string Voc still sits on every conductor upstream.</text>
+
+  <!-- DC arc faults -->
+  <rect x="24" y="122" width="410" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="145" font-size="12.5" font-weight="700" fill="#b45309">DC arc faults — solar's signature hazard</text>
+  <text x="38" y="167" font-size="9.5" fill="#5c5748">DC has no zero-crossing to snuff an arc — a</text>
+  <text x="38" y="181" font-size="9.5" fill="#5c5748">chafed conductor can sustain plasma and ignite.</text>
+  <rect x="38" y="193" width="358" height="46" rx="4" fill="#b45309"/>
+  <text x="217" y="211" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">AFCI trips are diagnostic gold —</text>
+  <text x="217" y="227" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">"reset until it stays on" is forbidden</text>
+
+  <!-- ground faults -->
+  <rect x="459" y="122" width="417" height="130" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="145" font-size="12.5" font-weight="700" fill="#0e7490">Ground faults — the dawn-to-noon pattern</text>
+  <text x="473" y="167" font-size="9.5" fill="#5c5748">Transformerless inverters run isolation (Riso)</text>
+  <text x="473" y="181" font-size="9.5" fill="#5c5748">tests every wake-up — refuse to start below threshold.</text>
+  <text x="473" y="203" font-size="9.5" font-weight="700" fill="#1f5a8f">Fault clears by noon = moisture in a connector</text>
+  <text x="473" y="217" font-size="9.5" font-weight="700" fill="#1f5a8f">or J-box, dew-wet at dawn, dry by lunch.</text>
+  <text x="473" y="239" font-size="9" fill="#5c5748">Hunt: isolate strings at combiner, megger each, split-half to the wet connector.</text>
+
+  <!-- working the DC side -->
+  <rect x="24" y="268" width="852" height="140" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="291" font-size="12.5" font-weight="700" fill="#1e1b14">Working the DC side — consolidated rules</text>
+  <g font-size="9.5" font-weight="700" fill="#1e1b14">
+    <text x="50" y="315">1. Gloves + eye protection minimum; arc-rated where thresholds demand.</text>
+    <text x="50" y="335">2. Never open a connector under load — draw current = arc. Verify zero current first.</text>
+    <text x="50" y="355">3. Respect fuse ratings in combiners — a string fuse is not a service disconnect.</text>
+    <text x="50" y="375">4. Label literacy: placards map what is energized from where.</text>
+  </g>
+  <text x="38" y="398" font-size="9.5" font-weight="700" fill="#8f1f1a">The trade's summary: the roof is a generator that sunrise turns on, whether or not anyone is ready.</text>
+
+  <rect x="24" y="418" width="852" height="46" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="446" font-size="10.5" font-weight="700" fill="#7a3f14">Isolate, then treat everything array-side as live, always — plan work for dawn/dusk windows or opaque coverings when a truly dead module is required.</text>
+</svg>

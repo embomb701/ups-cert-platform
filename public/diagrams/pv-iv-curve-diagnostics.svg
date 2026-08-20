@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The IV Curve — the Module's Signature, Read Three Ways</text>
+
+  <!-- curve panel -->
+  <rect x="24" y="55" width="410" height="235" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="78" font-size="12" font-weight="700" fill="#1e1b14">Healthy vs. faulted curves</text>
+  <!-- axes -->
+  <line x1="60" y1="255" x2="60" y2="100" stroke="#5c5748" stroke-width="1.5"/>
+  <line x1="60" y1="255" x2="410" y2="255" stroke="#5c5748" stroke-width="1.5"/>
+  <text x="30" y="105" font-size="8" fill="#5c5748">I</text>
+  <text x="405" y="270" font-size="8" fill="#5c5748">V</text>
+  <!-- healthy curve -->
+  <path d="M60,110 L330,110 Q365,110 375,180 L385,255" fill="none" stroke="#ca8a04" stroke-width="2.5"/>
+  <text x="215" y="102" font-size="8.5" font-weight="700" fill="#a16207">Healthy — smooth shoulder</text>
+  <!-- stepped curve -->
+  <path d="M60,140 L180,140 L180,175 L280,175 L280,210 L340,210 L350,255" fill="none" stroke="#6d28d9" stroke-width="2"/>
+  <text x="240" y="138" font-size="8" fill="#4a2a9e" font-weight="700">Steps = mismatch / diode</text>
+  <!-- current loss curve (lower flat top) -->
+  <path d="M60,160 L280,160 Q315,160 325,200 L335,255" fill="none" stroke="#0e7490" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="65" y="172" font-size="8" fill="#0e7490" font-weight="700">Lower top = current loss (soiling/shading)</text>
+  <!-- voltage loss curve (narrower) -->
+  <path d="M60,120 L230,120 Q260,120 268,190 L275,255" fill="none" stroke="#a4231e" stroke-width="2" stroke-dasharray="2 3"/>
+  <text x="70" y="232" font-size="8" fill="#8f1f1a" font-weight="700">Narrower = voltage loss (temp/bad cells)</text>
+
+  <!-- shading -->
+  <rect x="459" y="55" width="417" height="115" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#b45309">Shading — the disproportionate villain</text>
+  <text x="473" y="100" font-size="10" fill="#5c5748">Series cells share one current — shading ONE cell</text>
+  <text x="473" y="114" font-size="10" fill="#5c5748">throttles its whole group. Bypass diode routes</text>
+  <text x="473" y="128" font-size="10" fill="#5c5748">around it, sacrificing voltage to save current.</text>
+  <text x="473" y="150" font-size="9.5" font-weight="700" fill="#8a5010">A chimney shadow at 3pm daily = a repeating afternoon production dent.</text>
+
+  <!-- soiling / hot spots -->
+  <rect x="459" y="185" width="417" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="208" font-size="12.5" font-weight="700" fill="#8f1f1a">Soiling and hot spots</text>
+  <text x="473" y="230" font-size="10" fill="#5c5748">Uniform soiling skims a few percent. Localized</text>
+  <text x="473" y="244" font-size="10" fill="#5c5748">soiling (bird droppings) behaves like shading —</text>
+  <text x="473" y="258" font-size="10" fill="#5c5748">hot spots found by IR camera before they burn.</text>
+
+  <!-- walkaround catalog -->
+  <rect x="24" y="305" width="852" height="90" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="328" font-size="12" font-weight="700" fill="#0e7490">Module-level failure catalog — eyes first, always</text>
+  <g font-size="9.5" font-weight="700" fill="#1f5a8f">
+    <text x="50" y="352">• Delamination / browning</text>
+    <text x="280" y="352">• Cracked cells (snail trails)</text>
+    <text x="530" y="352">• Burned junction boxes</text>
+    <text x="750" y="352">• PID</text>
+  </g>
+  <text x="38" y="376" font-size="9.5" fill="#5c5748">Most module problems announce themselves visually before any meter is needed.</text>
+
+  <rect x="24" y="405" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="428" font-size="10.5" font-weight="700" fill="#7a3f14">Two steps in an otherwise smooth curve = two cell groups sacrificed to their bypass diodes —</text>
+  <text x="38" y="444" font-size="10.5" font-weight="700" fill="#7a3f14">the curve counts the damage for you.</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Three Inverter Architectures — Serviceability vs. Granularity</text>
+
+  <g font-size="10.5" font-weight="700">
+    <rect x="24" y="55" width="272" height="145" rx="6" fill="#fdf6d9" stroke="#ca8a04" stroke-width="2"/>
+    <text x="38" y="78" fill="#a16207">String inverter</text>
+    <text x="38" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Strings land directly; 1+ MPPT</text>
+    <text x="38" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">inputs, wall-mounted.</text>
+    <text x="38" y="136" font-weight="700" font-size="9.5" fill="#78350f">Whole-array electronics,</text>
+    <text x="38" y="150" font-weight="700" font-size="9.5" fill="#78350f">one serviceable box.</text>
+    <text x="38" y="175" font-weight="400" font-size="9" fill="#5c5748">Fault = one visit, one box</text>
+
+    <rect x="314" y="55" width="272" height="145" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="328" y="78" fill="#0e7490">Microinverters</text>
+    <text x="328" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">One small inverter per module —</text>
+    <text x="328" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">AC leaves the roof.</text>
+    <text x="328" y="136" font-weight="700" font-size="9.5" fill="#1f5a8f">Per-module MPPT and</text>
+    <text x="328" y="150" font-weight="700" font-size="9.5" fill="#1f5a8f">monitoring, granular faults.</text>
+    <text x="328" y="175" font-weight="400" font-size="9" fill="#5c5748">Fault = roof work, one unit swap</text>
+
+    <rect x="604" y="55" width="272" height="145" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="618" y="78" fill="#b45309">DC optimizers + inverter</text>
+    <text x="618" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Per-module DC-DC trackers</text>
+    <text x="618" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">feed a simplified central inverter.</text>
+    <text x="618" y="136" font-weight="700" font-size="9.5" fill="#8a5010">The hybrid position —</text>
+    <text x="618" y="150" font-weight="700" font-size="9.5" fill="#8a5010">granular tracking, one box.</text>
+    <text x="618" y="175" font-weight="400" font-size="9" fill="#5c5748">Utility-scale adds CENTRAL inverters</text>
+  </g>
+
+  <!-- anti-islanding -->
+  <rect x="24" y="220" width="852" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="243" font-size="12.5" font-weight="700" fill="#8f1f1a">Anti-islanding is absolute</text>
+  <text x="38" y="265" font-size="10" fill="#5c5748">Grid-interactive means synchronizing to the utility and pushing current in — a PLL matches</text>
+  <text x="38" y="279" font-size="10" fill="#5c5748">voltage/frequency/phase continuously. Certified inverters detect grid loss and stop exporting within</text>
+  <text x="38" y="293" font-size="10" fill="#5c5748">seconds — an inverter feeding a dead line would energize wires that lineworkers believe are dead.</text>
+  <text x="38" y="316" font-size="9.5" font-weight="700" fill="#8f1f1a">Standard grid-tie systems produce NOTHING in a blackout — backup requires batteries + an islanding-capable system.</text>
+
+  <rect x="24" y="350" width="852" height="70" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="371" font-size="11.5" font-weight="700" fill="#1e1b14">IEEE 1547 / UL 1741 — grid settings are utility-governed configuration</text>
+  <text x="38" y="391" font-size="10" fill="#5c5748">Mandatory ride-through, volt-VAR and frequency-watt support, utility-selectable profiles — set per</text>
+  <text x="38" y="405" font-size="10" fill="#5c5748">the interconnection agreement, never tuned to "make the trips stop."</text>
+
+  <rect x="24" y="432" width="852" height="34" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="454" font-size="10" font-weight="700" fill="#7a3f14">Same power-electronics rules apply throughout: DC bus discharge verification, heat kills, event logs are the first witness.</text>
+</svg>
