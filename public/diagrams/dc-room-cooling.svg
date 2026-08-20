@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Every IT Watt Is a Heat Watt — CRAC/CRAH and the Airflow Circuit</text>
+
+  <!-- room diagram -->
+  <rect x="40" y="60" width="500" height="230" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+
+  <!-- CRAH unit -->
+  <rect x="55" y="80" width="70" height="180" rx="4" fill="#eef3f7" stroke="#6d28d9" stroke-width="2"/>
+  <text x="60" y="100" font-size="9" font-weight="700" fill="#6d28d9">CRAC/</text>
+  <text x="60" y="112" font-size="9" font-weight="700" fill="#6d28d9">CRAH</text>
+
+  <!-- raised floor plenum -->
+  <rect x="135" y="230" width="380" height="20" fill="#e8dcc0" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="140" y="245" font-size="8" fill="#7a7256">raised-floor plenum</text>
+
+  <!-- perforated tiles + cold aisle -->
+  <rect x="160" y="200" width="40" height="30" fill="#e9f2fb" stroke="#0e7490" stroke-width="1"/>
+  <rect x="220" y="200" width="40" height="30" fill="#e9f2fb" stroke="#0e7490" stroke-width="1"/>
+  <path d="M 175 230 L 175 200 M 235 230 L 235 200" stroke="#0e7490" stroke-width="1.5" marker-end="url(#du)"/>
+  <text x="330" y="245" font-size="8" fill="#0e7490">perforated tiles = cold aisle delivery</text>
+
+  <!-- racks -->
+  <rect x="160" y="130" width="40" height="70" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="220" y="130" width="40" height="70" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
+  <text x="155" y="122" font-size="8" fill="#b45309">racks (cold intake front)</text>
+
+  <!-- hot aisle return -->
+  <rect x="300" y="130" width="120" height="70" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="310" y="122" font-size="8" fill="#a4231e">hot aisle (exhaust)</text>
+  <path d="M 360 130 L 360 90" stroke="#a4231e" stroke-width="1.5" marker-end="url(#du2)"/>
+  <text x="370" y="100" font-size="8" fill="#a4231e">hot return to CRAH</text>
+
+  <!-- bypass/recirc callouts -->
+  <path d="M 260 210 C 280 190 290 170 300 150" fill="none" stroke="#7a7256" stroke-width="1.5" stroke-dasharray="3 2"/>
+  <text x="440" y="150" font-size="8" font-weight="700" fill="#7a7256">recirculation:</text>
+  <text x="440" y="162" font-size="7.5" fill="#7a7256">hot exhaust back to intake</text>
+
+  <!-- callout boxes right -->
+  <rect x="560" y="60" width="315" height="100" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="574" y="83" font-size="12" font-weight="700" fill="#8f1f1a">Twin airflow sins</text>
+  <text x="574" y="103" font-size="10" fill="#5c5748">BYPASS — cold air returns without</text>
+  <text x="574" y="117" font-size="10" fill="#5c5748">touching a server</text>
+  <text x="574" y="136" font-size="10" fill="#5c5748">RECIRCULATION — hot exhaust</text>
+  <text x="574" y="150" font-size="10" fill="#5c5748">re-enters server intakes</text>
+
+  <rect x="560" y="172" width="315" height="118" rx="6" fill="#eef3f7" stroke="#6d28d9" stroke-width="2"/>
+  <text x="574" y="195" font-size="12" font-weight="700" fill="#6d28d9">CRAC vs. CRAH</text>
+  <text x="574" y="216" font-size="10" fill="#5c5748">CRAC — DX refrigeration in the</text>
+  <text x="574" y="230" font-size="10" fill="#5c5748">cabinet (compressors)</text>
+  <text x="574" y="249" font-size="10" fill="#5c5748">CRAH — chilled-water coil fed by</text>
+  <text x="574" y="263" font-size="10" fill="#5c5748">a central plant, no compressors</text>
+  <text x="574" y="282" font-size="9.5" font-weight="700" fill="#4a2a9e">Both discharge cold air down; pull hot return at the top</text>
+
+  <rect x="40" y="310" width="835" height="140" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="55" y="333" font-size="12.5" font-weight="700" fill="#1e1b14">Diagnostic: rack overheats in a room full of cold air</text>
+  <text x="55" y="356" font-size="10.5" fill="#5c5748">Almost always an airflow-path problem, not a capacity problem — tiles in the hot aisle (a classic</text>
+  <text x="55" y="372" font-size="10.5" fill="#5c5748">misconfiguration cooling nobody), underfloor cable dams starving racks like crushed ducts.</text>
+  <text x="55" y="396" font-size="10.5" font-weight="700" fill="#b45309">Fleet tuning: one CRAH humidifying while its neighbor dehumidifies wastes capacity invisibly —</text>
+  <text x="55" y="412" font-size="10.5" font-weight="700" fill="#b45309">units sharing one air mass need aligned setpoints/deadbands.</text>
+  <text x="55" y="435" font-size="9.5" fill="#5c5748">Cooling is ~1/3 of a facility's power bill — co-equal with the power chain in this job.</text>
+
+  <defs>
+    <marker id="du" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0e7490"/></marker>
+    <marker id="du2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a4231e"/></marker>
+  </defs>
+</svg>

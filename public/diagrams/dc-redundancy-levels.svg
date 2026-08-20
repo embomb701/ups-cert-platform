@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Redundancy Vocabulary — What You May Touch, and When</text>
+
+  <!-- N -->
+  <rect x="24" y="60" width="270" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="38" y="85" font-size="13" font-weight="700" fill="#a4231e">N</text>
+  <rect x="38" y="98" width="50" height="30" fill="#a4231e" opacity="0.7"/>
+  <text x="98" y="118" font-size="10" fill="#5c5748">exactly enough</text>
+  <text x="98" y="132" font-size="10" fill="#5c5748">capacity — nothing spare</text>
+  <text x="38" y="165" font-size="9.5" font-weight="700" fill="#8f1f1a">Any failure is a capacity</text>
+  <text x="38" y="179" font-size="9.5" font-weight="700" fill="#8f1f1a">emergency, not a repair ticket.</text>
+
+  <!-- N+1 -->
+  <rect x="315" y="60" width="270" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2.5"/>
+  <text x="329" y="85" font-size="13" font-weight="700" fill="#b45309">N+1</text>
+  <rect x="329" y="98" width="50" height="30" fill="#b45309" opacity="0.7"/>
+  <rect x="385" y="98" width="30" height="30" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="3 2"/>
+  <text x="425" y="118" font-size="10" fill="#5c5748">one spare unit —</text>
+  <text x="425" y="132" font-size="10" fill="#5c5748">the workhorse standard</text>
+  <text x="329" y="165" font-size="9.5" font-weight="700" fill="#8a5010">A unit in bypass for PM</text>
+  <text x="329" y="179" font-size="9.5" font-weight="700" fill="#8a5010">already runs the system at N.</text>
+
+  <!-- 2N -->
+  <rect x="606" y="60" width="270" height="130" rx="6" fill="#eef3f7" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="620" y="85" font-size="13" font-weight="700" fill="#6d28d9">2N</text>
+  <rect x="620" y="98" width="50" height="30" fill="#6d28d9" opacity="0.7"/>
+  <rect x="680" y="98" width="50" height="30" fill="#6d28d9" opacity="0.7"/>
+  <text x="738" y="112" font-size="9.5" fill="#5c5748">A + B —</text>
+  <text x="738" y="126" font-size="9.5" fill="#5c5748">two full</text>
+  <text x="738" y="140" font-size="9.5" fill="#5c5748">paths</text>
+  <text x="620" y="165" font-size="9.5" font-weight="700" fill="#4a2a9e">Utility to dual-corded</text>
+  <text x="620" y="179" font-size="9.5" font-weight="700" fill="#4a2a9e">servers, fully independent.</text>
+
+  <rect x="24" y="205" width="852" height="60" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="228" font-size="11" font-weight="700" fill="#7a3f14">Concurrent maintainability: any component can be maintained without dropping the load.</text>
+  <text x="38" y="248" font-size="10.5" fill="#5c5748">Maintenance reduces redundancy — change management always asks "what's our redundancy state during this work?"</text>
+
+  <!-- A/B independence -->
+  <rect x="24" y="285" width="410" height="165" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="308" font-size="12.5" font-weight="700" fill="#8f1f1a">A/B independence — physical daily reality</text>
+  <text x="38" y="330" font-size="10" fill="#5c5748">An extension cord between A-side and</text>
+  <text x="38" y="344" font-size="10" fill="#5c5748">B-side power strips "temporarily" feeding</text>
+  <text x="38" y="358" font-size="10" fill="#5c5748">an orphan device defeats millions of</text>
+  <text x="38" y="372" font-size="10" fill="#5c5748">dollars of design — and gets found on rounds.</text>
+  <text x="38" y="396" font-size="9.5" font-weight="700" fill="#8f1f1a">Fault or maintenance on either side can</text>
+  <text x="38" y="410" font-size="9.5" font-weight="700" fill="#8f1f1a">now affect both. Document, escalate, fix</text>
+  <text x="38" y="424" font-size="9.5" font-weight="700" fill="#8f1f1a">properly through change management.</text>
+
+  <!-- rounds/incident -->
+  <rect x="459" y="285" width="417" height="165" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="308" font-size="12.5" font-weight="700" fill="#0e7490">Rounds and incident response</text>
+  <text x="473" y="330" font-size="10" fill="#5c5748">Readings get RECORDED, not remembered —</text>
+  <text x="473" y="344" font-size="10" fill="#5c5748">"it was fine at 0200" carries legal weight</text>
+  <text x="473" y="358" font-size="10" fill="#5c5748">after an incident.</text>
+  <text x="473" y="380" font-size="10" fill="#5c5748">Incidents: roles, one voice/one log, EOP</text>
+  <text x="473" y="394" font-size="10" fill="#5c5748">scripts, blameless-but-ruthless post-</text>
+  <text x="473" y="408" font-size="10" fill="#5c5748">incident review — five-whys to root cause.</text>
+  <text x="473" y="430" font-size="9.5" font-weight="700" fill="#1f5a8f">Fix the process, not just the breaker.</text>
+</svg>

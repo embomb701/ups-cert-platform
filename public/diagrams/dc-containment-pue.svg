@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Containment &amp; Envelopes — Efficiency Trades Against Ride-Through</text>
+
+  <!-- containment diagram -->
+  <rect x="40" y="60" width="500" height="150" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
+  <text x="55" y="83" font-size="12.5" font-weight="700" fill="#1e1b14">Cold-Aisle Containment</text>
+
+  <rect x="70" y="110" width="40" height="70" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="200" y="110" width="40" height="70" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="130" y="100" width="90" height="90" fill="#e9f2fb" stroke="#6d28d9" stroke-width="2.5" stroke-dasharray="5 3"/>
+  <text x="135" y="95" font-size="8.5" font-weight="700" fill="#6d28d9">contained cold aisle — doors + roof</text>
+
+  <text x="70" y="200" font-size="9.5" fill="#a4231e" font-weight="700">Missing blanking panel = in-rack recirculation</text>
+  <rect x="235" y="130" width="6" height="30" fill="#fdeaea" stroke="#a4231e" stroke-width="1"/>
+
+  <rect x="270" y="100" width="240" height="90" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="284" y="120" font-size="10" font-weight="700" fill="#8f1f1a">Audit checklist</text>
+  <text x="284" y="138" font-size="9.5" fill="#5c5748">Missing blanking panels, open</text>
+  <text x="284" y="152" font-size="9.5" fill="#5c5748">floor cutouts, propped doors,</text>
+  <text x="284" y="166" font-size="9.5" fill="#5c5748">unsealed cable penetrations —</text>
+  <text x="284" y="180" font-size="9.5" font-weight="700" fill="#8f1f1a">containment only works if maintained</text>
+
+  <!-- ASHRAE envelope -->
+  <rect x="560" y="60" width="315" height="150" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="574" y="83" font-size="12.5" font-weight="700" fill="#0e7490">ASHRAE TC 9.9 Envelope</text>
+  <text x="574" y="107" font-size="14" font-weight="700" fill="#1e1b14">64.4–80.6°F (18–27°C)</text>
+  <text x="574" y="125" font-size="10" fill="#5c5748">recommended inlet — replaced the old</text>
+  <text x="574" y="139" font-size="10" fill="#5c5748">"meat-locker" rooms</text>
+  <text x="574" y="162" font-size="10" font-weight="700" fill="#1f5a8f">Warmer setpoint = more energy saved,</text>
+  <text x="574" y="176" font-size="10" font-weight="700" fill="#1f5a8f">but FEWER minutes of thermal ride-</text>
+  <text x="574" y="190" font-size="10" font-weight="700" fill="#1f5a8f">through before servers throttle.</text>
+
+  <!-- PUE -->
+  <rect x="40" y="230" width="405" height="105" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="55" y="253" font-size="12.5" font-weight="700" fill="#b45309">PUE = Total Facility Power ÷ IT Power</text>
+  <text x="55" y="277" font-size="10.5" fill="#5c5748">PUE 1.5 = 50% overhead above compute.</text>
+  <text x="55" y="292" font-size="10.5" fill="#5c5748">Modern free-cooled facilities chase 1.1–1.2.</text>
+  <text x="55" y="313" font-size="10" font-weight="700" fill="#8a5010">Coil cleaning, dampers, and setpoints move the PUE needle measurably.</text>
+
+  <!-- ride-through / on-generator -->
+  <rect x="465" y="230" width="410" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="480" y="253" font-size="12.5" font-weight="700" fill="#8f1f1a">Cooling on generator?</text>
+  <text x="480" y="276" font-size="10.5" fill="#5c5748">Some facilities shed mechanical load during</text>
+  <text x="480" y="291" font-size="10.5" fill="#5c5748">transfer, counting on ride-through — a slow</text>
+  <text x="480" y="306" font-size="10.5" fill="#5c5748">generator start becomes a thermal event even</text>
+  <text x="480" y="321" font-size="10" font-weight="700" fill="#8f1f1a">with perfect power. Know your site's answer.</text>
+
+  <rect x="40" y="350" width="835" height="95" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="55" y="373" font-size="12" font-weight="700" fill="#1e1b14">Free cooling extends the HVAC economizer lesson to facility scale</text>
+  <text x="55" y="396" font-size="10.5" fill="#5c5748">Air-side economizers duct filtered outdoor air directly. Water-side economizers use cooling</text>
+  <text x="55" y="412" font-size="10.5" fill="#5c5748">towers + heat exchangers to make chilled water without running chiller compressors when</text>
+  <text x="55" y="428" font-size="10.5" fill="#5c5748">outdoor wet-bulb is low — cooling technicians are efficiency engineers whether they know it or not.</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The Liquid Cooling Ladder — Air Can't Carry AI Heat</text>
+
+  <rect x="24" y="55" width="852" height="40" rx="5" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
+  <text x="38" y="80" font-size="11.5" font-weight="700" fill="#7a3f14">Racks that historically drew 5–15 kW now arrive at 40, 80, 120+ kW for GPU clusters — beyond air's physics.</text>
+
+  <!-- three rungs -->
+  <rect x="24" y="115" width="270" height="180" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/>
+  <text x="38" y="140" font-size="12.5" font-weight="700" fill="#0e7490">Rear-Door Heat</text>
+  <text x="38" y="157" font-size="12.5" font-weight="700" fill="#0e7490">Exchanger</text>
+  <text x="38" y="180" font-size="10" fill="#5c5748">Chilled-water coil replaces the</text>
+  <text x="38" y="194" font-size="10" fill="#5c5748">rack's back door — room stays</text>
+  <text x="38" y="208" font-size="10" fill="#5c5748">air-cooled, each rack exhausts</text>
+  <text x="38" y="222" font-size="10" fill="#5c5748">neutral air.</text>
+  <text x="38" y="250" font-size="9.5" font-weight="700" fill="#1f5a8f">Service: coils, valves,</text>
+  <text x="38" y="264" font-size="9.5" font-weight="700" fill="#1f5a8f">leak vigilance at rack scale</text>
+
+  <rect x="315" y="115" width="270" height="180" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2.5"/>
+  <text x="329" y="140" font-size="12.5" font-weight="700" fill="#b45309">Direct-to-Chip</text>
+  <text x="329" y="163" font-size="10" fill="#5c5748">Cold plates on CPUs/GPUs fed</text>
+  <text x="329" y="177" font-size="10" fill="#5c5748">by a Coolant Distribution Unit</text>
+  <text x="329" y="191" font-size="10" fill="#5c5748">(CDU) — pumps, heat exchangers,</text>
+  <text x="329" y="205" font-size="10" fill="#5c5748">filters, sensors.</text>
+  <text x="329" y="233" font-size="9.5" font-weight="700" fill="#8a5010">The CDU is your new</text>
+  <text x="329" y="247" font-size="9.5" font-weight="700" fill="#8a5010">machine — small hydronic</text>
+  <text x="329" y="261" font-size="9.5" font-weight="700" fill="#8a5010">plant, silicon-grade clean</text>
+
+  <rect x="606" y="115" width="270" height="180" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="620" y="140" font-size="12.5" font-weight="700" fill="#a4231e">Immersion</text>
+  <text x="620" y="163" font-size="10" fill="#5c5748">Servers submerged in</text>
+  <text x="620" y="177" font-size="10" fill="#5c5748">dielectric fluid tanks — still</text>
+  <text x="620" y="191" font-size="10" fill="#5c5748">niche, its own fluid-handling</text>
+  <text x="620" y="205" font-size="10" fill="#5c5748">world.</text>
+
+  <path d="M 294 205 L 313 205" stroke="#1e1b14" stroke-width="2" marker-end="url(#dl)"/>
+  <path d="M 585 205 L 604 205" stroke="#1e1b14" stroke-width="2" marker-end="url(#dl)"/>
+
+  <!-- CDU deep dive -->
+  <rect x="24" y="310" width="410" height="140" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="333" font-size="12.5" font-weight="700" fill="#1e1b14">The CDU is where trades converge</text>
+  <text x="38" y="355" font-size="10" fill="#5c5748">Separates facility water from the technology</text>
+  <text x="38" y="369" font-size="10" fill="#5c5748">loop. Particulates kill microchannel cold</text>
+  <text x="38" y="383" font-size="10" fill="#5c5748">plates — filtration and fluid chemistry are</text>
+  <text x="38" y="397" font-size="10" fill="#5c5748">life-and-death. Quick-disconnect manifolds</text>
+  <text x="38" y="411" font-size="10" fill="#5c5748">to every server — each one a potential drip.</text>
+  <text x="38" y="432" font-size="9.5" font-weight="700" fill="#7a3f14">Leak detection everywhere: water and megawatt busways now share the room.</text>
+
+  <!-- career framing -->
+  <rect x="459" y="310" width="417" height="140" rx="6" fill="#eef3f7" stroke="#6d28d9" stroke-width="2"/>
+  <text x="473" y="333" font-size="12.5" font-weight="700" fill="#6d28d9">Career framing</text>
+  <text x="473" y="355" font-size="10" fill="#5c5748">Air-cooling skills remain the fleet's bulk,</text>
+  <text x="473" y="369" font-size="10" fill="#5c5748">but liquid-literacy is the differentiation of</text>
+  <text x="473" y="383" font-size="10" fill="#5c5748">the next decade — servicing a CDU, reading</text>
+  <text x="473" y="397" font-size="10" fill="#5c5748">a chemistry report, handling a leak alarm</text>
+  <text x="473" y="411" font-size="10" fill="#5c5748">without panic.</text>
+  <text x="473" y="432" font-size="9.5" font-weight="700" fill="#4a2a9e">This module makes you conversant; OEM training makes you authorized.</text>
+
+  <defs>
+    <marker id="dl" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>
