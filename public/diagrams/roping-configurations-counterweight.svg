@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">1:1 vs. 2:1 Roping — Speed for Mechanical Advantage</text>
+
+  <!-- 1:1 -->
+  <rect x="24" y="55" width="410" height="150" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#0e7490">1:1 roping</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Rope attaches directly to the car frame —</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">car speed equals rope speed.</text>
+  <rect x="38" y="126" width="358" height="26" rx="4" fill="#0e7490"/>
+  <text x="217" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">No mechanical advantage</text>
+  <text x="38" y="172" font-size="9.5" font-weight="700" fill="#1f5a8f">Sheave and motor carry the FULL</text>
+  <text x="38" y="186" font-size="9.5" font-weight="700" fill="#1f5a8f">counterweight-to-car load differential.</text>
+
+  <!-- 2:1 -->
+  <rect x="459" y="55" width="417" height="150" rx="6" fill="#e6f4f2" stroke="#0f766e" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#134e4a">2:1 roping</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Rope passes under a sheave on the car</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">frame (or counterweight) back to a termination.</text>
+  <rect x="473" y="126" width="380" height="26" rx="4" fill="#0f766e"/>
+  <text x="663" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Car moves at HALF rope speed, 2× advantage</text>
+  <text x="473" y="172" font-size="9.5" font-weight="700" fill="#134e4a">Motor moves half the load — at the cost of</text>
+  <text x="473" y="186" font-size="9.5" font-weight="700" fill="#134e4a">double the rope travel distance.</text>
+
+  <!-- worked example -->
+  <rect x="24" y="220" width="852" height="65" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="243" font-size="11.5" font-weight="700" fill="#7a3f14">Worked example — 2:1 roping</text>
+  <text x="38" y="265" font-size="10.5" fill="#5c5748">Hoist rope travels at 400 fpm → the car moves at 200 fpm (half the rope speed).</text>
+
+  <!-- counterweight -->
+  <rect x="24" y="300" width="852" height="90" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="323" font-size="12.5" font-weight="700" fill="#b45309">Counterweight sizing</text>
+  <rect x="38" y="335" width="500" height="28" rx="4" fill="#b45309"/>
+  <text x="288" y="354" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">Counterweight = car weight + 40–50% of rated capacity</text>
+  <text x="38" y="378" font-size="9.5" fill="#5c5748">At roughly half-full car loading, drive sheave load is near zero — minimizing motor torque and energy use.</text>
+
+  <rect x="24" y="405" width="852" height="46" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="433" font-size="10.5" font-weight="700" fill="#1e1b14">Every rope needs individually equalized tension — unequal tension causes differential sheave wear and accelerates fatigue.</text>
+</svg>

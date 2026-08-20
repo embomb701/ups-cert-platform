@@ -15,6 +15,9 @@ export const ELEVATOR_TECH_MODULES: TrainingModule[] = [
           'Winding-drum machines represent an older traction variant where ropes wrap around a grooved drum without a counterweight. They are largely obsolete and prohibited for most new installations by ASME A17.1 due to limited rope capacity and free-fall risk.',
           'Selecting the correct type depends on building height, traffic volume, and pit/overhead clearance. Traction provides higher speed, energy efficiency via regenerative drives, and is preferred where a counterweight overhead space is available.',
         ],
+        images: [
+          { src: '/diagrams/traction-vs-hydraulic-elevators.svg', alt: 'Diagram comparing traction elevators (friction-driven sheave with counterweight) and hydraulic elevators (pressurized ram/jack), plus the obsolete winding-drum variant and selection criteria', caption: 'Two ways to lift a car — traction friction-drives a counterweighted sheave, hydraulic pushes on a fluid-powered ram limited by jack length.' },
+        ],
         keyPoints: [
           'Traction: friction-driven sheave, counterweight, unlimited height',
           'Hydraulic: ram/jack extends on pressurized fluid, limited to ~6 stories',
@@ -48,6 +51,9 @@ export const ELEVATOR_TECH_MODULES: TrainingModule[] = [
           'In 2:1 roping the rope passes under a sheave mounted on the car frame (or counterweight) and back up to a termination point. The car travels at half the rope speed, but the motor needs to move only half the load — providing a 2:1 mechanical advantage at the expense of double rope travel distance.',
           'Counterweight mass is set to approximately the car empty weight plus 40 to 50 percent of the rated load capacity. At that loading level (roughly half-full car), the drive sheave load is near zero, minimizing motor torque requirements and energy consumption at average traffic conditions.',
           'Dead-end hitches, spring hitches, and shackles secure rope terminations in the overhead and pit. Each rope is individually adjustable to equalize tension; unequal tension causes differential sheave wear and accelerates rope fatigue.',
+        ],
+        images: [
+          { src: '/diagrams/roping-configurations-counterweight.svg', alt: 'Diagram comparing 1:1 and 2:1 roping configurations with a worked speed example, plus the counterweight sizing formula of car weight plus 40-50% rated capacity', caption: '1:1 roping has no mechanical advantage; 2:1 roping halves motor load at double the rope travel — and the counterweight formula that balances both.' },
         ],
         keyPoints: [
           '1:1 roping: car speed equals rope speed, no mechanical advantage',
@@ -517,6 +523,9 @@ export const ELEVATOR_TECH_MODULES: TrainingModule[] = [
           'Instantaneous safeties are limited to cars with a contract speed of 150 fpm or less. They stop the car abruptly — acceptable at low speeds but dangerous at high speed due to high deceleration forces. At contract speeds above 150 fpm, gradual (progressive) safeties are required; they apply increasing clamping force progressively, limiting deceleration to levels safe for passengers.',
           'The car safety must be capable of stopping and holding 125 percent of the rated load at governor trip speed, per ASME A17.1. After any safety application, the elevator must be inspected by a qualified elevator mechanic before being returned to service. The governor must be reset manually and the safety device inspected for guide rail damage.',
         ],
+        images: [
+          { src: '/diagrams/governor-car-safety-device.svg', alt: 'Diagram of the governor-to-car-safety overspeed chain, comparing instantaneous safety devices limited to 150 fpm against gradual progressive safeties required above that speed, plus post-trip inspection requirements', caption: 'Governor sheave to car safety in four steps — instantaneous safeties only below 150 fpm, gradual safeties required above it.' },
+        ],
         keyPoints: [
           'Governor trips at minimum 115% of contract speed per ASME A17.1',
           'Governor rope gripped, activates car safety on the guide rails',
@@ -609,6 +618,9 @@ export const ELEVATOR_TECH_MODULES: TrainingModule[] = [
           "Phase I activation: all cars recall to the main landing (or alternate if smoke is detected at the main). Cars already traveling to a floor above the main reverse and return without stopping. Doors open at the main and remain open. The key switch must remain in the RECALL position to hold all cars at the main landing. Returning the key to the OFF or BYPASS position restores normal operation.",
           'Phase II is in-car firefighter operation, activated from a key switch inside the car. With Phase II active, the car responds only to car-operating panel (COP) commands; hall calls are ignored. Doors do not open automatically on arrival — the firefighter must hold the DOOR OPEN button. Doors do not close automatically; the firefighter must press and hold the DOOR CLOSE button.',
           'If the car doors encounter an obstruction during Phase II closing, the doors immediately reopen and remain open. This prevents a firefighter from being trapped by automatic door closing during rescue operations. Phase II is designed for fire department use only; building personnel should not use the elevator during a fire.',
+        ],
+        images: [
+          { src: '/diagrams/firefighter-phase-1-2-operation.svg', alt: 'Diagram of Phase I lobby recall behavior and Phase II in-car firefighter operation, including the automatic door-reopen-on-obstruction safety behavior', caption: 'Phase I recalls every car to the lobby; Phase II hands manual control to the firefighter — with doors that always reopen on an obstruction.' },
         ],
         keyPoints: [
           'Phase I (lobby recall): key switch or smoke detector recalls all cars to main landing',
@@ -821,6 +833,9 @@ export const ELEVATOR_TECH_MODULES: TrainingModule[] = [
           'ASME A17.1 requires the rupture valve to close automatically when the rate of oil flow exceeds the normal contract lowering speed by approximately 0.3 m/s (approximately 60 fpm above the rated lowering speed). Once closed, the car is safely held in place until the fault is corrected and the valve is manually reset.',
           'The lowering valve controls the rate of car descent during normal operation. It is an electrically operated proportional valve that meters oil flow from the jack cylinder back to the tank. Precise flow control provides smooth deceleration and leveling at each floor. The lowering valve also serves as a holding valve when the car is stationary, preventing drift from load-induced pressure.',
           'Floor leveling accuracy in hydraulic elevators is achieved by the lowering valve metering oil flow in small increments as the car approaches the floor sill. Temperature-compensated flow controls are used in climates with wide temperature swings because oil viscosity changes with temperature affect the flow-versus-valve-position relationship. Automatic temperature compensation adjusts valve opening based on oil temperature feedback.',
+        ],
+        images: [
+          { src: '/diagrams/hydraulic-rupture-lowering-valves.svg', alt: 'Diagram comparing the rupture valve velocity-fuse safety function against the lowering valve normal descent-control function, plus temperature compensation for oil viscosity', caption: 'The rupture valve protects against a catastrophic line failure; the lowering valve handles every normal descent and floor leveling.' },
         ],
         keyPoints: [
           'Rupture valve: normally open; closes automatically when flow exceeds rated lowering speed by ~0.3 m/s',

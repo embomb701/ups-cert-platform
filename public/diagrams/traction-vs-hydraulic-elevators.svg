@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Traction vs. Hydraulic — Two Ways to Lift a Car</text>
+
+  <!-- traction -->
+  <rect x="24" y="55" width="410" height="200" rx="6" fill="#e6f4f2" stroke="#0f766e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#134e4a">Traction elevator</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Steel hoist ropes grip a grooved drive</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">sheave by friction — car and counterweight</text>
+  <text x="38" y="128" font-size="9.5" fill="#3f3a2c">ride opposite ends of the rope.</text>
+  <rect x="38" y="140" width="358" height="26" rx="4" fill="#0f766e"/>
+  <text x="217" y="158" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Mid-rise to high-rise, &gt;2,000 fpm</text>
+  <text x="38" y="188" font-size="9.5" font-weight="700" fill="#134e4a">Higher speed, regenerative-drive efficiency —</text>
+  <text x="38" y="202" font-size="9.5" font-weight="700" fill="#134e4a">needs counterweight overhead clearance.</text>
+  <text x="38" y="228" font-size="9" fill="#5c5748">Winding-drum (no counterweight): obsolete, prohibited</text>
+  <text x="38" y="240" font-size="9" fill="#5c5748">for most new installs — limited rope capacity, free-fall risk.</text>
+
+  <!-- hydraulic -->
+  <rect x="459" y="55" width="417" height="200" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#0e7490">Hydraulic elevator</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Pressurized fluid extends a ram (jack</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">cylinder) that pushes the car up; gravity</text>
+  <text x="473" y="128" font-size="9.5" fill="#3f3a2c">and controlled fluid release lower it.</text>
+  <rect x="473" y="140" width="380" height="26" rx="4" fill="#0e7490"/>
+  <text x="663" y="158" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">~60 fpm max, limited to 5-6 stories</text>
+  <text x="473" y="188" font-size="9.5" font-weight="700" fill="#1f5a8f">Limit is the jack cylinder — it must physically</text>
+  <text x="473" y="202" font-size="9.5" font-weight="700" fill="#1f5a8f">extend the full floor travel distance.</text>
+  <text x="473" y="224" font-size="9" fill="#5c5748">Beyond ~6 floors, cylinder length becomes impractical and</text>
+  <text x="473" y="236" font-size="9" fill="#5c5748">pit structural constraints prevent deeper drilling.</text>
+
+  <rect x="24" y="275" width="852" height="90" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="298" font-size="12" font-weight="700" fill="#1e1b14">Selection depends on three site factors</text>
+  <g font-size="9.5" font-weight="700" fill="#5c5748">
+    <text x="50" y="322">• Building height</text>
+    <text x="270" y="322">• Traffic volume</text>
+    <text x="490" y="322">• Pit / overhead clearance</text>
+  </g>
+  <text x="38" y="346" font-size="9.5" font-weight="700" fill="#134e4a">Traction wins where counterweight overhead space is available — higher speed, better energy efficiency.</text>
+
+  <rect x="24" y="380" width="852" height="80" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="403" font-size="11.5" font-weight="700" fill="#7a3f14">Contract speed</text>
+  <text x="38" y="425" font-size="10" fill="#5c5748">The rated design speed of the elevator system — the reference point every code requirement (governor</text>
+  <text x="38" y="439" font-size="10" fill="#5c5748">trip speed, safety type, buffer type) is calculated against.</text>
+</svg>

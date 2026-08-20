@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Governor → Car Safety — the Overspeed Chain</text>
+
+  <!-- chain -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="195" height="55" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="121" y="76" text-anchor="middle" fill="#0e7490">Governor sheave</text><text x="121" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">spins with car speed</text>
+
+    <rect x="239" y="55" width="195" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="336" y="76" text-anchor="middle" fill="#b45309">Overspeed trip</text><text x="336" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">≥115% contract speed</text>
+
+    <rect x="454" y="55" width="195" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="551" y="76" text-anchor="middle" fill="#b45309">Governor rope gripped</text><text x="551" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">flyweights engage latch</text>
+
+    <rect x="669" y="55" width="207" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="772" y="76" text-anchor="middle" fill="#8f1f1a">Car safety activates</text><text x="772" y="92" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">clamps guide rails</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#gv)">
+    <line x1="219" y1="82" x2="237" y2="82"/><line x1="434" y1="82" x2="452" y2="82"/><line x1="649" y1="82" x2="667" y2="82"/>
+  </g>
+
+  <!-- instantaneous vs gradual -->
+  <rect x="24" y="135" width="410" height="130" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="158" font-size="12" font-weight="700" fill="#065f46">Instantaneous safety</text>
+  <text x="38" y="180" font-size="9.5" fill="#3f3a2c">Stops the car abruptly — high deceleration.</text>
+  <rect x="38" y="192" width="358" height="26" rx="4" fill="#059669"/>
+  <text x="217" y="210" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Contract speed 150 fpm or less only</text>
+  <text x="38" y="238" font-size="9" fill="#5c5748">Acceptable at low speed; dangerous at high speed.</text>
+
+  <rect x="459" y="135" width="417" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="158" font-size="12" font-weight="700" fill="#8f1f1a">Gradual (progressive) safety</text>
+  <text x="473" y="180" font-size="9.5" fill="#5c5748">Applies increasing clamping force progressively.</text>
+  <rect x="473" y="192" width="380" height="26" rx="4" fill="#a4231e"/>
+  <text x="663" y="210" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Required above 150 fpm contract speed</text>
+  <text x="473" y="238" font-size="9" fill="#5c5748">Limits deceleration to levels safe for passengers.</text>
+
+  <!-- rating + post-trip -->
+  <rect x="24" y="280" width="852" height="90" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="303" font-size="12" font-weight="700" fill="#7a3f14">Required capability + mandatory post-trip inspection</text>
+  <text x="38" y="325" font-size="10" fill="#5c5748">The car safety must stop and hold 125% of rated load at governor trip speed, per ASME A17.1.</text>
+  <text x="38" y="347" font-size="10" font-weight="700" fill="#7a3f14">After any safety application: manually reset the governor, inspect guide rails for damage — no return to service until a qualified mechanic clears it.</text>
+
+  <rect x="24" y="385" width="852" height="46" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="413" font-size="10.5" font-weight="700" fill="#1e1b14">Car safeties use wedge, roller, or flexible-guide-clamp designs — all apply clamping force against the guide rails, not the ropes.</text>
+
+  <defs>
+    <marker id="gv" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Firefighter Service — Two Phases, Two Very Different Behaviors</text>
+
+  <rect x="24" y="52" width="852" height="34" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/>
+  <text x="38" y="74" font-size="10.5" font-weight="700" fill="#8f1f1a">Mandatory per ASME A17.1 for every elevator traveling 25+ ft above the lowest fire department access level.</text>
+
+  <!-- Phase I -->
+  <rect x="24" y="98" width="410" height="175" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="121" font-size="12.5" font-weight="700" fill="#0e7490">Phase I — lobby recall</text>
+  <text x="38" y="143" font-size="9.5" fill="#3f3a2c">Triggered by lobby key switch OR automatic</text>
+  <text x="38" y="157" font-size="9.5" fill="#3f3a2c">smoke detector signal.</text>
+  <g font-size="9" font-weight="700" fill="#1f5a8f">
+    <text x="38" y="179">• ALL cars recall to main landing (or alternate if</text>
+    <text x="50" y="192">smoke detected at main)</text>
+    <text x="38" y="210">• Cars above main REVERSE, return without stopping</text>
+    <text x="38" y="228">• Doors open and stay open at the main landing</text>
+  </g>
+  <text x="38" y="253" font-size="9" fill="#5c5748">Key must stay in RECALL to hold cars — OFF/BYPASS restores normal service.</text>
+
+  <!-- Phase II -->
+  <rect x="459" y="98" width="417" height="175" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="121" font-size="12.5" font-weight="700" fill="#b45309">Phase II — in-car operation</text>
+  <text x="473" y="143" font-size="9.5" fill="#3f3a2c">Activated by a key switch inside the car —</text>
+  <text x="473" y="157" font-size="9.5" fill="#3f3a2c">for fire department use only.</text>
+  <g font-size="9" font-weight="700" fill="#8a5010">
+    <text x="473" y="179">• Responds ONLY to car-operating panel; hall calls ignored</text>
+    <text x="473" y="197">• Doors do NOT open automatically — hold DOOR OPEN</text>
+    <text x="473" y="215">• Doors do NOT close automatically — hold DOOR CLOSE</text>
+  </g>
+  <rect x="473" y="227" width="380" height="30" rx="4" fill="#b45309"/>
+  <text x="663" y="247" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Obstruction while closing → doors reopen, stay open</text>
+
+  <rect x="24" y="290" width="852" height="80" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="313" font-size="12" font-weight="700" fill="#1e1b14">Why the obstruction rule exists</text>
+  <text x="38" y="335" font-size="10" fill="#5c5748">Automatic door closing during rescue operations could trap a firefighter — the immediate-reopen behavior</text>
+  <text x="38" y="349" font-size="10" fill="#5c5748">removes that risk entirely, even in emergency-service mode.</text>
+
+  <rect x="24" y="385" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="408" font-size="10.5" font-weight="700" fill="#7a3f14">Phase II is fire department use only — building personnel should never operate an elevator during a fire</text>
+  <text x="38" y="424" font-size="10.5" font-weight="700" fill="#7a3f14">event, even if it appears to be in normal Phase II standby.</text>
+</svg>

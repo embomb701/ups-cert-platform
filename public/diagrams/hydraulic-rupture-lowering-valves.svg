@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Rupture Valve &amp; Lowering Valve — the Descent Safety Pair</text>
+
+  <!-- rupture valve -->
+  <rect x="24" y="55" width="410" height="175" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Rupture valve — the velocity fuse</text>
+  <text x="38" y="100" font-size="9.5" fill="#5c5748">Normally open, allows free flow both</text>
+  <text x="38" y="114" font-size="9.5" fill="#5c5748">directions for normal raise/lower.</text>
+  <rect x="38" y="126" width="358" height="46" rx="4" fill="#8f1f1a"/>
+  <text x="217" y="145" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Closes automatically when oil flow exceeds</text>
+  <text x="217" y="161" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">rated lowering speed by ~0.3 m/s (~60 fpm)</text>
+  <text x="38" y="194" font-size="9.5" font-weight="700" fill="#8f1f1a">Responds to FLOW rate, not pressure —</text>
+  <text x="38" y="208" font-size="9.5" font-weight="700" fill="#8f1f1a">detects a line rupture, not overpressure.</text>
+
+  <!-- lowering valve -->
+  <rect x="459" y="55" width="417" height="175" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#0e7490">Lowering valve — normal descent control</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Electrically operated proportional valve —</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">meters oil from the jack back to the tank.</text>
+  <text x="473" y="136" font-size="9.5" font-weight="700" fill="#1f5a8f">Small-increment metering near the floor sill</text>
+  <text x="473" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">gives smooth deceleration and leveling accuracy.</text>
+  <text x="473" y="172" font-size="9.5" fill="#5c5748">Also holds the car stationary — prevents drift</text>
+  <text x="473" y="186" font-size="9.5" fill="#5c5748">from load-induced pressure when parked.</text>
+
+  <!-- temp compensation -->
+  <rect x="24" y="248" width="852" height="90" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="271" font-size="12" font-weight="700" fill="#065f46">Temperature compensation</text>
+  <text x="38" y="293" font-size="10" fill="#3f3a2c">Oil viscosity changes with temperature, which shifts the flow-versus-valve-position relationship —</text>
+  <text x="38" y="307" font-size="10" fill="#3f3a2c">wide-temperature-swing climates need automatic compensation that adjusts valve opening from oil temp feedback.</text>
+
+  <rect x="24" y="355" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="378" font-size="10.5" font-weight="700" fill="#7a3f14">Once the rupture valve closes, the car is held safely in place until the fault is corrected — it does not</text>
+  <text x="38" y="394" font-size="10.5" font-weight="700" fill="#7a3f14">reopen on its own. Manual reset only.</text>
+
+  <rect x="24" y="422" width="852" height="42" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="447" font-size="10.5" font-weight="700" fill="#1e1b14">Two different jobs, two different valves: rupture valve = catastrophic-failure protection; lowering valve = every-day descent control.</text>
+</svg>
