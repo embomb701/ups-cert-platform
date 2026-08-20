@@ -15,6 +15,9 @@ export const WIND_TURBINE_MODULES: TrainingModule[] = [
           'IEC 61400-1 defines wind turbine classes by mean wind speed: Class I >= 10 m/s (50-year extreme gust 70 m/s), Class II 8.5 m/s (59.5 m/s gust), Class III 7.5 m/s (52.5 m/s gust) — selecting the wrong class for a site can void the turbine warranty and fail structural certification.',
           "Hub height wind speed is extrapolated from met mast measurements using the power law: v_hub = v_ref * (h_hub / h_ref)^alpha, where alpha = 0.143 (1/7) for flat terrain and up to 0.25 for forested or complex terrain sites.",
         ],
+        images: [
+          { src: '/diagrams/wind-power-equation-classes.svg', alt: 'Diagram of the wind power equation showing the cube-law relationship between wind speed and power, the IEC 61400-1 wind classes, and the power-law hub-height extrapolation formula', caption: 'Power scales with the CUBE of wind speed — a 10% speed increase yields 33% more available power.' },
+        ],
         keyPoints: [
           'P = 1/2 * rho * A * v^3 * Cp — power scales with the cube of wind speed',
           'IEC Class I sites: mean wind >= 10 m/s; extreme 50-year gust 70 m/s',
@@ -143,6 +146,9 @@ export const WIND_TURBINE_MODULES: TrainingModule[] = [
           'Gearbox oil analysis is the primary condition monitoring tool — samples taken every 6 months are tested for particle count (ISO 4406 cleanliness code), viscosity, water content, and wear metals (Fe, Cu, Cr). Rising iron count indicates ring-gear or planetary-gear wear.',
           'The planetary (epicyclic) stage carries the highest torque and is the most common failure location. Planetary bearing failures begin as micropitting on gear flanks — visible via borescope before progressing to spalling.',
           'Direct-drive turbines eliminate the gearbox using a large-diameter permanent magnet generator at low RPM, reducing drivetrain failure modes but requiring a full-power converter and a heavier nacelle.',
+        ],
+        images: [
+          { src: '/diagrams/gearbox-drivetrain-oil-analysis.svg', alt: 'Diagram of the wind turbine drivetrain from main shaft through the planetary stage, helical stages, and generator, with panels on oil analysis condition monitoring and the direct-drive alternative', caption: 'Full torque hits the planetary stage first — the highest-stress point and the most common gearbox failure location.' },
         ],
         keyPoints: [
           'Typical gearbox ratio: 80:1 to 110:1',
@@ -273,6 +279,9 @@ export const WIND_TURBINE_MODULES: TrainingModule[] = [
           'Permanent magnet synchronous generators (PMSG) used in direct-drive turbines eliminate excitation losses. The trade-off is the cost and supply-chain risk of rare-earth magnets (neodymium) and the weight of the large-diameter generator.',
           'Power converter cooling is critical — IGBT modules dissipate significant heat and have a maximum junction temperature of approximately 150 degrees C. Most converters use liquid cooling (water-glycol) or forced air. Converter failures are a leading cause of turbine downtime.',
         ],
+        images: [
+          { src: '/diagrams/generator-types-power-electronics.svg', alt: 'Comparison diagram of DFIG and full-power converter generator architectures, a worked super-synchronous slip calculation, and IGBT converter cooling requirements', caption: 'DFIG trades grid-support capability for a cheaper 30%-rated converter; FPC pays more for complete grid decoupling.' },
+        ],
         keyPoints: [
           'DFIG: stator direct to grid, rotor via partial-scale converter; slip +/-30%',
           'FPC: full-power converter; complete grid decoupling; PMSG common',
@@ -301,6 +310,9 @@ export const WIND_TURBINE_MODULES: TrainingModule[] = [
           'During LVRT, turbines must inject reactive current to support grid voltage — a reactive power boost of at least 2% rated reactive current per 1% voltage drop. This helps prevent voltage collapse during grid faults.',
           'The nacelle transformer steps up generator output voltage (typically 690 V or 1,000 V AC) to the collection system voltage (typically 34.5 kV). Protection includes differential relay, overcurrent, and buchholz relay for internal faults.',
           'Tower and nacelle are bonded to earth through the foundation ground grid. Blade lightning receptors conduct strike current down through the pitch bearing, main shaft, and tower to earth — insulated shaft couplings or bypass brushes protect bearings from pitting by lightning current.',
+        ],
+        images: [
+          { src: '/diagrams/grid-lvrt-lightning-path.svg', alt: 'Diagram of the LVRT reactive current injection requirement, the nacelle transformer step-up and protection scheme, and the lightning current path from blade receptor through pitch bearing and main shaft to earth ground', caption: 'LVRT keeps the turbine connected and supporting the grid through a fault — the lightning path routes strike current around, not through, the bearings.' },
         ],
         keyPoints: [
           'LVRT: turbine must stay connected during voltage dip — typically 0% for >=150 ms',
@@ -401,6 +413,9 @@ export const WIND_TURBINE_MODULES: TrainingModule[] = [
           'Emergency feather is triggered by controller fault, overspeed, or grid loss — battery backup (UPS or supercapacitor) ensures pitch actuators can feather all three blades to 90 degrees even without grid power. Pitch battery health is verified at every major service.',
           'The yaw system keeps the nacelle aligned with wind direction using wind vane or ultrasonic wind sensors — yaw motors drive the nacelle via a slewing ring gear. Each 1 degree of yaw misalignment causes approximately 1.5% power loss (cos^3 law).',
           'Cable twist accumulates as the nacelle yaws — a twist counter tracks cumulative yaw angle. At +/-3 full turns (+/-1,080 degrees), the turbine parks and performs an automatic unwind maneuver. Exceeding the hard stop can sever power and control cables in the tower.',
+        ],
+        images: [
+          { src: '/diagrams/pitch-yaw-control-systems.svg', alt: 'Diagram of pitch control fine-pitch and emergency feather behavior, the yaw system cos-cubed power loss relationship, the cable twist counter hard limit, and pitch battery service guidance', caption: 'Pitch feathers to 90° on any fault; yaw misalignment costs power fast; cable twist has a hard ±3-turn limit.' },
         ],
         keyPoints: [
           'Pitch feathers toward 90 degrees above rated wind and in every emergency (battery-backed)',

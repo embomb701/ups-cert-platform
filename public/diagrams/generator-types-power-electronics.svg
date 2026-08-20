@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Three Generator Architectures — Cost, Control, and Complexity Trade-offs</text>
+
+  <!-- DFIG -->
+  <rect x="24" y="55" width="410" height="165" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#0e7490">DFIG — Doubly-Fed Induction Generator</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Most common in 1.5–3 MW onshore turbines.</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">Stator connects direct to grid; rotor connects</text>
+  <text x="38" y="128" font-size="9.5" fill="#3f3a2c">through a partial-scale converter.</text>
+  <rect x="38" y="140" width="230" height="26" rx="4" fill="#0e7490"/>
+  <text x="153" y="158" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Converter ≈30% of rated power</text>
+  <text x="38" y="182" font-size="9.5" font-weight="700" fill="#1f5a8f">±30% slip range, variable-speed operation</text>
+  <text x="38" y="196" font-size="9.5" font-weight="700" fill="#1f5a8f">at a smaller, lower-cost converter.</text>
+
+  <!-- FPC -->
+  <rect x="459" y="55" width="417" height="165" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#065f46">FPC — Full-Power Converter</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Back-to-back voltage source converter rated at</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">100% turbine power — the generator is fully</text>
+  <text x="473" y="128" font-size="9.5" fill="#3f3a2c">decoupled from the grid.</text>
+  <text x="473" y="150" font-size="9.5" font-weight="700" fill="#065f46">Precise reactive power and frequency control —</text>
+  <text x="473" y="164" font-size="9.5" font-weight="700" fill="#065f46">superior grid support, higher converter cost.</text>
+  <text x="473" y="186" font-size="9.5" fill="#5c5748">PMSG (permanent magnet, direct-drive) commonly</text>
+  <text x="473" y="200" font-size="9.5" fill="#5c5748">pairs with FPC — no excitation losses, rare-earth magnet cost/supply risk.</text>
+
+  <!-- worked slip example -->
+  <rect x="24" y="238" width="410" height="90" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="261" font-size="12" font-weight="700" fill="#1e1b14">Worked example — super-synchronous slip</text>
+  <text x="38" y="283" font-size="9.5" fill="#5c5748">Synchronous speed 1,500 RPM, 15% slip:</text>
+  <text x="38" y="304" font-size="10" font-weight="700" fill="#1e1b14">1,500 × 1.15 = 1,725 RPM rotor speed</text>
+
+  <!-- cooling -->
+  <rect x="459" y="238" width="417" height="90" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="261" font-size="12" font-weight="700" fill="#b45309">Converter cooling is critical</text>
+  <text x="473" y="283" font-size="9.5" fill="#5c5748">IGBT modules: max junction temp ≈150°C.</text>
+  <text x="473" y="297" font-size="9.5" fill="#5c5748">Liquid (water-glycol) or forced-air cooling.</text>
+  <text x="473" y="315" font-size="9.5" font-weight="700" fill="#8a5010">Converter failures are a leading cause of turbine downtime.</text>
+
+  <rect x="24" y="345" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="368" font-size="10.5" font-weight="700" fill="#7a3f14">DFIG trades grid-support capability for a cheaper, smaller converter — FPC pays more upfront for</text>
+  <text x="38" y="384" font-size="10.5" font-weight="700" fill="#7a3f14">complete electrical isolation and independent real/reactive power control regardless of wind speed.</text>
+
+  <rect x="24" y="412" width="852" height="46" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="440" font-size="10.5" font-weight="700" fill="#1e1b14">Same power-electronics family as UPS and DCFC: rectifier → DC bus → inverter — the load and voltage scale, the failure modes don't.</text>
+</svg>

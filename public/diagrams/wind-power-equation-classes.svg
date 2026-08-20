@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The Power Equation — Wind Power Scales With the CUBE of Speed</text>
+
+  <!-- equation -->
+  <rect x="24" y="55" width="852" height="70" rx="6" fill="#e7f2fb" stroke="#0284c7" stroke-width="2"/>
+  <text x="38" y="82" font-size="16" font-weight="700" fill="#075985" font-family="ui-monospace,Consolas,monospace">P = ½ · ρ · A · v³ · Cp</text>
+  <text x="38" y="108" font-size="9.5" fill="#3f3a2c">ρ = air density (1.225 kg/m³ sea level)  ·  A = swept area  ·  v = wind speed  ·  Cp = power coefficient</text>
+
+  <!-- cube law callout -->
+  <rect x="24" y="140" width="410" height="90" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="163" font-size="12" font-weight="700" fill="#8f1f1a">The cube law consequence</text>
+  <text x="38" y="185" font-size="9.5" fill="#5c5748">A 10% increase in wind speed yields a</text>
+  <rect x="38" y="195" width="358" height="26" rx="4" fill="#8f1f1a"/>
+  <text x="217" y="213" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">33% increase in available power</text>
+
+  <!-- Weibull -->
+  <rect x="459" y="140" width="417" height="90" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="163" font-size="12" font-weight="700" fill="#0e7490">Wind resource distribution</text>
+  <text x="473" y="185" font-size="9.5" fill="#3f3a2c">Weibull distribution (shape k, scale c) —</text>
+  <text x="473" y="199" font-size="9.5" fill="#3f3a2c">most sites use k=2 (Rayleigh). AEP = integral</text>
+  <text x="473" y="213" font-size="9.5" fill="#3f3a2c">of the power curve against this distribution.</text>
+
+  <!-- IEC classes -->
+  <rect x="24" y="245" width="852" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="268" font-size="12" font-weight="700" fill="#1e1b14">IEC 61400-1 wind classes — pick the wrong one, void the warranty</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="280" width="260" height="55" rx="4" fill="#fdeaea" stroke="#a4231e"/><text x="168" y="298" text-anchor="middle" fill="#8f1f1a">Class I</text><text x="168" y="313" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">≥10 m/s mean, 70 m/s gust</text><text x="168" y="326" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">highest-wind sites</text>
+
+    <rect x="308" y="280" width="260" height="55" rx="4" fill="#fdeec9" stroke="#b45309"/><text x="438" y="298" text-anchor="middle" fill="#b45309">Class II</text><text x="438" y="313" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">8.5 m/s mean, 59.5 m/s gust</text>
+
+    <rect x="578" y="280" width="260" height="55" rx="4" fill="#e9f4ef" stroke="#059669"/><text x="708" y="298" text-anchor="middle" fill="#065f46">Class III</text><text x="708" y="313" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">7.5 m/s mean, 52.5 m/s gust</text><text x="708" y="326" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">lower-wind sites</text>
+  </g>
+
+  <!-- power law -->
+  <rect x="24" y="368" width="852" height="92" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="391" font-size="12" font-weight="700" fill="#7a3f14">Extrapolating met-mast data to hub height</text>
+  <text x="38" y="413" font-size="10" fill="#5c5748">v_hub = v_ref × (h_hub / h_ref)^α — α = 0.143 (1/7) for flat terrain, up to 0.25 for forested/complex terrain.</text>
+  <text x="38" y="435" font-size="10" font-weight="700" fill="#7a3f14">Worked: 7.0 m/s at 60m → 7.3 m/s at 80m hub. Small height gains matter — power scales as the cube.</text>
+</svg>

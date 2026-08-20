@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The Gearbox — Stepping 10-20 RPM Up to Generator Speed</text>
+
+  <!-- drivetrain chain -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="195" height="55" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="121" y="76" text-anchor="middle" fill="#0e7490">Main shaft</text><text x="121" y="92" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">10–20 RPM</text>
+
+    <rect x="239" y="55" width="205" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="341" y="76" text-anchor="middle" fill="#8f1f1a">Planetary stage</text><text x="341" y="92" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">highest torque</text>
+
+    <rect x="464" y="55" width="195" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="561" y="76" text-anchor="middle" fill="#b45309">Helical stages</text><text x="561" y="92" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">speed multiplication</text>
+
+    <rect x="679" y="55" width="197" height="55" rx="4" fill="#e9f4ef" stroke="#059669" stroke-width="2"/><text x="777" y="76" text-anchor="middle" fill="#065f46">Generator</text><text x="777" y="92" font-weight="400" font-size="8.5" text-anchor="middle" fill="#3f3a2c">1,200–1,800 RPM</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#gb)">
+    <line x1="219" y1="82" x2="237" y2="82"/><line x1="444" y1="82" x2="462" y2="82"/><line x1="659" y1="82" x2="677" y2="82"/>
+  </g>
+  <text x="24" y="128" font-size="9.5" font-weight="700" fill="#0e7490">Typical overall gear ratio: 80:1 to 110:1 — a 3-stage epicyclic + helical gearbox on most utility-scale turbines.</text>
+
+  <!-- planetary failure -->
+  <rect x="24" y="150" width="410" height="120" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="173" font-size="12" font-weight="700" fill="#8f1f1a">The planetary stage — most common failure</text>
+  <text x="38" y="195" font-size="9.5" fill="#5c5748">Full torque arrives here before any speed</text>
+  <text x="38" y="209" font-size="9.5" fill="#5c5748">multiplication — the highest-stress point.</text>
+  <text x="38" y="231" font-size="9.5" font-weight="700" fill="#8f1f1a">Failure sequence: micropitting on gear flanks</text>
+  <text x="38" y="245" font-size="9.5" font-weight="700" fill="#8f1f1a">(visible via borescope) → progresses to spalling.</text>
+
+  <!-- oil analysis -->
+  <rect x="459" y="150" width="417" height="120" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="173" font-size="12" font-weight="700" fill="#0e7490">Oil analysis — the primary condition monitor</text>
+  <text x="473" y="195" font-size="9.5" fill="#3f3a2c">Sampled every 6 months: particle count (ISO</text>
+  <text x="473" y="209" font-size="9.5" fill="#3f3a2c">4406), viscosity, water content, wear metals.</text>
+  <text x="473" y="231" font-size="9.5" font-weight="700" fill="#1f5a8f">Rising iron (Fe) count = ring-gear or</text>
+  <text x="473" y="245" font-size="9.5" font-weight="700" fill="#1f5a8f">planetary-gear wear in progress.</text>
+
+  <!-- worked example -->
+  <rect x="24" y="290" width="852" height="70" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="313" font-size="11.5" font-weight="700" fill="#7a3f14">Worked example — reading the ISO 4406 code</text>
+  <text x="38" y="335" font-size="10" fill="#5c5748">Sample returns 21/19/16 against an OEM max of 18/16/13 → filter or replace oil immediately, then</text>
+  <text x="38" y="349" font-size="10" fill="#5c5748">re-sample to verify it's back within spec. Waiting for the next scheduled interval risks catastrophic failure.</text>
+
+  <!-- direct drive alternative -->
+  <rect x="24" y="375" width="852" height="85" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="398" font-size="12" font-weight="700" fill="#065f46">The gearbox-free alternative — direct drive</text>
+  <text x="38" y="420" font-size="10" fill="#3f3a2c">Large-diameter permanent magnet generator at low RPM eliminates gearbox failure modes entirely —</text>
+  <text x="38" y="434" font-size="10" fill="#3f3a2c">the trade-off is a full-power converter and a much heavier nacelle.</text>
+
+  <defs>
+    <marker id="gb" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/></marker>
+  </defs>
+</svg>
