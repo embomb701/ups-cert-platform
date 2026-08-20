@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The Contactor + Capacitor Circuit — Two Voltage Worlds, One Component</text>
+
+  <!-- contactor -->
+  <rect x="24" y="55" width="410" height="150" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="78" font-size="13" font-weight="700" fill="#065f46">Contactor</text>
+  <rect x="38" y="90" width="170" height="24" rx="4" fill="#059669"/>
+  <text x="123" y="106" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Coil: 24V (thermostat)</text>
+  <rect x="222" y="90" width="196" height="24" rx="4" fill="#065f46"/>
+  <text x="320" y="106" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Contacts: 208–240V (line)</text>
+  <text x="38" y="134" font-size="9.5" fill="#3f3a2c">Low-voltage coil pulls in the armature; line-voltage</text>
+  <text x="38" y="148" font-size="9.5" fill="#3f3a2c">contacts feed the compressor and condenser fan.</text>
+  <text x="38" y="170" font-size="9.5" font-weight="700" fill="#8f1f1a">Pitted/burned contacts → resistance → heat →</text>
+  <text x="38" y="184" font-size="9.5" font-weight="700" fill="#8f1f1a">voltage drop that starves the compressor.</text>
+  <text x="38" y="198" font-size="9" fill="#5c5748">Inspect every PM visit — replace at first sign of pitting.</text>
+
+  <!-- capacitor -->
+  <rect x="459" y="55" width="417" height="150" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="78" font-size="13" font-weight="700" fill="#0e7490">PSC Run Capacitor</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Auxiliary-winding capacitor creates the phase shift</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">that produces starting and running torque — without</text>
+  <text x="473" y="128" font-size="9.5" fill="#3f3a2c">it, the motor hums and never rotates.</text>
+  <text x="473" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">Rated in microfarads (μF) + voltage.</text>
+  <text x="473" y="164" font-size="9.5" font-weight="700" fill="#1f5a8f">Bulged top + capacitance &gt;±10% off nameplate</text>
+  <text x="473" y="178" font-size="9.5" font-weight="700" fill="#1f5a8f">= failed, replace.</text>
+
+  <!-- dual run capacitor -->
+  <rect x="24" y="220" width="410" height="115" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="243" font-size="12" font-weight="700" fill="#1e1b14">Dual-run capacitor — one can, two loads</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="255" width="108" height="26" rx="4" fill="#f3efe2" stroke="#7a7256"/><text x="92" y="272" text-anchor="middle" fill="#1e1b14">HERM</text>
+    <rect x="156" y="255" width="108" height="26" rx="4" fill="#f3efe2" stroke="#7a7256"/><text x="210" y="272" text-anchor="middle" fill="#1e1b14">FAN</text>
+    <rect x="274" y="255" width="108" height="26" rx="4" fill="#f3efe2" stroke="#7a7256"/><text x="328" y="272" text-anchor="middle" fill="#1e1b14">COM</text>
+  </g>
+  <text x="38" y="300" font-size="9.5" font-weight="400" fill="#5c5748">Compressor run cap + fan motor run cap share one</text>
+  <text x="38" y="314" font-size="9.5" font-weight="400" fill="#5c5748">housing. ID the common terminal correctly first.</text>
+
+  <!-- crankcase heater -->
+  <rect x="459" y="220" width="417" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="243" font-size="12" font-weight="700" fill="#8f1f1a">Crankcase heater — the 4-hour rule</text>
+  <text x="473" y="265" font-size="9.5" fill="#5c5748">Refrigerant migrates to the compressor sump during</text>
+  <text x="473" y="279" font-size="9.5" fill="#5c5748">off cycles, dissolving into the oil.</text>
+  <text x="473" y="300" font-size="9.5" font-weight="700" fill="#8f1f1a">Energize the heater ≥4 hours before start-up</text>
+  <text x="473" y="314" font-size="9.5" font-weight="700" fill="#8f1f1a">after any extended shutdown — boils refrigerant out</text>
+  <text x="473" y="328" font-size="9.5" font-weight="700" fill="#8f1f1a">before start, preventing foaming and slugging.</text>
+
+  <rect x="24" y="355" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="378" font-size="10.5" font-weight="700" fill="#7a3f14">Hard-start kits add a start capacitor + potential relay in parallel with the run capacitor — extra torque for</text>
+  <text x="38" y="392" font-size="10.5" font-weight="700" fill="#7a3f14">low-voltage or heavily-loaded starts, common on heat pumps in cold weather.</text>
+
+  <rect x="24" y="422" width="852" height="42" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="447" font-size="10.5" font-weight="700" fill="#1e1b14">Hums but won't spin, correct voltage present → suspect the run capacitor first, not the contactor.</text>
+</svg>

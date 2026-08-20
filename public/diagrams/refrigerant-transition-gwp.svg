@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The Low-GWP Transition — AIM Act, A2L Safety, and the R-22/R-410A Sunset</text>
+
+  <!-- GWP bar chart -->
+  <rect x="24" y="52" width="852" height="150" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="74" font-size="12" font-weight="700" fill="#1e1b14">Global Warming Potential (relative to CO₂ over 100 years)</text>
+
+  <g font-size="9" font-weight="700">
+    <rect x="60" y="88" width="120" height="18" fill="#a4231e"/><text x="185" y="102" fill="#5c5748">R-22 — GWP 1,810 (banned from production)</text>
+    <rect x="60" y="112" width="138" height="18" fill="#8f1f1a"/><text x="203" y="126" fill="#5c5748">R-410A — GWP 2,088 (prohibited in new equip. after 1/1/25)</text>
+    <rect x="60" y="136" width="44" height="18" fill="#b45309"/><text x="109" y="150" fill="#5c5748">R-32 — GWP 675</text>
+    <rect x="60" y="160" width="31" height="18" fill="#059669"/><text x="97" y="174" fill="#5c5748">R-454B — GWP 466 (leading residential replacement)</text>
+  </g>
+
+  <!-- AIM Act -->
+  <rect x="24" y="215" width="410" height="95" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="238" font-size="12" font-weight="700" fill="#0e7490">AIM Act (2020)</text>
+  <text x="38" y="260" font-size="9.5" fill="#5c5748">EPA authority to phase down HFC production</text>
+  <text x="38" y="274" font-size="9.5" fill="#5c5748">and consumption 85% over 15 years.</text>
+  <text x="38" y="296" font-size="9.5" font-weight="700" fill="#1f5a8f">New equipment: GWP ≤700 required as of Jan 1, 2025.</text>
+
+  <!-- R-22 -->
+  <rect x="459" y="215" width="417" height="95" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="238" font-size="12" font-weight="700" fill="#b45309">R-22 — service only, no new production</text>
+  <text x="473" y="260" font-size="9.5" fill="#5c5748">Banned from US production/import since Jan 1, 2020.</text>
+  <text x="473" y="274" font-size="9.5" fill="#5c5748">Only reclaimed/recovered R-22 may service legacy units —</text>
+  <text x="473" y="288" font-size="9.5" fill="#5c5748">R-410A/R-407C are NOT drop-in replacements.</text>
+  <text x="473" y="303" font-size="9" font-weight="700" fill="#7a3f14">Requires Type II cert min. Never mix refrigerants in a cylinder.</text>
+
+  <!-- A2L -->
+  <rect x="24" y="325" width="852" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="348" font-size="12.5" font-weight="700" fill="#8f1f1a">A2L refrigerants (R-454B, R-32) — mildly flammable</text>
+  <text x="38" y="370" font-size="10" fill="#5c5748">Lower flammability limit ~9.9% by volume (R-454B). Per ASHRAE 15 &amp; UL 60335-2-40, enclosed spaces need:</text>
+  <g font-size="9.5" font-weight="700" fill="#8f1f1a">
+    <text x="50" y="392">• Ignition-source elimination</text>
+    <text x="330" y="392">• Leak/refrigerant detectors</text>
+    <text x="610" y="392">• Minimum ventilation rates</text>
+  </g>
+  <text x="38" y="414" font-size="9.5" font-weight="700" fill="#8f1f1a">No open flames, no non-intrinsically-safe power tools while refrigerant may be present. A2L-rated recovery equipment only.</text>
+</svg>

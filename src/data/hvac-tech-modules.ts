@@ -52,6 +52,9 @@ export const HVAC_TECH_MODULES: TrainingModule[] = [
           "Charging by superheat is used in the field on fixed-orifice residential systems — use the manufacturer's superheat chart (outdoor WB + indoor DB → target superheat) to avoid undercharging in cold weather.",
           'R-410A and R-32 are zeotropic blends that must always be charged as liquid from the cylinder to prevent fractionation — inverting the cylinder or using a liquid-port adapter delivers liquid phase.',
         ],
+        images: [
+          { src: '/diagrams/superheat-subcooling-charging.svg', alt: 'Superheat and subcooling diagram showing measurement points, target ranges, the classic undercharge signature, and charging methods', caption: 'Superheat (suction line) and subcooling (liquid line) — two numbers, two different measurement points.' },
+        ],
         keyPoints: [
           'Superheat = vapor temperature above saturation at suction line — target 8–12°F for most systems; too low = flood-back risk',
           'Subcooling = liquid temperature below saturation at liquid line — target 10–15°F; too low = flash gas before TXV',
@@ -106,6 +109,9 @@ export const HVAC_TECH_MODULES: TrainingModule[] = [
           'Hard-start kits add a start capacitor and potential relay in parallel with the run capacitor, providing extra starting torque on low-voltage or heavily loaded conditions — often used on heat pumps during cold-weather start.',
           'The compressor crankcase heater must be energized for at least 4 hours before start-up following a shutdown — refrigerant migration to the compressor sump during off cycles causes oil dilution and liquid slugging on the next start.',
           'Dual-run capacitors contain both the compressor run capacitor and fan motor run capacitor in one housing — the common terminal and the two "Herm" (compressor) and "Fan" terminals must be correctly identified before replacement.',
+        ],
+        images: [
+          { src: '/diagrams/motor-circuit-anatomy.svg', alt: 'Diagram of the contactor and capacitor circuit showing 24V coil vs. line-voltage contacts, PSC run capacitor, dual-run capacitor terminals, and the crankcase heater 4-hour rule', caption: 'Two voltage worlds, one component: the contactor coil runs at 24V while its contacts switch line voltage.' },
         ],
         keyPoints: [
           'Contactor coil is 24V; contacts carry line voltage — inspect contacts at every PM, replace at first sign of pitting',
@@ -223,6 +229,9 @@ export const HVAC_TECH_MODULES: TrainingModule[] = [
           'HSPF2 (Heating Seasonal Performance Factor 2) measures heat pump heating efficiency over a season — it represents BTU of heat produced per watt-hour of electricity consumed across a range of outdoor temperatures, including defrost and auxiliary heat use.',
           'Mini-split refrigerant line sets must be insulated to prevent condensation and capacity loss — the vapor (suction) line carries cold, low-pressure refrigerant in cooling mode and must be fully insulated; the liquid line typically needs insulation only in heating mode.',
           'Proper flaring of the copper line set connections is critical — a poor flare causes refrigerant leaks; use a ratcheting flare tool to the correct torque and inspect for cracks, ovality, or roughness before tightening the flare nut.',
+        ],
+        images: [
+          { src: '/diagrams/minisplit-inverter-system.svg', alt: 'Diagram of a mini-split system showing the outdoor inverter unit connected to multiple indoor zone heads, inverter vs. single-speed comparison, SEER2/HSPF2 definitions, and line set insulation requirements', caption: 'One outdoor inverter unit, up to 8 independently-controlled zones — no ductwork required.' },
         ],
         keyPoints: [
           'Inverter compressor modulates speed continuously — better efficiency and comfort than single-speed cycling',
@@ -364,6 +373,9 @@ export const HVAC_TECH_MODULES: TrainingModule[] = [
           'Section 608 fines can reach $44,539 per day per violation for knowing venting — EPA enforcement uses informants, vendor records, and purchase tracking to identify violations.',
           'The de minimis exemption allows small amounts released "in the course of good faith attempts to recover" — it does not allow deliberate venting; technicians must use recovery equipment even when residual amounts remain.',
         ],
+        images: [
+          { src: '/diagrams/epa608-recovery-cert-types.svg', alt: 'Diagram of EPA Section 608 showing the four certification types, ARI 740 recovery equipment requirements, reuse vs. reclaim rules, and enforcement fines', caption: 'Section 608: recover before opening any system, no exceptions — four certification types, ARI 700 purity for reclaimed refrigerant.' },
+        ],
         keyPoints: [
           'Section 608: MUST recover refrigerant before opening any system — no deliberate venting of CFCs, HCFCs, or HFCs',
           'Four cert types: I (small appliance), II (high-pressure), III (low-pressure), Universal — required to buy in containers >2 lbs',
@@ -394,6 +406,9 @@ export const HVAC_TECH_MODULES: TrainingModule[] = [
           'A2L refrigerants require modified service procedures: lower charge limits for enclosed spaces, refrigerant detectors in machine rooms, ignition-source elimination (no open flames, no non-intrinsically-safe power tools while refrigerant may be present), and A2L-rated recovery equipment.',
           'R-22 (HCFC) production was banned in the United States after January 1, 2020 — only reclaimed or recovered R-22 may be used for servicing existing equipment; new equipment must use an approved alternative.',
           'Technicians servicing legacy R-22 equipment must hold at least a Type II Section 608 certification and use recovery equipment approved for R-22; mixing refrigerants in recovery cylinders is prohibited and creates a hazardous, unidentifiable mixture.',
+        ],
+        images: [
+          { src: '/diagrams/refrigerant-transition-gwp.svg', alt: 'Diagram comparing GWP of R-22, R-410A, R-32, and R-454B, summarizing the AIM Act phasedown timeline, the R-22 production ban, and A2L flammability safety requirements', caption: 'GWP drives the transition: R-410A prohibited in new equipment after Jan 1, 2025 — A2L replacements bring new flammability precautions.' },
         ],
         keyPoints: [
           'AIM Act phases down HFC production 85% by 2036 — R-410A prohibited in new equipment after Jan 1, 2025',

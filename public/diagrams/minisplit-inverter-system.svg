@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Mini-Split Systems — No Ducts, Inverter-Driven, Zone by Zone</text>
+
+  <!-- system layout -->
+  <rect x="24" y="55" width="270" height="140" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="78" font-size="12" font-weight="700" fill="#065f46">Outdoor unit</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Inverter-driven compressor —</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">one unit, up to 8 indoor heads</text>
+  <text x="38" y="136" font-size="9.5" font-weight="700" fill="#065f46">Modulates capacity to match</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#065f46">total load across all zones</text>
+  <text x="38" y="172" font-size="9" fill="#5c5748">No ductwork required anywhere</text>
+
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#ms)">
+    <line x1="294" y1="90" x2="330" y2="70"/>
+    <line x1="294" y1="125" x2="330" y2="125"/>
+    <line x1="294" y1="160" x2="330" y2="180"/>
+  </g>
+
+  <g font-size="9.5" font-weight="700">
+    <rect x="330" y="55" width="180" height="34" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="1.5"/><text x="420" y="76" text-anchor="middle" fill="#0e7490">Head — Zone 1</text>
+    <rect x="330" y="108" width="180" height="34" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="1.5"/><text x="420" y="129" text-anchor="middle" fill="#0e7490">Head — Zone 2</text>
+    <rect x="330" y="163" width="180" height="34" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="1.5"/><text x="420" y="184" text-anchor="middle" fill="#0e7490">Head — Zone N</text>
+  </g>
+  <text x="330" y="215" font-size="9" font-weight="400" fill="#5c5748">Each zone independently controlled, own setpoint</text>
+
+  <!-- inverter vs single speed -->
+  <rect x="549" y="55" width="327" height="140" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="563" y="78" font-size="12" font-weight="700" fill="#b45309">Inverter vs. single-speed</text>
+  <text x="563" y="100" font-size="9.5" fill="#5c5748">Inverter varies motor speed continuously —</text>
+  <text x="563" y="114" font-size="9.5" fill="#5c5748">refrigerant flow matches load in real time.</text>
+  <text x="563" y="136" font-size="9.5" font-weight="700" fill="#8a5010">Single-speed only cycles fully on/off —</text>
+  <text x="563" y="150" font-size="9.5" font-weight="700" fill="#8a5010">temperature swings, more wear per cycle.</text>
+  <text x="563" y="172" font-size="9" fill="#5c5748">Inverter also extends useful heating range at low outdoor temps</text>
+
+  <!-- efficiency ratings -->
+  <rect x="24" y="220" width="410" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="243" font-size="12" font-weight="700" fill="#1e1b14">SEER2 — cooling</text>
+  <text x="38" y="264" font-size="9.5" fill="#5c5748">Seasonal efficiency, effective Jan 2023.</text>
+  <text x="38" y="278" font-size="9.5" fill="#5c5748">Tests at higher external static pressure than</text>
+  <text x="38" y="292" font-size="9.5" fill="#5c5748">old SEER — same unit reads lower SEER2.</text>
+  <text x="38" y="312" font-size="9" font-weight="700" fill="#059669">Both are current DOE metrics — compare like to like.</text>
+
+  <rect x="459" y="220" width="417" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="473" y="243" font-size="12" font-weight="700" fill="#1e1b14">HSPF2 — heating (heat pumps)</text>
+  <text x="473" y="264" font-size="9.5" fill="#5c5748">BTU of heat produced per watt-hour consumed,</text>
+  <text x="473" y="278" font-size="9.5" fill="#5c5748">across a seasonal range of outdoor temps —</text>
+  <text x="473" y="292" font-size="9.5" fill="#5c5748">includes defrost and aux-heat energy use.</text>
+
+  <!-- line set -->
+  <rect x="24" y="345" width="852" height="65" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="365" font-size="11.5" font-weight="700" fill="#0e7490">Line set insulation</text>
+  <text x="38" y="386" font-size="10" fill="#5c5748">Vapor (suction) line — always fully insulated, prevents condensation and capacity loss.</text>
+  <text x="38" y="400" font-size="10" fill="#5c5748">Liquid line — insulation typically needed only in heating mode.</text>
+
+  <rect x="24" y="422" width="852" height="42" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="447" font-size="10.5" font-weight="700" fill="#8f1f1a">Oil staining at a flare = leak. Recover, cut back, re-flare to spec, remake — never top off without fixing it.</text>
+
+  <defs>
+    <marker id="ms" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

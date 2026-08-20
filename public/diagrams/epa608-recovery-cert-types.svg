@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">EPA Section 608 — No Knowing Venting, Ever</text>
+
+  <rect x="24" y="52" width="852" height="46" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/>
+  <text x="38" y="80" font-size="11" font-weight="700" fill="#8f1f1a">Recover refrigerant before opening ANY system with more than a de minimis amount — Class I (CFC/HCFC) and Class II (HFC) alike.</text>
+
+  <!-- 4 cert types -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="112" width="200" height="85" rx="4" fill="#e9f4ef" stroke="#059669" stroke-width="2"/><text x="34" y="134" fill="#065f46">Type I</text><text x="34" y="152" font-weight="400" font-size="9" fill="#5c5748">Small appliances</text><text x="34" y="166" font-weight="400" font-size="9" fill="#5c5748">≤5 lbs, factory-charged</text>
+
+    <rect x="234" y="112" width="200" height="85" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="244" y="134" fill="#0e7490">Type II</text><text x="244" y="152" font-weight="400" font-size="9" fill="#5c5748">High-pressure</text><text x="244" y="166" font-weight="400" font-size="9" fill="#5c5748">systems (R-410A, R-22)</text>
+
+    <rect x="444" y="112" width="200" height="85" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="454" y="134" fill="#b45309">Type III</text><text x="454" y="152" font-weight="400" font-size="9" fill="#5c5748">Low-pressure</text><text x="454" y="166" font-weight="400" font-size="9" fill="#5c5748">systems</text>
+
+    <rect x="654" y="112" width="222" height="85" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="664" y="134" fill="#a4231e">Universal</text><text x="664" y="152" font-weight="400" font-size="9" fill="#5c5748">All three — I + II + III</text>
+  </g>
+  <text x="24" y="217" font-size="9.5" font-weight="700" fill="#7a3f14">Required for any technician purchasing refrigerant in containers larger than 2 lbs.</text>
+
+  <!-- recovery equipment -->
+  <rect x="24" y="240" width="410" height="100" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="263" font-size="12" font-weight="700" fill="#1e1b14">Recovery equipment</text>
+  <text x="38" y="285" font-size="9.5" fill="#5c5748">Must be listed to ARI 740 — the certification</text>
+  <text x="38" y="299" font-size="9.5" fill="#5c5748">category sets the recovery depth (vacuum level)</text>
+  <text x="38" y="313" font-size="9.5" fill="#5c5748">required for different system sizes.</text>
+  <text x="38" y="330" font-size="9" font-weight="700" fill="#059669">De minimis exempts good-faith recovery loss only —</text>
+
+  <!-- reuse vs reclaim -->
+  <rect x="459" y="240" width="417" height="100" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="263" font-size="12" font-weight="700" fill="#0e7490">Reuse vs. reclaim</text>
+  <text x="473" y="285" font-size="9.5" fill="#5c5748">Same system or same owner's other system —</text>
+  <text x="473" y="299" font-size="9.5" fill="#5c5748">no reclamation needed.</text>
+  <text x="473" y="317" font-size="9.5" font-weight="700" fill="#1f5a8f">Sold/transferred to a different owner — MUST</text>
+  <text x="473" y="331" font-size="9.5" font-weight="700" fill="#1f5a8f">meet ARI 700 reclaimed-grade purity first.</text>
+
+  <rect x="24" y="360" width="852" height="80" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="383" font-size="12" font-weight="700" fill="#8f1f1a">Enforcement is real money</text>
+  <text x="38" y="405" font-size="10.5" fill="#5c5748">Fines up to $44,539 per day, per violation, for knowing venting. EPA tracks purchase records and</text>
+  <text x="38" y="420" font-size="10.5" fill="#5c5748">vendor sales — deliberate venting is not covered by the de minimis exemption.</text>
+</svg>
