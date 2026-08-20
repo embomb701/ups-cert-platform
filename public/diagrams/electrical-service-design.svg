@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Electrical Service — From the Fence to the Rack</text>
+
+  <!-- chain -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="165" height="50" rx="4" fill="#eef3f7" stroke="#6d28d9" stroke-width="2"/><text x="34" y="75" fill="#6d28d9">MV Service</text><text x="34" y="90" font-weight="400" font-size="8.5" fill="#5c5748">13.8kV/12.47kV class</text>
+
+    <rect x="204" y="55" width="165" height="50" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="214" y="75" fill="#0e7490">Unit Substation</text><text x="214" y="90" font-weight="400" font-size="8.5" fill="#5c5748">owner-furnished, MV→LV</text>
+
+    <rect x="384" y="55" width="165" height="50" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="394" y="75" fill="#b45309">Main Switchgear</text><text x="394" y="90" font-weight="400" font-size="8.5" fill="#5c5748">bus arrangement, ties</text>
+
+    <rect x="564" y="55" width="150" height="50" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="574" y="75" fill="#a4231e">Generator</text><text x="574" y="90" font-weight="400" font-size="8.5" fill="#5c5748">kW + step-load</text>
+
+    <rect x="729" y="55" width="147" height="50" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="739" y="75" fill="#a4231e">UPS</text><text x="739" y="90" font-weight="400" font-size="8.5" fill="#5c5748">efficiency, runtime</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#es)">
+    <line x1="189" y1="80" x2="202" y2="80"/><line x1="369" y1="80" x2="382" y2="80"/>
+    <line x1="549" y1="80" x2="562" y2="80"/><line x1="714" y1="80" x2="727" y2="80"/>
+  </g>
+
+  <!-- MV rationale -->
+  <rect x="24" y="120" width="852" height="55" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="141" font-size="10.5" font-weight="700" fill="#7a3f14">Why medium voltage: transforming to MV at the fence reduces fault current at distribution points and</text>
+  <text x="38" y="157" font-size="10.5" font-weight="700" fill="#7a3f14">is vastly more efficient than running miles of 480V cable across a campus.</text>
+
+  <!-- switchgear bus + generator step load -->
+  <rect x="24" y="190" width="410" height="140" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="213" font-size="12" font-weight="700" fill="#b45309">Switchgear bus arrangement</text>
+  <text x="38" y="235" font-size="10" fill="#5c5748">Single / split / duplicate bus trades</text>
+  <text x="38" y="249" font-size="10" fill="#5c5748">operational flexibility for fault isolation.</text>
+  <text x="38" y="270" font-size="10" font-weight="700" fill="#8a5010">2N: A-bus and B-bus are physically</text>
+  <text x="38" y="284" font-size="10" font-weight="700" fill="#8a5010">separate lineups in separate rooms —</text>
+  <text x="38" y="298" font-size="10" font-weight="700" fill="#8a5010">architectural, not just a label.</text>
+  <text x="38" y="319" font-size="9" fill="#5c5748">Tie switches allow bus connection or isolation for maintenance.</text>
+
+  <rect x="459" y="190" width="417" height="140" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="213" font-size="12" font-weight="700" fill="#8f1f1a">Generator sizing needs TWO numbers</text>
+  <text x="473" y="235" font-size="10" fill="#5c5748">Steady-state kW rating AND step-load</text>
+  <text x="473" y="249" font-size="10" fill="#5c5748">acceptance (25–35% of rated kW per</text>
+  <text x="473" y="263" font-size="10" fill="#5c5748">step, recovery to 5% freq in &lt;10s, NFPA 110).</text>
+  <text x="473" y="286" font-size="10" font-weight="700" fill="#8f1f1a">Undersized step-load = bog, frequency</text>
+  <text x="473" y="300" font-size="10" font-weight="700" fill="#8f1f1a">drop, potential inverter crash on transfer</text>
+  <text x="473" y="314" font-size="9" fill="#5c5748">— a design deficiency, tested at commissioning, not a field repair.</text>
+
+  <!-- UPS economics -->
+  <rect x="24" y="345" width="852" height="115" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="368" font-size="12.5" font-weight="700" fill="#1e1b14">UPS efficiency is a specification line item, not a nice-to-have</text>
+  <text x="38" y="390" font-size="10.5" fill="#5c5748">N+1 modular: modules run near 85% rated capacity with one in maintenance bypass. 2N: two fully</text>
+  <text x="38" y="404" font-size="10.5" fill="#5c5748">independent strings at 50% load each — bypass must never bridge A and B paths.</text>
+  <text x="38" y="428" font-size="10.5" font-weight="700" fill="#7a3f14">Modern units hit 97–98% at optimal load. The gap between specifying 94% and 97% on a 10 MW</text>
+  <text x="38" y="442" font-size="10.5" font-weight="700" fill="#7a3f14">UPS plant is 300 kW — roughly $250,000/year in power cost.</text>
+
+  <defs>
+    <marker id="es" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

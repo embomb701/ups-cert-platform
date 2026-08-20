@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">TIA-942 — Five Distribution Areas, ER to EDA</text>
+
+  <!-- hierarchy chain -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="160" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="34" y="76" fill="#a4231e">ER</text><text x="34" y="90" font-weight="400" font-size="8.5" fill="#5c5748">Entrance Room —</text><text x="34" y="102" font-weight="400" font-size="8.5" fill="#5c5748">carrier meet-me</text>
+
+    <rect x="199" y="55" width="160" height="55" rx="4" fill="#eef3f7" stroke="#6d28d9" stroke-width="2.5"/><text x="209" y="76" fill="#6d28d9">MDA</text><text x="209" y="90" font-weight="400" font-size="8.5" fill="#5c5748">Main Distribution —</text><text x="209" y="102" font-weight="400" font-size="8.5" fill="#5c5748">core switches</text>
+
+    <rect x="374" y="55" width="160" height="55" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="384" y="76" fill="#0e7490">HDA</text><text x="384" y="90" font-weight="400" font-size="8.5" fill="#5c5748">Horizontal Dist. —</text><text x="384" y="102" font-weight="400" font-size="8.5" fill="#5c5748">one row/pod</text>
+
+    <rect x="549" y="55" width="150" height="55" rx="4" fill="#ffffff" stroke="#7a7256" stroke-width="1.5" stroke-dasharray="3 2"/><text x="559" y="76" fill="#7a7256">ZDA</text><text x="559" y="90" font-weight="400" font-size="8.5" fill="#5c5748">Zone (optional) —</text><text x="559" y="102" font-weight="400" font-size="8.5" fill="#5c5748">consolidation point</text>
+
+    <rect x="714" y="55" width="162" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="724" y="76" fill="#b45309">EDA</text><text x="724" y="90" font-weight="400" font-size="8.5" fill="#5c5748">Equipment Dist. —</text><text x="724" y="102" font-weight="400" font-size="8.5" fill="#5c5748">the rack itself</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#tc)">
+    <line x1="184" y1="82" x2="197" y2="82"/><line x1="359" y1="82" x2="372" y2="82"/>
+    <line x1="534" y1="82" x2="547" y2="82"/><line x1="699" y1="82" x2="712" y2="82"/>
+  </g>
+
+  <!-- backbone -->
+  <rect x="24" y="130" width="410" height="150" rx="6" fill="#eef3f7" stroke="#6d28d9" stroke-width="2"/>
+  <text x="38" y="153" font-size="12.5" font-weight="700" fill="#6d28d9">Backbone cabling</text>
+  <text x="38" y="176" font-size="10" font-weight="700" fill="#1e1b14">OS2 single-mode</text>
+  <text x="38" y="190" font-size="9.5" fill="#5c5748">inter-building, essentially unlimited</text>
+  <text x="38" y="203" font-size="9.5" fill="#5c5748">distance at data center speeds</text>
+  <text x="38" y="227" font-size="10" font-weight="700" fill="#1e1b14">OM4 / OM5 multimode</text>
+  <text x="38" y="241" font-size="9.5" fill="#5c5748">intra-building MDA→HDA;</text>
+  <text x="38" y="254" font-size="9.5" fill="#5c5748">OM4 to 400G at 100m</text>
+  <text x="38" y="265" font-size="9" font-weight="700" fill="#4a2a9e">Always overspec strand count — dark fiber</text>
+  <text x="38" y="276" font-size="9" font-weight="700" fill="#4a2a9e">is cheap now, expensive to pull later.</text>
+
+  <!-- horizontal + management -->
+  <rect x="459" y="130" width="417" height="150" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="153" font-size="12.5" font-weight="700" fill="#b45309">Horizontal cabling + management</text>
+  <text x="473" y="176" font-size="10" font-weight="700" fill="#1e1b14">Cat6A copper</text>
+  <text x="565" y="176" font-size="9.5" fill="#5c5748">10GBASE-T to 100m, most servers</text>
+  <text x="473" y="196" font-size="9.5" fill="#5c5748">OM3/OM4 fiber where speed/distance/density demands</text>
+  <text x="473" y="220" font-size="9.5" font-weight="700" fill="#8a5010">Min. 12-in separation from power feeders</text>
+  <text x="473" y="234" font-size="9.5" font-weight="700" fill="#8a5010">to reduce EMI.</text>
+  <text x="473" y="256" font-size="9" fill="#5c5748">Zero-U managers, velcro (not zip ties), color coding —</text>
+  <text x="473" y="269" font-size="9" fill="#5c5748">enforced from Day 1, tracked in DCIM.</text>
+
+  <rect x="24" y="300" width="852" height="65" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="323" font-size="11.5" font-weight="700" fill="#1e1b14">Connector types: LC duplex for high-density, MPO/MTP for 40G/100G+ parallel optics.</text>
+  <text x="38" y="345" font-size="10.5" fill="#5c5748">A cable-managed environment avoids the hour-long untangle that compounds to months of lost</text>
+  <text x="38" y="359" font-size="10.5" fill="#5c5748">productivity per year — and lets rounds staff spot unauthorized changes immediately.</text>
+</svg>

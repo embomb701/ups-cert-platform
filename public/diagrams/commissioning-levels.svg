@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Commissioning — Where Paper Design Meets Physical Reality</text>
+
+  <!-- L1-L5 ladder -->
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="55" width="160" height="60" rx="4" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/><text x="34" y="75" fill="#0e7490">L1 · Documents</text><text x="34" y="92" font-weight="400" font-size="8.5" fill="#5c5748">submittals, shop</text><text x="34" y="104" font-weight="400" font-size="8.5" fill="#5c5748">drawings vs. spec</text>
+
+    <rect x="199" y="55" width="160" height="60" rx="4" fill="#eef3f7" stroke="#6d28d9" stroke-width="2"/><text x="209" y="75" fill="#6d28d9">L2 · Installation</text><text x="209" y="92" font-weight="400" font-size="8.5" fill="#5c5748">as-built matches</text><text x="209" y="104" font-weight="400" font-size="8.5" fill="#5c5748">drawings, walked</text>
+
+    <rect x="374" y="55" width="160" height="60" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="384" y="75" fill="#b45309">L3 · Component</text><text x="384" y="92" font-weight="400" font-size="8.5" fill="#5c5748">each device tested</text><text x="384" y="104" font-weight="400" font-size="8.5" fill="#5c5748">alone</text>
+
+    <rect x="549" y="55" width="160" height="60" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="559" y="75" fill="#b45309">L4 · Integrated</text><text x="559" y="92" font-weight="400" font-size="8.5" fill="#5c5748">systems work</text><text x="559" y="104" font-weight="400" font-size="8.5" fill="#5c5748">together</text>
+
+    <rect x="724" y="55" width="152" height="60" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="734" y="75" fill="#a4231e">L5 · IST</text><text x="734" y="92" font-weight="400" font-size="8.5" fill="#5c5748">full-facility</text><text x="734" y="104" font-weight="400" font-size="8.5" fill="#5c5748">failure proof</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#cl)">
+    <line x1="184" y1="85" x2="197" y2="85"/><line x1="359" y1="85" x2="372" y2="85"/>
+    <line x1="534" y1="85" x2="547" y2="85"/><line x1="709" y1="85" x2="722" y2="85"/>
+  </g>
+
+  <text x="24" y="140" font-size="9.5" font-weight="700" fill="#8a5010">A wrong nameplate found at L1 (submittal) costs nothing; found after energization, it costs weeks.</text>
+
+  <!-- CxA -->
+  <rect x="24" y="165" width="410" height="115" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="188" font-size="12.5" font-weight="700" fill="#0e7490">The Commissioning Authority (CxA)</text>
+  <text x="38" y="210" font-size="10" fill="#5c5748">Independent professional — not on the</text>
+  <text x="38" y="224" font-size="10" fill="#5c5748">design team — who owns the plan and</text>
+  <text x="38" y="238" font-size="10" fill="#5c5748">signs off the report.</text>
+  <text x="38" y="260" font-size="9.5" font-weight="700" fill="#1f5a8f">Looking for problems, not confirming</text>
+  <text x="38" y="274" font-size="9.5" font-weight="700" fill="#1f5a8f">the contractor's own standard.</text>
+
+  <!-- IST -->
+  <rect x="459" y="165" width="417" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="188" font-size="12.5" font-weight="700" fill="#8f1f1a">L5 — the Integrated Systems Test</text>
+  <text x="473" y="210" font-size="10" fill="#5c5748">A Tier III IST: loss of utility, generator</text>
+  <text x="473" y="224" font-size="10" fill="#5c5748">fail-to-start, UPS module failure, chiller</text>
+  <text x="473" y="238" font-size="10" fill="#5c5748">trip, tower pump failure — sequentially.</text>
+  <text x="473" y="260" font-size="9.5" font-weight="700" fill="#8f1f1a">Takes days, full-facility staffing —</text>
+  <text x="473" y="274" font-size="9.5" font-weight="700" fill="#8f1f1a">proof before the first server is powered.</text>
+
+  <!-- FAT -->
+  <rect x="24" y="300" width="852" height="110" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="323" font-size="12.5" font-weight="700" fill="#b45309">Factory Acceptance Testing (FAT) — cheaper to fail at the factory</text>
+  <text x="38" y="346" font-size="10.5" fill="#5c5748">UPS, generators, paralleling switchgear, chillers — too large to fully test on-site before install. A UPS</text>
+  <text x="38" y="360" font-size="10.5" fill="#5c5748">FAT: full-load run, battery discharge to LVD, manual/auto bypass, SNMP verification, transfer timing.</text>
+  <text x="38" y="384" font-size="10.5" font-weight="700" fill="#7a3f14">Cost to correct escalates at every phase: factory &lt; site pre-energization &lt; after energization &lt; after</text>
+  <text x="38" y="398" font-size="10.5" font-weight="700" fill="#7a3f14">tenant move-in. Send the CxA or an owner's rep to witness.</text>
+
+  <defs>
+    <marker id="cl" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
+</svg>

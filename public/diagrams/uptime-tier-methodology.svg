@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="470" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Uptime Tiers — Redundant Paths, Not Just Redundant Parts</text>
+
+  <!-- four tiers -->
+  <g font-size="10">
+    <rect x="24" y="55" width="205" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+    <text x="34" y="78" font-size="12" font-weight="700" fill="#a4231e">Tier I</text>
+    <text x="34" y="96" fill="#5c5748">Single non-redundant</text>
+    <text x="34" y="109" fill="#5c5748">path</text>
+    <text x="34" y="130" font-weight="700" fill="#1e1b14">99.671%</text>
+    <text x="34" y="145" fill="#5c5748">28.8 hrs down/yr</text>
+
+    <rect x="239" y="55" width="205" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="249" y="78" font-size="12" font-weight="700" fill="#b45309">Tier II</text>
+    <text x="249" y="96" fill="#5c5748">Redundant components,</text>
+    <text x="249" y="109" fill="#5c5748">still single path</text>
+    <text x="249" y="130" font-weight="700" fill="#1e1b14">99.741%</text>
+    <text x="249" y="145" fill="#5c5748">22 hrs down/yr</text>
+
+    <rect x="454" y="55" width="205" height="130" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2.5"/>
+    <text x="464" y="78" font-size="12" font-weight="700" fill="#0e7490">Tier III</text>
+    <text x="464" y="96" fill="#5c5748">Concurrently maintainable</text>
+    <text x="464" y="109" fill="#5c5748">— redundant paths, 1 active</text>
+    <text x="464" y="130" font-weight="700" fill="#1e1b14">99.982%</text>
+    <text x="464" y="145" fill="#5c5748">1.6 hrs down/yr</text>
+
+    <rect x="669" y="55" width="207" height="130" rx="6" fill="#eef3f7" stroke="#6d28d9" stroke-width="2.5"/>
+    <text x="679" y="78" font-size="12" font-weight="700" fill="#6d28d9">Tier IV</text>
+    <text x="679" y="96" fill="#5c5748">Fault tolerant — all</text>
+    <text x="679" y="109" fill="#5c5748">paths active simultaneously</text>
+    <text x="679" y="130" font-weight="700" fill="#1e1b14">99.995%</text>
+    <text x="679" y="145" fill="#5c5748">0.4 hrs down/yr</text>
+  </g>
+  <!-- TIA-942 rating -->
+  <rect x="24" y="200" width="410" height="115" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="223" font-size="12" font-weight="700" fill="#b45309">TIA-942 Rated-1 through Rated-4</text>
+  <text x="38" y="245" font-size="10" fill="#5c5748">Parallel to Uptime Tiers, but covers the</text>
+  <text x="38" y="259" font-size="10" fill="#5c5748">ENTIRE facility — including cabling and</text>
+  <text x="38" y="273" font-size="10" fill="#5c5748">physical security, not just power/cooling.</text>
+  <text x="38" y="297" font-size="9.5" font-weight="700" fill="#8a5010">A Tier III design can fail Rated-3 on cabling alone.</text>
+
+  <!-- site selection -->
+  <rect x="459" y="200" width="417" height="115" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="223" font-size="12" font-weight="700" fill="#0e7490">Site selection baseline (Tier III/IV)</text>
+  <text x="473" y="245" font-size="10" fill="#5c5748">Dual utility feeds, separate substations,</text>
+  <text x="473" y="259" font-size="10" fill="#5c5748">separate transmission paths. Most</text>
+  <text x="473" y="273" font-size="10" fill="#5c5748">commercial DCs target Tier III overall.</text>
+  <text x="473" y="297" font-size="9.5" font-weight="700" fill="#1f5a8f">Fiber diversity is physical, not "carrier" — same conduit, same backhoe risk.</text>
+
+  <!-- stranded power -->
+  <rect x="24" y="330" width="852" height="120" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="353" font-size="12.5" font-weight="700" fill="#1e1b14">Stranded power, not energy waste, is the dominant financial inefficiency</text>
+  <text x="38" y="376" font-size="10.5" fill="#5c5748">Capacity provisioned but not yet deployed — the gap between commissioned plant and actual IT load.</text>
+  <text x="38" y="390" font-size="10.5" fill="#5c5748">Oversizing for load that arrives a decade later is expensive; undersizing locks out future density.</text>
+  <text x="38" y="414" font-size="10.5" font-weight="700" fill="#7a3f14">Phased construction: build the shell + first increment, expand as load grows — the design must</text>
+  <text x="38" y="428" font-size="10.5" font-weight="700" fill="#7a3f14">support expansion without facility shutdown.</text>
+</svg>
