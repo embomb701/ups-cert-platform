@@ -208,7 +208,7 @@ export default function PowerFormulaPage() {
           {/* Three forms */}
           <div className="card-dark p-6">
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">Three Equivalent Forms</p>
-            <p className="text-xs text-gray-400 mb-4">Combine with Ohm's Law (V = IR) to eliminate any unknown:</p>
+            <p className="text-xs text-gray-400 mb-4">Combine with Ohm&apos;s Law (V = IR) to eliminate any unknown:</p>
             <div className="space-y-3">
               {[
                 { f: 'P = V × I', when: 'You know voltage and current', color: 'text-yellow-400' },
@@ -301,7 +301,7 @@ export default function PowerFormulaPage() {
         <div className="card-dark p-6 mb-8">
           <h3 className="text-base font-semibold text-white mb-4">What Is a Watt?</h3>
           <p className="text-sm text-gray-400 mb-4 leading-relaxed">
-            One Watt equals one Joule of energy consumed per second. It doesn't care whether that energy is doing useful work
+            One Watt equals one Joule of energy consumed per second. It doesn&apos;t care whether that energy is doing useful work
             (spinning a motor) or being wasted as heat in a resistor — power is power.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -326,7 +326,7 @@ export default function PowerFormulaPage() {
             <div>
               <p className="text-white font-medium mb-1">Resistive losses in wiring</p>
               <p>Every wire has resistance. P = I²R tells you exactly how many watts are being converted to heat in that wire.
-                A 10A current through 0.5Ω of wire dissipates 50W as heat — that's a serious fire risk if the wire isn't rated for it.</p>
+                A 10A current through 0.5Ω of wire dissipates 50W as heat — that&apos;s a serious fire risk if the wire isn&apos;t rated for it.</p>
             </div>
             <div>
               <p className="text-white font-medium mb-1">UPS efficiency and heat</p>
@@ -414,7 +414,7 @@ export default function PowerFormulaPage() {
         {/* Navigation */}
         <div className="flex items-center justify-between pt-4 border-t border-gray-800">
           <Link href="/training/basic-electricity/ohms-law" className="text-sm text-gray-400 hover:text-white transition-colors">
-            &larr; Ohm's Law
+            &larr; Ohm&apos;s Law
           </Link>
           <div className="text-right">
             <p className="text-xs text-gray-600 mb-1">Next lesson</p>

@@ -107,7 +107,7 @@ export default function AboutPage() {
               </p>
               <p>
                 That breadth of experience across every role in the career path is what makes this
-                platform different. The content here isn't derived from theory or textbooks — it's built
+                platform different. The content here isn&apos;t derived from theory or textbooks — it&apos;s built
                 from startup, commissioning, troubleshooting, service coordination, billing, quoting,
                 field documentation, customer communication, team leadership, and field operations across
                 a wide range of UPS systems, manufacturers, topologies, and critical environments.

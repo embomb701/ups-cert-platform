@@ -32,7 +32,7 @@
   <!-- A2L -->
   <rect x="24" y="325" width="852" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
   <text x="38" y="348" font-size="12.5" font-weight="700" fill="#8f1f1a">A2L refrigerants (R-454B, R-32) — mildly flammable</text>
-  <text x="38" y="370" font-size="10" fill="#5c5748">Lower flammability limit ~9.9% by volume (R-454B). Per ASHRAE 15 &amp; UL 60335-2-40, enclosed spaces need:</text>
+  <text x="38" y="370" font-size="10" fill="#5c5748">Lower flammability limit ~11.5% by volume (R-454B). Per ASHRAE 15 &amp; UL 60335-2-40, enclosed spaces need:</text>
   <g font-size="9.5" font-weight="700" fill="#8f1f1a">
     <text x="50" y="392">• Ignition-source elimination</text>
     <text x="330" y="392">• Leak/refrigerant detectors</text>

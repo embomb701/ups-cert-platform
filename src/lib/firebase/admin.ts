@@ -50,4 +50,5 @@ export const adminStorage = new Proxy({} as ReturnType<typeof admin.storage>, {
   },
 });
 
-export default { adminDb, adminAuth, adminStorage };
+const adminSdk = { adminDb, adminAuth, adminStorage };
+export default adminSdk;

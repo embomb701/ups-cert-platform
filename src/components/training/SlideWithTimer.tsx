@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import PracticalActivity from './PracticalActivity';
 import MeterSimulator from './MeterSimulator';
 import type { PracticalExercise, MeterSimExercise, SlideTable, SlideImage } from '@/data/modules';
+import { DIAGRAM_DIMENSIONS, DEFAULT_DIAGRAM_DIMENSIONS } from '@/data/diagram-dimensions';
 
 const WIDGETS: Record<string, React.LazyExoticComponent<React.ComponentType>> = {
   'ohms-law-explorer': lazy(() => import('./widgets/OhmsLawExplorer')),
@@ -223,14 +224,25 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
           {/* Reference images */}
           {slide.images && slide.images.length > 0 && (
             <div className={`grid gap-4 ${slide.images.length >= 2 ? 'md:grid-cols-2' : ''}`}>
-              {slide.images.map((img, i) => (
+              {slide.images.map((img, i) => {
+                const dims = DIAGRAM_DIMENSIONS[img.src] ?? DEFAULT_DIAGRAM_DIMENSIONS;
+                return (
                 <div key={i} className="rounded-lg overflow-hidden border border-gray-700 bg-gray-900">
-                  <img src={img.src} alt={img.alt} className="w-full h-auto" />
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    width={dims.width}
+                    height={dims.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-auto"
+                  />
                   {img.caption && (
                     <p className="text-xs text-gray-500 px-3 py-2 border-t border-gray-800">{img.caption}</p>
                   )}
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
 

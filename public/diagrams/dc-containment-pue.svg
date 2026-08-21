@@ -3,24 +3,24 @@
 
   <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Containment &amp; Envelopes — Efficiency Trades Against Ride-Through</text>
 
-  <!-- containment diagram -->
+  <!-- containment -->
   <rect x="40" y="60" width="500" height="150" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
   <text x="55" y="83" font-size="12.5" font-weight="700" fill="#1e1b14">Cold-Aisle Containment</text>
 
-  <rect x="70" y="110" width="40" height="70" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
-  <rect x="200" y="110" width="40" height="70" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
-  <rect x="130" y="100" width="90" height="90" fill="#e9f2fb" stroke="#6d28d9" stroke-width="2.5" stroke-dasharray="5 3"/>
-  <text x="135" y="95" font-size="8.5" font-weight="700" fill="#6d28d9">contained cold aisle — doors + roof</text>
+  <rect x="55" y="95" width="220" height="105" rx="5" fill="#e9f2fb" stroke="#6d28d9" stroke-width="2"/>
+  <text x="65" y="115" font-size="10" font-weight="700" fill="#6d28d9">Doors + roof panels seal the</text>
+  <text x="65" y="129" font-size="10" font-weight="700" fill="#6d28d9">cold aisle into its own space.</text>
+  <text x="65" y="149" font-size="9.5" fill="#5c5748">Cold air reaches a rack only</text>
+  <text x="65" y="163" font-size="9.5" fill="#5c5748">through its front intake.</text>
+  <text x="65" y="183" font-size="9.5" font-weight="700" fill="#a4231e">Missing blanking panel =</text>
+  <text x="65" y="196" font-size="9.5" font-weight="700" fill="#a4231e">in-rack recirculation.</text>
 
-  <text x="70" y="200" font-size="9.5" fill="#a4231e" font-weight="700">Missing blanking panel = in-rack recirculation</text>
-  <rect x="235" y="130" width="6" height="30" fill="#fdeaea" stroke="#a4231e" stroke-width="1"/>
-
-  <rect x="270" y="100" width="240" height="90" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
-  <text x="284" y="120" font-size="10" font-weight="700" fill="#8f1f1a">Audit checklist</text>
-  <text x="284" y="138" font-size="9.5" fill="#5c5748">Missing blanking panels, open</text>
-  <text x="284" y="152" font-size="9.5" fill="#5c5748">floor cutouts, propped doors,</text>
-  <text x="284" y="166" font-size="9.5" fill="#5c5748">unsealed cable penetrations —</text>
-  <text x="284" y="180" font-size="9.5" font-weight="700" fill="#8f1f1a">containment only works if maintained</text>
+  <rect x="285" y="95" width="240" height="105" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="295" y="115" font-size="10" font-weight="700" fill="#8f1f1a">Audit checklist</text>
+  <text x="295" y="133" font-size="9.5" fill="#5c5748">Missing blanking panels, open</text>
+  <text x="295" y="147" font-size="9.5" fill="#5c5748">floor cutouts, propped doors,</text>
+  <text x="295" y="161" font-size="9.5" fill="#5c5748">unsealed cable penetrations —</text>
+  <text x="295" y="180" font-size="9.5" font-weight="700" fill="#8f1f1a">containment only works if maintained.</text>
 
   <!-- ASHRAE envelope -->
   <rect x="560" y="60" width="315" height="150" rx="6" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>

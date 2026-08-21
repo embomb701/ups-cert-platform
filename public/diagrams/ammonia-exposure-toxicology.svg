@@ -19,7 +19,7 @@
   </g>
   <text x="38" y="160" font-size="9.5" font-weight="700" fill="#8a5010">Olfactory fatigue = the nose stops detecting a gas that's still present and rising —</text>
   <text x="38" y="176" font-size="9.5" font-weight="700" fill="#8a5010">detector readings override smell above 100 ppm, always.</text>
-  <text x="38" y="200" font-size="9" fill="#5c5748">500 ppm: severe lung damage within 30 min. 2,132-2,982 ppm: enters flammable range (high ignition energy required).</text>
+  <text x="38" y="200" font-size="9" fill="#5c5748">500 ppm: severe lung damage within 30 min. 16%–25% by volume (≈160,000–250,000 ppm): flammable range (high ignition energy required).</text>
 
   <!-- why it burns -->
   <rect x="24" y="240" width="410" height="105" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>

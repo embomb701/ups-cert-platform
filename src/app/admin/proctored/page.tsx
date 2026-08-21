@@ -186,7 +186,7 @@ export default function AdminProctoredPage() {
           <p className="text-xs text-amber-300 font-semibold mb-2">FSE Exam Workflow</p>
           <ol className="space-y-1 text-xs text-gray-400">
             <li>1. <strong className="text-gray-300">scheduling_pending</strong> — Candidate paid. Contact them to schedule.</li>
-            <li>2. <strong className="text-gray-300">ready</strong> — Click "Unlock Exam" above once proctor is confirmed.</li>
+            <li>2. <strong className="text-gray-300">ready</strong> — Click &quot;Unlock Exam&quot; above once proctor is confirmed.</li>
             <li>3. Candidate starts exam from their dashboard.</li>
             <li>4. Exam scored server-side. Certificate issued if passed and not flagged.</li>
           </ol>

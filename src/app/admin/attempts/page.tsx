@@ -335,7 +335,7 @@ function AdminAttemptsContent() {
         </div>
 
         <p className="text-xs text-gray-600 mt-4">
-          "Clear & Reset" deletes all attempts and IP locks for that user + exam level, allowing an immediate retake.
+          &quot;Clear & Reset&quot; deletes all attempts and IP locks for that user + exam level, allowing an immediate retake.
         </p>
       </div>
     </section>

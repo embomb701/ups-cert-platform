@@ -28,13 +28,13 @@ export default function EmployersPage() {
           <p className="text-xs font-semibold text-amber-400 uppercase tracking-widest mb-3">For Employers</p>
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-5 leading-tight">
             Your next FSE already exists.<br />
-            <span className="text-indigo-400">They just haven't been trained yet.</span>
+            <span className="text-indigo-400">They just haven&apos;t been trained yet.</span>
           </h1>
           <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mb-8">
             The UPS field service industry has a talent problem — not a people problem.
-            There are motivated individuals who want this career. What's missing is a
+            There are motivated individuals who want this career. What&apos;s missing is a
             cost-effective, standardized way to get them ready before they walk through your door.
-            That's exactly what Mastering Field Service does.
+            That&apos;s exactly what Mastering Field Service does.
           </p>
           <div className="flex flex-wrap gap-4">
             <a href="#packages" className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors">
@@ -61,8 +61,8 @@ export default function EmployersPage() {
                 </p>
                 <p>
                   Multiply that across multiple hires, account for the inconsistency of trainer-to-trainer
-                  knowledge transfer, and the fact that some candidates wash out after you've already
-                  invested in them — and the hidden cost of your "free" in-house training is anything but free.
+                  knowledge transfer, and the fact that some candidates wash out after you&apos;ve already
+                  invested in them — and the hidden cost of your &quot;free&quot; in-house training is anything but free.
                 </p>
                 <p className="text-white font-medium">
                   Mastering Field Service externalizes that cost. Candidates arrive trained, tested, and certified
@@ -342,7 +342,7 @@ export default function EmployersPage() {
                 candidate has studied UPS field service fundamentals and can pass a rigorous knowledge exam.
                 They do not replace employer safety qualification, OEM training, electrical licensing,
                 NFPA 70E training, or site-specific authorization. Candidates must still be onboarded,
-                supervised, and qualified according to your organization's standards.
+                supervised, and qualified according to your organization&apos;s standards.
               </p>
             </div>
           </div>

@@ -252,7 +252,7 @@ export default function SettingsPage() {
           <div>
             <h2 className="text-base font-semibold text-white">Refer a Friend</h2>
             <p className="text-xs text-gray-500 mt-1">
-              Share your link. When someone signs up through it, it's credited to you.
+              Share your link. When someone signs up through it, it&apos;s credited to you.
             </p>
           </div>
 

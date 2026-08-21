@@ -2,36 +2,30 @@
   <rect width="900" height="470" fill="#fbf9f4"/>
 
   <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">-48V Always-On — the Battery IS the Bus</text>
+  <text x="24" y="52" font-size="12" fill="#5c5748">Parallel-redundant float architecture: no transfer switch, no switching event, ever.</text>
 
-  <!-- architecture diagram -->
-  <rect x="40" y="60" width="500" height="160" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2.5"/>
-  <text x="55" y="83" font-size="12" font-weight="700" fill="#1e1b14">Parallel-Redundant Float Architecture</text>
+  <!-- architecture chain -->
+  <g font-size="10.5" font-weight="700">
+    <rect x="24" y="80" width="150" height="60" rx="5" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
+    <text x="34" y="103" fill="#0e7490">Rectifiers</text><text x="34" y="119" font-weight="400" font-size="9" fill="#4a6d8a">AC → -48V DC</text><text x="34" y="132" font-weight="400" font-size="9" fill="#4a6d8a">float the bus</text>
 
-  <rect x="60" y="105" width="120" height="55" rx="5" fill="#e9f2fb" stroke="#0e7490" stroke-width="2"/>
-  <text x="70" y="128" font-size="10" font-weight="700" fill="#0e7490">Rectifiers</text>
-  <text x="70" y="143" font-size="8.5" fill="#5c5748">AC → -48V DC</text>
+    <rect x="204" y="70" width="150" height="100" rx="5" fill="#eef3f7" stroke="#6d28d9" stroke-width="2.5"/>
+    <text x="214" y="93" fill="#6d28d9">-48V BUS</text>
+    <text x="214" y="112" font-weight="400" font-size="8.5" fill="#4a2a9e">no transfer switch,</text>
+    <text x="214" y="124" font-weight="400" font-size="8.5" fill="#4a2a9e">no static switch,</text>
+    <text x="214" y="136" font-weight="400" font-size="8.5" fill="#4a2a9e">no switching event</text>
 
-  <rect x="60" y="175" width="120" height="30" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/>
-  <text x="70" y="194" font-size="9" fill="#7a3f14">float the bus</text>
+    <rect x="384" y="72" width="150" height="50" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+    <text x="394" y="94" fill="#a4231e">Batteries</text><text x="394" y="110" font-weight="400" font-size="8.5" fill="#8f1f1a">ride in parallel</text>
 
-  <path d="M 180 132 L 220 132" stroke="#0e7490" stroke-width="3"/>
-  <path d="M 200 132 L 200 175 L 220 175" stroke="#0e7490" stroke-width="3" fill="none"/>
-
-  <rect x="225" y="105" width="120" height="100" rx="5" fill="#eef3f7" stroke="#6d28d9" stroke-width="2.5"/>
-  <text x="235" y="128" font-size="10" font-weight="700" fill="#6d28d9">-48V BUS</text>
-  <text x="235" y="150" font-size="8.5" fill="#5c5748">no transfer switch,</text>
-  <text x="235" y="163" font-size="8.5" fill="#5c5748">no static switch,</text>
-  <text x="235" y="176" font-size="8.5" fill="#5c5748">no switching event</text>
-
-  <path d="M 345 132 L 385 132" stroke="#a4231e" stroke-width="3"/>
-  <rect x="390" y="105" width="120" height="55" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
-  <text x="400" y="128" font-size="10" font-weight="700" fill="#a4231e">Batteries</text>
-  <text x="400" y="143" font-size="8.5" fill="#5c5748">ride in parallel</text>
-
-  <path d="M 345 175 L 510 175" stroke="#7a3f14" stroke-width="3"/>
-  <rect x="390" y="160" width="120" height="45" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
-  <text x="400" y="182" font-size="10" font-weight="700" fill="#7a3f14">Load</text>
-  <text x="400" y="196" font-size="8.5" fill="#5c5748">radios, switches</text>
+    <rect x="384" y="128" width="150" height="50" rx="5" fill="#fdeec9" stroke="#7a3f14" stroke-width="2"/>
+    <text x="394" y="150" fill="#7a3f14">Load</text><text x="394" y="166" font-weight="400" font-size="8.5" fill="#8a5010">radios, switches</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="2" marker-end="url(#da)">
+    <line x1="174" y1="110" x2="202" y2="110"/>
+    <line x1="354" y1="97" x2="382" y2="97"/>
+    <line x1="354" y1="153" x2="382" y2="153"/>
+  </g>
 
   <!-- negative ground callout -->
   <rect x="560" y="60" width="315" height="160" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
@@ -76,4 +70,10 @@
   <rect x="24" y="400" width="852" height="50" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
   <text x="38" y="422" font-size="10.5" font-weight="700" fill="#1e1b14">The nominally "-48V" bus runs at 54V during float — this is normal. Equipment must tolerate</text>
   <text x="38" y="438" font-size="10.5" font-weight="700" fill="#1e1b14">the full 42V–57.6V range across discharge, float, and equalize conditions.</text>
+
+  <defs>
+    <marker id="da" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/>
+    </marker>
+  </defs>
 </svg>

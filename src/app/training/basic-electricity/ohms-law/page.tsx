@@ -176,11 +176,11 @@ export default function OhmsLawPage() {
           <span>/</span>
           <Link href="/training/basic-electricity" className="hover:text-gray-300">Basic Electricity</Link>
           <span>/</span>
-          <span className="text-gray-300">Ohm's Law</span>
+          <span className="text-gray-300">Ohm&apos;s Law</span>
         </div>
 
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-white mb-3">Ohm's Law</h1>
+          <h1 className="text-3xl font-bold text-white mb-3">Ohm&apos;s Law</h1>
           <p className="text-gray-400 max-w-2xl">
             The single most important formula in electronics. Every current, every voltage drop,
             every fuse rating — all trace back to this relationship.
@@ -386,7 +386,7 @@ export default function OhmsLawPage() {
           <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-400 leading-relaxed">
             <div>
               <p className="text-white font-medium mb-1">Battery discharge rate</p>
-              <p>A 48V battery bank powering a load with 4Ω total resistance pushes 12A of current. Ohm's Law tells you exactly how hard the batteries are working.</p>
+              <p>A 48V battery bank powering a load with 4Ω total resistance pushes 12A of current. Ohm&apos;s Law tells you exactly how hard the batteries are working.</p>
             </div>
             <div>
               <p className="text-white font-medium mb-1">Fuse and wire sizing</p>
