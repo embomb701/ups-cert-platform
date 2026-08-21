@@ -81,7 +81,7 @@ export const STRIPE_PRODUCTS = {
   training_kitchen: {
     name: 'Commercial Kitchen FSE Training Course + Jr. Kitchen FSE Certification Exam',
     shortName: 'Kitchen Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 99900,   // $999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_KITCHEN ?? '',
   },
 
@@ -97,7 +97,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_kitchen_testout: {
     name: 'Kitchen Training Course + Jr. Kitchen FSE Test-Out (Human Proctored)',
     shortName: 'Kitchen Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 124900,   // $1,249
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_KITCHEN_TESTOUT ?? '',
   },
 
@@ -108,7 +108,7 @@ export const STRIPE_PRODUCTS = {
   training_hvac: {
     name: 'HVAC FSE Training Course + Jr. HVAC FSE Certification Exam',
     shortName: 'HVAC Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 99900,   // $999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_HVAC ?? '',
   },
 
@@ -124,7 +124,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_hvac_testout: {
     name: 'HVAC Training Course + Jr. HVAC FSE Test-Out (Human Proctored)',
     shortName: 'HVAC Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 124900,   // $1,249
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_HVAC_TESTOUT ?? '',
   },
 
@@ -135,7 +135,7 @@ export const STRIPE_PRODUCTS = {
   training_generator: {
     name: 'Power Generation FSE Training Course + Jr. Generator FSE Certification Exam',
     shortName: 'Generator Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 119900,   // $1,199
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_GENERATOR ?? '',
   },
 
@@ -151,7 +151,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_generator_testout: {
     name: 'Generator Training Course + Jr. Generator FSE Test-Out (Human Proctored)',
     shortName: 'Generator Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 144900,   // $1,449
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_GENERATOR_TESTOUT ?? '',
   },
 
@@ -189,7 +189,7 @@ export const STRIPE_PRODUCTS = {
   training_solar: {
     name: 'Solar & Storage FSE Training Course + Jr. Solar FSE Certification Exam',
     shortName: 'Solar/BESS Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 119900,   // $1,199
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_SOLAR ?? '',
   },
 
@@ -205,7 +205,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_solar_testout: {
     name: 'Solar/BESS Training Course + Jr. Solar FSE Test-Out (Human Proctored)',
     shortName: 'Solar Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 144900,   // $1,449
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_SOLAR_TESTOUT ?? '',
   },
 
@@ -216,7 +216,7 @@ export const STRIPE_PRODUCTS = {
   training_evcharging: {
     name: 'EV Charging Infrastructure Training Course + Jr. EV Charging Tech Certification Exam',
     shortName: 'EV Charging Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 99900,   // $999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_EVCHARGING ?? '',
   },
 
@@ -232,7 +232,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_evcharging_testout: {
     name: 'EV Charging Training Course + Jr. EV Tech Test-Out (Human Proctored)',
     shortName: 'EV Charging Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 124900,   // $1,249
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_EVCHARGING_TESTOUT ?? '',
   },
 
@@ -243,7 +243,7 @@ export const STRIPE_PRODUCTS = {
   training_dcplants: {
     name: 'Telecom DC Power Plants Training Course + Jr. DC Plants Tech Certification Exam',
     shortName: 'DC Plants Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 99900,   // $999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_DCPLANTS ?? '',
   },
 
@@ -259,7 +259,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_dcplants_testout: {
     name: 'DC Plants Training Course + Jr. DC Plants Tech Test-Out (Human Proctored)',
     shortName: 'DC Plants Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 124900,   // $1,249
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_DCPLANTS_TESTOUT ?? '',
   },
 
@@ -270,7 +270,7 @@ export const STRIPE_PRODUCTS = {
   training_battery: {
     name: 'Battery Systems Technician Training Course + Jr. Battery Tech Certification Exam',
     shortName: 'Battery Tech Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 89900,   // $899
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_BATTERY ?? '',
   },
 
@@ -286,7 +286,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_battery_testout: {
     name: 'Battery Tech Training Course + Jr. Battery Tech Test-Out (Human Proctored)',
     shortName: 'Battery Tech Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 114900,   // $1,149
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_BATTERY_TESTOUT ?? '',
   },
 
@@ -297,7 +297,7 @@ export const STRIPE_PRODUCTS = {
   training_dcengineer: {
     name: 'Data Center Engineer Training Course + Jr. DC Engineer Certification Exam',
     shortName: 'DC Engineer Training Course',
-    priceInCents: 199900,   // $1,999 (premium: 34 modules)
+    priceInCents: 199900,   // $1,999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_DCENGINEER ?? '',
   },
 
@@ -324,7 +324,7 @@ export const STRIPE_PRODUCTS = {
   training_marine: {
     name: 'Marine Systems Technician Training Course + Jr. Marine Tech Certification Exam',
     shortName: 'Marine Tech Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 109900,   // $1,099
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_MARINE ?? '',
   },
 
@@ -338,7 +338,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_marine_testout: {
     name: 'Marine Tech Training Course + Jr. Marine Tech Test-Out (Human Proctored)',
     shortName: 'Marine Tech Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 134900,   // $1,349
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_MARINE_TESTOUT ?? '',
   },
 
@@ -349,7 +349,7 @@ export const STRIPE_PRODUCTS = {
   training_pool: {
     name: 'Pool Equipment Technician Training Course + Jr. Pool Tech Certification Exam',
     shortName: 'Pool Equipment Tech Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 99900,   // $999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_POOL ?? '',
   },
 
@@ -363,7 +363,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_pool_testout: {
     name: 'Pool Equipment Tech Training Course + Jr. Pool Tech Test-Out (Human Proctored)',
     shortName: 'Pool Equipment Tech Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 124900,   // $1,249
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_POOL_TESTOUT ?? '',
   },
 
@@ -374,7 +374,7 @@ export const STRIPE_PRODUCTS = {
   training_hvac_tech: {
     name: 'HVAC Technician Training Course + Jr. HVAC Tech Certification Exam',
     shortName: 'HVAC Tech Training Course',
-    priceInCents: 149900,
+    priceInCents: 99900,   // $999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_HVAC_TECH ?? '',
   },
 
@@ -388,7 +388,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_hvac_tech_testout: {
     name: 'HVAC Tech Training Course + Jr. HVAC Tech Test-Out (Human Proctored)',
     shortName: 'HVAC Tech Training + Test-Out Package',
-    priceInCents: 174900,
+    priceInCents: 124900,   // $1,249
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_HVAC_TECH_TESTOUT ?? '',
   },
 
@@ -399,7 +399,7 @@ export const STRIPE_PRODUCTS = {
   training_solar_inst: {
     name: 'Solar Installer Training Course + Jr. Solar Installer Certification Exam',
     shortName: 'Solar Installer Training Course',
-    priceInCents: 149900,
+    priceInCents: 79900,   // $799
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_SOLAR_INST ?? '',
   },
 
@@ -413,7 +413,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_solar_inst_testout: {
     name: 'Solar Installer Training Course + Jr. Solar Installer Test-Out (Human Proctored)',
     shortName: 'Solar Installer Training + Test-Out Package',
-    priceInCents: 174900,
+    priceInCents: 104900,   // $1,049
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_SOLAR_INST_TESTOUT ?? '',
   },
 
@@ -424,7 +424,7 @@ export const STRIPE_PRODUCTS = {
   training_wind_tech: {
     name: 'Wind Turbine Technician Training Course + Jr. Wind Turbine Technician Certification Exam',
     shortName: 'Wind Turbine Technician Training Course',
-    priceInCents: 149900,
+    priceInCents: 119900,   // $1,199
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_WIND_TECH ?? '',
   },
 
@@ -438,7 +438,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_wind_tech_testout: {
     name: 'Wind Turbine Technician Training Course + Jr. Wind Turbine Tech Test-Out (Human Proctored)',
     shortName: 'Wind Turbine Tech Training + Test-Out Package',
-    priceInCents: 174900,
+    priceInCents: 144900,   // $1,449
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_WIND_TECH_TESTOUT ?? '',
   },
 
@@ -449,7 +449,7 @@ export const STRIPE_PRODUCTS = {
   training_elevator_tech: {
     name: 'Elevator Technician Training Course + Jr. Elevator Technician Certification Exam',
     shortName: 'Elevator Technician Training Course',
-    priceInCents: 149900,
+    priceInCents: 119900,   // $1,199
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_ELEVATOR_TECH ?? '',
   },
 
@@ -463,7 +463,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_elevator_tech_testout: {
     name: 'Elevator Technician Training Course + Jr. Elevator Tech Test-Out (Human Proctored)',
     shortName: 'Elevator Tech Training + Test-Out Package',
-    priceInCents: 174900,
+    priceInCents: 144900,   // $1,449
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_ELEVATOR_TECH_TESTOUT ?? '',
   },
 
@@ -474,7 +474,7 @@ export const STRIPE_PRODUCTS = {
   training_fire_alarm_tech: {
     name: 'Fire Alarm & Suppression Technician Training Course + Jr. Fire Alarm Technician Certification Exam',
     shortName: 'Fire Alarm Technician Training Course',
-    priceInCents: 149900,
+    priceInCents: 109900,   // $1,099
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_FIRE_ALARM_TECH ?? '',
   },
 
@@ -488,7 +488,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_fire_alarm_tech_testout: {
     name: 'Fire Alarm Technician Training Course + Jr. Fire Alarm Tech Test-Out (Human Proctored)',
     shortName: 'Fire Alarm Tech Training + Test-Out Package',
-    priceInCents: 174900,
+    priceInCents: 134900,   // $1,349
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_FIRE_ALARM_TECH_TESTOUT ?? '',
   },
 
@@ -499,7 +499,7 @@ export const STRIPE_PRODUCTS = {
   training_bmet_tech: {
     name: 'Biomedical Equipment Technician Training Course + Jr. BMET Certification Exam',
     shortName: 'BMET Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 109900,   // $1,099
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_BMET_TECH ?? '',
   },
 
@@ -513,7 +513,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_bmet_tech_testout: {
     name: 'BMET Training Course + Jr. BMET Test-Out (Human Proctored)',
     shortName: 'BMET Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 134900,   // $1,349
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_BMET_TECH_TESTOUT ?? '',
   },
 
@@ -524,7 +524,7 @@ export const STRIPE_PRODUCTS = {
   training_bas_tech: {
     name: 'Building Automation Systems Technician Training Course + Jr. BAS Tech Certification Exam',
     shortName: 'BAS Tech Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 119900,   // $1,199
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_BAS_TECH ?? '',
   },
 
@@ -538,7 +538,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_bas_tech_testout: {
     name: 'BAS Tech Training Course + Jr. BAS Tech Test-Out (Human Proctored)',
     shortName: 'BAS Tech Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 144900,   // $1,449
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_BAS_TECH_TESTOUT ?? '',
   },
 
@@ -549,7 +549,7 @@ export const STRIPE_PRODUCTS = {
   training_ref_tech: {
     name: 'Commercial Refrigeration Technician Training Course + Jr. Ref Tech Certification Exam',
     shortName: 'Ref Tech Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 109900,   // $1,099
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_REF_TECH ?? '',
   },
 
@@ -563,14 +563,14 @@ export const STRIPE_PRODUCTS = {
   pkg_training_ref_tech_testout: {
     name: 'Ref Tech Training Course + Jr. Ref Tech Test-Out (Human Proctored)',
     shortName: 'Ref Tech Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 134900,   // $1,349
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_REF_TECH_TESTOUT ?? '',
   },
 
   training_plc_tech: {
     name: 'Industrial Controls & PLC Technician Training Course + Jr. PLC Tech Certification Exam',
     shortName: 'PLC Tech Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 119900,   // $1,199
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_PLC_TECH ?? '',
   },
 
@@ -584,14 +584,14 @@ export const STRIPE_PRODUCTS = {
   pkg_training_plc_tech_testout: {
     name: 'PLC Tech Training Course + Jr. PLC Tech Test-Out (Human Proctored)',
     shortName: 'PLC Tech Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 144900,   // $1,449
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_PLC_TECH_TESTOUT ?? '',
   },
 
   training_security_tech: {
     name: 'Electronic Security Systems Technician Training Course + Jr. Security Tech Certification Exam',
     shortName: 'Security Tech Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 99900,   // $999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_SECURITY_TECH ?? '',
   },
 
@@ -605,7 +605,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_security_tech_testout: {
     name: 'Security Tech Training Course + Jr. Security Tech Test-Out (Human Proctored)',
     shortName: 'Security Tech Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 124900,   // $1,249
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_SECURITY_TECH_TESTOUT ?? '',
   },
 
@@ -641,7 +641,7 @@ export const STRIPE_PRODUCTS = {
   training_pump_tech: {
     name: 'Pump Technician Training Course + Jr. Pump Technician Certification Exam',
     shortName: 'Pump Tech Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 109900,   // $1,099
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_PUMP_TECH ?? '',
   },
 
@@ -655,7 +655,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_pump_tech_testout: {
     name: 'Pump Tech Training Course + Jr. Pump Tech Test-Out (Human Proctored)',
     shortName: 'Pump Tech Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 134900,   // $1,349
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_PUMP_TECH_TESTOUT ?? '',
   },
 
@@ -666,7 +666,7 @@ export const STRIPE_PRODUCTS = {
   training_telecom: {
     name: 'Telecom OSP Technician Training Course + Jr. Telecom OSP Certification Exam',
     shortName: 'Telecom OSP Training Course',
-    priceInCents: 129900,   // $1,299
+    priceInCents: 119900,   // $1,199
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_TELECOM ?? '',
   },
 
@@ -680,7 +680,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_telecom_testout: {
     name: 'Telecom OSP Training Course + Jr. Telecom OSP Test-Out (Human Proctored)',
     shortName: 'Telecom OSP Training + Test-Out Package',
-    priceInCents: 154900,   // $1,549
+    priceInCents: 144900,   // $1,449
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_TELECOM_TESTOUT ?? '',
   },
 
@@ -691,7 +691,7 @@ export const STRIPE_PRODUCTS = {
   training_industrial_ref: {
     name: 'Industrial Refrigeration Operator Training Course + Jr. Industrial Ref Certification Exam',
     shortName: 'Industrial Ref Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 119900,   // $1,199
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_INDUSTRIAL_REF ?? '',
   },
 
@@ -705,7 +705,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_industrial_ref_testout: {
     name: 'Industrial Ref Training Course + Jr. Industrial Ref Test-Out (Human Proctored)',
     shortName: 'Industrial Ref Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 144900,   // $1,449
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_INDUSTRIAL_REF_TESTOUT ?? '',
   },
 
@@ -716,7 +716,7 @@ export const STRIPE_PRODUCTS = {
   training_dc_ops: {
     name: 'Data Center Operations Manager Training Course + Jr. DC Ops Manager Certification Exam',
     shortName: 'DC Ops Manager Training Course',
-    priceInCents: 149900,   // $1,499
+    priceInCents: 199900,   // $1,999
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_DC_OPS ?? '',
   },
 
@@ -730,7 +730,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_dc_ops_testout: {
     name: 'DC Ops Manager Training Course + Jr. DC Ops Manager Test-Out (Human Proctored)',
     shortName: 'DC Ops Manager Training + Test-Out Package',
-    priceInCents: 174900,   // $1,749
+    priceInCents: 224900,   // $2,249
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_DC_OPS_TESTOUT ?? '',
   },
 
@@ -741,7 +741,7 @@ export const STRIPE_PRODUCTS = {
   training_building_cx: {
     name: 'Building Commissioning Agent Training Course + Jr. Building Cx Agent Certification Exam',
     shortName: 'Building Cx Training Course',
-    priceInCents: 129900,   // $1,299
+    priceInCents: 169900,   // $1,699
     stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_BUILDING_CX ?? '',
   },
 
@@ -755,7 +755,7 @@ export const STRIPE_PRODUCTS = {
   pkg_training_building_cx_testout: {
     name: 'Building Cx Training Course + Jr. Building Cx Test-Out (Human Proctored)',
     shortName: 'Building Cx Training + Test-Out Package',
-    priceInCents: 154900,   // $1,549
+    priceInCents: 194900,   // $1,949
     stripePriceId: process.env.STRIPE_PRICE_ID_PKG_BUILDING_CX_TESTOUT ?? '',
   },
 
@@ -790,3 +790,19 @@ export const STRIPE_PRODUCTS = {
 } as const;
 
 export type ProductId = keyof typeof STRIPE_PRODUCTS;
+
+// ── Display-price helpers ───────────────────────────────────────────────────
+// UI surfaces (course listing, enroll buttons) should never hand-maintain a
+// separate price string — that's exactly the kind of duplicate-source-of-
+// truth that drifts out of sync with what checkout actually charges the
+// moment a price here changes. Derive the label from STRIPE_PRODUCTS instead.
+
+export function formatPriceInCents(cents: number): string {
+  return `$${(cents / 100).toLocaleString('en-US')}`;
+}
+
+export function coursePriceLabel(stripeProductId?: string): string | undefined {
+  if (!stripeProductId) return undefined;
+  const product = STRIPE_PRODUCTS[stripeProductId as ProductId] as { priceInCents: number } | undefined;
+  return product ? formatPriceInCents(product.priceInCents) : undefined;
+}

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { CourseVideo } from '@/components/CourseVideo';
 import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
+import { coursePriceLabel } from '@/lib/stripe/client';
 
 export const dynamic = 'force-dynamic';
 
@@ -161,7 +162,7 @@ export default async function KitchenPortalPage() {
               <div className="flex-shrink-0">
                 <PurchaseButton
                   productId="training_kitchen"
-                  label="Enroll — $1,499"
+                  label={`Enroll — ${coursePriceLabel('training_kitchen') ?? '$1,499'}`}
                   className="block w-full py-2.5 px-5 bg-orange-600 hover:bg-orange-500 disabled:opacity-50 text-white font-semibold rounded-lg text-sm text-center transition-colors"
                 />
               </div>

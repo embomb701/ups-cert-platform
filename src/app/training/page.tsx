@@ -4,6 +4,7 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { COURSES } from '@/data/courses';
 import { COURSE_SEQUENCES } from '@/data';
 import { getCourseStats } from '@/lib/utils/courseStats';
+import { coursePriceLabel } from '@/lib/stripe/client';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { ExternalLinkWarning } from '@/components/ExternalLinkWarning';
@@ -22,12 +23,6 @@ export const metadata: Metadata = {
     images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Training Hub' }],
   },
   twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
-};
-
-const ENROLL_PRICE_LABELS: Record<string, string> = {
-  training_building_cx: 'Enroll — $1,299',
-  training_telecom: 'Enroll — $1,299',
-  training_dcengineer: 'Enroll — $1,999',
 };
 
 // Courses that have a dedicated hub page at /training/[slug]
@@ -306,7 +301,7 @@ export default async function TrainingPage() {
                       {course.examLevel && <span>Certificate exam</span>}
                     </div>
                     <div className="flex items-center justify-between text-xs text-gray-600 mt-auto">
-                      <span>{course.price ?? '$1,499'}</span>
+                      <span>{coursePriceLabel(course.stripeProductId) ?? course.price ?? '$1,499'}</span>
                       <Link href={previewHref} className="text-gray-500 hover:text-gray-300 transition-colors">
                         Preview →
                       </Link>
@@ -314,7 +309,7 @@ export default async function TrainingPage() {
                     {course.stripeProductId && (
                       <PurchaseButton
                         productId={course.stripeProductId as any}
-                        label={ENROLL_PRICE_LABELS[course.stripeProductId] ?? 'Enroll — $1,499'}
+                        label={`Enroll — ${coursePriceLabel(course.stripeProductId) ?? '$1,499'}`}
                         className="block w-full py-2 px-3 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white text-xs font-medium rounded-lg text-center transition-colors"
                       />
                     )}

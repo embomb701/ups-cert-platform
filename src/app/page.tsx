@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { PlacementQuiz } from '@/components/PlacementQuiz';
+import { coursePriceLabel } from '@/lib/stripe/client';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 const OG_IMAGE = `${SITE_URL}/api/og`;
@@ -400,37 +401,40 @@ const CATEGORIES = [
   },
 ];
 
-// Course shortTitle and tagline — keyed by id
-const COURSE_QUICK: Record<string, { shortTitle: string; tagline: string; totalModules: number; free?: boolean; price?: string }> = {
+// Course shortTitle and tagline — keyed by id. Price is intentionally NOT
+// duplicated here — it's derived from STRIPE_PRODUCTS via stripeProductId
+// (see coursePriceLabel below) so this can never drift from what checkout
+// actually charges.
+const COURSE_QUICK: Record<string, { shortTitle: string; tagline: string; totalModules: number; free?: boolean; stripeProductId?: string }> = {
   'critical-environment': { shortTitle: 'CE Fundamentals', tagline: 'Safety and access protocols for anyone entering mission-critical facilities.', totalModules: 8, free: true },
-  'ups':                  { shortTitle: 'UPS FSE',          tagline: 'Service UPS systems in hospitals, data centers, and financial institutions.', totalModules: 28 },
-  'kitchen':              { shortTitle: 'Kitchen FSE',      tagline: 'Service commercial kitchen equipment — refrigeration, cooking, warewashing.', totalModules: 27 },
-  'hvac':                 { shortTitle: 'HVAC FSE',         tagline: 'Service commercial HVAC systems in critical and commercial environments.', totalModules: 25 },
-  'generator':            { shortTitle: 'Generator FSE',    tagline: 'Service standby diesel and gas generators protecting critical facilities.', totalModules: 25 },
-  'data-center':          { shortTitle: 'Data Center CFT',  tagline: 'Operate and maintain all power and cooling systems in data centers.', totalModules: 28 },
-  'solar':                { shortTitle: 'Solar/BESS',       tagline: 'Commission and service solar PV and battery energy storage systems.', totalModules: 21 },
-  'ev-charging':          { shortTitle: 'EV Charging',      tagline: 'Install and service Level 2 and DC fast-charging infrastructure.', totalModules: 18 },
-  'dc-plants':            { shortTitle: 'DC Plants Tech',   tagline: 'Maintain 48V DC power plant systems powering the telecom backbone.', totalModules: 17 },
-  'battery-tech':         { shortTitle: 'Battery Tech',     tagline: 'VRLA, lithium-ion, and flooded cell maintenance across industries.', totalModules: 18 },
-  'dc-engineer':          { shortTitle: 'DC Engineer',      tagline: 'Senior power engineering covering UPS, generators, and full facility power.', totalModules: 34, price: '$1,999' },
-  'marine':               { shortTitle: 'Marine Tech',      tagline: 'Service electrical and mechanical systems on commercial marine vessels.', totalModules: 16 },
-  'pool':                 { shortTitle: 'Pool Tech',        tagline: 'Maintain commercial pool and aquatic systems — pumps, filtration, chemicals.', totalModules: 17 },
-  'hvac-tech':            { shortTitle: 'HVAC Tech',        tagline: 'Commercial HVAC installation and service with a technical depth focus.', totalModules: 16 },
-  'solar-installer':      { shortTitle: 'Solar Installer',  tagline: 'Install and wire solar PV systems — NABCEP certification pathway.', totalModules: 16 },
-  'wind-turbine':         { shortTitle: 'Wind Turbine',     tagline: 'Climb and service wind turbines — mechanical, electrical, and hydraulic.', totalModules: 16 },
-  'elevator':             { shortTitle: 'Elevator Tech',    tagline: 'Service elevators and escalators — IUEC pathway with top-tier pay.', totalModules: 16 },
-  'fire-alarm':           { shortTitle: 'Fire Alarm Tech',  tagline: 'Install and service fire alarm systems — NICET certification pathway.', totalModules: 16 },
-  'bmet':                 { shortTitle: 'BMET',             tagline: 'Maintain biomedical equipment in hospitals and clinical environments.', totalModules: 16 },
-  'bas-tech':             { shortTitle: 'BAS Tech',         tagline: 'Program and service building automation systems — the IT-trades hybrid.', totalModules: 16 },
-  'ref-tech':             { shortTitle: 'Ref Tech',         tagline: 'Service commercial refrigeration — walk-ins, display cases, condensing units.', totalModules: 16 },
-  'plc-tech':             { shortTitle: 'PLC Tech',         tagline: 'Program and troubleshoot industrial PLC automation systems.', totalModules: 16 },
-  'security-tech':        { shortTitle: 'Security Tech',    tagline: 'Install and service access control, CCTV, and intrusion detection systems.', totalModules: 16 },
-  'field-pm':             { shortTitle: 'Field PM',         tagline: 'Manage field projects from initiation through closeout — PMP® pathway.', totalModules: 16 },
-  'pump-tech':            { shortTitle: 'Pump Tech',        tagline: 'Service centrifugal and positive-displacement pump systems.', totalModules: 16 },
-  'industrial-ref':       { shortTitle: 'Industrial Ref',   tagline: 'Ammonia refrigeration systems for food processing, cold storage, and breweries.', totalModules: 6 },
-  'dc-ops':               { shortTitle: 'DC Ops Manager',   tagline: 'Manage critical infrastructure uptime, efficiency, and compliance in data centers.', totalModules: 5 },
-  'building-cx':          { shortTitle: 'Building Cx',      tagline: 'Commission HVAC and BAS systems — LEED EA prerequisite on every project.', totalModules: 5, price: '$1,299' },
-  'telecom':              { shortTitle: 'Telecom OSP',      tagline: 'Outside plant fiber splicing, OTDR testing, and copper plant certification.', totalModules: 6, price: '$1,299' },
+  'ups':                  { shortTitle: 'UPS FSE',          tagline: 'Service UPS systems in hospitals, data centers, and financial institutions.', totalModules: 28, stripeProductId: 'training_course' },
+  'kitchen':              { shortTitle: 'Kitchen FSE',      tagline: 'Service commercial kitchen equipment — refrigeration, cooking, warewashing.', totalModules: 27, stripeProductId: 'training_kitchen' },
+  'hvac':                 { shortTitle: 'HVAC FSE',         tagline: 'Service commercial HVAC systems in critical and commercial environments.', totalModules: 25, stripeProductId: 'training_hvac' },
+  'generator':            { shortTitle: 'Generator FSE',    tagline: 'Service standby diesel and gas generators protecting critical facilities.', totalModules: 25, stripeProductId: 'training_generator' },
+  'data-center':          { shortTitle: 'Data Center CFT',  tagline: 'Operate and maintain all power and cooling systems in data centers.', totalModules: 28, stripeProductId: 'training_datacenter' },
+  'solar':                { shortTitle: 'Solar/BESS',       tagline: 'Commission and service solar PV and battery energy storage systems.', totalModules: 21, stripeProductId: 'training_solar' },
+  'ev-charging':          { shortTitle: 'EV Charging',      tagline: 'Install and service Level 2 and DC fast-charging infrastructure.', totalModules: 18, stripeProductId: 'training_evcharging' },
+  'dc-plants':            { shortTitle: 'DC Plants Tech',   tagline: 'Maintain 48V DC power plant systems powering the telecom backbone.', totalModules: 17, stripeProductId: 'training_dcplants' },
+  'battery-tech':         { shortTitle: 'Battery Tech',     tagline: 'VRLA, lithium-ion, and flooded cell maintenance across industries.', totalModules: 18, stripeProductId: 'training_battery' },
+  'dc-engineer':          { shortTitle: 'DC Engineer',      tagline: 'Senior power engineering covering UPS, generators, and full facility power.', totalModules: 34, stripeProductId: 'training_dcengineer' },
+  'marine':               { shortTitle: 'Marine Tech',      tagline: 'Service electrical and mechanical systems on commercial marine vessels.', totalModules: 16, stripeProductId: 'training_marine' },
+  'pool':                 { shortTitle: 'Pool Tech',        tagline: 'Maintain commercial pool and aquatic systems — pumps, filtration, chemicals.', totalModules: 17, stripeProductId: 'training_pool' },
+  'hvac-tech':            { shortTitle: 'HVAC Tech',        tagline: 'Commercial HVAC installation and service with a technical depth focus.', totalModules: 16, stripeProductId: 'training_hvac_tech' },
+  'solar-installer':      { shortTitle: 'Solar Installer',  tagline: 'Install and wire solar PV systems — NABCEP certification pathway.', totalModules: 16, stripeProductId: 'training_solar_inst' },
+  'wind-turbine':         { shortTitle: 'Wind Turbine',     tagline: 'Climb and service wind turbines — mechanical, electrical, and hydraulic.', totalModules: 16, stripeProductId: 'training_wind_tech' },
+  'elevator':             { shortTitle: 'Elevator Tech',    tagline: 'Service elevators and escalators — IUEC pathway with top-tier pay.', totalModules: 16, stripeProductId: 'training_elevator_tech' },
+  'fire-alarm':           { shortTitle: 'Fire Alarm Tech',  tagline: 'Install and service fire alarm systems — NICET certification pathway.', totalModules: 16, stripeProductId: 'training_fire_alarm_tech' },
+  'bmet':                 { shortTitle: 'BMET',             tagline: 'Maintain biomedical equipment in hospitals and clinical environments.', totalModules: 16, stripeProductId: 'training_bmet_tech' },
+  'bas-tech':             { shortTitle: 'BAS Tech',         tagline: 'Program and service building automation systems — the IT-trades hybrid.', totalModules: 16, stripeProductId: 'training_bas_tech' },
+  'ref-tech':             { shortTitle: 'Ref Tech',         tagline: 'Service commercial refrigeration — walk-ins, display cases, condensing units.', totalModules: 16, stripeProductId: 'training_ref_tech' },
+  'plc-tech':             { shortTitle: 'PLC Tech',         tagline: 'Program and troubleshoot industrial PLC automation systems.', totalModules: 16, stripeProductId: 'training_plc_tech' },
+  'security-tech':        { shortTitle: 'Security Tech',    tagline: 'Install and service access control, CCTV, and intrusion detection systems.', totalModules: 16, stripeProductId: 'training_security_tech' },
+  'field-pm':             { shortTitle: 'Field PM',         tagline: 'Manage field projects from initiation through closeout — PMP® pathway.', totalModules: 16, stripeProductId: 'training_field_pm' },
+  'pump-tech':            { shortTitle: 'Pump Tech',        tagline: 'Service centrifugal and positive-displacement pump systems.', totalModules: 16, stripeProductId: 'training_pump_tech' },
+  'industrial-ref':       { shortTitle: 'Industrial Ref',   tagline: 'Ammonia refrigeration systems for food processing, cold storage, and breweries.', totalModules: 6, stripeProductId: 'training_industrial_ref' },
+  'dc-ops':               { shortTitle: 'DC Ops Manager',   tagline: 'Manage critical infrastructure uptime, efficiency, and compliance in data centers.', totalModules: 5, stripeProductId: 'training_dc_ops' },
+  'building-cx':          { shortTitle: 'Building Cx',      tagline: 'Commission HVAC and BAS systems — LEED EA prerequisite on every project.', totalModules: 5, stripeProductId: 'training_building_cx' },
+  'telecom':              { shortTitle: 'Telecom OSP',      tagline: 'Outside plant fiber splicing, OTDR testing, and copper plant certification.', totalModules: 6, stripeProductId: 'training_telecom' },
 };
 
 const COLOR_ACCENT: Record<string, string> = {
@@ -654,7 +658,7 @@ export default function HomePage() {
                             href="/login"
                             className="flex-1 py-2 px-4 bg-blue-700 hover:bg-blue-600 text-white text-sm font-semibold rounded-lg text-center transition-colors"
                           >
-                            {q.free ? 'Start Free →' : `Enroll — ${q.price ?? '$1,499'} →`}
+                            {q.free ? 'Start Free →' : `Enroll — ${coursePriceLabel(q.stripeProductId) ?? '$1,499'} →`}
                           </Link>
                           <Link
                             href={`/training/${id}`}

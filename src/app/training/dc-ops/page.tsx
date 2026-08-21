@@ -6,6 +6,7 @@ import { COURSES } from '@/data/courses';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import { generateCourseMetadata } from '@/lib/utils/courseMetadata';
+import { coursePriceLabel } from '@/lib/stripe/client';
 
 export const dynamic = 'force-dynamic';
 
@@ -96,7 +97,7 @@ export default async function DcOpsOverviewPage() {
               <div className="flex-shrink-0">
                 <PurchaseButton
                   productId="training_dc_ops"
-                  label="Enroll — $1,499"
+                  label={`Enroll — ${coursePriceLabel('training_dc_ops') ?? '$1,499'}`}
                   className="block w-full py-2.5 px-5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold rounded-lg text-sm text-center transition-colors"
                 />
               </div>

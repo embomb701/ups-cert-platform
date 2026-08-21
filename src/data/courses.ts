@@ -1142,7 +1142,6 @@ export const COURSES: TrainingCourse[] = [
     stripeProductId: 'training_dcengineer',
     testOutProductId: 'jr_dc_engineer_test_human',
     comingSoon: false,
-    price: '$1,999',
     examLevel: 'jr_dc_engineer',
   },
   {

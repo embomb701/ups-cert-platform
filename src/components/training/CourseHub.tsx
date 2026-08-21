@@ -6,6 +6,7 @@ import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { COURSE_SEQUENCES } from '@/data/index';
 import { COURSES } from '@/data/courses';
 import { getCourseStats } from '@/lib/utils/courseStats';
+import { coursePriceLabel } from '@/lib/stripe/client';
 import Link from 'next/link';
 import { PurchaseButton } from '@/components/exam/PurchaseButton';
 import type { ProductId } from '@/types';
@@ -223,7 +224,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
             </p>
             <PurchaseButton
               productId={course.stripeProductId as ProductId}
-              label={`Enroll — ${course.price ?? '$1,499'}`}
+              label={`Enroll — ${coursePriceLabel(course.stripeProductId) ?? course.price ?? '$1,499'}`}
               className={`px-5 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors ${c.btn}`}
             />
           </div>
@@ -251,7 +252,7 @@ export async function CourseHub({ courseId }: { courseId: string }) {
                     </div>
                     <PurchaseButton
                       productId={course.stripeProductId as ProductId}
-                      label={`Enroll — ${course.price ?? '$1,499'}`}
+                      label={`Enroll — ${coursePriceLabel(course.stripeProductId) ?? course.price ?? '$1,499'}`}
                       className={`flex-shrink-0 px-4 py-2 rounded-lg text-white text-sm font-semibold transition-colors ${c.btn}`}
                     />
                   </div>
