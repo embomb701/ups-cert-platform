@@ -9,43 +9,47 @@ import { ExamQuestion } from '@/components/exam/ExamQuestion';
 import { ExamTimer } from '@/components/exam/ExamTimer';
 import type { ExamLevel, QuestionForExam, ExamSessionState } from '@/types';
 
+// Practice exam types map to the certification bank they draw from.
+// Module-level (not component-local) so its reference is stable across
+// renders — the exam-start effect below reads it without listing it as
+// a dependency, which would only be safe if it never changes identity.
+const PRACTICE_MAP: Record<string, ExamLevel> = {
+  practice_jr_fse: 'jr_fse',
+  practice_jr_kitchen_fse: 'jr_kitchen_fse',
+  practice_jr_hvac_fse: 'jr_hvac_fse',
+  practice_jr_gen_fse: 'jr_gen_fse',
+  practice_jr_dc_cft: 'jr_dc_cft',
+  practice_jr_solar_fse: 'jr_solar_fse',
+  practice_jr_ev_tech: 'jr_ev_tech',
+  practice_jr_dcp_tech: 'jr_dcp_tech',
+  practice_jr_battery_tech: 'jr_battery_tech',
+  practice_jr_dc_engineer: 'jr_dc_engineer',
+  practice_jr_marine_tech: 'jr_marine_tech',
+  practice_jr_pool_tech: 'jr_pool_tech',
+  practice_jr_hvac_tech: 'jr_hvac_tech',
+  practice_jr_solar_inst: 'jr_solar_inst',
+  practice_jr_wind_tech: 'jr_wind_tech',
+  practice_jr_elevator_tech: 'jr_elevator_tech',
+  practice_jr_fire_alarm_tech: 'jr_fire_alarm_tech',
+  practice_jr_bmet_tech: 'jr_bmet_tech',
+  practice_jr_bas_tech: 'jr_bas_tech',
+  practice_jr_ref_tech: 'jr_ref_tech',
+  practice_jr_plc_tech: 'jr_plc_tech',
+  practice_jr_security_tech: 'jr_security_tech',
+  practice_jr_field_pm: 'jr_field_pm',
+  practice_jr_pump_tech: 'jr_pump_tech',
+  practice_jr_industrial_ref: 'jr_industrial_ref',
+  practice_jr_dc_ops: 'jr_dc_ops',
+  practice_jr_building_cx: 'jr_building_cx',
+  practice_jr_telecom_tech: 'jr_telecom_tech',
+};
+
 export default function ExamPage() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, loading } = useAuth();
   const examType = (params?.examType as string) ?? 'jr_fse';
-  // Practice exam types map to the certification bank they draw from
-  const PRACTICE_MAP: Record<string, ExamLevel> = {
-    practice_jr_fse: 'jr_fse',
-    practice_jr_kitchen_fse: 'jr_kitchen_fse',
-    practice_jr_hvac_fse: 'jr_hvac_fse',
-    practice_jr_gen_fse: 'jr_gen_fse',
-    practice_jr_dc_cft: 'jr_dc_cft',
-    practice_jr_solar_fse: 'jr_solar_fse',
-    practice_jr_ev_tech: 'jr_ev_tech',
-    practice_jr_dcp_tech: 'jr_dcp_tech',
-    practice_jr_battery_tech: 'jr_battery_tech',
-    practice_jr_dc_engineer: 'jr_dc_engineer',
-    practice_jr_marine_tech: 'jr_marine_tech',
-    practice_jr_pool_tech: 'jr_pool_tech',
-    practice_jr_hvac_tech: 'jr_hvac_tech',
-    practice_jr_solar_inst: 'jr_solar_inst',
-    practice_jr_wind_tech: 'jr_wind_tech',
-    practice_jr_elevator_tech: 'jr_elevator_tech',
-    practice_jr_fire_alarm_tech: 'jr_fire_alarm_tech',
-    practice_jr_bmet_tech: 'jr_bmet_tech',
-    practice_jr_bas_tech: 'jr_bas_tech',
-    practice_jr_ref_tech: 'jr_ref_tech',
-    practice_jr_plc_tech: 'jr_plc_tech',
-    practice_jr_security_tech: 'jr_security_tech',
-    practice_jr_field_pm: 'jr_field_pm',
-    practice_jr_pump_tech: 'jr_pump_tech',
-    practice_jr_industrial_ref: 'jr_industrial_ref',
-    practice_jr_dc_ops: 'jr_dc_ops',
-    practice_jr_building_cx: 'jr_building_cx',
-    practice_jr_telecom_tech: 'jr_telecom_tech',
-  };
   const isPractice = examType in PRACTICE_MAP;
   const candidateName = searchParams?.get('name') ?? '';
 
@@ -92,6 +96,13 @@ export default function ExamPage() {
       })
       .catch(() => setError('Failed to start exam. Please try again.'))
       .finally(() => setStarting(false));
+    // session/starting are read only as re-entry guards (skip if an attempt
+    // is already starting or started), not reactive triggers — including
+    // them would not change behavior but invites confusion. isPractice is a
+    // pure function of examType, already a dep. candidateName is read once,
+    // at exam start, before session exists — a mid-flight change is a
+    // vanishingly rare edge case, not worth re-firing the start request.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, examType]);
 
   const submitAnswer = useCallback(
