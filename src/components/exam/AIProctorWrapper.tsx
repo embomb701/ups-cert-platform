@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useAuth } from '@/components/auth/AuthProvider';
+import type { SuspiciousEvent } from '@/types';
 
 interface Props {
   attemptId: string;
@@ -10,8 +11,12 @@ interface Props {
 
 type ProctorStatus = 'requesting' | 'loading' | 'active' | 'camera_denied' | 'error';
 
+// The bare suffix logViolation is called with — it prepends 'ai_' before
+// sending, so this must match SuspiciousEvent['type']'s 'ai_*' members.
+type AiViolationKind = 'no_face' | 'multiple_faces' | 'looking_away';
+
 interface Violation {
-  type: string;
+  type: AiViolationKind;
   label: string;
   at: Date;
 }
@@ -30,12 +35,13 @@ export function AIProctorWrapper({ attemptId, children }: Props) {
   const [violations, setViolations] = useState<Violation[]>([]);
   const [faceCount, setFaceCount] = useState<number | null>(null);
 
-  const logViolation = useCallback(async (type: string, label: string) => {
+  const logViolation = useCallback(async (type: AiViolationKind, label: string) => {
     const v: Violation = { type, label, at: new Date() };
     setViolations((prev) => [...prev.slice(-9), v]);
 
     try {
       const token = user ? await (await import('@/lib/firebase/auth')).getIdToken() : null;
+      const eventType: SuspiciousEvent['type'] = `ai_${type}`;
       await fetch('/api/exam/event', {
         method: 'POST',
         headers: {
@@ -44,7 +50,7 @@ export function AIProctorWrapper({ attemptId, children }: Props) {
         },
         body: JSON.stringify({
           attemptId,
-          events: [{ type: `ai_${type}`, count: 1, lastOccurredAt: new Date().toISOString() }],
+          events: [{ type: eventType, count: 1, lastOccurredAt: new Date().toISOString() }],
         }),
       });
     } catch {

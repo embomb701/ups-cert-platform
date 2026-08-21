@@ -6,8 +6,12 @@
 
 import type { SuspiciousEvent, SuspiciousRiskLevel } from '@/types';
 
-// Event weights for risk scoring
-const EVENT_WEIGHTS: Record<string, number> = {
+// Event weights for risk scoring. Exported because
+// src/app/api/admin/attempts/[id]/events/route.ts recomputes this same
+// scoring (over Firestore-aggregated counts instead of an in-memory
+// SuspiciousEvent[]) and must stay in sync with it — import this constant
+// there rather than hand-copying it.
+export const EVENT_WEIGHTS: Record<string, number> = {
   // Browser-based events
   tab_switch: 3,
   blur: 1,

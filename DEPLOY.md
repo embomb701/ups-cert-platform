@@ -1,103 +1,88 @@
-# Deployment Guide — GitHub + Netlify
+# Deployment Guide — GitHub + Vercel
+
+The live site (`fse-academy.com` / `masteringfse.com`) is a Vercel project (`a-team12/ups-cert-platform`) that auto-deploys to production on every push to `main`. This guide covers setting that up from scratch, or reproducing it for a fork.
 
 ## Step 1 — Push to GitHub (Terminal, ~2 min)
-
-Open a terminal and navigate to this project folder, then run:
 
 ```bash
 git init
 git add .
-git commit -m "Initial MVP scaffold"
+git commit -m "Initial commit"
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/ups-cert-platform.git
 git push -u origin main
 ```
 
 > Replace `YOUR_USERNAME` with your GitHub username.
-> Create the repo first at https://github.com/new — name it `ups-cert-platform`, private, no README.
+> Create the repo first at https://github.com/new.
 
 ---
 
-## Step 2 — Create Netlify Site (~2 min)
+## Step 2 — Create the Vercel Project (~2 min)
 
-1. Go to https://app.netlify.com
-2. Click **Add new site → Import an existing project**
-3. Choose **GitHub**
-4. Authorize Netlify to access your GitHub if prompted
-5. Select the `ups-cert-platform` repository
-6. Build settings (should auto-detect, but verify):
-   - **Build command:** `npm run build`
-   - **Publish directory:** `.next`
-   - **Node version:** `20`
-7. Click **Deploy site**
+Via the dashboard:
+1. Go to https://vercel.com/new
+2. Import the `ups-cert-platform` GitHub repository
+3. Framework preset should auto-detect as **Next.js** — leave build/output settings default
+4. Deploy
 
----
-
-## Step 3 — Add Environment Variables in Netlify (~3 min)
-
-In your Netlify site dashboard go to **Site configuration → Environment variables → Add a variable** and add every value from `.env.example`:
-
-| Variable | Where to get it |
-|---|---|
-| `NEXT_PUBLIC_FIREBASE_API_KEY` | Firebase Console → Project Settings → Web app |
-| `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` | Same |
-| `NEXT_PUBLIC_FIREBASE_PROJECT_ID` | Same |
-| `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` | Same |
-| `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | Same |
-| `NEXT_PUBLIC_FIREBASE_APP_ID` | Same |
-| `FIREBASE_CLIENT_EMAIL` | Firebase Console → Service Accounts → Generate key |
-| `FIREBASE_PRIVATE_KEY` | Same (include full key with `\n` newlines) |
-| `STRIPE_SECRET_KEY` | Stripe Dashboard → Developers → API keys |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Same |
-| `STRIPE_WEBHOOK_SECRET` | After Step 4 below |
-| `STRIPE_PRICE_ID_JR_FSC` | Stripe Dashboard → Products → Jr. FSC price ID |
-| `STRIPE_PRICE_ID_FSC` | Stripe Dashboard → Products → FSC price ID |
-| `NEXT_PUBLIC_SITE_URL` | Your Netlify site URL (e.g. `https://your-site.netlify.app`) |
-| `ADMIN_EMAILS` | Your email address |
-| `IP_HASH_SECRET` | Any long random string (32+ chars) |
-
-After adding variables, trigger a **redeploy** from the Deploys tab.
+Or via the CLI (`npm install -g vercel`, or use `npx vercel`):
+```bash
+vercel link      # link this folder to the Vercel project
+vercel --prod     # deploy to production
+```
 
 ---
 
-## Step 4 — Set Up Stripe Webhook
+## Step 3 — Add Environment Variables (~5 min)
+
+In the Vercel dashboard: **Project → Settings → Environment Variables**. Add every value from `.env.example` (each one is documented inline in that file — Firebase client + admin config, Stripe secret/publishable keys and per-product price IDs, `NEXT_PUBLIC_SITE_URL`, `ADMIN_EMAILS`, `IP_HASH_SECRET`, `SEED_SECRET`, `CRON_SECRET`, `SENDGRID_API_KEY`, and the `SITE_GATE_*` trio).
+
+Or via the CLI:
+```bash
+vercel env add STRIPE_SECRET_KEY production
+# ...repeat per variable, or use `vercel env pull` to sync an existing .env.local
+```
+
+After adding variables, redeploy (`vercel --prod`, or push a commit) so the build picks them up.
+
+**Site gate:** until the site is meant to be public, `src/middleware.ts` blocks every visitor behind a username/password screen driven by `SITE_GATE_USER` / `SITE_GATE_PASSWORD` / `SITE_GATE_SECRET`. Leaving any of the three unset fails the gate closed (nobody gets in — including you). To actually go live, either delete `src/middleware.ts` or set `SITE_GATE_ENABLED=false`.
+
+---
+
+## Step 4 — Set Up the Stripe Webhook
 
 1. Go to https://dashboard.stripe.com/webhooks
 2. Click **Add endpoint**
-3. Endpoint URL: `https://YOUR-SITE.netlify.app/api/stripe/webhook`
+3. Endpoint URL: `https://YOUR-DOMAIN/api/stripe/webhook`
 4. Select event: `checkout.session.completed`
 5. Click **Add endpoint**
 6. Copy the **Signing secret** (starts with `whsec_`)
-7. Add it to Netlify as `STRIPE_WEBHOOK_SECRET` and redeploy
+7. Add it to Vercel as `STRIPE_WEBHOOK_SECRET` and redeploy
+
+`/api/*` routes are explicitly excluded from the site gate (see `src/middleware.ts`) so the webhook stays reachable even while the rest of the site is gated.
 
 ---
 
 ## Step 5 — Deploy Firestore Rules
 
 ```bash
-# Install Firebase CLI if needed
 npm install -g firebase-tools
-
-# Login
 firebase login
-
-# Initialize (select your project)
 firebase use YOUR_PROJECT_ID
-
-# Deploy rules
 firebase deploy --only firestore:rules
 ```
 
 ---
 
-## Step 6 — Import Sample Questions
+## Step 6 — Import Question Banks
 
 ```bash
-# From the project folder
-npm run validate-questions
-npm run import-questions -- --file data/questions/jr-fsc-sample.json
-npm run import-questions -- --file data/questions/fsc-sample.json
+npm run validate-questions -- --file data/questions/<file>.json
+npm run import-questions -- --file data/questions/<file>.json
 ```
+
+Repeat per program — one `*-jr-fresh.json` / `*-jr-derived.json` pair lives in `data/questions/` for each of the 28 trade programs.
 
 ---
 
@@ -107,11 +92,15 @@ npm run import-questions -- --file data/questions/fsc-sample.json
 2. Go to Firebase Console → Firestore → `users` collection
 3. Find your user document (by email)
 4. Add field: `role` = `"admin"`
+5. Add your email to the `ADMIN_EMAILS` env var and redeploy
 
 ---
 
-## You're Live
+## Verifying a Deploy
 
-Your site will be at `https://your-site-name.netlify.app`.
+```bash
+vercel ls                      # recent deployments and their status
+vercel inspect <deployment-url>  # status, target, and which domains it's aliased to
+```
 
-Netlify auto-deploys every time you push to the `main` branch on GitHub.
+A `Ready` / `Production` deployment aliased to your custom domain means the push is live — though if the site gate (Step 3) is still enabled, "live" means "reachable and gated," not "publicly browsable."

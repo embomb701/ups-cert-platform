@@ -35,8 +35,8 @@
       { "id": "c", "text": "1.0 ohm" },
       { "id": "d", "text": "5.0 ohms" }
     ],
-    "correctChoiceId": "b",
-    "explanation": "NFPA 99 requires ground continuity of less than 0.2 ohms from the receptacle ground pin to the panel ground bus. Higher resistance indicates corrosion, loose connections, or damaged wiring that compromises the safety ground path."
+    "correctChoiceId": "a",
+    "explanation": "NFPA 99 requires ground continuity of less than 0.5 ohms from the receptacle ground pin to the panel ground bus (0.2 ohms is IEC 60601's stricter medical-device limit, not the NFPA 99 facility receptacle requirement). Higher resistance indicates corrosion, loose connections, or damaged wiring that compromises the safety ground path."
   },
   {
     "id": "bmet_fresh_004",
@@ -80,15 +80,15 @@
   {
     "id": "bmet_fresh_007",
     "examLevel": "jr_bmet_tech",
-    "question": "During electrical safety testing, a ground continuity measurement of 0.35 ohms requires the BMET to:",
+    "question": "During electrical safety testing, a ground continuity measurement of 0.65 ohms requires the BMET to:",
     "choices": [
-      { "id": "a", "text": "Return the device to service — 0.35 ohms is within acceptable limits" },
+      { "id": "a", "text": "Return the device to service — 0.65 ohms is within acceptable limits" },
       { "id": "b", "text": "Tag the device out of service and investigate the high ground resistance" },
       { "id": "c", "text": "Re-test immediately as high readings are often transient" },
       { "id": "d", "text": "Document the result and schedule repair at the next maintenance window" }
     ],
     "correctChoiceId": "b",
-    "explanation": "NFPA 99 requires ground continuity of less than 0.2 ohms. A reading of 0.35 ohms fails this requirement. The device must be red-tagged, the wiring inspected for corrosion or loose connections, repaired, and retested before returning to patient care."
+    "explanation": "NFPA 99 requires ground continuity of less than 0.5 ohms. A reading of 0.65 ohms fails this requirement. The device must be red-tagged, the wiring inspected for corrosion or loose connections, repaired, and retested before returning to patient care."
   },
   {
     "id": "bmet_fresh_008",

@@ -230,7 +230,11 @@ export interface SuspiciousEvent {
     | 'cut_attempt'
     | 'right_click'
     | 'text_selection'
-    | 'devtools_detected';
+    | 'devtools_detected'
+    // AI camera proctoring events — reported by AIProctorWrapper.tsx.
+    | 'ai_looking_away'
+    | 'ai_no_face'
+    | 'ai_multiple_faces';
   count: number;
   lastOccurredAt: Date;
 }

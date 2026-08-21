@@ -1,24 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
+import { EVENT_WEIGHTS } from '@/lib/exam/antiCheat';
 
 export const dynamic = 'force-dynamic';
-
-const EVENT_WEIGHTS: Record<string, number> = {
-  tab_switch: 3,
-  blur: 1,
-  visibility_change: 2,
-  fullscreen_exit: 2,
-  copy_attempt: 4,
-  paste_attempt: 4,
-  cut_attempt: 4,
-  right_click: 2,
-  text_selection: 1,
-  devtools_detected: 10,
-  ai_looking_away: 5,
-  ai_no_face: 8,
-  ai_multiple_faces: 10,
-};
 
 const EVENT_LABELS: Record<string, string> = {
   tab_switch: 'Tab / window switch',
