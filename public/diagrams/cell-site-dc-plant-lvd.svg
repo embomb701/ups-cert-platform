@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Cell Site -48V Plant — Batteries Float, So There Is No Switching Delay</text>
+
+  <!-- rectifier N+1 -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#0e7490">Rectifier plant — N+1 redundancy</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Modular, hot-swappable modules convert</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">208/240V 3-phase AC to regulated -48V DC.</text>
+  <text x="38" y="136" font-size="9.5" font-weight="700" fill="#1f5a8f">N+1: any single module can fail</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">without affecting site operation.</text>
+  <text x="38" y="172" font-size="9" fill="#5c5748">Rectifiers operate in parallel, sharing current on the DC bus.</text>
+
+  <!-- battery float -->
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#065f46">Battery float — no switching delay</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Batteries are ALWAYS connected, always</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">trickle-charged, always on the bus.</text>
+  <rect x="473" y="126" width="380" height="26" rx="4" fill="#059669"/>
+  <text x="663" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Utility fails → batteries carry the load instantly</text>
+  <text x="473" y="168" font-size="9" fill="#5c5748">The load never notices — no relay, no gap, no reset.</text>
+
+  <!-- LVD priority -->
+  <rect x="24" y="215" width="852" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="238" font-size="12.5" font-weight="700" fill="#b45309">LVD — Low-Voltage Disconnect, prioritized load shedding</text>
+  <rect x="38" y="250" width="230" height="26" rx="4" fill="#b45309"/>
+  <text x="153" y="268" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Threshold: ~42-43.5V (-48V plant)</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="285" width="380" height="46" rx="4" fill="#e9f4ef" stroke="#059669"/><text x="228" y="304" text-anchor="middle" fill="#065f46">Critical stays powered</text><text x="228" y="320" font-weight="400" font-size="8.5" text-anchor="middle" fill="#3f3a2c">baseband, radio equipment</text>
+
+    <rect x="450" y="285" width="380" height="46" rx="4" fill="#fdeaea" stroke="#a4231e"/><text x="640" y="304" text-anchor="middle" fill="#8f1f1a">Non-critical drops first</text><text x="640" y="320" font-weight="400" font-size="8.5" text-anchor="middle" fill="#8f1f1a">lighting, HVAC, non-essential monitoring</text>
+  </g>
+
+  <rect x="24" y="360" width="852" height="85" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="383" font-size="12" font-weight="700" fill="#1e1b14">A weak string fails silently — until it doesn't</text>
+  <text x="38" y="405" font-size="10" fill="#5c5748">Monthly float voltage, quarterly conductance/impedance testing, annual visual inspection, periodic</text>
+  <text x="38" y="419" font-size="10" fill="#5c5748">discharge test (IEEE 1188) — a degrading battery gives no warning until the next utility outage exposes it, often on the coldest night of the year.</text>
+</svg>

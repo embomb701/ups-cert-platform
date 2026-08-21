@@ -210,6 +210,9 @@ export const TELECOM_MODULES: TrainingModule[] = [
           'A loss budget calculation: the transmitter power minus the receiver sensitivity gives the total available loss margin. From that margin, subtract all passive losses (cable, connectors, splices) to determine the system margin. If the margin is positive, the link will work. If negative, the link will not. Example: transmitter power -3 dBm, receiver sensitivity -25 dBm, available budget = 22 dB. 5 km at 0.35 dB/km = 1.75 dB. Four connector pairs at 0.3 dB = 1.2 dB. Six splices at 0.05 dB = 0.3 dB. Total loss = 3.25 dB. Margin = 22 - 3.25 = 18.75 dB — this link works with plenty of margin.',
           'As an OSP tech, you use a power meter and light source (optical loss test set / OLTS) to measure actual end-to-end loss and compare against the loss budget. If measured loss exceeds the budget, you have a problem: a bad splice, a dirty connector, a macrobend, or a damaged section. The OTDR then locates where in the link the excess loss occurs.',
         ],
+        images: [
+          { src: '/diagrams/fiber-loss-budget-decibels.svg', alt: 'Diagram of the decibel logarithmic scale, typical fusion splice, connector, and cable losses, and a worked loss budget calculation showing available budget minus total losses equals margin', caption: 'Loss is additive in dB — a worked example shows 18.75 dB of margin on a 22 dB budget after subtracting cable, connector, and splice losses.' },
+        ],
         keyPoints: [
           '3 dB = half power; 10 dB = one-tenth power; losses are additive in dB',
           'Typical losses: fusion splice 0.02–0.10 dB; connector pair 0.1–0.75 dB; SMF cable 0.20–0.35 dB/km',
@@ -335,6 +338,9 @@ export const TELECOM_MODULES: TrainingModule[] = [
           'Key OTDR settings: wavelength (must match the operating wavelength — 1310 nm or 1550 nm for SMF), pulse width (wider pulses provide more range but reduce spatial resolution — for short links use narrow pulses), range (set to slightly beyond the expected link length), and averaging time (more averaging improves signal-to-noise but takes longer). Most modern OTDRs have automatic settings that work for initial characterization.',
           'Bidirectional OTDR measurement: splice loss measured from one end will differ slightly from the same splice measured from the other end, due to fiber geometry differences at the splice interface. The accepted splice loss is the average of both directions. For acceptance testing, bidirectional measurement is required by TIA-526-7. Modern OTDR software can compute the bidirectional average automatically when traces from both ends are provided.',
         ],
+        images: [
+          { src: '/diagrams/otdr-trace-interpretation.svg', alt: 'Diagram of an OTDR trace showing the launch event, cable attenuation slope, splice step losses without reflection, connector spike-plus-step signatures, and fiber end reflection, plus the bidirectional measurement requirement', caption: 'A step with no reflection means glass-to-glass (splice or macrobend); a spike plus step means a physical gap (connector or break).' },
+        ],
         keyPoints: [
           'OTDR sends laser pulses, measures backscatter vs distance — shows attenuation, splices, connectors, breaks along the link',
           'Trace elements: launch event, slope (cable loss), step losses (splices), reflections (connectors), end-face',
@@ -425,6 +431,9 @@ export const TELECOM_MODULES: TrainingModule[] = [
           'The 110-block (Type 110) is the modern standard for structured cabling: pairs are punched down onto wiring blocks using an impact punch tool (110 punch tool), which terminates and trims in one operation. 110-blocks are used in patch panels, IDFs, and MDFs in commercial buildings. The advantage of 110 hardware: more pairs per unit area, better high-frequency performance than 66-block for data applications, and a cleaner, more organized appearance.',
           'The krone block (used in European-origin systems) and the BIX block are two other cross-connect formats encountered in the field. While different physically, all cross-connect systems serve the same purpose: provide a manageable point where pairs can be traced, tested, and rerouted without disturbing cables on either side.',
           'Punchdown tools: the 66-block requires a 66-type punchdown tool; the 110-block requires a 110-type tool. Using the wrong tool damages the terminals. Always verify the block type before selecting the tool. The punchdown tool has two sides: "cut" and "no-cut." The cut side trims the conductor flush after termination. Never use the no-cut side on the final termination — it leaves a wire stub that can cause shorts.',
+        ],
+        images: [
+          { src: '/diagrams/cross-connect-blocks-comparison.svg', alt: 'Diagram comparing 66-block legacy cross-connect hardware with modern 110-block punch-down termination, and a warning that 66-type and 110-type punchdown tools are not interchangeable', caption: '66-block degrades above Category 3; 110-block supports Cat 5e and above — and the punchdown tools that terminate them are never interchangeable.' },
         ],
         keyPoints: [
           '66-block: legacy telecom standard, two-sided cross-connect with jumpers, still common in COs and existing plant',
@@ -551,6 +560,9 @@ export const TELECOM_MODULES: TrainingModule[] = [
           'LVD (Low-Voltage Disconnect): when the battery discharges to the LVD threshold (typically 42–43.5V for a −48V plant), the plant controller disconnects non-critical loads in a prioritized sequence to extend runtime on critical equipment. Critical equipment (typically baseband and radio) stays powered; auxiliary loads (lighting, HVAC, non-essential monitoring) drop first.',
           'Battery maintenance at cell sites: the same testing protocols as any VRLA string — monthly float voltage verification, quarterly impedance testing with a conductance meter, annual visual inspection, and the periodic full-load discharge test (following IEEE 1188 for VRLA). A weak string at a cell site fails silently until the next utility outage — a cold night in winter with a weak battery is when failures become outages.',
         ],
+        images: [
+          { src: '/diagrams/cell-site-dc-plant-lvd.svg', alt: 'Diagram of the cell site -48V rectifier plant N+1 redundancy, battery float operation with no switching delay, the LVD prioritized load-shedding sequence, and the battery maintenance testing schedule', caption: 'Batteries always float on the bus — when utility fails, they carry the load instantly, with no relay, no gap, no reset.' },
+        ],
         keyPoints: [
           'Rectifier plant: modular shelves, hot-swap N+1 redundancy, convert AC to −48V DC',
           'Battery float: batteries always on the bus — seamless transition, no switching delay on utility failure',
@@ -676,6 +688,9 @@ export const TELECOM_MODULES: TrainingModule[] = [
           'Inspection tools: a fiber inspection probe (digital microscope) connects to the end-face and displays it on a screen. Probes are available in 200×, 400×, and higher magnification. IEC 61300-3-35 defines four inspection zones on the connector end-face (Zone A: core, Zone B: cladding, Zone C: contact/adhesive, Zone D: ferrule) and specifies the maximum number and size of defects allowed in each zone per the TIA/IEC standards. Zone A (the core region) is the most critical — even tiny contamination in this zone causes significant insertion loss.',
           'Cleaning methods: dry cleaning (one-stroke fiber cleaning sticks or cassette cleaners) is the first attempt. If the probe still shows contamination after a dry clean, follow with a wet clean using a lint-free wipe dampened with optical-grade IPA (99% pure minimum — lower concentrations leave residue), then finish with a dry wipe. Never touch a cleaned end-face with your fingers — skin oils instantly contaminate the surface.',
           'Connector inspection before mating is mandatory for all permanent installations. Connecting a dirty fiber to a clean fiber contaminates the clean end-face as well — and in some cases permanently scratches the core. Inspect both sides of every mated pair before connection. Connector inspection should also be performed before OTDR testing — a dirty launch connector adds loss to the trace that looks like a fiber problem but is actually at the instrument end.',
+        ],
+        images: [
+          { src: '/diagrams/fiber-inspection-cleaning.svg', alt: 'Diagram of the IEC 61300-3-35 four fiber connector inspection zones, the dry-then-wet-then-dry cleaning sequence, and the rule to inspect both sides of every mated pair', caption: 'A single dust particle in Zone A can cost 1-2 dB — dry clean first, wet clean with optical-grade IPA only if needed, and inspect both sides of every pair.' },
         ],
         keyPoints: [
           '"Inspect before you connect" — contamination is the #1 cause of fiber link failures',

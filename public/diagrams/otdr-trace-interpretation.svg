@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Reading an OTDR Trace — What Each Signature Means</text>
+
+  <!-- trace chart -->
+  <rect x="24" y="55" width="852" height="200" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <line x1="60" y1="230" x2="60" y2="80" stroke="#5c5748" stroke-width="1.5"/>
+  <line x1="60" y1="230" x2="850" y2="230" stroke="#5c5748" stroke-width="1.5"/>
+  <text x="30" y="90" font-size="8.5" fill="#5c5748">dB</text>
+  <text x="800" y="248" font-size="8.5" fill="#5c5748">Distance</text>
+
+  <!-- launch event -->
+  <line x1="70" y1="90" x2="70" y2="150" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="45" y="80" font-size="7.5" font-weight="700" fill="#8f1f1a">Launch</text>
+
+  <!-- slope -->
+  <path d="M70,150 L280,175" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  <text x="130" y="167" font-size="7.5" font-weight="700" fill="#5b21b6">Cable attenuation (slope)</text>
+
+  <!-- splice step -->
+  <path d="M280,175 L280,183 L420,192" fill="none" stroke="#059669" stroke-width="2"/>
+  <text x="290" y="200" font-size="7.5" font-weight="700" fill="#065f46">Splice (step, no reflection)</text>
+
+  <!-- connector spike -->
+  <line x1="420" y1="192" x2="420" y2="130" stroke="#a4231e" stroke-width="2.5"/>
+  <path d="M420,192 L420,198 L620,212" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  <text x="430" y="120" font-size="7.5" font-weight="700" fill="#8f1f1a">Connector (spike + step)</text>
+
+  <!-- end reflection -->
+  <line x1="750" y1="212" x2="750" y2="95" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="700" y="88" font-size="7.5" font-weight="700" fill="#8f1f1a">Fiber end</text>
+
+  <!-- legend -->
+  <rect x="24" y="265" width="410" height="105" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="288" font-size="12" font-weight="700" fill="#065f46">Step, no reflection = glass-to-glass</text>
+  <text x="38" y="310" font-size="9.5" fill="#3f3a2c">Fusion splices and macrobends: no</text>
+  <text x="38" y="324" font-size="9.5" fill="#3f3a2c">Fresnel reflection because there's no</text>
+  <text x="38" y="338" font-size="9.5" fill="#3f3a2c">glass-air gap to reflect off.</text>
+  <text x="38" y="358" font-size="9" fill="#5c5748">A splice loses power; a macrobend leaks it out the cladding — same trace signature.</text>
+
+  <!-- reflective spike -->
+  <rect x="459" y="265" width="417" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="288" font-size="12" font-weight="700" fill="#8f1f1a">Spike + step = a physical glass-air gap</text>
+  <text x="473" y="310" font-size="9.5" fill="#5c5748">Connector pairs and breaks both create</text>
+  <text x="473" y="324" font-size="9.5" fill="#5c5748">Fresnel reflections — the spike is the</text>
+  <text x="473" y="338" font-size="9.5" fill="#5c5748">reflection, the step after it is the loss.</text>
+
+  <!-- bidirectional -->
+  <rect x="24" y="385" width="852" height="80" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="408" font-size="12" font-weight="700" fill="#7a3f14">Bidirectional measurement — required for acceptance (TIA-526-7)</text>
+  <text x="38" y="430" font-size="10" fill="#5c5748">Apparent splice loss differs by direction due to fiber geometry at the interface — the accepted value is</text>
+  <text x="38" y="444" font-size="10" fill="#5c5748">the average of both directions, not either single-direction reading alone.</text>
+</svg>

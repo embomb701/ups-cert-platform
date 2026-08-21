@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">66-Block vs. 110-Block — Different Tools, Not Interchangeable</text>
+
+  <!-- 66 block -->
+  <rect x="24" y="55" width="410" height="160" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#1e1b14">66-block (M66) — legacy</text>
+  <text x="38" y="100" font-size="9.5" fill="#5c5748">Two-sided cross-connect: incoming</text>
+  <text x="38" y="114" font-size="9.5" fill="#5c5748">pairs one side, outgoing the other,</text>
+  <text x="38" y="128" font-size="9.5" fill="#5c5748">jumpered between. Center clips bridge</text>
+  <text x="38" y="142" font-size="9.5" fill="#5c5748">or separate.</text>
+  <text x="38" y="164" font-size="9.5" font-weight="700" fill="#8a5010">Performance degrades above Category 3</text>
+  <text x="38" y="178" font-size="9.5" font-weight="700" fill="#8a5010">(16 MHz) — not for modern data.</text>
+  <text x="38" y="198" font-size="9" fill="#5c5748">Still common in COs, entrance terminals, legacy copper plant.</text>
+
+  <!-- 110 block -->
+  <rect x="459" y="55" width="417" height="160" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#065f46">110-block — modern standard</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Punch-down termination: the 110 tool</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">terminates AND trims in one operation.</text>
+  <text x="473" y="136" font-size="9.5" font-weight="700" fill="#065f46">Supports Category 5e and above —</text>
+  <text x="473" y="150" font-size="9.5" font-weight="700" fill="#065f46">the standard for patch panels, IDFs, MDFs.</text>
+  <text x="473" y="172" font-size="9" fill="#5c5748">More pairs per unit area, cleaner organization than 66-block.</text>
+  <text x="473" y="188" font-size="9" fill="#5c5748">Krone and BIX blocks serve the same role in other regions.</text>
+
+  <!-- punchdown tools -->
+  <rect x="24" y="230" width="852" height="110" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="253" font-size="12.5" font-weight="700" fill="#8f1f1a">Punchdown tools are NOT interchangeable</text>
+  <text x="38" y="275" font-size="10" fill="#5c5748">A 66-type tool damages 110-block IDC contacts, and vice versa — always verify block type before</text>
+  <text x="38" y="289" font-size="10" fill="#5c5748">selecting the tool.</text>
+  <rect x="38" y="301" width="360" height="26" rx="4" fill="#8f1f1a"/>
+  <text x="218" y="319" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">"Cut" side for final terminations, always</text>
+  <text x="410" y="319" font-size="9" fill="#5c5748">"No-cut" leaves a stub that shorts adjacent pairs</text>
+
+  <rect x="24" y="355" width="852" height="90" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="378" font-size="12" font-weight="700" fill="#1e1b14">All cross-connect systems serve the same purpose</text>
+  <text x="38" y="400" font-size="10" fill="#5c5748">Regardless of block type — 66, 110, krone, or BIX — the goal is the same: a manageable point where</text>
+  <text x="38" y="414" font-size="10" fill="#5c5748">pairs can be traced, tested, and rerouted without disturbing cables on either side.</text>
+</svg>
