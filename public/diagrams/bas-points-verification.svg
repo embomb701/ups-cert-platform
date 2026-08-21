@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">BAS Commissioning — Verify the Inputs Before You Trust the Control Logic</text>
+
+  <!-- points verification -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#0e7490">Points verification — the first BAS Cx step</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Confirm every sensor reads reality and</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">every actuator command moves the</text>
+  <text x="38" y="128" font-size="9.5" fill="#3f3a2c">CORRECT physical device.</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">AHU-1's economizer damper command</text>
+  <text x="38" y="164" font-size="9.5" font-weight="700" fill="#1f5a8f">must move AHU-1's damper, not AHU-2's.</text>
+
+  <!-- silent error -->
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#8f1f1a">Sensor calibration — the silent failure</text>
+  <text x="473" y="100" font-size="9.5" fill="#5c5748">A 5°F sensor offset triggers NO alarm —</text>
+  <text x="473" y="114" font-size="9.5" fill="#5c5748">it just makes the wrong decision, all day,</text>
+  <text x="473" y="128" font-size="9.5" fill="#5c5748">every day, silently.</text>
+  <rect x="473" y="140" width="380" height="26" rx="4" fill="#8f1f1a"/>
+  <text x="663" y="158" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Verify against calibrated reference instruments</text>
+
+  <!-- worked example -->
+  <rect x="24" y="200" width="852" height="90" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="223" font-size="12" font-weight="700" fill="#b45309">Worked example — a +5°F SAT sensor offset</text>
+  <text x="38" y="245" font-size="10" fill="#5c5748">Controller thinks supply air is 5°F warmer than it actually is → calls for more cooling to reach setpoint</text>
+  <text x="38" y="259" font-size="10" fill="#5c5748">→ delivers overcooled air, wastes energy, and never trips an alarm on its own.</text>
+  <text x="38" y="278" font-size="9" fill="#5c5748">Also common: CO2 drift, un-zeroed static pressure sensors, RH sensors degraded by liquid water exposure.</text>
+
+  <!-- SOO verification -->
+  <rect x="24" y="305" width="852" height="105" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="328" font-size="12.5" font-weight="700" fill="#065f46">Sequence of operation (SOO) verification — a desk review, not a field test</text>
+  <text x="38" y="350" font-size="10" fill="#3f3a2c">Compare the programmed sequence (controls contractor's documentation) against the specified</text>
+  <text x="38" y="364" font-size="10" fill="#3f3a2c">sequence in the mechanical spec — before any field time is spent.</text>
+  <text x="38" y="386" font-size="9.5" font-weight="700" fill="#065f46">Discrepancies found here cost nothing but reading time; the same gap found in the field costs a failed test.</text>
+</svg>

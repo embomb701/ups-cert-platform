@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">PCL Before FPT — Never Functionally Test Equipment That Isn't Ready</text>
+
+  <!-- PCL -->
+  <rect x="24" y="55" width="410" height="150" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#0e7490">Prefunctional checklist (PCL)</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Confirms equipment is installed</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">correctly — WITHOUT testing operation.</text>
+  <text x="38" y="136" font-size="9.5" font-weight="700" fill="#1f5a8f">Nameplate match, mounted/leveled,</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">connections complete, filters in, safety</text>
+  <text x="38" y="164" font-size="9.5" font-weight="700" fill="#1f5a8f">controls wired.</text>
+  <text x="38" y="186" font-size="9" fill="#5c5748">Completed and signed by the INSTALLING CONTRACTOR before CxA starts testing.</text>
+
+  <!-- FPT -->
+  <rect x="459" y="55" width="417" height="150" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#065f46">Functional Performance Test (FPT)</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">Exercises the system through its full</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">range of operating modes — verifies the</text>
+  <text x="473" y="128" font-size="9.5" fill="#3f3a2c">sequence of operation actually works.</text>
+  <rect x="473" y="140" width="380" height="26" rx="4" fill="#059669"/>
+  <text x="663" y="158" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Every step: expected result vs. actual result</text>
+  <text x="473" y="186" font-size="9" fill="#5c5748">A permanent pass/fail project record, not a checkbox.</text>
+
+  <!-- example test scope -->
+  <rect x="24" y="220" width="852" height="105" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="243" font-size="12" font-weight="700" fill="#b45309">A VAV AHU FPT covers every operating mode, not just design conditions</text>
+  <g font-size="9" font-weight="700" fill="#8a5010">
+    <text x="50" y="267">• SA temp control, heating &amp; cooling</text>
+    <text x="290" y="267">• Economizer at various OA conditions</text>
+    <text x="560" y="267">• Min OA damper position</text>
+    <text x="50" y="285">• Fan speed modulation vs. static pressure</text>
+    <text x="380" y="285">• Smoke detector + fire/smoke damper integration</text>
+  </g>
+  <text x="38" y="308" font-size="9.5" font-weight="700" fill="#8a5010">A system that works at design conditions can still fail in warm-up, smoke control, or min-ventilation mode.</text>
+
+  <!-- issues log -->
+  <rect x="24" y="345" width="852" height="95" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="368" font-size="12" font-weight="700" fill="#1e1b14">The issues log — every deficiency tracked to resolution</text>
+  <text x="38" y="390" font-size="10" fill="#5c5748">Description, responsible party, due date, resolution — for every finding at every phase. A clean issues</text>
+  <text x="38" y="404" font-size="10" fill="#5c5748">log (all items resolved or formally owner-accepted) is a prerequisite to commissioning substantial completion.</text>
+</svg>
