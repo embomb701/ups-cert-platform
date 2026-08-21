@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Single, Double, or Cartridge — Match the Seal to the Fluid</text>
+
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="55" width="272" height="150" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="38" y="78" fill="#0e7490">Single seal</text>
+    <text x="38" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">One set of seal faces — fluid</text>
+    <text x="38" y="113" font-weight="400" font-size="9.5" fill="#3f3a2c">on one side, atmosphere the other.</text>
+    <text x="38" y="136" font-weight="700" font-size="9.5" fill="#1f5a8f">Suitable for non-hazardous,</text>
+    <text x="38" y="150" font-weight="700" font-size="9.5" fill="#1f5a8f">non-toxic fluids only.</text>
+
+    <rect x="314" y="55" width="272" height="150" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+    <text x="328" y="78" fill="#8f1f1a">Double seal</text>
+    <text x="328" y="100" font-weight="400" font-size="9.5" fill="#5c5748">Two sets of faces with a</text>
+    <text x="328" y="113" font-weight="400" font-size="9.5" fill="#5c5748">barrier fluid between them.</text>
+    <text x="328" y="136" font-weight="700" font-size="9.5" fill="#8f1f1a">Required for hazardous,</text>
+    <text x="328" y="150" font-weight="700" font-size="9.5" fill="#8f1f1a">toxic, or abrasive fluids.</text>
+
+    <rect x="604" y="55" width="272" height="150" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+    <text x="618" y="78" fill="#065f46">Cartridge seal</text>
+    <text x="618" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Pre-assembled unit — slides on</text>
+    <text x="618" y="113" font-weight="400" font-size="9.5" fill="#3f3a2c">the shaft, bolts to the stuffing box.</text>
+    <text x="618" y="136" font-weight="700" font-size="9.5" fill="#065f46">No spring-compression</text>
+    <text x="618" y="150" font-weight="700" font-size="9.5" fill="#065f46">measurement — far fewer install errors.</text>
+  </g>
+
+  <!-- flush plans -->
+  <rect x="24" y="220" width="852" height="105" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="243" font-size="12.5" font-weight="700" fill="#b45309">API seal flush plans</text>
+  <text x="38" y="265" font-size="10" fill="#5c5748">Plans 11, 21, 32, 53, and others describe exactly how seal faces are lubricated, cooled, and protected —</text>
+  <text x="38" y="279" font-size="10" fill="#5c5748">the correct plan depends on the pumped fluid's characteristics and system pressure.</text>
+  <text x="38" y="301" font-size="9.5" font-weight="700" fill="#8a5010">Get the flush plan wrong and even the correctly-selected seal type will fail prematurely.</text>
+
+  <rect x="24" y="340" width="852" height="100" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="363" font-size="12" font-weight="700" fill="#1e1b14">Choosing between the three</text>
+  <text x="38" y="385" font-size="10" fill="#5c5748">Fluid hazard class drives the single-vs-double decision first — barrier fluid containment is non-negotiable</text>
+  <text x="38" y="399" font-size="10" fill="#5c5748">for toxic or abrasive service. Cartridge construction is an installation-quality upgrade layered on top of</text>
+  <text x="38" y="413" font-size="10" fill="#5c5748">either configuration — it doesn't change what the seal protects against, only how reliably it goes in.</text>
+</svg>

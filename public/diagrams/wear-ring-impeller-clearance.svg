@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Wear Rings — the Cheap Part That Determines Pump Efficiency</text>
+
+  <!-- function -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#0e7490">What wear rings do</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Case and impeller wear rings control the</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">internal recirculation path between the</text>
+  <text x="38" y="128" font-size="9.5" fill="#3f3a2c">high-pressure discharge and low-pressure suction.</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#1f5a8f">As they erode: internal leakage rises,</text>
+  <text x="38" y="164" font-size="9.5" font-weight="700" fill="#1f5a8f">efficiency drops, flow output falls.</text>
+
+  <!-- clearance spec -->
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#b45309">Clearance measurement</text>
+  <rect x="473" y="90" width="290" height="26" rx="4" fill="#b45309"/>
+  <text x="618" y="108" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Typical limit: 0.010–0.025 in per side</text>
+  <text x="473" y="134" font-size="9.5" fill="#3f3a2c">Measured with feeler gauges or a dial</text>
+  <text x="473" y="148" font-size="9.5" fill="#3f3a2c">indicator against the manufacturer spec.</text>
+  <text x="473" y="170" font-size="9.5" font-weight="700" fill="#8a5010">Over limit → replace the rings, not the pump.</text>
+
+  <!-- impeller inspection -->
+  <rect x="24" y="200" width="852" height="130" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="223" font-size="12.5" font-weight="700" fill="#8f1f1a">Two failure signatures on the impeller itself</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="235" width="380" height="75" rx="4" fill="#ffffff" stroke="#a4231e"/>
+    <text x="52" y="258" fill="#8f1f1a">Cavitation erosion</text>
+    <text x="52" y="278" font-weight="400" font-size="9" fill="#5c5748">Pitted, rough vane surfaces near the</text>
+    <text x="52" y="292" font-weight="400" font-size="9" fill="#5c5748">leading edge — bubble-implosion damage.</text>
+
+    <rect x="438" y="235" width="420" height="75" rx="4" fill="#ffffff" stroke="#a4231e"/>
+    <text x="452" y="258" fill="#8f1f1a">Abrasive-fluid erosion</text>
+    <text x="452" y="278" font-weight="400" font-size="9" fill="#5c5748">Smooth, polished thinning across vane</text>
+    <text x="452" y="292" font-weight="400" font-size="9" fill="#5c5748">surfaces — particulate wear, not pitting.</text>
+  </g>
+
+  <rect x="24" y="345" width="852" height="95" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="368" font-size="12" font-weight="700" fill="#1e1b14">Reading the wear pattern tells you the root cause</text>
+  <text x="38" y="390" font-size="10" fill="#5c5748">Pitted, rough erosion near the vane leading edge points back to a suction-side cavitation problem —</text>
+  <text x="38" y="404" font-size="10" fill="#5c5748">fix the NPSH margin, not just the impeller. Smooth polished thinning across the whole vane surface</text>
+  <text x="38" y="418" font-size="10" fill="#5c5748">points to abrasive particulate in the pumped fluid — check upstream filtration instead.</text>
+</svg>

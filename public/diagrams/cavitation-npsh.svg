@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Cavitation — When Suction Pressure Loses to Vapor Pressure</text>
+
+  <!-- mechanism -->
+  <g font-size="9" font-weight="700">
+    <rect x="24" y="55" width="195" height="55" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="121" y="78" text-anchor="middle" fill="#0e7490">Suction pressure drops</text><text x="121" y="94" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">below vapor pressure</text>
+
+    <rect x="239" y="55" width="195" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="336" y="78" text-anchor="middle" fill="#b45309">Vapor bubbles form</text><text x="336" y="94" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">fluid boils locally</text>
+
+    <rect x="454" y="55" width="195" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="551" y="78" text-anchor="middle" fill="#8f1f1a">Bubbles collapse</text><text x="551" y="94" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">at higher-pressure impeller</text>
+
+    <rect x="669" y="55" width="207" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="772" y="78" text-anchor="middle" fill="#8f1f1a">Shockwaves erode metal</text><text x="772" y="94" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">impeller/casing damage</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#cv)">
+    <line x1="219" y1="82" x2="237" y2="82"/><line x1="434" y1="82" x2="452" y2="82"/><line x1="649" y1="82" x2="667" y2="82"/>
+  </g>
+
+  <!-- signs -->
+  <rect x="24" y="130" width="410" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="153" font-size="12" font-weight="700" fill="#1e1b14">Signs of cavitation</text>
+  <text x="38" y="175" font-size="9.5" fill="#5c5748">Crackling/rumbling noise — like rocks in a</text>
+  <text x="38" y="189" font-size="9.5" fill="#5c5748">dryer. Vibration, reduced flow and pressure,</text>
+  <text x="38" y="203" font-size="9.5" fill="#5c5748">rapid impeller and casing erosion.</text>
+  <text x="38" y="222" font-size="9" font-weight="700" fill="#1e1b14">Unmistakable once you've heard it once.</text>
+
+  <!-- NPSH margin -->
+  <rect x="459" y="130" width="417" height="105" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="153" font-size="12" font-weight="700" fill="#065f46">NPSH — the number that predicts it</text>
+  <text x="473" y="175" font-size="9.5" fill="#3f3a2c">NPSHr = minimum head the pump needs.</text>
+  <text x="473" y="189" font-size="9.5" fill="#3f3a2c">NPSHa = head the system actually provides.</text>
+  <rect x="473" y="199" width="290" height="26" rx="4" fill="#059669"/>
+  <text x="618" y="217" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">NPSHa must exceed NPSHr by ≥3 ft (1m)</text>
+
+  <!-- remedies -->
+  <rect x="24" y="250" width="852" height="105" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="38" y="273" font-size="12" font-weight="700" fill="#b45309">Five remedies, in the order most techs try them</text>
+  <g font-size="9.5" font-weight="700" fill="#8a5010">
+    <text x="50" y="297">1. Lower fluid temperature (raises the vapor-pressure margin)</text>
+    <text x="50" y="315">2. Reduce suction pipe friction — shorter runs, fewer fittings</text>
+    <text x="50" y="333">3. Lower pump elevation relative to the source, or reduce speed, or select a lower-NPSHr pump</text>
+  </g>
+
+  <rect x="24" y="365" width="852" height="80" rx="6" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="386" font-size="11.5" font-weight="700" fill="#1e1b14">Cavitation damage is progressive, not cosmetic</text>
+  <text x="38" y="406" font-size="10" fill="#5c5748">Left uncorrected, cavitation erosion on impeller vanes and casing walls compounds — efficiency</text>
+  <text x="38" y="420" font-size="10" fill="#5c5748">drops further, which worsens the underlying suction condition.</text>
+
+  <defs>
+    <marker id="cv" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/></marker>
+  </defs>
+</svg>

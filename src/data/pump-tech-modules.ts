@@ -60,6 +60,9 @@ export const PUMP_TECH_MODULES: TrainingModule[] = [
           'The Best Efficiency Point (BEP) is the flow rate at which the pump operates with maximum efficiency. Operating far from BEP increases vibration, heat, and wear.',
           'The system curve plots the total head required vs. flow rate for the specific piping system. Where system curve and pump curve intersect is the operating point.',
         ],
+        images: [
+          { src: '/diagrams/pump-performance-curve.svg', alt: 'Diagram of a pump curve declining as flow increases and a rising system curve, with the Best Efficiency Point and the operating point marked at their intersection', caption: 'The pump curve and system curve intersect at the operating point — the design goal is keeping that point close to BEP.' },
+        ],
         keyPoints: [
           'Head decreases as flow increases on a centrifugal pump curve.',
           'BEP = Best Efficiency Point — design the operating point here.',
@@ -81,6 +84,9 @@ export const PUMP_TECH_MODULES: TrainingModule[] = [
           'Reducing pump speed to 80% cuts flow to 80%, head to 64%, and power to 51%. This cubic relationship makes variable-frequency drives (VFDs) extremely energy-efficient for pumps.',
           'VFDs allow pump speed to vary with system demand, maintaining near-BEP operation across a wide range of loads.',
           'Throttling a discharge valve to reduce flow wastes energy as heat in the valve; reducing speed via VFD saves that energy as reduced motor power.',
+        ],
+        images: [
+          { src: '/diagrams/affinity-laws-vfd.svg', alt: 'Diagram of the three affinity laws relating flow, head, and power to pump speed, a worked 80% speed example, and a comparison of valve throttling versus VFD speed reduction', caption: 'Power scales with speed cubed — an 80% speed cut nearly halves power draw, which is why VFDs pay for themselves.' },
         ],
         keyPoints: [
           'Power scales with speed cubed — reducing speed 20% cuts power by nearly half.',
@@ -302,6 +308,9 @@ export const PUMP_TECH_MODULES: TrainingModule[] = [
           'Cartridge seals come as a pre-assembled unit that slides onto the shaft and bolts to the stuffing box without needing to measure spring compression. They reduce installation errors significantly.',
           'The seal flush plan (API Plan 11, 21, 32, 53, etc.) describes how the seal faces are lubricated, cooled, and protected. The correct flush plan depends on fluid characteristics and pressure.',
         ],
+        images: [
+          { src: '/diagrams/mechanical-seal-configurations.svg', alt: 'Diagram comparing single, double, and cartridge mechanical seal configurations by hazard suitability and installation reliability, plus API seal flush plans', caption: 'Fluid hazard class drives the single-vs-double seal decision; cartridge construction is an installation-quality upgrade layered on top.' },
+        ],
         keyPoints: [
           'Single seal: one pair of faces, fluid on one side, atmosphere other.',
           'Double seal: two pairs of faces with barrier fluid — for hazardous fluids.',
@@ -433,6 +442,9 @@ export const PUMP_TECH_MODULES: TrainingModule[] = [
           'Signs of cavitation: crackling or rumbling noise (like rocks in a dryer), vibration, reduced flow and pressure, rapid impeller and casing erosion.',
           'NPSH (Net Positive Suction Head) is the key cavitation parameter. NPSHR is the minimum head required by the pump; NPSHa is the available head from the system. NPSHa must exceed NPSHR by a margin of at least 1.0 m (3 ft).',
           'Remedies: lower fluid temperature, reduce suction pipe friction (shorter runs, fewer fittings), lower pump elevation relative to the source, reduce pump speed, or select a pump with lower NPSHR.',
+        ],
+        images: [
+          { src: '/diagrams/cavitation-npsh.svg', alt: 'Diagram of the cavitation mechanism from pressure drop through vapor bubble formation to collapse and erosion, the signs of cavitation, the NPSHa/NPSHr margin rule, and five remedies', caption: 'NPSHa must exceed NPSHr by at least 3 feet — fall short and vapor bubbles collapse on the impeller, eroding it from the inside.' },
         ],
         keyPoints: [
           'Cavitation: vapor bubbles form at low pressure, implode on impeller — causes crackling noise and erosion.',
@@ -587,6 +599,9 @@ export const PUMP_TECH_MODULES: TrainingModule[] = [
           'As wear rings erode, internal leakage increases, efficiency drops, and flow output decreases. Manufacturers specify maximum allowable radial clearances (typically 0.010–0.025 in per side).',
           'Measure wear ring clearances with feeler gauges or a dial indicator. When clearance exceeds the maximum, replace the wear rings — not always the entire pump.',
           'Impeller eye diameter and vane condition also affect performance. Cavitation erodes impeller vanes; abrasive fluids cause smooth vane erosion. Dimensional inspection determines serviceability.',
+        ],
+        images: [
+          { src: '/diagrams/wear-ring-impeller-clearance.svg', alt: 'Diagram of wear ring function and clearance measurement limits, plus a comparison of pitted cavitation erosion versus smooth abrasive-fluid erosion on impeller vanes', caption: 'Pitted erosion at the vane leading edge means fix the NPSH margin; smooth polished thinning means check upstream filtration instead.' },
         ],
         keyPoints: [
           'Wear rings control internal recirculation — eroded rings reduce efficiency and flow.',
