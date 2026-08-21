@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Uptime Tiers I-IV — Downtime Tolerance, Cascaded Through Every System</text>
+
+  <!-- 4 tiers -->
+  <g font-size="10" font-weight="700">
+    <rect x="24" y="55" width="205" height="105" rx="4" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/><text x="126" y="78" text-anchor="middle" fill="#1e1b14">Tier I</text><text x="126" y="98" font-weight="400" font-size="8.5" text-anchor="middle" fill="#5c5748">Single path, no redundancy</text><rect x="38" y="110" width="180" height="24" rx="4" fill="#7a7256"/><text x="128" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#ffffff">28.8 hr/yr tolerance</text>
+
+    <rect x="239" y="55" width="205" height="105" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="341" y="78" text-anchor="middle" fill="#b45309">Tier II</text><text x="341" y="98" font-weight="400" font-size="8.5" text-anchor="middle" fill="#8a5010">Redundant components, N+1</text><rect x="253" y="110" width="180" height="24" rx="4" fill="#b45309"/><text x="343" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#ffffff">22 hr/yr tolerance</text>
+
+    <rect x="454" y="55" width="205" height="105" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="556" y="78" text-anchor="middle" fill="#0e7490">Tier III</text><text x="556" y="98" font-weight="400" font-size="8.5" text-anchor="middle" fill="#1f5a8f">Concurrently maintainable</text><rect x="468" y="110" width="180" height="24" rx="4" fill="#0e7490"/><text x="558" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#ffffff">1.6 hr/yr tolerance</text>
+
+    <rect x="669" y="55" width="207" height="105" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="772" y="78" text-anchor="middle" fill="#8f1f1a">Tier IV</text><text x="772" y="98" font-weight="400" font-size="8.5" text-anchor="middle" fill="#8f1f1a">Fault tolerant, active-active</text><rect x="683" y="110" width="180" height="24" rx="4" fill="#a4231e"/><text x="773" y="126" font-size="9" font-weight="700" text-anchor="middle" fill="#ffffff">26 min/yr tolerance</text>
+  </g>
+
+  <rect x="24" y="175" width="852" height="45" rx="5" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/>
+  <text x="38" y="203" font-size="10.5" font-weight="700" fill="#8f1f1a">Tier IV requires dual active-active paths on EVERY system, simultaneously — roughly 2× the CapEx of Tier II for the same IT capacity.</text>
+
+  <!-- TCCF -->
+  <rect x="24" y="235" width="410" height="105" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="258" font-size="12" font-weight="700" fill="#065f46">Claimed vs. verified</text>
+  <text x="38" y="280" font-size="9.5" fill="#3f3a2c">"Tier III-designed" is a self-claim, no</text>
+  <text x="38" y="294" font-size="9.5" fill="#3f3a2c">external check required.</text>
+  <text x="38" y="316" font-size="9.5" font-weight="700" fill="#065f46">TCCF = Uptime Institute's on-site,</text>
+  <text x="38" y="330" font-size="9.5" font-weight="700" fill="#065f46">independently verified proof.</text>
+
+  <!-- uptime math -->
+  <rect x="459" y="235" width="417" height="105" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="258" font-size="12" font-weight="700" fill="#0e7490">Uptime math — know it cold</text>
+  <g font-size="9.5" font-weight="700">
+    <text x="473" y="280" fill="#1f5a8f">99.9% = 8.76 hr/yr</text>
+    <text x="618" y="280" fill="#1f5a8f">99.99% = 52.6 min/yr</text>
+    <text x="473" y="298" fill="#1f5a8f">99.999% = 5.26 min/yr</text>
+  </g>
+  <text x="473" y="320" font-size="9" fill="#5c5748">SLA credits/penalties are calculated against these numbers directly.</text>
+
+  <rect x="24" y="355" width="852" height="105" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="378" font-size="12" font-weight="700" fill="#7a3f14">What buyers actually require</text>
+  <text x="38" y="400" font-size="10" fill="#5c5748">Enterprise IT, regulated industries, and government buyers increasingly require TCCF for colocation</text>
+  <text x="38" y="414" font-size="10" fill="#5c5748">vendors specifically because a self-claimed Tier designation carries no accountability — an operations</text>
+  <text x="38" y="428" font-size="10" fill="#5c5748">manager negotiating an SLA needs to know which document the buyer is actually asking for.</text>
+</svg>
