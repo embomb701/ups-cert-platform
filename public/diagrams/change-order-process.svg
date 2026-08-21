@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Change Control — Never Perform Out-of-Scope Work on a Verbal Yes</text>
+
+  <!-- process flow -->
+  <g font-size="8.5" font-weight="700">
+    <rect x="24" y="55" width="155" height="55" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="1.5"/><text x="101" y="80" text-anchor="middle" fill="#0e7490">1. Identify</text><text x="101" y="95" font-weight="400" font-size="7.5" text-anchor="middle" fill="#5c5748">the change</text>
+
+    <rect x="195" y="55" width="155" height="55" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="1.5"/><text x="272" y="80" text-anchor="middle" fill="#0e7490">2. Assess impact</text><text x="272" y="95" font-weight="400" font-size="7.5" text-anchor="middle" fill="#5c5748">scope, schedule, cost, risk</text>
+
+    <rect x="366" y="55" width="155" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/><text x="443" y="80" text-anchor="middle" fill="#b45309">3. Document</text><text x="443" y="95" font-weight="400" font-size="7.5" text-anchor="middle" fill="#8a5010">the change request</text>
+
+    <rect x="537" y="55" width="155" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="614" y="80" text-anchor="middle" fill="#8f1f1a">4. Approve</text><text x="614" y="95" font-weight="400" font-size="7.5" text-anchor="middle" fill="#8f1f1a">customer/sponsor sign-off</text>
+
+    <rect x="708" y="55" width="168" height="55" rx="4" fill="#e6f4f2" stroke="#0f766e" stroke-width="1.5"/><text x="792" y="80" text-anchor="middle" fill="#134e4a">5. Update plan</text><text x="792" y="95" font-weight="400" font-size="7.5" text-anchor="middle" fill="#3f3a2c">scope/schedule/budget</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.2" marker-end="url(#co)">
+    <line x1="179" y1="82" x2="193" y2="82"/><line x1="350" y1="82" x2="364" y2="82"/><line x1="521" y1="82" x2="535" y2="82"/><line x1="692" y1="82" x2="706" y2="82"/>
+  </g>
+
+  <rect x="24" y="130" width="852" height="80" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="153" font-size="12" font-weight="700" fill="#8f1f1a">"We'll sort it out later" almost never results in payment</text>
+  <text x="38" y="175" font-size="10" fill="#5c5748">A verbal request from a customer to add work outside the SOW is not authorization. Stop, document</text>
+  <text x="38" y="189" font-size="10" fill="#5c5748">the request, and get a signed change order before proceeding — every time, no exceptions.</text>
+
+  <!-- change log -->
+  <rect x="24" y="230" width="852" height="90" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="253" font-size="12" font-weight="700" fill="#0e7490">The change log — tracked at every status meeting</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="38" y="265" width="200" height="30" rx="4" fill="#7a7256"/><text x="138" y="285" text-anchor="middle" fill="#ffffff">Pending</text>
+    <rect x="248" y="265" width="200" height="30" rx="4" fill="#059669"/><text x="348" y="285" text-anchor="middle" fill="#ffffff">Approved</text>
+    <rect x="458" y="265" width="200" height="30" rx="4" fill="#a4231e"/><text x="558" y="285" text-anchor="middle" fill="#ffffff">Rejected</text>
+  </g>
+
+  <rect x="24" y="335" width="852" height="105" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="358" font-size="12" font-weight="700" fill="#1e1b14">A change order is a formal, written amendment</text>
+  <text x="38" y="380" font-size="10" fill="#5c5748">It modifies the original contract's scope, schedule, or cost. All changes — even small ones — must go</text>
+  <text x="38" y="394" font-size="10" fill="#5c5748">through the change control process. The change log is the single source of truth for every open,</text>
+  <text x="38" y="408" font-size="10" fill="#5c5748">approved, and rejected request across the life of the project.</text>
+
+  <defs>
+    <marker id="co" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1e1b14"/></marker>
+  </defs>
+</svg>

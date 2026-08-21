@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">The WBS — Everything in the Project Traces Back to a Work Package</text>
+
+  <!-- hierarchy -->
+  <rect x="24" y="55" width="852" height="55" rx="4" fill="#e6f4f2" stroke="#0f766e" stroke-width="2.5"/>
+  <text x="450" y="88" font-size="12" font-weight="700" fill="#134e4a" text-anchor="middle">Level 1 — The Project</text>
+  <line x1="450" y1="110" x2="450" y2="130" stroke="#5c5748" stroke-width="1.5"/>
+
+  <g font-size="9.5" font-weight="700">
+    <rect x="24" y="135" width="272" height="50" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="160" y="165" text-anchor="middle" fill="#0e7490">Level 2 — Major deliverable A</text>
+    <rect x="314" y="135" width="272" height="50" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="450" y="165" text-anchor="middle" fill="#0e7490">Level 2 — Major deliverable B</text>
+    <rect x="604" y="135" width="272" height="50" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="740" y="165" text-anchor="middle" fill="#0e7490">Level 2 — Major deliverable C</text>
+  </g>
+  <line x1="450" y1="185" x2="450" y2="205" stroke="#5c5748" stroke-width="1.5"/>
+
+  <g font-size="9" font-weight="700">
+    <rect x="24" y="210" width="176" height="45" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/><text x="112" y="236" text-anchor="middle" fill="#b45309">Level 3 — Work package</text>
+    <rect x="212" y="210" width="176" height="45" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/><text x="300" y="236" text-anchor="middle" fill="#b45309">Level 3 — Work package</text>
+    <rect x="400" y="210" width="176" height="45" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/><text x="488" y="236" text-anchor="middle" fill="#b45309">Level 3 — Work package</text>
+    <rect x="588" y="210" width="288" height="45" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="1.5"/><text x="732" y="236" text-anchor="middle" fill="#b45309">Level 3 — Work package</text>
+  </g>
+  <line x1="450" y1="255" x2="450" y2="275" stroke="#5c5748" stroke-width="1.5"/>
+  <rect x="300" y="280" width="300" height="40" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="1.5"/>
+  <text x="450" y="305" font-size="9.5" font-weight="700" text-anchor="middle" fill="#8f1f1a">Level 4 — Individual tasks</text>
+
+  <!-- 8/80 rule -->
+  <rect x="24" y="345" width="852" height="60" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="368" font-size="12" font-weight="700" fill="#7a3f14">The 8/80 rule</text>
+  <text x="38" y="390" font-size="10" fill="#5c5748">Each work package should be 8-80 hours of effort — small enough to estimate reliably, large enough to avoid excessive tracking overhead.</text>
+
+  <rect x="24" y="415" width="852" height="34" rx="5" fill="#ffffff" stroke="#1e1b14" stroke-width="2"/>
+  <text x="38" y="437" font-size="10" font-weight="700" fill="#1e1b14">The WBS is the foundation for scheduling, resource planning, and cost estimation — everything traces back to it.</text>
+</svg>

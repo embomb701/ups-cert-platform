@@ -147,6 +147,9 @@ export const FIELD_PM_MODULES: TrainingModule[] = [
           'Each work package should represent 8–80 hours of effort (the "8/80 rule") — small enough to estimate reliably, large enough not to generate excessive tracking overhead.',
           'The WBS is the foundation for scheduling, resource planning, and cost estimation. Everything in the project must trace back to a WBS element.',
         ],
+        images: [
+          { src: '/diagrams/wbs-hierarchy.svg', alt: 'Diagram of the WBS four-level hierarchy from the project down through major deliverables, work packages, and individual tasks, plus the 8/80 rule for work package sizing', caption: 'Everything in the project traces back to a work package — and the 8/80 rule keeps each one estimable without excessive tracking overhead.' },
+        ],
         keyPoints: [
           'WBS decomposes scope into work packages with traceable deliverables.',
           '8/80 rule: work packages should be 8–80 hours of effort.',
@@ -168,6 +171,9 @@ export const FIELD_PM_MODULES: TrainingModule[] = [
           'The critical path is the longest sequence of dependent tasks that determines the minimum project duration. Any delay on the critical path delays the project.',
           'Float (or slack) is the amount of time a non-critical task can slip without delaying the project. Critical path tasks have zero float.',
           'Milestone charts mark key events (permit approval, equipment delivery, customer sign-off) without showing task durations — useful for executive reporting.',
+        ],
+        images: [
+          { src: '/diagrams/gantt-critical-path.svg', alt: 'Diagram of a Gantt-style task timeline highlighting the critical path in red and a non-critical task with visible float in teal, plus panels defining critical path and float', caption: 'The critical path sets the minimum project duration — any delay there delays the whole project; float is the cushion everywhere else.' },
         ],
         keyPoints: [
           'Gantt chart: tasks on a timeline with durations and dependencies.',
@@ -323,6 +329,9 @@ export const FIELD_PM_MODULES: TrainingModule[] = [
           'Schedule Variance (SV) = EV − PV. Negative SV means behind schedule. Cost Variance (CV) = EV − AC. Negative CV means over budget.',
           'Percent complete is only meaningful when based on deliverables completed, not hours spent. "90% done" that never becomes 100% is a common project trap.',
         ],
+        images: [
+          { src: '/diagrams/earned-value-management.svg', alt: 'Diagram of the Planned Value, Earned Value, and Actual Cost earned value metrics, the Schedule Variance and Cost Variance formulas, and the percent-complete measurement trap', caption: 'SV = EV minus PV, CV = EV minus AC — one system that catches whether a project is behind schedule, over budget, or both.' },
+        ],
         keyPoints: [
           'EVM: PV = planned, EV = earned, AC = actual spend.',
           'SV = EV − PV (negative = behind). CV = EV − AC (negative = over budget).',
@@ -344,6 +353,9 @@ export const FIELD_PM_MODULES: TrainingModule[] = [
           'Steps: identify the change → assess impact on scope, schedule, cost, and risk → document the change request → obtain customer/sponsor approval → update the plan.',
           'Never perform out-of-scope work verbally agreed upon without a signed change order. "We\'ll sort it out later" almost never results in payment.',
           'Track change orders in a change log, including status (pending, approved, rejected). The change log is reviewed at every project status meeting.',
+        ],
+        images: [
+          { src: '/diagrams/change-order-process.svg', alt: 'Diagram of the five-step change control process from identify through update the plan, and the pending/approved/rejected change log status tracking', caption: '"We\'ll sort it out later" almost never results in payment — every change goes through identify, assess, document, approve, update.' },
         ],
         keyPoints: [
           'Change order = formal written amendment; never work out-of-scope without one.',
@@ -586,6 +598,9 @@ export const FIELD_PM_MODULES: TrainingModule[] = [
           'Conduct a formal walkthrough with the customer to identify punch list items. Document each item with description, location, responsible party, and due date.',
           'Distinguish between punch list items (deficiencies from the agreed scope) and warranty items (failures that occur after acceptance). Conflating the two leads to disputes.',
           'Once all punch list items are resolved, obtain a written customer acceptance (Certificate of Substantial Completion or Final Acceptance Sign-off).',
+        ],
+        images: [
+          { src: '/diagrams/punch-list-closeout.svg', alt: 'Diagram of the walkthrough-to-written-acceptance closeout process, and the distinction between punch list deficiencies from the original scope versus warranty items that occur after acceptance', caption: 'Punch list items belong to the original scope and must close before acceptance; warranty items are failures that happen after — conflating the two causes disputes.' },
         ],
         keyPoints: [
           'Punch list = documented deficiencies to resolve before acceptance.',

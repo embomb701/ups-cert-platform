@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Critical Path — the Chain Where Any Delay Delays the Whole Project</text>
+
+  <!-- gantt-style bars -->
+  <rect x="24" y="55" width="852" height="200" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="78" font-size="11" font-weight="700" fill="#1e1b14">Task timeline (Gantt-style)</text>
+
+  <g font-size="9" font-weight="700">
+    <text x="38" y="105" fill="#1e1b14">Task A</text>
+    <rect x="120" y="93" width="140" height="20" rx="3" fill="#a4231e"/>
+
+    <text x="38" y="132" fill="#1e1b14">Task B</text>
+    <rect x="260" y="120" width="120" height="20" rx="3" fill="#a4231e"/>
+
+    <text x="38" y="159" fill="#1e1b14">Task C</text>
+    <rect x="380" y="147" width="180" height="20" rx="3" fill="#a4231e"/>
+
+    <text x="38" y="186" fill="#1e1b14">Task D</text>
+    <rect x="260" y="174" width="90" height="20" rx="3" fill="#0e7490"/>
+    <text x="360" y="189" font-weight="400" font-size="8" fill="#1f5a8f">float →</text>
+    <rect x="410" y="174" width="70" height="20" rx="3" fill="#0e7490" fill-opacity="0.35" stroke="#0e7490" stroke-dasharray="2 2"/>
+
+    <text x="38" y="213" fill="#1e1b14">Task E</text>
+    <rect x="560" y="201" width="150" height="20" rx="3" fill="#a4231e"/>
+  </g>
+  <text x="720" y="215" font-size="8.5" font-weight="700" fill="#8f1f1a">critical path (red)</text>
+
+  <!-- definitions -->
+  <rect x="24" y="270" width="410" height="90" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="293" font-size="12" font-weight="700" fill="#8f1f1a">Critical path</text>
+  <text x="38" y="315" font-size="9.5" fill="#5c5748">The longest sequence of dependent tasks —</text>
+  <text x="38" y="329" font-size="9.5" fill="#5c5748">it sets the minimum project duration.</text>
+  <text x="38" y="349" font-size="9.5" font-weight="700" fill="#8f1f1a">Any delay here delays the whole project.</text>
+
+  <rect x="459" y="270" width="417" height="90" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="473" y="293" font-size="12" font-weight="700" fill="#0e7490">Float (slack)</text>
+  <text x="473" y="315" font-size="9.5" fill="#3f3a2c">The allowable delay for a non-critical task</text>
+  <text x="473" y="329" font-size="9.5" fill="#3f3a2c">before it affects the finish date.</text>
+  <text x="473" y="349" font-size="9.5" font-weight="700" fill="#1f5a8f">Critical path tasks always have ZERO float.</text>
+
+  <rect x="24" y="375" width="852" height="74" rx="6" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="398" font-size="11.5" font-weight="700" fill="#7a3f14">Milestone charts for executive reporting</text>
+  <text x="38" y="420" font-size="10" fill="#5c5748">Mark key events (permit approval, equipment delivery, customer sign-off) without showing task</text>
+  <text x="38" y="434" font-size="10" fill="#5c5748">durations — useful when leadership needs status without schedule detail.</text>
+</svg>

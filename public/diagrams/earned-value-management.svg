@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="460" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Earned Value — One System That Measures Scope, Schedule, and Cost Together</text>
+
+  <!-- 3 metrics -->
+  <g font-size="10.5" font-weight="700">
+    <rect x="24" y="55" width="272" height="100" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+    <text x="38" y="78" fill="#0e7490">PV — Planned Value</text>
+    <text x="38" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Budgeted cost of work that</text>
+    <text x="38" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">was SCHEDULED to be done.</text>
+
+    <rect x="314" y="55" width="272" height="100" rx="6" fill="#e6f4f2" stroke="#0f766e" stroke-width="2"/>
+    <text x="328" y="78" fill="#134e4a">EV — Earned Value</text>
+    <text x="328" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">Budgeted cost of work</text>
+    <text x="328" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">ACTUALLY completed.</text>
+
+    <rect x="604" y="55" width="272" height="100" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+    <text x="618" y="78" fill="#b45309">AC — Actual Cost</text>
+    <text x="618" y="100" font-weight="400" font-size="9.5" fill="#3f3a2c">What was actually</text>
+    <text x="618" y="114" font-weight="400" font-size="9.5" fill="#3f3a2c">SPENT to date.</text>
+  </g>
+
+  <!-- variance formulas -->
+  <rect x="24" y="170" width="410" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="193" font-size="12" font-weight="700" fill="#8f1f1a">Schedule Variance</text>
+  <rect x="38" y="205" width="290" height="28" rx="4" fill="#8f1f1a"/>
+  <text x="183" y="224" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">SV = EV − PV</text>
+  <text x="38" y="255" font-size="9.5" font-weight="700" fill="#8f1f1a">Negative SV = behind schedule</text>
+
+  <rect x="459" y="170" width="417" height="115" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="193" font-size="12" font-weight="700" fill="#b45309">Cost Variance</text>
+  <rect x="473" y="205" width="290" height="28" rx="4" fill="#b45309"/>
+  <text x="618" y="224" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">CV = EV − AC</text>
+  <text x="473" y="255" font-size="9.5" font-weight="700" fill="#b45309">Negative CV = over budget</text>
+
+  <!-- percent complete trap -->
+  <rect x="24" y="300" width="852" height="90" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="323" font-size="12" font-weight="700" fill="#1e1b14">The "90% done" trap</text>
+  <text x="38" y="345" font-size="10" fill="#5c5748">Percent complete is only meaningful when based on DELIVERABLES completed, not hours spent. A</text>
+  <text x="38" y="359" font-size="10" fill="#5c5748">task reported "90% done" that never becomes 100% is one of the most common project management failures.</text>
+
+  <rect x="24" y="400" width="852" height="46" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="428" font-size="10.5" font-weight="700" fill="#7a3f14">EVM integrates scope, schedule, and cost into one number — a project can look on-schedule and still be over budget, or vice versa.</text>
+</svg>
