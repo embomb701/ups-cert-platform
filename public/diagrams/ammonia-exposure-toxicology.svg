@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Ammonia Exposure — Never Trust Your Nose Above 100 ppm</text>
+
+  <!-- concentration ladder -->
+  <rect x="24" y="55" width="852" height="170" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="78" font-size="12" font-weight="700" fill="#1e1b14">Concentration ladder</text>
+  <g font-size="9" font-weight="700">
+    <rect x="38" y="90" width="150" height="50" rx="4" fill="#e9f4ef" stroke="#059669"/><text x="113" y="108" text-anchor="middle" fill="#065f46">5 ppm</text><text x="113" y="122" font-weight="400" font-size="7.5" text-anchor="middle" fill="#3f3a2c">odor detection threshold</text>
+
+    <rect x="198" y="90" width="150" height="50" rx="4" fill="#eef3f7" stroke="#0e7490"/><text x="273" y="108" text-anchor="middle" fill="#0e7490">25 ppm</text><text x="273" y="122" font-weight="400" font-size="7.5" text-anchor="middle" fill="#3f3a2c">OSHA PEL-TWA (8hr)</text>
+
+    <rect x="358" y="90" width="150" height="50" rx="4" fill="#fdeec9" stroke="#b45309"/><text x="433" y="108" text-anchor="middle" fill="#b45309">100 ppm</text><text x="433" y="122" font-weight="400" font-size="7.5" text-anchor="middle" fill="#8a5010">olfactory fatigue begins</text>
+
+    <rect x="518" y="90" width="150" height="50" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="593" y="108" text-anchor="middle" fill="#8f1f1a">300 ppm</text><text x="593" y="122" font-weight="400" font-size="7.5" text-anchor="middle" fill="#8f1f1a">IDLH — SCBA + evacuate</text>
+
+    <rect x="678" y="90" width="196" height="50" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/><text x="776" y="108" text-anchor="middle" fill="#8f1f1a">1,700 ppm</text><text x="776" y="122" font-weight="400" font-size="7.5" text-anchor="middle" fill="#8f1f1a">brief exposure fatal</text>
+  </g>
+  <text x="38" y="160" font-size="9.5" font-weight="700" fill="#8a5010">Olfactory fatigue = the nose stops detecting a gas that's still present and rising —</text>
+  <text x="38" y="176" font-size="9.5" font-weight="700" fill="#8a5010">detector readings override smell above 100 ppm, always.</text>
+  <text x="38" y="200" font-size="9" fill="#5c5748">500 ppm: severe lung damage within 30 min. 2,132-2,982 ppm: enters flammable range (high ignition energy required).</text>
+
+  <!-- why it burns -->
+  <rect x="24" y="240" width="410" height="105" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="263" font-size="12" font-weight="700" fill="#0e7490">Why ammonia burns tissue</text>
+  <text x="38" y="285" font-size="9.5" fill="#3f3a2c">Highly water-soluble and alkaline —</text>
+  <text x="38" y="299" font-size="9.5" fill="#3f3a2c">dissolves in eye/airway moisture to form</text>
+  <text x="38" y="313" font-size="9.5" fill="#3f3a2c">caustic ammonium hydroxide.</text>
+  <text x="38" y="333" font-size="9" font-weight="700" fill="#1f5a8f">Liquid contact adds frostbite to the chemical burn.</text>
+
+  <!-- first aid -->
+  <rect x="459" y="240" width="417" height="105" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="473" y="263" font-size="12" font-weight="700" fill="#065f46">First aid</text>
+  <rect x="473" y="275" width="380" height="26" rx="4" fill="#059669"/>
+  <text x="663" y="293" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">15-20 min continuous water flush</text>
+  <text x="473" y="318" font-size="9.5" fill="#3f3a2c">Remove contaminated clothing while flushing</text>
+  <text x="473" y="332" font-size="9.5" fill="#3f3a2c">(unless frozen to skin). Inhalation: remove and treat.</text>
+
+  <rect x="24" y="360" width="852" height="105" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="383" font-size="12.5" font-weight="700" fill="#8f1f1a">Do NOT become the second victim</text>
+  <text x="38" y="405" font-size="10" fill="#5c5748">Never enter a contaminated area without proper PPE to rescue an incapacitated worker. Ammonia rescue</text>
+  <text x="38" y="419" font-size="10" fill="#5c5748">requires SCBA above IDLH — going in without it turns one casualty into two, and the second rescuer</text>
+  <text x="38" y="433" font-size="10" fill="#5c5748">often arrives without any backup plan at all.</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Four Gauge Signatures Every Operator Should Recognize on Sight</text>
+
+  <!-- high head -->
+  <rect x="24" y="55" width="410" height="140" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="78" font-size="12" font-weight="700" fill="#8f1f1a">High discharge (head) pressure</text>
+  <g font-size="9" font-weight="700" fill="#5c5748">
+    <text x="38" y="100">1. Condenser fouling (scale/bio deposits)</text>
+    <text x="38" y="114">2. Condenser fan failure</text>
+    <text x="38" y="128">3. Loss of condenser water flow</text>
+    <text x="38" y="142">4. High ambient wet-bulb (design, not fault)</text>
+    <text x="38" y="156">5. Non-condensables trapped in high side</text>
+  </g>
+  <text x="38" y="178" font-size="9" font-weight="700" fill="#8f1f1a">Vent non-condensables from the high-pressure receiver.</text>
+
+  <!-- high suction -->
+  <rect x="459" y="55" width="417" height="140" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="78" font-size="12" font-weight="700" fill="#b45309">High suction pressure (too warm)</text>
+  <g font-size="9" font-weight="700" fill="#5c5748">
+    <text x="473" y="100">1. Excessive refrigeration load</text>
+    <text x="473" y="114">2. Low refrigerant charge</text>
+    <text x="473" y="128">3. Compressor capacity insufficient for load</text>
+    <text x="473" y="142">4. Liquid feed restriction upstream</text>
+  </g>
+  <text x="473" y="164" font-size="9" fill="#5c5748">Float valve stuck, solenoid partly closed, plugged strainer.</text>
+
+  <!-- low suction -->
+  <rect x="24" y="210" width="410" height="115" rx="6" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/>
+  <text x="38" y="233" font-size="12" font-weight="700" fill="#0e7490">Low suction pressure (too cold)</text>
+  <g font-size="9" font-weight="700" fill="#5c5748">
+    <text x="38" y="255">1. Very low load (floating setpoint should handle it)</text>
+    <text x="38" y="269">2. Stuck-open liquid feed — floods evaporator</text>
+    <text x="38" y="283">3. Instrument fault — verify with calibrated gauge</text>
+  </g>
+
+  <!-- liquid slugging -->
+  <rect x="459" y="210" width="417" height="115" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2.5"/>
+  <text x="473" y="233" font-size="12" font-weight="700" fill="#8f1f1a">Liquid slugging — mechanical emergency</text>
+  <rect x="473" y="245" width="380" height="46" rx="4" fill="#8f1f1a"/>
+  <text x="663" y="264" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Banging + frost at suction flange +</text>
+  <text x="663" y="280" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">low discharge temp = immediate shutdown</text>
+
+  <rect x="24" y="340" width="852" height="70" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="363" font-size="12" font-weight="700" fill="#1e1b14">Non-condensables — the head-pressure cause techs miss</text>
+  <text x="38" y="385" font-size="10" fill="#5c5748">Air or nitrogen accumulates in the condenser and high-pressure receiver, occupying volume without</text>
+  <text x="38" y="399" font-size="10" fill="#5c5748">condensing — raising head pressure even when the condenser itself is clean and fully functional.</text>
+
+  <rect x="24" y="418" width="852" height="46" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="441" font-size="10.5" font-weight="700" fill="#7a3f14">Frost immediately at the compressor suction flange is never routine — it means liquid is present where only vapor should be.</text>
+</svg>

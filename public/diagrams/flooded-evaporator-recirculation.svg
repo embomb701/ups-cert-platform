@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Flooded Evaporators — Pump More Liquid Than Evaporates, On Purpose</text>
+
+  <!-- flooded vs DX -->
+  <rect x="24" y="55" width="410" height="115" rx="6" fill="#e7f4f7" stroke="#0891b2" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#0e6e85">Flooded vs. DX evaporators</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Flooded: liquid level maintained inside the</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">coil — continuous boiling contact, no vapor</text>
+  <text x="38" y="128" font-size="9.5" fill="#3f3a2c">blankets like partially wetted DX coils.</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#0e6e85">Much higher heat transfer coefficient —</text>
+  <text x="38" y="164" font-size="9.5" font-weight="700" fill="#0e6e85">the industrial refrigeration standard.</text>
+
+  <!-- recirculation rate -->
+  <rect x="459" y="55" width="417" height="115" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#b45309">Pumped liquid recirculation (overfeed)</text>
+  <text x="473" y="100" font-size="9.5" fill="#3f3a2c">LPR pumps feed 2:1 to 4:1 — 2-4 lbs of</text>
+  <text x="473" y="114" font-size="9.5" fill="#3f3a2c">liquid pumped for every 1 lb evaporated.</text>
+  <rect x="473" y="126" width="290" height="26" rx="4" fill="#b45309"/>
+  <text x="618" y="144" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Unevaporated liquid returns to LP receiver</text>
+
+  <!-- defrost cycle -->
+  <g font-size="9" font-weight="700">
+    <rect x="24" y="200" width="195" height="55" rx="4" fill="#eef3f7" stroke="#0e7490" stroke-width="2"/><text x="121" y="223" text-anchor="middle" fill="#0e7490">1. Pump down</text><text x="121" y="239" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">clear liquid before hot gas</text>
+
+    <rect x="239" y="200" width="195" height="55" rx="4" fill="#fdeec9" stroke="#b45309" stroke-width="2"/><text x="336" y="223" text-anchor="middle" fill="#b45309">2. Hot gas admission</text><text x="336" y="239" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">pressurize, heat coil</text>
+
+    <rect x="454" y="200" width="195" height="55" rx="4" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/><text x="551" y="223" text-anchor="middle" fill="#8f1f1a">3. Defrost</text><text x="551" y="239" font-weight="400" font-size="8" text-anchor="middle" fill="#5c5748">until temp/timer terminates</text>
+
+    <rect x="669" y="200" width="207" height="55" rx="4" fill="#e9f4ef" stroke="#059669" stroke-width="2"/><text x="772" y="223" text-anchor="middle" fill="#065f46">4. Equalization</text><text x="772" y="239" font-weight="400" font-size="8" text-anchor="middle" fill="#3f3a2c">purge before cold liquid returns</text>
+  </g>
+  <g stroke="#1e1b14" stroke-width="1.5" marker-end="url(#fl)">
+    <line x1="219" y1="227" x2="237" y2="227"/><line x1="434" y1="227" x2="452" y2="227"/><line x1="649" y1="227" x2="667" y2="227"/>
+  </g>
+
+  <rect x="24" y="275" width="852" height="70" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="298" font-size="12" font-weight="700" fill="#8f1f1a">Why pump-down comes first</text>
+  <text x="38" y="320" font-size="10" fill="#5c5748">Hot gas introduced into a coil still full of cold liquid causes hydraulic shock — pump-down evacuates</text>
+  <text x="38" y="334" font-size="10" fill="#5c5748">the liquid before the pressure/temperature spike arrives, preventing pipe and valve damage.</text>
+
+  <rect x="24" y="365" width="852" height="95" rx="6" fill="#ffffff" stroke="#7a7256" stroke-width="1.5"/>
+  <text x="38" y="388" font-size="12" font-weight="700" fill="#1e1b14">Hot gas defrost is the most common method</text>
+  <text x="38" y="410" font-size="10" fill="#5c5748">Diverts compressor discharge gas into the evaporator, melting ice from the inside out. Alternatives:</text>
+  <text x="38" y="424" font-size="10" fill="#5c5748">electric resistance heaters, water spray, or air defrost (only viable just below 32°F in protected spaces).</text>
+  <text x="38" y="446" font-size="9.5" font-weight="700" fill="#1e1b14">Temperature termination beats timer alone — it catches both under- and over-defrost conditions.</text>
+
+  <defs>
+    <marker id="fl" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1e1b14"/></marker>
+  </defs>
+</svg>

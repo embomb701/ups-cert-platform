@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-monospace, Consolas, monospace">
+  <rect width="900" height="480" fill="#fbf9f4"/>
+
+  <text x="24" y="32" font-size="18" font-weight="700" fill="#1e1b14">Evaporative Condensers — Chasing Wet-Bulb, Not Dry-Bulb</text>
+
+  <!-- mechanism -->
+  <rect x="24" y="55" width="410" height="130" rx="6" fill="#e7f4f7" stroke="#0891b2" stroke-width="2"/>
+  <text x="38" y="78" font-size="12.5" font-weight="700" fill="#0e6e85">How it rejects heat</text>
+  <text x="38" y="100" font-size="9.5" fill="#3f3a2c">Ammonia condenses inside coil tubes;</text>
+  <text x="38" y="114" font-size="9.5" fill="#3f3a2c">water sprays over the outside; fans draw</text>
+  <text x="38" y="128" font-size="9.5" fill="#3f3a2c">air through.</text>
+  <text x="38" y="150" font-size="9.5" font-weight="700" fill="#0e6e85">Sensible (air) + evaporative (water) cooling</text>
+  <text x="38" y="164" font-size="9.5" font-weight="700" fill="#0e6e85">together — approaches wet-bulb, not dry-bulb.</text>
+
+  <!-- sizing -->
+  <rect x="459" y="55" width="417" height="130" rx="6" fill="#fdeec9" stroke="#b45309" stroke-width="2"/>
+  <text x="473" y="78" font-size="12.5" font-weight="700" fill="#b45309">Sizing by heat rejection, not cooling load</text>
+  <rect x="473" y="90" width="380" height="28" rx="4" fill="#b45309"/>
+  <text x="663" y="109" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">Total heat rejection = cooling load + heat of compression</text>
+  <text x="473" y="140" font-size="9.5" fill="#3f3a2c">≈20-25% more than refrigerating capacity.</text>
+  <text x="473" y="162" font-size="9.5" font-weight="700" fill="#8a5010">Undersizing → high condensing pressure → higher power, possible HP cutout trip.</text>
+
+  <!-- water treatment -->
+  <rect x="24" y="200" width="852" height="120" rx="6" fill="#fdeaea" stroke="#a4231e" stroke-width="2"/>
+  <text x="38" y="223" font-size="12.5" font-weight="700" fill="#8f1f1a">Water treatment — non-negotiable</text>
+  <text x="38" y="245" font-size="10" fill="#5c5748">Evaporation concentrates dissolved minerals — untreated water builds scale, corrodes the coil/basin,</text>
+  <text x="38" y="259" font-size="10" fill="#5c5748">and grows biological contamination including Legionella in the warm, aerosolized water.</text>
+  <g font-size="9.5" font-weight="700" fill="#8f1f1a">
+    <text x="50" y="285">• Scale inhibitors</text>
+    <text x="250" y="285">• Biocides (Legionella control)</text>
+    <text x="500" y="285">• Corrosion inhibitors</text>
+    <text x="700" y="285">• Blowdown</text>
+  </g>
+  <text x="38" y="304" font-size="9" fill="#5c5748">Many jurisdictions legally require a Legionella water management plan for evaporative condensers.</text>
+
+  <!-- winterization -->
+  <rect x="24" y="335" width="852" height="80" rx="6" fill="#e9f4ef" stroke="#059669" stroke-width="2"/>
+  <text x="38" y="358" font-size="12" font-weight="700" fill="#065f46">Winterization — three options, one non-negotiable outcome</text>
+  <text x="38" y="380" font-size="10" fill="#3f3a2c">Drain to dry operation (fan airflow only, reduced capacity), heat the basin (electric or steam), or run a</text>
+  <text x="38" y="394" font-size="10" fill="#3f3a2c">glycol loop between condenser and refrigerant coil — a frozen basin or coil means extensive damage.</text>
+
+  <rect x="24" y="425" width="852" height="42" rx="5" fill="#fff4e8" stroke="#d4802a" stroke-width="1.5"/>
+  <text x="38" y="450" font-size="10.5" font-weight="700" fill="#7a3f14">Legionella aerosolized by the fan system is the health risk — not just a water-quality footnote.</text>
+</svg>
