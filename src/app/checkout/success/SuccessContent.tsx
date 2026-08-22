@@ -48,6 +48,7 @@ const PRODUCT_INFO: Record<string, ProductInfo> = {
   training_dc_ops:        { heading: 'DC Ops Training Unlocked', detail: 'Full access to Data Center Operations Manager is now active.', nextStep: { label: 'Start Training →', href: '/training/dc-ops' }, steps: CERT_PATH },
   training_building_cx:   { heading: 'Building Cx Training Unlocked', detail: 'Full access to Building Commissioning Agent is now active.', nextStep: { label: 'Start Training →', href: '/training/building-cx' }, steps: CERT_PATH },
   training_telecom:       { heading: 'Telecom Training Unlocked', detail: 'Full access to Telecom OSP Technician is now active.', nextStep: { label: 'Start Training →', href: '/training/telecom' }, steps: CERT_PATH },
+  training_switchgear_tech: { heading: 'Switchgear Tech Training Unlocked', detail: 'Full access to Switchgear & Substation Technician is now active.', nextStep: { label: 'Start Training →', href: '/training/switchgear-tech' }, steps: CERT_PATH },
 
   // ── Test-out exams ────────────────────────────────────────────────────
   jr_fse_test_human:           { heading: 'Jr. FSE Exam Access Unlocked', detail: 'Your Junior UPS Field Service Engineer exam is ready. Review the rules, then start when ready.', nextStep: { label: 'Go to Dashboard →', href: '/dashboard' } },
@@ -78,6 +79,7 @@ const PRODUCT_INFO: Record<string, ProductInfo> = {
   jr_dc_ops_test_human:        { heading: 'Jr. DC Ops Exam Access Unlocked', detail: 'Your Junior Data Center Operations Manager exam is ready.', nextStep: { label: 'Go to Dashboard →', href: '/dashboard' } },
   jr_building_cx_test_human:   { heading: 'Jr. Building Cx Exam Access Unlocked', detail: 'Your Junior Building Commissioning Agent exam is ready.', nextStep: { label: 'Go to Dashboard →', href: '/dashboard' } },
   jr_telecom_tech_test_human:  { heading: 'Jr. Telecom Tech Exam Access Unlocked', detail: 'Your Junior Telecom OSP Technician exam is ready.', nextStep: { label: 'Go to Dashboard →', href: '/dashboard' } },
+  jr_switchgear_tech_test_human: { heading: 'Jr. Switchgear Tech Exam Access Unlocked', detail: 'Your Junior Switchgear & Substation Technician exam is ready.', nextStep: { label: 'Go to Dashboard →', href: '/dashboard' } },
 
   // ── FSE proctored ─────────────────────────────────────────────────────
   fse_proctored_exam: {
@@ -144,6 +146,7 @@ const PRODUCT_INFO: Record<string, ProductInfo> = {
   pkg_training_dc_ops_testout:        { heading: 'DC Ops Bundle Activated', detail: 'Training and exam access for Data Center Operations Manager are both unlocked.', nextStep: { label: 'Start Training →', href: '/training/dc-ops' } },
   pkg_training_building_cx_testout:   { heading: 'Building Cx Bundle Activated', detail: 'Training and exam access for Building Commissioning Agent are both unlocked.', nextStep: { label: 'Start Training →', href: '/training/building-cx' } },
   pkg_training_telecom_testout:       { heading: 'Telecom Bundle Activated', detail: 'Training and exam access for Telecom OSP Technician are both unlocked.', nextStep: { label: 'Start Training →', href: '/training/telecom' } },
+  pkg_training_switchgear_tech_testout: { heading: 'Switchgear Tech Bundle Activated', detail: 'Training and exam access for Switchgear & Substation Technician are both unlocked.', nextStep: { label: 'Start Training →', href: '/training/switchgear-tech' } },
 
   // ── Misc ──────────────────────────────────────────────────────────────
   signed_book: {

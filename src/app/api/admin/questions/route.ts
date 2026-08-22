@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     const collection = adminDb.collection('questionBank');
 
-    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap, hvacTechSnap, hvacTechActiveSnap, solarInstSnap, solarInstActiveSnap, windTechSnap, windTechActiveSnap, elevatorTechSnap, elevatorTechActiveSnap, fireAlarmTechSnap, fireAlarmTechActiveSnap, bmetTechSnap, bmetTechActiveSnap, basTechSnap, basTechActiveSnap, refTechSnap, refTechActiveSnap, plcTechSnap, plcTechActiveSnap, securityTechSnap, securityTechActiveSnap, fieldPmSnap, fieldPmActiveSnap, pumpTechSnap, pumpTechActiveSnap, telecomSnap, telecomActiveSnap, industrialRefSnap, industrialRefActiveSnap, dcOpsSnap, dcOpsActiveSnap, buildingCxSnap, buildingCxActiveSnap] = await Promise.all([
+    const [jrSnap, jrActiveSnap, fseSnap, fseActiveSnap, kitchenSnap, kitchenActiveSnap, hvacSnap, hvacActiveSnap, genSnap, genActiveSnap, dcSnap, dcActiveSnap, solarSnap, solarActiveSnap, evSnap, evActiveSnap, dcpSnap, dcpActiveSnap, batSnap, batActiveSnap, dceSnap, dceActiveSnap, marineSnap, marineActiveSnap, poolSnap, poolActiveSnap, hvacTechSnap, hvacTechActiveSnap, solarInstSnap, solarInstActiveSnap, windTechSnap, windTechActiveSnap, elevatorTechSnap, elevatorTechActiveSnap, fireAlarmTechSnap, fireAlarmTechActiveSnap, bmetTechSnap, bmetTechActiveSnap, basTechSnap, basTechActiveSnap, refTechSnap, refTechActiveSnap, plcTechSnap, plcTechActiveSnap, securityTechSnap, securityTechActiveSnap, fieldPmSnap, fieldPmActiveSnap, pumpTechSnap, pumpTechActiveSnap, telecomSnap, telecomActiveSnap, industrialRefSnap, industrialRefActiveSnap, dcOpsSnap, dcOpsActiveSnap, buildingCxSnap, buildingCxActiveSnap, switchgearTechSnap, switchgearTechActiveSnap] = await Promise.all([
       collection.where('examLevel', '==', 'jr_fse').count().get(),
       collection.where('examLevel', '==', 'jr_fse').where('active', '==', true).count().get(),
       collection.where('examLevel', 'in', ['fse', 'fse_ai']).count().get(),
@@ -76,6 +76,8 @@ export async function GET(req: NextRequest) {
       collection.where('examLevel', '==', 'jr_dc_ops').where('active', '==', true).count().get(),
       collection.where('examLevel', '==', 'jr_building_cx').count().get(),
       collection.where('examLevel', '==', 'jr_building_cx').where('active', '==', true).count().get(),
+      collection.where('examLevel', '==', 'jr_switchgear_tech').count().get(),
+      collection.where('examLevel', '==', 'jr_switchgear_tech').where('active', '==', true).count().get(),
     ]);
 
     return NextResponse.json({
@@ -194,6 +196,10 @@ export async function GET(req: NextRequest) {
       jr_building_cx: {
         total: buildingCxSnap.data().count,
         active: buildingCxActiveSnap.data().count,
+      },
+      jr_switchgear_tech: {
+        total: switchgearTechSnap.data().count,
+        active: switchgearTechActiveSnap.data().count,
       },
     });
   } catch (err: any) {

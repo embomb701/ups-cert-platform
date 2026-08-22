@@ -127,6 +127,7 @@ export async function POST(req: NextRequest) {
     const dcOpsComplete = COURSE_SEQUENCES['training_dc_ops'].every((m) => completedIds.has(m.id));
     const buildingCxComplete = COURSE_SEQUENCES['training_building_cx'].every((m) => completedIds.has(m.id));
     const telecomComplete = COURSE_SEQUENCES['training_telecom'].every((m) => completedIds.has(m.id));
+    const switchgearTechComplete = COURSE_SEQUENCES['training_switchgear_tech'].every((m) => completedIds.has(m.id));
 
     if (upsComplete) {
       // Grant Jr. FSE exam access (from training path, not test-out)
@@ -477,6 +478,18 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    if (switchgearTechComplete) {
+      await grantPractice('practice_jr_switchgear_tech');
+      const pendingDoc = await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_switchgear_tech_pending').get();
+      const pendingData = pendingDoc.data();
+      if (pendingData?.fromTraining) {
+        await adminDb.collection('users').doc(uid).collection('examAccess').doc('jr_switchgear_tech').set(
+          { granted: true, testOut: false, testOutFailed: false, fromTraining: true, purchaseId: pendingData.purchaseId, trainingCompletedAt: FieldValue.serverTimestamp() },
+          { merge: true }
+        );
+      }
+    }
+
     // ── Emails (best-effort — never block the response) ─────────────────────
     if (userEmail) {
       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
@@ -513,6 +526,7 @@ export async function POST(req: NextRequest) {
       if (justCompleted(COURSE_SEQUENCES['training_dc_ops'])) courseCompletions.push({ name: 'Data Center Operations Manager', certTitle: 'Jr. Data Center Operations Manager', practiceExamLevel: 'jr_dc_ops' });
       if (justCompleted(COURSE_SEQUENCES['training_building_cx'])) courseCompletions.push({ name: 'Building Commissioning (Cx) Agent', certTitle: 'Jr. Building Commissioning Agent', practiceExamLevel: 'jr_building_cx' });
       if (justCompleted(COURSE_SEQUENCES['training_telecom'])) courseCompletions.push({ name: 'Telecom OSP Technician', certTitle: 'Jr. Telecom OSP Technician', practiceExamLevel: 'jr_telecom_tech' });
+      if (justCompleted(COURSE_SEQUENCES['training_switchgear_tech'])) courseCompletions.push({ name: 'Switchgear & Substation Technician', certTitle: 'Jr. Switchgear & Substation Technician', practiceExamLevel: 'jr_switchgear_tech' });
 
       Promise.allSettled([
         ...(wasPreviouslyPassed ? [] : [sendModuleCompleteEmail(userEmail, userName, mod.title, `${siteUrl}/training`)]),
@@ -520,7 +534,7 @@ export async function POST(req: NextRequest) {
       ]).catch(() => {});
     }
 
-    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete || batteryComplete || dcEngineerComplete || marineComplete || poolComplete || hvacTechComplete || solarInstComplete || windTechComplete || elevatorTechComplete || fireAlarmTechComplete || bmetTechComplete || basComplete || refComplete || plcComplete || securityTechComplete || fieldPmComplete || pumpTechComplete || industrialRefComplete || dcOpsComplete || buildingCxComplete || telecomComplete;
+    const trainingComplete = upsComplete || kitchenComplete || hvacComplete || generatorComplete || datacenterComplete || solarComplete || evChargingComplete || dcPlantsComplete || batteryComplete || dcEngineerComplete || marineComplete || poolComplete || hvacTechComplete || solarInstComplete || windTechComplete || elevatorTechComplete || fireAlarmTechComplete || bmetTechComplete || basComplete || refComplete || plcComplete || securityTechComplete || fieldPmComplete || pumpTechComplete || industrialRefComplete || dcOpsComplete || buildingCxComplete || telecomComplete || switchgearTechComplete;
     return NextResponse.json({ passed: true, results, trainingComplete });
   } catch {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });

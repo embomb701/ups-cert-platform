@@ -37,6 +37,7 @@ const EXAM_LEVEL_LABELS: Record<string, string> = {
   jr_dc_ops: 'Jr. DC Ops',
   jr_building_cx: 'Jr. Building Cx',
   jr_telecom_tech: 'Jr. Telecom Tech',
+  jr_switchgear_tech: 'Jr. Switchgear Tech',
 };
 
 interface DashData {

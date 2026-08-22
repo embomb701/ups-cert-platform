@@ -268,6 +268,7 @@ describe('generateCertNumber', () => {
       ['jr_dc_ops', 'DCO'],
       ['jr_building_cx', 'BCX'],
       ['jr_telecom_tech', 'TEL'],
+      ['jr_switchgear_tech', 'SWG'],
       ['fse', 'FSE'],
     ];
     for (const [level, prefix] of cases) {

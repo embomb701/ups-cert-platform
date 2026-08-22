@@ -56,6 +56,7 @@ const COURSE_TO_PRACTICE_EXAM_LEVEL: Record<string, string> = {
   training_dc_ops: 'jr_dc_ops',
   training_building_cx: 'jr_building_cx',
   training_telecom: 'jr_telecom_tech',
+  training_switchgear_tech: 'jr_switchgear_tech',
 };
 
 const COURSE_NAMES: Record<string, string> = {
@@ -87,6 +88,7 @@ const COURSE_NAMES: Record<string, string> = {
   training_dc_ops: 'Data Center Operations Manager',
   training_building_cx: 'Building Commissioning Agent',
   training_telecom: 'Telecom OSP Technician',
+  training_switchgear_tech: 'Switchgear & Substation Technician',
 };
 
 export async function GET(req: NextRequest) {

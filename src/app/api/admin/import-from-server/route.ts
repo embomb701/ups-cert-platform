@@ -84,6 +84,7 @@ const DERIVED_BANKS = new Set([
   'industrial-ref-jr-derived',
   'dc-ops-jr-derived',
   'building-cx-jr-derived',
+  'switchgear-tech-jr-derived',
 ]);
 
 function getFileQuestions(name: string): QuestionRecord[] | null {
@@ -161,6 +162,7 @@ const FILE_ORDER = [
   'dc-ops-jr-derived',
   'building-cx-jr-fresh.json',
   'building-cx-jr-derived',
+  'switchgear-tech-jr-derived',
 ];
 
 export async function POST(req: NextRequest) {

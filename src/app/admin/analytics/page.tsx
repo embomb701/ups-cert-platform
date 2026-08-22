@@ -40,6 +40,7 @@ const LEVEL_TO_COURSE: Record<string, string> = {
   jr_dc_ops: 'DC Ops Manager',
   jr_building_cx: 'Building Cx',
   jr_telecom_tech: 'Telecom OSP',
+  jr_switchgear_tech: 'Switchgear Tech',
   fse: 'UPS FSE (Proctored)',
   fse_ai: 'UPS FSE (AI Proctored)',
 };

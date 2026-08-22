@@ -66,6 +66,7 @@ const CERT_LEVEL_LABELS: Record<string, string> = {
   jr_dc_ops: 'Jr. Data Center Operations Manager',
   jr_building_cx: 'Jr. Building Commissioning Agent',
   jr_telecom_tech: 'Jr. Telecom OSP Technician',
+  jr_switchgear_tech: 'Jr. Switchgear & Substation Technician',
   fse: 'UPS Field Service Engineer (Human Proctored)',
 };
 
@@ -212,6 +213,7 @@ export default async function PublicProfilePage({ params }: PageProps) {
           jr_dc_ops: 'training_dc_ops',
           jr_building_cx: 'training_building_cx',
           jr_telecom_tech: 'training_telecom',
+          jr_switchgear_tech: 'training_switchgear_tech',
         };
         return map[c.examLevel] ?? '';
       })
