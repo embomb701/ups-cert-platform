@@ -55,6 +55,15 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Missed-question spaced-repetition review queue
+    match /users/{userId}/missedQuestions/{questionId} {
+      allow read: if isOwner(userId) || isAdmin();
+      // Only admin SDK (backend, via /api/exam/submit and /api/review/answer)
+      // writes review-queue state — never client, so a client can't fake
+      // mastery or skip the schedule.
+      allow write: if false;
+    }
+
     // ---------------------------------------------------------------
     // Products (public read)
     // ---------------------------------------------------------------

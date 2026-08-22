@@ -4,6 +4,7 @@ import { sendCertEarnedEmail } from '@/lib/email';
 
 export const dynamic = 'force-dynamic';
 import { scoreAttempt, generateCertNumber } from '@/lib/exam/engine';
+import { recordPracticeMisses } from '@/lib/exam/reviewQueue';
 import {
   calculateRiskScore,
   classifyRiskLevel,
@@ -113,6 +114,20 @@ export async function POST(req: NextRequest) {
 
     // Practice attempts: return score/results immediately without cert or test-out flag
     if (attempt.isPractice) {
+      // Update the missed-question review queue — best-effort, never blocks
+      // the score response the student is waiting on.
+      try {
+        const answeredQuestions = questionDocs
+          .filter((qSnap) => qSnap.exists)
+          .map((qSnap) => {
+            const q = qSnap.data()!;
+            return { id: qSnap.id, category: q.category as string, correctAnswerId: q.correctAnswerId as string };
+          });
+        await recordPracticeMisses(adminDb, uid, attempt.examLevel, answeredQuestions, answers);
+      } catch (err) {
+        console.error('recordPracticeMisses failed (non-fatal):', err);
+      }
+
       return NextResponse.json({
         score,
         passed,

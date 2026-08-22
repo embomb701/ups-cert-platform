@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import Link from 'next/link';
+import { useAuth } from '@/components/auth/AuthProvider';
 import type { ExamLevel } from '@/types';
 
 const RULES_JR = [
@@ -56,8 +58,10 @@ const RULES_FSE = [
 export default function ExamRulesPage() {
   const params = useParams();
   const router = useRouter();
+  const { user } = useAuth();
   const examType = (params?.examType as string) ?? 'jr_fse';
   const [accepted, setAccepted] = useState(false);
+  const [dueReviewCount, setDueReviewCount] = useState(0);
   const [candidateName, setCandidateName] = useState('');
 
   const PRACTICE_LABELS: Record<string, string> = {
@@ -143,6 +147,25 @@ export default function ExamRulesPage() {
     ? 'UPS Field Service Certification (AI Proctored)'
     : 'UPS Field Service Certification';
 
+  // Only surface the review nudge before a real (non-practice) jr-course
+  // exam — practice is where misses get recorded in the first place.
+  useEffect(() => {
+    if (!user || !jrCourse) return;
+    let cancelled = false;
+    user.getIdToken().then((token) =>
+      fetch(`/api/review/${examType}`, { headers: { Authorization: `Bearer ${token}` } })
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        if (!cancelled && typeof data?.dueCount === 'number') setDueReviewCount(data.dueCount);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, examType]);
+
   const handleStart = () => {
     if (!accepted || !candidateName.trim()) return;
     router.push(`/exam/${examType}?name=${encodeURIComponent(candidateName.trim())}`);
@@ -176,6 +199,22 @@ export default function ExamRulesPage() {
             requirements, or replace site-specific procedures.
           </p>
         </div>
+
+        {dueReviewCount > 0 && (
+          <div className="card-dark p-6 bg-indigo-950/20 border-indigo-900/40 mb-6 flex items-center justify-between gap-4 flex-wrap">
+            <p className="text-sm text-gray-300">
+              You have <strong className="text-indigo-300">{dueReviewCount}</strong> question
+              {dueReviewCount === 1 ? '' : 's'} from past practice attempts due for review — worth a quick
+              pass before you start.
+            </p>
+            <Link
+              href={`/review/${examType}`}
+              className="shrink-0 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-colors"
+            >
+              Review Now →
+            </Link>
+          </div>
+        )}
 
         {/* Name for certificate */}
         <div className="card-dark p-6 mb-6">

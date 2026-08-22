@@ -272,6 +272,28 @@ export interface ExamAttempt {
 }
 
 // ---------------------------------------------------------------
+// Missed-Question Spaced Repetition (review mode)
+// ---------------------------------------------------------------
+// A record only exists for a question the user has gotten wrong at least
+// once on a practice attempt. Box follows a 5-box Leitner schedule — a
+// correct answer advances a box (and reschedules further out); a wrong
+// answer always resets to box 1, due immediately. Reaching a correct
+// answer while already in the top box marks the question mastered and
+// removes it from the active review queue.
+export interface MissedQuestionRecord {
+  questionId: string;
+  examLevel: ExamLevel;
+  category: string;
+  timesWrong: number;
+  box: number; // 1-5
+  mastered: boolean;
+  firstMissedAt: Date;
+  lastAnsweredAt: Date;
+  nextReviewAt: Date;
+  masteredAt?: Date;
+}
+
+// ---------------------------------------------------------------
 // IP / Network Locks
 // ---------------------------------------------------------------
 export interface IpExamLock {
