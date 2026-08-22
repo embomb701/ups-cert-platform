@@ -69,13 +69,13 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
         title: 'NFPA 99 Healthcare Facilities Code',
         body: [
           'NFPA 99, Health Care Facilities Code, establishes minimum requirements for medical gas systems, electrical systems, and equipment safety in healthcare facilities. NFPA 99 classifies spaces and systems by risk category: Category 1 covers systems where failure could be immediately life-threatening (OR, ICU), Category 2 covers systems where failure may be hazardous but not immediately life-threatening, Category 3 covers non-patient care areas, and Category 4 covers administrative support areas.',
-          'NFPA 99 requires that all patient care area receptacles be tested for grounding integrity, correct polarity, and retention force. Ground continuity must be less than 0.2 ohms from the outlet ground pin to the panel ground bus. Receptacles in critical care areas (Category 1) must be hospital-grade with higher retention force than standard commercial receptacles.',
+          'NFPA 99 requires that all patient care area receptacles be tested for grounding integrity, correct polarity, and retention force. Ground continuity must be less than 0.5 ohms from the outlet ground pin to the panel ground bus. Receptacles in critical care areas (Category 1) must be hospital-grade with higher retention force than standard commercial receptacles.',
           'Isolated Power Systems (IPS) are required by NFPA 99 in wet procedure locations such as operating rooms. An IPS uses an isolation transformer to create a floating secondary that is not referenced to ground, preventing the return path for ground-fault current through a patient. A Line Isolation Monitor (LIM) continuously monitors the impedance to ground and alarms if it drops below a threshold, warning of an emerging fault before a complete path develops.',
           'Medical gas systems (oxygen, nitrous oxide, medical air, vacuum, and WAGD) are covered by NFPA 99. BMETs may inspect and verify gas outlets but generally do not service piped gas systems, which require specialized medical gas technicians. BMETs must know alarm setpoints and zone valve locations for emergency response.',
         ],
         keyPoints: [
           'NFPA 99 Categories: 1 = life-threatening if failed (OR/ICU), 2 = hazardous but not immediate, 3 = non-patient, 4 = administrative',
-          'Ground continuity: less than 0.2 ohms from receptacle to panel ground bus',
+          'Ground continuity: less than 0.5 ohms from receptacle to panel ground bus',
           'Isolated Power Systems required in wet procedure locations (ORs): floating secondary prevents shock hazard',
           'LIM (Line Isolation Monitor) alarms when total hazard current exceeds safe threshold',
         ],
@@ -83,8 +83,8 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
           {
             q: 'NFPA 99 requires ground continuity in patient care receptacles to be less than:',
             a: ['0.5 ohms', '0.2 ohms', '1.0 ohm', '5.0 ohms'],
-            correct: 1,
-            exp: 'NFPA 99 requires ground continuity of less than 0.2 ohms from the outlet ground pin to the panel ground bus. Higher resistance indicates corrosion, loose connections, or damaged wiring that could impair the safety ground path.',
+            correct: 0,
+            exp: 'NFPA 99 requires ground continuity of less than 0.5 ohms from the outlet ground pin to the panel ground bus (0.2 ohms is IEC 60601\'s stricter medical-device limit, not the NFPA 99 facility receptacle requirement). Higher resistance indicates corrosion, loose connections, or damaged wiring that could impair the safety ground path.',
           },
           {
             q: 'An Isolated Power System (IPS) in an operating room protects patients by:',
@@ -122,8 +122,8 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
       {
         q: 'Ground continuity from a patient care receptacle to the panel ground bus must be less than:',
         a: ['0.5 ohms', '0.2 ohms', '1.0 ohm', '5.0 ohms'],
-        correct: 1,
-        exp: 'NFPA 99 requires ground continuity of less than 0.2 ohms. Higher resistance can impair the safety ground and indicates a wiring or connection problem requiring repair.',
+        correct: 0,
+        exp: 'NFPA 99 requires ground continuity of less than 0.5 ohms (0.2 ohms is IEC 60601\'s stricter limit, not NFPA 99\'s). Higher resistance can impair the safety ground and indicates a wiring or connection problem requiring repair.',
       },
       {
         q: 'IEC 60601-1 Type CF applied part classification applies to equipment with:',
@@ -212,29 +212,29 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
         body: [
           'Electrical Safety Analyzers (ESAs) such as the Fluke Biomedical ESA620 automate leakage current measurement per NFPA 99 and IEC 60601 test sequences. An ESA applies a load and measures leakage in microamperes while simulating normal and single-fault conditions including open neutral, open ground, and reversed polarity.',
           'The standard test sequence includes: (1) line voltage and frequency check; (2) ground continuity from chassis to ground pin; (3) chassis leakage in normal condition; (4) chassis leakage with open neutral; (5) chassis leakage with open ground; (6) chassis leakage with reversed polarity; (7) patient lead leakage for each applied lead; (8) patient lead auxiliary leakage between leads.',
-          'A ground continuity test passes when resistance from the chassis ground lug to the supply cord ground pin is less than 0.2 ohms (NFPA 99) or less than 0.1 ohms (IEC 60601). High ground resistance indicates a loose connection, broken ground wire, or corroded terminal that must be repaired before the device can be returned to service.',
+          'A ground continuity test passes when resistance from the chassis ground lug to the supply cord ground pin is less than 0.5 ohms (NFPA 99 facility receptacle requirement) or less than 0.1 ohms (IEC 60601\'s stricter device-level limit). High ground resistance indicates a loose connection, broken ground wire, or corroded terminal that must be repaired before the device can be returned to service.',
           'When an equipment failure is found during electrical safety testing, the device must be tagged out of service (red-tagged) and quarantined until repaired and retested. No device may be returned to clinical use without a passing electrical safety test and documentation of the repair.',
         ],
         images: [
-          { src: '/diagrams/esa-test-sequence.svg', alt: 'Diagram of the eight-step electrical safety analyzer test sequence, the NFPA 99 and IEC 60601 ground continuity pass thresholds, a worked failing example, and the red-tag quarantine procedure', caption: 'Eight steps, one hard threshold: ground continuity under 0.2 ohms — anything higher gets red-tagged and repaired before it touches a patient.' },
+          { src: '/diagrams/esa-test-sequence.svg', alt: 'Diagram of the eight-step electrical safety analyzer test sequence, the NFPA 99 and IEC 60601 ground continuity pass thresholds, a worked failing example, and the red-tag quarantine procedure', caption: 'Eight steps, one hard threshold: ground continuity under 0.5 ohms — anything higher gets red-tagged and repaired before it touches a patient.' },
         ],
         keyPoints: [
           'ESA automates leakage measurement; tests NC, open neutral, open ground, reversed polarity conditions',
-          'Ground continuity pass: <0.2 ohms (NFPA 99) or <0.1 ohms (IEC 60601)',
+          'Ground continuity pass: <0.5 ohms (NFPA 99) or <0.1 ohms (IEC 60601)',
           'Full test sequence: line voltage, ground continuity, chassis leakage, patient lead leakage',
           'Failed devices must be red-tagged and quarantined until repaired and retested',
         ],
         quiz: [
           {
-            q: 'A ground continuity test on a patient care device reads 0.35 ohms. The correct action is to:',
+            q: 'A ground continuity test on a patient care device reads 0.65 ohms. The correct action is to:',
             a: [
-              'Return the device to service — 0.35 ohms is within normal limits',
+              'Return the device to service — 0.65 ohms is within normal limits',
               'Tag the device out of service and investigate the high ground resistance before returning it to use',
               'Reset the device and retest — high readings are often transient',
               'Reduce to 0.3 ohms by cleaning the plug and retest',
             ],
             correct: 1,
-            exp: 'NFPA 99 requires ground continuity of less than 0.2 ohms. A reading of 0.35 ohms fails this requirement. The device must be red-tagged, the wiring and connectors inspected for corrosion or loose connections, repaired, and retested before returning to patient care.',
+            exp: 'NFPA 99 requires ground continuity of less than 0.5 ohms. A reading of 0.65 ohms fails this requirement. The device must be red-tagged, the wiring and connectors inspected for corrosion or loose connections, repaired, and retested before returning to patient care.',
           },
           {
             q: 'During electrical safety testing, the "open ground" test condition simulates:',
@@ -300,9 +300,9 @@ export const BMET_TECH_MODULES: TrainingModule[] = [
       },
       {
         q: 'Ground continuity of a patient care device measures 0.15 ohms. This result is:',
-        a: ['A failure — it must be below 0.1 ohms per NFPA 99', 'A pass — it is below the 0.2 ohm NFPA 99 limit', 'Borderline — requires immediate re-testing with a different analyzer', 'A failure — NFPA 99 requires zero resistance'],
+        a: ['A failure — it must be below 0.1 ohms per NFPA 99', 'A pass — it is below the 0.5 ohm NFPA 99 limit', 'Borderline — requires immediate re-testing with a different analyzer', 'A failure — NFPA 99 requires zero resistance'],
         correct: 1,
-        exp: 'NFPA 99 requires ground continuity of less than 0.2 ohms. A reading of 0.15 ohms passes this requirement. IEC 60601 has a more stringent 0.1 ohm limit, but for NFPA 99 compliance, 0.15 ohms is acceptable.',
+        exp: 'NFPA 99 requires ground continuity of less than 0.5 ohms. A reading of 0.15 ohms passes this requirement. IEC 60601 has a more stringent 0.1 ohm limit for detachable-cord equipment, but for NFPA 99 compliance, 0.15 ohms is comfortably acceptable.',
       },
       {
         q: 'The "open neutral" single-fault condition in electrical safety testing simulates:',

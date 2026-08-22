@@ -145,6 +145,7 @@ export function generateCertNumber(examLevel: ExamLevel): string {
     : examLevel === 'jr_dc_ops' ? 'DCO'
     : examLevel === 'jr_building_cx' ? 'BCX'
     : examLevel === 'jr_telecom_tech' ? 'TEL'
+    : examLevel === 'jr_switchgear_tech' ? 'SWG'
     : 'FSE';
   const year = new Date().getFullYear();
   const rand = uuidv4().split('-')[0].toUpperCase();

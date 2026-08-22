@@ -760,6 +760,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // SWITCHGEAR & SUBSTATION TECHNICIAN PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_switchgear_tech: {
+    name: 'Switchgear & Substation Technician Training Course + Jr. Switchgear Tech Certification Exam',
+    shortName: 'Switchgear Tech Training Course',
+    priceInCents: 99900,    // $999
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_SWITCHGEAR_TECH ?? '',
+  },
+
+  jr_switchgear_tech_test_human: {
+    name: 'Jr. Switchgear & Substation Technician Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Switchgear Tech Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_SWITCHGEAR_TECH_HUMAN ?? '',
+  },
+
+  pkg_training_switchgear_tech_testout: {
+    name: 'Switchgear Tech Training Course + Jr. Switchgear Tech Test-Out (Human Proctored)',
+    shortName: 'Switchgear Tech Training + Test-Out Package',
+    priceInCents: 124900,   // $1,249
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_SWITCHGEAR_TECH_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

@@ -1394,4 +1394,18 @@ export const COURSES: TrainingCourse[] = [
     comingSoon: false,
     examLevel: 'jr_telecom_tech',
   },
+  {
+    id: 'switchgear-tech',
+    title: 'Switchgear & Substation Technician',
+    shortTitle: 'Switchgear Tech',
+    tagline: 'Metal-clad MV switchgear, protective relaying and coordination, NETA acceptance/maintenance testing, arc flash and MV safety, and substation grounding — the critical-power discipline data center buildout runs on.',
+    accessKey: 'training_switchgear_tech',
+    certTitle: 'Jr. Switchgear & Substation Technician',
+    color: 'amber',
+    totalModules: 16,
+    stripeProductId: 'training_switchgear_tech',
+    testOutProductId: 'jr_switchgear_tech_test_human',
+    comingSoon: false,
+    examLevel: 'jr_switchgear_tech',
+  },
 ];

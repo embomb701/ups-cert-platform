@@ -1961,7 +1961,7 @@ export const MODULES: TrainingModule[] = [
       { q: 'Mega (M) represents:', a: ['10^3', '10^6', '10^9', '10^-6'], correct: 1, exp: 'Mega = 10^6. Capital M = Mega (10^6); lowercase m = milli (10^-3).' },
       { q: 'V = 24V, R = 2.2kΩ. Current in mA:', a: ['10.9 mA', '52.8 mA', '10.9 A', '1.09 mA'], correct: 0, exp: 'I = 24/2200 = 0.0109A = 10.9mA.' },
       { q: 'P = I²R. I = 50mA, R = 1kΩ. Power:', a: ['50W', '2.5W', '0.05W', '250W'], correct: 1, exp: '(0.05A)² × 1000Ω = 0.0025 × 1000 = 2.5W.' },
-      { q: '10kVA at 0.9 PF = _____ kW:', a: ['10 kW', '11 kW', '9 kW', '0.9 kW'], correct: 2, exp: '10 × 0.9 = 9 kW.' },
+      { q: '10kVA at 0.9 PF = _____ kW:', a: ['10 kW', '11 kW', '9 kW', '0.9 kW'], correct: 2, exp: 'Real power = apparent power × power factor: 10 kVA × 0.9 PF = 9 kW. Power factor is the ratio of real (working) power to apparent (total) power delivered.' },
       { q: 'A 100Ah battery at 25A discharge lasts approximately:', a: ['100 hours', '4 hours', '25 hours', '2500 hours'], correct: 1, exp: '100Ah / 25A = 4 hours (theoretical).' },
       { q: 'VA and W differ because:', a: ['They use different voltages', 'VA is apparent power; W is real power', 'W accounts for frequency; VA does not', 'They are identical for all loads'], correct: 1, exp: 'VA = apparent power (I×V). W = real power (actual work). Ratio = power factor.' },
       { q: '47 µF converted to nanofarads (nF) is:', a: ['0.047 nF', '47,000 nF', '4700 nF', '470 nF'], correct: 1, exp: '1 µF = 1000 nF. 47 µF = 47,000 nF.' },
