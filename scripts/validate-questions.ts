@@ -34,7 +34,19 @@ interface Question {
   tags: string[];
 }
 
-const VALID_EXAM_LEVELS = ['jr_fse', 'fse_ai', 'fse'];
+// Keep in sync with the `ExamLevel` union in src/types/index.ts — this was
+// stuck at the original 3 UPS-only levels and silently rejected every
+// question for the other 26 courses added since. There's no way to pull a
+// runtime value out of a type import, so this list has to be maintained by
+// hand; add new exam levels here whenever a new course is added.
+const VALID_EXAM_LEVELS = [
+  'jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft',
+  'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer',
+  'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech',
+  'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech',
+  'jr_plc_tech', 'jr_security_tech', 'jr_field_pm', 'jr_pump_tech', 'jr_industrial_ref',
+  'jr_dc_ops', 'jr_building_cx', 'jr_telecom_tech',
+];
 const VALID_DIFFICULTIES = ['easy', 'medium', 'hard', 'expert'];
 const VALID_CHOICE_IDS = ['A', 'B', 'C', 'D'];
 
@@ -47,7 +59,7 @@ function validateQuestion(q: Record<string, unknown>, index: number): string[] {
   }
 
   if (!VALID_EXAM_LEVELS.includes(q.examLevel as string)) {
-    errors.push(`${prefix}: invalid examLevel "${q.examLevel}" (must be jr_fsc or fsc)`);
+    errors.push(`${prefix}: invalid examLevel "${q.examLevel}" (see VALID_EXAM_LEVELS)`);
   }
 
   if (!q.category || typeof q.category !== 'string') {

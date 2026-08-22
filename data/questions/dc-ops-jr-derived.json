@@ -9165,7 +9165,7 @@
       { "id": "D", "text": "0.9 kW" }
     ],
     "correctAnswerId": "C",
-    "explanation": "10 × 0.9 = 9 kW.",
+    "explanation": "Real power = apparent power × power factor: 10 kVA × 0.9 PF = 9 kW. Power factor is the ratio of real (working) power to apparent (total) power delivered.",
     "referenceBookSection": "Module 6 — Scientific Notation and Powers of 10",
     "safetyCritical": false,
     "reviewRequired": false,
