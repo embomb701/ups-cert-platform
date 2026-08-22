@@ -154,10 +154,10 @@ export const COURSE_SEQUENCES: Record<string, TrainingModule[]> = {
   training_field_pm: [...FOUNDATION, ...[...FIELD_PM_MODULES].sort(byNum)],
   training_pump_tech: [...FOUNDATION, ...[...PUMP_TECH_MODULES].sort(byNum)],
   critical_environment: [...CE_MODULES].sort(byNum),
-  training_telecom: [...TELECOM_MODULES].sort(byNum),
-  training_industrial_ref: [...INDUSTRIAL_REF_MODULES].sort(byNum),
-  training_building_cx: [...BUILDING_CX_MODULES].sort(byNum),
-  training_dc_ops: [...DC_OPS_MODULES].sort(byNum),
+  training_telecom: [...FOUNDATION, ...[...TELECOM_MODULES].sort(byNum)],
+  training_industrial_ref: [...FOUNDATION, ...[...INDUSTRIAL_REF_MODULES].sort(byNum)],
+  training_building_cx: [...FOUNDATION, ...[...BUILDING_CX_MODULES].sort(byNum)],
+  training_dc_ops: [...FOUNDATION, ...[...DC_OPS_MODULES].sort(byNum)],
   // Data Center Engineer: foundation + UPS tech core + generator ops + HVAC cooling +
   // the three DC-specific ops modules (cooling, monitoring, operations) + DCE engineering modules
   training_dcengineer: [
