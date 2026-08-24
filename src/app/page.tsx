@@ -10,16 +10,16 @@ const OG_IMAGE = `${SITE_URL}/api/og`;
 export const metadata: Metadata = {
   title: 'Mastering Field Service Training Portal — 28 Career Tracks in Critical Infrastructure',
   description:
-    'Start a $45K–$130K+ career in field service in 3–6 months. No college required. 28 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Field PM, and more.',
+    'Start a $55K–$98K entry-level career in field service in 3–6 months — reach $135K+ with a few years of experience. No college required. 28 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Field PM, and more.',
   openGraph: {
     title: 'Mastering Field Service Training Portal — 28 Career Tracks in Critical Infrastructure',
-    description: 'Start a $45K–$130K+ career in field service in 3–6 months. No college required.',
+    description: 'Start a $55K–$98K entry-level career in field service in 3–6 months — reach $135K+ with experience. No college required.',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Mastering Field Service Training Portal' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Mastering Field Service Training Portal — 28 Career Tracks',
-    description: 'Start a $45K–$130K+ career in field service. No college required.',
+    description: 'Start a $55K–$98K entry-level career in field service — reach $135K+ with experience. No college required.',
     images: [OG_IMAGE],
   },
 };
@@ -502,14 +502,14 @@ export default function HomePage() {
               Industry facing critical technician shortage across all trades
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-6">
-              Start a <span className="text-gradient">$45K–$130K+</span> career in 3–6 months.{' '}
+              Start at <span className="text-gradient">$55K–$98K</span> entry-level.{' '}
               <span className="text-gray-300">No college. No debt.</span>
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
               Mastering Field Service is a full technical training portal with 28 career tracks —
               critical power, HVAC, solar, data centers, elevators, biomedical, industrial automation, and more.
               One shared electrical and safety foundation. Choose the trade. Earn the credential.
-              Get hired.
+              Get hired in 3–6 months — and reach $135K+ with a few years of experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -535,7 +535,7 @@ export default function HomePage() {
             {[
               { stat: '28', label: 'Career tracks in one portal' },
               { stat: '3–6 months', label: 'To your first field job' },
-              { stat: '$130K+', label: 'Management ceiling' },
+              { stat: '$135K+', label: 'With a few years of experience' },
               { stat: '$0', label: 'Student loan debt' },
             ].map((item, i) => (
               <div key={i} className="border border-gray-800 rounded-lg p-4 bg-gray-800/40">
@@ -686,10 +686,10 @@ export default function HomePage() {
         </div>
         <div className="grid md:grid-cols-4 gap-6">
           {[
-            { title: 'Jr. Technician', salary: '$45K–$75K', time: 'After certification', color: 'border-blue-800 bg-blue-900/20', tc: 'text-blue-400' },
-            { title: 'Technician / FSE', salary: '$75K–$100K', time: '2–3 years', color: 'border-green-900 bg-green-900/10', tc: 'text-green-400' },
-            { title: 'Senior / Lead', salary: '$95K–$130K', time: '5–8 years', color: 'border-yellow-900 bg-yellow-900/10', tc: 'text-yellow-400' },
-            { title: 'Management', salary: '$130K+', time: '8–12 years', color: 'border-orange-900 bg-orange-900/10', tc: 'text-orange-400' },
+            { title: 'Jr. Technician', salary: '$55K–$98K', time: 'After certification', color: 'border-blue-800 bg-blue-900/20', tc: 'text-blue-400' },
+            { title: 'Technician / FSE', salary: '$85K–$115K', time: '2–3 years', color: 'border-green-900 bg-green-900/10', tc: 'text-green-400' },
+            { title: 'Senior / Lead', salary: '$110K–$130K', time: '5–8 years', color: 'border-yellow-900 bg-yellow-900/10', tc: 'text-yellow-400' },
+            { title: 'Principal / Management', salary: '$130K–$135K+', time: '8–12 years', color: 'border-orange-900 bg-orange-900/10', tc: 'text-orange-400' },
           ].map((item, i) => (
             <div key={i} className={`rounded-lg border p-6 text-center ${item.color}`}>
               <p className={`font-bold text-lg ${item.tc}`}>{item.title}</p>
