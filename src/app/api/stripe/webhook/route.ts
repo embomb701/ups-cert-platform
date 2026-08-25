@@ -1576,6 +1576,22 @@ async function handleCheckoutCompleted(eventId: string, session: Stripe.Checkout
       await grantJrSwitchgearTechAccess(userId, pid);
       break;
 
+    // ── Cross-trade bundles: training-only, spans multiple courses. Test-out
+    // for any bundled course is bought separately per course, same as buying
+    // training standalone today. ────────────────────────────────────────────
+    case 'bundle_critical_power':
+      await grantTrainingAccess(userId, pid);
+      await grantGeneratorTrainingAccess(userId, pid);
+      await grantSwitchgearTechTrainingAccess(userId, pid);
+      await grantDataCenterTrainingAccess(userId, pid);
+      break;
+
+    case 'bundle_refrigeration':
+      await grantKitchenTrainingAccess(userId, pid);
+      await grantRefTechTrainingAccess(userId, pid);
+      await grantIndustrialRefTrainingAccess(userId, pid);
+      break;
+
     default:
       console.warn('Unhandled productId in webhook:', productId);
   }

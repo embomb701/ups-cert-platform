@@ -785,6 +785,30 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // CROSS-TRADE BUNDLES
+  // Training-only, spanning multiple courses at a discount vs. buying each
+  // training_* separately — same model as every single-course training
+  // product (test-out is bought/added per course afterward, same as always).
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // UPS $1,499 + Generator $1,199 + Switchgear Tech $999 + Data Center CFT
+  // $1,499 = $5,196 separately.
+  bundle_critical_power: {
+    name: 'Critical Power Bundle — UPS, Generator, Switchgear & Substation, Data Center CFT Training',
+    shortName: 'Critical Power Bundle',
+    priceInCents: 439900,   // $4,399 (vs. $5,196 separately — save $797)
+    stripePriceId: process.env.STRIPE_PRICE_ID_BUNDLE_CRITICAL_POWER ?? '',
+  },
+
+  // Kitchen $999 + Ref Tech $1,099 + Industrial Ref $1,199 = $3,297 separately.
+  bundle_refrigeration: {
+    name: 'Refrigeration & Mechanical Bundle — Commercial Kitchen, Refrigeration, Industrial Ref Training',
+    shortName: 'Refrigeration & Mechanical Bundle',
+    priceInCents: 279900,   // $2,799 (vs. $3,297 separately — save $498)
+    stripePriceId: process.env.STRIPE_PRICE_ID_BUNDLE_REFRIGERATION ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
 

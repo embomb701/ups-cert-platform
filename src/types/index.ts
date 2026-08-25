@@ -155,6 +155,11 @@ export const PRODUCTS = {
   TRAINING_DC_OPS: 'training_dc_ops',
   JR_DC_OPS_TEST_HUMAN: 'jr_dc_ops_test_human',
   PKG_TRAINING_DC_OPS_TESTOUT: 'pkg_training_dc_ops_testout',
+  TRAINING_SWITCHGEAR_TECH: 'training_switchgear_tech',
+  JR_SWITCHGEAR_TECH_TEST_HUMAN: 'jr_switchgear_tech_test_human',
+  PKG_TRAINING_SWITCHGEAR_TECH_TESTOUT: 'pkg_training_switchgear_tech_testout',
+  BUNDLE_CRITICAL_POWER: 'bundle_critical_power',
+  BUNDLE_REFRIGERATION: 'bundle_refrigeration',
 } as const;
 
 // Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts

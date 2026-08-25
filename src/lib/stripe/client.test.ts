@@ -81,3 +81,26 @@ describe('STRIPE_PRODUCTS — package bundles never cost more than buying separa
     }
   });
 });
+
+describe('STRIPE_PRODUCTS — cross-trade bundles never cost more than buying each course separately', () => {
+  // Unlike pkg_* (one course's training + its own test-out), a bundle_*
+  // spans several courses' training_* products with no test-out included.
+  const bundles: Record<string, (keyof typeof STRIPE_PRODUCTS)[]> = {
+    bundle_critical_power: ['training_course', 'training_generator', 'training_switchgear_tech', 'training_datacenter'],
+    bundle_refrigeration: ['training_kitchen', 'training_ref_tech', 'training_industrial_ref'],
+  };
+
+  it.each(Object.entries(bundles))('%s costs less than its component courses bought separately', (bundleId, componentIds) => {
+    const bundle = STRIPE_PRODUCTS[bundleId as keyof typeof STRIPE_PRODUCTS];
+    const sum = componentIds.reduce((total, id) => total + STRIPE_PRODUCTS[id].priceInCents, 0);
+
+    expect(bundle.priceInCents, `${bundleId} ($${bundle.priceInCents / 100}) should be cheaper than ${componentIds.join(' + ')} ($${sum / 100})`).toBeLessThan(sum);
+  });
+
+  it('every bundle_* product in the catalog is covered by the mapping above', () => {
+    const bundleIds = entries.map(([id]) => id).filter((id) => id.startsWith('bundle_'));
+    for (const id of bundleIds) {
+      expect(Object.keys(bundles), `${id} is a bundle but has no component mapping in this test — add one`).toContain(id);
+    }
+  });
+});

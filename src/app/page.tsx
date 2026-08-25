@@ -547,6 +547,53 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── TRUST / WHY THIS IS DIFFERENT ─────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 py-16 border-b border-gray-800">
+        <div className="text-center mb-10">
+          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Not Another Quiz Mill</span>
+          <h2 className="text-3xl font-bold text-white mt-3">Built like a real credential, because it is one.</h2>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              title: 'Publicly verifiable',
+              body: 'Every certificate has a public verification page. Anyone — an employer, a recruiter, you — can confirm a candidate name, certification level, and status by number, free, in seconds.',
+              cta: { label: 'Verify a certificate →', href: '/verify' },
+            },
+            {
+              title: 'Real exam banks, not 20 recycled questions',
+              body: 'Each certification draws from a dedicated bank of 600–1,000+ unique questions, randomized per attempt — deep enough that memorizing a friend’s exam doesn’t work.',
+              cta: null,
+            },
+            {
+              title: 'Standards-aligned, not generic',
+              body: 'Curriculum is built against the actual codes the work is governed by — NFPA 70E arc-flash, NFPA 99 healthcare facilities, EPA Section 608, OSHA 1910.147 lockout/tagout, and the NEC — not paraphrased trivia.',
+              cta: null,
+            },
+            {
+              title: 'Employers search by certification',
+              body: 'Certified candidates are browsable by employers directly on the platform, filtered by exact certification level — your credential is built to be found, not just printed.',
+              cta: { label: 'See employer plans →', href: '/employers' },
+            },
+          ].map((item, i) => (
+            <div key={i} className="card-dark p-6 flex flex-col">
+              <h3 className="text-white font-semibold text-base mb-2">{item.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed flex-1">{item.body}</p>
+              {item.cta && (
+                <Link href={item.cta.href} className="text-blue-400 hover:text-blue-300 text-sm font-semibold mt-4 inline-block">
+                  {item.cta.label}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-gray-500 text-xs mt-8 max-w-2xl mx-auto leading-relaxed">
+          Written and built by Francis Aiello — 25+ years in the UPS and critical power industry, published
+          author, and VP of Field Services — not licensed generic course content.{' '}
+          <Link href="/about" className="text-gray-400 hover:text-gray-300 underline">More about the program →</Link>
+        </p>
+      </section>
+
       {/* ── PLACEMENT QUIZ ────────────────────────────────────────────── */}
       <section id="quiz" className="max-w-3xl mx-auto px-4 pt-12">
         <PlacementQuiz />
@@ -849,6 +896,54 @@ export default function HomePage() {
               productId="signed_book"
               label="Buy Signed Book — $69.99"
               className="block py-2.5 px-5 bg-amber-700 hover:bg-amber-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── BUNDLE & SAVE ─────────────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 py-20 border-b border-gray-800">
+        <div className="text-center mb-12">
+          <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Bundle & Save</span>
+          <h2 className="text-3xl font-bold text-white mt-3 mb-4">Related trades, one price.</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            These clusters of trades work together on the job — the bundle price reflects that. Each course
+            trains independently; buy the test-out for any of them individually, whenever you&apos;re ready.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="rounded-xl border border-cyan-800/60 bg-cyan-950/10 p-6 flex flex-col">
+            <h3 className="text-white font-bold text-lg mb-1">Critical Power Bundle</h3>
+            <p className="text-3xl font-bold text-white mb-1">$4,399</p>
+            <p className="text-cyan-300 text-sm mb-4">$5,196 separately — save $797</p>
+            <ul className="space-y-1.5 mb-5 flex-1">
+              {['UPS Field Service Engineering', 'Power Generation Field Service Engineering', 'Switchgear & Substation Technician', 'Data Center Critical Facilities'].map((t, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                  <span className="text-cyan-400 flex-shrink-0 mt-0.5">✓</span>{t}
+                </li>
+              ))}
+            </ul>
+            <PurchaseButton
+              productId="bundle_critical_power"
+              label="Enroll — $4,399"
+              className="block w-full py-2.5 px-4 bg-cyan-700 hover:bg-cyan-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+            />
+          </div>
+          <div className="rounded-xl border border-orange-800/60 bg-orange-950/10 p-6 flex flex-col">
+            <h3 className="text-white font-bold text-lg mb-1">Refrigeration & Mechanical Bundle</h3>
+            <p className="text-3xl font-bold text-white mb-1">$2,799</p>
+            <p className="text-orange-300 text-sm mb-4">$3,297 separately — save $498</p>
+            <ul className="space-y-1.5 mb-5 flex-1">
+              {['Commercial Kitchen Field Service Engineering', 'Commercial Refrigeration Technician', 'Industrial Refrigeration Operator'].map((t, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                  <span className="text-orange-400 flex-shrink-0 mt-0.5">✓</span>{t}
+                </li>
+              ))}
+            </ul>
+            <PurchaseButton
+              productId="bundle_refrigeration"
+              label="Enroll — $2,799"
+              className="block w-full py-2.5 px-4 bg-orange-700 hover:bg-orange-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
             />
           </div>
         </div>
