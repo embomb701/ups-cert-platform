@@ -222,11 +222,23 @@ export async function CourseHub({ courseId }: { courseId: string }) {
             <p className="text-gray-400 text-sm mb-4">
               The first 3 modules are free. Enroll to unlock all {totalCount} modules and earn your {course.certTitle}.
             </p>
-            <PurchaseButton
-              productId={course.stripeProductId as ProductId}
-              label={`Enroll — ${coursePriceLabel(course.stripeProductId) ?? course.price ?? '$1,499'}`}
-              className={`px-5 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors ${c.btn}`}
-            />
+            <div className="flex flex-wrap items-center gap-3">
+              <PurchaseButton
+                productId={course.stripeProductId as ProductId}
+                label={`Enroll — ${coursePriceLabel(course.stripeProductId) ?? course.price ?? '$1,499'}`}
+                className={`px-5 py-2.5 rounded-lg text-white text-sm font-semibold transition-colors ${c.btn}`}
+              />
+              {course.testOutProductId && (
+                <>
+                  <span className="text-gray-600 text-xs">or</span>
+                  <PurchaseButton
+                    productId={course.testOutProductId as ProductId}
+                    label={`Already know it? Test Out — ${coursePriceLabel(course.testOutProductId) ?? '$299'}`}
+                    className="px-4 py-2 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white text-sm font-medium transition-colors"
+                  />
+                </>
+              )}
+            </div>
           </div>
         )}
 

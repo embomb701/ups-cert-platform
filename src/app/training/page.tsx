@@ -33,6 +33,7 @@ const HUB_ROUTES = new Set([
   'dcengineer', 'marine', 'pool', 'hvac-tech', 'solar-inst',
   'wind-tech', 'elevator-tech', 'fire-alarm-tech', 'bmet-tech',
   'bas-tech', 'ref-tech', 'plc-tech', 'security-tech', 'field-pm', 'pump-tech',
+  'switchgear-tech',
 ]);
 
 function courseHref(courseId: string, accessKey: string, hasAccess: boolean): string {

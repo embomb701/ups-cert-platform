@@ -27,6 +27,7 @@ const HUB_ROUTES: Record<string, string> = {
   'bas-tech': '/training/bas-tech', 'ref-tech': '/training/ref-tech',
   'plc-tech': '/training/plc-tech', 'security-tech': '/training/security-tech',
   'field-pm': '/training/field-pm', 'pump-tech': '/training/pump-tech',
+  'switchgear-tech': '/training/switchgear-tech',
 };
 
 function tsToMs(ts: unknown): number {

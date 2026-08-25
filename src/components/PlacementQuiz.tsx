@@ -41,7 +41,7 @@ const COMFORT_OPTIONS: { value: Comfort; label: string }[] = [
 function recommend(env: Environment, background: Background, comfort: Comfort): { primary: string; alternates: string[] } {
   switch (env) {
     case 'critical_power':
-      if (comfort === 'strong' && background === 'electrical') return { primary: 'dcengineer', alternates: ['ups', 'datacenter'] };
+      if (comfort === 'strong' && background === 'electrical') return { primary: 'dcengineer', alternates: ['switchgear-tech', 'ups'] };
       if (background === 'it') return { primary: 'datacenter', alternates: ['ups', 'dcplants'] };
       return { primary: 'ups', alternates: ['generator', 'datacenter'] };
     case 'healthcare':
