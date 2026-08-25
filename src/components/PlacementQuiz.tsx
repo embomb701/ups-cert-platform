@@ -6,7 +6,7 @@ import { COURSES, type TrainingCourse } from '@/data/courses';
 
 // ---------------------------------------------------------------
 // "Which cert fits you?" — a 3-question placement quiz that routes
-// visitors to a recommended track instead of a 28-course wall.
+// visitors to a recommended track instead of a 29-course wall.
 // Pure client-side, no persistence — reuses existing course data.
 // ---------------------------------------------------------------
 

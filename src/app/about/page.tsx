@@ -6,11 +6,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 export const metadata: Metadata = {
   title: 'About — FA Consulting and Recruiting',
   description:
-    'Mastering Field Service is a division of FA Consulting and Recruiting, founded by Francis Aiello. We build field service training and certification across 28 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.',
+    'Mastering Field Service is a division of FA Consulting and Recruiting, founded by Francis Aiello. We build field service training and certification across 29 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.',
   openGraph: {
     title: 'About Mastering Field Service',
     description:
-      'Learn about FA Consulting and Recruiting and the mission behind Mastering Field Service — 28 career tracks, industry-backed certifications, no college required.',
+      'Learn about FA Consulting and Recruiting and the mission behind Mastering Field Service — 29 career tracks, industry-backed certifications, no college required.',
     images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'About Mastering Field Service' }],
   },
   twitter: {
@@ -28,7 +28,7 @@ export default function AboutPage() {
         name: 'Mastering Field Service Training Portal',
         alternateName: 'FA Consulting and Recruiting',
         url: SITE_URL,
-        description: 'Professional field service training and certification portal for UPS, HVAC, solar, data center, and 28 career tracks.',
+        description: 'Professional field service training and certification portal for UPS, HVAC, solar, data center, and 29 career tracks.',
         founder: { '@type': 'Person', name: 'Francis Aiello', jobTitle: 'CEO' },
       },
       {
@@ -79,7 +79,7 @@ export default function AboutPage() {
               <h3 className="text-base font-semibold text-white mb-2">For the Next Generation</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
                 Give motivated people — regardless of background — a credible, structured path into
-                a rewarding, in-demand career across 28 field service trades: UPS, HVAC, Solar,
+                a rewarding, in-demand career across 29 field service trades: UPS, HVAC, Solar,
                 Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.
               </p>
             </div>

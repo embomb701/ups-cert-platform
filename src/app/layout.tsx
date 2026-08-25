@@ -1,8 +1,24 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+// IBM Plex — designed for IBM's engineering/technical documentation, not a
+// generic startup face. Reads as "credential" and "datasheet," which fits a
+// trade-certification platform better than the default Inter-everywhere
+// look. Plex Mono is used for stat figures and prices (tabular-feeling
+// numbers), Plex Sans for everything else.
+const plexSans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-mono',
+  display: 'swap',
+});
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AuthProvider } from '@/components/auth/AuthProvider';
@@ -14,7 +30,7 @@ export const metadata: Metadata = {
     template: '%s | Mastering Field Service',
   },
   description:
-    'Professional field service training and certification from FA Consulting and Recruiting. 28 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more — built on a shared electrical foundation, by Francis Aiello.',
+    'Professional field service training and certification from FA Consulting and Recruiting. 29 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more — built on a shared electrical foundation, by Francis Aiello.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -40,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`h-full ${inter.variable}`}>
+    <html lang="en" className={`h-full ${plexSans.variable} ${plexMono.variable}`}>
       <body className="h-full flex flex-col font-sans">
         <ServiceWorkerRegister />
         <AuthProvider>

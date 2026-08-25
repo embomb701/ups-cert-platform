@@ -117,10 +117,10 @@ export default function LoginPage() {
           </p>
           <div className="space-y-4">
             {[
-              '28 career tracks on one shared electrical foundation',
+              '29 career tracks on one shared electrical foundation',
               'Structured training completed in 3–6 months',
               'Jr. certification exam included at completion',
-              'Starting at $1,499 — less than one month of college tuition',
+              'Starting at $799 — less than one month of college tuition',
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
                 <span className="text-green-400 font-bold text-lg mt-0.5">✓</span>

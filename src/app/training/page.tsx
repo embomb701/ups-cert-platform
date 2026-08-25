@@ -15,11 +15,11 @@ export const dynamic = 'force-dynamic';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 export const metadata: Metadata = {
-  title: 'Training Hub — 28 Career Tracks in Field Service',
-  description: 'Browse all 28 field service training tracks. Start with UPS, HVAC, solar, data center, elevators, and more. Enroll and begin at your own pace.',
+  title: 'Training Hub — 29 Career Tracks in Field Service',
+  description: 'Browse all 29 field service training tracks. Start with UPS, HVAC, solar, data center, elevators, and more. Enroll and begin at your own pace.',
   openGraph: {
-    title: 'Training Hub — 28 Field Service Career Tracks',
-    description: 'Access your enrolled training courses across 28 field service career paths.',
+    title: 'Training Hub — 29 Field Service Career Tracks',
+    description: 'Access your enrolled training courses across 29 field service career paths.',
     images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Training Hub' }],
   },
   twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
@@ -153,7 +153,7 @@ export default async function TrainingPage() {
           </h1>
           <p className="text-gray-400 mt-1">
             {isGuest
-              ? '28 career tracks — enroll to start'
+              ? '29 career tracks — enroll to start'
               : enrolledCourses.length > 0
               ? `${enrolledCourses.length} course${enrolledCourses.length !== 1 ? 's' : ''} enrolled`
               : 'Choose your training program'}

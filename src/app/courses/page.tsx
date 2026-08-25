@@ -5,18 +5,18 @@ import { COURSES } from '@/data/courses';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 export const metadata: Metadata = {
-  title: 'All 28 Career Tracks — Mastering Field Service Training Portal',
+  title: 'All 29 Career Tracks — Mastering Field Service Training Portal',
   description:
-    'Browse all 28 field service career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more. No college required. Start free.',
+    'Browse all 29 field service career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more. No college required. Start free.',
   openGraph: {
-    title: 'All 28 Career Tracks — Mastering Field Service Training Portal',
-    description: 'Browse all 28 field service career tracks. No college required. Start free.',
-    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Mastering Field Service — 28 Career Tracks' }],
+    title: 'All 29 Career Tracks — Mastering Field Service Training Portal',
+    description: 'Browse all 29 field service career tracks. No college required. Start free.',
+    images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Mastering Field Service — 29 Career Tracks' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'All 28 Career Tracks — Mastering Field Service Training Portal',
-    description: 'Browse all 28 field service career tracks. No college required. Start free.',
+    title: 'All 29 Career Tracks — Mastering Field Service Training Portal',
+    description: 'Browse all 29 field service career tracks. No college required. Start free.',
     images: [`${SITE_URL}/api/og`],
   },
 };
@@ -37,7 +37,7 @@ const BORDER: Record<string, string> = {
 const CATEGORIES: { label: string; ids: string[] }[] = [
   {
     label: 'Critical Power & Data Center',
-    ids: ['ups', 'datacenter', 'dcengineer', 'dc-ops', 'dcplants', 'battery'],
+    ids: ['ups', 'datacenter', 'dcengineer', 'dc-ops', 'dcplants', 'battery', 'switchgear-tech'],
   },
   {
     label: 'Generation & Renewables',
@@ -83,6 +83,7 @@ const HUB_ROUTES: Record<string, string> = {
   'bas-tech': '/training/bas-tech', 'ref-tech': '/training/ref-tech',
   'plc-tech': '/training/plc-tech', 'security-tech': '/training/security-tech',
   'field-pm': '/training/field-pm', 'pump-tech': '/training/pump-tech',
+  'switchgear-tech': '/training/switchgear-tech',
 };
 
 export default function CourseCatalogPage() {
@@ -91,8 +92,8 @@ export default function CourseCatalogPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Mastering Field Service — 28 Career Tracks',
-    description: 'Professional field service training courses across 28 career tracks',
+    name: 'Mastering Field Service — 29 Career Tracks',
+    description: 'Professional field service training courses across 29 career tracks',
     numberOfItems: COURSES.length,
     itemListElement: COURSES.map((c, i) => ({
       '@type': 'ListItem',
@@ -115,7 +116,7 @@ export default function CourseCatalogPage() {
       <section className="border-b border-gray-800 py-14 px-4">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-3">
-            28 career tracks
+            29 career tracks
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
             One portal. Every field service trade.
