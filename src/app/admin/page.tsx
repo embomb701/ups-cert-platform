@@ -14,6 +14,7 @@ const adminSections = [
   { label: 'Proctored Orders', href: '/admin/proctored', desc: 'Manage FSE scheduling and proctor unlock' },
   { label: 'Certificates', href: '/admin/certificates', desc: 'View, revoke, manage certificates' },
   { label: 'Question Bank', href: '/admin/questions', desc: 'Import, review, activate/deactivate questions' },
+  { label: 'Question Stats', href: '/admin/question-stats', desc: 'Highest wrong-rate questions per course — find broken or ambiguous questions' },
   { label: 'Audit Logs', href: '/admin/audit', desc: 'Suspicious events, admin actions' },
   { label: 'IP Locks', href: '/admin/ip-locks', desc: 'Review and clear network cooldown locks' },
 ];

@@ -6,6 +6,7 @@ import { COURSES } from '@/data/courses';
 export const dynamic = 'force-dynamic';
 import { scoreAttempt, generateCertNumber } from '@/lib/exam/engine';
 import { recordPracticeMisses } from '@/lib/exam/reviewQueue';
+import { recordQuestionStats } from '@/lib/exam/questionStats';
 import {
   calculateRiskScore,
   classifyRiskLevel,
@@ -108,6 +109,28 @@ export async function POST(req: NextRequest) {
       if (userAnswer?.selectedChoiceId === q.correctAnswerId) {
         categoryBreakdown[cat].correct++;
       }
+    }
+
+    // Per-question performance tracking (admin analytics) — every scored
+    // attempt, practice or real, counts. Best-effort: never blocks the
+    // score response a student is waiting on.
+    try {
+      const statQuestions = questionDocs
+        .filter((qSnap) => qSnap.exists)
+        .map((qSnap) => {
+          const q = qSnap.data()!;
+          return {
+            id: qSnap.id,
+            examLevel: attempt.examLevel,
+            category: q.category as string,
+            questionText: q.questionText as string,
+            correctAnswerId: q.correctAnswerId as string,
+            safetyCritical: !!q.safetyCritical,
+          };
+        });
+      await recordQuestionStats(adminDb, statQuestions, answers);
+    } catch (err) {
+      console.error('recordQuestionStats failed (non-fatal):', err);
     }
 
     let certificateNumber: string | undefined;

@@ -92,6 +92,14 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Per-question performance stats (admin analytics — which questions
+    // have the highest wrong-rate). Written only by the admin SDK via
+    // /api/exam/submit on every scored attempt; never by a client.
+    match /questionStats/{questionId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
     // ---------------------------------------------------------------
     // Exam Attempts
     // ---------------------------------------------------------------
