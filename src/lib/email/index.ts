@@ -24,7 +24,7 @@ export async function sendModuleCompleteEmail(
       <p style="color:#78716c;font-size:12px;margin:0 0 16px;text-transform:uppercase;letter-spacing:.08em;">Training Portal</p>
       <h2 style="color:#fafaf9;margin:0 0 8px;font-size:20px;">Module passed ✓</h2>
       <p style="color:#a8a29e;margin:0 0 20px;">Hey ${displayName} — you just passed <strong style="color:#fafaf9;">${moduleTitle}</strong>. Keep going.</p>
-      <a href="${courseUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Continue training →</a>
+      <a href="${courseUrl}" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Continue training →</a>
       <p style="margin:32px 0 0;font-size:12px;color:#57534e;">Mastering Field Service · <a href="${SITE_URL}" style="color:#78716c;">${SITE_URL}</a></p>
     </div>`,
   );
@@ -52,7 +52,7 @@ export async function sendCourseCompleteEmail(
       <h2 style="color:#fafaf9;margin:0 0 8px;font-size:22px;">Course complete 🎓</h2>
       <p style="color:#a8a29e;margin:0 0 8px;">Congratulations, ${displayName}!</p>
       <p style="color:#a8a29e;margin:0 0 20px;">You've finished every module in <strong style="color:#fafaf9;">${courseName}</strong>. Your <strong style="color:#fb923c;">${certTitle}</strong> practice exam is now unlocked.</p>
-      <a href="${ctaUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">${ctaLabel}</a>
+      <a href="${ctaUrl}" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">${ctaLabel}</a>
       ${secondaryLink}
       <p style="margin:32px 0 0;font-size:12px;color:#57534e;">Mastering Field Service · <a href="${SITE_URL}" style="color:#78716c;">${SITE_URL}</a></p>
     </div>`,
@@ -77,7 +77,7 @@ export async function sendProgressReminderEmail(
       <p style="color:#78716c;font-size:12px;margin:0 0 16px;text-transform:uppercase;letter-spacing:.08em;">Training Reminder</p>
       <h2 style="color:#fafaf9;margin:0 0 8px;font-size:20px;">Hey ${displayName}, it's been ${dayText}</h2>
       <p style="color:#a8a29e;margin:0 0 20px;">You're enrolled in <strong style="color:#fafaf9;">${courseName}</strong> and haven't completed a module recently. Your progress is saved — pick up right where you left off.</p>
-      <a href="${courseUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Continue training →</a>
+      <a href="${courseUrl}" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Continue training →</a>
       <p style="margin:24px 0 0;font-size:13px;color:#57534e;">Credentials from this portal are verified by employers — completing your course opens doors.</p>
       <p style="margin:20px 0 0;font-size:12px;color:#44403c;">Mastering Field Service · <a href="${SITE_URL}" style="color:#78716c;">${SITE_URL}</a></p>
       <p style="margin:8px 0 0;font-size:11px;color:#57534e;">You're receiving this because you're enrolled in a course. <a href="${unsubUrl}" style="color:#78716c;">Unsubscribe from reminders →</a></p>
@@ -105,7 +105,7 @@ export async function sendOrderConfirmationEmail(
         <p style="color:#fafaf9;font-weight:600;margin:0 0 4px;font-size:15px;">${productName}</p>
         <p style="color:#78716c;font-size:13px;margin:0;">${amount} · Access granted immediately</p>
       </div>
-      <a href="${dashboardUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Go to your dashboard →</a>
+      <a href="${dashboardUrl}" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Go to your dashboard →</a>
       <p style="margin:24px 0 0;font-size:12px;color:#57534e;">Keep this email as your receipt. Questions? Reply to this email.</p>
       <p style="margin:12px 0 0;font-size:12px;color:#44403c;">Mastering Field Service · <a href="${SITE_URL}" style="color:#78716c;">${SITE_URL}</a></p>
     </div>`,
@@ -142,7 +142,7 @@ export async function sendTrialDripEmail(
           <p style="color:#fafaf9;margin:0 0 4px;font-size:14px;">✓ Module 2: Single-Phase UPS Architecture</p>
           <p style="color:#fafaf9;margin:0;font-size:14px;">✓ Module 3: Three-Phase UPS Systems</p>
         </div>
-        <a href="${upsUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Start free modules →</a>
+        <a href="${upsUrl}" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Start free modules →</a>
         ${footer}
       </div>`,
     );
@@ -163,7 +163,7 @@ export async function sendTrialDripEmail(
           <p style="color:#a8a29e;margin:0 0 4px;font-size:13px;">· Preventive Maintenance Schedules</p>
           <p style="color:#a8a29e;margin:0;font-size:13px;">· …and 20 more modules</p>
         </div>
-        <a href="${coursesUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">View all courses & enroll →</a>
+        <a href="${coursesUrl}" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">View all courses & enroll →</a>
         ${footer}
       </div>`,
     );
@@ -180,7 +180,7 @@ export async function sendTrialDripEmail(
           <p style="color:#fb923c;font-size:13px;margin:0 0 8px;">28 modules · Verified certification · Employer-searchable</p>
           <p style="color:#fed7aa;font-size:13px;margin:0;">Employers on the platform search by certification level when posting jobs. This is how candidates get found.</p>
         </div>
-        <a href="${coursesUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Enroll now →</a>
+        <a href="${coursesUrl}" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Enroll now →</a>
         ${footer}
       </div>`,
     );
@@ -208,7 +208,7 @@ export async function sendCertEarnedEmail(
       <p style="color:#a8a29e;margin:0 0 8px;">Congratulations, ${displayName}!</p>
       <p style="color:#a8a29e;margin:0 0 4px;">You've earned the <strong style="color:#fafaf9;">${certTitle}</strong>.</p>
       <p style="color:#78716c;font-size:13px;margin:0 0 20px;">Certificate #${certNumber}</p>
-      <a href="${verifyUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">View certificate →</a>${jobsButton}
+      <a href="${verifyUrl}" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">View certificate →</a>${jobsButton}
       <p style="margin:32px 0 0;font-size:12px;color:#57534e;">Mastering Field Service · <a href="${SITE_URL}" style="color:#78716c;">${SITE_URL}</a></p>
     </div>`,
   );
@@ -229,7 +229,7 @@ export async function sendWelcomeEmail(to: string, name: string, uid: string): P
         <li><strong style="color:#fafaf9;">29 career tracks</strong> — UPS, HVAC, Kitchen, Data Center, Solar, and more.</li>
         <li><strong style="color:#fafaf9;">Certifications</strong> — Complete a course and unlock your Jr. FSE exam.</li>
       </ul>
-      <a href="${SITE_URL}/training" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Start training →</a>
+      <a href="${SITE_URL}/training" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Start training →</a>
       <p style="margin:32px 0 0;font-size:12px;color:#57534e;">Mastering Field Service · <a href="${SITE_URL}" style="color:#78716c;">${SITE_URL}</a></p>
       <p style="margin:8px 0 0;font-size:11px;color:#44403c;">You received this because you created an account. <a href="${unsubUrl}" style="color:#78716c;">Unsubscribe →</a></p>
     </div>`,

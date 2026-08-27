@@ -25,8 +25,14 @@ export function badgeTitleForExamLevel(examLevel: string): string {
 
 export function badgeColorForExamLevel(examLevel: string): string {
   const course = COURSES.find((c) => c.examLevel === examLevel);
+  // Matches src/data/courses.ts `color` values to the hex each now actually
+  // renders as on-site. "blue" specifically is NOT stock Tailwind blue —
+  // tailwind.config.ts renames that key to a warm orange/copper accent
+  // (see its "Palette philosophy" comment) — so a course with color:'blue'
+  // needs its badge to use that same corrected value, not literal blue, or
+  // the issued badge image would visually contradict the site it came from.
   const COLOR_HEX: Record<string, string> = {
-    blue: '#3b82f6', orange: '#f97316', teal: '#14b8a6', amber: '#f59e0b',
+    blue: '#ce480c', orange: '#f97316', teal: '#14b8a6', amber: '#f59e0b',
     violet: '#8b5cf6', yellow: '#eab308', green: '#22c55e', sky: '#0ea5e9',
     rose: '#f43f5e', cyan: '#06b6d4', emerald: '#10b981',
   };

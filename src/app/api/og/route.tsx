@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
             width: '36px', height: '36px', borderRadius: '8px',
-            background: 'linear-gradient(135deg, #f97316, #06b6d4)',
+            background: 'linear-gradient(135deg, #ce480c, #06b6d4)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
