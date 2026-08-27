@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import { COURSE_SEQUENCES } from '@/data';
+import { COURSES } from '@/data/courses';
+import { coursePriceLabel } from '@/lib/stripe/client';
 
 export const dynamic = 'force-dynamic';
 
@@ -200,6 +202,33 @@ export async function GET(req: NextRequest) {
       };
     }).sort((a, b) => b.completed / (b.total || 1) - a.completed / (a.total || 1));
 
+    // Cross-sell: courses the user hasn't purchased, ranked by how much of
+    // that course's own sequence they've already completed — almost always
+    // via the shared 10-module foundation every course starts with. Filters
+    // out noise (a couple of stray shared modules) and only surfaces a real
+    // head start: the full foundation done (>=10 modules) and at least a
+    // quarter of that course's total sequence already behind them.
+    const crossSell = COURSES
+      .filter((c) => !c.free && c.stripeProductId && !enrolledCourseKeys.has(c.accessKey))
+      .map((c) => {
+        const modules = COURSE_SEQUENCES[c.accessKey] ?? [];
+        const completedCount = modules.filter((m) => completedIds.has(m.id)).length;
+        const pct = modules.length > 0 ? completedCount / modules.length : 0;
+        return {
+          id: c.id,
+          title: c.title,
+          shortTitle: c.shortTitle,
+          stripeProductId: c.stripeProductId!,
+          priceLabel: coursePriceLabel(c.stripeProductId) ?? null,
+          completedCount,
+          total: modules.length,
+          pct: Math.round(pct * 100),
+        };
+      })
+      .filter((c) => c.completedCount >= 10 && c.pct >= 25)
+      .sort((a, b) => b.pct - a.pct)
+      .slice(0, 3);
+
     // Certificates
     const certificates = certsSnap.docs.map((doc) => {
       const d = doc.data();
@@ -266,6 +295,7 @@ export async function GET(req: NextRequest) {
       uid,
       access,
       enrolledCourses,
+      crossSell,
       certificates,
       attempts,
       jobApplications,

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
+import { COURSES } from '@/data/courses';
 
 const CERT_TITLES: Record<string, string> = {
   jr_fse: 'Jr. UPS Field Service Engineer',
@@ -181,6 +182,17 @@ export default function ExamResultsPage() {
                   </svg>
                   Add to LinkedIn
                 </a>
+                {(() => {
+                  const accessKey = COURSES.find((c) => c.examLevel === result.examLevel)?.accessKey;
+                  return accessKey ? (
+                    <Link
+                      href={`/jobs?course=${accessKey}`}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-orange-700 hover:bg-orange-600 text-white text-sm font-medium transition-colors"
+                    >
+                      Find Matching Jobs →
+                    </Link>
+                  ) : null;
+                })()}
                 <Link href="/dashboard" className="text-sm text-indigo-400 hover:text-indigo-300 flex items-center">
                   View in dashboard
                 </Link>

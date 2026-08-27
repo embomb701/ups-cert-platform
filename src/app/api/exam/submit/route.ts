@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { sendCertEarnedEmail } from '@/lib/email';
+import { COURSES } from '@/data/courses';
 
 export const dynamic = 'force-dynamic';
 import { scoreAttempt, generateCertNumber } from '@/lib/exam/engine';
@@ -254,12 +255,14 @@ export async function POST(req: NextRequest) {
         const userRecord = await adminAuth.getUser(uid);
         if (userRecord.email && certificateNumber) {
           const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
+          const accessKey = COURSES.find((c) => c.examLevel === attempt.examLevel)?.accessKey;
           sendCertEarnedEmail(
             userRecord.email,
             userRecord.displayName || userRecord.email,
             certTitle,
             certificateNumber,
             `${siteUrl}/verify/${certificateNumber}`,
+            accessKey ? `${siteUrl}/jobs?course=${accessKey}` : undefined,
           ).catch(() => {});
         }
       } catch {

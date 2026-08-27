@@ -33,6 +33,7 @@ const COURSE_OPTIONS = [
   { key: 'training_dc_ops', label: 'Data Center Operations Manager' },
   { key: 'training_building_cx', label: 'Building Commissioning (Cx) Agent' },
   { key: 'training_telecom', label: 'Telecom OSP Technician' },
+  { key: 'training_switchgear_tech', label: 'Switchgear & Substation Technician' },
 ];
 
 const JOB_TYPES = [

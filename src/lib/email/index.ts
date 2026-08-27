@@ -193,8 +193,12 @@ export async function sendCertEarnedEmail(
   certTitle: string,
   certNumber: string,
   verifyUrl: string,
+  jobsUrl?: string,
 ): Promise<void> {
   const displayName = name.split(' ')[0] || 'there';
+  const jobsButton = jobsUrl
+    ? `<a href="${jobsUrl}" style="display:inline-block;padding:12px 24px;background:#44403c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;margin-left:10px;">Find matching jobs →</a>`
+    : '';
   await send(
     to,
     `Certificate earned: ${certTitle}`,
@@ -204,7 +208,7 @@ export async function sendCertEarnedEmail(
       <p style="color:#a8a29e;margin:0 0 8px;">Congratulations, ${displayName}!</p>
       <p style="color:#a8a29e;margin:0 0 4px;">You've earned the <strong style="color:#fafaf9;">${certTitle}</strong>.</p>
       <p style="color:#78716c;font-size:13px;margin:0 0 20px;">Certificate #${certNumber}</p>
-      <a href="${verifyUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">View certificate →</a>
+      <a href="${verifyUrl}" style="display:inline-block;padding:12px 24px;background:#ea580c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">View certificate →</a>${jobsButton}
       <p style="margin:32px 0 0;font-size:12px;color:#57534e;">Mastering Field Service · <a href="${SITE_URL}" style="color:#78716c;">${SITE_URL}</a></p>
     </div>`,
   );

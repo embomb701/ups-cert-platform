@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { getIdToken } from '@/lib/firebase/auth';
+import { PurchaseButton } from '@/components/exam/PurchaseButton';
+import type { ProductId } from '@/types';
 
 const EXAM_LEVEL_LABELS: Record<string, string> = {
   jr_fse: 'Jr. FSE',
@@ -45,6 +47,7 @@ interface DashData {
   uid: string;
   access: { jr_fse: boolean; fse_ai: boolean; fse_proctored: string | null };
   enrolledCourses: { key: string; name: string; completed: number; total: number; practiceExamLevel: string | null }[];
+  crossSell: { id: string; title: string; shortTitle: string; stripeProductId: string; priceLabel: string | null; completedCount: number; total: number; pct: number }[];
   certificates: { id: string; certificateNumber: string; certificationTitle: string; examLevel: string; issuedAt: string | null; status: string; score: number | null }[];
   attempts: { id: string; examLevel: string; score?: number; passed?: boolean; completedAt: string | null }[];
   jobApplications: { id: string; listingId: string; listingTitle: string; company: string; status: string; createdAt: string | null }[];
@@ -186,6 +189,7 @@ export default function DashboardPage() {
   const validCerts = certs.filter((c) => c.status === 'valid');
   const courses = data?.enrolledCourses ?? [];
   const completedCourses = courses.filter((c) => c.completed === c.total && c.total > 0);
+  const crossSell = data?.crossSell ?? [];
   const attempts = data?.attempts ?? [];
   const jobApps = data?.jobApplications ?? [];
   const orders = data?.employerOrders ?? [];
@@ -194,10 +198,10 @@ export default function DashboardPage() {
 
   // Suggested next course — shown when at least one course is complete
   const NEXT_COURSE_MAP: Record<string, Array<{ key: string; name: string; path: string; reason: string }>> = {
-    training_portal:       [{ key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'UPS + data center skills open critical facilities roles' }, { key: 'training_battery', name: 'Battery Systems Technician', path: '/training/battery', reason: 'Battery storage pairs naturally with UPS expertise' }],
+    training_portal:       [{ key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'UPS + data center skills open critical facilities roles' }, { key: 'training_switchgear_tech', name: 'Switchgear & Substation Technician', path: '/training/switchgear-tech', reason: 'Switchgear is the piece of critical power UPS training doesn’t cover' }],
     training_kitchen:      [{ key: 'training_hvac', name: 'HVAC FSE', path: '/training/hvac', reason: 'HVAC knowledge expands your commercial kitchen scope' }, { key: 'training_ref_tech', name: 'Commercial Refrigeration Tech', path: '/training/ref-tech', reason: 'Natural follow-on from kitchen equipment expertise' }],
     training_hvac:         [{ key: 'training_generator', name: 'Power Generation FSE', path: '/training/generator', reason: 'HVAC + generator skills cover most critical facilities work' }, { key: 'training_ref_tech', name: 'Commercial Refrigeration Tech', path: '/training/ref-tech', reason: 'Refrigeration tech rounds out your cooling expertise' }],
-    training_generator:    [{ key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'Generator skills are core to data center critical power' }, { key: 'training_portal', name: 'UPS Field Service Engineering', path: '/training/ups', reason: 'UPS + generator coverage unlocks critical power roles' }],
+    training_generator:    [{ key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'Generator skills are core to data center critical power' }, { key: 'training_switchgear_tech', name: 'Switchgear & Substation Technician', path: '/training/switchgear-tech', reason: 'Generators feed switchgear — a natural adjacent specialty' }],
     training_datacenter:   [{ key: 'training_dcengineer', name: 'Data Center Engineer', path: '/training/dcengineer', reason: 'Advance from ops to engineering with DC Engineer training' }, { key: 'training_dc_ops', name: 'Data Center Operations Manager', path: '/training/dc-ops', reason: 'Move into operations leadership with DC Ops training' }],
     training_solar:        [{ key: 'training_battery', name: 'Battery Systems Technician', path: '/training/battery', reason: 'Solar + storage is the most in-demand combination in renewables' }, { key: 'training_evcharging', name: 'EV Charging Infrastructure', path: '/training/evcharging', reason: 'Expand into EV infrastructure alongside solar' }],
     training_evcharging:   [{ key: 'training_solar', name: 'Solar & Storage FSE', path: '/training/solar', reason: 'Solar + EV covers the full clean energy tech stack' }, { key: 'training_battery', name: 'Battery Systems Technician', path: '/training/battery', reason: 'Battery storage is essential to EV infrastructure' }],
@@ -222,6 +226,7 @@ export default function DashboardPage() {
     training_dc_ops:       [{ key: 'training_dcengineer', name: 'Data Center Engineer', path: '/training/dcengineer', reason: 'Move from operations management into engineering leadership' }, { key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'CFT training complements your operations management expertise' }],
     training_building_cx:  [{ key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS expertise is essential in commissioning work' }, { key: 'training_field_pm', name: 'Field Project Manager', path: '/training/field-pm', reason: 'PM skills pair naturally with commissioning agent work' }],
     training_telecom:      [{ key: 'training_dcplants', name: 'Telecom DC Power Plants', path: '/training/dcplants', reason: 'DC power plants are the backbone of telecom infrastructure' }, { key: 'training_security_tech', name: 'Electronic Security Systems', path: '/training/security-tech', reason: 'Security systems appear alongside telecom infrastructure' }],
+    training_switchgear_tech:[{ key: 'training_dcengineer', name: 'Data Center Engineer', path: '/training/dcengineer', reason: 'Switchgear expertise is core to the electrical design DC Engineer covers' }, { key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'Switchgear + critical facilities covers the full power chain' }],
   };
 
   const enrolledKeys = new Set(courses.map((c) => c.key));
@@ -447,6 +452,36 @@ export default function DashboardPage() {
             >
               Explore course →
             </Link>
+          </div>
+        )}
+
+        {/* Cross-sell: courses already partway done via the shared foundation */}
+        {!dataLoading && crossSell.length > 0 && (
+          <div className="card-dark p-5 border-orange-800/40 bg-orange-950/10">
+            <p className="text-xs text-orange-400 font-semibold uppercase tracking-wide mb-1">
+              Already partway there
+            </p>
+            <p className="text-sm text-gray-400 mb-4">
+              Every course shares the same 10-module foundation — you&apos;ve already completed modules that count
+              toward these too.
+            </p>
+            <div className="space-y-3">
+              {crossSell.map((c) => (
+                <div key={c.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 first:pt-0 border-t first:border-t-0 border-gray-800">
+                  <div className="min-w-0">
+                    <p className="text-white text-sm font-semibold truncate">{c.title}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      {c.completedCount} of {c.total} modules already done ({c.pct}%)
+                    </p>
+                  </div>
+                  <PurchaseButton
+                    productId={c.stripeProductId as ProductId}
+                    label={`Enroll — ${c.priceLabel ?? 'See price'}`}
+                    className="flex-shrink-0 px-4 py-2 rounded-lg bg-orange-700 hover:bg-orange-600 text-white text-xs font-semibold text-center transition-colors"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         )}
 

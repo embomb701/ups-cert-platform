@@ -47,6 +47,7 @@ const COURSE_LABELS: Record<string, string> = {
   training_dc_ops: 'DC Ops Manager',
   training_building_cx: 'Building Cx',
   training_telecom: 'Telecom OSP',
+  training_switchgear_tech: 'Switchgear Tech',
 };
 
 const TYPE_COLORS: Record<string, string> = {
@@ -76,7 +77,14 @@ function timeAgo(date: Date): string {
   return `${Math.floor(days / 30)} months ago`;
 }
 
-export default async function JobsPage() {
+interface JobsPageProps {
+  searchParams: Promise<{ course?: string }>;
+}
+
+export default async function JobsPage({ searchParams }: JobsPageProps) {
+  const { course: courseFilter } = await searchParams;
+  const filterLabel = courseFilter ? COURSE_LABELS[courseFilter] : undefined;
+
   const snap = await adminDb
     .collection('jobListings')
     .where('status', '==', 'active')
@@ -84,7 +92,7 @@ export default async function JobsPage() {
     .limit(100)
     .get();
 
-  const listings: Listing[] = snap.docs.map((doc) => ({
+  const allListings: Listing[] = snap.docs.map((doc) => ({
     id: doc.id,
     title: doc.data().title,
     company: doc.data().company,
@@ -95,6 +103,13 @@ export default async function JobsPage() {
     createdAt: doc.data().createdAt ?? null,
   }));
 
+  // Only actually filter when the param matches a real certification — an
+  // unrecognized value falls back to showing everything rather than an
+  // empty, confusing page.
+  const listings = filterLabel
+    ? allListings.filter((l) => l.courseRequirements.includes(courseFilter!))
+    : allListings;
+
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
       <div className="max-w-3xl mx-auto space-y-8">
@@ -103,7 +118,9 @@ export default async function JobsPage() {
           <div>
             <h1 className="text-2xl font-bold text-white mb-1">Job Board</h1>
             <p className="text-gray-500 text-sm">
-              {listings.length > 0
+              {filterLabel
+                ? `${listings.length} listing${listings.length !== 1 ? 's' : ''} matching your ${filterLabel} certification`
+                : listings.length > 0
                 ? `${listings.length} active listing${listings.length !== 1 ? 's' : ''} from verified employers`
                 : 'No active listings yet — check back soon.'}
             </p>
@@ -116,14 +133,34 @@ export default async function JobsPage() {
           </Link>
         </div>
 
+        {filterLabel && (
+          <div className="rounded-lg border border-orange-800/50 bg-orange-950/10 px-4 py-2.5 flex items-center justify-between gap-3">
+            <p className="text-xs text-orange-300">
+              Filtered to jobs preferring <strong>{filterLabel}</strong> certification.
+            </p>
+            <Link href="/jobs" className="text-xs text-gray-400 hover:text-white flex-shrink-0">
+              Show all jobs →
+            </Link>
+          </div>
+        )}
+
         {listings.length === 0 ? (
           <div className="rounded-xl border border-gray-700 bg-gray-800/30 p-12 text-center">
-            <p className="text-gray-500 text-sm">No active job listings yet.</p>
-            <p className="text-gray-600 text-xs mt-2">
-              Employers with a seat pack can{' '}
-              <Link href="/jobs/post" className="text-blue-400 hover:text-blue-300 underline">post positions</Link>{' '}
-              here.
+            <p className="text-gray-500 text-sm">
+              {filterLabel ? `No open listings currently prefer ${filterLabel} specifically.` : 'No active job listings yet.'}
             </p>
+            {filterLabel ? (
+              <p className="text-gray-600 text-xs mt-2">
+                <Link href="/jobs" className="text-blue-400 hover:text-blue-300 underline">Browse all open listings</Link>{' '}
+                instead — many employers hire across multiple certifications.
+              </p>
+            ) : (
+              <p className="text-gray-600 text-xs mt-2">
+                Employers with a seat pack can{' '}
+                <Link href="/jobs/post" className="text-blue-400 hover:text-blue-300 underline">post positions</Link>{' '}
+                here.
+              </p>
+            )}
           </div>
         ) : (
           <div className="space-y-3">
