@@ -52,7 +52,7 @@ interface DashData {
   attempts: { id: string; examLevel: string; score?: number; passed?: boolean; completedAt: string | null }[];
   jobApplications: { id: string; listingId: string; listingTitle: string; company: string; status: string; createdAt: string | null }[];
   employerOrders: { id: string; seats: number; seatsUsed: number; courseKey: string }[];
-  profile: { openToOpportunities: boolean; profileVisible: boolean; headline: string; location: string };
+  profile: { openToOpportunities: boolean; profileVisible: boolean; headline: string; location: string; referralCount: number };
   streak: number;
 }
 
@@ -93,6 +93,7 @@ export default function DashboardPage() {
   const [data, setData] = useState<DashData | null>(null);
   const [dataLoading, setDataLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [copiedReferral, setCopiedReferral] = useState(false);
   const [toggling, setToggling] = useState(false);
 
   // FSE scheduling form
@@ -170,6 +171,14 @@ export default function DashboardPage() {
     navigator.clipboard.writeText(`${SITE_URL}/p/${data.uid}`).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
+  function copyReferralUrl() {
+    if (!data) return;
+    navigator.clipboard.writeText(`${SITE_URL}?ref=${data.uid}`).then(() => {
+      setCopiedReferral(true);
+      setTimeout(() => setCopiedReferral(false), 2000);
     });
   }
 
@@ -546,6 +555,36 @@ export default function DashboardPage() {
                 >
                   Edit profile settings
                 </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Refer a Friend */}
+          <div className="card-dark p-6">
+            <h2 className="text-base font-semibold text-white mb-4">Refer a Friend</h2>
+            {dataLoading ? (
+              <p className="text-sm text-gray-500">Loading…</p>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <p className="text-xs text-gray-500 mb-1.5">Your link</p>
+                  <div className="flex items-center gap-2">
+                    <code className="text-xs text-gray-400 bg-gray-900 border border-gray-700 rounded px-2 py-1 flex-1 truncate">
+                      ?ref={data?.uid?.slice(0, 8)}…
+                    </code>
+                    <button
+                      onClick={copyReferralUrl}
+                      className="text-xs px-2 py-1 rounded border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-colors flex-shrink-0"
+                    >
+                      {copiedReferral ? 'Copied!' : 'Copy'}
+                    </button>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500">
+                  {(profile?.referralCount ?? 0) === 0
+                    ? 'Share your link. Anyone who signs up through it is credited to you.'
+                    : `${profile!.referralCount} ${profile!.referralCount === 1 ? 'person has' : 'people have'} signed up through your link.`}
+                </p>
               </div>
             )}
           </div>
