@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import type {
   PracticalExercise,
   PracticalStep,
@@ -145,10 +146,21 @@ export default function PracticalActivity({ exercise, onComplete }: Props) {
           ))}
         </div>
 
-        {/* Reference image for this step */}
+        {/* Reference image for this step — intrinsic dimensions vary per
+            figure and aren't tracked for this older image set (unlike the
+            SVG diagrams in SlideWithTimer), so width/height are left at 0
+            with `sizes` driving responsive width, per Next's documented
+            pattern for a fill-width image of unknown natural size. */}
         {step?.image && (
           <div className="rounded-lg overflow-hidden border border-gray-700 bg-gray-900">
-            <img src={step.image} alt="Reference diagram" className="w-full h-auto" />
+            <Image
+              src={step.image}
+              alt="Reference diagram"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
         )}
 

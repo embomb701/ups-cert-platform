@@ -15,6 +15,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'firebasestorage.googleapis.com',
       },
+      // Google sign-in profile photos — the only OAuth provider this app
+      // supports (see src/lib/firebase/auth.ts); email/password users have
+      // no photoURL at all, so this is the one external avatar host that
+      // ever actually appears.
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
     ],
   },
   webpack: (config, { isServer }) => {

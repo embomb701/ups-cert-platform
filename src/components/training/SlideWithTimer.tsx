@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
+import Image from 'next/image';
 import PracticalActivity from './PracticalActivity';
 import MeterSimulator from './MeterSimulator';
 import type { PracticalExercise, MeterSimExercise, SlideTable, SlideImage } from '@/data/modules';
@@ -228,13 +229,12 @@ export default function SlideWithTimer({ moduleId, slideIndex, slide, nextUrl, s
                 const dims = DIAGRAM_DIMENSIONS[img.src] ?? DEFAULT_DIAGRAM_DIMENSIONS;
                 return (
                 <div key={i} className="rounded-lg overflow-hidden border border-gray-700 bg-gray-900">
-                  <img
+                  <Image
                     src={img.src}
                     alt={img.alt}
                     width={dims.width}
                     height={dims.height}
                     loading="lazy"
-                    decoding="async"
                     className="w-full h-auto"
                   />
                   {img.caption && (

@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { checkIsAdmin } from '@/lib/utils/isAdmin';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = { title: 'Admin — User Detail' };
 export const dynamic = 'force-dynamic';
@@ -71,7 +72,7 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
           <Link href="/admin/users" className="text-xs text-gray-500 hover:text-gray-300 mb-4 block">&larr; All Users</Link>
           <div className="flex items-start gap-4">
             {userRecord.photoURL && (
-              <img src={userRecord.photoURL} alt="" className="w-12 h-12 rounded-full flex-shrink-0" />
+              <Image src={userRecord.photoURL} alt="" width={48} height={48} className="w-12 h-12 rounded-full flex-shrink-0" />
             )}
             <div>
               <h1 className="text-xl font-bold text-white">{userRecord.displayName || '(no name)'}</h1>

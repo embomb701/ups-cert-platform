@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { getIdToken } from '@/lib/firebase/auth';
 
@@ -221,9 +222,11 @@ export default function CandidatesPage() {
                   {/* Identity */}
                   <div className="flex items-start gap-3">
                     {c.photoURL ? (
-                      <img
+                      <Image
                         src={c.photoURL}
                         alt={c.displayName}
+                        width={48}
+                        height={48}
                         className="w-12 h-12 rounded-full object-cover flex-shrink-0"
                       />
                     ) : (

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { ShareProfileButton } from '@/components/profile/ShareProfileButton';
 
@@ -252,7 +253,7 @@ export default async function PublicProfilePage({ params }: PageProps) {
         {/* Header */}
         <div className="flex items-start gap-5">
           {photoURL ? (
-            <img src={photoURL} alt={displayName} className="w-16 h-16 rounded-full flex-shrink-0 object-cover" />
+            <Image src={photoURL} alt={displayName} width={64} height={64} className="w-16 h-16 rounded-full flex-shrink-0 object-cover" />
           ) : (
             <div className="w-16 h-16 rounded-full bg-blue-900 border border-blue-700 flex items-center justify-center flex-shrink-0">
               <span className="text-blue-300 font-bold text-xl">{initials}</span>
