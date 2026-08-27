@@ -115,6 +115,15 @@ export default async function CertificatePrintPage({ params }: Props) {
       <div className="cert-page section-pad">
         <div className="no-print text-center mb-6 space-y-3">
           <div className="flex items-center justify-center gap-3 flex-wrap">
+            <a
+              href={`/api/certificate/${cert.certificateNumber}/pdf`}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-green-700 hover:bg-green-600 text-white font-semibold text-sm transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download PDF
+            </a>
             <PrintButton />
             <a
               href={linkedInUrl}
@@ -129,7 +138,7 @@ export default async function CertificatePrintPage({ params }: Props) {
             </a>
           </div>
           <p className="text-xs text-gray-500">
-            In the print dialog, select <strong className="text-gray-300">Save as PDF</strong> to download.
+            Or use <strong className="text-gray-300">Print → Save as PDF</strong> for a version matching exactly what&apos;s shown below.
           </p>
         </div>
 

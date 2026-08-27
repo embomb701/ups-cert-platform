@@ -156,15 +156,21 @@ export default function ExamResultsPage() {
               <p className="text-sm text-green-300 font-medium mb-1">Certificate issued</p>
               <p className="text-xs text-gray-400 font-mono mb-3">{result.certificateNumber}</p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <Link
-                  href={`/certificate/${result.certificateNumber}`}
-                  target="_blank"
+                <a
+                  href={`/api/certificate/${result.certificateNumber}/pdf`}
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-green-700 hover:bg-green-600 text-white text-sm font-medium transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                   Download Certificate (PDF)
+                </a>
+                <Link
+                  href={`/certificate/${result.certificateNumber}`}
+                  target="_blank"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white text-sm font-medium transition-colors"
+                >
+                  View Certificate
                 </Link>
                 <a
                   href={(() => {
