@@ -37,6 +37,7 @@ const CERT_TITLES: Record<string, string> = {
   jr_building_cx: 'Jr. Building Commissioning Technician',
   jr_telecom_tech: 'Jr. Telecom Outside Plant Technician',
   jr_switchgear_tech: 'Jr. Switchgear & Substation Technician',
+  jr_water_wastewater: 'Jr. Water & Wastewater Treatment Operator',
 };
 
 interface ChoiceItem {

@@ -14,12 +14,6 @@ export interface UpcomingCourse {
 
 export const UPCOMING_COURSES: UpcomingCourse[] = [
   {
-    id: 'water-wastewater',
-    title: 'Water & Wastewater Treatment Operator',
-    tagline: 'Operate and maintain drinking water and wastewater treatment systems — filtration, disinfection, sludge processing, regulatory compliance, and state operator licensing pathways.',
-    color: 'sky',
-  },
-  {
     id: 'boiler-tech',
     title: 'Boiler Technician / Stationary Engineer',
     tagline: 'Operate and maintain commercial and industrial boiler plants — combustion, steam and hydronic systems, ASME/NBIC code compliance, and city/state stationary engineer licensing pathways.',

@@ -134,6 +134,7 @@ export default async function CertificateVerifyPage({ params }: Props) {
                   jr_building_cx: 'Junior Building Commissioning Agent',
                   jr_telecom_tech: 'Junior Telecom OSP Technician',
                   jr_switchgear_tech: 'Junior Switchgear & Substation Technician',
+                  jr_water_wastewater: 'Junior Water & Wastewater Treatment Operator',
                   fse: 'UPS Field Service Engineer (Human Proctored)',
                 } as Record<string, string>)[cert.examLevel] ?? cert.examLevel}
               </span>

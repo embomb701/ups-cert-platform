@@ -8,17 +8,17 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 const OG_IMAGE = `${SITE_URL}/api/og`;
 
 export const metadata: Metadata = {
-  title: 'Mastering Field Service Training Portal — 29 Career Tracks in Critical Infrastructure',
+  title: 'Mastering Field Service Training Portal — 30 Career Tracks in Critical Infrastructure',
   description:
-    'Start a $55K–$98K entry-level career in field service in 3–6 months — reach $135K+ with a few years of experience. No college required. 29 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Field PM, and more.',
+    'Start a $55K–$98K entry-level career in field service in 3–6 months — reach $135K+ with a few years of experience. No college required. 30 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Field PM, and more.',
   openGraph: {
-    title: 'Mastering Field Service Training Portal — 29 Career Tracks in Critical Infrastructure',
+    title: 'Mastering Field Service Training Portal — 30 Career Tracks in Critical Infrastructure',
     description: 'Start a $55K–$98K entry-level career in field service in 3–6 months — reach $135K+ with experience. No college required.',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Mastering Field Service Training Portal' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mastering Field Service Training Portal — 29 Career Tracks',
+    title: 'Mastering Field Service Training Portal — 30 Career Tracks',
     description: 'Start a $55K–$98K entry-level career in field service — reach $135K+ with experience. No college required.',
     images: [OG_IMAGE],
   },
@@ -460,7 +460,7 @@ export default function HomePage() {
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
         name: 'Mastering Field Service Training Portal',
-        description: 'Professional field service training and certification. 29 career tracks.',
+        description: 'Professional field service training and certification. 30 career tracks.',
       },
       {
         '@type': 'EducationalOrganization',
@@ -506,7 +506,7 @@ export default function HomePage() {
               <span className="text-gray-300">No college. No debt.</span>
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
-              Mastering Field Service is a full technical training portal with 29 career tracks —
+              Mastering Field Service is a full technical training portal with 30 career tracks —
               critical power, HVAC, solar, data centers, elevators, biomedical, industrial automation, and more.
               One shared electrical and safety foundation. Choose the trade. Earn the credential.
               Get hired in 3–6 months — and reach $135K+ with a few years of experience.
@@ -522,7 +522,7 @@ export default function HomePage() {
                 href="#courses"
                 className="px-8 py-4 border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white font-semibold rounded-lg text-lg transition-colors text-center"
               >
-                Browse All 29 Tracks ↓
+                Browse All 30 Tracks ↓
               </Link>
             </div>
             <p className="text-gray-600 text-sm mt-4">
@@ -533,7 +533,7 @@ export default function HomePage() {
 
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { stat: '29', label: 'Career tracks in one portal' },
+              { stat: '30', label: 'Career tracks in one portal' },
               { stat: '3–6 months', label: 'To your first field job' },
               { stat: '$135K+', label: 'With a few years of experience' },
               { stat: '$0', label: 'Student loan debt' },
@@ -729,7 +729,7 @@ export default function HomePage() {
         <div className="text-center mb-12">
           <span className="text-blue-400 text-sm font-semibold uppercase tracking-widest">Career Trajectory</span>
           <h2 className="text-3xl font-bold text-white mt-3">Where this takes you.</h2>
-          <p className="text-gray-400 mt-3 max-w-xl mx-auto">Across all 28 tracks, the same career ladder applies. The trades vary — the ceiling doesn&apos;t.</p>
+          <p className="text-gray-400 mt-3 max-w-xl mx-auto">Across all 30 tracks, the same career ladder applies. The trades vary — the ceiling doesn&apos;t.</p>
         </div>
         <div className="grid md:grid-cols-4 gap-6">
           {[
@@ -1061,7 +1061,7 @@ export default function HomePage() {
       {/* ── FINAL CTA ─────────────────────────────────────────────────── */}
       <section className="max-w-4xl mx-auto px-4 py-24 text-center">
         <h2 className="text-4xl font-bold text-white mb-6">
-          29 career tracks. One decision.{' '}
+          30 career tracks. One decision.{' '}
           <span className="text-blue-400">Start your free account.</span>
         </h2>
         <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">

@@ -13,7 +13,7 @@ export async function GET() {
     name: 'Mastering Field Service Training Portal',
     url: SITE_URL,
     email: 'careers@aiellorecruiter.com',
-    description: 'Field service career training and certification across 29+ technical trades.',
+    description: 'Field service career training and certification across 30+ technical trades.',
   }, {
     headers: { 'Content-Type': 'application/ld+json' },
   });

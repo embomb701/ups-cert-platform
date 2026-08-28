@@ -75,6 +75,8 @@ const SERVER_FILES = [
   'building-cx-jr-derived',
   // Q7
   'switchgear-tech-jr-derived',
+  // Q8
+  'water-wastewater-jr-derived',
 ];
 
 const QUARTERS: string[][] = [
@@ -115,10 +117,14 @@ const QUARTERS: string[][] = [
   [
     'switchgear-tech-jr-derived',
   ],
+  // Q8: Water & Wastewater Treatment Operator
+  [
+    'water-wastewater-jr-derived',
+  ],
 ];
 
 export default function AdminQuestionsPage() {
-  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats; jr_dc_engineer?: BankStats; jr_marine_tech?: BankStats; jr_pool_tech?: BankStats; jr_hvac_tech?: BankStats; jr_solar_inst?: BankStats; jr_wind_tech?: BankStats; jr_elevator_tech?: BankStats; jr_fire_alarm_tech?: BankStats; jr_bmet_tech?: BankStats; jr_bas_tech?: BankStats; jr_ref_tech?: BankStats; jr_plc_tech?: BankStats; jr_security_tech?: BankStats; jr_field_pm?: BankStats; jr_pump_tech?: BankStats; jr_telecom_tech?: BankStats; jr_industrial_ref?: BankStats; jr_dc_ops?: BankStats; jr_building_cx?: BankStats; jr_switchgear_tech?: BankStats } | null>(null);
+  const [stats, setStats] = useState<{ jr_fse: BankStats; fse: BankStats; jr_kitchen_fse?: BankStats; jr_hvac_fse?: BankStats; jr_gen_fse?: BankStats; jr_dc_cft?: BankStats; jr_solar_fse?: BankStats; jr_ev_tech?: BankStats; jr_dcp_tech?: BankStats; jr_battery_tech?: BankStats; jr_dc_engineer?: BankStats; jr_marine_tech?: BankStats; jr_pool_tech?: BankStats; jr_hvac_tech?: BankStats; jr_solar_inst?: BankStats; jr_wind_tech?: BankStats; jr_elevator_tech?: BankStats; jr_fire_alarm_tech?: BankStats; jr_bmet_tech?: BankStats; jr_bas_tech?: BankStats; jr_ref_tech?: BankStats; jr_plc_tech?: BankStats; jr_security_tech?: BankStats; jr_field_pm?: BankStats; jr_pump_tech?: BankStats; jr_telecom_tech?: BankStats; jr_industrial_ref?: BankStats; jr_dc_ops?: BankStats; jr_building_cx?: BankStats; jr_switchgear_tech?: BankStats; jr_water_wastewater?: BankStats } | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [importing, setImporting] = useState(false);
   const [serverImporting, setServerImporting] = useState(false);
@@ -710,6 +716,20 @@ export default function AdminQuestionsPage() {
                 <p className="text-xs text-gray-500">active of {stats.jr_switchgear_tech.total.toLocaleString()} total · target 1,000</p>
                 <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
                   <div className="h-full bg-amber-500 rounded-full" style={{ width: `${Math.min(100, (stats.jr_switchgear_tech.active / 1000) * 100)}%` }} />
+                </div>
+              </>
+            ) : <p className="text-xs text-red-400">Failed to load</p>}
+          </div>
+          <div className="card-dark p-4 border-sky-900/50">
+            <h3 className="text-sm font-semibold text-white mb-2">Jr. Water/Wastewater Bank</h3>
+            {statsLoading ? (
+              <p className="text-xs text-gray-500">Loading…</p>
+            ) : stats?.jr_water_wastewater ? (
+              <>
+                <p className="text-2xl font-bold text-sky-400">{stats.jr_water_wastewater.active.toLocaleString()}</p>
+                <p className="text-xs text-gray-500">active of {stats.jr_water_wastewater.total.toLocaleString()} total · target 1,000</p>
+                <div className="mt-2 h-1.5 bg-gray-800 rounded-full">
+                  <div className="h-full bg-sky-500 rounded-full" style={{ width: `${Math.min(100, (stats.jr_water_wastewater.active / 1000) * 100)}%` }} />
                 </div>
               </>
             ) : <p className="text-xs text-red-400">Failed to load</p>}

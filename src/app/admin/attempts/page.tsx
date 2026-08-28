@@ -65,6 +65,7 @@ const LEVEL_LABELS: Record<string, string> = {
   jr_building_cx: 'Jr. Building Cx',
   jr_telecom_tech: 'Jr. Telecom OSP',
   jr_switchgear_tech: 'Jr. Switchgear Tech',
+  jr_water_wastewater: 'Jr. Water/Wastewater',
 };
 
 const STATUS_COLORS: Record<string, string> = {

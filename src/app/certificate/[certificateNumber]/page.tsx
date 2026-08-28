@@ -70,6 +70,7 @@ export default async function CertificatePrintPage({ params }: Props) {
     : cert.examLevel === 'jr_building_cx' ? 'Junior Building Commissioning Agent'
     : cert.examLevel === 'jr_telecom_tech' ? 'Junior Telecom OSP Technician'
     : cert.examLevel === 'jr_switchgear_tech' ? 'Junior Switchgear & Substation Technician'
+    : cert.examLevel === 'jr_water_wastewater' ? 'Junior Water & Wastewater Treatment Operator'
     : 'Field Service Engineer';
 
   const certJsonLd = {

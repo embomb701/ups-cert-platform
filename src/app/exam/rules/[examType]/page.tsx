@@ -94,6 +94,7 @@ export default function ExamRulesPage() {
     practice_jr_building_cx: 'Jr. Building Cx Practice Test — Results Only, No Certificate',
     practice_jr_telecom_tech: 'Jr. Telecom OSP Practice Test — Results Only, No Certificate',
     practice_jr_switchgear_tech: 'Jr. Switchgear Tech Practice Test — Results Only, No Certificate',
+    practice_jr_water_wastewater: 'Jr. Water/Wastewater Practice Test — Results Only, No Certificate',
   };
   // Jr-course exam display config: rules token + certification label
   const JR_COURSE_META: Record<string, { token: string; label: string }> = {
@@ -125,6 +126,7 @@ export default function ExamRulesPage() {
     jr_building_cx: { token: 'Jr. Building Cx Exam', label: 'Junior Building Commissioning Agent Certification' },
     jr_telecom_tech: { token: 'Jr. Telecom OSP Exam', label: 'Junior Telecom Outside Plant Technician Certification' },
     jr_switchgear_tech: { token: 'Jr. Switchgear Tech Exam', label: 'Junior Switchgear & Substation Technician Certification' },
+    jr_water_wastewater: { token: 'Jr. Water/Wastewater Exam', label: 'Junior Water & Wastewater Treatment Operator Certification' },
   };
   const isPractice = examType in PRACTICE_LABELS;
   const jrCourse = JR_COURSE_META[examType];

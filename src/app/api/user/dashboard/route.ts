@@ -59,6 +59,7 @@ const COURSE_TO_PRACTICE_EXAM_LEVEL: Record<string, string> = {
   training_building_cx: 'jr_building_cx',
   training_telecom: 'jr_telecom_tech',
   training_switchgear_tech: 'jr_switchgear_tech',
+  training_water_wastewater: 'jr_water_wastewater',
 };
 
 const COURSE_NAMES: Record<string, string> = {
@@ -91,6 +92,7 @@ const COURSE_NAMES: Record<string, string> = {
   training_building_cx: 'Building Commissioning Agent',
   training_telecom: 'Telecom OSP Technician',
   training_switchgear_tech: 'Switchgear & Substation Technician',
+  training_water_wastewater: 'Water & Wastewater Treatment Operator',
 };
 
 export async function GET(req: NextRequest) {

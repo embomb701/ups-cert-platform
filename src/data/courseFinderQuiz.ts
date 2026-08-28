@@ -59,7 +59,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       },
       {
         label: 'Mechanical & fluid systems — motors, refrigerant, pumps',
-        weights: { hvac: 2, 'hvac-tech': 2, 'ref-tech': 2, 'industrial-ref': 2, pool: 2, 'pump-tech': 2, kitchen: 2, marine: 2 },
+        weights: { hvac: 2, 'hvac-tech': 2, 'ref-tech': 2, 'industrial-ref': 2, pool: 2, 'pump-tech': 2, kitchen: 2, marine: 2, 'water-wastewater': 2 },
       },
       {
         label: 'Software, networks & controls — programming, logic, integration',
@@ -85,7 +85,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       },
       {
         label: "I'd rather own one site than travel between them",
-        weights: { 'dc-ops': 2, 'building-cx': 2, 'bas-tech': 2, 'field-pm': 2 },
+        weights: { 'dc-ops': 2, 'building-cx': 2, 'bas-tech': 2, 'field-pm': 2, 'water-wastewater': 2 },
       },
     ],
   },

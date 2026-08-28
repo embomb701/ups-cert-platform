@@ -18,6 +18,7 @@ const HUB_ROUTES: Record<string, string> = {
   'plc-tech': '/training/plc-tech', 'security-tech': '/training/security-tech',
   'field-pm': '/training/field-pm', 'pump-tech': '/training/pump-tech',
   'switchgear-tech': '/training/switchgear-tech',
+  'water-wastewater': '/training/water-wastewater',
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {

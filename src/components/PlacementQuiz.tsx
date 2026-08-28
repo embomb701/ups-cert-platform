@@ -6,7 +6,7 @@ import { COURSES, type TrainingCourse } from '@/data/courses';
 
 // ---------------------------------------------------------------
 // "Which cert fits you?" — a 3-question placement quiz that routes
-// visitors to a recommended track instead of a 29-course wall.
+// visitors to a recommended track instead of a 30-course wall.
 // Pure client-side, no persistence — reuses existing course data.
 // ---------------------------------------------------------------
 
@@ -53,7 +53,7 @@ function recommend(env: Environment, background: Background, comfort: Comfort): 
       return { primary: 'kitchen', alternates: ['ref-tech', 'hvac-tech'] };
     case 'industrial':
       if (background === 'it') return { primary: 'plc-tech', alternates: ['pump-tech', 'industrial-ref'] };
-      return { primary: 'pump-tech', alternates: ['plc-tech', 'industrial-ref'] };
+      return { primary: 'pump-tech', alternates: ['plc-tech', 'industrial-ref', 'water-wastewater'] };
     case 'remote':
       if (background === 'it') return { primary: 'telecom', alternates: ['solar', 'wind-tech'] };
       return { primary: 'solar', alternates: ['solar-inst', 'wind-tech'] };

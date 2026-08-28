@@ -226,7 +226,7 @@ export async function sendWelcomeEmail(to: string, name: string, uid: string): P
       <p style="color:#a8a29e;margin:0 0 16px;">You're in. Here's how to make the most of your free access:</p>
       <ul style="color:#a8a29e;margin:0 0 20px;padding-left:20px;line-height:1.8;">
         <li><strong style="color:#fafaf9;">Free modules</strong> — Start with the first 3 UPS FSE modules, no purchase required.</li>
-        <li><strong style="color:#fafaf9;">29 career tracks</strong> — UPS, HVAC, Kitchen, Data Center, Solar, and more.</li>
+        <li><strong style="color:#fafaf9;">30 career tracks</strong> — UPS, HVAC, Kitchen, Data Center, Solar, and more.</li>
         <li><strong style="color:#fafaf9;">Certifications</strong> — Complete a course and unlock your Jr. FSE exam.</li>
       </ul>
       <a href="${SITE_URL}/training" style="display:inline-block;padding:12px 24px;background:#c8440c;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Start training →</a>

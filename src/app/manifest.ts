@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Mastering Field Service Training Portal',
     short_name: 'MasteringFSE',
-    description: 'Field service training and certification — 29 career tracks in critical infrastructure.',
+    description: 'Field service training and certification — 30 career tracks in critical infrastructure.',
     start_url: '/',
     display: 'standalone',
     background_color: '#1c1917',

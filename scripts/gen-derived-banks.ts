@@ -33,6 +33,7 @@ import {
   buildFieldPmBankQuestions,
   buildPumpTechBankQuestions,
   buildSwitchgearTechBankQuestions,
+  buildWaterWastewaterBankQuestions,
 } from '../src/lib/exam/kitchenBank';
 
 const BANKS: Record<string, () => unknown[]> = {
@@ -60,6 +61,7 @@ const BANKS: Record<string, () => unknown[]> = {
   'field-pm-jr-derived':        buildFieldPmBankQuestions,
   'pump-tech-jr-derived':       buildPumpTechBankQuestions,
   'switchgear-tech-jr-derived': buildSwitchgearTechBankQuestions,
+  'water-wastewater-jr-derived': buildWaterWastewaterBankQuestions,
 };
 
 const outDir = join(process.cwd(), 'data', 'questions');

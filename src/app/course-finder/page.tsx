@@ -7,7 +7,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 export const metadata: Metadata = {
   title: 'Course Finder — Which Field Service Track Fits You?',
   description:
-    'A 5-question quiz that narrows all 29 field service career tracks down to the ones worth a closer look, based on your interests, environment, and travel appetite.',
+    'A 5-question quiz that narrows all 30 field service career tracks down to the ones worth a closer look, based on your interests, environment, and travel appetite.',
   openGraph: {
     title: 'Course Finder — Which Field Service Track Fits You?',
     description: 'A 5-question quiz that points you toward the right field service career track.',
@@ -33,7 +33,7 @@ export default function CourseFinderPage() {
           </h1>
           <p className="text-gray-400 text-base leading-relaxed">
             Five quick questions about how you like to work — not a certified aptitude test,
-            just a fast way to cut 29 career tracks down to a few worth a closer look.
+            just a fast way to cut 30 career tracks down to a few worth a closer look.
           </p>
         </div>
       </section>

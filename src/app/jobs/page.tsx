@@ -49,6 +49,7 @@ const COURSE_LABELS: Record<string, string> = {
   training_building_cx: 'Building Cx',
   training_telecom: 'Telecom OSP',
   training_switchgear_tech: 'Switchgear Tech',
+  training_water_wastewater: 'Water/Wastewater Operator',
 };
 
 interface FirestoreListing {

@@ -15,11 +15,11 @@ export const dynamic = 'force-dynamic';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 export const metadata: Metadata = {
-  title: 'Training Hub — 29 Career Tracks in Field Service',
-  description: 'Browse all 29 field service training tracks. Start with UPS, HVAC, solar, data center, elevators, and more. Enroll and begin at your own pace.',
+  title: 'Training Hub — 30 Career Tracks in Field Service',
+  description: 'Browse all 30 field service training tracks. Start with UPS, HVAC, solar, data center, elevators, and more. Enroll and begin at your own pace.',
   openGraph: {
-    title: 'Training Hub — 29 Field Service Career Tracks',
-    description: 'Access your enrolled training courses across 29 field service career paths.',
+    title: 'Training Hub — 30 Field Service Career Tracks',
+    description: 'Access your enrolled training courses across 30 field service career paths.',
     images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'Training Hub' }],
   },
   twitter: { card: 'summary_large_image', images: [`${SITE_URL}/api/og`] },
@@ -33,7 +33,7 @@ const HUB_ROUTES = new Set([
   'dcengineer', 'marine', 'pool', 'hvac-tech', 'solar-inst',
   'wind-tech', 'elevator-tech', 'fire-alarm-tech', 'bmet-tech',
   'bas-tech', 'ref-tech', 'plc-tech', 'security-tech', 'field-pm', 'pump-tech',
-  'switchgear-tech',
+  'switchgear-tech', 'water-wastewater',
 ]);
 
 function courseHref(courseId: string, accessKey: string, hasAccess: boolean): string {
@@ -154,7 +154,7 @@ export default async function TrainingPage() {
           </h1>
           <p className="text-gray-400 mt-1">
             {isGuest
-              ? '29 career tracks — enroll to start'
+              ? '30 career tracks — enroll to start'
               : enrolledCourses.length > 0
               ? `${enrolledCourses.length} course${enrolledCourses.length !== 1 ? 's' : ''} enrolled`
               : 'Choose your training program'}
@@ -165,7 +165,7 @@ export default async function TrainingPage() {
           <div className="rounded-xl border border-indigo-700/50 bg-indigo-950/20 p-5 flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex-1">
               <p className="text-white font-semibold text-sm">Sign in to access your training</p>
-              <p className="text-gray-400 text-xs mt-0.5">Create a free account to save progress and earn certificates. Browse all 28 tracks below.</p>
+              <p className="text-gray-400 text-xs mt-0.5">Create a free account to save progress and earn certificates. Browse all 30 tracks below.</p>
             </div>
             <div className="flex gap-2 flex-shrink-0">
               <Link href="/login?signup=1" className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-colors">Create account →</Link>

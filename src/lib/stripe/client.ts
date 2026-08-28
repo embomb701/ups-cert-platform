@@ -785,6 +785,31 @@ export const STRIPE_PRODUCTS = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // WATER & WASTEWATER TREATMENT OPERATOR PROGRAM
+  // ─────────────────────────────────────────────────────────────────────────
+
+  training_water_wastewater: {
+    name: 'Water & Wastewater Treatment Operator Training Course + Jr. Certification Exam',
+    shortName: 'Water/Wastewater Training Course',
+    priceInCents: 109900,   // $1,099
+    stripePriceId: process.env.STRIPE_PRICE_ID_TRAINING_WATER_WASTEWATER ?? '',
+  },
+
+  jr_water_wastewater_test_human: {
+    name: 'Jr. Water & Wastewater Treatment Operator Certification Exam — Human Proctored Test-Out',
+    shortName: 'Jr. Water/Wastewater Test-Out (Human Proctored)',
+    priceInCents: 29900,    // $299
+    stripePriceId: process.env.STRIPE_PRICE_ID_JR_WATER_WASTEWATER_HUMAN ?? '',
+  },
+
+  pkg_training_water_wastewater_testout: {
+    name: 'Water/Wastewater Training Course + Jr. Test-Out (Human Proctored)',
+    shortName: 'Water/Wastewater Training + Test-Out Package',
+    priceInCents: 134900,   // $1,349
+    stripePriceId: process.env.STRIPE_PRICE_ID_PKG_WATER_WASTEWATER_TESTOUT ?? '',
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // CROSS-TRADE BUNDLES
   // Training-only, spanning multiple courses at a discount vs. buying each
   // training_* separately — same model as every single-course training

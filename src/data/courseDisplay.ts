@@ -43,6 +43,10 @@ export const COURSE_CATEGORIES: { label: string; ids: string[] }[] = [
     ids: ['plc-tech', 'security-tech', 'bmet-tech', 'telecom'],
   },
   {
+    label: 'Utilities & Environmental',
+    ids: ['water-wastewater'],
+  },
+  {
     label: 'Management',
     ids: ['field-pm'],
   },
@@ -67,4 +71,5 @@ export const COURSE_HUB_ROUTES: Record<string, string> = {
   'plc-tech': '/training/plc-tech', 'security-tech': '/training/security-tech',
   'field-pm': '/training/field-pm', 'pump-tech': '/training/pump-tech',
   'switchgear-tech': '/training/switchgear-tech',
+  'water-wastewater': '/training/water-wastewater',
 };

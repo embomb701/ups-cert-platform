@@ -107,7 +107,7 @@ export function CourseCatalogGrid({
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search 29 career tracks…"
+          placeholder="Search 30 career tracks…"
           className="w-full pl-10 pr-9 py-2.5 rounded-lg bg-gray-800/60 border border-gray-700 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
         />
         {query && (

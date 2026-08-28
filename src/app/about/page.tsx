@@ -6,11 +6,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 export const metadata: Metadata = {
   title: 'About — Mastering Field Service',
   description:
-    'Mastering Field Service was built by Francis Aiello. We build field service training and certification across 29 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.',
+    'Mastering Field Service was built by Francis Aiello. We build field service training and certification across 30 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.',
   openGraph: {
     title: 'About Mastering Field Service',
     description:
-      'Learn about the mission behind Mastering Field Service — 29 career tracks, industry-backed certifications, no college required.',
+      'Learn about the mission behind Mastering Field Service — 30 career tracks, industry-backed certifications, no college required.',
     images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'About Mastering Field Service' }],
   },
   twitter: {
@@ -27,7 +27,7 @@ export default function AboutPage() {
         '@type': 'Organization',
         name: 'Mastering Field Service Training Portal',
         url: SITE_URL,
-        description: 'Professional field service training and certification portal for UPS, HVAC, solar, data center, and 29 career tracks.',
+        description: 'Professional field service training and certification portal for UPS, HVAC, solar, data center, and 30 career tracks.',
         founder: { '@type': 'Person', name: 'Francis Aiello', jobTitle: 'CEO' },
       },
       {
@@ -78,7 +78,7 @@ export default function AboutPage() {
               <h3 className="text-base font-semibold text-white mb-2">For the Next Generation</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
                 Give motivated people — regardless of background — a credible, structured path into
-                a rewarding, in-demand career across 29 field service trades: UPS, HVAC, Solar,
+                a rewarding, in-demand career across 30 field service trades: UPS, HVAC, Solar,
                 Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.
               </p>
             </div>
@@ -152,7 +152,7 @@ export default function AboutPage() {
             <p className="text-sm text-gray-400 leading-relaxed">
               The UPS curriculum is built on{' '}
               <em>Mastering Uninterruptible Power Supplies, Field Service Engineering</em> —
-              the technical book by Francis Aiello. All 28 tracks share the same electrical and
+              the technical book by Francis Aiello. All 30 tracks share the same electrical and
               safety foundation and expand into trade-specific content developed from real field experience.
               Employer partnerships and additional certification levels are actively in development.
             </p>

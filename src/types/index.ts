@@ -2,7 +2,7 @@
 // Core shared types for UPS Certification Platform
 // ============================================================
 
-export type ExamLevel = 'jr_fse' | 'fse' | 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech' | 'jr_battery_tech' | 'jr_dc_engineer' | 'jr_marine_tech' | 'jr_pool_tech' | 'jr_hvac_tech' | 'jr_solar_inst' | 'jr_wind_tech' | 'jr_elevator_tech' | 'jr_fire_alarm_tech' | 'jr_bmet_tech' | 'jr_bas_tech' | 'jr_ref_tech' | 'jr_plc_tech' | 'jr_security_tech' | 'jr_field_pm' | 'jr_pump_tech' | 'jr_industrial_ref' | 'jr_dc_ops' | 'jr_building_cx' | 'jr_telecom_tech' | 'jr_switchgear_tech';
+export type ExamLevel = 'jr_fse' | 'fse' | 'jr_kitchen_fse' | 'jr_hvac_fse' | 'jr_gen_fse' | 'jr_dc_cft' | 'jr_solar_fse' | 'jr_ev_tech' | 'jr_dcp_tech' | 'jr_battery_tech' | 'jr_dc_engineer' | 'jr_marine_tech' | 'jr_pool_tech' | 'jr_hvac_tech' | 'jr_solar_inst' | 'jr_wind_tech' | 'jr_elevator_tech' | 'jr_fire_alarm_tech' | 'jr_bmet_tech' | 'jr_bas_tech' | 'jr_ref_tech' | 'jr_plc_tech' | 'jr_security_tech' | 'jr_field_pm' | 'jr_pump_tech' | 'jr_industrial_ref' | 'jr_dc_ops' | 'jr_building_cx' | 'jr_telecom_tech' | 'jr_switchgear_tech' | 'jr_water_wastewater';
 export type UserRole = 'user' | 'admin' | 'proctor';
 export type CertificateStatus = 'valid' | 'expired' | 'revoked' | 'under_review';
 export type PurchaseStatus = 'pending' | 'complete' | 'refunded' | 'failed';
@@ -158,6 +158,9 @@ export const PRODUCTS = {
   TRAINING_SWITCHGEAR_TECH: 'training_switchgear_tech',
   JR_SWITCHGEAR_TECH_TEST_HUMAN: 'jr_switchgear_tech_test_human',
   PKG_TRAINING_SWITCHGEAR_TECH_TESTOUT: 'pkg_training_switchgear_tech_testout',
+  TRAINING_WATER_WASTEWATER: 'training_water_wastewater',
+  JR_WATER_WASTEWATER_TEST_HUMAN: 'jr_water_wastewater_test_human',
+  PKG_TRAINING_WATER_WASTEWATER_TESTOUT: 'pkg_training_water_wastewater_testout',
   BUNDLE_CRITICAL_POWER: 'bundle_critical_power',
   BUNDLE_REFRIGERATION: 'bundle_refrigeration',
   BUNDLE_RENEWABLE_ENERGY: 'bundle_renewable_energy',

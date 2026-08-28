@@ -29,7 +29,7 @@ const GROUPS: { label: string; items: FaqItem[] }[] = [
     items: [
       {
         q: 'Do I need a college degree?',
-        a: 'No. None of the 29 career tracks require a degree. Every track is built around a shared electrical and safety foundation, then branches into trade-specific curriculum — the kind of thing people have historically learned on the job, just structured and self-paced.',
+        a: 'No. None of the 30 career tracks require a degree. Every track is built around a shared electrical and safety foundation, then branches into trade-specific curriculum — the kind of thing people have historically learned on the job, just structured and self-paced.',
       },
       {
         q: 'How long does it take to become job-ready?',
@@ -37,11 +37,11 @@ const GROUPS: { label: string; items: FaqItem[] }[] = [
       },
       {
         q: 'Can I try it before paying anything?',
-        a: 'Yes. Create a free account and the first 3 modules of every one of the 29 tracks are open at no cost — no card required to start.',
+        a: 'Yes. Create a free account and the first 3 modules of every one of the 30 tracks are open at no cost — no card required to start.',
       },
       {
         q: 'Which track should I pick?',
-        a: 'If you already know your trade, go straight to /courses. If you’re not sure, the course finder is a 5-question quiz that narrows the 29 tracks down to a few worth a closer look based on your interests and how you like to work.',
+        a: 'If you already know your trade, go straight to /courses. If you’re not sure, the course finder is a 5-question quiz that narrows the 30 tracks down to a few worth a closer look based on your interests and how you like to work.',
       },
     ],
   },
@@ -92,7 +92,7 @@ const GROUPS: { label: string; items: FaqItem[] }[] = [
     items: [
       {
         q: 'What can I expect to earn?',
-        a: 'Entry-level roles across the 29 tracks generally start in the $55K–$98K range, reaching $135K+ with a few years of experience. Actual pay varies by track, region, employer, and how much travel the role involves.',
+        a: 'Entry-level roles across the 30 tracks generally start in the $55K–$98K range, reaching $135K+ with a few years of experience. Actual pay varies by track, region, employer, and how much travel the role involves.',
       },
       {
         q: 'Do you help with finding a job?',

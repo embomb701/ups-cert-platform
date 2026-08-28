@@ -1018,6 +1018,37 @@ async function grantJrSwitchgearTechAccess(userId: string, purchaseId: string) {
   });
 }
 
+async function grantWaterWastewaterTrainingAccess(userId: string, purchaseId: string) {
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('training_water_wastewater')
+    .set({ granted: true, grantedAt: FieldValue.serverTimestamp(), purchaseId }, { merge: true });
+
+  await adminDb
+    .collection('users').doc(userId)
+    .collection('examAccess').doc('jr_water_wastewater_pending')
+    .set({ fromTraining: true, purchaseId, grantedAt: FieldValue.serverTimestamp() }, { merge: true });
+}
+
+async function grantJrWaterWastewaterAccess(userId: string, purchaseId: string) {
+  await adminDb.collection('proctoredExamOrders').add({
+    userId,
+    purchaseId,
+    productId: 'jr_water_wastewater_test_human',
+    examLevel: 'jr_water_wastewater',
+    testOut: true,
+    proctoring: 'human',
+    status: 'scheduling_pending',
+    schedulingStatus: 'awaiting_contact',
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    proctorId: null,
+    proctorName: null,
+    meetingLink: null,
+    adminNotes: 'Jr. Water & Wastewater Treatment Operator Human Proctored Test-Out — schedule proctor session and unlock when ready.',
+  });
+}
+
 // ── Main handler ───────────────────────────────────────────────────────────
 
 async function handleCheckoutCompleted(eventId: string, session: Stripe.Checkout.Session) {
@@ -1574,6 +1605,22 @@ async function handleCheckoutCompleted(eventId: string, session: Stripe.Checkout
     case 'pkg_training_switchgear_tech_testout':
       await grantSwitchgearTechTrainingAccess(userId, pid);
       await grantJrSwitchgearTechAccess(userId, pid);
+      break;
+
+    // ── Standalone training course (Water & Wastewater Treatment Operator) ────
+    case 'training_water_wastewater':
+      await grantWaterWastewaterTrainingAccess(userId, pid);
+      break;
+
+    // ── Water/Wastewater Test-Out ──────────────────────────────────────────────
+    case 'jr_water_wastewater_test_human':
+      await grantJrWaterWastewaterAccess(userId, pid);
+      break;
+
+    // ── Package: Water/Wastewater Training + Test-Out ─────────────────────────
+    case 'pkg_training_water_wastewater_testout':
+      await grantWaterWastewaterTrainingAccess(userId, pid);
+      await grantJrWaterWastewaterAccess(userId, pid);
       break;
 
     // ── Cross-trade bundles: training-only, spans multiple courses. Test-out

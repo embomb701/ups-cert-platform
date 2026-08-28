@@ -68,6 +68,7 @@ const CERT_LEVEL_LABELS: Record<string, string> = {
   jr_building_cx: 'Jr. Building Commissioning Agent',
   jr_telecom_tech: 'Jr. Telecom OSP Technician',
   jr_switchgear_tech: 'Jr. Switchgear & Substation Technician',
+  jr_water_wastewater: 'Jr. Water & Wastewater Treatment Operator',
   fse: 'UPS Field Service Engineer (Human Proctored)',
 };
 
@@ -215,6 +216,7 @@ export default async function PublicProfilePage({ params }: PageProps) {
           jr_building_cx: 'training_building_cx',
           jr_telecom_tech: 'training_telecom',
           jr_switchgear_tech: 'training_switchgear_tech',
+          jr_water_wastewater: 'training_water_wastewater',
         };
         return map[c.examLevel] ?? '';
       })

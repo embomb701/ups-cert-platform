@@ -40,6 +40,7 @@ const EXAM_LEVEL_LABELS: Record<string, string> = {
   jr_building_cx: 'Jr. Building Cx',
   jr_telecom_tech: 'Jr. Telecom Tech',
   jr_switchgear_tech: 'Jr. Switchgear Tech',
+  jr_water_wastewater: 'Jr. Water/Wastewater',
 };
 
 interface DashData {
@@ -236,6 +237,7 @@ export default function DashboardPage() {
     training_building_cx:  [{ key: 'training_bas_tech', name: 'Building Automation Systems', path: '/training/bas-tech', reason: 'BAS expertise is essential in commissioning work' }, { key: 'training_field_pm', name: 'Field Project Manager', path: '/training/field-pm', reason: 'PM skills pair naturally with commissioning agent work' }],
     training_telecom:      [{ key: 'training_dcplants', name: 'Telecom DC Power Plants', path: '/training/dcplants', reason: 'DC power plants are the backbone of telecom infrastructure' }, { key: 'training_security_tech', name: 'Electronic Security Systems', path: '/training/security-tech', reason: 'Security systems appear alongside telecom infrastructure' }],
     training_switchgear_tech:[{ key: 'training_dcengineer', name: 'Data Center Engineer', path: '/training/dcengineer', reason: 'Switchgear expertise is core to the electrical design DC Engineer covers' }, { key: 'training_datacenter', name: 'Data Center Critical Facilities', path: '/training/datacenter', reason: 'Switchgear + critical facilities covers the full power chain' }],
+    training_water_wastewater:[{ key: 'training_pump_tech', name: 'Pump Technician', path: '/training/pump-tech', reason: 'Treatment plants run on the same pump systems this track covers' }, { key: 'training_industrial_ref', name: 'Industrial Refrigeration Operator', path: '/training/industrial-ref', reason: 'Similar regulatory-heavy, process-operations skill set' }],
   };
 
   const enrolledKeys = new Set(courses.map((c) => c.key));
@@ -270,7 +272,7 @@ export default function DashboardPage() {
             <h2 className="text-lg font-bold text-white mb-2">Let&apos;s get you started.</h2>
             <p className="text-sm text-gray-400 leading-relaxed mb-5 max-w-xl">
               Every track shares the same electrical and safety foundation, so nothing you complete
-              goes to waste. Not sure which of the 29 career tracks fits — or just want to jump in?
+              goes to waste. Not sure which of the 30 career tracks fits — or just want to jump in?
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -283,7 +285,7 @@ export default function DashboardPage() {
                 href="/courses"
                 className="px-4 py-2.5 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold text-sm transition-colors"
               >
-                Browse All 29 Tracks
+                Browse All 30 Tracks
               </Link>
             </div>
             <Link

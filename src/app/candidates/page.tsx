@@ -38,6 +38,7 @@ const CERT_LEVELS: { value: string; label: string }[] = [
   { value: 'jr_building_cx', label: 'Jr. Building Commissioning Agent' },
   { value: 'jr_telecom_tech', label: 'Jr. Telecom OSP Technician' },
   { value: 'jr_switchgear_tech', label: 'Jr. Switchgear & Substation Technician' },
+  { value: 'jr_water_wastewater', label: 'Jr. Water & Wastewater Treatment Operator' },
   { value: 'fse', label: 'UPS FSE (Human Proctored)' },
 ];
 

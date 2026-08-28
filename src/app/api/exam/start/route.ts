@@ -69,13 +69,14 @@ export async function POST(req: NextRequest) {
       practice_jr_building_cx: { bank: 'jr_building_cx', accessDoc: 'practice_jr_building_cx', label: 'Jr. Building Cx' },
       practice_jr_telecom_tech: { bank: 'jr_telecom_tech', accessDoc: 'practice_jr_telecom_tech', label: 'Jr. Telecom OSP' },
       practice_jr_switchgear_tech: { bank: 'jr_switchgear_tech', accessDoc: 'practice_jr_switchgear_tech', label: 'Jr. Switchgear Tech' },
+      practice_jr_water_wastewater: { bank: 'jr_water_wastewater', accessDoc: 'practice_jr_water_wastewater', label: 'Jr. Water/Wastewater' },
     };
     const practice = PRACTICE_EXAMS[rawExamLevel];
     const isPractice = !!practice;
     const examLevel = (practice ? practice.bank : rawExamLevel) as ExamLevel;
     const candidateName = (body.candidateName as string | undefined)?.trim() ?? '';
 
-    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech', 'jr_security_tech', 'jr_field_pm', 'jr_pump_tech', 'jr_industrial_ref', 'jr_dc_ops', 'jr_building_cx', 'jr_telecom_tech', 'jr_switchgear_tech'].includes(examLevel)) {
+    if (!['jr_fse', 'fse', 'jr_kitchen_fse', 'jr_hvac_fse', 'jr_gen_fse', 'jr_dc_cft', 'jr_solar_fse', 'jr_ev_tech', 'jr_dcp_tech', 'jr_battery_tech', 'jr_dc_engineer', 'jr_marine_tech', 'jr_pool_tech', 'jr_hvac_tech', 'jr_solar_inst', 'jr_wind_tech', 'jr_elevator_tech', 'jr_fire_alarm_tech', 'jr_bmet_tech', 'jr_bas_tech', 'jr_ref_tech', 'jr_plc_tech', 'jr_security_tech', 'jr_field_pm', 'jr_pump_tech', 'jr_industrial_ref', 'jr_dc_ops', 'jr_building_cx', 'jr_telecom_tech', 'jr_switchgear_tech', 'jr_water_wastewater'].includes(examLevel)) {
       return NextResponse.json({ error: 'Invalid exam level' }, { status: 400 });
     }
 
@@ -202,6 +203,7 @@ export async function POST(req: NextRequest) {
       jr_building_cx: { label: 'Jr. Building Cx', productId: 'jr_building_cx_test_human', courseKey: 'training_building_cx' },
       jr_telecom_tech: { label: 'Jr. Telecom OSP', productId: 'jr_telecom_tech_test_human', courseKey: 'training_telecom' },
       jr_switchgear_tech: { label: 'Jr. Switchgear Tech', productId: 'jr_switchgear_tech_test_human', courseKey: 'training_switchgear_tech' },
+      jr_water_wastewater: { label: 'Jr. Water/Wastewater', productId: 'jr_water_wastewater_test_human', courseKey: 'training_water_wastewater' },
     };
 
     let kitchenTestOut = false;

@@ -61,7 +61,7 @@ export function CourseFinderQuiz({ courses }: { courses: TrainingCourse[] }) {
           </p>
           <h2 className="text-2xl font-bold text-white mb-3">Here&apos;s where to start looking</h2>
           <p className="text-sm text-gray-400 max-w-md mx-auto">
-            Not a certified aptitude test — just a fast way to narrow 29 tracks down to a few
+            Not a certified aptitude test — just a fast way to narrow 30 tracks down to a few
             worth a closer look, based on how you answered.
           </p>
         </div>
@@ -105,7 +105,7 @@ export function CourseFinderQuiz({ courses }: { courses: TrainingCourse[] }) {
             href="/courses"
             className="px-6 py-3 rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold text-sm transition-colors"
           >
-            Browse All 29 Tracks
+            Browse All 30 Tracks
           </Link>
         </div>
       </div>

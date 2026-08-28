@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: '%s | Mastering Field Service',
   },
   description:
-    'Professional field service training and certification from Mastering Field Service. 29 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more — built on a shared electrical foundation, by Francis Aiello.',
+    'Professional field service training and certification from Mastering Field Service. 30 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more — built on a shared electrical foundation, by Francis Aiello.',
   openGraph: {
     type: 'website',
     locale: 'en_US',

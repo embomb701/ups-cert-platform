@@ -63,6 +63,7 @@ describe('STRIPE_PRODUCTS — package bundles never cost more than buying separa
     pkg_training_dc_ops_testout: ['training_dc_ops', 'jr_dc_ops_test_human'],
     pkg_training_building_cx_testout: ['training_building_cx', 'jr_building_cx_test_human'],
     pkg_training_switchgear_tech_testout: ['training_switchgear_tech', 'jr_switchgear_tech_test_human'],
+    pkg_training_water_wastewater_testout: ['training_water_wastewater', 'jr_water_wastewater_test_human'],
   };
 
   it.each(Object.entries(packages))('%s costs less than its training + test-out parts combined', (pkgId, [trainingId, testOutId]) => {

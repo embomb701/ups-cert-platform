@@ -117,7 +117,7 @@ export default function LoginPage() {
           </p>
           <div className="space-y-4">
             {[
-              '29 career tracks on one shared electrical foundation',
+              '30 career tracks on one shared electrical foundation',
               'Structured training completed in 3–6 months',
               'Jr. certification exam included at completion',
               'Starting at $799 — less than one month of college tuition',

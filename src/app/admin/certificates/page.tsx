@@ -27,7 +27,7 @@ const LEVEL_LABELS: Record<string, string> = {
   jr_bas_tech: 'Jr. BAS Tech', jr_ref_tech: 'Jr. Ref Tech', jr_plc_tech: 'Jr. PLC Tech',
   jr_security_tech: 'Jr. Security Tech', jr_field_pm: 'Jr. Field PM', jr_pump_tech: 'Jr. Pump Tech',
   jr_industrial_ref: 'Jr. Industrial Ref', jr_dc_ops: 'Jr. DC Ops', jr_building_cx: 'Jr. Bldg Cx',
-  jr_telecom_tech: 'Jr. Telecom OSP', jr_switchgear_tech: 'Jr. Switchgear Tech', fse: 'FSE', fse_ai: 'FSE (AI)',
+  jr_telecom_tech: 'Jr. Telecom OSP', jr_switchgear_tech: 'Jr. Switchgear Tech', jr_water_wastewater: 'Jr. Water/Wastewater', fse: 'FSE', fse_ai: 'FSE (AI)',
 };
 
 export default async function AdminCertificatesPage({

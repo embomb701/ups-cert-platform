@@ -324,7 +324,7 @@ export default function FieldServiceLifePage() {
                 Start Training Free →
               </Link>
               <Link href="/courses" className="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-semibold text-sm transition-colors">
-                See All 29 Career Tracks
+                See All 30 Career Tracks
               </Link>
             </div>
             <a

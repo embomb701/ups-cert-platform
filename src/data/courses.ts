@@ -1408,4 +1408,18 @@ export const COURSES: TrainingCourse[] = [
     comingSoon: false,
     examLevel: 'jr_switchgear_tech',
   },
+  {
+    id: 'water-wastewater',
+    title: 'Water & Wastewater Treatment Operator',
+    shortTitle: 'Water/Wastewater Operator',
+    tagline: 'Operate and maintain drinking water and wastewater treatment systems — filtration, disinfection, sludge processing, regulatory compliance, and state operator licensing pathways.',
+    accessKey: 'training_water_wastewater',
+    certTitle: 'Jr. Water & Wastewater Treatment Operator',
+    color: 'sky',
+    totalModules: 16,
+    stripeProductId: 'training_water_wastewater',
+    testOutProductId: 'jr_water_wastewater_test_human',
+    comingSoon: false,
+    examLevel: 'jr_water_wastewater',
+  },
 ];

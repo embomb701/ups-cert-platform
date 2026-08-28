@@ -41,6 +41,7 @@ const LEVEL_TO_COURSE: Record<string, string> = {
   jr_building_cx: 'Building Cx',
   jr_telecom_tech: 'Telecom OSP',
   jr_switchgear_tech: 'Switchgear Tech',
+  jr_water_wastewater: 'Water/Wastewater',
   fse: 'UPS FSE (Proctored)',
   fse_ai: 'UPS FSE (AI Proctored)',
 };
