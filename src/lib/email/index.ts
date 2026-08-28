@@ -10,6 +10,62 @@ async function send(to: string, subject: string, html: string): Promise<void> {
   await sgMail.send({ to, from: FROM, subject, html });
 }
 
+const ADMIN_EMAILS = [
+  'faiello@gmail.com',
+  'careers@aiellorecruiter.com',
+  'aiellochori@gmail.com',
+];
+
+function escHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Notifies the admin team with the resume attached directly — resumes are
+// stored privately (no public URL), so attaching the file is the reliable
+// way to get it into an inbox without building a separate authenticated
+// download flow for this one-off notification.
+export async function sendResumeUploadedEmail(
+  candidateName: string,
+  candidateEmail: string,
+  fileName: string,
+  fileBuffer: Buffer,
+): Promise<void> {
+  const apiKey = process.env.SENDGRID_API_KEY;
+  if (!apiKey) return;
+  sgMail.setApiKey(apiKey);
+  await sgMail.sendMultiple({
+    to: ADMIN_EMAILS,
+    from: FROM,
+    subject: `Resume uploaded — ${candidateName || candidateEmail}`,
+    html: `
+      <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">
+        <h2 style="color:#1e1b4b;margin-bottom:4px;">New Resume Upload</h2>
+        <table style="width:100%;border-collapse:collapse;margin-top:20px;">
+          <tr>
+            <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#374151;font-weight:600;width:80px;">Name</td>
+            <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;">${escHtml(candidateName || '(no name on file)')}</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#374151;font-weight:600;">Email</td>
+            <td style="padding:10px 0;border-bottom:1px solid #e5e7eb;color:#111827;">
+              <a href="mailto:${escHtml(candidateEmail)}" style="color:#4f46e5;">${escHtml(candidateEmail)}</a>
+            </td>
+          </tr>
+        </table>
+        <p style="margin-top:16px;font-size:13px;color:#9ca3af;">Attached: ${escHtml(fileName)}</p>
+      </div>
+    `,
+    attachments: [
+      {
+        content: fileBuffer.toString('base64'),
+        filename: fileName,
+        type: 'application/pdf',
+        disposition: 'attachment',
+      },
+    ],
+  });
+}
+
 export async function sendModuleCompleteEmail(
   to: string,
   name: string,

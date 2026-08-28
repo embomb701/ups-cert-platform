@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb, adminStorage } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
+import { sendResumeUploadedEmail } from '@/lib/email';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 30;
@@ -58,6 +59,14 @@ export async function POST(req: NextRequest) {
     },
     { merge: true },
   );
+
+  // Best-effort — never fail the upload if the notification email fails.
+  try {
+    const authUser = await adminAuth.getUser(uid);
+    await sendResumeUploadedEmail(authUser.displayName ?? '', authUser.email ?? '', fileName, buffer);
+  } catch (err) {
+    console.error('Resume upload notification email failed (non-fatal):', err);
+  }
 
   return NextResponse.json({ ok: true, fileName });
 }
