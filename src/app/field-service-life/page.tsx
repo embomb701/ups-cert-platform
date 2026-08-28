@@ -53,6 +53,17 @@ export default function FieldServiceLifePage() {
             Guys who do last figure out, usually a few years in, that it&apos;s actually the job&apos;s
             biggest perk — if you play it right.
           </p>
+          <a
+            href="https://www.youtube.com/watch?v=qmIRorq1PWM"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-lg border border-gray-700 hover:border-red-600 text-gray-300 hover:text-white text-sm font-semibold transition-colors"
+          >
+            <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            Watch the Field Service Life podcast →
+          </a>
         </div>
       </section>
 
@@ -316,6 +327,17 @@ export default function FieldServiceLifePage() {
                 See All 29 Career Tracks
               </Link>
             </div>
+            <a
+              href="https://www.youtube.com/watch?v=qmIRorq1PWM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-5 text-sm text-gray-500 hover:text-white transition-colors"
+            >
+              <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Or hear more on the Field Service Life podcast →
+            </a>
           </div>
 
         </div>
