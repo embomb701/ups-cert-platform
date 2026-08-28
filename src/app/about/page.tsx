@@ -93,7 +93,7 @@ export default function AboutPage() {
               </div>
               <div>
                 <h2 className="text-xl font-bold text-white">Francis Aiello</h2>
-                <p className="text-sm text-indigo-400">CEO, FA Consulting and Recruiting</p>
+                <p className="text-sm text-indigo-400">Developer &amp; CEO of This Platform, Owner of the Field Service Life Podcast</p>
                 <p className="text-sm text-gray-500">Author · VP of Field Services · 25+ Years in the Industry</p>
               </div>
             </div>
