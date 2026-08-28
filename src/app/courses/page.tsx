@@ -74,6 +74,12 @@ export default function CourseCatalogPage() {
               Employer plans
             </Link>
           </div>
+          <Link
+            href="/course-finder"
+            className="inline-flex items-center gap-2 mt-6 text-sm text-blue-400 hover:text-blue-300 transition-colors font-medium"
+          >
+            Not sure which track fits? Take the 5-question course finder →
+          </Link>
         </div>
       </section>
 
