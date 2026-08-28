@@ -353,7 +353,7 @@ export default function EmployersPage() {
             </p>
             <Link href="/contact"
               className="px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors inline-block">
-              Contact FA Consulting and Recruiting →
+              Contact Us →
             </Link>
           </div>
         </div>

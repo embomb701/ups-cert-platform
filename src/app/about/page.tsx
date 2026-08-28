@@ -4,13 +4,13 @@ import Link from 'next/link';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 export const metadata: Metadata = {
-  title: 'About — FA Consulting and Recruiting',
+  title: 'About — Mastering Field Service',
   description:
-    'Mastering Field Service is a division of FA Consulting and Recruiting, founded by Francis Aiello. We build field service training and certification across 29 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.',
+    'Mastering Field Service was built by Francis Aiello. We build field service training and certification across 29 career tracks — UPS, HVAC, Solar, Data Center, Elevator, Marine, BAS, PLC, Biomedical, and more.',
   openGraph: {
     title: 'About Mastering Field Service',
     description:
-      'Learn about FA Consulting and Recruiting and the mission behind Mastering Field Service — 29 career tracks, industry-backed certifications, no college required.',
+      'Learn about the mission behind Mastering Field Service — 29 career tracks, industry-backed certifications, no college required.',
     images: [{ url: `${SITE_URL}/api/og`, width: 1200, height: 630, alt: 'About Mastering Field Service' }],
   },
   twitter: {
@@ -26,7 +26,6 @@ export default function AboutPage() {
       {
         '@type': 'Organization',
         name: 'Mastering Field Service Training Portal',
-        alternateName: 'FA Consulting and Recruiting',
         url: SITE_URL,
         description: 'Professional field service training and certification portal for UPS, HVAC, solar, data center, and 29 career tracks.',
         founder: { '@type': 'Person', name: 'Francis Aiello', jobTitle: 'CEO' },
@@ -34,9 +33,9 @@ export default function AboutPage() {
       {
         '@type': 'Person',
         name: 'Francis Aiello',
-        jobTitle: 'CEO',
-        worksFor: { '@type': 'Organization', name: 'FA Consulting and Recruiting' },
-        description: 'Author, VP of Field Services, and founder of Mastering Field Service with 25+ years in the UPS and critical power industry.',
+        jobTitle: 'Developer & CEO',
+        worksFor: { '@type': 'Organization', name: 'Mastering Field Service Training Portal' },
+        description: 'Developer, CEO, and founder of Mastering Field Service, and owner of the Field Service Life podcast, with 25+ years in the UPS and critical power industry.',
       },
     ],
   };
@@ -52,7 +51,7 @@ export default function AboutPage() {
             Mastering Field Service <span className="text-gradient">Training Portal</span>
           </h1>
           <p className="text-lg text-gray-300 leading-relaxed mb-2">
-            A division of <span className="text-white font-semibold">FA Consulting and Recruiting</span>
+            Built by <span className="text-white font-semibold">Francis Aiello</span>, a 25-year veteran of the UPS and critical power industry
           </p>
           <p className="text-gray-400 leading-relaxed">
             We exist to bridge a gap that has existed in the UPS and critical power industry for decades:
@@ -120,9 +119,8 @@ export default function AboutPage() {
                 needed to step into a UPS field service role and perform safely and competently from day one.
               </p>
               <p>
-                FA Consulting and Recruiting was founded to operationalize that mission: connecting
-                qualified candidates to employers, and helping employers find people who are already
-                prepared to work.
+                This platform was built to operationalize that mission: connecting qualified candidates
+                to employers, and helping employers find people who are already prepared to work.
               </p>
             </div>
           </div>
@@ -164,7 +162,7 @@ export default function AboutPage() {
           <div className="card-dark p-6 bg-amber-950/20 border-amber-900/40 mb-10">
             <h3 className="text-sm font-semibold text-amber-200 mb-2">Independence Statement</h3>
             <p className="text-xs text-gray-400 leading-relaxed">
-              The Mastering Field Service Training Portal is operated by FA Consulting and Recruiting and
+              The Mastering Field Service Training Portal is operated independently and
               is not affiliated with, endorsed by, or sponsored by any employer, manufacturer,
               customer, or service company unless explicitly stated. The certifications offered here
               are educational knowledge credentials. They do not authorize energized electrical work,

@@ -10,6 +10,7 @@ const navLinks = [
   { label: 'Certifications', href: '/certifications/junior' },
   { label: 'Jobs', href: '/jobs' },
   { label: 'Employers', href: '/employers' },
+  { label: 'Field Service Life', href: '/field-service-life' },
   { label: 'Book', href: '/book' },
   { label: 'About', href: '/about' },
 ];

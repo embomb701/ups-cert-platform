@@ -17,8 +17,7 @@ export function Footer() {
               </span>
               <p className="text-sm font-semibold text-white">Mastering Field Service</p>
             </div>
-            <p className="text-[10px] font-semibold text-blue-400/80 uppercase tracking-[0.18em] mb-2">Training Portal</p>
-            <p className="text-xs text-gray-600 mb-3">FA Consulting and Recruiting</p>
+            <p className="text-[10px] font-semibold text-blue-400/80 uppercase tracking-[0.18em] mb-3">Training Portal</p>
             <p className="text-xs text-gray-500 leading-relaxed">
               Professional field service training, certification, and career development.
             </p>
@@ -58,7 +57,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
-          &copy; {year} FA Consulting and Recruiting. Mastering Field Service Training Portal. All rights reserved.
+          &copy; {year} Mastering Field Service Training Portal. All rights reserved.
         </div>
       </div>
 

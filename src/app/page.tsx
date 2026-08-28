@@ -467,7 +467,7 @@ export default function HomePage() {
         '@id': `${SITE_URL}/#org`,
         name: 'Mastering Field Service Training Portal',
         url: SITE_URL,
-        description: 'Field service career training and certification by FA Consulting and Recruiting.',
+        description: 'Field service career training and certification by Mastering Field Service.',
         founder: { '@type': 'Person', name: 'Francis Aiello' },
         sameAs: [],
       },

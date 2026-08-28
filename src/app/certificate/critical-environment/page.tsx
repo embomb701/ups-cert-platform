@@ -93,7 +93,6 @@ export default async function CECertificatePage() {
               <p className="text-emerald-700 font-mono text-xs font-bold uppercase tracking-[0.25em]">
                 Mastering Field Service Training Portal
               </p>
-              <p className="text-gray-400 text-xs tracking-wider uppercase">FA Consulting &amp; Recruiting</p>
             </div>
 
             {/* Divider */}
@@ -142,8 +141,7 @@ export default async function CECertificatePage() {
                 <div>
                   <div className="h-px w-40 bg-gray-400 mb-1" />
                   <p className="text-sm font-semibold text-gray-700">Francis Aiello</p>
-                  <p className="text-xs text-gray-500">Founder, FA Consulting &amp; Recruiting</p>
-                  <p className="text-xs text-gray-400">Mastering Field Service</p>
+                  <p className="text-xs text-gray-500">Founder &amp; CEO, Mastering Field Service</p>
                 </div>
               </div>
               <div className="text-right space-y-1">

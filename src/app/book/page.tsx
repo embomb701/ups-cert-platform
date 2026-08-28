@@ -44,7 +44,7 @@ export default function BookPage() {
     author: { '@type': 'Person', name: 'Francis Aiello' },
     url: `${SITE_URL}/book`,
     description: 'A practical, field-focused guide to UPS systems for people entering or advancing in UPS field service engineering.',
-    publisher: { '@type': 'Organization', name: 'FA Consulting and Recruiting' },
+    publisher: { '@type': 'Organization', name: 'Mastering Field Service' },
     inLanguage: 'en',
     genre: 'Technical / Field Service Engineering',
   };
