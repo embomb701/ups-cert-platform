@@ -108,6 +108,7 @@ export async function GET(req: NextRequest) {
           headline: (userData.headline as string) ?? '',
           location: (userData.location as string) ?? '',
           certificates: certsByUser.get(id) ?? [],
+          hasResume: userData.resumeShareConsent === true && typeof userData.resumeFileName === 'string',
         };
       })
       .filter((c) => c.displayName !== 'Candidate' || (certsByUser.get(c.uid)?.length ?? 0) > 0);

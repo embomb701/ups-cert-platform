@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
@@ -53,7 +53,7 @@ interface DashData {
   attempts: { id: string; examLevel: string; score?: number; passed?: boolean; completedAt: string | null }[];
   jobApplications: { id: string; listingId: string; listingTitle: string; company: string; status: string; createdAt: string | null }[];
   employerOrders: { id: string; seats: number; seatsUsed: number; courseKey: string }[];
-  profile: { openToOpportunities: boolean; profileVisible: boolean; headline: string; location: string; referralCount: number };
+  profile: { openToOpportunities: boolean; profileVisible: boolean; headline: string; location: string; referralCount: number; resumeFileName: string | null; resumeUploadedAt: string | null; resumeShareConsent: boolean };
   streak: number;
 }
 
@@ -96,6 +96,13 @@ export default function DashboardPage() {
   const [copied, setCopied] = useState(false);
   const [copiedReferral, setCopiedReferral] = useState(false);
   const [toggling, setToggling] = useState(false);
+
+  // Resume upload
+  const resumeInputRef = useRef<HTMLInputElement>(null);
+  const [resumeUploading, setResumeUploading] = useState(false);
+  const [resumeDeleting, setResumeDeleting] = useState(false);
+  const [resumeConsentToggling, setResumeConsentToggling] = useState(false);
+  const [resumeError, setResumeError] = useState('');
 
   // FSE scheduling form
   const [schedPhone, setSchedPhone] = useState('');
@@ -165,6 +172,92 @@ export default function DashboardPage() {
       }
     } catch { /* ignore */ }
     setToggling(false);
+  }
+
+  async function handleResumeUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = ''; // allow re-selecting the same file later
+    if (!file || !data) return;
+
+    setResumeError('');
+    if (file.type !== 'application/pdf') {
+      setResumeError('Only PDF files are accepted.');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setResumeError('File is too large — 5MB maximum.');
+      return;
+    }
+
+    setResumeUploading(true);
+    try {
+      const token = await getIdToken();
+      const form = new FormData();
+      form.append('resume', file);
+      const res = await fetch('/api/user/resume', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: form,
+      });
+      if (res.ok) {
+        const { fileName } = await res.json();
+        setData((d) => d ? { ...d, profile: { ...d.profile, resumeFileName: fileName, resumeUploadedAt: new Date().toISOString() } } : d);
+      } else {
+        const body = await res.json().catch(() => ({}));
+        setResumeError(body.error ?? 'Upload failed. Please try again.');
+      }
+    } catch {
+      setResumeError('Upload failed. Please try again.');
+    }
+    setResumeUploading(false);
+  }
+
+  async function handleResumeDelete() {
+    if (!data) return;
+    setResumeDeleting(true);
+    try {
+      const token = await getIdToken();
+      const res = await fetch('/api/user/resume', {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        setData((d) => d ? { ...d, profile: { ...d.profile, resumeFileName: null, resumeUploadedAt: null, resumeShareConsent: false } } : d);
+      }
+    } catch { /* ignore */ }
+    setResumeDeleting(false);
+  }
+
+  async function handleResumeView() {
+    try {
+      const token = await getIdToken();
+      const res = await fetch('/api/user/resume', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) return;
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank', 'noopener,noreferrer');
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } catch { /* ignore */ }
+  }
+
+  async function handleResumeConsentToggle() {
+    if (!data) return;
+    setResumeConsentToggling(true);
+    try {
+      const token = await getIdToken();
+      const newVal = !data.profile.resumeShareConsent;
+      const res = await fetch('/api/profile/settings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ resumeShareConsent: newVal }),
+      });
+      if (res.ok) {
+        setData((d) => d ? { ...d, profile: { ...d.profile, resumeShareConsent: newVal } } : d);
+      }
+    } catch { /* ignore */ }
+    setResumeConsentToggling(false);
   }
 
   function copyProfileUrl() {
@@ -619,6 +712,87 @@ export default function DashboardPage() {
                     ? 'Share your link. Anyone who signs up through it is credited to you.'
                     : `${profile!.referralCount} ${profile!.referralCount === 1 ? 'person has' : 'people have'} signed up through your link.`}
                 </p>
+              </div>
+            )}
+          </div>
+
+          {/* Resume */}
+          <div className="card-dark p-6">
+            <h2 className="text-base font-semibold text-white mb-4">Resume</h2>
+            {dataLoading ? (
+              <p className="text-sm text-gray-500">Loading…</p>
+            ) : (
+              <div className="space-y-4">
+                <input
+                  ref={resumeInputRef}
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handleResumeUpload}
+                  className="hidden"
+                />
+                {profile?.resumeFileName ? (
+                  <>
+                    <div>
+                      <p className="text-sm text-gray-200 truncate">{profile.resumeFileName}</p>
+                      {profile.resumeUploadedAt && (
+                        <p className="text-xs text-gray-600 mt-0.5">
+                          Uploaded {new Date(profile.resumeUploadedAt).toLocaleDateString()}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={handleResumeView}
+                        className="text-xs px-2.5 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
+                      >
+                        View
+                      </button>
+                      <button
+                        onClick={() => resumeInputRef.current?.click()}
+                        disabled={resumeUploading}
+                        className="text-xs px-2.5 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-colors disabled:opacity-50"
+                      >
+                        {resumeUploading ? 'Uploading…' : 'Replace'}
+                      </button>
+                      <button
+                        onClick={handleResumeDelete}
+                        disabled={resumeDeleting}
+                        className="text-xs px-2.5 py-1.5 rounded border border-red-900/60 text-red-400 hover:text-red-300 hover:border-red-700 transition-colors disabled:opacity-50"
+                      >
+                        {resumeDeleting ? 'Removing…' : 'Remove'}
+                      </button>
+                    </div>
+                    <label className="flex items-start gap-2.5 pt-3 border-t border-gray-800 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={profile.resumeShareConsent}
+                        onChange={handleResumeConsentToggle}
+                        disabled={resumeConsentToggling}
+                        className="mt-0.5 accent-indigo-500"
+                      />
+                      <span className="text-xs text-gray-400 leading-relaxed">
+                        Share my resume with employers hiring in a field that matches my
+                        certifications. Only visible to employers with active hiring access — and
+                        only while &ldquo;Open to opportunities&rdquo; above is also on.
+                      </span>
+                    </label>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      Upload a resume so employers hiring in your certified field can find and
+                      review it. PDF only, 5MB max.
+                    </p>
+                    <button
+                      onClick={() => resumeInputRef.current?.click()}
+                      disabled={resumeUploading}
+                      className="block w-full text-center text-xs px-3 py-2 rounded-lg border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-colors disabled:opacity-50"
+                    >
+                      {resumeUploading ? 'Uploading…' : 'Upload Resume (PDF) →'}
+                    </button>
+                  </>
+                )}
+                {resumeError && <p className="text-xs text-red-400">{resumeError}</p>}
               </div>
             )}
           </div>

@@ -49,6 +49,7 @@ interface Candidate {
   headline: string;
   location: string;
   certificates: { examLevel: string; certificationTitle: string; issuedAt: string | null }[];
+  hasResume: boolean;
 }
 
 function Initials({ name }: { name: string }) {
@@ -69,10 +70,30 @@ export default function CandidatesPage() {
   const [forbidden, setForbidden] = useState(false);
   const [certLevel, setCertLevel] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
+  const [downloadingUid, setDownloadingUid] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading && !user) router.replace('/login');
   }, [user, loading, router]);
+
+  async function downloadResume(uid: string, displayName: string) {
+    setDownloadingUid(uid);
+    try {
+      const token = await getIdToken();
+      const res = await fetch(`/api/candidates/${uid}/resume`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) return;
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${displayName.replace(/[^a-z0-9]+/gi, '-') || 'resume'}.pdf`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } catch { /* ignore */ }
+    setDownloadingUid(null);
+  }
 
   useEffect(() => {
     if (!user) return;
@@ -272,15 +293,24 @@ export default function CandidatesPage() {
                   )}
 
                   {/* Action */}
-                  <div className="mt-auto">
+                  <div className="mt-auto flex gap-2">
                     <Link
                       href={`/p/${c.uid}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full text-center px-3 py-2 rounded-lg border border-gray-700 text-sm text-gray-300 hover:text-white hover:border-gray-500 transition-colors"
+                      className="flex-1 text-center px-3 py-2 rounded-lg border border-gray-700 text-sm text-gray-300 hover:text-white hover:border-gray-500 transition-colors"
                     >
                       View profile →
                     </Link>
+                    {c.hasResume && (
+                      <button
+                        onClick={() => downloadResume(c.uid, c.displayName)}
+                        disabled={downloadingUid === c.uid}
+                        className="flex-1 text-center px-3 py-2 rounded-lg border border-indigo-800/60 bg-indigo-950/20 text-sm text-indigo-300 hover:text-white hover:border-indigo-600 transition-colors disabled:opacity-50"
+                      >
+                        {downloadingUid === c.uid ? 'Downloading…' : 'Resume →'}
+                      </button>
+                    )}
                   </div>
 
                 </div>

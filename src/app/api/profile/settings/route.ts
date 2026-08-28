@@ -25,6 +25,7 @@ export async function PATCH(req: NextRequest) {
   if (typeof body.profileVisible === 'boolean') allowed.profileVisible = body.profileVisible;
   if (typeof body.headline === 'string') allowed.headline = body.headline.trim().slice(0, 120);
   if (typeof body.location === 'string') allowed.location = body.location.trim().slice(0, 80);
+  if (typeof body.resumeShareConsent === 'boolean') allowed.resumeShareConsent = body.resumeShareConsent;
 
   if (Object.keys(allowed).length === 0) {
     return NextResponse.json({ error: 'No valid fields' }, { status: 400 });

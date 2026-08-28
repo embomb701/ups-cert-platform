@@ -290,6 +290,9 @@ export async function GET(req: NextRequest) {
       headline: userData.headline ?? '',
       location: userData.location ?? '',
       referralCount: userData.referralCount ?? 0,
+      resumeFileName: userData.resumeFileName ?? null,
+      resumeUploadedAt: userData.resumeUploadedAt?.toDate?.()?.toISOString() ?? null,
+      resumeShareConsent: userData.resumeShareConsent ?? false,
     };
 
     return NextResponse.json({
