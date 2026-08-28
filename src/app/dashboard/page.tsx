@@ -177,7 +177,7 @@ export default function DashboardPage() {
   async function handleResumeUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     e.target.value = ''; // allow re-selecting the same file later
-    if (!file || !data) return;
+    if (!file) return;
 
     setResumeError('');
     if (file.type !== 'application/pdf') {
@@ -213,7 +213,6 @@ export default function DashboardPage() {
   }
 
   async function handleResumeDelete() {
-    if (!data) return;
     setResumeDeleting(true);
     try {
       const token = await getIdToken();
@@ -243,11 +242,10 @@ export default function DashboardPage() {
   }
 
   async function handleResumeConsentToggle() {
-    if (!data) return;
     setResumeConsentToggling(true);
     try {
       const token = await getIdToken();
-      const newVal = !data.profile.resumeShareConsent;
+      const newVal = !(data?.profile.resumeShareConsent ?? false);
       const res = await fetch('/api/profile/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
