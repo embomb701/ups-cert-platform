@@ -1,5 +1,6 @@
 import { adminDb } from '@/lib/firebase/admin';
 import Link from 'next/link';
+import { JobBoardList, type JobListing } from '@/components/jobs/JobBoardList';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,14 +51,7 @@ const COURSE_LABELS: Record<string, string> = {
   training_switchgear_tech: 'Switchgear Tech',
 };
 
-const TYPE_COLORS: Record<string, string> = {
-  'full-time': 'bg-blue-900/40 text-blue-400 border-blue-700/50',
-  'part-time': 'bg-teal-900/40 text-teal-400 border-teal-700/50',
-  'contract': 'bg-amber-900/40 text-amber-400 border-amber-700/50',
-  'temporary': 'bg-purple-900/40 text-purple-400 border-purple-700/50',
-};
-
-interface Listing {
+interface FirestoreListing {
   id: string;
   title: string;
   company: string;
@@ -92,7 +86,7 @@ export default async function JobsPage({ searchParams }: JobsPageProps) {
     .limit(100)
     .get();
 
-  const allListings: Listing[] = snap.docs.map((doc) => ({
+  const allListings: FirestoreListing[] = snap.docs.map((doc) => ({
     id: doc.id,
     title: doc.data().title,
     company: doc.data().company,
@@ -106,9 +100,20 @@ export default async function JobsPage({ searchParams }: JobsPageProps) {
   // Only actually filter when the param matches a real certification — an
   // unrecognized value falls back to showing everything rather than an
   // empty, confusing page.
-  const listings = filterLabel
+  const courseFiltered = filterLabel
     ? allListings.filter((l) => l.courseRequirements.includes(courseFilter!))
     : allListings;
+
+  const listings: JobListing[] = courseFiltered.map((l) => ({
+    id: l.id,
+    title: l.title,
+    company: l.company,
+    location: l.location,
+    type: l.type,
+    courseRequirements: l.courseRequirements,
+    applicationCount: l.applicationCount,
+    postedAgo: l.createdAt?.toDate ? timeAgo(l.createdAt.toDate()) : '',
+  }));
 
   return (
     <div className="min-h-screen bg-gray-900 py-10 px-4">
@@ -163,54 +168,7 @@ export default async function JobsPage({ searchParams }: JobsPageProps) {
             )}
           </div>
         ) : (
-          <div className="space-y-3">
-            {listings.map((listing) => {
-              const postedDate = listing.createdAt?.toDate?.();
-              return (
-                <Link
-                  key={listing.id}
-                  href={`/jobs/${listing.id}`}
-                  className="block rounded-xl border border-gray-700 bg-gray-800/40 hover:border-gray-600 hover:bg-gray-800/60 p-5 transition-colors"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h2 className="text-white font-semibold text-sm">{listing.title}</h2>
-                        <span className={`text-xs px-2 py-0.5 rounded-full border ${TYPE_COLORS[listing.type] ?? 'bg-gray-700 text-gray-400 border-gray-600'}`}>
-                          {listing.type}
-                        </span>
-                      </div>
-                      <p className="text-gray-400 text-xs mb-2">
-                        {listing.company} · {listing.location}
-                      </p>
-                      {listing.courseRequirements.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {listing.courseRequirements.slice(0, 4).map((key) => (
-                            <span key={key} className="text-xs px-2 py-0.5 rounded bg-gray-700/60 text-gray-400">
-                              {COURSE_LABELS[key] ?? key}
-                            </span>
-                          ))}
-                          {listing.courseRequirements.length > 4 && (
-                            <span className="text-xs px-2 py-0.5 rounded bg-gray-700/60 text-gray-500">
-                              +{listing.courseRequirements.length - 4} more
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-shrink-0 text-right">
-                      <p className="text-gray-600 text-xs">{postedDate ? timeAgo(postedDate) : ''}</p>
-                      {listing.applicationCount > 0 && (
-                        <p className="text-gray-600 text-xs mt-1">
-                          {listing.applicationCount} applicant{listing.applicationCount !== 1 ? 's' : ''}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+          <JobBoardList listings={listings} courseLabels={COURSE_LABELS} />
         )}
 
       </div>
