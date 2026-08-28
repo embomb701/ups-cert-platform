@@ -946,6 +946,40 @@ export default function HomePage() {
               className="block w-full py-2.5 px-4 bg-orange-700 hover:bg-orange-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
             />
           </div>
+          <div className="rounded-xl border border-yellow-800/60 bg-yellow-950/10 p-6 flex flex-col">
+            <h3 className="text-white font-bold text-lg mb-1">Renewable Energy Bundle</h3>
+            <p className="text-3xl font-bold text-white mb-1">$3,599</p>
+            <p className="text-yellow-300 text-sm mb-4">$4,196 separately — save $597</p>
+            <ul className="space-y-1.5 mb-5 flex-1">
+              {['Solar & Battery Energy Storage', 'Solar Installer', 'EV Charging Infrastructure', 'Wind Turbine Technician'].map((t, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                  <span className="text-yellow-400 flex-shrink-0 mt-0.5">✓</span>{t}
+                </li>
+              ))}
+            </ul>
+            <PurchaseButton
+              productId="bundle_renewable_energy"
+              label="Enroll — $3,599"
+              className="block w-full py-2.5 px-4 bg-yellow-700 hover:bg-yellow-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+            />
+          </div>
+          <div className="rounded-xl border border-teal-800/60 bg-teal-950/10 p-6 flex flex-col">
+            <h3 className="text-white font-bold text-lg mb-1">Building Systems Bundle</h3>
+            <p className="text-3xl font-bold text-white mb-1">$4,499</p>
+            <p className="text-teal-300 text-sm mb-4">$5,196 separately — save $697</p>
+            <ul className="space-y-1.5 mb-5 flex-1">
+              {['Building Automation Systems Technician', 'Fire Alarm & Suppression Technician', 'Building Commissioning (Cx) Agent', 'Elevator Technician'].map((t, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                  <span className="text-teal-400 flex-shrink-0 mt-0.5">✓</span>{t}
+                </li>
+              ))}
+            </ul>
+            <PurchaseButton
+              productId="bundle_building_systems"
+              label="Enroll — $4,499"
+              className="block w-full py-2.5 px-4 bg-teal-700 hover:bg-teal-600 disabled:opacity-50 text-white font-semibold rounded-lg text-center text-sm transition-colors"
+            />
+          </div>
         </div>
       </section>
 

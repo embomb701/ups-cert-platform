@@ -1592,6 +1592,20 @@ async function handleCheckoutCompleted(eventId: string, session: Stripe.Checkout
       await grantIndustrialRefTrainingAccess(userId, pid);
       break;
 
+    case 'bundle_renewable_energy':
+      await grantSolarTrainingAccess(userId, pid);
+      await grantSolarInstTrainingAccess(userId, pid);
+      await grantEvChargingTrainingAccess(userId, pid);
+      await grantWindTechTrainingAccess(userId, pid);
+      break;
+
+    case 'bundle_building_systems':
+      await grantBasTechTrainingAccess(userId, pid);
+      await grantFireAlarmTechTrainingAccess(userId, pid);
+      await grantBuildingCxTrainingAccess(userId, pid);
+      await grantElevatorTechTrainingAccess(userId, pid);
+      break;
+
     default:
       console.warn('Unhandled productId in webhook:', productId);
   }

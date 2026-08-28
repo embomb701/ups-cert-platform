@@ -88,6 +88,8 @@ describe('STRIPE_PRODUCTS — cross-trade bundles never cost more than buying ea
   const bundles: Record<string, (keyof typeof STRIPE_PRODUCTS)[]> = {
     bundle_critical_power: ['training_course', 'training_generator', 'training_switchgear_tech', 'training_datacenter'],
     bundle_refrigeration: ['training_kitchen', 'training_ref_tech', 'training_industrial_ref'],
+    bundle_renewable_energy: ['training_solar', 'training_solar_inst', 'training_evcharging', 'training_wind_tech'],
+    bundle_building_systems: ['training_bas_tech', 'training_fire_alarm_tech', 'training_building_cx', 'training_elevator_tech'],
   };
 
   it.each(Object.entries(bundles))('%s costs less than its component courses bought separately', (bundleId, componentIds) => {

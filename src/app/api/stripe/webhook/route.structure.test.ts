@@ -116,6 +116,18 @@ describe('Stripe webhook — cross-trade bundle cases grant every one of their c
       'grantRefTechTrainingAccess',
       'grantIndustrialRefTrainingAccess',
     ],
+    bundle_renewable_energy: [
+      'grantSolarTrainingAccess',
+      'grantSolarInstTrainingAccess',
+      'grantEvChargingTrainingAccess',
+      'grantWindTechTrainingAccess',
+    ],
+    bundle_building_systems: [
+      'grantBasTechTrainingAccess',
+      'grantFireAlarmTechTrainingAccess',
+      'grantBuildingCxTrainingAccess',
+      'grantElevatorTechTrainingAccess',
+    ],
   };
 
   it('every bundle_* case calls exactly its expected set of *TrainingAccess functions', () => {

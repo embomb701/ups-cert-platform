@@ -160,6 +160,8 @@ export const PRODUCTS = {
   PKG_TRAINING_SWITCHGEAR_TECH_TESTOUT: 'pkg_training_switchgear_tech_testout',
   BUNDLE_CRITICAL_POWER: 'bundle_critical_power',
   BUNDLE_REFRIGERATION: 'bundle_refrigeration',
+  BUNDLE_RENEWABLE_ENERGY: 'bundle_renewable_energy',
+  BUNDLE_BUILDING_SYSTEMS: 'bundle_building_systems',
 } as const;
 
 // Keep ProductId in sync with STRIPE_PRODUCTS keys in src/lib/stripe/client.ts

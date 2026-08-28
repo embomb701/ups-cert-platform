@@ -808,6 +808,24 @@ export const STRIPE_PRODUCTS = {
     stripePriceId: process.env.STRIPE_PRICE_ID_BUNDLE_REFRIGERATION ?? '',
   },
 
+  // Solar $1,199 + Solar Installer $799 + EV Charging $999 + Wind Turbine
+  // $1,199 = $4,196 separately.
+  bundle_renewable_energy: {
+    name: 'Renewable Energy Bundle — Solar & Storage, Solar Installer, EV Charging, Wind Turbine Training',
+    shortName: 'Renewable Energy Bundle',
+    priceInCents: 359900,   // $3,599 (vs. $4,196 separately — save $597)
+    stripePriceId: process.env.STRIPE_PRICE_ID_BUNDLE_RENEWABLE_ENERGY ?? '',
+  },
+
+  // BAS Tech $1,199 + Fire Alarm Tech $1,099 + Building Cx $1,699 + Elevator
+  // Tech $1,199 = $5,196 separately.
+  bundle_building_systems: {
+    name: 'Building Systems Bundle — BAS, Fire Alarm & Suppression, Building Commissioning, Elevator Training',
+    shortName: 'Building Systems Bundle',
+    priceInCents: 449900,   // $4,499 (vs. $5,196 separately — save $697)
+    stripePriceId: process.env.STRIPE_PRICE_ID_BUNDLE_BUILDING_SYSTEMS ?? '',
+  },
+
   // ─────────────────────────────────────────────────────────────────────────
   // PHYSICAL PRODUCTS
   // ─────────────────────────────────────────────────────────────────────────
