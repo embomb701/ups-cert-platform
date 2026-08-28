@@ -589,6 +589,26 @@ export default function DashboardPage() {
             )}
           </div>
 
+          {/* Field Service Archetype (just for fun) */}
+          <div className="card-dark p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base font-semibold text-white">Your Archetype</h2>
+              <span className="text-[10px] px-1.5 py-0.5 rounded border border-indigo-800/60 bg-indigo-950/30 text-indigo-300 uppercase tracking-wider">
+                For fun
+              </span>
+            </div>
+            <p className="text-sm text-gray-400 leading-relaxed mb-4">
+              Ten quick questions about how you work. Find out which legend — Zeus, Odin, Athena,
+              Loki, and more — matches your instincts on the job.
+            </p>
+            <Link
+              href="/field-service-archetype"
+              className="block text-center text-xs px-3 py-2 rounded-lg border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
+            >
+              Take the quiz →
+            </Link>
+          </div>
+
           {/* Employer Team (if orders exist) */}
           {(dataLoading || orders.length > 0) && (
             <div className="card-dark p-6">
