@@ -399,7 +399,7 @@ export default function DashboardPage() {
             ) : courses.length === 0 ? (
               <div className="text-center py-6">
                 <p className="text-sm text-gray-600 mb-3">No courses enrolled yet.</p>
-                <Link href="/certifications" className="text-xs text-indigo-400 hover:text-indigo-300">
+                <Link href="/courses" className="text-xs text-indigo-400 hover:text-indigo-300">
                   Browse courses →
                 </Link>
               </div>
