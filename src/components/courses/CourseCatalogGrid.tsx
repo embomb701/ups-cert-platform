@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { TrainingCourse } from '@/data/courses';
+import type { UpcomingCourse } from '@/data/upcomingCourses';
 import {
   COURSE_TEXT_COLOR as TEXT,
   COURSE_BORDER_COLOR as BORDER,
@@ -44,15 +45,43 @@ function CourseCard({ course }: { course: TrainingCourse }) {
   );
 }
 
-export function CourseCatalogGrid({ courses }: { courses: TrainingCourse[] }) {
+function UpcomingCourseCard({ course }: { course: UpcomingCourse }) {
+  const text = TEXT[course.color] ?? 'text-gray-400';
+  return (
+    <div className="rounded-xl border border-dashed border-gray-700 bg-gray-800/10 p-5 flex flex-col gap-3">
+      <div>
+        <div className="flex items-center justify-between mb-1">
+          <span className={`text-xs font-bold uppercase tracking-widest font-mono ${text}`}>
+            Coming Soon
+          </span>
+        </div>
+        <p className="text-gray-300 font-semibold text-sm leading-snug">{course.title}</p>
+        <p className="text-gray-600 text-xs mt-1.5 leading-relaxed line-clamp-3">
+          {course.tagline}
+        </p>
+      </div>
+      <div className="flex items-center justify-between mt-auto pt-1 border-t border-gray-800">
+        <span className="text-xs text-gray-600">In development</span>
+      </div>
+    </div>
+  );
+}
+
+export function CourseCatalogGrid({
+  courses,
+  upcoming = [],
+}: {
+  courses: TrainingCourse[];
+  upcoming?: UpcomingCourse[];
+}) {
   const [query, setQuery] = useState('');
   const courseMap = useMemo(() => Object.fromEntries(courses.map((c) => [c.id, c])), [courses]);
 
   const normalizedQuery = query.trim().toLowerCase();
-  const matchesQuery = (c: TrainingCourse) =>
+  const matchesQuery = (c: { title: string; tagline: string; shortTitle?: string }) =>
     normalizedQuery === '' ||
     c.title.toLowerCase().includes(normalizedQuery) ||
-    c.shortTitle.toLowerCase().includes(normalizedQuery) ||
+    c.shortTitle?.toLowerCase().includes(normalizedQuery) ||
     c.tagline.toLowerCase().includes(normalizedQuery);
 
   const visibleCategories = CATEGORIES.map(({ label, ids }) => ({
@@ -60,7 +89,9 @@ export function CourseCatalogGrid({ courses }: { courses: TrainingCourse[] }) {
     courses: ids.map((id) => courseMap[id]).filter((c): c is TrainingCourse => !!c && matchesQuery(c)),
   })).filter((cat) => cat.courses.length > 0);
 
-  const totalVisible = visibleCategories.reduce((sum, cat) => sum + cat.courses.length, 0);
+  const visibleUpcoming = upcoming.filter(matchesQuery);
+
+  const totalVisible = visibleCategories.reduce((sum, cat) => sum + cat.courses.length, 0) + visibleUpcoming.length;
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-12 space-y-12">
@@ -111,6 +142,20 @@ export function CourseCatalogGrid({ courses }: { courses: TrainingCourse[] }) {
           </div>
         </div>
       ))}
+
+      {/* Upcoming tracks */}
+      {visibleUpcoming.length > 0 && (
+        <div>
+          <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">
+            Coming Soon
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {visibleUpcoming.map((course) => (
+              <UpcomingCourseCard key={course.id} course={course} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

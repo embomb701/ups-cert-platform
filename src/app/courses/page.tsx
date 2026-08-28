@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { COURSES } from '@/data/courses';
+import { UPCOMING_COURSES } from '@/data/upcomingCourses';
 import { CourseCatalogGrid } from '@/components/courses/CourseCatalogGrid';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
@@ -84,7 +85,7 @@ export default function CourseCatalogPage() {
       </section>
 
       {/* Categories (client-side search/filter) */}
-      <CourseCatalogGrid courses={COURSES} />
+      <CourseCatalogGrid courses={COURSES} upcoming={UPCOMING_COURSES} />
 
       {/* CTA */}
       <section className="border-t border-gray-800 py-14 px-4 text-center">
