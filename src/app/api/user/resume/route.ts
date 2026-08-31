@@ -48,7 +48,10 @@ export async function POST(req: NextRequest) {
   try {
     await sendResumeUploadedEmail(authUser.displayName ?? '', authUser.email ?? '', fileName, buffer);
   } catch (err) {
-    console.error('Resume upload email failed:', err);
+    // Node's default error inspection truncates the nested SendGrid error
+    // body — pull it out explicitly so the actual reason is visible in logs.
+    const sgErrors = (err as { response?: { body?: { errors?: unknown } } })?.response?.body?.errors;
+    console.error('Resume upload email failed. SendGrid errors:', JSON.stringify(sgErrors ?? err, null, 2));
     return NextResponse.json({ error: 'Could not send your resume. Please try again.' }, { status: 502 });
   }
 
