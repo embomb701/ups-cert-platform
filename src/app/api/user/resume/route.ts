@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { adminAuth, adminDb, adminStorage } from '@/lib/firebase/admin';
+import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { sendResumeUploadedEmail } from '@/lib/email';
 
@@ -7,10 +7,6 @@ export const dynamic = 'force-dynamic';
 export const maxDuration = 30;
 
 const MAX_BYTES = 5 * 1024 * 1024; // 5MB
-
-function resumePath(uid: string) {
-  return `resumes/${uid}/resume.pdf`;
-}
 
 async function requireUid(req: NextRequest): Promise<string | null> {
   const authHeader = req.headers.get('Authorization');
@@ -23,7 +19,10 @@ async function requireUid(req: NextRequest): Promise<string | null> {
   }
 }
 
-// Upload (or replace) the caller's own resume.
+// Emails the resume directly — never written to a file store. Only a
+// lightweight "a resume exists" record lives in Firestore (filename +
+// timestamp), which is what powers the "Resume on file" badge employers
+// see and the dashboard's own display. Once sent, the app has no copy.
 export async function POST(req: NextRequest) {
   const uid = await requireUid(req);
   if (!uid) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -43,71 +42,36 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Only PDF files are accepted.' }, { status: 400 });
   }
 
-  const bucket = adminStorage.bucket();
-  const storageFile = bucket.file(resumePath(uid));
-  await storageFile.save(buffer, {
-    contentType: 'application/pdf',
-    metadata: { cacheControl: 'private, no-store' },
-  });
-
   const fileName = (file.name || 'resume.pdf').slice(0, 150);
+
+  const authUser = await adminAuth.getUser(uid);
+  try {
+    await sendResumeUploadedEmail(authUser.displayName ?? '', authUser.email ?? '', fileName, buffer);
+  } catch (err) {
+    console.error('Resume upload email failed:', err);
+    return NextResponse.json({ error: 'Could not send your resume. Please try again.' }, { status: 502 });
+  }
+
   await adminDb.collection('users').doc(uid).set(
     {
       resumeFileName: fileName,
-      resumeSizeBytes: buffer.length,
       resumeUploadedAt: FieldValue.serverTimestamp(),
     },
     { merge: true },
   );
 
-  // Best-effort — never fail the upload if the notification email fails.
-  try {
-    const authUser = await adminAuth.getUser(uid);
-    await sendResumeUploadedEmail(authUser.displayName ?? '', authUser.email ?? '', fileName, buffer);
-  } catch (err) {
-    console.error('Resume upload notification email failed (non-fatal):', err);
-  }
-
   return NextResponse.json({ ok: true, fileName });
 }
 
-// Stream the caller's own resume back (view/download).
-export async function GET(req: NextRequest) {
-  const uid = await requireUid(req);
-  if (!uid) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
-  const bucket = adminStorage.bucket();
-  const storageFile = bucket.file(resumePath(uid));
-  const [exists] = await storageFile.exists();
-  if (!exists) return NextResponse.json({ error: 'No resume on file' }, { status: 404 });
-
-  const [buffer] = await storageFile.download();
-  const userSnap = await adminDb.collection('users').doc(uid).get();
-  const fileName = (userSnap.data()?.resumeFileName as string) || 'resume.pdf';
-
-  return new NextResponse(buffer as unknown as BodyInit, {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': `inline; filename="${fileName.replace(/"/g, '')}"`,
-      'Cache-Control': 'private, no-store',
-    },
-  });
-}
-
-// Remove the caller's own resume entirely.
+// Clears the "resume on file" record. There's no stored file to delete —
+// re-submitting just means uploading again, which re-sends the email.
 export async function DELETE(req: NextRequest) {
   const uid = await requireUid(req);
   if (!uid) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const bucket = adminStorage.bucket();
-  const storageFile = bucket.file(resumePath(uid));
-  await storageFile.delete({ ignoreNotFound: true });
-
   await adminDb.collection('users').doc(uid).set(
     {
       resumeFileName: FieldValue.delete(),
-      resumeSizeBytes: FieldValue.delete(),
       resumeUploadedAt: FieldValue.delete(),
       resumeShareConsent: false,
     },

@@ -227,20 +227,6 @@ export default function DashboardPage() {
     setResumeDeleting(false);
   }
 
-  async function handleResumeView() {
-    try {
-      const token = await getIdToken();
-      const res = await fetch('/api/user/resume', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) return;
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      window.open(url, '_blank', 'noopener,noreferrer');
-      setTimeout(() => URL.revokeObjectURL(url), 60_000);
-    } catch { /* ignore */ }
-  }
-
   async function handleResumeConsentToggle() {
     setResumeConsentToggling(true);
     try {
@@ -734,17 +720,11 @@ export default function DashboardPage() {
                       <p className="text-sm text-gray-200 truncate">{profile.resumeFileName}</p>
                       {profile.resumeUploadedAt && (
                         <p className="text-xs text-gray-600 mt-0.5">
-                          Uploaded {new Date(profile.resumeUploadedAt).toLocaleDateString()}
+                          Sent {new Date(profile.resumeUploadedAt).toLocaleDateString()}
                         </p>
                       )}
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <button
-                        onClick={handleResumeView}
-                        className="text-xs px-2.5 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
-                      >
-                        View
-                      </button>
                       <button
                         onClick={() => resumeInputRef.current?.click()}
                         disabled={resumeUploading}
@@ -769,24 +749,25 @@ export default function DashboardPage() {
                         className="mt-0.5 accent-indigo-500"
                       />
                       <span className="text-xs text-gray-400 leading-relaxed">
-                        Share my resume with employers hiring in a field that matches my
-                        certifications. Only visible to employers with active hiring access — and
-                        only while &ldquo;Open to opportunities&rdquo; above is also on.
+                        Let employers hiring in a field that matches my certifications see that I
+                        have a resume on file. The file itself is only ever sent to Mastering
+                        Field Service directly — employers see a badge, not a download, and only
+                        while &ldquo;Open to opportunities&rdquo; above is also on.
                       </span>
                     </label>
                   </>
                 ) : (
                   <>
                     <p className="text-sm text-gray-400 leading-relaxed">
-                      Upload a resume so employers hiring in your certified field can find and
-                      review it. PDF only, 5MB max.
+                      Send your resume so it reaches Mastering Field Service directly — it&apos;s
+                      emailed straight through, not stored or posted anywhere. PDF only, 5MB max.
                     </p>
                     <button
                       onClick={() => resumeInputRef.current?.click()}
                       disabled={resumeUploading}
                       className="block w-full text-center text-xs px-3 py-2 rounded-lg border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-colors disabled:opacity-50"
                     >
-                      {resumeUploading ? 'Uploading…' : 'Upload Resume (PDF) →'}
+                      {resumeUploading ? 'Sending…' : 'Send Resume (PDF) →'}
                     </button>
                   </>
                 )}
