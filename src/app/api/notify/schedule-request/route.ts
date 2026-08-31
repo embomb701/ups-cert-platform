@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
         sgMail.setApiKey(apiKey);
         await sgMail.sendMultiple({
           to: ADMIN_EMAILS,
-          from: { name: 'Mastering Field Service Training Portal', email: 'careers@aiellorecruiter.com' },
+          from: { name: 'Mastering Field Service Training Portal', email: 'masteringfse_admin@aiellorecruiter.com' },
           subject: `FSE Exam Scheduling Request — ${name}`,
           html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">

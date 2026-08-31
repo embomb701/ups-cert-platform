@@ -1,6 +1,9 @@
 import sgMail from '@sendgrid/mail';
 
-const FROM = { name: 'Mastering Field Service Training Portal', email: 'careers@aiellorecruiter.com' };
+// Must exactly match a verified Sender Identity in SendGrid (Settings →
+// Sender Authentication → Single Sender Verification) — SendGrid rejects
+// sends from any address that isn't verified.
+const FROM = { name: 'Mastering Field Service Training Portal', email: 'masteringfse_admin@aiellorecruiter.com' };
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
 async function send(to: string, subject: string, html: string): Promise<void> {
