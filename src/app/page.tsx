@@ -7,6 +7,22 @@ import { coursePriceLabel } from '@/lib/stripe/client';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 const OG_IMAGE = `${SITE_URL}/api/og`;
 
+// A handful of course IDs used for pricing/lookup below don't match their
+// actual /training/[slug] route folder name — map them here so the "Preview"
+// link on the course explorer doesn't 404.
+const TRAINING_ROUTE_SLUG: Record<string, string> = {
+  'data-center': 'datacenter',
+  'ev-charging': 'evcharging',
+  'dc-plants': 'dcplants',
+  'battery-tech': 'battery',
+  'dc-engineer': 'dcengineer',
+  'solar-installer': 'solar-inst',
+  'wind-turbine': 'wind-tech',
+  elevator: 'elevator-tech',
+  'fire-alarm': 'fire-alarm-tech',
+  bmet: 'bmet-tech',
+};
+
 export const metadata: Metadata = {
   title: 'Mastering Field Service Training Portal — 30 Career Tracks in Critical Infrastructure',
   description:
@@ -708,7 +724,7 @@ export default function HomePage() {
                             {q.free ? 'Start Free →' : `Enroll — ${coursePriceLabel(q.stripeProductId) ?? '$1,499'} →`}
                           </Link>
                           <Link
-                            href={`/training/${id}`}
+                            href={`/training/${TRAINING_ROUTE_SLUG[id] ?? id}`}
                             className="py-2 px-4 border border-gray-600 hover:border-gray-400 text-gray-400 hover:text-white text-sm rounded-lg text-center transition-colors"
                           >
                             Preview →
