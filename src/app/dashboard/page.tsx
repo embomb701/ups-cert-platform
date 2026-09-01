@@ -209,6 +209,7 @@ export default function DashboardPage() {
         const { fileName } = await res.json();
         setLocalResumeFileName(fileName);
         setResumeSuccess('Sent! Your resume was emailed to Mastering Field Service.');
+        setTimeout(() => setResumeSuccess(''), 5000);
         setData((d) => d ? { ...d, profile: { ...d.profile, resumeFileName: fileName, resumeUploadedAt: new Date().toISOString() } } : d);
       } else {
         const body = await res.json().catch(() => ({}));
@@ -725,8 +726,8 @@ export default function DashboardPage() {
                   className="hidden"
                 />
                 {resumeSuccess && (
-                  <p className="text-xs text-emerald-400 bg-emerald-950/30 border border-emerald-900/50 rounded-lg px-3 py-2">
-                    {resumeSuccess}
+                  <p className="flex items-center gap-2 text-sm font-semibold text-emerald-300 bg-emerald-950/50 border border-emerald-700 rounded-lg px-3 py-2.5">
+                    <span aria-hidden="true">✓</span> {resumeSuccess}
                   </p>
                 )}
                 {(localResumeFileName ?? profile?.resumeFileName) ? (
