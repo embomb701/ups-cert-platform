@@ -85,20 +85,27 @@ export default async function TeamPage() {
     redirect('/login');
   }
 
-  // Load employer orders for this user
-  const ordersSnap = await adminDb
-    .collection('employerOrders')
-    .where('userId', '==', uid)
-    .where('status', '==', 'active')
-    .orderBy('createdAt', 'desc')
-    .get();
+  // Load employer orders for this user. Never hard-crash this page just
+  // because a Firestore query fails (e.g. a missing composite index) —
+  // degrade to the existing "no seat packs" empty state instead.
+  let orders: EmployerOrder[] = [];
+  try {
+    const ordersSnap = await adminDb
+      .collection('employerOrders')
+      .where('userId', '==', uid)
+      .where('status', '==', 'active')
+      .orderBy('createdAt', 'desc')
+      .get();
 
-  const orders: EmployerOrder[] = ordersSnap.docs.map((doc) => ({
-    id: doc.id,
-    seats: doc.data().seats ?? 0,
-    productId: doc.data().productId ?? '',
-    createdAt: doc.data().createdAt ?? null,
-  }));
+    orders = ordersSnap.docs.map((doc) => ({
+      id: doc.id,
+      seats: doc.data().seats ?? 0,
+      productId: doc.data().productId ?? '',
+      createdAt: doc.data().createdAt ?? null,
+    }));
+  } catch (err) {
+    console.error('Team page orders query failed:', err);
+  }
 
   if (orders.length === 0) {
     return (
@@ -123,15 +130,19 @@ export default async function TeamPage() {
   // Load all invitations for these orders
   const orderIds = orders.map((o) => o.id);
   const allInvites: Invitation[] = [];
-  for (const oid of orderIds) {
-    const snap = await adminDb
-      .collection('teamInvitations')
-      .where('orderId', '==', oid)
-      .orderBy('createdAt', 'desc')
-      .get();
-    snap.docs.forEach((doc) => {
-      allInvites.push({ token: doc.id, ...doc.data() } as Invitation);
-    });
+  try {
+    for (const oid of orderIds) {
+      const snap = await adminDb
+        .collection('teamInvitations')
+        .where('orderId', '==', oid)
+        .orderBy('createdAt', 'desc')
+        .get();
+      snap.docs.forEach((doc) => {
+        allInvites.push({ token: doc.id, ...doc.data() } as Invitation);
+      });
+    }
+  } catch (err) {
+    console.error('Team page invitations query failed:', err);
   }
 
   // Map orderId → invitation list

@@ -45,33 +45,40 @@ export default async function AccountJobsPage() {
     redirect('/login');
   }
 
-  const listingsSnap = await adminDb
-    .collection('jobListings')
-    .where('postedByUid', '==', uid)
-    .orderBy('createdAt', 'desc')
-    .get();
-
-  const listings: Listing[] = listingsSnap.docs.map((doc) => ({
-    id: doc.id,
-    title: doc.data().title,
-    location: doc.data().location,
-    type: doc.data().type,
-    status: doc.data().status,
-    applicationCount: doc.data().applicationCount ?? 0,
-    createdAt: doc.data().createdAt ?? null,
-  }));
-
-  // Load applications for all listings
+  // Never hard-crash this page for an employer just because a Firestore query
+  // fails (e.g. a missing composite index) — degrade to an empty list instead.
+  let listings: Listing[] = [];
   const allApplications: Application[] = [];
-  for (const listing of listings) {
-    const appSnap = await adminDb
-      .collection('jobApplications')
-      .where('listingId', '==', listing.id)
+  try {
+    const listingsSnap = await adminDb
+      .collection('jobListings')
+      .where('postedByUid', '==', uid)
       .orderBy('createdAt', 'desc')
       .get();
-    appSnap.docs.forEach((doc) => {
-      allApplications.push({ id: doc.id, ...doc.data() } as Application);
-    });
+
+    listings = listingsSnap.docs.map((doc) => ({
+      id: doc.id,
+      title: doc.data().title,
+      location: doc.data().location,
+      type: doc.data().type,
+      status: doc.data().status,
+      applicationCount: doc.data().applicationCount ?? 0,
+      createdAt: doc.data().createdAt ?? null,
+    }));
+
+    // Load applications for all listings
+    for (const listing of listings) {
+      const appSnap = await adminDb
+        .collection('jobApplications')
+        .where('listingId', '==', listing.id)
+        .orderBy('createdAt', 'desc')
+        .get();
+      appSnap.docs.forEach((doc) => {
+        allApplications.push({ id: doc.id, ...doc.data() } as Application);
+      });
+    }
+  } catch (err) {
+    console.error('Account jobs query failed:', err);
   }
 
   const appsByListing: Record<string, Application[]> = {};

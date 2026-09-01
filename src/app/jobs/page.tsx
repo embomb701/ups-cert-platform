@@ -80,23 +80,31 @@ export default async function JobsPage({ searchParams }: JobsPageProps) {
   const { course: courseFilter } = await searchParams;
   const filterLabel = courseFilter ? COURSE_LABELS[courseFilter] : undefined;
 
-  const snap = await adminDb
-    .collection('jobListings')
-    .where('status', '==', 'active')
-    .orderBy('createdAt', 'desc')
-    .limit(100)
-    .get();
+  // The job board must never hard-crash for visitors just because a Firestore
+  // query fails (e.g. a missing composite index) — degrade to the existing
+  // "no listings" empty state instead, and log server-side for diagnosis.
+  let allListings: FirestoreListing[] = [];
+  try {
+    const snap = await adminDb
+      .collection('jobListings')
+      .where('status', '==', 'active')
+      .orderBy('createdAt', 'desc')
+      .limit(100)
+      .get();
 
-  const allListings: FirestoreListing[] = snap.docs.map((doc) => ({
-    id: doc.id,
-    title: doc.data().title,
-    company: doc.data().company,
-    location: doc.data().location,
-    type: doc.data().type,
-    courseRequirements: doc.data().courseRequirements ?? [],
-    applicationCount: doc.data().applicationCount ?? 0,
-    createdAt: doc.data().createdAt ?? null,
-  }));
+    allListings = snap.docs.map((doc) => ({
+      id: doc.id,
+      title: doc.data().title,
+      company: doc.data().company,
+      location: doc.data().location,
+      type: doc.data().type,
+      courseRequirements: doc.data().courseRequirements ?? [],
+      applicationCount: doc.data().applicationCount ?? 0,
+      createdAt: doc.data().createdAt ?? null,
+    }));
+  } catch (err) {
+    console.error('Job board query failed:', err);
+  }
 
   // Only actually filter when the param matches a real certification — an
   // unrecognized value falls back to showing everything rather than an
