@@ -1,16 +1,21 @@
-import sgMail from '@sendgrid/mail';
+import { Resend } from 'resend';
 
-// Must exactly match a verified Sender Identity in SendGrid (Settings →
-// Sender Authentication → Single Sender Verification) — SendGrid rejects
-// sends from any address that isn't verified.
-const FROM = { name: 'Mastering Field Service Training Portal', email: 'masteringfse_admin@aiellorecruiter.com' };
+// Must be an address on a domain verified in Resend (Domains → Add Domain).
+// Unlike SendGrid's single-sender model, once a domain is verified any
+// address @ that domain can send — no per-address verification needed.
+const FROM = 'Mastering Field Service Training Portal <notifications@fse-academy.com>';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fse-academy.com';
 
+function getResend(): Resend | null {
+  const apiKey = process.env.RESEND_API_KEY;
+  return apiKey ? new Resend(apiKey) : null;
+}
+
 async function send(to: string, subject: string, html: string): Promise<void> {
-  const apiKey = process.env.SENDGRID_API_KEY;
-  if (!apiKey || !to) return;
-  sgMail.setApiKey(apiKey);
-  await sgMail.send({ to, from: FROM, subject, html });
+  const resend = getResend();
+  if (!resend || !to) return;
+  const { error } = await resend.emails.send({ from: FROM, to, subject, html });
+  if (error) throw new Error(`Resend error: ${error.message}`);
 }
 
 const ADMIN_EMAILS = [
@@ -33,10 +38,9 @@ export async function sendResumeUploadedEmail(
   fileName: string,
   fileBuffer: Buffer,
 ): Promise<void> {
-  const apiKey = process.env.SENDGRID_API_KEY;
-  if (!apiKey) return;
-  sgMail.setApiKey(apiKey);
-  await sgMail.sendMultiple({
+  const resend = getResend();
+  if (!resend) return;
+  const { error } = await resend.emails.send({
     to: ADMIN_EMAILS,
     from: FROM,
     subject: `Resume uploaded — ${candidateName || candidateEmail}`,
@@ -60,13 +64,13 @@ export async function sendResumeUploadedEmail(
     `,
     attachments: [
       {
-        content: fileBuffer.toString('base64'),
+        content: fileBuffer,
         filename: fileName,
-        type: 'application/pdf',
-        disposition: 'attachment',
+        contentType: 'application/pdf',
       },
     ],
   });
+  if (error) throw new Error(`Resend error: ${error.message}`);
 }
 
 export async function sendModuleCompleteEmail(

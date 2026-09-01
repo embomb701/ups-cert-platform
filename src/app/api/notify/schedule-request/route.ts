@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase/admin';
 import { FieldValue } from 'firebase-admin/firestore';
-import sgMail from '@sendgrid/mail';
+import { Resend } from 'resend';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 30;
@@ -55,13 +55,13 @@ export async function POST(req: NextRequest) {
     });
 
     // Email is best-effort — never block success if it fails
-    const apiKey = process.env.SENDGRID_API_KEY;
+    const apiKey = process.env.RESEND_API_KEY;
     if (apiKey) {
       try {
-        sgMail.setApiKey(apiKey);
-        await sgMail.sendMultiple({
+        const resend = new Resend(apiKey);
+        const { error } = await resend.emails.send({
           to: ADMIN_EMAILS,
-          from: { name: 'Mastering Field Service Training Portal', email: 'masteringfse_admin@aiellorecruiter.com' },
+          from: 'Mastering Field Service Training Portal <notifications@fse-academy.com>',
           subject: `FSE Exam Scheduling Request — ${name}`,
           html: `
             <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;">
@@ -87,11 +87,12 @@ export async function POST(req: NextRequest) {
             </div>
           `,
         });
+        if (error) console.error('Schedule request email failed (non-fatal):', error);
       } catch (emailErr) {
         console.error('Schedule request email failed (non-fatal):', emailErr);
       }
     } else {
-      console.warn('SENDGRID_API_KEY not set — schedule request saved to Firestore only');
+      console.warn('RESEND_API_KEY not set — schedule request saved to Firestore only');
     }
 
     return NextResponse.json({ ok: true });
