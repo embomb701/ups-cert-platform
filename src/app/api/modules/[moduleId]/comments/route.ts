@@ -20,25 +20,30 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ mod
     return NextResponse.json({ error: 'Module not found' }, { status: 404 });
   }
 
-  const snap = await adminDb
-    .collection('moduleComments')
-    .where('moduleId', '==', moduleId)
-    .orderBy('createdAt', 'desc')
-    .limit(PAGE_SIZE)
-    .get();
+  try {
+    const snap = await adminDb
+      .collection('moduleComments')
+      .where('moduleId', '==', moduleId)
+      .orderBy('createdAt', 'desc')
+      .limit(PAGE_SIZE)
+      .get();
 
-  const comments = snap.docs.map((doc) => {
-    const d = doc.data();
-    return {
-      id: doc.id,
-      text: d.text as string,
-      displayName: d.displayName as string,
-      uid: d.uid as string,
-      createdAt: d.createdAt?.toDate?.()?.toISOString() ?? null,
-    };
-  }).reverse(); // oldest first for a natural thread read order
+    const comments = snap.docs.map((doc) => {
+      const d = doc.data();
+      return {
+        id: doc.id,
+        text: d.text as string,
+        displayName: d.displayName as string,
+        uid: d.uid as string,
+        createdAt: d.createdAt?.toDate?.()?.toISOString() ?? null,
+      };
+    }).reverse(); // oldest first for a natural thread read order
 
-  return NextResponse.json({ comments });
+    return NextResponse.json({ comments });
+  } catch (err) {
+    console.error('Module comments query failed:', err);
+    return NextResponse.json({ comments: [] }, { status: 200 });
+  }
 }
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ moduleId: string }> }) {

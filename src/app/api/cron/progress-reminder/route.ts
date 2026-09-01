@@ -68,6 +68,8 @@ export async function GET(req: NextRequest) {
       const uid = user.uid;
       const userRef = adminDb.collection('users').doc(uid);
 
+      try {
+
       // Check opt-out and reminder cooldown
       const profileSnap = await userRef.get();
       const profileData = profileSnap.data() ?? {};
@@ -134,6 +136,11 @@ export async function GET(req: NextRequest) {
       );
 
       sent++;
+      } catch (err) {
+        // One bad user record shouldn't abort reminders for everyone else in the batch.
+        console.error(`Progress reminder failed for user ${uid}:`, err);
+        skipped++;
+      }
     }
 
     if (sent >= MAX_EMAILS_PER_RUN) break;
