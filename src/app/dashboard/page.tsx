@@ -103,6 +103,11 @@ export default function DashboardPage() {
   const [resumeDeleting, setResumeDeleting] = useState(false);
   const [resumeConsentToggling, setResumeConsentToggling] = useState(false);
   const [resumeError, setResumeError] = useState('');
+  const [resumeSuccess, setResumeSuccess] = useState('');
+  // Local override so the card reflects a successful send immediately in
+  // this session, even if the separate dashboard-summary fetch never loads
+  // (it degrades independently — see the dataLoading/data split above).
+  const [localResumeFileName, setLocalResumeFileName] = useState<string | null>(null);
 
   // FSE scheduling form
   const [schedPhone, setSchedPhone] = useState('');
@@ -180,6 +185,7 @@ export default function DashboardPage() {
     if (!file) return;
 
     setResumeError('');
+    setResumeSuccess('');
     if (file.type !== 'application/pdf') {
       setResumeError('Only PDF files are accepted.');
       return;
@@ -201,6 +207,8 @@ export default function DashboardPage() {
       });
       if (res.ok) {
         const { fileName } = await res.json();
+        setLocalResumeFileName(fileName);
+        setResumeSuccess('Sent! Your resume was emailed to Mastering Field Service.');
         setData((d) => d ? { ...d, profile: { ...d.profile, resumeFileName: fileName, resumeUploadedAt: new Date().toISOString() } } : d);
       } else {
         const body = await res.json().catch(() => ({}));
@@ -221,6 +229,8 @@ export default function DashboardPage() {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
+        setLocalResumeFileName(null);
+        setResumeSuccess('');
         setData((d) => d ? { ...d, profile: { ...d.profile, resumeFileName: null, resumeUploadedAt: null, resumeShareConsent: false } } : d);
       }
     } catch { /* ignore */ }
@@ -714,11 +724,16 @@ export default function DashboardPage() {
                   onChange={handleResumeUpload}
                   className="hidden"
                 />
-                {profile?.resumeFileName ? (
+                {resumeSuccess && (
+                  <p className="text-xs text-emerald-400 bg-emerald-950/30 border border-emerald-900/50 rounded-lg px-3 py-2">
+                    {resumeSuccess}
+                  </p>
+                )}
+                {(localResumeFileName ?? profile?.resumeFileName) ? (
                   <>
                     <div>
-                      <p className="text-sm text-gray-200 truncate">{profile.resumeFileName}</p>
-                      {profile.resumeUploadedAt && (
+                      <p className="text-sm text-gray-200 truncate">{localResumeFileName ?? profile?.resumeFileName}</p>
+                      {profile?.resumeUploadedAt && (
                         <p className="text-xs text-gray-600 mt-0.5">
                           Sent {new Date(profile.resumeUploadedAt).toLocaleDateString()}
                         </p>
@@ -743,7 +758,7 @@ export default function DashboardPage() {
                     <label className="flex items-start gap-2.5 pt-3 border-t border-gray-800 cursor-pointer">
                       <input
                         type="checkbox"
-                        checked={profile.resumeShareConsent}
+                        checked={profile?.resumeShareConsent ?? false}
                         onChange={handleResumeConsentToggle}
                         disabled={resumeConsentToggling}
                         className="mt-0.5 accent-indigo-500"
