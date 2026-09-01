@@ -38,7 +38,9 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
 
   const { uid } = await params;
 
-  // Load user record + Firestore user doc + subcollections in parallel
+  // Load user record + Firestore user doc + subcollections in parallel.
+  // The two orderBy queries can fail independently (e.g. a missing composite
+  // index) — never let that crash the whole page, just that section.
   const [userRecord, userDocSnap, accessSnap, progressSnap, certsSnap, attemptsSnap, purchasesSnap] =
     await Promise.all([
       adminAuth.getUser(uid).catch(() => null),
@@ -46,8 +48,10 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
       adminDb.collection('users').doc(uid).collection('examAccess').get(),
       adminDb.collection('users').doc(uid).collection('trainingProgress').get(),
       adminDb.collection('certificates').where('userId', '==', uid).get(),
-      adminDb.collection('examAttempts').where('userId', '==', uid).orderBy('createdAt', 'desc').limit(20).get(),
-      adminDb.collection('purchases').where('userId', '==', uid).orderBy('createdAt', 'desc').limit(20).get(),
+      adminDb.collection('examAttempts').where('userId', '==', uid).orderBy('createdAt', 'desc').limit(20).get()
+        .catch((err) => { console.error('Admin user detail: examAttempts query failed:', err); return null; }),
+      adminDb.collection('purchases').where('userId', '==', uid).orderBy('createdAt', 'desc').limit(20).get()
+        .catch((err) => { console.error('Admin user detail: purchases query failed:', err); return null; }),
     ]);
 
   if (!userRecord) {
@@ -222,7 +226,9 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
           <div className="p-5 border-b border-gray-800">
             <h2 className="text-sm font-semibold text-white">Exam Attempts (last 20)</h2>
           </div>
-          {attemptsSnap.empty ? (
+          {attemptsSnap === null ? (
+            <p className="px-5 py-4 text-xs text-red-400">Couldn&apos;t load exam attempts — the query failed. Check server logs.</p>
+          ) : attemptsSnap.empty ? (
             <p className="px-5 py-4 text-xs text-gray-600">No exam attempts</p>
           ) : (
             <table className="w-full text-xs">
@@ -260,7 +266,9 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
           <div className="p-5 border-b border-gray-800">
             <h2 className="text-sm font-semibold text-white">Purchases (last 20)</h2>
           </div>
-          {purchasesSnap.empty ? (
+          {purchasesSnap === null ? (
+            <p className="px-5 py-4 text-xs text-red-400">Couldn&apos;t load purchases — the query failed. Check server logs.</p>
+          ) : purchasesSnap.empty ? (
             <p className="px-5 py-4 text-xs text-gray-600">No purchases</p>
           ) : (
             <table className="w-full text-xs">

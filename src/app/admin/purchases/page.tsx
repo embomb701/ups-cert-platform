@@ -56,23 +56,35 @@ export default async function AdminPurchasesPage({
     query = adminDb.collection('purchases').where('status', '==', statusFilter).orderBy('createdAt', 'desc').limit(300);
   }
 
-  const snap = await query.get();
-
-  const purchases = snap.docs.map((doc) => {
-    const d = doc.data();
-    const productId = d.productId as string ?? '';
-    const productName = (STRIPE_PRODUCTS as Record<string, { shortName: string }>)[productId]?.shortName ?? productId;
-    return {
-      id: doc.id,
-      email: d.email as string ?? '—',
-      productId,
-      productName,
-      amount: typeof d.amount === 'number' ? d.amount : 0,
-      status: d.status as string ?? 'pending',
-      createdAt: d.createdAt,
-      sessionId: d.stripeCheckoutSessionId as string ?? d.id,
-    };
-  });
+  // Never hard-crash this page just because a Firestore query fails (e.g. a
+  // missing composite index on the filtered variant) — show a distinct error
+  // state instead of silently rendering "no purchases found" / $0 revenue.
+  let purchases: {
+    id: string; email: string; productId: string; productName: string;
+    amount: number; status: string; createdAt: unknown; sessionId: string;
+  }[] = [];
+  let queryFailed = false;
+  try {
+    const snap = await query.get();
+    purchases = snap.docs.map((doc) => {
+      const d = doc.data();
+      const productId = d.productId as string ?? '';
+      const productName = (STRIPE_PRODUCTS as Record<string, { shortName: string }>)[productId]?.shortName ?? productId;
+      return {
+        id: doc.id,
+        email: d.email as string ?? '—',
+        productId,
+        productName,
+        amount: typeof d.amount === 'number' ? d.amount : 0,
+        status: d.status as string ?? 'pending',
+        createdAt: d.createdAt,
+        sessionId: d.stripeCheckoutSessionId as string ?? d.id,
+      };
+    });
+  } catch (err) {
+    console.error('Admin purchases query failed:', err);
+    queryFailed = true;
+  }
 
   const totalRevenue = purchases
     .filter((p) => p.status === 'completed')
@@ -123,7 +135,13 @@ export default async function AdminPurchasesPage({
               </tr>
             </thead>
             <tbody>
-              {purchases.length === 0 ? (
+              {queryFailed ? (
+                <tr>
+                  <td colSpan={6} className="px-4 py-10 text-center text-xs text-red-400">
+                    Couldn&apos;t load purchases — the query failed (a required Firestore index may still be missing). Check server logs.
+                  </td>
+                </tr>
+              ) : purchases.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-4 py-10 text-center text-xs text-gray-600">No purchases found</td>
                 </tr>

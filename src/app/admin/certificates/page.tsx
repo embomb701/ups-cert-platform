@@ -57,23 +57,35 @@ export default async function AdminCertificatesPage({
     query = adminDb.collection('certificates').where('status', '==', statusFilter).orderBy('issuedAt', 'desc').limit(250);
   }
 
-  const snap = await query.get();
-
-  const certs = snap.docs.map((doc) => {
-    const d = doc.data();
-    const issuedAt = d.issuedAt?.toDate?.() ?? new Date();
-    return {
-      id: doc.id,
-      certificateNumber: d.certificateNumber as string,
-      candidateName: d.candidateName as string ?? '—',
-      certificationTitle: d.certificationTitle as string ?? '—',
-      examLevel: d.examLevel as string ?? '',
-      issuedAt,
-      score: typeof d.score === 'number' ? Math.round(d.score) : null,
-      status: d.status as string ?? 'valid',
-      publicScoreEnabled: d.publicScoreEnabled === true,
-    };
-  });
+  // Never hard-crash this page just because a Firestore query fails (e.g. a
+  // missing composite index on the filtered variant) — show a distinct error
+  // state instead of silently rendering "no certificates found".
+  let certs: {
+    id: string; certificateNumber: string; candidateName: string; certificationTitle: string;
+    examLevel: string; issuedAt: Date; score: number | null; status: string; publicScoreEnabled: boolean;
+  }[] = [];
+  let queryFailed = false;
+  try {
+    const snap = await query.get();
+    certs = snap.docs.map((doc) => {
+      const d = doc.data();
+      const issuedAt = d.issuedAt?.toDate?.() ?? new Date();
+      return {
+        id: doc.id,
+        certificateNumber: d.certificateNumber as string,
+        candidateName: d.candidateName as string ?? '—',
+        certificationTitle: d.certificationTitle as string ?? '—',
+        examLevel: d.examLevel as string ?? '',
+        issuedAt,
+        score: typeof d.score === 'number' ? Math.round(d.score) : null,
+        status: d.status as string ?? 'valid',
+        publicScoreEnabled: d.publicScoreEnabled === true,
+      };
+    });
+  } catch (err) {
+    console.error('Admin certificates query failed:', err);
+    queryFailed = true;
+  }
 
   const filters = ['all', 'valid', 'revoked', 'under_review', 'expired'];
 
@@ -119,7 +131,13 @@ export default async function AdminCertificatesPage({
               </tr>
             </thead>
             <tbody>
-              {certs.length === 0 ? (
+              {queryFailed ? (
+                <tr>
+                  <td colSpan={7} className="px-4 py-10 text-center text-xs text-red-400">
+                    Couldn&apos;t load certificates — the query failed (a required Firestore index may still be missing). Check server logs.
+                  </td>
+                </tr>
+              ) : certs.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-4 py-10 text-center text-xs text-gray-600">No certificates found</td>
                 </tr>
